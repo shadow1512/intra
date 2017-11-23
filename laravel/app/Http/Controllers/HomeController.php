@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Adldap\Laravel\Facades\Adldap;
 
 class HomeController extends Controller
 {
@@ -13,6 +14,9 @@ class HomeController extends Controller
      */
     public function __construct()
     {
+        $users = Adldap::search()->users()->get();
+        var_dump($users);
+        exit();
         $this->middleware('auth');
     }
 

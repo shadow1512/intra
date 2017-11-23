@@ -33,6 +33,7 @@ return array(
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
     'Laravel\\Tinker\\' => array($vendorDir . '/laravel/tinker/src'),
+    'LaravelAuthLdap\\' => array($vendorDir . '/aparticka/laravel-auth-ldap/src'),
     'Larapack\\DoctrineSupport\\' => array($vendorDir . '/larapack/doctrine-support/src'),
     'Intervention\\Image\\' => array($vendorDir . '/intervention/image/src/Intervention/Image'),
     'Illuminate\\' => array($vendorDir . '/laravel/framework/src/Illuminate'),
@@ -48,4 +49,6 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Arrilot\\Widgets\\' => array($vendorDir . '/arrilot/laravel-widgets/src'),
     'App\\' => array($baseDir . '/app'),
+    'Adldap\\Laravel\\' => array($vendorDir . '/adldap2/adldap2-laravel/src'),
+    'Adldap\\' => array($vendorDir . '/adldap2/adldap2/src'),
 );

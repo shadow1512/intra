@@ -24,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        phpinfo();
         $users = Adldap::search()->users()->get();
         var_dump($users);
         exit();

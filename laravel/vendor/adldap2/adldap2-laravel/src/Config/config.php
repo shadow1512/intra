@@ -118,7 +118,7 @@ return [
                 |
                 */
 
-                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', 'work.kodeks.net')),
+                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.32.2 172.16.32.3')),
 
                 /*
                 |--------------------------------------------------------------------------

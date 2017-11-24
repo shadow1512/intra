@@ -118,7 +118,7 @@ return [
                 |
                 */
 
-                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', 'programmers.kodeks.net work.kodeks.net')),
+                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', 'work.kodeks.net')),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -187,8 +187,8 @@ return [
                 |
                 */
 
-                'admin_username' => env('ADLDAP_ADMIN_USERNAME', 'username'),
-                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', 'password'),
+                'admin_username' => env('ADLDAP_ADMIN_USERNAME', 'intranet'),
+                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', 'j8d2qj32d'),
 
                 /*
                 |--------------------------------------------------------------------------

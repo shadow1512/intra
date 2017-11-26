@@ -158,7 +158,7 @@ return [
                 |
                 */
 
-                'base_dn' => env('ADLDAP_BASEDN', 'dc=kodeks,dc=net'),
+                'base_dn' => env('ADLDAP_BASEDN', 'dc=work,dc=kodeks,dc=net'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -221,7 +221,7 @@ return [
                 */
 
                 'use_ssl' => false,
-                'use_tls' => false,
+                'use_tls' => true,
 
             ],
 

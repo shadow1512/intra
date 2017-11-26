@@ -109,7 +109,8 @@ class Adldap implements AdldapInterface
     public function connect($name = null, $username = null, $password = null)
     {
         $provider = $name ? $this->getProvider($name) : $this->getDefaultProvider();
-        
+
+        var_dump($provider->connect($username, $password));exit();
         return $provider->connect($username, $password);
     }
 

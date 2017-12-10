@@ -27,6 +27,6 @@ class HomeController extends Controller
         /*$users = Adldap::search()->users()->get();
         var_dump($users);
         exit();*/
-        return view('home');
+        return view('main');
     }
 }

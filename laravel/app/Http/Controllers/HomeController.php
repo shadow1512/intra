@@ -24,9 +24,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $users = Adldap::search()->users()->get();
+        /*$users = Adldap::search()->users()->get();
         var_dump($users);
-        exit();
-        //return view('home');
+        exit();*/
+        return view('home');
     }
 }

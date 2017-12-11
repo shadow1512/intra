@@ -20,9 +20,9 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        //новости
         $news = News::orderBy('importancy', 'desc')->get();
-        return view('news.list', ['news'    =>  $news]);
+        return view('news.fulllist', ['news'    =>  $news]);
     }
 
     /**
@@ -30,4 +30,9 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function item($id)
+    {
+        $item = News::findOrFail($id);
+        return view('news.item', ['item'    =>  $item]);
+    }
 }

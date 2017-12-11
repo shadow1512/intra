@@ -28,11 +28,11 @@ Route::get('/services/mail', 'RoomsController@index')->name('services.mail');
 Route::get('/holidays', 'RoomsController@index')->name('holidays');
 Route::get('/library', 'RoomsController@index')->name('library');
 
-Route::get('/people', 'RoomsController@index')->name('people');
-Route::get('/people/dept/{id}', 'RoomsController@index')->name('people.dept');
-Route::get('/people/unit/{id}', 'RoomsController@index')->name('people.unit');
-Route::get('/people/birthday', 'RoomsController@index')->name('people.birthday');
-Route::get('/people/new', 'RoomsController@index')->name('people.new');
+Route::get('/people', 'UserController@index')->name('people');
+Route::get('/people/dept/{id}', 'UserController@index')->name('people.dept');
+Route::get('/people/unit/{id}', 'UserController@unit')->name('people.unit');
+Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
+Route::get('/people/new', 'UserController@index')->name('people.new');
 
 Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');

@@ -31,6 +31,14 @@ class UserController extends Controller
         return view('users.birthday', ['users'    =>  $users]);
     }
 
+    public function unit($id)
+    {
+        $user = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+            ->findOrFail($id);
+
+        return view('users.unit', ['user'    =>  $user]);
+    }
     /**
      * Show the form for creating a new resource.
      *

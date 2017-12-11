@@ -177,30 +177,8 @@
             </ul>
         </nav>
         <aside class="content_i staff">
-            <div class="staff_i">
-                <div class="h __h_m">Дни рождения</div>
-                <ul class="staff_ul">
-                    <li class="staff_li"><a href="" class="staff_lk"><img src="/images/faces/face_1.jpg" alt="" class="staff_img">
-                            <div class="staff_name">Галкин Алексей</div>
-                            <div class="staff_tx">Специалист 2-й категории  по информационным технологиям</div></a></li>
-                    <li class="staff_li"><a href="" class="staff_lk"><img src="/images/faces/face_2.jpg" alt="" class="staff_img">
-                            <div class="staff_name">Иванова Ольга</div>
-                            <div class="staff_tx">Специалист 1-й категории по маркетингу</div></a></li>
-                    <li class="staff_li"><a href="" class="staff_li_more">Еще у <span>3</span> человек</a></li>
-                </ul>
-            </div>
-            <div class="staff_i">
-                <div class="h __h_m">Новые сотрудники</div>
-                <ul class="staff_ul">
-                    <li class="staff_li"><a href="" class="staff_lk"><img src="/images/faces/face_2.jpg" alt="" class="staff_img">
-                            <div class="staff_name">Иванова Ольга</div>
-                            <div class="staff_tx">Специалист 1-й категории по маркетингу</div></a></li>
-                    <li class="staff_li"><a href="" class="staff_lk"><img src="/images/faces/face_1.jpg" alt="" class="staff_img">
-                            <div class="staff_name">Галкиaн Алексей</div>
-                            <div class="staff_tx">Специалист 2-й категории  по информационным технологиям</div></a></li>
-                    <li class="staff_li"><a href="" class="staff_li_more">Все новые сотрудники</a></li>
-                </ul>
-            </div>
+            @yield('birthday')
+            @yield('newusers');
         </aside>
     </div>
     <div class="push"></div>

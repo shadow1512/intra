@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'NewsController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
@@ -31,6 +31,8 @@ Route::get('/library', 'RoomsController@index')->name('library');
 Route::get('/people', 'RoomsController@index')->name('people');
 Route::get('/people/dept/{id}', 'RoomsController@index')->name('people.dept');
 Route::get('/people/unit/{id}', 'RoomsController@index')->name('people.unit');
+Route::get('/people/birthday', 'RoomsController@index')->name('people.birthday');
+Route::get('/people/new', 'RoomsController@index')->name('people.new');
 
 Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');

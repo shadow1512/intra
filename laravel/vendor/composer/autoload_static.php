@@ -1191,6 +1191,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Dotenv\\Loader' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Loader.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
         'EditNewsNullableTags' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
+        'EditeUsersAddattributes' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
         'Faker\\Calculator\\Luhn' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
         'Faker\\DefaultGenerator' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/DefaultGenerator.php',

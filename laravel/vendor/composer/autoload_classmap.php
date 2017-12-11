@@ -787,6 +787,7 @@ return array(
     'Dotenv\\Loader' => $vendorDir . '/vlucas/phpdotenv/src/Loader.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
+    'EditeUsersAddattributes' => $baseDir . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Luhn' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',
     'Faker\\DefaultGenerator' => $vendorDir . '/fzaninotto/faker/src/Faker/DefaultGenerator.php',

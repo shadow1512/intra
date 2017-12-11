@@ -176,7 +176,7 @@ return [
                 'icon_class'    => 'voyager-person',
             ],
             'Home' => [
-                'route'         => '/',
+                'route'         => '/admin/',
                 'icon_class'    => 'voyager-home',
                 'target_blank'  => true,
             ],

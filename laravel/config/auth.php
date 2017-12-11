@@ -37,12 +37,12 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'ldap',
+            'driver' => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'ldap',
+            'driver' => 'session',
             'provider' => 'users',
         ],
     ],

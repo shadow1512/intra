@@ -12,8 +12,32 @@
 */
 
 Route::get('/', 'NewsController@index')->name('home');
+
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
+
+Route::get('/rooms/conference', 'RoomsController@index')->name('rooms.conference');
+Route::get('/rooms/116', 'RoomsController@index')->name('rooms.116');
+Route::get('/rooms/218', 'RoomsController@index')->name('rooms.218');
+Route::get('/rooms/228', 'RoomsController@index')->name('rooms.228');
+
+Route::get('/services/teh', 'RoomsController@index')->name('services.teh');
+Route::get('/services/cartridge', 'RoomsController@index')->name('services.cartridge');
+Route::get('/services/mail', 'RoomsController@index')->name('services.mail');
+
+Route::get('/holidays', 'RoomsController@index')->name('holidays');
+Route::get('/library', 'RoomsController@index')->name('library');
+
+Route::get('/people', 'RoomsController@index')->name('people');
+Route::get('/people/dept/{id}', 'RoomsController@index')->name('people.dept');
+Route::get('/people/unit/{id}', 'RoomsController@index')->name('people.unit');
+
+Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
+Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');
+Route::get('/kitchen/bills', 'RoomsController@index')->name('kitchen.bills');
+
+Route::get('/staff', 'RoomsController@index')->name('staff');
+
 //Auth::routes();
 
 

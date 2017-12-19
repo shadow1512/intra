@@ -29,7 +29,9 @@ Route::get('/holidays', 'RoomsController@index')->name('holidays');
 Route::get('/library', 'RoomsController@index')->name('library');
 
 Route::get('/people', 'UserController@index')->name('people');
-Route::get('/people/dept/{id}', 'UserController@index')->name('people.dept');
+Route::get('/people/search', 'UserController@search')->name('people.search');
+Route::get('/people/dept/{id}', 'UserController@search')->name('people.dept');
+Route::get('/people/dept', 'UserController@search')->name('people.root');
 Route::get('/people/unit/{id}', 'UserController@unit')->name('people.unit');
 Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
 Route::get('/people/new', 'UserController@index')->name('people.new');

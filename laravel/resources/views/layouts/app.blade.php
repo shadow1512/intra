@@ -8,137 +8,17 @@
     <!-- eo header-->
     <div class="content layout_main">
         <div class="main_top">
-            <div class="main_top_phones">
-                <div class="main_top_phones_people">
-                    <div class="main_top_phones_h">Телефонный справочник</div>
-                    <div class="main_top_phones_logout"><svg class="main_top_phones_logout_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
-                        <div class="main_top_phones_logout_tx">Избранные контакты</div>
-                        <div class="main_top_phones_logout_tx">Необходимо авторизоваться</div>
-                    </div>
-                    <ul class="main_top_phones_lst __hidden">
-                        <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Крупцов Сергей Владимирович</a></li>
-                        <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Кутин Александр Викторович</a></li>
-                        <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Мейнцер Антон Петрович</a></li>
-                        <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Степанов Владимир Павлович</a></li>
-                    </ul>
-                </div>
-                <div class="main_top_phones_search"><a href="" class="main_top_phones_search_lk">
-                        Найти сотрудника
-                        <svg class="main_top_phones_search_lk_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg></a></div>
-            </div>
-            <div class="main_top_dinner">
-                <div class="h __h_m">Столовая<span class="main_top_dinner_status">(Открыта)</span></div>
-                <div class="main_top_dinner_info"><span class="main_top_dinner_info_i">Завтраки: с&nbsp;10.30 до&nbsp;11.30</span><span class="main_top_dinner_info_i">Обеды: с&nbsp;13.00 до&nbsp;16.00</span></div>
-                <ul class="main_top_dinner_lst">
-                    <li class="main_top_dinner_lst_i __logout"><a href="" class="main_top_dinner_lst_lk __js-modal-dinner-lk">
-                            <div class="main_top_dinner_lst_ic"><svg class="main_top_dinner_lst_ic_dinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.1 33"><path class="st0" d="M8.1.4c0 .5-.5 6.9-.6 7.4s-1 .6-1.1 0c0 .1-.5-6.7-.6-7.3-.1-.6-1.1-.6-1.2 0C4.6.9 4 7.3 4 7.8c-.1.6-1 .6-1 0S2.5 1 2.4.5 1.3-.1 1.2.5C1.2 1.1 0 7.4 0 9.8s1.5 3.9 3.1 4.7c0 .4-.9 14.2-.9 15.6S3.6 33 5.3 33c1.7 0 3.1-1.8 3.1-2.5 0-.8-.9-15.5-1-15.9 1.7-.8 3.3-2.7 3.2-4.5-.1-1.7-1.2-9-1.3-9.6S8.2-.1 8.1.4zM20.4 0c-1.2 0-6.1 3.6-6.1 8.9 0 5.7 2.4 8 2.4 8.3 0 .3-1.1 1.2-1.1 1.2s-1 10.3-1 11.7 1.4 2.9 3 2.9c2 0 3.4-1.4 3.4-3.3V.7c.1-.2 0-.7-.6-.7z"/></svg></div>
-                            <div class="main_top_dinner_lst_tx">Меню на&nbsp;сегодня</div></a></li>
-                    <li class="main_top_dinner_lst_i __logout"><a href="" class="main_top_dinner_lst_lk __js-modal-camera-lk">
-                            <div class="main_top_dinner_lst_ic"><svg class="main_top_dinner_lst_ic_cam" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 35.4 24.5"><path class="st0" d="M22.1 2.2s.1.1 0 0l.1 4.5c0 .8.5 1.6 1.2 2 .3.2.6.3 1 .3s.9-.1 1.3-.4l7.5-4.3v15.9L25.6 16c-.4-.3-.8-.4-1.3-.4-.4 0-.7.1-1 .3-.7.4-1.2 1.1-1.2 2v4.4s0 .1-.1.1H2.3s-.1 0-.1-.1V2.4s0-.1.1-.1h19.8m12.2-1.2c-.2 0-.7.1-1 .3l-8.9 5.3V2.3c0-1.3-1-2.3-2.3-2.3H2.3C1 0 0 1 0 2.3v19.9c0 1.3 1 2.3 2.3 2.3h19.8c1.3 0 2.3-1 2.3-2.3v-4.4l9.1 5.3c.3.3.6.2.8.2.2 0 .4-.1.5-.1.4-.2.7-.6.7-1.1v-20c0-.5-.3-.9-.7-1.1-.1.2-.3.1-.5.1z"/></svg></div>
-                            <div class="main_top_dinner_lst_tx">Веб-камера в&nbsp;столовой</div></a></li>
-                </ul>
-            </div>
+            @yield('topshelf')
         </div>
         <div class="content_i main-page">
             <div class="content_i_w">
                 @yield('news')
             </div>
         </div>
-        <nav class="content_i menu">
-            <ul class="menu_ul">
-                <li class="menu_li">
-                    <div class="menu_li_h">Полезная информация</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="http://www.kodeks.ru/about.html" class="menu_li_lk">Информация о&nbsp;Консорциуме</a></li>
-                        <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816800315" class="menu_li_lk">Регламент административной деятельности</a></li>
-                        <li class="menu_li_lst_i"><a href="http://intra.lan.kodeks.net/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
-                        <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816803322" class="menu_li_lk">Реквизиты предприятий Консорциума</a></li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Программный комплекс</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i __inner"><a href="http://172.16.2.4:8000/kodeks/" class="menu_li_lk">Кодекс</a>
-                            <div class="menu_li_inner">
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714396" class="menu_li_inner_lk">Помощник бухгалтера</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714399" class="menu_li_inner_lk">Помощник кадровика: Эксперт </a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777717011" class="menu_li_inner_lk">Законодательство Москвы</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714405" class="menu_li_inner_lk">Законодательство Санкт-Петербурга</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714409" class="menu_li_inner_lk">Законодательство Ленинградской области</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714413" class="menu_li_inner_lk">Техэксперт: Нормы, правила, стандарты и законодательство России</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777715300" class="menu_li_inner_lk">Техэксперт: Промышленная безопасность</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777717034" class="menu_li_inner_lk">Техэксперт: Помощник проектировщика</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714415" class="menu_li_inner_lk">Стройэксперт. Профессиональный вариант</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714430" class="menu_li_inner_lk">Техэксперт: Охрана труда</a>
-                                <a href="http://172.16.2.4:8000/kodeks/?nd=777714434" class="menu_li_inner_lk">Техэксперт: Пожарная безопасность</a>
-                            </div>
-                        </li>
-                        <li class="menu_li_lst_i __inner"><a href="http://172.16.2.4:8000/teh/" class="menu_li_lk">Техэксперт</a>
-                            <div class="menu_li_inner">
-                                <a href="http://172.16.2.4:8000/teh/?nd=777717444" class="menu_li_inner_lk">Техэксперт: Нефтегазовый комплекс</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777714427" class="menu_li_inner_lk">Техэксперт: Электроэнергетика</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777714430" class="menu_li_inner_lk">Техэксперт: Охрана труда</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777714415" class="menu_li_inner_lk">Стройэксперт. Профессиональный вариант</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777717097" class="menu_li_inner_lk">Техэксперт: Теплоэнергетика</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777714425" class="menu_li_inner_lk">Стройтехнолог</a>
-                                <a href="http://172.16.2.4:8000/teh/?nd=777715237" class="menu_li_inner_lk">Техэксперт: Экология. Проф</a>
-                            </div>
-                        </li>
-                        <li class="menu_li_lst_i"><a href="http://intra.lan.kodeks.net/newprice/Pricelist/Pricelist.html" class="menu_li_lk">Прейскурант</a></li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Административно-управленческая деятельность</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="http://172.16.0.223/SedKodeks/news/index.html" class="menu_li_lk">СЭД</a></li>
-                        <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=777717302" class="menu_li_lk">БУД</a></li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Автоматические системы</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="http://ask.kodeks.ru/" class="menu_li_lk">АСВО</a></li>
-                        <li class="menu_li_lst_i"><a href="http://hotline2.kodeks.ru/" class="menu_li_lk">АСГЛ</a></li>
-                        <li class="menu_li_lst_i"><a href="http://spp.kodeks.ru" class="menu_li_lk">СПП</a></li>
-                        <li class="menu_li_lst_i __inner"><a href="" class="menu_li_lk">Redmine</a>
-                            <div class="menu_li_inner">
-                                <a href="http://task.qd.kodeks.ru" class="menu_li_inner_lk">task.qd.kodeks.ru</a>
-                                <a href="http://redmine.dmz" class="menu_li_inner_lk">redmine.dmz</a>
-                                <a href="http://corp.kodeks.ru" class="menu_li_inner_lk">corp.kodeks.ru</a>
-                                <a href="http://redmine.upt.kodeks.ru" class="menu_li_inner_lk">redmine.upt.kodeks.ru</a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Резерв переговорных</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="{{route("rooms.conference")}}" class="menu_li_lk">Конференц-зал</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("rooms.116")}}" class="menu_li_lk">116 кабинет</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("rooms.228")}}" class="menu_li_lk">228 кабинет</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("rooms.218")}}" class="menu_li_lk">218 кабинет</a></li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Заказы и&nbsp;заявки</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="{{route("services.teh")}}" class="menu_li_lk">Техобслуживание</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("services.cartridge")}}" class="menu_li_lk">Картриджи</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("services.mail")}}" class="menu_li_lk">Почтовая доставка</a></li>
-                    </ul>
-                </li>
-                <li class="menu_li">
-                    <div class="menu_li_h">Неформальный Кодекс</div>
-                    <ul class="menu_li_lst">
-                        <li class="menu_li_lst_i"><a href="{{route("holidays")}}" class="menu_li_lk">Фото и&nbsp;видео с&nbsp;праздников</a></li>
-                        <li class="menu_li_lst_i"><a href="{{route("library")}}" class="menu_li_lk">Библиотека</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </nav>
+        @include('nav')
         <aside class="content_i staff">
             @yield('birthday')
-            @yield('newusers');
+            @yield('newusers')
         </aside>
     </div>
     <div class="push"></div>

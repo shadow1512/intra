@@ -34,6 +34,7 @@ class HomeController extends Controller
         $dt = date("z");
         $dt1 = $dt + 3;
         $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+
         ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])
                 ->orderBy('birthday', 'asc')->get();
 

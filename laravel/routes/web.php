@@ -26,7 +26,8 @@ Route::get('/services/cartridge', 'RoomsController@index')->name('services.cartr
 Route::get('/services/mail', 'RoomsController@index')->name('services.mail');
 
 Route::get('/holidays', 'RoomsController@index')->name('holidays');
-Route::get('/library', 'RoomsController@index')->name('library');
+Route::get('/library', 'LibraryController@index')->name('library');
+Route::get('/library/razdel/{id}', 'LibraryController@index')->name('library.razdel');
 
 Route::get('/people', 'UserController@index')->name('people');
 Route::get('/people/search', 'UserController@search')->name('people.search');

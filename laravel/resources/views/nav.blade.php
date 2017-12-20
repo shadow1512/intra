@@ -66,12 +66,13 @@
         </li>
         <li class="menu_li">
             <div class="menu_li_h">Резерв переговорных</div>
+            @if (count($rooms))
             <ul class="menu_li_lst">
-                <li class="menu_li_lst_i"><a href="{{route("rooms.conference")}}" class="menu_li_lk">Конференц-зал</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("rooms.116")}}" class="menu_li_lk">116 кабинет</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("rooms.228")}}" class="menu_li_lk">228 кабинет</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("rooms.218")}}" class="menu_li_lk">218 кабинет</a></li>
+                @foreach($rooms as $room)
+                <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
+                @endforeach
             </ul>
+            @endif
         </li>
         <li class="menu_li">
             <div class="menu_li_h">Заказы и&nbsp;заявки</div>

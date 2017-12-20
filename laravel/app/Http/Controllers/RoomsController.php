@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Rooms;
+use App\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
@@ -22,6 +23,14 @@ class RoomsController extends Controller
     {
         //
 
+    }
+
+    public function book($id)
+    {
+        $room = Rooms::findOrFail($id);
+        //
+        $bookings = array();
+        return view('rooms.order', ['room'    =>  $room, 'bookings'   =>  $bookings]);
     }
 
     /**

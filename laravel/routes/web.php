@@ -16,10 +16,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 
-Route::get('/rooms/conference', 'RoomsController@index')->name('rooms.conference');
-Route::get('/rooms/116', 'RoomsController@index')->name('rooms.116');
-Route::get('/rooms/218', 'RoomsController@index')->name('rooms.218');
-Route::get('/rooms/228', 'RoomsController@index')->name('rooms.228');
+Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
 
 Route::get('/services/teh', 'RoomsController@index')->name('services.teh');
 Route::get('/services/cartridge', 'RoomsController@index')->name('services.cartridge');

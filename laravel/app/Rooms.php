@@ -17,7 +17,7 @@ class Rooms extends Model
     use SoftDeletes;
     //
     protected $fillable = [
-        'title', 'annotation', 'fulltext', 'published_at', 'importancy',
+        'name', 'available',
     ];
     protected $table = 'rooms';
 }

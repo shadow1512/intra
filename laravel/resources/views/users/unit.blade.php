@@ -3,10 +3,10 @@
 @section('news')
 <div class="content_i_w">
     <div class="profile_contacts">
-        <--<div class="h __h_m h_profile_contacts">Мои контакты</div>
+        <div class="h __h_m h_profile_contacts">Мои контакты</div>
         <ul class="profile_contacts_ul">
             <li class="profile_contacts_li">
-                <div class="profile_contacts_pic"><img src="./images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
+                <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
                 <div class="profile_contacts_info">
                     <div class="profile_contacts_status"></div><a href="" class="profile_contacts_name">Ганощенко Вероника Викторовна</a>
                     <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
@@ -15,7 +15,7 @@
                 </div>
             </li>
             <li class="profile_contacts_li">
-                <div class="profile_contacts_pic"><img src="./images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
+                <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
                 <div class="profile_contacts_info">
                     <div class="profile_contacts_status"></div><a href="" class="profile_contacts_name">Ганощенко Вероника Викторовна</a>
                     <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
@@ -24,7 +24,7 @@
                 </div>
             </li>
             <li class="profile_contacts_li">
-                <div class="profile_contacts_pic"><img src="./images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
+                <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
                 <div class="profile_contacts_info">
                     <div class="profile_contacts_status"></div><a href="" class="profile_contacts_name">Ганощенко Вероника Викторовна</a>
                     <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
@@ -33,7 +33,7 @@
                 </div>
             </li>
             <li class="profile_contacts_li">
-                <div class="profile_contacts_pic"><img src="./images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
+                <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
                 <div class="profile_contacts_info">
                     <div class="profile_contacts_status"></div><a href="" class="profile_contacts_name">Ганощенко Вероника Викторовна</a>
                     <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
@@ -41,7 +41,7 @@
                     <div class="profile_contacts_position">Телефон: 487</div>
                 </div>
             </li>
-        </ul>-->
+        </ul>
     </div>
     <div class="profile_i">
         <div class="profile_aside">

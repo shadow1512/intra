@@ -41,7 +41,7 @@ class HomeController extends Controller
 
         //новые сотрудники
         $newusers = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-            ->where(DB::raw("ADDDATE(workstart, INTERVAL 1 MONTH)"), '>=', "'" . date("Y-m-d") . "'")
+            ->whereRaw("ADDDATE(workstart, INTERVAL 1 MONTH) >= '" . date("Y-m-d") . "'")
             ->orderBy('workstart', 'desc')->get();
 
         //Комнаты

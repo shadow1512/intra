@@ -35,9 +35,9 @@
 @section('newusers')
 <div class="staff_i">
     <div class="h __h_m">Новые сотрудники</div>
-    @if (count($users))
+    @if (count($newusers))
     <ul class="staff_ul">
-        @foreach ($users as $user)
+        @foreach ($newusers as $user)
             <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
                     <div class="staff_name">{{ $user->name }}</div>
                     <div class="staff_tx">{{ $user->work_title }}</div></a></li>

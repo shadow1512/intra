@@ -40,12 +40,48 @@
                                 <div class="order_calendar_date">{{$caldate->format("j")}} {{$caldate->format("M")}}</div><a href="" class="btn order_calendar_btn">Забронировать</a>
                                 <div class="order_calendar_conference">
                                     <ul class="order_calendar_conference_lst">
-                                        @if(isset($bookings["'" . $caldate->format("Y") . "-" . $caldate->format("m") . "-" . $caldate->format("d") . "'"]) && count($bookings["'" . $caldate->format("Y") . "-" . $caldate->format("m") . "-" . $caldate->format("d") . "'"]))
-                                        <li style="width: 15%" class="order_calendar_conference_i"></li>
-                                        <li style="width: 5%" class="order_calendar_conference_i __booked"></li>
-                                        <li style="width: 30%" class="order_calendar_conference_i"></li>
-                                        <li style="width: 10%" class="order_calendar_conference_i __booked"></li>
-                                        <li style="width: 30%" class="order_calendar_conference_i"></li>
+                                        @php
+                                            $index = strtotime($caldate->format("Y") . '-' . $caldate->format("m") . '-' . $caldate->format("d"));
+                                        @endphp
+                                        @if(isset($bookings[$index]) && count($bookings[$index]))
+                                            @php
+                                                $periods = array();
+                                                $numperiods = 1;
+                                                $start  = 600;
+                                                $end    = 1200;
+
+                                                foreach($bookings[$index] as $booking) {
+                                                    $ts = $booking["time_start"];
+                                                    $ts = explode(":", $ts);
+
+                                                    $te = $booking["time_end"];
+                                                    $te = explode(":", $te);
+
+                                                    $period_start = (int)$ts[0] * 60 + (int)$ts[1];
+                                                    if($period_start == $start) {
+                                                        if(isset($periods[$numperiods - 1])) {
+                                                            $periods[$numperiods - 1]["length"] += ((int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
+                                                        }
+                                                        else {
+                                                            $periods[$numperiods - 1]   =   array(  "used"      => true,
+                                                                                                    "length"    => (int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
+                                                        }
+                                                    }
+                                                    else {
+                                                        $numperiods ++;
+
+                                                        $periods[$numperiods - 1]   =   array(  "used"      => false,
+                                                                                                "length"    => (int)$ts[0] * 60 + (int)$ts[1] - $start);
+                                                        $numperiods ++;
+                                                        $periods[$numperiods - 1]   =   array(  "used"      => true,
+                                                                                                "length"    => (int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
+                                                    }
+                                                    $start = (int)$te[0] * 60 + (int)$te[1];
+                                                }
+                                            @endphp
+                                            @foreach($periods as $period)
+                                                <li style="width: {{round($period["length"]/600 * 100)}}%" class="order_calendar_conference_i @if($period["used"]) __booked @endif"></li>
+                                            @endforeach
                                         @else
                                             <li style="width: 100%" class="order_calendar_conference_i"></li>
                                         @endif
@@ -54,10 +90,10 @@
                             </div>
                             <div class="order_calendar_cnt"><a href="" title="Закрыть" class="order_calendar_cnt_close"><svg class="order_calendar_cnt_close_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a>
                                 <div class="order_calendar_cnt_date">{{$caldate->format("j")}} {{$caldate->format("M")}}, {{$caldate->format("D")}}</div>
-                                @if(isset($bookings["'" . $caldate->format("Y") . "-" . $caldate->format("m") . "-" . $caldate->format("d") . "'"]) && count($bookings["'" . $caldate->format("Y") . "-" . $caldate->format("m") . "-" . $caldate->format("d") . "'"]))
-                                    @foreach($bookings["'" . $caldate->format("Y") . "-" . $caldate->format("m") . "-" . $caldate->format("d") . "'"] as $booking)
+                                @if(isset($bookings[$index]) && count($bookings[$index]))
+                                    @foreach($bookings[$index] as $booking)
                                 <div class="order_calendar_cnt_i">
-                                    <div class="order_calendar_cnt_time">{{$booking->time_start}} – {{$booking->time_end}}</div>
+                                    <div class="order_calendar_cnt_time">{{date("H:i", strtotime($booking->date_book . " " . $booking->time_start))}} – {{date("H:i", strtotime($booking->date_book . " " . $booking->time_end))}}</div>
                                     <div class="order_calendar_cnt_t">{{$booking->name}}</div>
                                     <div class="order_calendar_cnt_contact">
                                         <p>{{$booking->person_name}}</p>

@@ -41,7 +41,7 @@ Route::get('/kitchen/bills', 'RoomsController@index')->name('kitchen.bills');
 Route::get('/staff', 'RoomsController@index')->name('staff');
 Route::get('/search', 'SearchController@index')->name('search');
 
-//Auth::routes();
+Auth::routes();
 
 
 Route::group(['prefix' => 'admin'], function () {

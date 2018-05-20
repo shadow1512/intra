@@ -3,6 +3,10 @@
  */
 $(document).ready(function(){
 
+    $("a.header_search_btn").on("click", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+       $(this).parent().parent().submit();
+    });
 
 
 //modal window

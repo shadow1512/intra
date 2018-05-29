@@ -66,6 +66,7 @@ class Guard implements GuardInterface
         $password = $password ?: null;
 
         if ($username) {
+            var_dump($username);exit();
             // If the username isn't empty, we'll append the configured
             // account prefix and suffix to bind to the LDAP server.
             $prefix = $prefix ?: $this->configuration->get('account_prefix');

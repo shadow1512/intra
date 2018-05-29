@@ -76,10 +76,10 @@ class Guard implements GuardInterface
 
         // We'll mute any exceptions / warnings here. All we need to know
         // is if binding failed and we'll throw our own exception.
-        /*if (!@$this->connection->bind($username, $password)) {
+        if (!@$this->connection->bind($username, $password)) {
             throw new BindException($this->connection->getLastError(), $this->connection->errNo());
-        }*/
-        $this->connection->bind($username, $password);exit();
+        }
+        //$this->connection->bind($username, $password);exit();
     }
 
     /**

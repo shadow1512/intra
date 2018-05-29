@@ -28,6 +28,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        var_dump(Adldap::getProvider('default')->search()->users());
         //новости
         $news = News::orderBy('importancy', 'desc')->limit(5)->get();
 

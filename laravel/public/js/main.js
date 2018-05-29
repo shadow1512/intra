@@ -8,6 +8,11 @@ $(document).ready(function(){
        $(this).parent().parent().submit();
     });
 
+    $(document).on("click", "a.logout", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        $(this).parent().submit();
+    });
+
 
 //modal window
     function popUp(button, window, callback) {

@@ -240,12 +240,7 @@
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
                         <div class="dinner_camera_i"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/FNj74AcY4Hc" ></iframe></div>
-                        <div class="dinner_camera_i"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/FNj74AcY4Hc" ></iframe>
-                            <script src="/js/libs/jquery-3.1.0.js"></script>
-                            <script src="/js/libs/chosen.jquery.min.js"></script>
-                            <script src="/js/libs/owl.carousel.js"></script>
-                            <script src="/js/main.js"></script>
-                        </div>
+                        <div class="dinner_camera_i"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/FNj74AcY4Hc" ></iframe></div>
                     </div>
                 </div>
             </div>
@@ -253,5 +248,9 @@
     </div>
 </div>
 <!--eo modal-->
+<script src="/js/libs/jquery-3.1.0.js"></script>
+<script src="/js/libs/chosen.jquery.min.js"></script>
+<script src="/js/libs/owl.carousel.js"></script>
+<script src="/js/main.js"></script>
 </body>
 </html>

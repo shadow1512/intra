@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://intra.lan.kodeks.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -168,7 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         TCG\Voyager\VoyagerServiceProvider::class,
-        LaravelAuthLdap\AuthLdapServiceProvider::class,
+        //LaravelAuthLdap\AuthLdapServiceProvider::class
         Adldap\Laravel\AdldapServiceProvider::class,
 
         /*
@@ -194,8 +194,6 @@ return [
     */
 
     'aliases' => [
-
-        'Adldap'=> \Adldap\Laravel\Facades\Adldap::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -229,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Adldap'=> Adldap\Laravel\Facades\Adldap::class,
     ],
 
 ];

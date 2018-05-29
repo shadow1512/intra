@@ -118,7 +118,8 @@ return [
                 |
                 */
 
-                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.32.2 172.16.32.3')),
+                //'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.32.2 172.16.32.3')),
+                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.32.3')),
 
                 /*
                 |--------------------------------------------------------------------------

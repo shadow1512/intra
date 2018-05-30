@@ -19,13 +19,8 @@ $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
     $header = substr($res, 0, $header_size);
-    $headers = explode("\r\n\r\n", $header);
-    var_dump($headers);
-    foreach($headers as $parts) {
-        $part = explode(":", $parts);
-        if($part[0] == "Token") {
-            $tok = trim($part[1]);
-        }
+    if (preg_match('#^Token:\s*(.*)$#mi', $header, $m)) {
+        $tok = $m[1];
     }
 }
 

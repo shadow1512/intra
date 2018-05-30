@@ -24,10 +24,7 @@ if($status_code == 200) {
     }
 }
 
-print $tok;
-echo "\r\n";
 curl_close($ch);
-
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
 //curl_setopt($ch, CURLOPT_HEADER, true);
@@ -38,6 +35,32 @@ $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $tree = json_decode($res);
-    var_dump($tree);
+    $conn = mysqli_connect("localhost", "root", "fH24031958", "intradb") or die("No DB connection");
+    $conn->set_charset("utf8");
+
+    foreach($tree as $obj) {
+
+        if($obj->Active === true) {
+
+            if($obj->ExecutiveType == 0) {
+                $res    =   mysqli_query($conn, "SELECT id FROM dep_keys WHERE key='" . $obj->UID . "'");
+                if($res && $res->num_rows > 0) {
+
+                }
+                else {
+                    $date = date("Y-m-d H:i:s");
+                    mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')";
+                    $dep_id = mysqli_insert_id($conn);
+                    mysqli_query($conn, "INSERT INTO deps_keys (dep_id, key) VALUES ($dep_id, '" . $obj->UID . "')";
+                }
+            }
+            else {
+
+            }
+        }
+
+    }
 }
+
+
 ?>

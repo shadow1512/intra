@@ -5,9 +5,14 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
-
+$conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
+$conn->set_charset("utf8");
 $tok = null;
 
+if(isset($argv[1]) && ($argv[1] == 'struct')) {
+    createDepartmentStructure($conn);
+    exit();
+}
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
@@ -35,9 +40,6 @@ $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $tree = json_decode($res);
-    $conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
-    $conn->set_charset("utf8");
-
     foreach($tree as $obj) {
 
         if($obj->Active === true) {
@@ -71,5 +73,21 @@ if($status_code == 200) {
     }
 }
 
+function createDepartmentStructure($conn) {
+    $deps = mysqli_query($conn, "SELECT * FROM deps_keys");
+    if($deps) {
+        while($row = $deps->fetch_assoc()) {
+            if($row['parent_key'] != '00000000-0000-0000-0000-000000000000') {
+                $parent_dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE parent_key='" . $row['parent_key'] . "'");
+                if($parent_dep && $parent_dep->num_rows > 0) {
+                    $parent_id = $parent_dep->fetch_assoc();
+                    $parent_id = $parent_id["dep_id"];
+                    mysqli_query($conn, "UPDATE deps SET parent_id=$parent_id WHERE id=" . $row['dep_id']);
+                }
+            }
+        }
+
+    }
+}
 
 ?>

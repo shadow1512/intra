@@ -78,7 +78,7 @@ function createDepartmentStructure($conn) {
     if($deps) {
         while($row = $deps->fetch_assoc()) {
             if($row['parent_key'] != '00000000-0000-0000-0000-000000000000') {
-                $parent_dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE parent_key='" . $row['parent_key'] . "'");
+                $parent_dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $row['parent_key'] . "'");
                 if($parent_dep && $parent_dep->num_rows > 0) {
                     $parent_id = $parent_dep->fetch_assoc();
                     $parent_id = $parent_id["dep_id"];

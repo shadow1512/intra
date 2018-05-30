@@ -49,9 +49,9 @@ if($status_code == 200) {
                 }
                 else {
                     $date = date("Y-m-d H:i:s");
-                    mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')";
+                    mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
                     $dep_id = mysqli_insert_id($conn);
-                    mysqli_query($conn, "INSERT INTO deps_keys (dep_id, key) VALUES ($dep_id, '" . $obj->UID . "')";
+                    mysqli_query($conn, "INSERT INTO deps_keys (dep_id, key) VALUES ($dep_id, '" . $obj->UID . "')");
                 }
             }
             else {

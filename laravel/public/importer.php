@@ -51,7 +51,7 @@ if($status_code == 200) {
                     $date = date("Y-m-d H:i:s");
                     mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
                     $dep_id = mysqli_insert_id($conn);
-                    mysqli_query($conn, "INSERT INTO deps_keys (dep_id, key) VALUES ($dep_id, '" . $obj->UID . "')");
+                    mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`) VALUES ('" . $obj->UID . "', $dep_id)");
                 }
             }
             else {

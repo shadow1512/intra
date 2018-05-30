@@ -35,10 +35,11 @@ curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
 //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
+var_dump(curl_getinfo($ch, CURLINFO_HEADER_OUT));
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
 if($status_code == 200) {
-    
+
 }
 var_dump($res);
 ?>

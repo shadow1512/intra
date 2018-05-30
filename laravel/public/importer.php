@@ -31,12 +31,14 @@ curl_close($ch);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
 curl_setopt($ch, CURLOPT_HEADER, true);
-curl_setopt($ch, CURLOPT_HEADER_OUT, true);
+curl_setopt($ch, CURLINFO_HEADER_OUT, true);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
 //curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-var_dump($status_code);
 
+if($status_code == 200) {
+    
+}
 var_dump($res);
 ?>

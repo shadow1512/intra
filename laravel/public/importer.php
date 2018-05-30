@@ -35,7 +35,7 @@ $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $tree = json_decode($res);
-    $conn = mysqli_connect("localhost", "root", "fH24031958", "intradb") or die("No DB connection");
+    $conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
     $conn->set_charset("utf8");
 
     foreach($tree as $obj) {

@@ -24,6 +24,8 @@ if($status_code == 200) {
     }
 }
 
+print $tok;
+echo "\r\n";
 curl_close($ch);
 
 

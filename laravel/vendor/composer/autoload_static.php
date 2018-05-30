@@ -1199,6 +1199,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Dotenv\\Exception\\ValidationException' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Exception/ValidationException.php',
         'Dotenv\\Loader' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Loader.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
+        'EditDepartmentsKeys' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_000251_edit_departments_keys.php',
         'EditNewsNullableTags' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
         'EditeUsersAddattributes' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
         'Faker\\Calculator\\Iban' => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',

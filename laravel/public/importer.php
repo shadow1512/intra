@@ -43,15 +43,24 @@ if($status_code == 200) {
         if($obj->Active === true) {
 
             if($obj->ExecutiveType == 0) {
-                $res    =   mysqli_query($conn, "SELECT id FROM dep_keys WHERE key='" . $obj->UID . "'");
+                $res    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE key='" . $obj->UID . "'");
                 if($res && $res->num_rows > 0) {
+                    $row = $res->fetch_assoc();
+                    $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
+                    $dep    =   mysqli_query($conn, "SELECT updated_at FROM deps WHERE id=" . $row['dep_id']);
+                    if($dep && $dep->num_rows > 0) {
+                        $rowdep = $dep->fetch_assoc();
+                        if($mdate > $rowdep['updated_at']){
+                            mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "')");
+                        }
 
+                    }
                 }
                 else {
                     $date = date("Y-m-d H:i:s");
                     mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
                     $dep_id = mysqli_insert_id($conn);
-                    mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`) VALUES ('" . $obj->UID . "', $dep_id)");
+                    mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`, `parent_key`) VALUES ('" . $obj->UID . "', $dep_id, '" . $obj->Parent . "')");
                 }
             }
             else {

@@ -31,9 +31,8 @@ curl_close($ch);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects?uid=null');
 curl_setopt($ch, CURLOPT_HEADER, false);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'Token' => $tok
-));
+curl_setopt($ch, CURLOPT_HEADER, CURLHEADER_UNIFIED);
+curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);

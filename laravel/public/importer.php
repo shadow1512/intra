@@ -20,7 +20,7 @@ if($status_code == 200) {
     $header_size = curl_getinfo($ch,CURLINFO_HEADER_SIZE);
     $header = substr($res, 0, $header_size);
     if (preg_match('#^Token:\s*(.*)$#mi', $header, $m)) {
-        $tok = $m[1];
+        $tok = trim($m[1]);
     }
 }
 

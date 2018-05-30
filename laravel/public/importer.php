@@ -29,8 +29,8 @@ echo "\r\n";
 curl_close($ch);
 
 
-$ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects/');
-//curl_setopt($ch, CURLOPT_HEADER, false);
+$ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects?uid=null');
+curl_setopt($ch, CURLOPT_HEADER, false);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Token' => $tok
 ));

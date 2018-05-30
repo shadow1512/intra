@@ -26,16 +26,16 @@ if($status_code == 200) {
 
 curl_close($ch);
 
-var_dump($tok);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects/');
-curl_setopt($ch, CURLOPT_HEADER, false);
+//curl_setopt($ch, CURLOPT_HEADER, false);
 curl_setopt($ch, CURLOPT_HTTPHEADER, array(
     'Token' => $tok
 ));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $res = curl_exec($ch);
+$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+var_dump($status_code);
 
 var_dump($res);
 ?>

@@ -14,7 +14,9 @@ class EditUsersPhoneLength extends Migration
     public function up()
     {
         //
-        $table->string('phone', 24)->change();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('phone', 24)->change();
+        });
     }
 
     /**

@@ -87,7 +87,7 @@ if($status_code == 200) {
                     if($status_code == 200) {
                         $obj = json_decode($res);
 
-                        //var_dump($obj);
+                        var_dump($obj);exit();
                         $date = date("Y-m-d H:i:s");
                         $insres = mysqli_query($conn,
                             "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 

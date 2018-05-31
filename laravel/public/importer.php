@@ -101,8 +101,12 @@ if($status_code == 200) {
                         $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
+                            $chef = 0;
+                            if($obj->Leader) {
+                                $chef = 1;
+                            }
                             $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")";
+                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', $chef)";
                             $insres =   mysqli_query($conn, $query);
 
                             if(!$insres) {

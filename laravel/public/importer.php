@@ -89,10 +89,13 @@ if($status_code == 200) {
 
                         //var_dump($obj);
                         $date = date("Y-m-d H:i:s");
-                        mysqli_query($conn,
+                        $selres = mysqli_query($conn,
                             "INSERT INTO users (`name`, `role`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
-                                    VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Surname . "', '" . $obj->Patronymic . "', '" . $obj->Phone . "',
+                                    VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Patronymic . "', '" . $obj->Surname . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
+                        if(!$selres) {
+                            printf("Error: %s\n", mysqli_error($conn));
+                        }
                         $user_id = mysqli_insert_id($conn);
                         mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
 

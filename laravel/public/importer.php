@@ -87,7 +87,6 @@ if($status_code == 200) {
                     if($status_code == 200) {
                         $obj = json_decode($res);
 
-                        var_dump($obj);exit();
                         $date = date("Y-m-d H:i:s");
                         $insres = mysqli_query($conn,
                             "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
@@ -102,11 +101,13 @@ if($status_code == 200) {
                         $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
-                            $insres =   mysqli_query($conn,
-                                "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")");
+                            $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
+                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")";
+                            $insres =   mysqli_query($conn, $query);
+
                             if(!$insres) {
                                 printf("Error: %s\n", mysqli_error($conn));
+                                printf("Error: %s\n", $query);exit();
                             }
                         }
                     }

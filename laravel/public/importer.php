@@ -5,12 +5,18 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
+require_once __DIR__ . 'hiercode.php';
+
 $conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
 $conn->set_charset("utf8");
 $tok = null;
 
 if(isset($argv[1]) && ($argv[1] == 'struct')) {
-    createDepartmentStructure($conn);
+    createDepartmentStructure($conn, 2);
+    exit();
+}
+if(isset($argv[1]) && ($argv[1] == 'parents')) {
+    createDepartmentParents($conn);
     exit();
 }
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -73,7 +79,7 @@ if($status_code == 200) {
     }
 }
 
-function createDepartmentStructure($conn) {
+function createDepartmentParents($conn) {
     $deps = mysqli_query($conn, "SELECT * FROM deps_keys");
     if($deps) {
         while($row = $deps->fetch_assoc()) {
@@ -87,6 +93,45 @@ function createDepartmentStructure($conn) {
             }
         }
 
+    }
+}
+
+function createDepartmentStructure($conn, $parent_id) {
+    $code = new HierCode(CODE_LENGTH);
+    $parent_code    = null;
+
+    if($parent_id != 2) {
+        $parent_dep = mysqli_query($conn, "SELECT * FROM deps WHERE id=" . $parent_id);
+        if($parent_dep && $parent_dep->num_rows > 0) {
+            $parent_row     = $parent_dep->fetch_assoc();
+            $parent_code    = $parent_row["parent_id"];
+        }
+    }
+    else {
+        for($i = 0; $i < CODE_LENGTH; $i++) {
+            $parent_code .= $code->digit_to_char[0];
+        }
+
+    }
+
+    $deps = mysqli_query($conn, "SELECT * FROM deps WHERE parent_id=" . $parent_id);
+    if($deps) {
+        $index = 0;
+        $dep_code = $parent_code;
+        while($row = $deps->fetch_assoc()) {
+            if($index == 0) {
+                for($i = 0; $i < CODE_LENGTH; $i++) {
+                    $dep_code .= $code->digit_to_char[0];
+                }
+            }
+            else {
+                $code->setValue($dep_code);
+                $dep_code = $code->getNextCode();
+            }
+
+            mysqli_query($conn, "UPDATE deps SET parent_id='" . $dep_code . "' WHERE id=" . $row["id"]);
+            createDepartmentStructure($conn, $row["id"]);
+        }
     }
 }
 

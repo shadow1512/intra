@@ -5,7 +5,7 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
-require_once __DIR__ . 'hiercode.php';
+require_once __DIR__ . '/hiercode.php';
 
 $conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
 $conn->set_charset("utf8");

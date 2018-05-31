@@ -51,7 +51,7 @@ if($status_code == 200) {
         if($obj->Active === true) {
 
             if($obj->ExecutiveType == 0) {
-                $res    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE key='" . $obj->UID . "'");
+                $res    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE `key`='" . $obj->UID . "'");
                 if($res && $res->num_rows > 0) {
                     $row = $res->fetch_assoc();
                     $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
@@ -72,7 +72,40 @@ if($status_code == 200) {
                 }
             }
             else {
+                $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
+                if($res && $res->num_rows > 0) {
 
+                }
+                else {
+                    $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
+                    //curl_setopt($ch, CURLOPT_HEADER, true);
+                    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $res = curl_exec($ch);
+                    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                    if($status_code == 200) {
+                        $obj = json_decode($res);
+
+                        var_dump($obj);
+                        $date = date("Y-m-d H:i:s");
+                        $name = $obj->Surname . ' ' . $obj->FirstName . ' ' . $obj->Patronymic;
+                        /*mysqli_query($conn,
+                            "INSERT INTO users (`name`, `role`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
+                                    VALUES ('" . $name . "', 2, '" . $obj->FirstName . "', '" . $obj->Surname . "', '" . $obj->Patronymic . "', '" . $obj->Phone . "', 
+                                            '" . $obj->Email . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
+                        $user_id = mysqli_insert_id($conn);
+                        mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
+
+                        $dep    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE `key`='" . $obj->Parent . "'");
+                        if($dep && $dep->num_rows > 0) {
+                            $rowdep = $dep->fetch_assoc();
+                            mysqli_query($conn,
+                                "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
+                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")");
+                        }*/
+                    }
+                }
             }
         }
 

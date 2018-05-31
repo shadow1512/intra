@@ -51,7 +51,7 @@ if($status_code == 200) {
         if($obj->Active === true) {
 
             if($obj->ExecutiveType == 0) {
-                $res    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE `key`='" . $obj->UID . "'");
+                $res    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
                 if($res && $res->num_rows > 0) {
                     $row = $res->fetch_assoc();
                     $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
@@ -87,12 +87,11 @@ if($status_code == 200) {
                     if($status_code == 200) {
                         $obj = json_decode($res);
 
-                        var_dump($obj);
+                        //var_dump($obj);
                         $date = date("Y-m-d H:i:s");
-                        $name = $obj->Surname . ' ' . $obj->FirstName . ' ' . $obj->Patronymic;
-                        /*mysqli_query($conn,
+                        mysqli_query($conn,
                             "INSERT INTO users (`name`, `role`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
-                                    VALUES ('" . $name . "', 2, '" . $obj->FirstName . "', '" . $obj->Surname . "', '" . $obj->Patronymic . "', '" . $obj->Phone . "', 
+                                    VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Surname . "', '" . $obj->Patronymic . "', '" . $obj->Phone . "',
                                             '" . $obj->Email . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
                         $user_id = mysqli_insert_id($conn);
                         mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
@@ -103,7 +102,7 @@ if($status_code == 200) {
                             mysqli_query($conn,
                                 "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
                                                         VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")");
-                        }*/
+                        }
                     }
                 }
             }

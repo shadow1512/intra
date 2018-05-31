@@ -131,6 +131,7 @@ function createDepartmentStructure($conn, $parent_id) {
 
             mysqli_query($conn, "UPDATE deps SET parent_id='" . $dep_code . "' WHERE id=" . $row["id"]);
             createDepartmentStructure($conn, $row["id"]);
+            $index ++;
         }
     }
 }

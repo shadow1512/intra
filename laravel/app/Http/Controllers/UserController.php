@@ -135,7 +135,7 @@ class UserController extends Controller
             }
         }
         else {
-            $length = 2;
+            $length = 4;
             $deps = Dep::whereRaw('LENGTH(parent_id) = ' . $length)
                 ->orderBy('name', 'asc')
                 ->get();

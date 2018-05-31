@@ -92,11 +92,11 @@ if($status_code == 200) {
                         mysqli_query($conn,
                             "INSERT INTO users (`name`, `role`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
                                     VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Surname . "', '" . $obj->Patronymic . "', '" . $obj->Phone . "',
-                                            '" . $obj->Email . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
+                                            '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
                         $user_id = mysqli_insert_id($conn);
                         mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
 
-                        $dep    =   mysqli_query($conn, "SELECT dep_id FROM dep_keys WHERE `key`='" . $obj->Parent . "'");
+                        $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
                             mysqli_query($conn,

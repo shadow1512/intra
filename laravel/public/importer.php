@@ -89,11 +89,11 @@ if($status_code == 200) {
 
                         //var_dump($obj);
                         $date = date("Y-m-d H:i:s");
-                        $selres = mysqli_query($conn,
-                            "INSERT INTO users (`name`, `role`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
+                        $insres = mysqli_query($conn,
+                            "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
                                     VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Patronymic . "', '" . $obj->Surname . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
-                        if(!$selres) {
+                        if(!$insres) {
                             printf("Error: %s\n", mysqli_error($conn));
                         }
                         $user_id = mysqli_insert_id($conn);
@@ -102,9 +102,12 @@ if($status_code == 200) {
                         $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
-                            mysqli_query($conn,
+                            $insres =   mysqli_query($conn,
                                 "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
                                                         VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', " . $obj->Leader . ")");
+                            if(!$insres) {
+                                printf("Error: %s\n", mysqli_error($conn));
+                            }
                         }
                     }
                 }

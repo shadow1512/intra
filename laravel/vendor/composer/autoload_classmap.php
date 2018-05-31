@@ -804,6 +804,7 @@ return array(
     'EditUsersDatafieldsNullable' => $baseDir . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',
     'EditUsersFullnames' => $baseDir . '/database/migrations/2018_05_31_112135_edit_users_fullnames.php',
     'EditUsersName' => $baseDir . '/database/migrations/2018_05_31_115935_edit_users_name.php',
+    'EditUsersPhoneLength' => $baseDir . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',
     'EditeUsersAddattributes' => $baseDir . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
     'Faker\\Calculator\\Iban' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Iban.php',
     'Faker\\Calculator\\Luhn' => $vendorDir . '/fzaninotto/faker/src/Faker/Calculator/Luhn.php',

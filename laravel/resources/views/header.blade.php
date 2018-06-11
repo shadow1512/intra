@@ -42,7 +42,7 @@
                         <button class="btn __full-width">Войти</button>
                     </div>
                 </form>
-                <div class="header_login_nav_lks"><!--<a href="" class="header_login_nav_lk">Зарегистрироваться</a>--><a href="{{ route('password.request') }}" class="header_login_nav_lk __margin-top_m">Забыли пароль</a></div>
+                <div class="header_login_nav_lks"><!--<a href="" class="header_login_nav_lk">Зарегистрироваться</a><a href="" class="header_login_nav_lk __margin-top_m">Забыли пароль</a>--></div>
             </div>
         </div>
         @endif

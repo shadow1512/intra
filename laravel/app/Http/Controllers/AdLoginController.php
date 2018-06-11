@@ -32,7 +32,7 @@ class AdLoginController extends Controller
             $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
             if($user) {
                 $guid = $user->getConvertedGuid();
-                $user = User::select("id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.key', '=', $guid)->limit(1)->first();
+                $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.key', '=', $guid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);
                     print json_encode(array("ok"));

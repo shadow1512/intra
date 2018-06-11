@@ -46,5 +46,14 @@ class ProfileController extends Controller
 
     }
 
+    public function addcontact($id)
+    {
+        DB::table('user_contacts')->insert(
+            ['user_id' => Auth::user()->id, 'contact_id' => $id]
+        );
+
+        return redirect('/people/unit/' . $id);
+    }
+
 
 }

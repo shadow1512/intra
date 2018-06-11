@@ -22,7 +22,7 @@
             </div>
             <div class="profile_info_i">
                 <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>
-            </div><a href="" class="btn">Добавить в контакты</a>
+            </div><a href="{{route('profile.add', ['id' => $user->id])}}" class="btn">Добавить в контакты</a>
         </div>
     </div>
 </div>

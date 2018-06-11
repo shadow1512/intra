@@ -8,6 +8,7 @@ use App\News;
 use App\User;
 use App\Rooms;
 use DB;
+use Auth;
 
 class HomeController extends Controller
 {
@@ -28,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        var_dump(Auth::user());
         //новости
         $news = News::orderBy('importancy', 'desc')->limit(5)->get();
 

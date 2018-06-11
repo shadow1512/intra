@@ -33,7 +33,7 @@ class ProfileController extends Controller
         $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone")
             ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
-        return view('view', ['contacts'    =>  $contacts]);
+        return view('profile.view', ['contacts'    =>  $contacts]);
     }
 
     public function edit()

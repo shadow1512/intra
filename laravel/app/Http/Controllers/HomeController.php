@@ -29,7 +29,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        var_dump(Auth::user());
         //новости
         $news = News::orderBy('importancy', 'desc')->limit(5)->get();
 

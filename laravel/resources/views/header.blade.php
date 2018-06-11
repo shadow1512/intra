@@ -16,8 +16,8 @@
             <div class="header_intra-logo_tx">Корпоративный информационный портал</div></a>
         @if (Auth::check())
         <div class="header_login"><a href="" class="header_login_name ic-down __js_header_login">
-                <div class="header_login_name_pic"><img src="/images/faces/profile_1.jpg" alt="{{Auth::user->fname}} {{Auth::user->lname}}" class="header_login_name_img"></div>
-                <div class="header_login_name_tx">{{Auth::user->fname}} {{Auth::user->lname}}</div></a>
+                <div class="header_login_name_pic"><img src="/images/faces/profile_1.jpg" alt="{{Auth::user()->fname}} {{Auth::user()->lname}}" class="header_login_name_img"></div>
+                <div class="header_login_name_tx">{{Auth::user()->fname}} {{Auth::user()->lname}}</div></a>
             <div class="header_login_nav __hidden">
                 <ul class="header_login_nav_ul">
                     <li class="header_login_nav_li"><a href="{{ route('profile') }}" class="header_login_nav_lk">Настройки профиля</a></li>

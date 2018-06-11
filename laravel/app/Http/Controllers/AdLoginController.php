@@ -31,7 +31,7 @@ class AdLoginController extends Controller
             $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
             if($user) {
                 var_dump($user->getEmails());
-                var_dump($user->getAuthIdentifier());
+                var_dump($user->getConvertedGuid());
             }
         } else {
             echo 'NO';

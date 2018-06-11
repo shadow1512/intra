@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use DB;
+use Auth;
 
 class AdLoginController extends Controller
 {

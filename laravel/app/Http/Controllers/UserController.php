@@ -42,7 +42,10 @@ class UserController extends Controller
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
             ->findOrFail($id);
 
-        return view('users.unit', ['user'    =>  $user]);
+        $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone")
+            ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', $id)->get();
+
+        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts]);
     }
 
     protected function getCrumbs($id) {

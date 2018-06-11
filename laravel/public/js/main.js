@@ -13,6 +13,38 @@ $(document).ready(function(){
         $(this).parent().submit();
     });
 
+    $(document).on("submit", "#login_form", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        if($("#input_login").val().trim() && $("#input_pass").val().trim()) {
+            $.ajax({
+                type: "POST",
+                url: "/auth/login",
+                cache: false,
+                async: true,
+                dataType: "json",
+                data: "login=" + $("#input_login").val().trim() + "&pass=" + $("#input_pass").val().trim() + "&_token=" + $("input[name='_token']").val(),
+                success: function(msg) {
+                    if(msg[0] == "ok") {
+                        location.reload(true);
+                    }
+                    if(msg[0] == "error") {
+                        if(msg[1] == "no linked user") {
+                            alert("Нет привязанного пользователя СЭД");
+                        }
+                        if(msg[1] == "wrong credentials") {
+                            alert("Неверное имя или пароль");
+                        }
+                        if(msg[1] == "no ldap user") {
+                            alert("Нет привязанного пользователя AD");
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            alert("Необходимо ввести имя и пароль, аналогичные для доступа к рабочему компьютеру");
+        }
+    });
 
 //modal window
     function popUp(button, window, callback) {

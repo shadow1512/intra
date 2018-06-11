@@ -30,13 +30,13 @@
                 Войти
                 <svg class="header_login_name_logout-ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24.082001 24.271"><path d="M12.01 1.517c2.576 0 5.246 2.17 5.246 3.79V9.1c0 1.46-.606 4.252-2.234 5.534-.415.327-.63.846-.568 1.37.063.526.393.98.873 1.2l6.604 3.132c.053.023.634.122.634.934v1.48H1.52v-1.54c0-.602.453-.79.633-.874l6.665-3.146c.48-.22.81-.67.872-1.193.064-.52-.146-1.04-.556-1.368-1.576-1.267-2.31-4.05-2.31-5.53V5.308c0-1.585 2.635-3.79 5.19-3.79m0-1.518C8.657 0 5.3 2.797 5.3 5.31V9.1c0 1.658.757 5.01 2.878 6.714L1.516 18.96S0 19.634 0 20.476v2.276c0 .838.68 1.518 1.516 1.518h21.05c.837 0 1.516-.68 1.516-1.517v-2.276c0-.893-1.517-1.518-1.517-1.518l-6.604-3.132c2.104-1.655 2.814-4.905 2.814-6.727V5.31C18.774 2.796 15.36 0 12.01 0z"/></svg></a>
             <div class="header_login_nav __hidden">
-                <form class="header_login_nav_form" method="POST" action="{{ route('auth.login') }}">
+                <form class="header_login_nav_form" method="POST" action="{{ route('auth.login') }}" id="login_form">
                     {{ csrf_field() }}
                     <div class="field">
-                        <input type="text" name="login" placeholder="Логин" class="it">
+                        <input type="text" name="login" placeholder="Логин" class="it" id="input_login">
                     </div>
                     <div class="field">
-                        <input type="password" name="pass" placeholder="Пароль" class="it">
+                        <input type="password" name="pass" placeholder="Пароль" class="it" id="input_pass">
                     </div>
                     <div class="field">
                         <button class="btn __full-width">Войти</button>

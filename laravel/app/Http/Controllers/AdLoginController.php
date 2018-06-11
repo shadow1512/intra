@@ -34,6 +34,8 @@ class AdLoginController extends Controller
                 $guid = $user->getConvertedGuid();
                 $user = User::leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.key', '=', $guid)->limit(1)->first();
                 if($user) {
+                    var_dump($user->id);
+                    exit();
                     Auth::loginUsingId($user->id);
                     print json_encode(array("ok"));
                 }

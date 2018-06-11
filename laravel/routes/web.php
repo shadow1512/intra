@@ -36,7 +36,7 @@ Route::get('/people/new', 'UserController@index')->name('people.new');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
-Route::get('/profile/add/{id}', 'UserController@addcontact')->name('profile.addcontact');
+Route::get('/profile/add/{id}', 'ProfileController@addcontact')->name('profile.addcontact');
 
 Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');

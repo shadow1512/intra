@@ -28,6 +28,11 @@ class HomeController extends Controller
      */
     public function index()
     {
+        if (Adldap::getProvider('default')->auth()->attempt('tempuser1', 't159m753p')) {
+            echo 'YES';
+        } else {
+            echo 'NO';
+        }
         var_dump(Adldap::getProvider('default')->search()->users()->find('tempuser1'));
         //новости
         $news = News::orderBy('importancy', 'desc')->limit(5)->get();

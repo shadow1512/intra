@@ -9,7 +9,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Dep;
 use DB;
 use PDO;
 
@@ -29,6 +28,19 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
+    {
+        $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone")
+            ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
+
+        return view('view', ['contacts'    =>  $contacts]);
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function update(Request $request)
     {
 
     }

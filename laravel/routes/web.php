@@ -35,6 +35,7 @@ Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
 Route::get('/people/new', 'UserController@index')->name('people.new');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
 
 Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');

@@ -56,7 +56,7 @@ $(document).ready(function(){
             $(window).addClass('__vis');
             $('body').css('overflow', 'hidden');
             if(callback) {
-                callback(button, window);
+                callback($(this), window);
             }
 
         });
@@ -82,8 +82,7 @@ $(document).ready(function(){
     popUp('.__js-modal-profile-lk', '.__js-modal-profile');
     popUp('.order_calendar_cnt_add', '.__js-modal-order', function(but, win) {
         if($(but).parent().parent().hasClass("__active")) {
-            var dd = $(but).parent().find("span.order_date").text();
-            alert(dd);
+            var dd = $(but).parent().children("span.order_date").text();
             $(win).find("input[name='input_date_booking']").val(dd);
         }
     });

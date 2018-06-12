@@ -89,7 +89,8 @@
                                 </div>
                             </div>
                             <div class="order_calendar_cnt"><a href="" title="Закрыть" class="order_calendar_cnt_close"><svg class="order_calendar_cnt_close_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a>
-                                <div class="order_calendar_cnt_date">{{$caldate->format("j")}} {{$caldate->format("M")}}, {{$caldate->format("D")}}</div><span class="order_date" style="display:none">{{$caldate->format("Y-m-d")}}</span>
+                                <div class="order_calendar_cnt_date">{{$caldate->format("j")}} {{$caldate->format("M")}}, {{$caldate->format("D")}}</div>
+                                <span class="order_date" style="display:none">{{$caldate->format("Y-m-d")}}</span>
                                 @if(isset($bookings[$index]) && count($bookings[$index]))
                                     @foreach($bookings[$index] as $booking)
                                 <div class="order_calendar_cnt_i">

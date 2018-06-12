@@ -52,16 +52,20 @@
     <div class="main_top_phones">
         <div class="main_top_phones_people">
             <div class="main_top_phones_h">Телефонный справочник</div>
+            @if (Auth::check())
+                @if (count($contacts))
+            <ul class="main_top_phones_lst">
+                    @foreach($contacts as $item)
+                <li class="main_top_phones_lst_i"><a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_lst_i_lk">{{$item->lname}} {{$item->fname}} {{$item->mname}}</a></li>
+                    @endforeach
+            </ul>
+                @endif
+            @else
             <div class="main_top_phones_logout"><svg class="main_top_phones_logout_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
                 <div class="main_top_phones_logout_tx">Избранные контакты</div>
                 <div class="main_top_phones_logout_tx">Необходимо авторизоваться</div>
             </div>
-            <ul class="main_top_phones_lst __hidden">
-                <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Крупцов Сергей Владимирович</a></li>
-                <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Кутин Александр Викторович</a></li>
-                <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Мейнцер Антон Петрович</a></li>
-                <li class="main_top_phones_lst_i"><a href="" class="main_top_phones_lst_i_lk">Степанов Владимир Павлович</a></li>
-            </ul>
+            @endif
         </div>
         <div class="main_top_phones_search"><a href="{{route("people.search")}}" class="main_top_phones_search_lk">
                 Найти сотрудника

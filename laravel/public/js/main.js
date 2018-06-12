@@ -13,12 +13,30 @@ $(document).ready(function(){
         $(this).parent().submit();
     });
 
+    $(document).on("click", "#delete_avatar", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("href");
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function(msg) {
+                if(msg[0] == "ok") {
+                    $("#img_avatar").attr("src", msg[1]);
+                }
+            }
+        });
+    });
+
     $(document).on("submit", "#login_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("action");
         if($("#input_login").val().trim() && $("#input_pass").val().trim()) {
             $.ajax({
                 type: "POST",
-                url: "/auth/login",
+                url: url,
                 cache: false,
                 async: true,
                 dataType: "json",

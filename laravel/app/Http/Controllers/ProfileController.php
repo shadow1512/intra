@@ -58,5 +58,15 @@ class ProfileController extends Controller
         return redirect('/people/unit/' . $id);
     }
 
+    public function deleteavatar()
+    {
+        $default = Config::get('image.default_avatar');
+        DB::table('users')->update(
+            ['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]
+        );
+
+        print json_encode('array("ok", $default)');
+    }
+
 
 }

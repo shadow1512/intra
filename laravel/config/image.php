@@ -15,6 +15,8 @@ return array(
     |
     */
 
-    'driver' => 'gd'
+    'driver'            =>  'imagick',
+    'default_avatar'    =>  '/images/faces/default.png',
+    'avatar_path'       =>  __DIR__ . '/images/faces/'
 
 );

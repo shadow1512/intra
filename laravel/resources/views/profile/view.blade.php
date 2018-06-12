@@ -35,7 +35,7 @@
                 <form class="profile_form" id="profile_update_form">
                     {{ csrf_field() }}
                     <div class="field">
-                        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}"></div>
+                        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" id="img_avatar"><a href="{{route('profile.deleteavatar')}}" id="delete_avatar">Удалить</a></div>
                         <input type="file" id="input_avatar" class="it">Загрузить новую фотографию</input>
                     </div>
                     <div class="field">

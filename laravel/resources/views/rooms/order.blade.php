@@ -123,7 +123,7 @@
                 <div class="h light_h __h_m">Забронировать время</div>
                 <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create', ["id"  =>  $room->id])}}">
                     {{ csrf_field() }}
-                    <input type="hidden" name="input_date" id="input_date"/>
+                    <input type="hidden" name="input_date_booking" id="input_date_booking"/>
                     <div class="field">
                         <label for="input_name" class="lbl">Название мероприятия:</label>
                         <input id="input_name" name="input_name" type="text" value="" class="it">

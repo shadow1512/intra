@@ -94,8 +94,7 @@ $(document).ready(function(){
         },
         done: function (e, data) {
             $("#progress").remove();
-            alert(data[0]);
-            alert(data[0][0]);
+            alert(data.result[0]);
             $.each(data.result.files, function (index, file) {
                 alert('a');
                 alert(index);

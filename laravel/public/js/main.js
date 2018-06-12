@@ -68,7 +68,7 @@ $(document).ready(function(){
 
     $('#input_avatar').fileupload({
         dataType: 'json',
-        url: '/projects/create/',
+        url: $("#avatar_url").val(),
         singleFileUploads: true,
         sequentialUploads: true,
         //formData: [{name: 'opt', value: 'async'},{name: 'form',value: 'uploadfiles'}],

@@ -94,27 +94,22 @@ $(document).ready(function(){
         },
         done: function (e, data) {
             $("#progress").remove();
-            alert(data.result[0]);
-            $.each(data.result.files, function (index, file) {
-                alert('a');
-                alert(index);
-                alert(file[0]);
-                if(file[0] == "ok") {
-                    $("#img_avatar").attr("src", file[1]);
-                }
-                else {
-                    var errMessage = "Файл загружен не был. Причина - ";
-                    if(file[1] == "file wrong type") {
-                        errMessage += "для загрузки необходимо выбрать файл jpeg или png";
-                    }
-                    if(file[1] == "file too large") {
-                        errMessage += "для загрузки доступны изображения не более 3мб";
-                    }
 
-                    $("#input_file_error").text(errMessage);
-                    $("#input_file_error").show();
+            if(data.result[0] == "ok") {
+                $("#img_avatar").attr("src", data.result[1]);
+            }
+            else {
+                var errMessage = "Файл загружен не был. Причина - ";
+                if(data.result[1] == "file wrong type") {
+                    errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                 }
-            });
+                if(data.result[1] == "file too large") {
+                    errMessage += "для загрузки доступны изображения не более 3мб";
+                }
+
+                $("#input_file_error").text(errMessage);
+                $("#input_file_error").show();
+            }
         },
         fail: function (e, data) {
             $("#progress").remove();

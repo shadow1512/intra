@@ -69,7 +69,7 @@ $(document).ready(function(){
     $('#input_avatar').fileupload({
         dataType: 'json',
         url: $("#avatar_url").val(),
-        singleFileUploads: true,
+        singleFileUploads: false,
         sequentialUploads: true,
         //formData: [{name: 'opt', value: 'async'},{name: 'form',value: 'uploadfiles'}],
         submit: function (e, data) {
@@ -95,7 +95,7 @@ $(document).ready(function(){
             $.each(data.result.files, function (index, file) {
                 alert('a');
                 alert(index);
-                alet(file[0]);
+                alert(file[0]);
                 if(file[0] == "ok") {
                     $("#img_avatar").attr("src", file[1]);
                 }

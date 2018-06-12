@@ -155,19 +155,11 @@ $(document).ready(function(){
                 dataType: "json",
                 data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
                 success: function(msg) {
-                    if(msg[0] == "ok") {
+                    if(msg[0] == "success") {
                         location.reload(true);
                     }
                     if(msg[0] == "error") {
-                        if(msg[1] == "no linked user") {
-                            alert("Нет привязанного пользователя СЭД");
-                        }
-                        if(msg[1] == "wrong credentials") {
-                            alert("Неверное имя или пароль");
-                        }
-                        if(msg[1] == "no ldap user") {
-                            alert("Нет привязанного пользователя AD");
-                        }
+                        alert("Во время сохранения профиля произошли ошибки");
                     }
                 }
             });

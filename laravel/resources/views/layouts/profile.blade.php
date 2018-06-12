@@ -20,7 +20,7 @@
 @include('footer')
 <!--eo footer-->
 <script src="/js/libs/jquery-3.1.0.js"></script>
-<script src="/js/libs/jquery-ui.min"></script>
+<script src="/js/libs/jquery-ui.min.js"></script>
 <script src="/js/libs/chosen.jquery.min.js"></script>
 <script src="/js/libs/owl.carousel.js"></script>
 <script src="/js/libs/maskedinput.min.js"></script>

@@ -128,6 +128,12 @@ $(document).ready(function(){
 
     $(document).on("submit", "#profile_update_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        $("#profile_update_form").submit();
+        return false;
+    });
+
+    $(document).on("submit", "#profile_update_form", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("action");
         var form = $(this);
         var flag = true;
@@ -138,6 +144,7 @@ $(document).ready(function(){
 
         if(!fname || !lname) {
             flag = false;
+            alert("Имя и фамилия являются обязательными полями");
         }
         if(flag) {
             $.ajax({

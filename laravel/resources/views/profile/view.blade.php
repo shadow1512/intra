@@ -72,7 +72,7 @@
                         <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
                         <textarea id="input_position_desc" name="input_position_desc" class="it">{{Auth::user()->position_desc}}</textarea>
                     </div>
-                    <div class="field"><a href="#" class="btn profile_form_btn">OK</a></div>
+                    <div class="field"><a href="#" class="btn profile_form_btn" id="submit_profile_form">OK</a></div>
                 </form>
             </div>
         </div>

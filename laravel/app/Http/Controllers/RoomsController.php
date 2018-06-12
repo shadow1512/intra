@@ -47,6 +47,10 @@ class RoomsController extends Controller
         return view('rooms.order', ['room'    =>  $room, 'bookings'   =>  $bookings_by_dates]);
     }
 
+    public function createbooking($id, Request $request) {
+        
+    }
+
     /**
      * Show the form for creating a new resource.
      *

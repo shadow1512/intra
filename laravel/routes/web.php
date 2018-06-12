@@ -17,6 +17,7 @@ Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 
 Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
+Route::post('/rooms/book/{id}', 'RoomsController@createbooking')->name('rooms.book.create');
 
 Route::get('/services/teh', 'RoomsController@index')->name('services.teh');
 Route::get('/services/cartridge', 'RoomsController@index')->name('services.cartridge');

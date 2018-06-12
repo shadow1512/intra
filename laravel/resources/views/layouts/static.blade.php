@@ -20,5 +20,7 @@
 <script src="/js/libs/chosen.jquery.min.js"></script>
 <script src="/js/libs/owl.carousel.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/libs/jquery.datetimepicker.js"></script>
+<script src="/js/room.js"></script>
 </body>
 </html>

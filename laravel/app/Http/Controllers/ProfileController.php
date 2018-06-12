@@ -67,7 +67,7 @@ class ProfileController extends Controller
             ['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]
         );
 
-        print json_encode('array("ok", $default)');
+        print json_encode(array("ok", $default));
     }
 
     public function updateavatar(Request $request)

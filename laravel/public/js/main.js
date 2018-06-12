@@ -8,6 +8,8 @@ $(document).ready(function(){
        $(this).parent().parent().submit();
     });
 
+    $("#input_mobile_phone").intlTelInput();
+    
     $(document).on("click", "a.logout", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).parent().submit();

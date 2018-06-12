@@ -17,6 +17,6 @@ return array(
 
     'driver'            =>  'imagick',
     'default_avatar'    =>  '/images/faces/default.png',
-    'avatar_path'       =>  __DIR__ . '/images/faces/'
+    'avatar_path'       =>  'images/faces/'
 
 );

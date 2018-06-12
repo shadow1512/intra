@@ -32,44 +32,45 @@
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             <div class="modal_cnt">
                 <div class="h light_h __h_m">Настройки профиля</div>
-                <form class="profile_form" id="profile_update_form">
+                <form class="profile_form" id="profile_update_form" action="{{route('profile.update')}}">
                     {{ csrf_field() }}
                     <div class="field">
                         <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" id="img_avatar"></div>
                         <a href="{{route('profile.deleteavatar')}}" id="delete_avatar">Удалить</a>
-                        <input type="file" id="input_avatar" class="it">Загрузить новую фотографию</input>
+                        <input type="file" id="input_avatar" name="input_avatar" class="it">Загрузить новую фотографию</input>
+                        <input type="hidden" name="avatar_url" id="avatar_url" value="{{route('profile.updateavatar')}}">
                     </div>
                     <div class="field">
                         <label for="input_fname" class="lbl">Имя:</label>
-                        <input id="input_fname" type="text" value="{{Auth::user()->fname}}" class="it">
+                        <input id="input_fname" name="input_fname" type="text" value="{{Auth::user()->fname}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_mname" class="lbl">Отчество:</label>
-                        <input id="input_mname" type="text" value="{{Auth::user()->mname}}" class="it">
+                        <input id="input_mname" name="input_mname" type="text" value="{{Auth::user()->mname}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_lname" class="lbl">Фамилия:</label>
-                        <input id="input_lname" type="text" value="{{Auth::user()->lname}}" class="it">
+                        <input id="input_lname" name="input_lname" type="text" value="{{Auth::user()->lname}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_address" class="lbl">Адрес:</label>
-                        <input id="input_address" type="text" value="{{Auth::user()->address}}" class="it">
+                        <input id="input_address" name="input_address" type="text" value="{{Auth::user()->address}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_room" class="lbl">Комната:</label>
-                        <input id="input_room" type="text" value="{{Auth::user()->room}}" class="it">
+                        <input id="input_room" name="input_room" type="text" value="{{Auth::user()->room}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_phone" class="lbl">Местный телефон:</label>
-                        <input id="input_phone" type="text" value="{{Auth::user()->phone}}" class="it">
+                        <input id="input_phone" name="input_phone" type="text" value="{{Auth::user()->phone}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
-                        <input id="input_mobile_phone" type="text" value="{{Auth::user()->mobile_phone}}" class="it">
+                        <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{Auth::user()->mobile_phone}}" class="it">
                     </div>
                     <div class="field">
                         <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                        <textarea id="input_position_desc" class="it">{{Auth::user()->position_desc}}</textarea>
+                        <textarea id="input_position_desc" name="input_position_desc" class="it">{{Auth::user()->position_desc}}</textarea>
                     </div>
                     <div class="field"><a href="#" class="btn profile_form_btn">OK</a></div>
                 </form>

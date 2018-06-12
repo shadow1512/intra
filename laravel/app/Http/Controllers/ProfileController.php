@@ -15,6 +15,7 @@ use PDO;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use DateTime;
 
 class ProfileController extends Controller
@@ -68,5 +69,12 @@ class ProfileController extends Controller
         print json_encode('array("ok", $default)');
     }
 
+    public function updateavatar(Request $request)
+    {
+        $path = Storage::putFile(Config::get('image.avatar_path'), $request->file('input_avatar'));
+        var_dump(Storage::size($path));
+        var_dump(Storage::type($path));
+        var_dump(Storage::mime_type($path));
 
+    }
 }

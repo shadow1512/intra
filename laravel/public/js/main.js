@@ -66,6 +66,109 @@ $(document).ready(function(){
         }
     });
 
+    $('#input_avatar').fileupload({
+        dataType: 'json',
+        url: '/projects/create/',
+        singleFileUploads: true,
+        sequentialUploads: true,
+        //formData: [{name: 'opt', value: 'async'},{name: 'form',value: 'uploadfiles'}],
+        submit: function (e, data) {
+            totalSize = 0;
+
+            $.each(data.files, function (index, file) {
+                totalSize += file.size;
+            });
+            if(totalSize > 30000000) {
+                $("#input_file_error").text("Нельзя загрузить более 3мб");
+                $("#input_file_error").show();
+                return false;
+            }
+            progress = document.createElement("div");
+            $(progress).attr("id", "progress");
+            $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
+            $("div.profile_aside_pic").append(progress);
+        },
+        done: function (e, data) {
+            $("#progress").remove();
+            $.each(data.result.files, function (index, file) {
+                if(file[0] == "success") {
+                    lbl = document.createElement("mark"), deleteButton = $("<a href=\"#\" id=\"uploaded_" + file[1] + "\" class=\"file_del\"></a>");
+                    if(file[2].dtype == "image") {
+                        $("#img_avatar").attr("src", file[2].document);
+                    }
+                }
+                else {
+                    var errMessage = "Файл " + file[2].origname + " загружен не был. Причина - ";
+                    if(file[1] == 14) {
+                        errMessage += "недопустимое разрешение файла";
+                    }
+                    if(file[1] == 15) {
+                        errMessage += "недопустимый тип файла";
+                    }
+                    if(file[1] == 16) {
+                        errMessage += "файл слишком большого размера";
+                    }
+                    $("#input_file_error").text(errMessage);
+                    $("#input_file_error").show();
+                }
+            });
+        },
+        fail: function (e, data) {
+            $("#progress").remove();
+            $("#input_file_error").text("Нам не удалось загрузить файлы. Мы уже знаем об этом и примем меры. Вы можете продолжить создание проекта, загрузив файлы позже через свой профиль, где вы сможете отредактировать создаваемый проект");
+            $("#input_file_error").show();
+
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progressbar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+
+    $(document).on("submit", "#profile_update_form", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("action");
+        var form = $(this);
+        var flag = true;
+
+        var fname = lname = "";
+        fname   = $("#input_fname").val().trim();
+        lname   = $("#input_lname").val().trim();
+
+        if(!fname || !lname) {
+            flag = false;
+        }
+        if(flag) {
+            $.ajax({
+                type: "POST",
+                url: url,
+                cache: false,
+                async: true,
+                dataType: "json",
+                data: form.serialise() + "&_token=" + $("input[name='_token']").val(),
+                success: function(msg) {
+                    if(msg[0] == "ok") {
+                        location.reload(true);
+                    }
+                    if(msg[0] == "error") {
+                        if(msg[1] == "no linked user") {
+                            alert("Нет привязанного пользователя СЭД");
+                        }
+                        if(msg[1] == "wrong credentials") {
+                            alert("Неверное имя или пароль");
+                        }
+                        if(msg[1] == "no ldap user") {
+                            alert("Нет привязанного пользователя AD");
+                        }
+                    }
+                }
+            });
+        }
+    });
+
 //modal window
     function popUp(button, window, callback) {
         $(document).on('click', button, function(event) {

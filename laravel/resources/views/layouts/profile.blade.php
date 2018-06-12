@@ -26,5 +26,6 @@
 <script src="/js/libs/maskedinput.min.js"></script>
 <script src="/js/libs/jquery.fileupload.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/profile.js"></script>
 </body>
 </html>

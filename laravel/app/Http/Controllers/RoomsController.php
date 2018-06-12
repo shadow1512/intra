@@ -48,7 +48,7 @@ class RoomsController extends Controller
     }
 
     public function createbooking($id, Request $request) {
-        
+
     }
 
     /**

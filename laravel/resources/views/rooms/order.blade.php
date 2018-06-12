@@ -121,7 +121,7 @@
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             <div class="modal_cnt">
                 <div class="h light_h __h_m">Забронировать время</div>
-                <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create')}}">
+                <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create', ["id"  =>  $room->id])}}">
                     {{ csrf_field() }}
                     <input type="hidden" name="input_date" id="input_date"/>
                     <div class="field">

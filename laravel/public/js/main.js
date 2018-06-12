@@ -153,7 +153,7 @@ $(document).ready(function(){
                 cache: false,
                 async: true,
                 dataType: "json",
-                data: form.serialise() + "&_token=" + $("input[name='_token']").val(),
+                data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
                 success: function(msg) {
                     if(msg[0] == "ok") {
                         location.reload(true);

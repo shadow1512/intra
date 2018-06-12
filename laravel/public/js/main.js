@@ -91,11 +91,11 @@ $(document).ready(function(){
             $("div.profile_aside_pic").append(progress);
         },
         success: function(e, data) {
-            alert('ss');
         },
         done: function (e, data) {
             alert('yep');
             $("#progress").remove();
+            alert(data);
             $.each(data.result.files, function (index, file) {
                 alert('a');
                 alert(index);

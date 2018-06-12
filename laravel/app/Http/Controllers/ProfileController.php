@@ -72,8 +72,8 @@ class ProfileController extends Controller
     public function updateavatar(Request $request)
     {
         $path = Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
-        var_dump(Storage::disk('public')->size($path));
-        var_dump(Storage::disk('public')->mime_type($path));
+        var_dump(Storage::disk('public')->getSize($path));
+        var_dump(Storage::disk('public')->getMimetype($path));
 
     }
 }

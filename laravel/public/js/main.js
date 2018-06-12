@@ -90,7 +90,11 @@ $(document).ready(function(){
             $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
             $("div.profile_aside_pic").append(progress);
         },
+        success: function(e, data) {
+            alert('ss');
+        },
         done: function (e, data) {
+            alert('yep');
             $("#progress").remove();
             $.each(data.result.files, function (index, file) {
                 alert('a');

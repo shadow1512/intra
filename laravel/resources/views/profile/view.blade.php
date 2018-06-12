@@ -3,7 +3,7 @@
 @section('view')
 <div class="profile_i">
     <div class="profile_aside">
-        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
+        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
             <p class="profile_aside_invoice_i">1 650 ₽</p></a>
     </div>
@@ -35,7 +35,8 @@
                 <form class="profile_form" id="profile_update_form">
                     {{ csrf_field() }}
                     <div class="field">
-                        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" id="img_avatar"><a href="{{route('profile.deleteavatar')}}" id="delete_avatar">Удалить</a></div>
+                        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" id="img_avatar"></div>
+                        <a href="{{route('profile.deleteavatar')}}" id="delete_avatar">Удалить</a>
                         <input type="file" id="input_avatar" class="it">Загрузить новую фотографию</input>
                     </div>
                     <div class="field">

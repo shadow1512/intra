@@ -80,10 +80,12 @@ $(document).ready(function(){
     popUp('.__js-modal-bill-lk', '.__js-modal-bill');
     popUp('.__js-modal-camera-lk', '.__js-modal-camera');
     popUp('.__js-modal-profile-lk', '.__js-modal-profile');
-    popUp('.order_calendar_cnt_add', '.__js-modal-order', function(but, win) {
+    popUp('.order_calendar_cnt_add', '.__js-modal-order');
+
+    /*function(but, win) {
         var dd = $(but).parent().find("span.order_date").text();
         $(win).find("input[name='input_date']").val(dd);
-    });
+    }*/
 
     //eo modal window
 

@@ -91,23 +91,18 @@ $(document).ready(function(){
         done: function (e, data) {
             $("#progress").remove();
             $.each(data.result.files, function (index, file) {
-                if(file[0] == "success") {
-                    lbl = document.createElement("mark"), deleteButton = $("<a href=\"#\" id=\"uploaded_" + file[1] + "\" class=\"file_del\"></a>");
-                    if(file[2].dtype == "image") {
-                        $("#img_avatar").attr("src", file[2].document);
-                    }
+                if(file[0] == "ok") {
+                    $("#img_avatar").attr("src", file[1]);
                 }
                 else {
-                    var errMessage = "Файл " + file[2].origname + " загружен не был. Причина - ";
-                    if(file[1] == 14) {
-                        errMessage += "недопустимое разрешение файла";
+                    var errMessage = "Файл загружен не был. Причина - ";
+                    if(file[1] == "file wrong type") {
+                        errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                     }
-                    if(file[1] == 15) {
-                        errMessage += "недопустимый тип файла";
+                    if(file[1] == "file too large") {
+                        errMessage += "для загрузки доступны изображения не более 3мб";
                     }
-                    if(file[1] == 16) {
-                        errMessage += "файл слишком большого размера";
-                    }
+                    
                     $("#input_file_error").text(errMessage);
                     $("#input_file_error").show();
                 }

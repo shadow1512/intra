@@ -16,6 +16,7 @@ use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 use DateTime;
 
 class ProfileController extends Controller
@@ -71,9 +72,26 @@ class ProfileController extends Controller
 
     public function updateavatar(Request $request)
     {
-        $path = Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
-        var_dump(Storage::disk('public')->getSize($path));
-        var_dump(Storage::disk('public')->getMimetype($path));
+        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
+        $size   =   Storage::disk('public')->getSize($path);
+        $type   =   Storage::disk('public')->getMimetype($path);
+
+        if($size <= 3000000) {
+            if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+                $manager = new ImageManager(array('driver' => 'imagick'));
+                $image  = $manager->make('$path')->fit(Config::get('image.avatar_width'))->save($path);
+                DB::table('users')->update(
+                    ['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]
+                );
+                print json_encode(array("ok",   Storage::disk('public')->url($path)));
+            }
+            else {
+                print json_encode(array("error", "file wrong type"));
+            }
+        }
+        else {
+            print json_encode(array("error", "file too large"));
+        }
 
     }
 }

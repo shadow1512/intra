@@ -74,7 +74,7 @@ class ProfileController extends Controller
                             'room'  =>  $room,  'address'   =>  $address,   'phone' =>  $phone,
                             'mobile_phone'  =>  $mobile_phone,  'position_desc' =>  $position_desc,
                             'updated_at' => date("Y-m-d H:i:s")]);
-            return response()->json(['success');
+            return response()->json(['success']);
         }
 
     }

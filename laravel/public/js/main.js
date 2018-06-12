@@ -82,6 +82,7 @@ $(document).ready(function(){
     popUp('.__js-modal-profile-lk', '.__js-modal-profile');
     popUp('.order_calendar_cnt_add', '.__js-modal-order', function(but, win) {
         var dd = $(but).parent().find("span.order_date").text();
+        alert(dd);
         $(win).find("input[name='input_date_booking']").val(dd);
     });
 

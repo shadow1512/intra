@@ -17,7 +17,7 @@ return array(
 
     'driver'            =>  'imagick',
     'default_avatar'    =>  '/images/faces/default.png',
-    'avatar_path'       =>  '/users/faces/',
+    'avatar_path'       =>  '/users/faces',
     'avatar_width'      =>  150
 
 );

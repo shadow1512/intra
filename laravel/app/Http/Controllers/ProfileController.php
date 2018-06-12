@@ -56,7 +56,7 @@ class ProfileController extends Controller
 
         $validator = Validator::make($request->all(), [
             'input_fname'           => 'required|max:255',
-            'input_mname'           => 'required|max:255',
+            'input_mname'           => 'max:255',
             'input_lname'           => 'required|max:255',
             'input_address'         => 'max:255',
             'input_room'            => 'max:3',

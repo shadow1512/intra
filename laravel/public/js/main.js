@@ -126,7 +126,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on("submit", "#profile_update_form", function(ev) {
+    $(document).on("click", "#submit_profile_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $("#profile_update_form").submit();
         return false;

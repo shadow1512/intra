@@ -93,9 +93,9 @@ $(document).ready(function(){
         success: function(e, data) {
         },
         done: function (e, data) {
-            alert('yep');
             $("#progress").remove();
-            alert(data);
+            alert(data[0]);
+            alert(data[0][0]);
             $.each(data.result.files, function (index, file) {
                 alert('a');
                 alert(index);

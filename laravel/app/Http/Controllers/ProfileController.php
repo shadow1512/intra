@@ -12,7 +12,7 @@ use Auth;
 use App\User;
 use DB;
 use PDO;
-
+use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DateTime;

@@ -35,18 +35,18 @@ class AdLoginController extends Controller
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.key', '=', $guid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);
-                    print json_encode(array("ok"));
+                    return response()->json(['ok']);
                 }
                 else {
-                    print json_encode(array("error", "no linked user"));
+                    return response()->json(['error', 'no linked user']);
                 }
             }
             else {
-                print json_encode(array("error", "no ldap user"));
+                return response()->json(['error', 'no ldap user']);
             }
         }
         else {
-            print json_encode(array("error", "wrong credentials"));
+            return response()->json(['error', 'wrong credentials']);
         }
 
     }

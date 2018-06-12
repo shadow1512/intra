@@ -67,7 +67,7 @@ class ProfileController extends Controller
             ['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]
         );
 
-        print json_encode(array("ok", $default));
+        return response()->json(['ok', $default]);
     }
 
     public function updateavatar(Request $request)
@@ -83,14 +83,14 @@ class ProfileController extends Controller
                 DB::table('users')->update(
                     ['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]
                 );
-                print json_encode(array("ok",   Storage::disk('public')->url($path)));
+                return response()->json(['ok', Storage::disk('public')->url($path)]);
             }
             else {
-                print json_encode(array("error", "file wrong type"));
+                return response()->json(['error', 'file wrong type']);
             }
         }
         else {
-            print json_encode(array("error", "file too large"));
+            return response()->json(['error', 'file too large']);
         }
 
     }

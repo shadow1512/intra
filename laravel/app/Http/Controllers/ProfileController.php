@@ -45,6 +45,37 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
+        $fname          = trim($request->input('input_fname'));
+        $mname          = trim($request->input('input_mname'));
+        $lname          = trim($request->input('input_lname'));
+        $address        = trim($request->input('input_address'));
+        $room           = trim($request->input('input_room'));
+        $phone          = trim($request->input('input_phone'));
+        $mobile_phone   = trim($request->input('input_mobile_phone'));
+        $position_desc  = trim($request->input('input_position_desc'));
+
+        $validator = Validator::make($request->all(), [
+            'input_fname'           => 'required|max:255',
+            'input_mname'           => 'required|max:255',
+            'input_lname'           => 'required|max:255',
+            'input_address'         => 'max:255',
+            'input_room'            => 'max:3',
+            'input_phone'           => 'max:24',
+            'input_mobile_phone'    => 'max:24',
+            'input_position_desc'   => 'max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error', $validator]);
+        }
+        else {
+            DB::table('users')->where("id", "=", Auth::user()->id)
+                ->update(['fname' => $fname, 'lname'    =>  $lname, 'mname' =>  $mname,
+                            'room'  =>  $room,  'address'   =>  $address,   'phone' =>  $phone,
+                            'mobile_phone'  =>  $mobile_phone,  'position_desc' =>  $position_desc,
+                            'updated_at' => date("Y-m-d H:i:s")]);
+            return response()->json(['success');
+        }
 
     }
 

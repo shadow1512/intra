@@ -73,7 +73,6 @@ class ProfileController extends Controller
     {
         $path = Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
         var_dump(Storage::disk('public')->size($path));
-        var_dump(Storage::disk('public')->type($path));
         var_dump(Storage::disk('public')->mime_type($path));
 
     }

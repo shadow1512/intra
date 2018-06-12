@@ -63,9 +63,8 @@ class ProfileController extends Controller
     public function deleteavatar()
     {
         $default = Config::get('image.default_avatar');
-        DB::table('users')->update(
-            ['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]
-        );
+        DB::table('users')->where("id", "=", Auth::user()->id)
+            ->update(['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]);
 
         return response()->json(['ok', $default]);
     }
@@ -80,9 +79,8 @@ class ProfileController extends Controller
             if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                 $manager = new ImageManager(array('driver' => 'imagick'));
                 $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
-                DB::table('users')->update(
-                    ['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]
-                );
+                DB::table('users')->where("id", "=", Auth::user()->id)
+                    ->update(['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
                 return response()->json(['ok', Storage::disk('public')->url($path)]);
             }
             else {

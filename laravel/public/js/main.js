@@ -93,6 +93,9 @@ $(document).ready(function(){
         done: function (e, data) {
             $("#progress").remove();
             $.each(data.result.files, function (index, file) {
+                alert('a');
+                alert(index);
+                alet(file[0]);
                 if(file[0] == "ok") {
                     $("#img_avatar").attr("src", file[1]);
                 }

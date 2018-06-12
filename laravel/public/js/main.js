@@ -78,7 +78,9 @@ $(document).ready(function(){
             $.each(data.files, function (index, file) {
                 totalSize += file.size;
             });
-            if(totalSize > 30000000) {
+
+            if(totalSize > 3000000) {
+                alert("Для фотографии используйте изображение менее 3мб");
                 $("#input_file_error").text("Нельзя загрузить более 3мб");
                 $("#input_file_error").show();
                 return false;
@@ -102,7 +104,7 @@ $(document).ready(function(){
                     if(file[1] == "file too large") {
                         errMessage += "для загрузки доступны изображения не более 3мб";
                     }
-                    
+
                     $("#input_file_error").text(errMessage);
                     $("#input_file_error").show();
                 }

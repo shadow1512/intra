@@ -334,6 +334,7 @@ class ModerateController extends Controller
         $book->save();
 
         DB::table('lib_books_razdels')->where("book_id", "=", $id)->delete();
+        var_dump($request->input('razdels[]'));exit();
         if(count($request->input('razdels[]'))) {
             foreach($request->input('razdels[]') as $razdel_id) {
                 DB::table('lib_books_razdels')->insert(

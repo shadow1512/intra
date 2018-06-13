@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use DB;
+use App\News;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -32,6 +33,8 @@ class ModerateController extends Controller
      */
     public function index()
     {
-
+        //новости
+        $news = News::orderBy('importancy', 'desc')->limit(5)->get();
+        return view('moderate.news.list', ['news'    =>  $news]);
     }
 }

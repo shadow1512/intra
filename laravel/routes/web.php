@@ -58,6 +58,8 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::get('/', 'ModerateController@index')->name('moderate');
     Route::get('/news/create', 'ModerateController@newscreate')->name('moderate.news.create');
     Route::get('/news/edit/{id}', 'ModerateController@newsedit')->name('moderate.news.edit');
+    Route::put('/news/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
+    Route::put('/news/store', 'ModerateController@newsstore')->name('moderate.news.store');
     Route::delete('/news/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     Route::get('/rooms', 'ModerateController@rooms')->name('moderate.rooms.index');
     Route::get('/rooms/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');

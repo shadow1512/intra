@@ -54,6 +54,46 @@ class ModerateController extends Controller
 
     }
 
+    public function newsstore(Request $request)
+    {
+
+    }
+
+    public function newsupdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|string|max:191',
+            'annotation'    =>  'required|string|max:1000',
+            'fulltext'      =>  'string|max:10000',
+            'importancy'    =>  'integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.news.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $news = News::findOrFail($id);
+        $news->title        = $request->input('title');
+        $news->annotation   = $request->input('annotation');
+        $news->fulltext     = $request->input('fulltext');
+        $published_at = date("Y-m-d H:i:s");
+        if($request->input('published_at')) {
+            $published_at = date("Y-m-d H:i:s", strtotime($request->input('published_at')));
+        }
+        $news->published_at = $published_at;
+        $importancy = 1;
+        if($request->input('importancy')) {
+            $importancy = $request->input('importancy');
+        }
+        $news->importancy  = $importancy;
+
+        $news->updated_at = date("Y-m-d H:i:s");
+        $news->save();
+
+        return redirect(route('moderate'));
+    }
+
     public function rooms()
     {
         //Комнаты

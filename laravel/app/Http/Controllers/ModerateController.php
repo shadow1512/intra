@@ -257,7 +257,7 @@ class ModerateController extends Controller
                 ->withInput();
         }
 
-        $razdel = Rooms::findOrFail($id);
+        $razdel = LibRazdel::findOrFail($id);
         $razdel->name  = $request->input('name');
         $razdel->updated_at = date("Y-m-d H:i:s");
         $razdel->save();

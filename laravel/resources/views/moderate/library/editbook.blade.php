@@ -73,6 +73,7 @@
                                         <label class="form-check-label" for="razdel_{{$razdel->id}}">{{$razdel->name}}</label>
                                     </div>
                                     @endforeach
+                                @endif
                                 </div>
                             </div>
                             <div class="form-group">

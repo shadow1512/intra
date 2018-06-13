@@ -63,7 +63,7 @@ class ModerateController extends Controller
 
     public function roomscreate()
     {
-
+        return view('moderate.rooms.create');
     }
 
     public function roomsedit($id)
@@ -72,9 +72,39 @@ class ModerateController extends Controller
         return view('moderate.rooms.edit', ['room'    =>  $room]);
     }
 
-    public function roomsdelete()
+    public function roomsdelete($id)
     {
+        $room = Rooms::findOrFail($id);
+        $room->delete();
 
+        return redirect(route('moderate.rooms.index'));
+    }
+
+    public function roomsstore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:50',
+        ]);
+        if ($validator->fails()) {
+            return redirect('moderate.rooms.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        
+        $available = 0;
+        if($request->input('available')) {
+            $available = 0;
+        }
+        else {
+            $available = 1;
+        }
+
+        Rooms::create([
+            'name'      => $request->input('name'),
+            'available' =>  $available,
+        ]);
+
+        return redirect(route('moderate.rooms.index'));
     }
 
     public function roomsupdate(Request $request, $id)
@@ -97,6 +127,7 @@ class ModerateController extends Controller
         else {
             $room->available = 1;
         }
+        $room->updated_at = date("Y-m-d H:i:s");
         $room->save();
 
         return redirect(route('moderate.rooms.index'));

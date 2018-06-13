@@ -68,7 +68,7 @@
                                 <label for="published_at" class="col-md-4 control-label">Дата публикации</label>
 
                                 <div class="col-md-6">
-                                    <input id="published_at" type="text" class="form-control" name="published_at" value="{{ $news->published_at }}"/>
+                                    <input id="published_at" type="text" class="form-control" name="published_at" value="{{ date("d.m.Y H:i", strtotime($news->published_at)) }}"/>
 
                                     @if ($errors->has('published_at'))
                                         <span class="help-block">

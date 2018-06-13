@@ -50,14 +50,46 @@ class ModerateController extends Controller
         return view('moderate.news.edit', ['news'    =>  $news]);
     }
 
-    public function newsdelete()
+    public function newsdelete($id)
     {
+        $news = News::findOrFail($id);
+        $news->delete();
 
+        return redirect(route('moderate'));
     }
 
     public function newsstore(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|string|max:191',
+            'annotation'    =>  'required|string|max:1000',
+            'fulltext'      =>  'string|max:10000',
+            'importancy'    =>  'integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.news.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        $published_at = date("Y-m-d H:i:s");
+        if($request->input('published_at')) {
+            $published_at = date("Y-m-d H:i:s", strtotime($request->input('published_at') . ":00"));
+        }
+        $importancy = 1;
+        if($request->input('importancy')) {
+            $importancy = $request->input('importancy');
+        }
+
+        News::create([
+            'title'             =>  $request->input('title'),
+            'annotation'        =>  $request->input('annotation'),
+            'fulltext'          =>  $request->input('fulltext'),
+            'published_at'      =>  $published_at,
+            'importancy'        =>  $importancy
+        ]);
+
+        return redirect(route('moderate'));
     }
 
     public function newsupdate(Request $request, $id)

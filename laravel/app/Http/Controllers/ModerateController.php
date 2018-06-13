@@ -41,12 +41,13 @@ class ModerateController extends Controller
 
     public function newscreate()
     {
-
+        return view('moderate.news.create');
     }
 
-    public function newsedit()
+    public function newsedit($id)
     {
-
+        $news = News::findOrFail($id);
+        return view('moderate.news.edit', ['news'    =>  $news]);
     }
 
     public function newsdelete()

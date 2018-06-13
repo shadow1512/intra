@@ -13,6 +13,8 @@ use App\User;
 use DB;
 use App\News;
 use App\Rooms;
+use App\LibBook;
+use App\LibRazdel;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -212,6 +214,63 @@ class ModerateController extends Controller
     }
 
     public function library()
+    {
+        $razdels = LibRazdel::selectRaw("lib_razdels.id, name, count(lib_books_razdels.book_id) as numbooks")
+            ->leftJoin('lib_books_razdels', 'lib_razdels.id', '=', 'lib_books_razdels.razdel_id')
+            ->groupBy(['lib_books_razdels.razdel_id', 'lib_razdels.id', 'lib_razdels.name'])
+            ->orderBy('name', 'desc')->get();
+
+        $books = LibBook::orderBy('name', 'desc')->get();
+
+        return view('moderate.library.list', ['razdels'    =>  $razdels, 'books'    =>  $books]);
+    }
+
+    public function librarycreate()
+    {
+
+    }
+
+    public function libraryedit($id)
+    {
+
+    }
+
+    public function librarydelete($id)
+    {
+
+    }
+
+    public function libraryupdate($id, Request $request)
+    {
+
+    }
+
+    public function librarystore(Request $request)
+    {
+
+    }
+
+    public function librarycreatebook()
+    {
+
+    }
+
+    public function libraryeditbook($id)
+    {
+
+    }
+
+    public function librarydeletebook($id)
+    {
+
+    }
+
+    public function libraryupdatebook($id, Request $request)
+    {
+
+    }
+
+    public function librarystorebook(Request $request)
     {
 
     }

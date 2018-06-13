@@ -68,6 +68,16 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::put('/rooms/store', 'ModerateController@roomsstore')->name('moderate.rooms.store');
     Route::delete('/rooms/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
     Route::get('/library', 'ModerateController@library')->name('moderate.library.index');
+    Route::get('/library/razdel/create', 'ModerateController@librarycreate')->name('moderate.library.create');
+    Route::get('/library/razdel/edit/{id}', 'ModerateController@libraryedit')->name('moderate.library.edit');
+    Route::put('/library/razdel/update/{id}', 'ModerateController@libraryupdate')->name('moderate.library.update');
+    Route::put('/library/razdel/store', 'ModerateController@librarystore')->name('moderate.library.store');
+    Route::delete('/library/razdel/delete/{id}', 'ModerateController@librarydelete')->name('moderate.library.delete');
+    Route::get('/library/book/create', 'ModerateController@librarycreatebook')->name('moderate.library.createbook');
+    Route::get('/library/book/edit/{id}', 'ModerateController@libraryeditbook')->name('moderate.library.editbook');
+    Route::put('/library/book/update/{id}', 'ModerateController@libraryupdatebook')->name('moderate.library.updatebook');
+    Route::put('/library/book/store', 'ModerateController@librarystorebook')->name('moderate.library.storebook');
+    Route::delete('/library/book/delete/{id}', 'ModerateController@librarydeletebook')->name('moderate.library.deletebook');
     Route::get('/users', 'ModerateController@users')->name('moderate.users.index');
     Route::get('/foto', 'ModerateController@foto')->name('moderate.foto.index');
 });

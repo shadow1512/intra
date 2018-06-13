@@ -97,7 +97,7 @@ class ModerateController extends Controller
         else {
             $room->available = 1;
         }
-        $rooms->save();
+        $room->save();
 
         return redirect(route('moderate.rooms'));
     }

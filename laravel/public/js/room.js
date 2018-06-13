@@ -27,3 +27,32 @@ $("#input_time_end").datetimepicker({
 $(document).on("click", "#input_time_start,#input_time_end", function() {
    $(this).datetimepicker('toggle');
 });
+
+$(document).on("click", "#submit_room_order_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $("#room_order_form").submit();
+    return false;
+});
+
+$(document).on("submit", "#room_order_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    var url = $(this).attr("action");
+    var form = $(this);
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
+        success: function(msg) {
+            if(msg[0] == "success") {
+                location.reload(true);
+            }
+            if(msg[0] == "error") {
+                alert("Во время сохранения заказа произошли ошибки");
+            }
+        }
+    });
+});

@@ -57,12 +57,13 @@ Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
 Route::group(['prefix' => 'moderate'], function () {
     Route::get('/', 'ModerateController@index')->name('moderate');
     Route::get('/news/create', 'ModerateController@newscreate')->name('moderate.news.create');
-    Route::get('/news/edit', 'ModerateController@newsedit')->name('moderate.news.edit');
-    Route::delete('/news/delete', 'ModerateController@newsdelete')->name('moderate.news.delete');
+    Route::get('/news/edit/{id}', 'ModerateController@newsedit')->name('moderate.news.edit');
+    Route::delete('/news/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     Route::get('/rooms', 'ModerateController@rooms')->name('moderate.rooms.index');
     Route::get('/rooms/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
-    Route::get('/rooms/edit', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
-    Route::delete('/rooms/delete', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
+    Route::get('/rooms/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
+    Route::put('/rooms/update/{id}', 'ModerateController@roomsupdate')->name('moderate.rooms.update');
+    Route::delete('/rooms/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
     Route::get('/library', 'ModerateController@library')->name('moderate.library.index');
     Route::get('/users', 'ModerateController@users')->name('moderate.users.index');
     Route::get('/foto', 'ModerateController@foto')->name('moderate.foto.index');

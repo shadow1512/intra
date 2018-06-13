@@ -66,14 +66,40 @@ class ModerateController extends Controller
 
     }
 
-    public function roomsedit()
+    public function roomsedit($id)
     {
-
+        $room = Rooms::findOrFail($id);
+        return view('moderate.rooms.edit', ['room'    =>  $room]);
     }
 
     public function roomsdelete()
     {
 
+    }
+
+    public function roomsupdate(Request $request, $id)
+    {
+        //
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:50',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.rooms.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $room = Rooms::findOrFail($id);
+        $room->name  = $request->input('name');
+        if($request->input('available')) {
+            $room->available = 0;
+        }
+        else {
+            $room->available = 1;
+        }
+        $rooms->save();
+
+        return redirect(route('moderate.rooms'));
     }
 
     public function users()

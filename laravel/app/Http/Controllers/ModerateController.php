@@ -293,7 +293,7 @@ class ModerateController extends Controller
     {
         $book       = LibBook::findOrFail($id);
         $razdels    = LibRazdel::orderby('name')->get();
-        $razdel_ids = DB:table('lib_books_razdels')->where("book_id", "=", $id)->pluck("razdel_id");
+        $razdel_ids = DB::table('lib_books_razdels')->where("book_id", "=", $id)->pluck("razdel_id");
         return view('moderate.library.editbook', ['book'    =>  $book, 'razdels'    =>  $razdels, 'razdel_ids'  =>  $razdel_ids]);
     }
 
@@ -301,7 +301,7 @@ class ModerateController extends Controller
     {
         $book = LibBook::findOrFail($id);
         $book->delete();
-        DB:table('lib_books_razdels')->where("book_id", "=", $id)->delete();
+        DB::table('lib_books_razdels')->where("book_id", "=", $id)->delete();
 
         return redirect(route('moderate.library.index'));
     }
@@ -329,7 +329,7 @@ class ModerateController extends Controller
         $book->updated_at = date("Y-m-d H:i:s");
         $book->save();
 
-        DB:table('lib_books_razdels')->where("book_id", "=", $id)->delete();
+        DB::table('lib_books_razdels')->where("book_id", "=", $id)->delete();
         if(count($request->input('razdels[]'))) {
             foreach($request->input('razdels[]') as $razdel_id) {
                 DB::table('lib_books_razdels')->insert(
@@ -369,7 +369,7 @@ class ModerateController extends Controller
                 );
             }
         }
-        
+
         return redirect(route('moderate.library.index'));
     }
 

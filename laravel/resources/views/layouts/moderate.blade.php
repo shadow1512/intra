@@ -14,7 +14,7 @@
     <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
     <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
-    <script src="{{ asset('js/libs/maskedinput.js') }}"></script>
+    <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
 </head>
@@ -34,7 +34,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-                        <img src="/images/logo-intra.png"/>
+                        <img src="/images/logo_intra.png"/>
                     </a>
                 </div>
 

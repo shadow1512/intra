@@ -12,6 +12,7 @@ use Auth;
 use App\User;
 use DB;
 use App\News;
+use App\Rooms;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -54,6 +55,23 @@ class ModerateController extends Controller
     }
 
     public function rooms()
+    {
+        //Комнаты
+        $rooms = Rooms::orderBy('name')->get();
+        return view('moderate.rooms.list', ['rooms'    =>  $rooms]);
+    }
+
+    public function roomscreate()
+    {
+
+    }
+
+    public function roomsedit()
+    {
+
+    }
+
+    public function roomsdelete()
     {
 
     }

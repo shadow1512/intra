@@ -6,11 +6,11 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="row">
-                <div class="col-md-6"><strong>Вместимость</strong></div>
-                <div class="col-md-6">
+                <div class="col-md-9"><h3>Новости</h3></div>
+                <div class="col-md-3">
                     <form method="get" action="{{ route('moderate.news.create') }}">
                         <button type="submit" class="btn btn-primary">
-                            Создать контейнер
+                            Создать новость
                         </button>
                     </form>
                 </div>

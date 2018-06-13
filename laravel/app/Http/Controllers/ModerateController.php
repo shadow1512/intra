@@ -99,7 +99,7 @@ class ModerateController extends Controller
         }
         $room->save();
 
-        return redirect(route('moderate.rooms'));
+        return redirect(route('moderate.rooms.index'));
     }
 
     public function users()

@@ -11,12 +11,12 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ asset('css/moderate.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/jquery.datetimepicker.css') }}" rel="stylesheet">
-    <script src="/js/libs/jquery-3.1.0.js"></script>
-    <script src="/js/libs/maskedinput.js"></script>
-    <script src="/js/libs/jquery.datetimepicker.js"></script>
-    <script src="/js/moderate.js"></script>
+    <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
+    <script src="{{ asset('js/libs/maskedinput.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
+    <script src="{{ asset('js/moderate.js') }}"></script>
 </head>
 <body>
     <div id="app">

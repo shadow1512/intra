@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="form-group form-check">
-                                <input type="checkbox" class="form-check-input" id="available" name="available" @if ($room-available == 0) checked="checked"@endif/>
+                                <input type="checkbox" class="form-check-input" id="available" name="available" @if ($room->available == 0) checked="checked"@endif/>
                                 <label class="form-check-label" for="available">Требуется подтверждение</label>
                             </div>
                             <div class="form-group">

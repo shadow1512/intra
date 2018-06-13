@@ -54,6 +54,6 @@ Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
 //Auth::routes();
 
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+Route::group(['prefix' => 'moderate'], function () {
+    Route::get('/', 'ModerateController@index')->name('moderate');
 });

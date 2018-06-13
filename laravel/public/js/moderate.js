@@ -37,6 +37,6 @@ $(document).ready(function($) {
     $("#to_complete_at, #published_at").datetimepicker({
         lang:'ru',
         format:'d/m/Y H:i',
-        formatDate:'Y-m-d H:i',
+        //formatDate:'Y-m-d H:i',
     });
 }); 

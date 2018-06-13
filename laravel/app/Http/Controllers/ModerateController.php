@@ -80,7 +80,7 @@ class ModerateController extends Controller
         $news->fulltext     = $request->input('fulltext');
         $published_at = date("Y-m-d H:i:s");
         if($request->input('published_at')) {
-            $published_at = date("Y-m-d H:i:s", strtotime($request->input('published_at')));
+            $published_at = date("Y-m-d H:i:s", strtotime($request->input('published_at') . ":00"));
         }
         $news->published_at = $published_at;
         $importancy = 1;

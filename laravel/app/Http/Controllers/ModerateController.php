@@ -227,52 +227,150 @@ class ModerateController extends Controller
 
     public function librarycreate()
     {
-
+        return view('moderate.library.create');
     }
 
     public function libraryedit($id)
     {
-
+        $razdel = LibRazdel::findOrFail($id);
+        return view('moderate.library.edit', ['razdel'    =>  $razdel]);
     }
 
     public function librarydelete($id)
     {
+        $razdel = LibRazdel::findOrFail($id);
+        $razdel->delete();
+        DB:table('lib_books_razdels')->where("razdel_id", "=", $id)->delete();
 
+        return redirect(route('moderate.library.index'));
     }
 
     public function libraryupdate($id, Request $request)
     {
+        //
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:128',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.library.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        $razdel = Rooms::findOrFail($id);
+        $razdel->name  = $request->input('name');
+        $razdel->updated_at = date("Y-m-d H:i:s");
+        $razdel->save();
+
+        return redirect(route('moderate.library.index'));
     }
 
     public function librarystore(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:128',
+        ]);
+        if ($validator->fails()) {
+            return redirect('moderate.razdel.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        LibRazdel::create([
+            'name'      => $request->input('name'),
+        ]);
+
+        return redirect(route('moderate.library.index'));
     }
 
     public function librarycreatebook()
     {
-
+        $razdels = LibRazdel::orderby('name')->get();
+        return view('moderate.library.createbook', ['razdels'   =>  $razdels]);
     }
 
     public function libraryeditbook($id)
     {
-
+        $book       = LibBook::findOrFail($id);
+        $razdels    = LibRazdel::orderby('name')->get();
+        $razdel_ids = DB:table('lib_books_razdels')->where("book_id", "=", $id)->pluck("razdel_id");
+        return view('moderate.library.editbook', ['book'    =>  $book, 'razdels'    =>  $razdels, 'razdel_ids'  =>  $razdel_ids]);
     }
 
     public function librarydeletebook($id)
     {
+        $book = LibBook::findOrFail($id);
+        $book->delete();
+        DB:table('lib_books_razdels')->where("book_id", "=", $id)->delete();
 
+        return redirect(route('moderate.library.index'));
     }
 
     public function libraryupdatebook($id, Request $request)
     {
+        //
+        $validator = Validator::make($request->all(), [
+            'name'      =>  'required|string|max:255',
+            'authors'   =>  'required|string|max:255',
+            'anno'      =>  'string|max:1000',
+            'year'      =>  'integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.library.editbook')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        $book = LibBook::findOrFail($id);
+        $book->name     = $request->input('name');
+        $book->authors  = $request->input('authors');
+        $book->anno     = $request->input('anno');
+        $book->year     = $request->input('year');
+        $book->updated_at = date("Y-m-d H:i:s");
+        $book->save();
+
+        DB:table('lib_books_razdels')->where("book_id", "=", $id)->delete();
+        if(count($request->input('razdels[]'))) {
+            foreach($request->input('razdels[]') as $razdel_id) {
+                DB::table('lib_books_razdels')->insert(
+                    ['razdel_id' => $razdel_id, 'book_id' => $id]
+                );
+            }
+        }
+
+        return redirect(route('moderate.library.index'));
     }
 
     public function librarystorebook(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name'      =>  'required|string|max:255',
+            'authors'   =>  'required|string|max:255',
+            'anno'      =>  'string|max:1000',
+            'year'      =>  'integer',
+        ]);
+        if ($validator->fails()) {
+            return redirect('moderate.library.createbook')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        LibBook::create([
+            'name'      => $request->input('name'),
+            'authors'   => $request->input('authors'),
+            'anno'      => $request->input('anno'),
+            'year'      => $request->input('year'),
+        ]);
+
+        if(count($request->input('razdels[]'))) {
+            foreach($request->input('razdels[]') as $razdel_id) {
+                DB::table('lib_books_razdels')->insert(
+                    ['razdel_id' => $razdel_id, 'book_id' => $id]
+                );
+            }
+        }
+        
+        return redirect(route('moderate.library.index'));
     }
 
     public function foto()

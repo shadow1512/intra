@@ -37,4 +37,34 @@ class ModerateController extends Controller
         $news = News::orderBy('importancy', 'desc')->limit(5)->get();
         return view('moderate.news.list', ['news'    =>  $news]);
     }
+
+    public function newsedit()
+    {
+
+    }
+
+    public function newsdelete()
+    {
+
+    }
+
+    public function rooms()
+    {
+
+    }
+
+    public function users()
+    {
+
+    }
+
+    public function library()
+    {
+
+    }
+
+    public function foto()
+    {
+
+    }
 }

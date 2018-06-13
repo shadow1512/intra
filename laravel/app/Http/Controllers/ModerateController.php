@@ -90,7 +90,7 @@ class ModerateController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
-        
+
         $available = 0;
         if($request->input('available')) {
             $available = 0;

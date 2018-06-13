@@ -63,6 +63,7 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::get('/rooms/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
     Route::get('/rooms/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
     Route::put('/rooms/update/{id}', 'ModerateController@roomsupdate')->name('moderate.rooms.update');
+    Route::put('/rooms/store', 'ModerateController@roomsstore')->name('moderate.rooms.store');
     Route::delete('/rooms/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
     Route::get('/library', 'ModerateController@library')->name('moderate.library.index');
     Route::get('/users', 'ModerateController@users')->name('moderate.users.index');

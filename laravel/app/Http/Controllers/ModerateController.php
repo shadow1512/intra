@@ -38,6 +38,11 @@ class ModerateController extends Controller
         return view('moderate.news.list', ['news'    =>  $news]);
     }
 
+    public function newscreate()
+    {
+
+    }
+
     public function newsedit()
     {
 

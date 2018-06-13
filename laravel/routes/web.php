@@ -56,6 +56,7 @@ Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
 
 Route::group(['prefix' => 'moderate'], function () {
     Route::get('/', 'ModerateController@index')->name('moderate');
+    Route::get('/news/create', 'ModerateController@newscreate')->name('moderate.news.create');
     Route::get('/news/edit', 'ModerateController@newsedit')->name('moderate.news.edit');
     Route::delete('/news/delete', 'ModerateController@newsdelete')->name('moderate.news.delete');
     Route::get('/rooms', 'ModerateController@rooms')->name('moderate.rooms.index');

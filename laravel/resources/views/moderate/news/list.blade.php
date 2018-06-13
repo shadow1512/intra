@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-md-6"><strong>Вместимость</strong></div>
                 <div class="col-md-6">
-                    <form method="get" action="{{ route('containers.create') }}">
+                    <form method="get" action="{{ route('moderate.news.create') }}">
                         <button type="submit" class="btn btn-primary">
                             Создать контейнер
                         </button>

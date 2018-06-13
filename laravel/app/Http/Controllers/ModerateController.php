@@ -294,6 +294,7 @@ class ModerateController extends Controller
         $book       = LibBook::findOrFail($id);
         $razdels    = LibRazdel::orderby('name')->get();
         $razdel_ids = DB::table('lib_books_razdels')->where("book_id", "=", $id)->pluck("razdel_id");
+        var_dump($razdel_ids);
         $ids = array();
         foreach($razdel_ids as $razdel_id) {
             $ids[] = $razdel_id->razdel_id;

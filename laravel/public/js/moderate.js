@@ -47,7 +47,7 @@ $(document).ready(function($) {
         //formatDate:'Y-m-d H:i',
     });
 
-    $('#iavatar').fileupload({
+    $('#avatar').fileupload({
         dataType: 'json',
         url: $("#avatar_url").val(),
         singleFileUploads: false,

@@ -17,7 +17,7 @@
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline"/>
                                     <small id="avatarimgHelpInline" class="text-muted"><a href="" class="delete_avatar">Удалить</a></small>
                             </div>
-                            
+
                             <div class="custom-file"{{ $errors->has('avatar') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="avatar" name="avatar" aria-describedby="avatarHelpInline">
                                 <label class="custom-file-label" for="avatar">Выберите изображение</label>

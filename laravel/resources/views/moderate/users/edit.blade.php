@@ -11,7 +11,7 @@
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $user->id }}"/>
-                            <input type="hidden" id="avatar_url" value="{{  route('moderate.users.updatedavatar', ["id" => $user->id]) }}">
+                            <input type="hidden" id="avatar_url" value="{{  route('moderate.users.updateavatar', ["id" => $user->id]) }}">
                             <div class="form-group">
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline".>
                                     <small id="avatarimgHelpInline" class="text-muted"><a href="" class="delete_avatar">Удалить</a></small>

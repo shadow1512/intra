@@ -359,17 +359,17 @@ class ModerateController extends Controller
                 ->withInput();
         }
 
-        LibBook::create([
-            'name'      => $request->input('name'),
-            'authors'   => $request->input('authors'),
-            'anno'      => $request->input('anno'),
-            'year'      => $request->input('year'),
-        ]);
+        $book = LibBook::create([
+                    'name'      => $request->input('name'),
+                    'authors'   => $request->input('authors'),
+                    'anno'      => $request->input('anno'),
+                    'year'      => $request->input('year'),
+                ]);
 
         if(count($request->input('razdels.*'))) {
             foreach($request->input('razdels.*') as $razdel_id) {
                 DB::table('lib_books_razdels')->insert(
-                    ['razdel_id' => $razdel_id, 'book_id' => $id]
+                    ['razdel_id' => $razdel_id, 'book_id' => $book->id]
                 );
             }
         }

@@ -16,7 +16,7 @@
                                 <label for="workstart" class="col-md-4 control-label">Начало работы в компании</label>
 
                                 <div class="col-md-6">
-                                    <input id="workstart" type="text" class="form-control" name="workstart" value="@if ($user->workstart) {{ $user->workstart }} @endif" autofocus>
+                                    <input id="workstart" type="text" class="form-control" name="workstart" value="@if ($user->workstart) {{ date("d.m.Y", strtotime($user->workstart)) }} @endif" autofocus>
 
                                     @if ($errors->has('workstart'))
                                         <span class="help-block">
@@ -29,7 +29,7 @@
                                 <label for="birthday" class="col-md-4 control-label">День рождения</label>
 
                                 <div class="col-md-6">
-                                    <input id="birthday" type="text" class="form-control" name="birthday" value="@if ($user->birthday) {{ $user->birthday }} @endif">
+                                    <input id="birthday" type="text" class="form-control" name="birthday" value="@if ($user->birthday) {{ date("d.m.Y", strtotime($user->birthday)) }} @endif">
 
                                     @if ($errors->has('birthday'))
                                         <span class="help-block">

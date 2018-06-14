@@ -42,7 +42,7 @@
                     <!-- Left Side Of Navbar -->
                     @if (Auth::check())
                     <ul class="nav navbar-nav">
-                        <li><a href="/">Новости</a></li>
+                        <li><a href="{{ route('moderate') }}">Новости</a></li>
                         <li><a href="{{ route('moderate.library.index') }}">Библиотека</a></li>
                         <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
                         <li><a href="{{ route('moderate.users.start') }}">Сотрудники</a></li>

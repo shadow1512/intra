@@ -22,6 +22,8 @@ return array(
     'avatar_width'      =>  150,
     'cover_path'        =>  '/library/covers',
     'book_path'         =>  '/library/books',
+    'gallery_path'      =>  '/gallery',
+    'photo_thumb_width' => 150,
     'cover_width'       =>  200,
     'cover_height'      =>  280,
 

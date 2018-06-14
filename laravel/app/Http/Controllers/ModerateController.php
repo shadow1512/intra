@@ -15,6 +15,8 @@ use App\News;
 use App\Rooms;
 use App\LibBook;
 use App\LibRazdel;
+use App\Gallery;
+use App\GalleryPhoto;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -451,6 +453,53 @@ class ModerateController extends Controller
     }
 
     public function foto()
+    {
+        $gallery = Gallery::selectRaw("gallery.id, name, count(gallery_photos.id) as numphotos")
+            ->leftJoin('gallery_photos', 'gallery.id', '=', 'gallery_photos.gallery_id')
+            ->groupBy(['gallery_photos.gallery_id', 'gallery.id', 'gallery.name'])
+            ->orderBy('published_at', 'desc')->get();
+
+        return view('moderate.gallery.list', ['galleries'    =>  $gallery]);
+    }
+
+    public function fotocreate()
+    {
+        return view('moderate.gallery.create');
+    }
+
+    public function fotoedit($id)
+    {
+        $gallery    = Gallery::findOrFail($id);
+        $photos     = GalleryPhoto::where("gallery_id", "=", $id);
+        return view('moderate.gallery.edit', ["gallery" =>  $gallery, 'photos'  =>  $photos]);
+    }
+
+    public function fotostore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:255',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('moderate.foto.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $gallery    =   Gallery::create([
+                            'name'      => $request->input('name'),
+                        ]);
+
+        if($request->input('published_at')) {
+            $gallery->published_at = date("Y-m-d", strtotime($request->input('published_at')));
+        }
+
+        $gallery->save();
+
+        return redirect(route('moderate.foto.edit', ["id"   =>  $gallery->id]));
+    }
+
+    public function fotoupdate($id, Request $request)
     {
 
     }

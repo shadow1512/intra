@@ -400,6 +400,8 @@ return array(
     'CreateDataTypesTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_data_types_table.php',
     'CreateDepartments' => $baseDir . '/database/migrations/2017_12_11_084240_create_departments.php',
     'CreateDepartmentsKeys' => $baseDir . '/database/migrations/2018_05_30_195719_create_departments_keys.php',
+    'CreateGallery' => $baseDir . '/database/migrations/2018_06_14_235050_create_gallery.php',
+    'CreateGalleryPhotos' => $baseDir . '/database/migrations/2018_06_14_235558_create_gallery_photos.php',
     'CreateMenuTable' => $baseDir . '/database/migrations/2016_05_19_173453_create_menu_table.php',
     'CreatePagesTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_pages_table.php',
     'CreatePeoplesDepartments' => $baseDir . '/database/migrations/2017_12_11_085344_create_peoples_departments.php',

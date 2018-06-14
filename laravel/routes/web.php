@@ -91,4 +91,8 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::put('/users/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
     Route::get('/users/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');
     Route::get('/foto', 'ModerateController@foto')->name('moderate.foto.index');
+    Route::get('/foto/create', 'ModerateController@fotocreate')->name('moderate.foto.create');
+    Route::get('/foto/edit/{id}', 'ModerateController@fotoedit')->name('moderate.foto.edit');
+    Route::put('/foto/update/{id}', 'ModerateController@fotoupdate')->name('moderate.foto.update');
+    Route::put('/foto/store', 'ModerateController@fotostore')->name('moderate.foto.store');
 });

@@ -40,7 +40,7 @@ $(document).ready(function($) {
         //formatDate:'Y-m-d H:i',
     });
 
-    $("#birthday, #workstart").datetimepicker({
+    $("#birthday, #workstart, #published_at_gallery").datetimepicker({
         lang:'ru',
         format:'d.m.Y',
         timepicker:false,

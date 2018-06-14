@@ -83,5 +83,6 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::get('/users/{letter}', 'ModerateController@users')->name('moderate.users.index');
     Route::get('/users/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
     Route::put('/users/update/{id}', 'ModerateController@usersupdate')->name('moderate.users.update');
+    Route::put('/users/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
     Route::get('/foto', 'ModerateController@foto')->name('moderate.foto.index');
 });

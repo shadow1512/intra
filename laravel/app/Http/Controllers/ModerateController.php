@@ -418,4 +418,28 @@ class ModerateController extends Controller
         return redirect(route('moderate.users.start'));
     }
 
+    public function usersupdateavatar($id, Request $request)
+    {
+        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
+        $size   =   Storage::disk('public')->getSize($path);
+        $type   =   Storage::disk('public')->getMimetype($path);
+
+        if($size <= 3000000) {
+            if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+                $manager = new ImageManager(array('driver' => 'imagick'));
+                $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
+                DB::table('users')->where("id", "=", $id)
+                    ->update(['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+                return response()->json(['ok', Storage::disk('public')->url($path)]);
+            }
+            else {
+                return response()->json(['error', 'file wrong type']);
+            }
+        }
+        else {
+            return response()->json(['error', 'file too large']);
+        }
+
+    }
+
 }

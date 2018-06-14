@@ -11,6 +11,18 @@
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $user->id }}"/>
+                            <input type="hidden" id="avatar_url" value="{{  route('moderate.users.updatedavatar', ["id" => $user->id]) }}">
+                            <div class="form-group">
+                                    <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline".>
+                                    <small id="avatarimgHelpInline" class="text-muted"><a href="" class="delete_avatar">Удалить</a></small>
+                            </div>
+                            <div class="form-group{{ $errors->has('avatar') ? ' has-error' : '' }}">
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="avatar" name="avatar" aria-describedby="avatarHelpInline">
+                                    <label class="custom-file-label" for="avatar">Выберите изображение</label>
+                                    <small id="avatarHelpInline" class="text-muted">Файл не более 3мб</small>
+                                </div>
+                            </div>
 
                             <div class="form-group{{ $errors->has('workstart') ? ' has-error' : '' }}">
                                 <label for="workstart" class="col-md-4 control-label">Начало работы в компании</label>

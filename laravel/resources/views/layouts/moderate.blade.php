@@ -14,8 +14,10 @@
     <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
     <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
 </head>
 <body>

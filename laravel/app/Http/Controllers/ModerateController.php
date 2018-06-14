@@ -442,4 +442,13 @@ class ModerateController extends Controller
 
     }
 
+    public function deleteavatar($id)
+    {
+        $default = Config::get('image.default_avatar');
+        DB::table('users')->where("id", "=", $id)
+            ->update(['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]);
+
+        return response()->json(['ok', $default]);
+    }
+
 }

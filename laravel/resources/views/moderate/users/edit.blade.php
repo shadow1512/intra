@@ -15,7 +15,7 @@
                             <div class="form-group">
                                     <label for="img_avatar" class="col-md-4 control-label">Аватар</label>
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline"/>
-                                    <small id="avatarimgHelpInline" class="text-muted"><a href="" class="delete_avatar">Удалить</a></small>
+                                    <small id="avatarimgHelpInline" class="text-muted"><a href="{{route('moderate.users.deleteavatar', ["id"    =>  $user->id])}}" id="delete_avatar">Удалить</a></small>
                             </div>
 
                             <div class="custom-file"{{ $errors->has('avatar') ? ' has-error' : '' }}>

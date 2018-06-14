@@ -97,4 +97,21 @@ $(document).ready(function($) {
             );
         }
     });
+
+    $(document).on("click", "#delete_avatar", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("href");
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function(msg) {
+                if(msg[0] == "ok") {
+                    $("#img_avatar").attr("src", msg[1]);
+                }
+            }
+        });
+    });
 }); 

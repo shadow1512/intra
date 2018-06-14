@@ -382,7 +382,7 @@ class ModerateController extends Controller
         if($size <= 3000000) {
             if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                 $manager = new ImageManager(array('driver' => 'imagick'));
-                $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'))->save(storage_path('app/public') . '/' . $path);
+                $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'), Config::get('image.cover_height'))->save(storage_path('app/public') . '/' . $path);
                 DB::table('lib_books')->where("id", "=", $id)
                     ->update(['image' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
                 return response()->json(['ok', Storage::disk('public')->url($path)]);

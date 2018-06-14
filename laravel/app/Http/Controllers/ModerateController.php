@@ -393,7 +393,29 @@ class ModerateController extends Controller
 
     public function usersupdate($id, Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'numpark'           =>  'integer',
+            'position_desc'     =>  'string|max:255',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.users.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
 
+        $user = User::findOrFail($id);
+        if($request->input('workstart')) {
+            $user->workstart = date("Y-m-d", strtotime($request->input('workstart')));
+        }
+        if($request->input('birthday')) {
+            $user->birthday = date("Y-m-d", strtotime($request->input('birthday')));
+        }
+        $user->numpark          =   $request->input('numpark');
+        $user->position_desc    =   $request->input('position_desc');
+        $user->updated_at = date("Y-m-d H:i:s");
+        $user->save();
+
+        return redirect(route('moderate.users.start'));
     }
 
 }

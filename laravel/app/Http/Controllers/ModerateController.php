@@ -381,4 +381,22 @@ class ModerateController extends Controller
     {
 
     }
+
+    public function users($letter = "А")
+    {
+        $users = User::where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+
+        return view('moderate.users.list', ['users'    =>  $users]);
+    }
+
+    public function usersedit($id)
+    {
+
+    }
+
+    public function usersupdate($id, Request $request)
+    {
+
+    }
+
 }

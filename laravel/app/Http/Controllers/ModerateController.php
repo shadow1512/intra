@@ -399,7 +399,7 @@ class ModerateController extends Controller
 
     public function libraryupdatebookfile($id, Request $request)
     {
-        $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book'), 'public');
+        $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book_file'), 'public');
 
         DB::table('lib_books')->where("id", "=", $id)
             ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);

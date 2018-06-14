@@ -387,7 +387,8 @@ class ModerateController extends Controller
 
     public function usersedit($id)
     {
-
+        $user       = User::findOrFail($id);
+        return view('moderate.users.edit', ['user'    =>  $user]);
     }
 
     public function usersupdate($id, Request $request)

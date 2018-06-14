@@ -45,7 +45,7 @@
                         <li><a href="/">Новости</a></li>
                         <li><a href="{{ route('moderate.library.index') }}">Библиотека</a></li>
                         <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
-                        <li><a href="{{ route('moderate.users.index') }}">Сотрудники</a></li>
+                        <li><a href="{{ route('moderate.users.start') }}">Сотрудники</a></li>
                         <li><a href="{{ route('moderate.foto.index') }}">Фото/видео с праздников</a></li>
                     </ul>
                     @endif

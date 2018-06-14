@@ -34,7 +34,7 @@ class HomeController extends Controller
 
         //дни рождения
         $dt = date("z");
-        $dt1 = $dt + 3;
+        $dt1 = $dt + 5;
         $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
 
         ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])
@@ -56,5 +56,12 @@ class HomeController extends Controller
         }
 
         return view('home', ['news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers, 'rooms'  =>  $rooms, 'contacts'  =>  $contacts]);
+    }
+
+    function parking()
+    {
+        $users =    User::where('numpark', '>', 0)->orderBy('numpark', 'asc')->get();
+
+        return view('users.parking', ['users'   =>  $users]);
     }
 }

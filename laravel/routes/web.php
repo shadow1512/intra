@@ -11,7 +11,8 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/',         'HomeController@index')->name('home');
+Route::get('/parking',  'HomeController@parking')->name('parking');
 
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');

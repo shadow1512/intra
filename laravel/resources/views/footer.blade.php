@@ -28,7 +28,7 @@
                 <div class="footer_lst_i_h">Полезное</div>
             </li>
             <li class="footer_lst_i"><a href="http://intra.lan.kodeks.net/surv" class="footer_lst_i_lk">О&nbsp;рабочем времени сотрудников</a></li>
-            <li class="footer_lst_i"><a href="http://htgi.dmz/webhtgi/Pages/Document.aspx?uid=0d3be9ee-c8e4-46d1-8f59-ffceb88bdc69" class="footer_lst_i_lk">Номера парковочных мест</a></li>
+            <li class="footer_lst_i"><a href="{{route('parking')}}">Номера парковочных мест</a></li>
             <li class="footer_lst_i"><a href="{{route("services.mail")}}" class="footer_lst_i_lk">Заявка на&nbsp;почтовую доставку</a></li>
             <li class="footer_lst_i"><a href="{{route("services.cartridge")}}" class="footer_lst_i_lk">Заявка на&nbsp;замену картриджа</a></li>
             <li class="footer_lst_i"><a href="{{route("services.teh")}}" class="footer_lst_i_lk">Заявка на&nbsp;техническое обслуживание</a></li>
@@ -36,7 +36,7 @@
     </div>
     <div class="footer_bottom">
         <div class="footer_copyright">
-            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2017</div>
+            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2018</div>
             <div class="footer_copyright_tx __margin-top_s">Исключительные авторские и&nbsp;смежные права принадлежат АО&nbsp;&laquo;Кодекс&raquo;.</div>
         </div>
     </div>

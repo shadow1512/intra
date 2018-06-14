@@ -420,7 +420,7 @@ class ModerateController extends Controller
 
     public function usersupdateavatar($id, Request $request)
     {
-        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('input_avatar'), 'public');
+        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('avatar'), 'public');
         $size   =   Storage::disk('public')->getSize($path);
         $type   =   Storage::disk('public')->getMimetype($path);
 

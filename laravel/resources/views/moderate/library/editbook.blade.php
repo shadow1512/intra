@@ -76,6 +76,18 @@
                                 @endif
                                 </div>
                             </div>
+                            <input type="hidden" id="cover_url" value="{{  route('moderate.library.updatebookcover', ["id" => $book->id]) }}">
+                            <div class="form-group">
+                                <label for="img_avatar" class="col-md-4 control-label">Обложка</label>
+                                <img src="{{ $book->image }}" id="img_image" aria-describedby="imageimgHelpInline"/>
+                                <small id="imageimgHelpInline" class="text-muted"><a href="{{route('moderate.library.deletebookcover', ["id"    =>  $book->id])}}" id="delete_cover">Удалить</a></small>
+                            </div>
+
+                            <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
+                                <input type="file" class="custom-file-input" id="cover" name="cover" aria-describedby="coverHelpInline">
+                                <label class="custom-file-label" for="cover">Выберите изображение</label>
+                                <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

@@ -17,7 +17,11 @@ return array(
 
     'driver'            =>  'imagick',
     'default_avatar'    =>  '/images/faces/default.png',
+    'default_cover'     =>  '/images/books/book_default.png',
     'avatar_path'       =>  '/users/faces',
-    'avatar_width'      =>  150
+    'avatar_width'      =>  150,
+    'cover_path'        =>  '/library/covers',
+    'book_path'         =>  '/library/books',
+    'cover_width'       =>  280,
 
 );

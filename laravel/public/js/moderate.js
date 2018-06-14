@@ -98,6 +98,57 @@ $(document).ready(function($) {
         }
     });
 
+    $('#cover').fileupload({
+        dataType: 'json',
+        url: $("#cover_url").val(),
+        singleFileUploads: false,
+        sequentialUploads: true,
+        submit: function (e, data) {
+            totalSize = 0;
+
+            $.each(data.files, function (index, file) {
+                totalSize += file.size;
+            });
+
+            if(totalSize > 3000000) {
+                alert("Для фотографии используйте изображение менее 3мб");
+                return false;
+            }
+            progress = document.createElement("div");
+            $(progress).attr("id", "progress");
+            $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
+            $("div.profile_aside_pic").append(progress);
+        },
+        success: function(e, data) {
+        },
+        done: function (e, data) {
+            $("#progress").remove();
+
+            if(data.result[0] == "ok") {
+                $("#img_image").attr("src", data.result[1]);
+            }
+            else {
+                var errMessage = "Файл загружен не был. Причина - ";
+                if(data.result[1] == "file wrong type") {
+                    errMessage += "для загрузки необходимо выбрать файл jpeg или png";
+                }
+                if(data.result[1] == "file too large") {
+                    errMessage += "для загрузки доступны изображения не более 3мб";
+                }
+            }
+        },
+        fail: function (e, data) {
+            $("#progress").remove();
+        },
+        progressall: function (e, data) {
+            var progress = parseInt(data.loaded / data.total * 100, 10);
+            $('#progress .progressbar').css(
+                'width',
+                progress + '%'
+            );
+        }
+    });
+
     $(document).on("click", "#delete_avatar", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("href");
@@ -110,6 +161,23 @@ $(document).ready(function($) {
             success: function(msg) {
                 if(msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
+                }
+            }
+        });
+    });
+
+    $(document).on("click", "#delete_cover", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("href");
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function(msg) {
+                if(msg[0] == "ok") {
+                    $("#img_image").attr("src", msg[1]);
                 }
             }
         });

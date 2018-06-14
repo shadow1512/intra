@@ -79,6 +79,8 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::put('/library/book/update/{id}', 'ModerateController@libraryupdatebook')->name('moderate.library.updatebook');
     Route::put('/library/book/store', 'ModerateController@librarystorebook')->name('moderate.library.storebook');
     Route::delete('/library/book/delete/{id}', 'ModerateController@librarydeletebook')->name('moderate.library.deletebook');
+    Route::put('/library/book/update/cover/{id}', 'ModerateController@libraryupdatebookcover')->name('moderate.library.updatebookcover');
+    Route::get('/library/book/delete/cover/{id}', 'ModerateController@librarydeletebookcover')->name('moderate.library.deletebookcover');
     Route::get('/users', 'ModerateController@users')->name('moderate.users.start');
     Route::get('/users/{letter}', 'ModerateController@users')->name('moderate.users.index');
     Route::get('/users/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');

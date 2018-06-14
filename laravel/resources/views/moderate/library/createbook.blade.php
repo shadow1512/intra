@@ -67,7 +67,7 @@
                                     <div class="col-md-6 col-md-offset-4">
                                         @foreach ($razdels as $razdel)
                                             <div class="form-check form-check-inline">
-                                                <input type="checkbox" class="form-check-input" id="razdel_{{$razdel->id}}" name="razdels[]" @if (in_array($razdel->id, old('razdels[]')))checked="checked"@endif value="{{$razdel->id}}"/>
+                                                <input type="checkbox" class="form-check-input" id="razdel_{{$razdel->id}}" name="razdels[]" @if (old('razdels.*') && in_array($razdel->id, old('razdels.*')))checked="checked"@endif value="{{$razdel->id}}"/>
                                                 <label class="form-check-label" for="razdel_{{$razdel->id}}">{{$razdel->name}}</label>
                                             </div>
                                         @endforeach

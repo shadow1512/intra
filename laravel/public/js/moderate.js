@@ -176,7 +176,7 @@ $(document).ready(function($) {
             $("#progress").remove();
 
             if(data.result[0] == "ok") {
-                $("#no_file").replaceWith(data.result[1]);
+                $("#nofile").replaceWith(data.result[1]);
             }
         },
         fail: function (e, data) {

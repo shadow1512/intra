@@ -355,6 +355,7 @@ class ModerateController extends Controller
                 ->withInput();
         }
 
+
         $book = LibBook::create([
                     'name'      => $request->input('name'),
                     'authors'   => $request->input('authors'),
@@ -369,11 +370,32 @@ class ModerateController extends Controller
                 );
             }
         }
+        $res_cover  = $this->librarystorebookcover($book->id, $request);
+        $res_book   = $this->librarystorebookfile($book->id, $request);
 
+        if($res_cover[0] == "ok") {
+            $book->image = $res_cover[1];
+        }
+        if($res_book[0] == "ok") {
+            $book->file = $res_book[2];
+        }
+        $book->save();
         return redirect(route('moderate.library.index'));
     }
 
     public function libraryupdatebookcover($id, Request $request)
+    {
+        $res = $this->librarystorebookcover($id, $request);
+        return response()->json([$res[0], $res[1]]);
+    }
+
+    public function libraryupdatebookfile($id, Request $request)
+    {
+        $res = $this->librarystorebookfile($id, $request);
+        return response()->json([$res[0], $res[1]]);
+    }
+
+    private function librarystorebookcover($id, $request)
     {
         $path   =   Storage::disk('public')->putFile(Config::get('image.cover_path'), $request->file('cover'), 'public');
         $size   =   Storage::disk('public')->getSize($path);
@@ -385,19 +407,18 @@ class ModerateController extends Controller
                 $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'), Config::get('image.cover_height'))->save(storage_path('app/public') . '/' . $path);
                 DB::table('lib_books')->where("id", "=", $id)
                     ->update(['image' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
-                return response()->json(['ok', Storage::disk('public')->url($path)]);
+                return array('ok', Storage::disk('public')->url($path));
             }
             else {
-                return response()->json(['error', 'file wrong type']);
+                return array('error', 'file wrong type');
             }
         }
         else {
-            return response()->json(['error', 'file too large']);
+            return array('error', 'file too large');
         }
-
     }
 
-    public function libraryupdatebookfile($id, Request $request)
+    private function librarystorebookfile($id, $request)
     {
         $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book_file'), 'public');
 
@@ -406,7 +427,7 @@ class ModerateController extends Controller
 
         $html = "<a href=\"" .  Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
         $html .= "<small id=\"filelinkHelpInline\" class=\"text-muted\"><a href=\"" . route('moderate.library.deletebookfile', ["id"    =>  $id]) . "\" id=\"delete_file\">Удалить</a></small>";
-        return response()->json(['ok', $html]);
+        return array('ok', $html, Storage::disk('public')->url($path));
     }
 
     public function librarydeletebookcover($id)

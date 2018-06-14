@@ -74,6 +74,17 @@
                                     </div>
                                  @endif
                             </div>
+                            <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
+                                <input type="file" class="custom-file-input" id="cover" name="cover" aria-describedby="coverHelpInline">
+                                <label class="custom-file-label" for="cover">Выберите изображение</label>
+                                <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
+                            </div>
+
+                            <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
+                                <input type="file" class="custom-file-input" id="book_file" name="book_file" aria-describedby="fileHelpInline">
+                                <label class="custom-file-label" for="book_file">Выберите файл</label>
+                                <small id="fileHelpInline" class="text-muted">Файл не более 30мб</small>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

@@ -61,7 +61,8 @@ class HomeController extends Controller
     function parking()
     {
         $users =    User::where('numpark', '>', 0)->orderBy('numpark', 'asc')->get();
-
-        return view('users.parking', ['users'   =>  $users]);
+        //Комнаты
+        $rooms = Rooms::orderBy('name')->get();
+        return view('users.parking', ['users'   =>  $users, 'rooms' =>  $rooms]);
     }
 }

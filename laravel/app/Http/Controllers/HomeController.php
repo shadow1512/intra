@@ -35,13 +35,13 @@ class HomeController extends Controller
         //дни рождения
         $dt = date("z");
         $dt1 = $dt + 5;
-        $users = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_people.work_title")
+        $users = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])
                 ->orderBy('birthday', 'asc')->get();
 
         //новые сотрудники
-        $newusers = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_people.work_title")
+        $newusers = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereRaw("ADDDATE(workstart, INTERVAL 1 MONTH) >= '" . date("Y-m-d") . "'")
             ->orderBy('workstart', 'desc')->get();

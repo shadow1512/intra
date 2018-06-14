@@ -397,7 +397,7 @@ class ModerateController extends Controller
 
     private function librarystorebookcover($id, $request)
     {
-        $path   =   Storage::disk('public')->putFile(Config::get('image.cover_path'), $request->input('cover'), 'public');
+        $path   =   Storage::disk('public')->putFile(Config::get('image.cover_path'), $request->file('cover'), 'public');
         $size   =   Storage::disk('public')->getSize($path);
         $type   =   Storage::disk('public')->getMimetype($path);
 
@@ -420,7 +420,7 @@ class ModerateController extends Controller
 
     private function librarystorebookfile($id, $request)
     {
-        $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->input('book_file'), 'public');
+        $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book_file'), 'public');
 
         DB::table('lib_books')->where("id", "=", $id)
             ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);

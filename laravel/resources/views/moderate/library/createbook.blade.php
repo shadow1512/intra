@@ -76,13 +76,13 @@
                             </div>
                             <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="cover_create" name="cover" aria-describedby="coverHelpInline">
-                                <label class="custom-file-label" for="cover">Выберите изображение</label>
+                                <label class="custom-file-label" for="cover_create">Выберите изображение</label>
                                 <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
 
                             <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="book_file_create" name="book_file" aria-describedby="fileHelpInline">
-                                <label class="custom-file-label" for="book_file">Выберите файл</label>
+                                <label class="custom-file-label" for="book_file_create">Выберите файл</label>
                                 <small id="fileHelpInline" class="text-muted">Файл не более 30мб</small>
                             </div>
                             <div class="form-group">

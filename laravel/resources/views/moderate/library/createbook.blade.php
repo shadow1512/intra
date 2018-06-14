@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Создать новую книгу в библиотеке</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.storebook') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.storebook') }}" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">

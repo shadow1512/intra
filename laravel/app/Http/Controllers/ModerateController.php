@@ -208,10 +208,6 @@ class ModerateController extends Controller
         return redirect(route('moderate.rooms.index'));
     }
 
-    public function users()
-    {
-
-    }
 
     public function library()
     {

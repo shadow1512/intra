@@ -334,9 +334,8 @@ class ModerateController extends Controller
         $book->save();
 
         DB::table('lib_books_razdels')->where("book_id", "=", $id)->delete();
-        var_dump($request->input('razdels.*'));exit();
-        if(count($request->input('razdels[]'))) {
-            foreach($request->input('razdels[]') as $razdel_id) {
+        if(count($request->input('razdels.*'))) {
+            foreach($request->input('razdels.*') as $razdel_id) {
                 DB::table('lib_books_razdels')->insert(
                     ['razdel_id' => $razdel_id, 'book_id' => $id]
                 );
@@ -367,8 +366,8 @@ class ModerateController extends Controller
             'year'      => $request->input('year'),
         ]);
 
-        if(count($request->input('razdels[]'))) {
-            foreach($request->input('razdels[]') as $razdel_id) {
+        if(count($request->input('razdels.*'))) {
+            foreach($request->input('razdels.*') as $razdel_id) {
                 DB::table('lib_books_razdels')->insert(
                     ['razdel_id' => $razdel_id, 'book_id' => $id]
                 );

@@ -397,6 +397,18 @@ class ModerateController extends Controller
 
     }
 
+    public function libraryupdatebookfile($id, Request $request)
+    {
+        $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book'), 'public');
+
+        DB::table('lib_books')->where("id", "=", $id)
+            ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+
+        $html = "<a href=\"" .  Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
+        $html .= "<small id=\"filelinkHelpInline\" class=\"text-muted\"><a href=\"" . route('moderate.library.deletebookfile', ["id"    =>  $id]) . "\" id=\"delete_file\">Удалить</a></small>";
+        return response()->json(['ok', $html]);
+    }
+
     public function librarydeletebookcover($id)
     {
         $default = Config::get('image.default_cover');
@@ -404,6 +416,17 @@ class ModerateController extends Controller
             ->update(['image' => $default, 'updated_at' => date("Y-m-d H:i:s")]);
 
         return response()->json(['ok', $default]);
+    }
+
+    public function librarydeletebookfile($id)
+    {
+        $book = LibBook::findOrFail($id);
+        $book->file = null;
+        $book->updated_at = date("Y-m-d H:i:s");
+        $book->save();
+
+        $html = "<span id=\"nofile\">Нет</span>";
+        return response()->json(['ok', $html]);
     }
 
     public function foto()

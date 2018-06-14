@@ -88,6 +88,24 @@
                                 <label class="custom-file-label" for="cover">Выберите изображение</label>
                                 <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
+
+                            <input type="hidden" id="book_url" value="{{  route('moderate.library.updatebookfile', ["id" => $book->id]) }}">
+                            <div class="form-group">
+                                <label for="link_file" class="col-md-4 control-label">Исходный файл</label>
+                                @if ($book->file)
+                                    <a href="{{ $book->file }}" id="link_file" aria-describedby="filelinkHelpInline">{{ $book->file }}</a>
+                                    <small id="filelinkHelpInline" class="text-muted"><a href="{{route('moderate.library.deletebookfile', ["id"    =>  $book->id])}}" id="delete_file">Удалить</a></small>
+                                @else
+                                    <span id="nofile">Нет</span>
+                                @endif
+                            </div>
+
+                            <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
+                                <input type="file" class="custom-file-input" id="book_file" name="book_file" aria-describedby="fileHelpInline">
+                                <label class="custom-file-label" for="book_file">Выберите файл</label>
+                                <small id="fileHelpInline" class="text-muted">Файл не более 30мб</small>
+                            </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

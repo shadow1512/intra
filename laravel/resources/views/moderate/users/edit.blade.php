@@ -29,7 +29,7 @@
                                 <label for="birthday" class="col-md-4 control-label">День рождения</label>
 
                                 <div class="col-md-6">
-                                    <input id="birthday" type="text" class="form-control" name="birthday" value="@if ($user->birthday){{ $user->birthday }} @endif">
+                                    <input id="birthday" type="text" class="form-control" name="birthday" value="@if ($user->birthday) {{ $user->birthday }} @endif">
 
                                     @if ($errors->has('birthday'))
                                         <span class="help-block">
@@ -69,8 +69,8 @@
 
                                 <div class="col-md-6">
                                     <select class="custom-select" id="role_id" name="role_id">
-                                        <option value="1" @if ($user->role_id == 1)selected@endif>Модератор</option>
-                                        <option value="2" @if ($user->role_id == 2)selected@endif>Пользователь</option>
+                                        <option value="1" @if ($user->role_id == 1) selected @endif>Модератор</option>
+                                        <option value="2" @if ($user->role_id == 2) selected @endif>Пользователь</option>
                                     </select>
 
                                     @if ($errors->has('role_id'))

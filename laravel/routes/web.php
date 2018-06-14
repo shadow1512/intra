@@ -95,4 +95,6 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::get('/foto/edit/{id}', 'ModerateController@fotoedit')->name('moderate.foto.edit');
     Route::put('/foto/update/{id}', 'ModerateController@fotoupdate')->name('moderate.foto.update');
     Route::put('/foto/store', 'ModerateController@fotostore')->name('moderate.foto.store');
+    Route::put('/foto/update/image/{id}', 'ModerateController@fotoupdateimage')->name('moderate.foto.updateimage');
+    Route::delete('/foto/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
 });

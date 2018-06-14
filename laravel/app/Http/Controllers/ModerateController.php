@@ -161,7 +161,7 @@ class ModerateController extends Controller
             'name'  => 'required|string|max:50',
         ]);
         if ($validator->fails()) {
-            return redirect('moderate.rooms.create')
+            return redirect()->route('moderate.rooms.create')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -271,7 +271,7 @@ class ModerateController extends Controller
             'name'  => 'required|string|max:128',
         ]);
         if ($validator->fails()) {
-            return redirect('moderate.razdel.create')
+            return redirect()->route('moderate.library.create')
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -354,7 +354,7 @@ class ModerateController extends Controller
             'year'      =>  'integer',
         ]);
         if ($validator->fails()) {
-            return redirect('moderate.library.createbook')
+            return redirect()->route('moderate.library.createbook')
                 ->withErrors($validator)
                 ->withInput();
         }

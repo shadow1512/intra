@@ -39,4 +39,11 @@ $(document).ready(function($) {
         format:'d.m.Y H:i',
         //formatDate:'Y-m-d H:i',
     });
+
+    $("#birthday, #workstart").datetimepicker({
+        lang:'ru',
+        format:'d.m.Y',
+        timepicker:false,
+        //formatDate:'Y-m-d H:i',
+    });
 }); 

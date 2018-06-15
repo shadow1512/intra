@@ -29,7 +29,7 @@ class SearchController extends Controller
      */
     public function index()
     {
-        $news = $users = $docs = array();
-        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs]);
+        $news = $users = $docs = $books = array();
+        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs, "books"  => $books]);
     }
 }

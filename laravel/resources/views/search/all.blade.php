@@ -41,7 +41,7 @@
             <div class="h __h_m search-res_cnt_i_b_h">Новостей: {{count($news)}}</div>
             <ul class="news_ul">
                 @foreach ($news as $new)
-                <li class="news_li __important"><a href="{{route('news', ["id"  $new->id])}}" class="news_li_lk">{{$new_title}}</a>
+                <li class="news_li __important"><a href="{{route('news', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
                     <div class="news_li_date">@convertdate($item->published_at)</div>
                 </li>
                 @endforeach
@@ -53,7 +53,7 @@
             <div class="h __h_m search-res_cnt_i_b_h">Документов: {{count($docs)}}</div>
             <ul class="docs_lst">
                 @foreach ($docs as $doc)
-                <li class="docs_lst_i"><a href="{{route('docs.link')}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$doc_title}}</span><span class="docs_lst_i_number">№{{$doc->number}} от {{date("d.m.Y", strtotime($doc->date_publish))}}</span></a></li>
+                <li class="docs_lst_i"><a href="{{route('docs.link')}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$doc->title}}</span><span class="docs_lst_i_number">№{{$doc->number}} от {{date("d.m.Y", strtotime($doc->date_publish))}}</span></a></li>
                 @endforeach
             </ul>
             @endif

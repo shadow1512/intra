@@ -20,11 +20,11 @@ Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
 Route::post('/rooms/book/{id}', 'RoomsController@createbooking')->name('rooms.book.create');
 
-Route::get('/services/teh', 'RoomsController@index')->name('services.teh');
-Route::get('/services/cartridge', 'RoomsController@index')->name('services.cartridge');
-Route::get('/services/mail', 'RoomsController@index')->name('services.mail');
+Route::get('/services/teh', 'ServicesController@teh')->name('services.teh');
+Route::get('/services/cartridge', 'ServicesController@cartridge')->name('services.cartridge');
+Route::get('/services/mail', 'ServicesController@mail')->name('services.mail');
 
-Route::get('/holidays', 'RoomsController@index')->name('holidays');
+Route::get('/foto', 'GalleryController@index')->name('foto');
 Route::get('/library', 'LibraryController@index')->name('library');
 Route::get('/library/razdel/{id}', 'LibraryController@index')->name('library.razdel');
 

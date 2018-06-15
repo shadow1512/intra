@@ -85,7 +85,7 @@
         <li class="menu_li">
             <div class="menu_li_h">Неформальный Кодекс</div>
             <ul class="menu_li_lst">
-                <li class="menu_li_lst_i"><a href="{{route("holidays")}}" class="menu_li_lk">Фото и&nbsp;видео с&nbsp;праздников</a></li>
+                <li class="menu_li_lst_i"><a href="{{route("foto")}}" class="menu_li_lk">Фото и&nbsp;видео с&nbsp;праздников</a></li>
                 <li class="menu_li_lst_i"><a href="{{route("library")}}" class="menu_li_lk">Библиотека</a></li>
             </ul>
         </li>

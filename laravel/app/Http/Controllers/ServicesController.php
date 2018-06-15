@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use DB;
 use Auth;
+use App\Rooms;
 
 class ServicesController extends Controller
 {
@@ -26,16 +27,19 @@ class ServicesController extends Controller
      */
     public function teh()
     {
-        return view('services.teh');
+        //Комнаты
+        $rooms = Rooms::orderBy('name')->get();
+
+        return view('services.teh', ["rooms"    =>  $rooms]);
     }
 
     public function cartridge()
     {
-        return view('services.cartridge');
+        return view('services.cartridge', ["rooms"    =>  $rooms]);
     }
 
     public function mail()
     {
-        return view('services.mail');
+        return view('services.mail', ["rooms"    =>  $rooms]);
     }
 }

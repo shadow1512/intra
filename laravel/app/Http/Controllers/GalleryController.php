@@ -31,6 +31,6 @@ class GalleryController extends Controller
         //галереи
         $items = Gallery::orderBy('published_at', 'desc')->get();
 
-        return view('galery.list', ['items'    =>  $items]);
+        return view('gallery.list', ['items'    =>  $items]);
     }
 }

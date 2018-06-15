@@ -29,6 +29,6 @@ class SearchController extends Controller
      */
     public function index()
     {
-        return view('search.all');
+        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs]);
     }
 }

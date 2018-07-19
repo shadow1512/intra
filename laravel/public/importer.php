@@ -47,7 +47,6 @@ $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $tree = json_decode($res);
     foreach($tree as $obj) {
-        var_dump($obj);exit();
         if($obj->Active === true) {
 
             if($obj->ExecutiveType == 0) {
@@ -72,6 +71,7 @@ if($status_code == 200) {
                 }
             }
             else {
+                var_dump($obj);exit();
                 $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
                 if($res && $res->num_rows > 0) {
 

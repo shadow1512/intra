@@ -47,7 +47,7 @@ $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
     $tree = json_decode($res);
     foreach($tree as $obj) {
-
+        var_dump($obj);exit();
         if($obj->Active === true) {
 
             if($obj->ExecutiveType == 0) {

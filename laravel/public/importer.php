@@ -73,7 +73,8 @@ if($status_code == 200) {
             else {
                 $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
                 if($res && $res->num_rows > 0) {
-                    $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                    //$chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                    $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetUser?uid=' . $obj->UID);
                     //curl_setopt($ch, CURLOPT_HEADER, true);
                     curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
                     curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));

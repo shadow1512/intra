@@ -7,19 +7,22 @@
     @include('header')
     <!-- eo header-->
     <div class="content layout_main">
-        <div class="main_top">
-            @yield('topshelf')
-        </div>
         <div class="content_i main-page">
-            <div class="content_i_w">
-                @yield('news')
+            @yield('dinner')
+            <div class="content_i_container">
+                <aside class="staff">
+                    <div id="open-dinner" class="staff_i __dinner">
+                        <div class="h __h_m">Столовая<span class="__color_link">&nbsp;+</span></div>
+                    </div>
+                    @yield('birthday')
+                    @yield('newusers')
+                </aside>
+                <div class="content_i_w">
+                    @yield('news')
+                </div>
             </div>
         </div>
         @include('nav')
-        <aside class="content_i staff">
-            @yield('birthday')
-            @yield('newusers')
-        </aside>
     </div>
     <div class="push"></div>
 </div>

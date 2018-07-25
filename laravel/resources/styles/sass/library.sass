@@ -1,0 +1,49 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.library_lst
+	margin: 0
+	padding: 0
+	list-style-type: none
+.library_lst_i
+	position: relative
+	padding: 20px 30px
+	margin: 0
+	border-bottom: 1px solid $border
+	@include clearfix
+.library_lst_i_img
+	float: left
+	width: 130px
+	padding-right: 30px
+.library_lst_i_info
+	padding-right: 80px
+	padding-left: 130px
+.library_lst_i_t
+	font-size: 16px
+	font-weight: 600
+.library_lst_i_author
+	color: $inverse
+	margin-top: 10px
+	font-weight: 600
+.library_lst_i_dscr
+	color: $normal
+	margin-top: 10px
+	&:before
+		content: ''
+		display: block
+		width: 100px
+		height: 1px
+		background-color: $border
+		margin-bottom: 15px
+.library_lst_i_download
+	position: absolute
+	top: 20px
+	right: 70px
+	&:hover
+		.library_lst_i_download_ic
+			fill: $inverse
+.library_lst_i_download_ic
+	fill: $normal
+	width: 30px
+	height: 30px
+	@include transition(all .15s ease-in)

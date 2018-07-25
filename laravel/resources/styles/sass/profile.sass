@@ -1,0 +1,229 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.profile .content_i_w
+  overflow: hidden
+
+.profile_i
+  @include clearfix
+  position: relative
+  overflow: hidden
+  padding: 30px 35px 10px 30px
+
+.profile_aside
+  width: 128px
+  float: left
+  margin-right: 35px
+.profile_aside_pic
+  width: 128px
+  height: 128px
+  display: block
+  overflow: hidden
+  margin: 0 auto
+  @include border-radius(50%)
+.profile_aside_set
+  display: block
+  text-align: center
+  font-size: 12px
+  margin: 20px 0
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+.profile_aside_invoice
+  display: block
+  color: $base
+  text-decoration: none
+  width: 100%
+  text-align: center
+  border: 1px solid $border
+  @include border-radius(3px)
+  &:hover
+    .profile_aside_invoice_t
+      background: $inverse
+.profile_aside_invoice_t
+  background: $background
+  display: block
+  margin: 0
+  padding: 5px 0
+  @include transition(all .15s ease-in)
+.profile_aside_invoice_i
+  display: block
+  margin: 0
+  padding: 10px 0
+  font-size: 18px
+
+.profile_info
+  overflow: hidden
+.profile_info_btn
+  width: 175px
+  float: right
+  margin-left: 15px
+.profile_info_i
+  @include clearfix
+  margin-bottom: 30px
+  overflow: hidden
+.profile_info_name
+  display: inline-block
+  margin: 0 35px 0 0
+  font-size: em(22)
+  vertical-align: top
+.profile_info_place
+  display: inline-block
+  margin: 0
+  vertical-align: top
+.profile_info_position, .profile_info_room, .profile_info_mail, .profile_info_birth, .profile_info_address, .profile_info_phone, .profile_info_responsibility
+  margin: 5px 0 0
+.profile_info_position
+  color: $normal
+.profile_info_i_requests
+  border: 1px solid $border
+.profile_info_i_requests_i
+  border-bottom: 1px solid $border
+  &:last-child
+    border-bottom: none
+.profile_info_i_requests_i_left
+  border-right: 1px solid $border
+  display: inline-block
+  padding: 15px
+  width: 65%
+  margin-right: -4px
+  vertical-align: top
+.profile_info_i_requests_i_right
+  display: inline-block
+  padding: 15px
+  width: 35%
+  margin-right: -4px
+  vertical-align: top
+.profile_info_i_requests_i_status
+  color: $active
+  &.__fail
+     color: $alert
+.profile_info_i_requests_i_time
+  color: $normal
+
+.profile_contacts
+  width: 375px
+  float: right
+  margin-bottom: -1000px
+  padding-bottom: 1000px
+  border-left: 1px solid #e0e0e0
+.h_profile_contacts
+  text-align: center
+  padding: 20px
+  margin: 0
+  color: $dark
+  border-bottom: 1px solid $border
+.profile_contacts_ul
+  display: block
+  margin: 0
+.profile_contacts_li
+  display: block
+  @include clearfix
+  padding: 15px 20px
+  border-bottom: 1px solid $border
+  margin: 0
+  &:last-child
+    border-bottom: none
+.profile_contacts_lk
+  text-decoration: none
+  color: $base
+  display: block
+  padding: 15px 20px
+  @include transition(all .15s ease-in)
+  &:hover
+    background-color: $background-el
+.profile_contacts_pic
+  width: 45px
+  height: 45px
+  float: left
+  margin-right: 20px
+  display: block
+  overflow: hidden
+  @include border-radius(50%)
+.profile_contacts_info
+  overflow: hidden
+  position: relative
+  padding-left: 20px
+.profile_contacts_name
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+.profile_contacts_status
+  width: 8px
+  height: 8px
+  background-color: $green
+  border-radius: 50%
+  position: absolute
+  top: 5px
+  left: 0
+.profile_contacts_name, .profile_contacts_position
+  margin: 0
+.profile_contacts_position
+  color: $normal
+  font-size: em(13)
+
+.profile_contacts_place
+  margin: 5px 0 0
+  font-size: em(12)
+
+.profile_form
+  .lbl
+    font-size: 14px
+    color: $normal
+.profile_form_cnt
+  overflow: hidden
+.profile_form_photo
+  display: inline-block
+  width: 30%
+  vertical-align: top
+  margin-right: -4px
+  border-right: 1px solid $border
+  background-color: $background
+  margin-bottom: -1000000px
+  padding: 30px 15px 1000000px 15px
+  text-align: center
+.profile_form_photo_h
+  margin-bottom: 15px
+  font-size: 16px
+.profile_form_photo_it
+  width: 0.1px
+  height: 0.1px
+  opacity: 0
+  overflow: hidden
+  position: absolute
+  z-index: -1
+.profile_form_photo_label
+  cursor: pointer
+  text-decoration: underline
+  color: $link
+  display: block
+  margin-top: 20px
+  margin-bottom: 10px
+  &:hover
+    text-decoration: none
+.profile_form_info
+  display: inline-block
+  width: 70%
+  vertical-align: top
+  margin-right: -4px
+  padding: 15px 50px 30px
+.profile_form_info_left,
+.profile_form_info_right
+  display: inline-block
+  width: 50%
+  margin-right: -4px
+  vertical-align: top
+.profile_form_info_left
+  padding-right: 15px
+.profile_form_info_right
+  padding-left: 15px
+.profile_form_btn
+  width: 160px
+.profile_form_submit
+  border-top: 1px solid $border
+  padding: 15px 0
+  text-align: center
+.profile_form_h
+  border-bottom: 1px solid $border
+  padding: 15px 50px 15px 15px
+  text-align: center

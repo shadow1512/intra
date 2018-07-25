@@ -1,0 +1,163 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+/* структура */
+.main_w
+  min-height: 100%
+  height: auto !important
+  width: 100%
+  margin: 0 auto -65px
+  position: relative
+  min-width: 990px
+  background-color: $background
+.push
+  height: 65px
+  clear: both
+.footer
+  position: relative
+  clear: both
+  margin: 0 auto
+  padding: 30px 15px 0
+  background-color: $background
+  min-width: 990px
+.footer_top
+  max-width: 1200px
+  margin: 0 auto
+  padding: 50px 0
+.footer_bottom
+  border-top: 1px solid $border
+  padding: 30px 0
+.footer_copyright
+  color: $normal
+  text-align: center
+  line-height: 1em
+  max-width: 1200px
+  margin: 0 auto
+.footer_top_left
+  display: inline-block
+  vertical-align: top
+  width: 28%
+  margin-right: -4px
+.footer_logo
+  color: $normal
+  border: 1px solid $border
+  padding: 20px
+  width: 180px
+  display: block
+  text-decoration: none
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $project-default
+    border-color: $project-default
+    .footer_logo_ic
+      fill: $project-default
+.footer_logo_ic
+  fill: $normal
+  width: 122px
+  height: 45px
+  @include transition(all .15s ease-in)
+.footer_logo_tx
+  margin-top: 10px
+.footer_lst
+  list-style-type: none
+  margin: 0 -4px 0 0
+  padding: 0
+  display: inline-block
+  vertical-align: top
+  padding-right: 80px
+  width: 24%
+  &:last-child
+    padding-right: 0
+.footer_lst_i_h
+  color: $normal
+.footer_lst_i_lk
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+/* content */
+.layout_main
+  min-width: 990px
+  max-width: 1200px
+  margin: 0 auto
+.content
+  margin-top: 15px
+  margin-bottom: 15px
+  @include clearfix
+  overflow: hidden
+  border-left: 1px solid $border
+  border-right: 1px solid $border
+  border-bottom: 1px solid $border
+  &.__no-border
+    border: none
+  &.__order
+    border: none
+    overflow: visible
+    .onecolumn-page
+      border-top: none
+.content_i_container
+  position: relative
+.content_i
+  float: left
+  &.menu
+    margin-left: -100%
+    width: 311px
+    background-color: $project-default
+    margin-bottom: -1000000px
+    padding-bottom: 1000000px
+  &.dining-menu
+    margin-left: -100%
+    width: 311px
+    background-color: $dark
+    margin-bottom: -1000000px
+    padding-bottom: 1000000px
+  &.inside-page,
+  &.main-page,
+  &.onecolumn-page
+    width: 100%
+    background-color: $clear
+    margin-bottom: -1000000px
+    padding-bottom: 1000000px
+.content_i_w
+  background: $clear
+.inside-page
+  .content_i_w
+    margin-left: 311px
+.main-page
+  .content_i_w
+    margin: 0 219px 0 311px
+    border-top: 1px solid $border
+.onecolumn-page
+  border-top: 1px solid $border
+  .content_i_w
+    margin: 0
+
+.content_header
+  padding: 15px 20px
+  background-color: $clear
+  position: relative
+  height: 70px
+  border-top: 1px solid $border
+.content_extra
+  background-color: $clear
+  border-top: 1px solid $border
+  position: relative
+.content_i_header
+  padding: 15px 30px
+  border-bottom: 1px solid $border
+  border-top: 1px solid $border
+  position: relative
+  &.__with-ic
+    padding-left: 60px
+.content_i_header_ic
+  fill: $base
+  width: 18px
+  height: 18px
+  position: absolute
+  left: 30px
+  top: 50%
+  margin-top: -9px
+.content_tx
+  padding: 30px 50px
+  &.__no-pad
+    padding: 0

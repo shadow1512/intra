@@ -1,0 +1,136 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.dinner_top
+  padding: 20px 0
+  border-bottom: 1px solid $border
+  text-align: center
+
+.dinner_i
+  text-align: left
+  margin-top: 50px
+  &:first-child
+    margin-top: 0
+
+.dinner_lst,
+.bill_lst
+  margin: 30px 0 0 0
+  padding: 0
+  list-style-type: none
+  text-align: left
+
+.dinner_lst_i,
+.bill_lst_i
+  padding: 0
+  margin: 0 0 20px 0
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMS40ODgiIHdpZHRoPSIxMCIgZmlsbD0iIzk5OSI+PHRleHQgeT0iMS40ODgiIHg9Ii0xLjI4MyI+LjwvdGV4dD48L3N2Zz4=)
+  background-repeat: repeat-x
+  background-position: 0 70%
+
+.bill_lst_i
+  &.__current
+    font-size: 18px
+    font-weight: 600
+
+.dinner_lst_i_name
+  display: inline-block
+  vertical-align: top
+  width: 72%
+  padding-right: 30px
+
+.bill_lst_i_name
+  display: inline-block
+  vertical-align: top
+  width: 85%
+  padding-right: 30px
+
+.dinner_lst_i_mass
+  display: inline-block
+  vertical-align: top
+  width: 15%
+  padding-right: 30px
+  color: $normal
+
+.dinner_lst_i_price
+  display: inline-block
+  vertical-align: top
+  width: 11.5%
+  text-align: right
+  font-weight: 600
+
+.bill_lst_i_price
+  display: inline-block
+  vertical-align: top
+  width: 14%
+  text-align: right
+
+.dinner_lst_i_bg
+  background: $clear
+  padding-right: 5px
+
+.dinner_i_h
+  color: $inverse
+  font-weight: 600
+  font-size: 18px
+  line-height: 22px
+  padding-left: 50px
+  padding-top: 5px
+  min-height: 30px
+  position: relative
+  &.__ic-1
+    background: url("../../images/icons/ic-dinner-1.png") no-repeat 0 50%
+  &.__ic-2
+    background: url("../../images/icons/ic-dinner-2.png") no-repeat 0 50%
+  &.__ic-3
+    background: url("../../images/icons/ic-dinner-3.png") no-repeat 0 50%
+
+.dinner_i_h_ic
+  fill: $inverse
+  width: 36px
+  height: 32px
+  position: absolute
+  left: 0
+  top: 50%
+  margin-top: -16px
+
+.dinner_camera
+  margin-top: 30px
+
+.dinner_camera_i
+  display: inline-block
+  vertical-align: top
+  width: 50%
+  margin-right: -4px
+  height: 400px
+
+.dinner_aside
+  padding: 25px 10px
+  text-align: center
+  color: $clear
+  font-size: 16px
+  border-bottom: 1px solid rgba(256, 256, 256, 0.3)
+  &:last-child
+    border-bottom: none
+
+.dinner_aside_i
+  padding: 0 0 20px
+  margin: 0 20px
+  color: rgba($clear, 0.9)
+  &:before
+    content: ''
+    display: block
+    width: 100px
+    height: 1px
+    background-color: $clear
+    opacity: 0.5
+    margin: 0 auto 20px
+
+.dinner_aside_span
+  padding-right: 15px
+
+.dinner_aside_video
+  display: inline-block
+  vertical-align: top
+  margin-right: -4px
+  width: 50%
+  margin-top: 30px

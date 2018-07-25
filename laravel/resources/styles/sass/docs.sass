@@ -1,0 +1,34 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.docs_lst
+  margin: 0
+  padding: 0
+  list-style-type: none
+
+.docs_lst_i
+  position: relative
+  margin: 0
+  padding: 0
+  border-bottom: 1px solid $border
+  &:last-child
+    border-bottom: none
+
+.docs_lst_i_lk
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzYuODM0IiB2aWV3Qm94PSIwIDAgMzguMDAwOTk5IDQ2LjgzNCIgd2lkdGg9IjMwLjAwMSIgZmlsbD0iI2QxZGNlMiI+PHBhdGggZD0iTTI0LjQ1NyAwTDIuMDYyLjAyUy4wMS45ODUuMDEgMi4wODVMMCA0NC44MzRzMS4xMiAxLjk2IDIuMDIgMS45NiAzMi45MjIuMDQgMzQgLjA0IDEuOTYtLjczNCAxLjk2LTJsLjAyLTMxLjI3TDI0LjQ1OCAwem0tLjQ1NCAyLjQxN0wzNS41NCAxMy45N0gyNC4wMDNWMi40MTZ6bTExLjk3NSA0Mi4zNzVIMi4wMThWMi4wMjJIMjIuMDR2MTRoMTMuOTM4djI4Ljc3eiIvPjxwYXRoIGQ9Ik0zMy4wMiAyMC42NTh2Mi4wM0g1LjAxdi0yTTMyLjk1NyAyNS42NTh2Mi4wM0g0Ljk0N3YtMk0zMi45ODggMzAuNjI2djIuMDM1SDQuOTQ4VjMwLjY2TTMyLjk4OCAzNS42MzN2Mi4wMzRINC45NDh2LTIuMDAyIi8+PC9zdmc+)
+  background-repeat: no-repeat
+  background-position: 30px 50%
+  text-decoration: none
+  color: $base
+  padding: 25px 30px 25px 75px
+  display: block
+  @include transition(all .15s ease-in)
+  &:hover
+    background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzYuODM0IiB2aWV3Qm94PSIwIDAgMzguMDAwOTk5IDQ2LjgzNCIgd2lkdGg9IjMwLjAwMSIgZmlsbD0iI2YwOTIzNSI+PHBhdGggZD0iTTI0LjQ1NyAwTDIuMDYyLjAyUy4wMS45ODUuMDEgMi4wODVMMCA0NC44MzRzMS4xMiAxLjk2IDIuMDIgMS45NiAzMi45MjIuMDQgMzQgLjA0IDEuOTYtLjczNCAxLjk2LTJsLjAyLTMxLjI3TDI0LjQ1OCAwem0tLjQ1NCAyLjQxN0wzNS41NCAxMy45N0gyNC4wMDNWMi40MTZ6bTExLjk3NSA0Mi4zNzVIMi4wMThWMi4wMjJIMjIuMDR2MTRoMTMuOTM4djI4Ljc3eiIvPjxwYXRoIGQ9Ik0zMy4wMiAyMC42NTh2Mi4wM0g1LjAxdi0yTTMyLjk1NyAyNS42NTh2Mi4wM0g0Ljk0N3YtMk0zMi45ODggMzAuNjI2djIuMDM1SDQuOTQ4VjMwLjY2TTMyLjk4OCAzNS42MzN2Mi4wMzRINC45NDh2LTIuMDAyIi8+PC9zdmc+)
+    background-repeat: no-repeat
+    background-position: 30px 50%
+    background-color: $background-el
+
+.docs_lst_i_number
+  color: $normal
+  padding-left: 100px

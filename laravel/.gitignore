@@ -10,3 +10,5 @@ npm-debug.log
 yarn-error.log
 .env
 /source-html/*
+**/.DS_Store
+*.DS_Store

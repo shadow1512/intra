@@ -1,0 +1,528 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.subscribe
+  display: block
+  float: right
+  width: 22px
+  height: 22px
+
+.pagination_news
+  border-top: 1px solid #d1dce2
+  padding: 24px 0 9px
+
+.staff
+  position: absolute
+  right: 0
+  top: 0
+  background: $clear
+  border-left: 1px solid $border
+  border-top: 1px solid $border
+  margin-left: -220px
+  width: 220px
+  text-align: center
+  margin-bottom: -1000000px
+  padding-bottom: 1000000px
+
+.staff_i
+  border-bottom: 1px solid #d1dce2
+  padding: 40px 15px 20px 15px
+  &:last-child
+    border-bottom: 0
+  .h
+    margin-bottom: 17px
+  &.__dinner
+    cursor: pointer
+    display: none
+
+.staff_ul
+  margin: 0
+  padding: 15px 0 0 0
+  list-style-type: none
+
+.staff_li
+  text-align: center
+  margin: 0
+  padding-bottom: 30px
+
+.staff_img
+  display: block
+  margin: 0 auto 15px
+  width: 111px
+  height: 111px
+  @include border-radius(50%)
+
+.staff_lk
+  color: $base
+  text-decoration: none
+  &:hover
+    .staff_name
+      text-decoration: underline
+
+.staff_name
+  margin-bottom: 5px
+
+.staff_tx
+  color: $normal
+  font-size: 12px
+  line-height: 15px
+
+.staff_li_more
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+.staff-control-nav
+  position: relative
+  list-style: none
+  @include indentnull
+  @include clearfix
+  margin-top: 10px
+  display: block
+  z-index: 12
+  text-align: center
+  li
+    display: inline-block
+    height: 11px
+    text-indent: -9999px
+    cursor: pointer
+    margin: 0
+  a
+    display: block
+    width: 11px
+    height: 11px
+    margin: 0 3px
+    font-size: 1px
+    background: darken($active, 5%)
+    @include border-radius(11px)
+    &:hover
+      background: darken($active, 15%)
+    &.staff-active
+      background: darken($active, 15%)
+
+/* menu */
+.menu_ul
+  display: block
+  @include indentnull
+  @include clearfix
+  background-color: $project-default
+  border-left: 1px solid darken($project-default, 5%)
+  font-size: 14px
+
+.menu_li
+  display: block
+  padding: 20px 0
+  margin: 0
+  position: relative
+  color: $clear
+  cursor: pointer
+  border-bottom: 1px solid darken($project-default, 5%)
+  &:last-child
+    border-bottom: none
+
+.menu_li_lk
+  color: $clear
+  text-decoration: none
+  display: block
+  padding: 7px 50px 7px 20px
+  position: relative
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $inverse-menu
+    text-decoration: none
+
+.menu_li_h
+  color: $clear
+  font-family: $bold
+  font-size: 16px
+  opacity: 0.7
+  position: relative
+  padding: 0 20px
+  &:after
+    content: '–'
+    position: absolute
+    right: 15px
+    top: 50%
+    margin-top: -11px
+  &.__close
+    &:after
+      content: '+'
+      position: absolute
+      right: 15px
+      top: 50%
+      margin-top: -11px
+
+.menu_li_lst
+  margin: 10px 0 0 0
+  padding: 0
+  list-style-type: none
+
+.menu_li_lst_i
+  padding: 0
+  margin: 0
+  position: relative
+  &:last-child
+    padding-bottom: 0
+  &.__active
+    .menu_li_lk
+      color: $inverse-menu
+  &.__inner
+    &:hover
+      .menu_li_inner
+        visibility: visible
+        opacity: 1
+      .menu_li_lk
+        color: $inverse-menu
+        background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTAiIHdpZHRoPSI2IiBmaWxsPSIjZmZiNTZjIiB2aWV3Qm94PSIwIDAgNC45MzMwMDAxIDkuODYyOTk5NyI+PHBhdGggZD0iTTAgMGw0LjkzMyA0LjkzTDAgOS44NjRWMHoiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIi8+PC9zdmc+)
+        background-repeat: no-repeat
+        background-position: 95% 50%
+    .menu_li_lk
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTAiIHdpZHRoPSI2IiBmaWxsPSIjZmZmIiB2aWV3Qm94PSIwIDAgNC45MzMwMDAxIDkuODYyOTk5NyI+PHBhdGggZD0iTTAgMGw0LjkzMyA0LjkzTDAgOS44NjRWMHoiIGZpbGwtcnVsZT0iZXZlbm9kZCIgY2xpcC1ydWxlPSJldmVub2RkIi8+PC9zdmc+)
+      background-repeat: no-repeat
+      background-position: 95% 50%
+
+.menu_li_info
+  color: $clear
+  opacity: 0.6
+  position: absolute
+  top: 50%
+  right: 15px
+  margin-top: -10px
+
+.menu_li_inner
+  background-color: $project-default-dark
+  padding: 10px 0
+  position: absolute
+  top: -10px
+  left: 310px
+  width: 250px
+  visibility: hidden
+  opacity: 0
+  @include transition(all .3s ease-in)
+
+.menu_li_inner_lk
+  color: $clear
+  text-decoration: none
+  display: block
+  @include transition(all .15s ease-in)
+  padding: 10px 15px
+  &:hover
+    color: $inverse-menu
+    text-decoration: none
+  &:last-child
+    padding-bottom: 0
+
+.__menu_simple
+  background: $active
+  line-height: 1.1em
+  border-bottom: 1px solid darken($active, 5%)
+  .menu_li_lk
+    display: block
+    margin-bottom: 3px
+
+.__menu_simple_name
+  font-size: em(16)
+  font-weight: 500
+
+.__menu_main
+  padding: 0
+  background: darken($active, 5%)
+  &:hover
+    background: darken($active, 5%)
+
+.menu_main_nav
+  @include clearfix
+  padding: 8px 15px 2px
+
+.menu_main_nav_i
+  display: block
+  float: left
+  padding-left: 30px
+  margin-bottom: 10px
+  width: 50%
+  height: 20px
+  font-size: em(13)
+  color: $clear
+  text-decoration: none
+  &:hover
+    color: lighten($inverse, 30%)
+    text-decoration: none
+
+.__menu_directory
+  position: relative
+  padding: 0 70px 0 0
+  background: darken($active, 5%)
+  border-bottom: 1px solid darken($active, 10%)
+  &:hover
+    background: darken($active, 5%)
+
+.menu_directory_t
+  display: block
+  padding: 27px 7px 27px 27px
+  font-size: em(15)
+  line-height: 1em
+  color: $clear
+  text-decoration: none
+  &:hover
+    color: $clear
+    text-decoration: none
+  &.__up
+    cursor: pointer
+  &.__up:hover
+    color: lighten($inverse, 30%)
+    text-decoration: none
+  &.__up:before
+    display: block
+    content: ""
+    width: 8px
+    height: 13px
+    @include position(absolute, 27px null null 15px)
+
+.menu_directory_search
+  width: 70px
+  height: 100%
+  @include position(absolute, 0 0 null null)
+  border-left: 1px solid darken($active, 10%)
+  text-align: center
+  padding-top: 43px
+  font-size: em(11)
+  color: lighten($project-default, 70%)
+  text-decoration: none
+  &:hover
+    color: lighten($inverse, 30%)
+    text-decoration: none
+
+.__menu_search
+  background: $active
+  font-size: em(14)
+  &:hover
+    background: $active
+    cursor: auto
+  .field
+    margin-top: 15px
+  .__field_inverse
+    margin-top: 5px
+    &:first-child
+      margin-top: 0
+
+/* news */
+.main_news
+  padding: 40px 100px 40px 40px
+
+.news
+  text-align: center
+  padding: 40px 180px
+
+.news_ul
+  margin: 0
+  padding: 15px 0 0 0
+  list-style-type: none
+  text-align: left
+
+.news_li
+  padding-bottom: 25px
+  &:first-child
+    border-top: 0
+  &.__important
+    .news_li_lk
+      font-size: 18px
+      line-height: 22px
+
+.news_li_date
+  color: $normal
+  margin-top: 10px
+
+.news_li_lk
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+.news_i
+  text-align: left
+  margin-top: 30px
+
+/* top */
+.main_top
+  @include clearfix
+  overflow: hidden
+
+.main_top_phones
+  font-size: 14px
+  background-color: $project-default-dark
+
+.main_top_phones_search
+  padding: 15px 20px
+  position: relative
+  text-align: center
+
+.main_top_phones_search_lk
+  text-decoration: none
+  color: $clear
+  padding-left: 25px
+  position: relative
+  margin-left: -15px
+  text-align: center
+  @include transition(all .15s ease-in)
+  &:hover
+    opacity: 0.7
+
+.main_top_phones_search_lk_ic
+  width: 14px
+  height: 14px
+  fill: $clear
+  position: absolute
+  left: 0
+  top: 50%
+  margin-top: -7px
+  @include transition(all .15s ease-in)
+
+.main_top_phones_h
+  color: $clear
+  font-size: 18px
+  line-height: 22px
+
+.main_top_phones_people
+  padding: 30px 20px 15px 20px
+  border-bottom: 1px solid rgba($clear, 0.2)
+
+.main_top_phones_lst
+  margin: 25px 0 0
+  padding: 0
+  list-style-type: none
+  height: 116px
+  overflow: auto
+
+.main_top_phones_lst_i
+  margin: 0
+  padding: 0 0 10px 0
+  &:last-child
+    padding-bottom: 0
+
+.main_top_phones_lst_i_lk
+  color: $clear
+  text-decoration: none
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTUiIHdpZHRoPSIxNSIgdmlld0JveD0iMCAwIDM2LjkxODAwNiAzNS4xIj48cGF0aCBkPSJNMjkuMjggMzUuMWMtLjIgMC0uNC0uMS0uNS0uMmwtMTAuMy03LjUtMTAuMyA3LjVjLS4zLjItLjguMi0xLjEgMHMtLjUtLjctLjMtMWwzLjktMTIuMS0xMC4zLTcuNWMtLjMtLjItLjUtLjctLjMtMSAuMS0uNC41LS42LjktLjZoMTIuN0wxNy41OC42Yy4xLS40LjUtLjYuOS0uNnMuOC4zLjkuNmwzLjkgMTIuMWgxMi43Yy40IDAgLjguMy45LjYuMS40IDAgLjgtLjMgMWwtMTAuMyA3LjUgMy45IDEyLjFjLjEuNCAwIC44LS4zIDEtLjIuMi0uNC4yLS42LjJ6bS0xMC44LTkuN2MuMiAwIC40LjEuNS4ybDguNSA2LjItMy4zLTEwYy0uMS0uNCAwLS44LjMtMWw4LjUtNi4yaC0xMC41Yy0uNCAwLS44LS4zLS45LS42bC0zLjMtMTAtMy4zIDEwYy0uMS40LS41LjYtLjkuNkgzLjU4bDguNSA2LjJjLjMuMi41LjcuMyAxbC0zLjMgMTAgOC41LTYuMmMuNS0uMS43LS4yLjktLjJ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)
+  background-repeat: no-repeat
+  background-position: 0 50%
+  padding-left: 25px
+  &:hover
+    text-decoration: underline
+
+.main_top_phones_logout
+  text-align: center
+  position: relative
+  opacity: 0.6
+  color: $clear
+  height: 116px
+  margin: 25px 0 0
+
+.main_top_phones_logout_tx
+  margin-top: 5px
+
+.main_top_phones_logout_ic
+  width: 50px
+  height: 50px
+  fill: $clear
+  margin: 0 auto
+
+.main_top_dinner
+  margin-left: 311px
+  background-color: $background-el
+  padding: 30px
+  min-height: 259px
+  position: relative
+  border-top: 1px solid $border
+
+.main_top_dinner_lst
+  margin: 25px 0 0 0
+  padding: 0
+  list-style-type: none
+
+.main_top_dinner_lst_i
+  display: inline-block
+  width: 33%
+  vertical-align: top
+  margin-right: -4px
+  height: 123px
+  text-align: center
+  background: $project-default-dark
+  border-right: 1px solid rgba($clear, 0.2)
+  &:last-child
+    border-right: none
+  &.__logout
+    width: 50%
+  &.__bg1
+    background: url(../../images/dinner/dining-bg1.jpg) no-repeat
+    background-size: cover
+  &.__bg2
+    background: url(../../images/dinner/dining-bg2.jpg) no-repeat
+    background-size: cover
+  &.__bg3
+    background: url(../../images/dinner/dining-bg3.jpg) no-repeat
+    background-size: cover
+
+.main_top_dinner_lst_ic
+  width: 67px
+  height: 67px
+  margin: 15px auto 0
+  border: 1px solid $clear
+  border-radius: 50%
+  position: relative
+.main_top_dinner_lst_ic_dinner
+  fill: $clear
+  position: absolute
+  left: 50%
+  top: 50%
+  width: 22px
+  height: 34px
+  margin-top: -17px
+  margin-left: -11px
+.main_top_dinner_lst_ic_cam
+  fill: $clear
+  position: absolute
+  left: 50%
+  top: 50%
+  width: 34px
+  height: 24px
+  margin-top: -12px
+  margin-left: -17px
+
+.main_top_dinner_lst_lk
+  color: $clear
+  display: block
+  text-decoration: none
+  @include transition(all .15s ease-in)
+  &:hover
+    opacity: 0.8
+
+.main_top_dinner_lst_tx
+  margin-top: 10px
+
+.main_top_dinner_lst_price
+  font-size: 24px
+  line-height: 28px
+  margin-top: 40px
+  margin-bottom: 25px
+
+.main_top_dinner_status
+  color: $green
+  padding-left: 5px
+  font-size: 14px
+  &.__close
+    color: $alert
+
+.main_top_dinner_info
+  position: absolute
+  top: 30px
+  left: 250px
+  padding-right: 150px
+
+.main_top_dinner_hide
+  position: absolute
+  top: 30px
+  right: 40px
+  color: $normal
+  cursor: pointer
+
+.main_top_dinner_info_i
+  padding-right: 15px

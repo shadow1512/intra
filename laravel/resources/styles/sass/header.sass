@@ -1,0 +1,211 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+
+.header_w
+  background-color: $clear
+  background-image: linear-gradient(to top, #f8f8f8 0%, #f8f8f8 0%, white 64%, white 100%)
+  @include box-shadow( 0 1px 3px 1px rgba(74, 104, 120, 0.20))
+  border-bottom: 1px solid #c3ccd2
+  border-top: 1px solid #d1d2d2
+  position: relative
+  z-index: 99
+  font-size: 14px
+  @include clearfix
+
+.header_search_w
+  float: left
+  width: 100%
+
+.header_search
+  margin: 0 222px 0 290px
+.header_search_logos
+  float: left
+  padding: 0 10px
+  border-right: 1px solid $borderhead
+.header_search_logo
+  display: block
+  width: 70px
+  height: 74px
+  float: left
+  color: $kodeks-default
+  text-decoration: none
+  font-size: 10px
+  line-height: 1em
+  position: relative
+  text-align: center
+  @include transition(all .15s ease-in)
+  &:hover
+    opacity: 0.7
+    color: $kodeks-default
+  &.__cntd
+    color: $cntd-default
+  &.__dc
+    color: $project-default
+.header_search_logo_kod
+  fill: $kodeks-default
+  width: 25px
+  height: 30px
+  position: absolute
+  top: 50%
+  margin-top: -20px
+  margin-left: -12px
+  left: 50%
+.header_search_logo_cntd
+  fill: $cntd-default
+  width: 27px
+  height: 27px
+  position: absolute
+  top: 50%
+  margin-top: -18px
+  margin-left: -14px
+  left: 50%
+.header_search_logo_dc
+  fill: $project-default
+  width: 35px
+  height: 23px
+  position: absolute
+  top: 50%
+  margin-top: -18px
+  margin-left: -18px
+  left: 50%
+.header_search_logo_tx
+  padding-top: 50px
+
+.header_search_form
+  overflow: hidden
+  padding: 5px 19px 0
+  position: relative
+.header_search_btn
+  position: absolute
+  top: 50%
+  margin-top: -10px
+  right: 10px
+  @include transition(all .15s ease-in)
+  &:hover
+    .header_search_btn_ic
+      fill: $form-elem
+.header_search_it
+  padding-right: 40px
+.header_search_btn_ic
+  width: 20px
+  height: 20px
+  fill: $normal
+  @include transition(all .15s ease-in)
+
+.header_intra-logo
+  display: block
+  float: left
+  margin-left: -100%
+  width: 290px
+  height: 74px
+  padding-top: 20px
+  text-align: center
+  border-left: 1px solid $borderhead
+  border-right: 1px solid $borderhead
+  position: relative
+  text-decoration: none
+  color: $kodeks-default
+  @include transition(all .15s ease-in)
+  &:hover
+    opacity: 0.7
+.header_intra-logo_ic
+  width: 122px
+  height: 45px
+  fill: $kodeks-default
+  position: absolute
+  top: 50%
+  margin-top: -22px
+  left: 25px
+.header_intra-logo_tx
+  color: $kodeks-default
+  font-size: 12px
+  line-height: 13px
+  padding-left: 170px
+  text-align: left
+
+
+.header_login
+  width: 220px
+  float: left
+  margin-left: -220px
+  position: relative
+  cursor: pointer
+  border-left: 1px solid $borderhead
+  border-right: 1px solid $borderhead
+.header_login_name
+  display: block
+  height: 74px
+  padding: 15px 25px 0 10px
+  color: $base
+  background-position: 95% 50%
+  text-decoration: none
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $project-default
+    text-decoration: none
+  &.__logout
+    color: $project-default
+    text-align: center
+    padding: 28px 0 0 25px
+    &:hover
+      color: $inverse
+      .header_login_name_logout-ic
+        fill: $inverse
+.header_login_name_logout-ic
+  fill: $project-default
+  width: 17px
+  height: 18px
+  position: absolute
+  top: 50%
+  left: 30%
+  margin-top: -9px
+  @include transition(all .15s ease-in)
+.header_login_name_pic
+  display: inline-block
+  width: 45px
+  height: 45px
+  text-align: center
+  vertical-align: middle
+  margin-right: -4px
+.header_login_name_img
+  border-radius: 50%
+.header_login_name_tx
+  display: inline-block
+  text-align: left
+  padding-left: 10px
+  width: 142px
+  vertical-align: middle
+  margin-right: -4px
+.header_login_nav
+  width: 220px
+  @include position(absolute, 76px 0 null null)
+  z-index: 2
+  background: $clear
+  @include box-shadow(0 3px 3px 1px rgba(74,104,120,0.34))
+  border-bottom: 1px solid #c3ccd2
+  border-top: 1px solid #d1d2d2
+.header_login_nav_ul
+  padding: 15px
+  margin: 0
+  list-style-type: none
+.header_login_nav_li
+  display: block
+  margin: 0 0 15px 0
+  padding: 0
+  &:last-child
+    margin: 0
+
+.header_login_nav_lk
+  display: block
+  text-decoration: none
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $inverse
+
+.header_login_nav_form
+  padding: 15px
+  border-bottom: 1px solid $border
+.header_login_nav_lks
+  padding: 15px
+  text-align: center

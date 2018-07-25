@@ -114,5 +114,34 @@ $(document).ready(function(){
     open('.__js_header_login', '.header_login_nav');
     open('.order_calendar_btn', '.order_calendar_cnt', '.order_calendar_i');
 
+    function toggleMenu (el, siblings) {
+        $(el).click(function () {
+            if ($(this).hasClass('__close')) {
+                $(this).removeClass('__close');
+            } else {
+                $(this).addClass('__close');
+            }
+            $(this).siblings(siblings).toggle(500);
+        })
+    }
+
+    toggleMenu('.menu_li_h', '.menu_li_lst');
+
+    function hideDinner (el, block, openBlock) {
+        $(el).click(function () {
+            $(block).fadeOut(200);
+            $(openBlock).show();
+        })
+    }
+    function showDinner (el, block) {
+        $(el).click(function () {
+            $(this).hide();
+            $(block).fadeIn(200);
+        })
+    }
+
+    hideDinner('.main_top_dinner_hide', '.main_top_dinner', '#open-dinner');
+    showDinner('#open-dinner', '.main_top_dinner');
+
 });
 

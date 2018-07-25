@@ -1,0 +1,250 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+.directory_lst
+  margin: 0
+  padding: 0
+  list-style-type: none
+
+.directory_lst_i
+  position: relative
+  margin: 0
+  padding: 25px 30px
+  border-bottom: 1px solid $border
+  @include transition(all .15s ease-in)
+  &:last-child
+    border-bottom: none
+  &:hover
+    .directory_lst_i_action
+      visibility: visible
+      opacity: 1
+
+.directory_lst_i_pic
+  display: inline-block
+  width: 12%
+  vertical-align: top
+  padding-right: 10px
+
+.directory_lst_i_name
+  display: inline-block
+  width: 50%
+  vertical-align: top
+  position: relative
+  padding-left: 20px
+  padding-right: 20px
+
+.directory_lst_i_name_fio
+  font-size: 16px
+  text-decoration: none
+  color: $base
+  &:hover
+    text-decoration: underline
+
+.directory_lst_i_name_status
+  width: 8px
+  height: 8px
+  background-color: $green
+  border-radius: 50%
+  position: absolute
+  top: 5px
+  left: 0
+
+.directory_lst_i_info
+  display: inline-block
+  width: 30%
+  vertical-align: top
+  padding-right: 20px
+
+.directory_lst_i_action
+  display: inline-block
+  width: 6%
+  vertical-align: top
+  position: relative
+  min-height: 70px
+  visibility: hidden
+  opacity: 0
+
+.directory_lst_i_action_add
+  fill: $project-default
+  width: 24px
+  height: 24px
+
+.directory_lst_i_action_del
+  fill: $alert
+  width: 17px
+  height: 17px
+
+.directory_lst_i_action_lk
+  position: absolute
+  right: 0
+  top: 5px
+  @include transition(all .15s ease-in)
+  opacity: 0.6
+  &:hover
+    opacity: 1
+
+.directory_lst_i_img
+  width: 65px
+  height: 65px
+  border-radius: 50%
+
+.directory_lst_i_name_spec
+  color: $normal
+
+.directory_search
+  text-decoration: none
+  color: $project-default
+  display: inline-block
+  position: absolute
+  top: 50%
+  right: 20px
+  margin-top: -9px
+  font-size: 16px
+  padding-left: 28px
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $inverse
+    .directory_search_ic
+      fill: $inverse
+
+.directory_search_ic
+  fill: $project-default
+  width: 16px
+  height: 16px
+  position: absolute
+  left: 0
+  top: 50%
+  margin-top: -8px
+  @include transition(all .15s ease-in)
+
+.directory_searchform
+  padding: 10px
+  position: relative
+  @include clearfix
+
+.directory_searchform_field
+  display: inline-block
+  width: 33%
+  padding-left: 10px
+  padding-right: 10px
+  margin: 10px 0
+
+.directory_searchform_btn
+  float: right
+  margin-right: 10px
+  width: 150px
+  margin-top: 10px
+
+.search-res_lst
+  margin: 0
+  padding: 0
+  list-style-type: none
+  font-size: 14px
+
+.search-res_lst_i
+  display: inline-block
+  vertical-align: top
+  width: 170px
+  padding: 0
+  margin: 0 10px 0 0
+  text-align: center
+  text-transform: uppercase
+  border: 1px solid $border
+  position: relative
+  &:last-child
+    margin-right: 0
+  &.active
+    border-bottom: none
+    padding-bottom: 10px
+    background-color: $clear
+    .search-res_lst_i_lk
+      color: $base
+      &:hover
+        background-color: $clear
+        color: $base
+    &:after
+      content: ''
+      position: absolute
+      height: 1px
+      background-color: $clear
+      width: 168px
+      bottom: -1px
+      left: 0
+
+.search-res_lst_i_lk
+  background-color: $clear
+  display: block
+  padding: 15px 10px
+  text-decoration: none
+  color: $project-default
+  @include transition(all .15s ease-in)
+  &:hover
+    background-color: $background-el
+    color: $base
+
+.search-res_cnt
+  border: 1px solid $border
+
+.search-res_cnt_i
+  display: none
+  background-color: $clear
+  padding: 30px
+  @include clearfix
+  &.__no-pad
+    padding: 0 0 30px 0
+
+.search-res_cnt_i_b
+  border-bottom: 1px solid $border
+  margin-right: 375px
+  padding: 0 30px
+  &:last-child
+    border-bottom: none
+
+.search-res_cnt_i_b-right
+  float: right
+  width: 375px
+  border-left: 1px solid $border
+  margin-bottom: -100000px
+  padding-bottom: 100000px
+  .search-res_cnt_i_b_h
+    margin-left: 15px
+
+.search-res_cnt_i_b_h
+  padding: 25px 0 10px
+  margin-bottom: 10px
+  position: relative
+  &:after
+    content: ''
+    width: 100px
+    height: 1px
+    background-color: $border
+    position: absolute
+    bottom: 0
+    left: 0
+
+.search-res_section-lst
+  list-style-type: none
+  margin: 0
+  padding: 15px 0 30px
+
+.search-res_section-lst_i
+  margin: 25px 0 0 0
+  padding: 0
+  &:first-child
+    margin-top: 0
+
+.search-res_section-lst_breadcrumbs
+  list-style-type: none
+  margin: 5px 0 0 0
+  padding: 0
+
+.search-res_section-lst_breadcrumbs_i
+  display: inline-block
+  margin: 0
+  padding: 0
+  &:after
+    content: ' / '
+  &:last-child
+    &:after
+      content: ''
+

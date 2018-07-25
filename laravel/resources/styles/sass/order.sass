@@ -1,0 +1,195 @@
+@import "./partials/variables"
+@import "./partials/mixins"
+
+
+.order
+  padding: 30px
+.order_calendar
+  width: 100%
+  min-height: 448px
+  margin-top: 20px
+
+.order_calendar_row
+  @include clearfix
+  position: relative
+  width: 100%
+  &.__t
+    .order_calendar_i
+      text-align: center
+      height: 22px
+      line-height: 22px
+      padding: 0
+
+.order_calendar_i
+  float: left
+  width: 14.285%
+  height: 112px
+  padding: 7px
+  border: 1px solid lighten($base, 20%)
+  font-size: em(13)
+  background: $clear
+  @include transition(all .15s ease-in)
+  &.__disabled
+    background: $background
+    .order_calendar_date
+      border-bottom: 1px solid $background
+  &.__day-off
+    background: $dayoff
+    &:hover
+      border: 1px solid lighten($base, 20%)
+      .order_calendar_btn
+        visibility: hidden
+        opacity: 0
+  &:hover,
+  &.__active
+    border: 1px solid $project-default
+    .order_calendar_btn
+      visibility: visible
+      opacity: 1
+.order_calendar_i_inner
+  position: relative
+  height: 100%
+.order_calendar_date
+  color: $dark
+  font-weight: bold
+  display: inline-block
+  vertical-align: top
+  width: 20px
+  white-space: nowrap
+  padding-bottom: 5px
+  border-bottom: 1px solid $border
+  margin-right: 10px
+  margin-bottom: 10px
+
+.order_calendar_conference
+  position: absolute
+  bottom: 0
+  left: 0
+  width: 100%
+  text-align: center
+.order_calendar_conference_tx
+  color: $normal
+  margin-bottom: 3px
+.order_calendar_conference_lst
+  @include clearfix
+  display: block
+  list-style-type: none
+  width: 100%
+  height: 3px
+  margin: 0
+  padding: 0
+  background: lighten($base, 20%)
+.order_calendar_conference_i
+  @include indentnull
+  display: block
+  float: left
+  height: 3px
+  &.__booked
+    background: #f09235
+
+.order_calendar_btn
+  visibility: hidden
+  @include transition(all .15s ease-in)
+  opacity: 0
+  height: 25px
+  line-height: 25px
+  padding: 0 8px
+  display: inline-block
+
+.order_calendar_cnt
+  display: none
+  @include position(absolute, 112px null null 0)
+  z-index: 9
+  background: $base
+  width: 100%
+  min-height: 298px
+  color: rgba($clear, 0.6)
+  padding: 15px
+  font-size: 14px
+
+.order_calendar_cnt_date
+  line-height: 1em
+  margin: 0 0 15px
+  padding-bottom: 10px
+  border-bottom: 1px solid rgba($clear, 0.6)
+
+.order_calendar_cnt_i
+  width: 20%
+  margin-right: 20px
+  height: 238px
+  float: left
+  padding: 14px
+  background: $clear
+  color: $base
+  border: 3px solid rgba($clear, 0.6)
+  text-align: center
+
+.order_calendar_cnt_time
+  &:after
+    display: block
+    content: ""
+    width: 20%
+    height: 1px
+    margin: 15px auto 0
+    background: lighten($base, 20%)
+
+.order_calendar_cnt_t
+  font-weight: bold
+  margin: 15px 0
+
+.order_calendar_cnt_contact
+  &:before
+    display: block
+    content: ""
+    width: 20%
+    height: 1px
+    margin: 0 auto 15px
+    background: lighten($base, 20%)
+  p
+    margin: 0
+    &:first-child
+      color: $project-default
+  a, a:hover
+    color: lighten($base, 20%)
+
+.order_calendar_cnt_add
+  width: 20%
+  height: 238px
+  position: relative
+  float: left
+  color: rgba($clear, 0.6)
+  text-align: center
+  text-decoration: none
+  padding: 125px 15px 20px 15px
+  border: 3px solid rgba($clear, 0.6)
+  @include transition(all .15s ease-in)
+  &:hover
+    color: $clear
+    border: 3px solid $clear
+    text-decoration: none
+    .order_calendar_cnt_add_ic
+      opacity: 1
+.order_calendar_cnt_add_ic
+  width: 36px
+  height: 36px
+  fill: $clear
+  opacity: 0.6
+  position: absolute
+  top: 75px
+  left: 50%
+  margin-left: -18px
+  @include transition(all .15s ease-in)
+
+.order_calendar_cnt_close
+  position: absolute
+  right: 10px
+  top: 10px
+.order_calendar_cnt_close_ic
+  width: 14px
+  height: 14px
+  fill: $clear
+  opacity: 0.7
+  @include transition(all .15s ease-in)
+  &:hover
+    opacity: 1
+

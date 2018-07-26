@@ -23,6 +23,28 @@
         <div class="profile_info_i">
             <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{Auth::user()->position_desc}}</span></p>
         </div>
+        <div class="profile_info_i">
+            <div class="profile_info_i_requests">
+            <div class="profile_info_i_requests_i">
+                <div class="profile_info_i_requests_i_left">
+                <div>Заявка на техническое обслуживание</div>
+                <div class="profile_info_i_requests_i_time">5 августа 16:19</div>
+                </div>
+                <div class="profile_info_i_requests_i_right">
+                <div class="profile_info_i_requests_i_status">На рассмотрении</div>
+                </div>
+            </div>
+            <div class="profile_info_i_requests_i">
+                <div class="profile_info_i_requests_i_left">
+                <div>Заявка на техническое обслуживание</div>
+                <div class="profile_info_i_requests_i_time">5 августа 16:19</div>
+                </div>
+                <div class="profile_info_i_requests_i_right">
+                <div class="profile_info_i_requests_i_status __fail">Отклонена</div>
+                </div>
+            </div>
+            </div>
+        </div>
     </div>
 </div>
 <!--modal-->

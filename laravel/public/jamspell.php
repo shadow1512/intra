@@ -18,7 +18,7 @@ $field = "дериво";
 if(isset($argv[1])) {
     $field = $argv[1];
 }
-curl_setopt($ch, CURLOPT_POSTFIELDS, $field);
+curl_setopt($ch, CURLOPT_POSTFIELDS, array("text"=>$field));
 $res = curl_exec($ch);
 
 var_dump($res);

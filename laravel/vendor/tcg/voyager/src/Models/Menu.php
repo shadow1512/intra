@@ -4,6 +4,7 @@ namespace TCG\Voyager\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Events\MenuDisplay;
 use TCG\Voyager\Facades\Voyager;
 
 /**
@@ -39,7 +40,9 @@ class Menu extends Model
     {
         // GET THE MENU - sort collection in blade
         $menu = static::where('name', '=', $menuName)
-            ->with('parent_items.children')
+            ->with(['parent_items.children' => function ($q) {
+                $q->orderBy('order');
+            }])
             ->first();
 
         // Check for Menu Existence
@@ -47,7 +50,7 @@ class Menu extends Model
             return false;
         }
 
-        event('voyager.menu.display', $menu);
+        event(new MenuDisplay($menu));
 
         // Convert options array into object
         $options = (object) $options;
@@ -61,7 +64,7 @@ class Menu extends Model
 
             if (!Auth::guest()) {
                 $user = Voyager::model('User')->find(Auth::id());
-                $user_permissions = $user->role->permissions->pluck('key')->toArray();
+                $user_permissions = $user->role ? $user->role->permissions->pluck('key')->toArray() : [];
             }
 
             $options->user = (object) compact('permissions', 'dataTypes', 'prefix', 'user_permissions');

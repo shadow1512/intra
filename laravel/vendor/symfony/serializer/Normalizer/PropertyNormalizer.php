@@ -35,7 +35,7 @@ class PropertyNormalizer extends AbstractObjectNormalizer
      */
     public function supportsNormalization($data, $format = null)
     {
-        return parent::supportsNormalization($data, $format) && $this->supports(get_class($data));
+        return parent::supportsNormalization($data, $format) && $this->supports(\get_class($data));
     }
 
     /**
@@ -47,22 +47,28 @@ class PropertyNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * Checks if the given class has any non-static property.
-     *
-     * @param string $class
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    private function supports($class)
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return __CLASS__ === \get_class($this);
+    }
+
+    /**
+     * Checks if the given class has any non-static property.
+     */
+    private function supports(string $class): bool
     {
         $class = new \ReflectionClass($class);
 
         // We look for at least one non-static property
-        foreach ($class->getProperties() as $property) {
-            if (!$property->isStatic()) {
-                return true;
+        do {
+            foreach ($class->getProperties() as $property) {
+                if (!$property->isStatic()) {
+                    return true;
+                }
             }
-        }
+        } while ($class = $class->getParentClass());
 
         return false;
     }
@@ -77,7 +83,7 @@ class PropertyNormalizer extends AbstractObjectNormalizer
         }
 
         try {
-            $reflectionProperty = new \ReflectionProperty(is_string($classOrObject) ? $classOrObject : get_class($classOrObject), $attribute);
+            $reflectionProperty = $this->getReflectionProperty($classOrObject, $attribute);
             if ($reflectionProperty->isStatic()) {
                 return false;
             }
@@ -96,13 +102,15 @@ class PropertyNormalizer extends AbstractObjectNormalizer
         $reflectionObject = new \ReflectionObject($object);
         $attributes = array();
 
-        foreach ($reflectionObject->getProperties() as $property) {
-            if (!$this->isAllowedAttribute($object, $property->name)) {
-                continue;
-            }
+        do {
+            foreach ($reflectionObject->getProperties() as $property) {
+                if (!$this->isAllowedAttribute($reflectionObject->getName(), $property->name)) {
+                    continue;
+                }
 
-            $attributes[] = $property->name;
-        }
+                $attributes[] = $property->name;
+            }
+        } while ($reflectionObject = $reflectionObject->getParentClass());
 
         return $attributes;
     }
@@ -113,7 +121,7 @@ class PropertyNormalizer extends AbstractObjectNormalizer
     protected function getAttributeValue($object, $attribute, $format = null, array $context = array())
     {
         try {
-            $reflectionProperty = new \ReflectionProperty(get_class($object), $attribute);
+            $reflectionProperty = $this->getReflectionProperty($object, $attribute);
         } catch (\ReflectionException $reflectionException) {
             return;
         }
@@ -132,7 +140,7 @@ class PropertyNormalizer extends AbstractObjectNormalizer
     protected function setAttributeValue($object, $attribute, $value, $format = null, array $context = array())
     {
         try {
-            $reflectionProperty = new \ReflectionProperty(get_class($object), $attribute);
+            $reflectionProperty = $this->getReflectionProperty($object, $attribute);
         } catch (\ReflectionException $reflectionException) {
             return;
         }
@@ -147,5 +155,24 @@ class PropertyNormalizer extends AbstractObjectNormalizer
         }
 
         $reflectionProperty->setValue($object, $value);
+    }
+
+    /**
+     * @param string|object $classOrObject
+     *
+     * @throws \ReflectionException
+     */
+    private function getReflectionProperty($classOrObject, string $attribute): \ReflectionProperty
+    {
+        $reflectionClass = new \ReflectionClass($classOrObject);
+        while (true) {
+            try {
+                return $reflectionClass->getProperty($attribute);
+            } catch (\ReflectionException $e) {
+                if (!$reflectionClass = $reflectionClass->getParentClass()) {
+                    throw $e;
+                }
+            }
+        }
     }
 }

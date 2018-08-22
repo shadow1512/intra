@@ -48,7 +48,8 @@ class RemoveCommand extends BaseCommand
                 new InputOption('classmap-authoritative', 'a', InputOption::VALUE_NONE, 'Autoload classes from the classmap only. Implicitly enables `--optimize-autoloader`.'),
                 new InputOption('apcu-autoloader', null, InputOption::VALUE_NONE, 'Use APCu to cache found/not-found classes.'),
             ))
-            ->setHelp(<<<EOT
+            ->setHelp(
+                <<<EOT
 The <info>remove</info> command removes a package from the current
 list of installed packages
 
@@ -131,7 +132,7 @@ EOT
             ->setApcuAutoloader($apcu)
             ->setUpdate(true)
             ->setUpdateWhitelist($packages)
-            ->setWhitelistDependencies(!$input->getOption('no-update-with-dependencies'))
+            ->setWhitelistTransitiveDependencies(!$input->getOption('no-update-with-dependencies'))
             ->setIgnorePlatformRequirements($input->getOption('ignore-platform-reqs'))
             ->setRunScripts(!$input->getOption('no-scripts'))
         ;

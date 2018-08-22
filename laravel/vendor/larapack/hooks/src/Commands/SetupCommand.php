@@ -5,6 +5,8 @@ namespace Larapack\Hooks\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Filesystem\Filesystem;
 use Larapack\Hooks\Composer;
+use Larapack\Hooks\Events\Setup;
+use Larapack\Hooks\HooksServiceProvider;
 
 class SetupCommand extends Command
 {
@@ -43,6 +45,10 @@ class SetupCommand extends Command
 
         $composer->save();
 
+        $this->call('vendor:publish', ['--provider' => HooksServiceProvider::class]);
+
         $this->info('Hooks are now ready to use! Go ahead and try to "php artisan hook:install test-hook"');
+
+        event(new Setup());
     }
 }

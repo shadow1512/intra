@@ -135,7 +135,7 @@ return [
     |
     */
 
-    'providers' => [
+    'providers' => array(
 
         /*
          * Laravel Framework Service Providers...
@@ -170,6 +170,7 @@ return [
         TCG\Voyager\VoyagerServiceProvider::class,
         //LaravelAuthLdap\AuthLdapServiceProvider::class
         Adldap\Laravel\AdldapServiceProvider::class,
+        cijic\phpMorphy\MorphyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -180,7 +181,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Sleimanx2\Plastic\PlasticServiceProvider::class
-    ],
+    ),
 
     /*
     |--------------------------------------------------------------------------
@@ -228,6 +229,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Adldap'=> Adldap\Laravel\Facades\Adldap::class,
+        'Morphy'    => cijic\phpMorphy\Facade\Morphy::class,
     ],
 
 ];

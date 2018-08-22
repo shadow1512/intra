@@ -11,7 +11,7 @@
 
 namespace Symfony\Component\Serializer\Encoder;
 
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\Exception\NotEncodableValueException;
 
 /**
  * Decodes JSON data.
@@ -31,10 +31,10 @@ class JsonDecode implements DecoderInterface
      * @param bool $associative True to return the result associative array, false for a nested stdClass hierarchy
      * @param int  $depth       Specifies the recursion depth
      */
-    public function __construct($associative = false, $depth = 512)
+    public function __construct(bool $associative = false, int $depth = 512)
     {
         $this->associative = $associative;
-        $this->recursionDepth = (int) $depth;
+        $this->recursionDepth = $depth;
     }
 
     /**
@@ -56,11 +56,11 @@ class JsonDecode implements DecoderInterface
      *      If not specified, this method will use the default set in JsonDecode::__construct
      *
      * json_decode_options: integer
-     *      Specifies additional options as per documentation for json_decode. Only supported with PHP 5.4.0 and higher
+     *      Specifies additional options as per documentation for json_decode.
      *
      * @return mixed
      *
-     * @throws UnexpectedValueException
+     * @throws NotEncodableValueException
      *
      * @see http://php.net/json_decode json_decode
      */
@@ -75,7 +75,7 @@ class JsonDecode implements DecoderInterface
         $decodedData = json_decode($data, $associative, $recursionDepth, $options);
 
         if (JSON_ERROR_NONE !== json_last_error()) {
-            throw new UnexpectedValueException(json_last_error_msg());
+            throw new NotEncodableValueException(json_last_error_msg());
         }
 
         return $decodedData;

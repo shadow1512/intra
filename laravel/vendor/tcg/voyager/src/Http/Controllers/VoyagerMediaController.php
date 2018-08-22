@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManagerStatic as Image;
+use League\Flysystem\Plugin\ListWith;
 use TCG\Voyager\Facades\Voyager;
 
 class VoyagerMediaController extends Controller
@@ -57,11 +58,11 @@ class VoyagerMediaController extends Controller
         $error = '';
 
         if (Storage::disk($this->filesystem)->exists($new_folder)) {
-            $error = __('voyager.media.folder_exists_already');
+            $error = __('voyager::media.folder_exists_already');
         } elseif (Storage::disk($this->filesystem)->makeDirectory($new_folder)) {
             $success = true;
         } else {
-            $error = __('voyager.media.error_creating_dir');
+            $error = __('voyager::media.error_creating_dir');
         }
 
         return compact('success', 'error');
@@ -85,11 +86,11 @@ class VoyagerMediaController extends Controller
 
         if ($type == 'folder') {
             if (!Storage::disk($this->filesystem)->deleteDirectory($fileFolder)) {
-                $error = __('voyager.media.error_deleting_folder');
+                $error = __('voyager::media.error_deleting_folder');
                 $success = false;
             }
         } elseif (!Storage::disk($this->filesystem)->delete($fileFolder)) {
-            $error = __('voyager.media.error_deleting_file');
+            $error = __('voyager::media.error_deleting_file');
             $success = false;
         }
 
@@ -129,16 +130,16 @@ class VoyagerMediaController extends Controller
         $source = "{$location}/{$source}";
         $destination = strpos($destination, '/../') !== false
             ? $this->directory.'/'.dirname($folderLocation).'/'.str_replace('/../', '', $destination)
-            : "{$location}/{$destination}";
+            : "/{$destination}";
 
         if (!file_exists($destination)) {
             if (Storage::disk($this->filesystem)->move($source, $destination)) {
                 $success = true;
             } else {
-                $error = __('voyager.media.error_moving');
+                $error = __('voyager::media.error_moving');
             }
         } else {
-            $error = __('voyager.media.error_already_exists');
+            $error = __('voyager::media.error_already_exists');
         }
 
         return compact('success', 'error');
@@ -163,10 +164,10 @@ class VoyagerMediaController extends Controller
             if (Storage::disk($this->filesystem)->move("{$location}/{$filename}", "{$location}/{$newFilename}")) {
                 $success = true;
             } else {
-                $error = __('voyager.media.error_moving');
+                $error = __('voyager::media.error_moving');
             }
         } else {
-            $error = __('voyager.media.error_may_exist');
+            $error = __('voyager::media.error_may_exist');
         }
 
         return compact('success', 'error');
@@ -176,12 +177,30 @@ class VoyagerMediaController extends Controller
     public function upload(Request $request)
     {
         try {
-            $path = $request->file->store($request->upload_path, $this->filesystem);
-            $path = preg_replace('/^public\//', '', $path);
+            $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix();
+
+            $allowedImageMimeTypes = [
+                'image/jpeg',
+                'image/png',
+                'image/gif',
+                'image/bmp',
+                'image/svg+xml',
+            ];
+            $file = $request->file->store($request->upload_path, $this->filesystem);
+
+            if (in_array($request->file->getMimeType(), $allowedImageMimeTypes)) {
+                $image = Image::make($realPath.$file);
+
+                if ($request->file->getClientOriginalExtension() == 'gif') {
+                    copy($request->file->getRealPath(), $realPath.$file);
+                } else {
+                    $image->orientate()->save($realPath.$file);
+                }
+            }
+
             $success = true;
-            $message = __('voyager.media.success_uploaded_file');
-            $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix().$path;
-            Image::make($realPath)->orientate()->save();
+            $message = __('voyager::media.success_uploaded_file');
+            $path = preg_replace('/^public\//', '', $file);
         } catch (Exception $e) {
             $success = false;
             $message = $e->getMessage();
@@ -194,37 +213,30 @@ class VoyagerMediaController extends Controller
     private function getFiles($dir)
     {
         $files = [];
-        $storageFiles = Storage::disk($this->filesystem)->files($dir);
-        $storageFolders = Storage::disk($this->filesystem)->directories($dir);
+        $storage = Storage::disk($this->filesystem)->addPlugin(new ListWith());
+        $storageItems = $storage->listWith(['mimetype'], $dir);
 
-        foreach ($storageFiles as $file) {
-            if (empty(pathinfo($file, PATHINFO_FILENAME)) && config('voyager.hidden_files')) {
+        foreach ($storageItems as $item) {
+            if ($item['type'] == 'dir') {
                 $files[] = [
-                    'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
-                    'type'          => Storage::disk($this->filesystem)->mimeType($file),
-                    'path'          => Storage::disk($this->filesystem)->url($file),
-                    'size'          => Storage::disk($this->filesystem)->size($file),
-                    'last_modified' => Storage::disk($this->filesystem)->lastModified($file),
+                    'name'          => $item['basename'],
+                    'type'          => 'folder',
+                    'path'          => Storage::disk($this->filesystem)->url($item['path']),
+                    'items'         => '',
+                    'last_modified' => '',
                 ];
-            } elseif (!empty(pathinfo($file, PATHINFO_FILENAME))) {
+            } else {
+                if (empty(pathinfo($item['path'], PATHINFO_FILENAME)) && !config('voyager.hidden_files')) {
+                    continue;
+                }
                 $files[] = [
-                    'name'          => strpos($file, '/') > 1 ? str_replace('/', '', strrchr($file, '/')) : $file,
-                    'type'          => Storage::disk($this->filesystem)->mimeType($file),
-                    'path'          => Storage::disk($this->filesystem)->url($file),
-                    'size'          => Storage::disk($this->filesystem)->size($file),
-                    'last_modified' => Storage::disk($this->filesystem)->lastModified($file),
+                    'name'          => $item['basename'],
+                    'type'          => isset($item['mimetype']) ? $item['mimetype'] : 'file',
+                    'path'          => Storage::disk($this->filesystem)->url($item['path']),
+                    'size'          => $item['size'],
+                    'last_modified' => $item['timestamp'],
                 ];
             }
-        }
-
-        foreach ($storageFolders as $folder) {
-            $files[] = [
-                'name'          => strpos($folder, '/') > 1 ? str_replace('/', '', strrchr($folder, '/')) : $folder,
-                'type'          => 'folder',
-                'path'          => Storage::disk($this->filesystem)->url($folder),
-                'items'         => '',
-                'last_modified' => '',
-            ];
         }
 
         return $files;
@@ -258,12 +270,12 @@ class VoyagerMediaController extends Controller
 
             // Check if field exists
             if (!isset($data->{$field})) {
-                throw new Exception(__('voyager.generic.field_does_not_exist'), 400);
+                throw new Exception(__('voyager::generic.field_does_not_exist'), 400);
             }
 
             // Check if valid json
             if (is_null(@json_decode($data->{$field}))) {
-                throw new Exception(__('voyager.json.invalid'), 500);
+                throw new Exception(__('voyager::json.invalid'), 500);
             }
 
             // Decode field value
@@ -274,7 +286,7 @@ class VoyagerMediaController extends Controller
 
             // Check if image exists in array
             if (!array_key_exists($image, $fieldData)) {
-                throw new Exception(__('voyager.media.image_does_not_exist'), 400);
+                throw new Exception(__('voyager::media.image_does_not_exist'), 400);
             }
 
             // Remove image from array
@@ -286,13 +298,13 @@ class VoyagerMediaController extends Controller
 
             return response()->json([
                'data' => [
-                   'status'     => 200,
-                   'message'    => __('voyager.media.image_removed'),
+                   'status'  => 200,
+                   'message' => __('voyager::media.image_removed'),
                ],
             ]);
         } catch (Exception $e) {
             $code = 500;
-            $message = __('voyager.generic.internal_error');
+            $message = __('voyager::generic.internal_error');
 
             if ($e->getCode()) {
                 $code = $e->getCode();
@@ -304,10 +316,46 @@ class VoyagerMediaController extends Controller
 
             return response()->json([
                 'data' => [
-                    'status'    => $code,
-                    'message'   => $message,
+                    'status'  => $code,
+                    'message' => $message,
                 ],
             ], $code);
         }
+    }
+
+    // Crop Image
+    public function crop(Request $request)
+    {
+        $createMode = $request->get('createMode') === 'true';
+        $x = $request->get('x');
+        $y = $request->get('y');
+        $height = $request->get('height');
+        $width = $request->get('width');
+
+        $realPath = Storage::disk($this->filesystem)->getDriver()->getAdapter()->getPathPrefix();
+        $originImagePath = $realPath.$request->upload_path.'/'.$request->originImageName;
+
+        try {
+            if ($createMode) {
+                // create a new image with the cpopped data
+                $fileNameParts = explode('.', $request->originImageName);
+                array_splice($fileNameParts, count($fileNameParts) - 1, 0, 'cropped_'.time());
+                $newImageName = implode('.', $fileNameParts);
+                $destImagePath = $realPath.$request->upload_path.'/'.$newImageName;
+            } else {
+                // override the original image
+                $destImagePath = $originImagePath;
+            }
+
+            Image::make($originImagePath)->crop($width, $height, $x, $y)->save($destImagePath);
+
+            $success = true;
+            $message = __('voyager::media.success_crop_image');
+        } catch (Exception $e) {
+            $success = false;
+            $message = $e->getMessage();
+        }
+
+        return response()->json(compact('success', 'message'));
     }
 }

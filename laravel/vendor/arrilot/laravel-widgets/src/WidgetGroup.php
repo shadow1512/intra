@@ -45,11 +45,11 @@ class WidgetGroup
     protected $separator = '';
 
     /**
-     * The number of widgets in the group.
+     * Id that is going to be issued to the next widget when it's added to the group.
      *
      * @var int
      */
-    protected $count = 0;
+    protected $nextWidgetId = 1;
 
     /**
      * A callback that defines extra markup that wraps every widget in the group.
@@ -80,17 +80,73 @@ class WidgetGroup
 
         $output = '';
         $index = 0;
+        $count = $this->count();
+
         foreach ($this->widgets as $position => $widgets) {
             foreach ($widgets as $widget) {
-                $output .= $this->performWrap($this->displayWidget($widget), $index, $this->count);
+                $output .= $this->performWrap($this->displayWidget($widget), $index, $count);
                 $index++;
-                if ($this->count !== $index) {
+                if ($index !== $count) {
                     $output .= $this->separator;
                 }
             }
         }
 
         return $this->convertToViewExpression($output);
+    }
+
+    /**
+     * Remove a widget by its id.
+     *
+     * @param int $id
+     */
+    public function removeById($id)
+    {
+        foreach ($this->widgets as $position => $widgets) {
+            foreach ($widgets as $i => $widget) {
+                if ($widget['id'] === $id) {
+                    unset($this->widgets[$position][$i]);
+
+                    return;
+                }
+            }
+        }
+    }
+
+    /**
+     * Remove all widgets with $name from the group.
+     *
+     * @param string $name
+     */
+    public function removeByName($name)
+    {
+        foreach ($this->widgets as $position => $widgets) {
+            foreach ($widgets as $i => $widget) {
+                if ($widget['arguments'][0] === $name) {
+                    unset($this->widgets[$position][$i]);
+                }
+            }
+        }
+    }
+
+    /**
+     * Remove all widgets from $position from the group.
+     *
+     * @param int|string $position
+     */
+    public function removeByPosition($position)
+    {
+        if (array_key_exists($position, $this->widgets)) {
+            unset($this->widgets[$position]);
+        }
+    }
+
+    /**
+     * Remove all widgets from the group.
+     */
+    public function removeAll()
+    {
+        $this->widgets = [];
     }
 
     /**
@@ -112,7 +168,7 @@ class WidgetGroup
      */
     public function addWidget()
     {
-        $this->addWidgetWithType('sync', func_get_args());
+        return $this->addWidgetWithType('sync', func_get_args());
     }
 
     /**
@@ -120,7 +176,7 @@ class WidgetGroup
      */
     public function addAsyncWidget()
     {
-        $this->addWidgetWithType('async', func_get_args());
+        return $this->addWidgetWithType('async', func_get_args());
     }
 
     /**
@@ -201,6 +257,8 @@ class WidgetGroup
      *
      * @param string $type
      * @param array  $arguments
+     *
+     * @return int
      */
     protected function addWidgetWithType($type, array $arguments = [])
     {
@@ -208,14 +266,17 @@ class WidgetGroup
             $this->widgets[$this->position] = [];
         }
 
+        $id = $this->nextWidgetId;
         $this->widgets[$this->position][] = [
+            'id'        => $id,
             'arguments' => $arguments,
             'type'      => $type,
         ];
 
-        $this->count++;
-
         $this->resetPosition();
+        $this->nextWidgetId++;
+
+        return $id;
     }
 
     /**
@@ -245,8 +306,8 @@ class WidgetGroup
      * Wraps widget content in a special markup defined by $this->wrap().
      *
      * @param string $content
-     * @param int $index
-     * @param int $total
+     * @param int    $index
+     * @param int    $total
      *
      * @return string
      */

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesserInterface;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 
 /**
  * Normalizes an {@see \SplFileInfo} object to a data URI.
@@ -23,8 +23,14 @@ use Symfony\Component\Serializer\Exception\UnexpectedValueException;
  *
  * @author Kévin Dunglas <dunglas@gmail.com>
  */
-class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface
+class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface, CacheableSupportsMethodInterface
 {
+    private static $supportedTypes = array(
+        \SplFileInfo::class => true,
+        \SplFileObject::class => true,
+        File::class => true,
+    );
+
     /**
      * @var MimeTypeGuesserInterface
      */
@@ -79,11 +85,14 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface
      * Regex adapted from Brian Grinstead code.
      *
      * @see https://gist.github.com/bgrins/6194623
+     *
+     * @throws InvalidArgumentException
+     * @throws NotNormalizableValueException
      */
     public function denormalize($data, $class, $format = null, array $context = array())
     {
         if (!preg_match('/^data:([a-z0-9][a-z0-9\!\#\$\&\-\^\_\+\.]{0,126}\/[a-z0-9][a-z0-9\!\#\$\&\-\^\_\+\.]{0,126}(;[a-z0-9\-]+\=[a-z0-9\-]+)?)?(;base64)?,[a-z0-9\!\$\&\\\'\,\(\)\*\+\,\;\=\-\.\_\~\:\@\/\?\%\s]*\s*$/i', $data)) {
-            throw new UnexpectedValueException('The provided "data:" URI is not valid.');
+            throw new NotNormalizableValueException('The provided "data:" URI is not valid.');
         }
 
         try {
@@ -96,7 +105,7 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface
                     return new \SplFileObject($data);
             }
         } catch (\RuntimeException $exception) {
-            throw new UnexpectedValueException($exception->getMessage(), $exception->getCode(), $exception);
+            throw new NotNormalizableValueException($exception->getMessage(), $exception->getCode(), $exception);
         }
 
         throw new InvalidArgumentException(sprintf('The class parameter "%s" is not supported. It must be one of "SplFileInfo", "SplFileObject" or "Symfony\Component\HttpFoundation\File\File".', $class));
@@ -107,13 +116,15 @@ class DataUriNormalizer implements NormalizerInterface, DenormalizerInterface
      */
     public function supportsDenormalization($data, $type, $format = null)
     {
-        $supportedTypes = array(
-            \SplFileInfo::class => true,
-            \SplFileObject::class => true,
-            File::class => true,
-        );
+        return isset(self::$supportedTypes[$type]);
+    }
 
-        return isset($supportedTypes[$type]);
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return __CLASS__ === \get_class($this);
     }
 
     /**

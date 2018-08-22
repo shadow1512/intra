@@ -2,6 +2,7 @@
 
 namespace Larapack\Hooks;
 
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,14 +13,39 @@ class HooksServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // Registers resources and commands
-        if ($this->app->runningInConsole()) {
-            $this->registerCommands();
+        $configPath = dirname(__DIR__).'/publishable/config/hooks.php';
+
+        $this->mergeConfigFrom($configPath, 'hooks');
+
+        if (!config('hooks.enabled', true)) {
+            return;
         }
 
+        $this->registerCommands();
+
+        $this->publishes(
+            [$configPath => config_path('hooks.php')],
+            'hooks-config'
+        );
+
         // Register Hooks system and aliases
-        $this->app->singleton(Hooks::class, Hooks::class);
+        $this->app->singleton(Hooks::class, function ($app) {
+            $filesystem = $app[Filesystem::class];
+            $migrator = $app[Migrator::class];
+
+            return new Hooks($filesystem, $migrator);
+        });
+
         $this->app->alias(Hooks::class, 'hooks');
+
+        // The migrator is responsible for actually running and rollback the migration
+        // files in the application. We'll pass in our database connection resolver
+        // so the migrator can resolve any of these connections when it needs to.
+        $this->app->singleton(Migrator::class, function ($app) {
+            $repository = $app['migration.repository'];
+
+            return new Migrator($repository, $app['db'], $app['files']);
+        });
     }
 
     /**
@@ -49,6 +75,10 @@ class HooksServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if (!config('hooks.enabled', true)) {
+            return;
+        }
+
         // Register hook providers
         $this->registerHookProviders();
     }

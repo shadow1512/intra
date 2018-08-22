@@ -118,7 +118,7 @@ return [
                 |
                 */
 
-                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', '172.16.32.2 172.16.32.3')),
+                'domain_controllers' => explode(' ', env('ADLDAP_CONTROLLERS', 'corp-dc1.corp.acme.org corp-dc2.corp.acme.org')),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -158,7 +158,7 @@ return [
                 |
                 */
 
-                'base_dn' => env('ADLDAP_BASEDN', 'dc=work,dc=kodeks,dc=net'),
+                'base_dn' => env('ADLDAP_BASEDN', 'dc=corp,dc=acme,dc=org'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -187,8 +187,8 @@ return [
                 |
                 */
 
-                'admin_username' => env('ADLDAP_ADMIN_USERNAME', 'intranet'),
-                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', 'j8d2qj32d'),
+                'admin_username' => env('ADLDAP_ADMIN_USERNAME', 'username'),
+                'admin_password' => env('ADLDAP_ADMIN_PASSWORD', 'password'),
 
                 /*
                 |--------------------------------------------------------------------------
@@ -221,7 +221,7 @@ return [
                 */
 
                 'use_ssl' => false,
-                'use_tls' => true,
+                'use_tls' => false,
 
             ],
 

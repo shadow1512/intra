@@ -135,12 +135,145 @@ CSV
         $this->assertEquals("\n\n", $this->encoder->encode(array(array()), 'csv'));
     }
 
-    /**
-     * @expectedException \Symfony\Component\Serializer\Exception\InvalidArgumentException
-     */
-    public function testEncodeNonFlattenableStructure()
+    public function testEncodeVariableStructure()
     {
-        $this->encoder->encode(array(array('a' => array('foo', 'bar')), array('a' => array())), 'csv');
+        $value = array(
+            array('a' => array('foo', 'bar')),
+            array('a' => array(), 'b' => 'baz'),
+            array('a' => array('bar', 'foo'), 'c' => 'pong'),
+        );
+        $csv = <<<CSV
+a.0,a.1,c,b
+foo,bar,,
+,,,baz
+bar,foo,pong,
+
+CSV;
+
+        $this->assertEquals($csv, $this->encoder->encode($value, 'csv'));
+    }
+
+    public function testEncodeCustomHeaders()
+    {
+        $context = array(
+            CsvEncoder::HEADERS_KEY => array(
+                'b',
+                'c',
+            ),
+        );
+        $value = array(
+            array('a' => 'foo', 'b' => 'bar'),
+        );
+        $csv = <<<CSV
+b,c,a
+bar,,foo
+
+CSV;
+
+        $this->assertEquals($csv, $this->encoder->encode($value, 'csv', $context));
+    }
+
+    public function testEncodeFormulas()
+    {
+        $this->encoder = new CsvEncoder(',', '"', '\\', '.', true);
+
+        $this->assertSame(<<<'CSV'
+0
+"	=2+3"
+
+CSV
+            , $this->encoder->encode(array('=2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
+"	-2+3"
+
+CSV
+            , $this->encoder->encode(array('-2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
+"	+2+3"
+
+CSV
+            , $this->encoder->encode(array('+2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
+"	@MyDataColumn"
+
+CSV
+            , $this->encoder->encode(array('@MyDataColumn'), 'csv'));
+    }
+
+    public function testDoNotEncodeFormulas()
+    {
+        $this->assertSame(<<<'CSV'
+0
+=2+3
+
+CSV
+            , $this->encoder->encode(array('=2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
+-2+3
+
+CSV
+            , $this->encoder->encode(array('-2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
++2+3
+
+CSV
+            , $this->encoder->encode(array('+2+3'), 'csv'));
+
+        $this->assertSame(<<<'CSV'
+0
+@MyDataColumn
+
+CSV
+            , $this->encoder->encode(array('@MyDataColumn'), 'csv'));
+    }
+
+    public function testEncodeFormulasWithSettingsPassedInContext()
+    {
+        $this->assertSame(<<<'CSV'
+0
+"	=2+3"
+
+CSV
+            , $this->encoder->encode(array('=2+3'), 'csv', array(
+                CsvEncoder::ESCAPE_FORMULAS_KEY => true,
+            )));
+
+        $this->assertSame(<<<'CSV'
+0
+"	-2+3"
+
+CSV
+            , $this->encoder->encode(array('-2+3'), 'csv', array(
+                CsvEncoder::ESCAPE_FORMULAS_KEY => true,
+            )));
+
+        $this->assertSame(<<<'CSV'
+0
+"	+2+3"
+
+CSV
+            , $this->encoder->encode(array('+2+3'), 'csv', array(
+                CsvEncoder::ESCAPE_FORMULAS_KEY => true,
+            )));
+
+        $this->assertSame(<<<'CSV'
+0
+"	@MyDataColumn"
+
+CSV
+            , $this->encoder->encode(array('@MyDataColumn'), 'csv', array(
+                CsvEncoder::ESCAPE_FORMULAS_KEY => true,
+            )));
     }
 
     public function testSupportsDecoding()
@@ -176,6 +309,22 @@ f
 
 CSV
         , 'csv'));
+    }
+
+    public function testDecodeOnlyOneAsCollection()
+    {
+        $this->encoder = new CsvEncoder(',', '"', '\\', '.');
+
+        $expected = array(
+            array('foo' => 'a'),
+        );
+
+        $this->assertEquals($expected, $this->encoder->decode(<<<'CSV'
+foo
+a
+
+CSV
+            , 'csv', array(CsvEncoder::AS_COLLECTION_KEY => true)));
     }
 
     public function testDecodeToManyRelation()

@@ -41,7 +41,7 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
      */
     public function supportsNormalization($data, $format = null)
     {
-        return parent::supportsNormalization($data, $format) && $this->supports(get_class($data));
+        return parent::supportsNormalization($data, $format) && $this->supports(\get_class($data));
     }
 
     /**
@@ -53,13 +53,17 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
     }
 
     /**
-     * Checks if the given class has any get{Property} method.
-     *
-     * @param string $class
-     *
-     * @return bool
+     * {@inheritdoc}
      */
-    private function supports($class)
+    public function hasCacheableSupportsMethod(): bool
+    {
+        return __CLASS__ === \get_class($this);
+    }
+
+    /**
+     * Checks if the given class has any get{Property} method.
+     */
+    private function supports(string $class): bool
     {
         $class = new \ReflectionClass($class);
         $methods = $class->getMethods(\ReflectionMethod::IS_PUBLIC);
@@ -74,18 +78,17 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
 
     /**
      * Checks if a method's name is get.* or is.*, and can be called without parameters.
-     *
-     * @return bool whether the method is a getter or boolean getter
      */
-    private function isGetMethod(\ReflectionMethod $method)
+    private function isGetMethod(\ReflectionMethod $method): bool
     {
-        $methodLength = strlen($method->name);
+        $methodLength = \strlen($method->name);
 
         return
             !$method->isStatic() &&
             (
                 ((0 === strpos($method->name, 'get') && 3 < $methodLength) ||
-                (0 === strpos($method->name, 'is') && 2 < $methodLength)) &&
+                (0 === strpos($method->name, 'is') && 2 < $methodLength) ||
+                (0 === strpos($method->name, 'has') && 3 < $methodLength)) &&
                 0 === $method->getNumberOfRequiredParameters()
             )
         ;
@@ -123,13 +126,18 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
         $ucfirsted = ucfirst($attribute);
 
         $getter = 'get'.$ucfirsted;
-        if (is_callable(array($object, $getter))) {
+        if (\is_callable(array($object, $getter))) {
             return $object->$getter();
         }
 
         $isser = 'is'.$ucfirsted;
-        if (is_callable(array($object, $isser))) {
+        if (\is_callable(array($object, $isser))) {
             return $object->$isser();
+        }
+
+        $haser = 'has'.$ucfirsted;
+        if (\is_callable(array($object, $haser))) {
+            return $object->$haser();
         }
     }
 
@@ -139,10 +147,10 @@ class GetSetMethodNormalizer extends AbstractObjectNormalizer
     protected function setAttributeValue($object, $attribute, $value, $format = null, array $context = array())
     {
         $setter = 'set'.ucfirst($attribute);
-        $key = get_class($object).':'.$setter;
+        $key = \get_class($object).':'.$setter;
 
         if (!isset(self::$setterAccessibleCache[$key])) {
-            self::$setterAccessibleCache[$key] = is_callable(array($object, $setter)) && !(new \ReflectionMethod($object, $setter))->isStatic();
+            self::$setterAccessibleCache[$key] = \is_callable(array($object, $setter)) && !(new \ReflectionMethod($object, $setter))->isStatic();
         }
 
         if (self::$setterAccessibleCache[$key]) {

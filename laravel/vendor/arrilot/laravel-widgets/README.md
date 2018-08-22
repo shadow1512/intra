@@ -5,7 +5,7 @@
 
 # Widgets for Laravel
 
-*A powerful alternative to view composers. Asynchronous widgets, reloadable widgets, console generator, caching - everything you can think of.*
+*A powerful alternative to view composers. Asynchronous widgets, reloadable widgets, console generator, caching - everything you can imagine.*
 
 ## Installation
 
@@ -214,9 +214,12 @@ In some situations it can be very beneficial to load widget content with AJAX.
 Fortunately, this can be achieved very easily!
 All you need to do is to change facade or blade directive - `Widget::` => `AsyncWidget::`, `@widget` => `@asyncWidget`
 
-> Note: Widget params are encrypted and sent via ajax call. Expect them to be json_encoded and json_decoded afterwards.
+Widget params are encrypted (by default) and sent via ajax call under the hood. So expect them to be `json_encoded()` and `json_decoded()` afterwards.
 
-> Note: Since version 3.1 you no longer need `jquery` to make ajax calls. However you can set `use_jquery_for_ajax_calls` to `true` in the config file if you want to.
+> Note: You can turn encryption off for a given widget by setting `public $encryptParams = false;` on it. However, this action makes widget params publicly accessible, so please make sure you do not leave any vulnerabilities.
+For example, if you pass something like user_id through widget params and turn encryption off, you do need to add one more access check inside the widget.
+
+> Note: You can set `use_jquery_for_ajax_calls` to `true` in the config file to use it for ajax calls if you want to.
 
 By default nothing is shown until ajax call is finished.
 
@@ -299,6 +302,39 @@ No caching is turned on by default.
 A cache key depends on a widget name and each widget parameter.
 Override ```cacheKey``` method if you need to adjust it.
 
+### Cache tagging
+
+When tagging is supported ([see the Laravel cache documentation](https://laravel.com/docs/cache#cache-tags)) and to 
+simplify cache flushing, a tag `widgets` is assigned by default to all widgets. 
+You can define one or more additional tags to your widgets by setting the values 
+in the `$cacheTags` property in your widget class. Example :
+
+```php
+class RecentNews extends AbstractWidget
+{
+    /**
+     * Cache tags allow you to tag related items in the cache 
+     * and then flush all cached values that assigned a given tag.
+     *
+     * @var array
+     */
+    public $cacheTags = ['news', 'frontend'];
+}
+```
+
+For this example, if you need to flush :
+
+```php
+// Clear widgets with the tag news
+Cache::tags('news')->flush();
+
+// Clear widgets with the tag news OR backend
+Cache::tags(['news', 'frontend'])->flush();
+
+// Flush all widgets cache
+Cache::tags('widgets')->flush();
+```
+
 ## Widget groups (extra)
 
 In most cases Blade is a perfect tool for setting the position and order of widgets.
@@ -334,7 +370,39 @@ Widget::group('sidebar')->wrap(function ($content, $index, $total) {
 })->...;
 ```
 
-### Checking the state of a widget group
+### Removing widgets from a group
+
+There is a couple of ways to remove widget/widgets from a group after they've been already added.
+
+1) Remove one widget by its unique `id`
+```php
+$id1 = Widget::group('sidebar')->addWidget('files');
+$id2 = Widget::group('sidebar')->addAsyncWidget('files');
+Widget::group('sidebar')->removeById($id1); // There is only second widget in the group now
+```
+
+2) Remove all widgets with specific name
+```php
+Widget::group('sidebar')->addWidget('files');
+Widget::group('sidebar')->addAsyncWidget('files');
+Widget::group('sidebar')->removeByName('files'); // Widget group is empty now
+```
+
+3) Remove all widgets that are placed on a specific position.
+```php
+Widget::group('sidebar')->position(42)->addWidget('files');
+Widget::group('sidebar')->position(42)->addAsyncWidget('files');
+Widget::group('sidebar')->removeByPosition(42); // Widget group is empty now
+```
+
+4) Remove all widgets at once.
+```php
+Widget::group('sidebar')->addWidget('files');
+Widget::group('sidebar')->addAsyncWidget('files');
+Widget::group('sidebar')->removeAll(); // Widget group is empty now
+```
+
+### Checking the state of a group
 
 `Widget::group('sidebar')->isEmpty(); // bool`
 

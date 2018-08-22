@@ -4,13 +4,13 @@
             <button class="hamburger btn-link">
                 <span class="hamburger-inner"></span>
             </button>
-
+            @section('breadcrumbs')
             <ol class="breadcrumb hidden-xs">
                 @if(count(Request::segments()) == 1)
-                    <li class="active"><i class="voyager-boat"></i> {{ __('voyager.generic.dashboard') }}</li>
+                    <li class="active"><i class="voyager-boat"></i> {{ __('voyager::generic.dashboard') }}</li>
                 @else
                     <li class="active">
-                        <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> {{ __('voyager.generic.dashboard') }}</a>
+                        <a href="{{ route('voyager.dashboard')}}"><i class="voyager-boat"></i> {{ __('voyager::generic.dashboard') }}</a>
                     </li>
                 @endif
                 <?php $breadcrumb_url = url(''); ?>
@@ -18,7 +18,7 @@
                     <?php $breadcrumb_url .= '/' . Request::segment($i); ?>
                     @if(Request::segment($i) != ltrim(route('voyager.dashboard', [], false), '/') && !is_numeric(Request::segment($i)))
 
-                        @if($i < count(Request::segments()) & $i > 0)
+                        @if($i < count(Request::segments()) & $i > 0 && array_search('database',Request::segments())===false)
                             <li class="active"><a
                                         href="{{ $breadcrumb_url }}">{{ ucwords(str_replace('-', ' ', str_replace('_', ' ', Request::segment($i)))) }}</a>
                             </li>
@@ -29,8 +29,9 @@
                     @endif
                 @endfor
             </ol>
+            @show
         </div>
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav @if (config('voyager.multilingual.rtl')) navbar-left @else navbar-right @endif">
             <li class="dropdown profile">
                 <a href="#" class="dropdown-toggle text-right" data-toggle="dropdown" role="button"
                    aria-expanded="false"><img src="{{ $user_avatar }}" class="profile-img"> <span

@@ -5,7 +5,7 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
-$ch = curl_init('http://127.0.0.1/candidates');
+$ch = curl_init('http://127.0.0.1:8080/candidates');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_POST, true);
 $res = curl_exec($ch);

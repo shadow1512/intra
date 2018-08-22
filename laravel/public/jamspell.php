@@ -5,7 +5,10 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
-$ch = curl_init('http://localhost:8080/candidates');
+
+exec("curl -d \"ствкан\" http://localhost:8080/candidates", $out);
+
+/*$ch = curl_init('http://localhost:8080/candidates');
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -15,5 +18,6 @@ if($status_code == 200) {
     var_dump($res);
 }
 
-curl_close($ch);
+curl_close($ch);*/
+var_dump($out);
 ?>

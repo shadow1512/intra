@@ -13,6 +13,7 @@ curl_setopt($ch, CURLOPT_URL, 'http://localhost/candidates');
 curl_setopt($ch, CURLOPT_PORT, 8080);
 curl_setopt($ch, CURLOPT_POST, true);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch, CURLOPT_VERBOSE, TRUE);
 
 $field = "дериво";
 if(isset($argv[1])) {

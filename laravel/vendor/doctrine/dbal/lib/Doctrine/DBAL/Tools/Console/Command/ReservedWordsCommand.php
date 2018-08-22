@@ -19,24 +19,20 @@
 
 namespace Doctrine\DBAL\Tools\Console\Command;
 
-use Doctrine\DBAL\Platforms\Keywords\ReservedKeywordsValidator;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use function array_keys;
-use function count;
-use function implode;
+use Doctrine\DBAL\Platforms\Keywords\ReservedKeywordsValidator;
 
 class ReservedWordsCommand extends Command
 {
     /**
      * @var array
      */
-    private $keywordListClasses = [
+    private $keywordListClasses = array(
         'mysql'         => 'Doctrine\DBAL\Platforms\Keywords\MySQLKeywords',
         'mysql57'       => 'Doctrine\DBAL\Platforms\Keywords\MySQL57Keywords',
-        'mysql80'       => 'Doctrine\DBAL\Platforms\Keywords\MySQL80Keywords',
         'sqlserver'     => 'Doctrine\DBAL\Platforms\Keywords\SQLServerKeywords',
         'sqlserver2005' => 'Doctrine\DBAL\Platforms\Keywords\SQLServer2005Keywords',
         'sqlserver2008' => 'Doctrine\DBAL\Platforms\Keywords\SQLServer2008Keywords',
@@ -51,7 +47,7 @@ class ReservedWordsCommand extends Command
         'sqlanywhere11' => 'Doctrine\DBAL\Platforms\Keywords\SQLAnywhere11Keywords',
         'sqlanywhere12' => 'Doctrine\DBAL\Platforms\Keywords\SQLAnywhere12Keywords',
         'sqlanywhere16' => 'Doctrine\DBAL\Platforms\Keywords\SQLAnywhere16Keywords',
-    ];
+    );
 
     /**
      * If you want to add or replace a keywords list use this command.
@@ -97,7 +93,6 @@ The following keyword lists are currently shipped with Doctrine:
 
     * mysql
     * mysql57
-    * mysql80
     * pgsql
     * pgsql92
     * sqlite
@@ -125,10 +120,9 @@ EOT
 
         $keywordLists = (array) $input->getOption('list');
         if ( ! $keywordLists) {
-            $keywordLists = [
+            $keywordLists = array(
                 'mysql',
                 'mysql57',
-                'mysql80',
                 'pgsql',
                 'pgsql92',
                 'sqlite',
@@ -141,7 +135,7 @@ EOT
                 'sqlanywhere11',
                 'sqlanywhere12',
                 'sqlanywhere16',
-            ];
+            );
         }
 
         $keywords = [];
@@ -174,7 +168,5 @@ EOT
 
             return 1;
         }
-
-        return 0;
     }
 }

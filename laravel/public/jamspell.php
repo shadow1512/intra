@@ -5,7 +5,7 @@
  * Date: 30.05.2018
  * Time: 15:20
  */
-
+phpinfo();exit();
 //exec("curl -d \"ствкан\" http://localhost:8080/candidates", $out);
 
 $ch = curl_init();

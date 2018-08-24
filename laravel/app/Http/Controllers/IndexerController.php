@@ -19,6 +19,7 @@ use App\Terms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
+use cijic\phpMorphy\Facade\Morphy;
 
 class IndexerController extends Controller
 {

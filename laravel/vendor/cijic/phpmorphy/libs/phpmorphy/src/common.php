@@ -61,6 +61,8 @@ class phpMorphy_FilesBundle {
     function phpMorphy_FilesBundle($dirName, $lang) {
         $this->dir = rtrim($dirName, "\\/" . DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $this->setLang($lang);
+
+        var_dump($this->dir);
     }
 
     function getLang() {
@@ -191,10 +193,8 @@ class phpMorphy {
         
         // TODO: use two versions of phpMorphy class i.e. phpMorphy_v3 { } ... phpMorphy_v2 extends phpMorphy_v3
         if($dir instanceof phpMorphy_FilesBundle && is_array($lang)) {
-            echo 'oldstyle';
             $this->initOldStyle($dir, $lang);
         } else {
-            echo 'newstyle';
             $this->initNewStyle($this->createFilesBundle($dir, $lang), $options);
         }
         

@@ -43,6 +43,16 @@ class IndexerController extends Controller
             var_dump(Morphy::getPseudoRoot($user->fname));
             var_dump(Morphy::getBaseForm($user->fname));
             var_dump(Morphy::getAllForms($user->fname));
+            var_dump(Morphy::getPseudoRoot('Борисовым'));
+            var_dump(Morphy::getBaseForm('Борисовым'));
+            var_dump(Morphy::getAllForms('Борисовым'));
+            var_dump(Morphy::getPseudoRoot('дерево'));
+            var_dump(Morphy::getBaseForm('дерево'));
+            var_dump(Morphy::getAllForms('дерево'));
+            var_dump(Morphy::getPseudoRoot('деревом'));
+            var_dump(Morphy::getBaseForm('деревом'));
+            var_dump(Morphy::getAllForms('деревом'));
+
             exit();
             $term = new Terms();
             $term->baseterm = Morphy::getPseudoRoot($user->fname);

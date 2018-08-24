@@ -41,7 +41,10 @@ class IndexerController extends Controller
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
         foreach($users as $user) {
             $term = new Terms();
-            $term->baseterm = Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8"));
+            $baseform = Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8"));
+            if(count($baseform)) {
+                $term->baseterm = $baseform[0];
+            }
             $term->term = $user->fname;
             $term->section = 'users';
             $term->record = $user->id;

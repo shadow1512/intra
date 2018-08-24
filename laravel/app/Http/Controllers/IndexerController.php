@@ -42,8 +42,7 @@ class IndexerController extends Controller
         foreach($users as $user) {
             $term = new Terms();
             $baseform = Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8"));
-            var_dump($baseform);
-            if(count($baseform)) {
+            if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
             $term->term = $user->fname;

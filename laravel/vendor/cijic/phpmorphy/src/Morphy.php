@@ -23,6 +23,7 @@ class Morphy extends phpMorphy
 
         try {
             parent::__construct($this->dictsPath, $this->language, $options);
+            var_dump($this->dictsPath);var_dump($this->language);
         } catch(phpMorphy_Exception $e) {
             throw new Exception('Error occured while creating phpMorphy instance: ' . PHP_EOL . $e);
         }

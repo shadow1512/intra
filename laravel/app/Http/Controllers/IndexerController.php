@@ -19,6 +19,7 @@ use App\Terms;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
+use cijic\phpMorphy\Facade\Morphy;
 
 class IndexerController extends Controller
 {
@@ -38,21 +39,19 @@ class IndexerController extends Controller
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
-
-        $morphy = new cijic\phpMorphy\Morphy('ru');
         foreach($users as $user) {
-            var_dump($morphy->getPseudoRoot($user->fname));
-            var_dump($morphy->getBaseForm($user->fname));
-            var_dump($morphy->getAllForms($user->fname));
-            var_dump($morphy->getPseudoRoot('Борисовым'));
-            var_dump($morphy->getBaseForm('Борисовым'));
-            var_dump($morphy->getAllForms('Борисовым'));
-            var_dump($morphy->getPseudoRoot('дерево'));
-            var_dump($morphy->getBaseForm('дерево'));
-            var_dump($morphy->getAllForms('дерево'));
-            var_dump($morphy->getPseudoRoot('деревом'));
-            var_dump($morphy->getBaseForm('деревом'));
-            var_dump($morphy->getAllForms('деревом'));
+            var_dump(Morphy::getPseudoRoot($user->fname));
+            var_dump(Morphy::getBaseForm($user->fname));
+            var_dump(Morphy::getAllForms($user->fname));
+            var_dump(Morphy::getPseudoRoot('Борисовым'));
+            var_dump(Morphy::getBaseForm('Борисовым'));
+            var_dump(Morphy::getAllForms('Борисовым'));
+            var_dump(Morphy::getPseudoRoot('дерево'));
+            var_dump(Morphy::getBaseForm('дерево'));
+            var_dump(Morphy::getAllForms('дерево'));
+            var_dump(Morphy::getPseudoRoot('деревом'));
+            var_dump(Morphy::getBaseForm('деревом'));
+            var_dump(Morphy::getAllForms('деревом'));
 
             exit();
             $term = new Terms();

@@ -15,7 +15,7 @@ class EditTermsTableAddDefaultBaseterm extends Migration
     {
         Schema::table('terms', function (Blueprint $table) {
             //
-            $table->date('baseterm')->nullable()->change();
+            $table->string('baseterm', 255)->nullable()->change();
         });
     }
 

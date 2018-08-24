@@ -39,25 +39,9 @@ class IndexerController extends Controller
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
-        var_dump(Morphy::getEncoding());
-        var_dump(Morphy::getLocale());
         foreach($users as $user) {
-            var_dump(Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8")));
-            var_dump(Morphy::getBaseForm($user->fname));
-            var_dump(Morphy::getAllForms($user->fname));
-            var_dump(Morphy::getPseudoRoot('Борисовым'));
-            var_dump(Morphy::getBaseForm('Борисовым'));
-            var_dump(Morphy::getAllForms('Борисовым'));
-            var_dump(Morphy::getPseudoRoot('дерево'));
-            var_dump(Morphy::getBaseForm('дерево'));
-            var_dump(Morphy::getAllForms('дерево'));
-            var_dump(Morphy::getPseudoRoot('деревом'));
-            var_dump(Morphy::getBaseForm('деревом'));
-            var_dump(Morphy::getAllForms('деревом'));
-
-            exit();
             $term = new Terms();
-            $term->baseterm = Morphy::getPseudoRoot($user->fname);
+            $term->baseterm = Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8"));
             $term->term = $user->fname;
             $term->section = 'users';
             $term->record = $user->id;

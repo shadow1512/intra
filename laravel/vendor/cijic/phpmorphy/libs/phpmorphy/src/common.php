@@ -515,8 +515,6 @@ class phpMorphy {
     protected function invoke($method, $word, $type) {
         $this->last_prediction_type = self::PREDICT_BY_NONE;
 
-        var_dump($type);
-        var_dump($this->__common_morphier);
         if($type === self::ONLY_PREDICT) {
             if(is_array($word)) {
                 $result = array();

@@ -39,6 +39,8 @@ class IndexerController extends Controller
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
+        var_dump(Morphy::getEncoding());
+        var_dump(Morphy::getLocale());
         foreach($users as $user) {
             var_dump(Morphy::getPseudoRoot($user->fname));
             var_dump(Morphy::getBaseForm($user->fname));

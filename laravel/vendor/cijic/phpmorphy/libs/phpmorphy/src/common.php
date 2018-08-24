@@ -191,8 +191,10 @@ class phpMorphy {
         
         // TODO: use two versions of phpMorphy class i.e. phpMorphy_v3 { } ... phpMorphy_v2 extends phpMorphy_v3
         if($dir instanceof phpMorphy_FilesBundle && is_array($lang)) {
+            echo 'oldstyle';
             $this->initOldStyle($dir, $lang);
         } else {
+            echo 'newstyle';
             $this->initNewStyle($this->createFilesBundle($dir, $lang), $options);
         }
         

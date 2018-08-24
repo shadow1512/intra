@@ -852,6 +852,7 @@ return array(
     'EditGalleryNullablePublishedAt' => $baseDir . '/database/migrations/2018_06_15_012303_edit_gallery_nullable_published_at.php',
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
     'EditRoomsChangeAvailable' => $baseDir . '/database/migrations/2018_06_13_175300_edit_rooms_change_available.php',
+    'EditTermsTableAddDefaultBaseterm' => $baseDir . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
     'EditUsersAddAddressDescription' => $baseDir . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
     'EditUsersAddNumpark' => $baseDir . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
     'EditUsersAddPosition' => $baseDir . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',

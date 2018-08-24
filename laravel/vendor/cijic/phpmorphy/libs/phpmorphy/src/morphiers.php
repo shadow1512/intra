@@ -41,7 +41,7 @@ interface phpMorphy_Morphier_Interface {
 
 class phpMorphy_Morphier_Empty implements phpMorphy_Morphier_Interface {
     function getAnnot($word) { return false; }
-    function getBaseForm($word) { return false; }
+    function getBaseForm($word) { echo 'empty';return false; }
     function getAllForms($word) { return false; }
     function getAllFormsWithGramInfo($word) { return false; }
     function getPseudoRoot($word) { return false; }

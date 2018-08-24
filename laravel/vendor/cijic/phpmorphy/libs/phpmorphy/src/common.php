@@ -61,8 +61,6 @@ class phpMorphy_FilesBundle {
     function phpMorphy_FilesBundle($dirName, $lang) {
         $this->dir = rtrim($dirName, "\\/" . DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR;
         $this->setLang($lang);
-
-        var_dump($this->dir);
     }
 
     function getLang() {
@@ -587,6 +585,8 @@ class phpMorphy {
         $graminfo_as_text = $this->options['graminfo_as_text'];
         
         // fsa
+        var_dump($bundle->getCommonAutomatFile());
+        var_dump($bundle->getPredictAutomatFile());
         $this->common_fsa = $this->createFsa($storage_factory->open($storage_type, $bundle->getCommonAutomatFile(), false), false); // lazy
         $this->predict_fsa = $this->createFsa($storage_factory->open($storage_type, $bundle->getPredictAutomatFile(), true), true);  // lazy
 

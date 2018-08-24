@@ -42,7 +42,7 @@ class IndexerController extends Controller
         var_dump(Morphy::getEncoding());
         var_dump(Morphy::getLocale());
         foreach($users as $user) {
-            var_dump(Morphy::getPseudoRoot($user->fname));
+            var_dump(Morphy::getPseudoRoot(mb_strtoupper($user->fname, "UTF-8")));
             var_dump(Morphy::getBaseForm($user->fname));
             var_dump(Morphy::getAllForms($user->fname));
             var_dump(Morphy::getPseudoRoot('Борисовым'));

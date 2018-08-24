@@ -40,6 +40,10 @@ class IndexerController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
         foreach($users as $user) {
+            var_dump(Morphy::getPseudoRoot($user->fname));
+            var_dump(Morphy::getBaseForm($user->fname));
+            var_dump(Morphy::getAllForms($user->fname));
+            exit();
             $term = new Terms();
             $term->baseterm = Morphy::getPseudoRoot($user->fname);
             $term->term = $user->fname;

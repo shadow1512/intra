@@ -57,10 +57,10 @@ class SearchController extends Controller
         $phrase = trim($request->input('phrase'));
         $phrase = mb_substr($phrase, 0, 100);
 
-        var_dump(__DIR__);
-        require_once __DIR__ . '/../../../../correction/ReflectionTypeHint.php';
-        require_once __DIR__ . '/../../../../correction/Text/LangCorrect.php';
-        require_once __DIR__ . '/../../../../correction/UTF8.php';
+        var_dump($_SERVER['DOCUMENT_ROOT']);
+        require_once Config::get('correction_path') .   'ReflectionTypeHint.php';
+        require_once Config::get('correction_path') .   'Text/LangCorrect.php';
+        require_once Config::get('correction_path') .   'UTF8.php';
 
         //Орфография, опечатки
         $dict = pspell_new ( 'ru', '', '', "utf-8", PSPELL_NORMAL);

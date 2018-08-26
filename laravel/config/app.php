@@ -134,6 +134,7 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
+    'correction_path'   =>   '/var/www/intra/laravel/correction/',
 
     'providers' => array(
 

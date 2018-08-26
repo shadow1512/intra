@@ -482,6 +482,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'AddPermissionGroupIdToPermissionsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_15_000000_add_permission_group_id_to_permissions_table.php',
         'AddPolicyNameToDataTypesTable' => __DIR__ . '/../..' . '/database/migrations/2017_07_05_210000_add_policyname_to_data_types_table.php',
         'AddRouteToMenuItemsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_13_000000_add_route_to_menu_items_table.php',
+        'AddSynonimsTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_25_155113_add_synonims_table.php',
         'AddVoyagerUserFields' => __DIR__ . '/../..' . '/database/migrations/2016_01_01_000000_add_voyager_user_fields.php',
         'Adldap\\Adldap' => __DIR__ . '/..' . '/adldap2/adldap2/src/Adldap.php',
         'Adldap\\AdldapException' => __DIR__ . '/..' . '/adldap2/adldap2/src/AdldapException.php',

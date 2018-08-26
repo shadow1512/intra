@@ -9,7 +9,7 @@
                 <form action="{{route('search')}}" method="post" class="header_search_form">
                     {{csrf_field()}}
                     <div class="field">
-                        <input type="text" value="" placeholder="Введите фамилию сотрудника или контакт" class="it header_search_it"><a href="" title="Найти" class="header_search_btn"><svg class="header_search_btn_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg></a>
+                        <input type="text" value="" placeholder="Введите фамилию сотрудника или контакт" class="it header_search_it" name="phrase"><a href="" title="Найти" class="header_search_btn"><svg class="header_search_btn_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg></a>
                     </div>
                 </form>
             </div>

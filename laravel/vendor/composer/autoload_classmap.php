@@ -12,6 +12,7 @@ return array(
     'AddPermissionGroupIdToPermissionsTable' => $baseDir . '/database/migrations/2017_01_15_000000_add_permission_group_id_to_permissions_table.php',
     'AddPolicyNameToDataTypesTable' => $baseDir . '/database/migrations/2017_07_05_210000_add_policyname_to_data_types_table.php',
     'AddRouteToMenuItemsTable' => $baseDir . '/database/migrations/2017_01_13_000000_add_route_to_menu_items_table.php',
+    'AddSynonimsTable' => $baseDir . '/database/migrations/2018_08_25_155113_add_synonims_table.php',
     'AddVoyagerUserFields' => $baseDir . '/database/migrations/2016_01_01_000000_add_voyager_user_fields.php',
     'Adldap\\Adldap' => $vendorDir . '/adldap2/adldap2/src/Adldap.php',
     'Adldap\\AdldapException' => $vendorDir . '/adldap2/adldap2/src/AdldapException.php',

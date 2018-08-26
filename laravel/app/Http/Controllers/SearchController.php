@@ -13,6 +13,7 @@ use App\LibBook;
 use App\LibRazdel;
 use cijic\phpMorphy\Facade\Morphy;
 use DB;
+use Config;
 
 class SearchController extends Controller
 {

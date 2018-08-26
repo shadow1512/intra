@@ -42,7 +42,7 @@ class IndexerController extends Controller
             //Имя
 
             $term = new Terms();
-            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($user->fname, "UTF-8")));
+            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->fname, "UTF-8")));
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
@@ -54,7 +54,7 @@ class IndexerController extends Controller
             //Фамилия
 
             $term = new Terms();
-            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($user->lname, "UTF-8")));
+            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->lname, "UTF-8")));
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
@@ -66,7 +66,7 @@ class IndexerController extends Controller
             //Отчество
 
             $term = new Terms();
-            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($user->mname, "UTF-8")));
+            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->mname, "UTF-8")));
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
@@ -103,7 +103,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -128,7 +128,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -153,7 +153,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -178,7 +178,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -198,7 +198,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -219,7 +219,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -244,7 +244,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }
@@ -264,7 +264,7 @@ class IndexerController extends Controller
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getPseudoRoot(trim(mb_strtoupper($word, "UTF-8")));
+                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
                                 $term->baseterm = $baseform[0];
                             }

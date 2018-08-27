@@ -59,7 +59,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim($user->fname));
+            pspell_add_to_personal($pspell_link, trim( mb_convert_encoding($user->fname,  "KOI8-R",   "UTF-8")));
             //Фамилия
 
             $term = new Terms();
@@ -72,7 +72,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim($user->lname));
+            pspell_add_to_personal($pspell_link, trim(mb_convert_encoding($user->lname,  "KOI8-R",   "UTF-8")));
             //Отчество
 
             $term = new Terms();
@@ -85,7 +85,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim($user->mname));
+            pspell_add_to_personal($pspell_link, trim(mb_convert_encoding($user->mname,  "KOI8-R",   "UTF-8")));
             //Номер комнаты
 
             if(trim($user->room)) {

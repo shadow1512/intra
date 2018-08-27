@@ -49,12 +49,12 @@ class IndexerController extends Controller
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
-            $term->term = $user->fname;
+            $term->term = trim($user->fname);
             $term->section = 'users';
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->fname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->fname));
             //Фамилия
 
             $term = new Terms();
@@ -62,12 +62,12 @@ class IndexerController extends Controller
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
-            $term->term = $user->lname;
+            $term->term = trim($user->lname);
             $term->section = 'users';
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->lname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->lname));
             //Отчество
 
             $term = new Terms();
@@ -75,12 +75,12 @@ class IndexerController extends Controller
             if($baseform && count($baseform)) {
                 $term->baseterm = $baseform[0];
             }
-            $term->term = $user->mname;
+            $term->term = trim($user->mname);
             $term->section = 'users';
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->mname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->mname));
             //Номер комнаты
 
             if(trim($user->room)) {

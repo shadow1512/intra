@@ -35,8 +35,13 @@ class IndexerController extends Controller
     {
         //
         Terms::truncate();
-        //создаем файлик, который потом добавим в словарь
-        Storage::disk('public')->put(Config::get('dict.dict_path') .   '/pspell_custom.txt', "", 'public');
+        //создаем файлик, в который потом добавим в словарь
+        $pspell_link = pspell_new_personal(storage_path('app/public/dict/pspell_custom.rws'),"ru", "", "", "UTF-8",
+            PSPELL_NORMAL);
+        // Setup the personal dictionary
+        $pspell_config = pspell_config_create("ru");
+        pspell_config_personal($pspell_config, storage_path('app/public/dict/pspell_custom.rws'));
+
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -54,7 +59,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->fname));
+            pspell_add_to_personal($pspell_link, trim($user->fname));
             //Фамилия
 
             $term = new Terms();
@@ -67,7 +72,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->lname));
+            pspell_add_to_personal($pspell_link, trim($user->lname));
             //Отчество
 
             $term = new Terms();
@@ -80,7 +85,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', trim($user->mname));
+            pspell_add_to_personal($pspell_link, trim($user->mname));
             //Номер комнаты
 
             if(trim($user->room)) {
@@ -283,6 +288,9 @@ class IndexerController extends Controller
                 }
             }
         }
+
+        // Save the wordlist
+        pspell_save_wordlist($pspell_link);
 
     }
 

@@ -80,6 +80,7 @@ class SearchController extends Controller
                     //Если цифры или слова
                     if ($validator->fails()) {
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
+                        $oldword    =   $word;
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                         //вот теперь можно убрать лишнее
                         $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
@@ -89,12 +90,16 @@ class SearchController extends Controller
                                 - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                                 - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                             //слово есть в словаре
+                            $total_found_by_word    =   0;
+
                             if(pspell_check($dict,  $word)) {
-                                $words_records[]    =   $this->getSearchResultsByWord($word);
+                                $res= $this->getSearchResultsByWord($word);
+                                $words_records[]    =   $res;
+                                $total_found_by_word    =   count($res);
+                                unset($res);
                             }
                             //Слово не нашлось в словаре
                             else {
-                                $total_found_by_word    =   0;
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest    =   pspell_suggest($dict,   $word);
                                 //берем только первый вариант, остальные уже не то
@@ -106,9 +111,19 @@ class SearchController extends Controller
                                     $total_found_by_word    =   count($res);
                                     unset($res);
                                 }
+                            }
+                            if(!$total_found_by_word) {
+                                //ищем как есть
+                                $res= $this->getSearchResultsByWord($word);
+                                $words_records[]    =   $res;
+                                $total_found_by_word    =   count($res);
+                                unset($res);
                                 if(!$total_found_by_word) {
-                                    //ищем как есть
-                                    $words_records[]    =   $this->getSearchResultsByWord($word);
+                                    $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                                    $res= $this->getSearchResultsByWord($oldword);
+                                    $words_records[]    =   $res;
+                                    $total_found_by_word    =   count($res);
+                                    unset($res);
                                 }
                             }
                         }

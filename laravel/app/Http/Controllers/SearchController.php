@@ -392,18 +392,20 @@ class SearchController extends Controller
                     $syn_word = preg_replace("/[^0-9A-zА-я]/iu", "", $syn_word);
                     //с цифрами ничего делать не надо
                     if(mb_strlen($syn_word, "UTF-8") >= 3) {
-                        $forms = Morphy::getBaseForm(trim(mb_strtoupper($syn_word, "UTF-8")));
+                        var_dump($syn_word);
+                        $forms = Morphy::getBaseForm(mb_strtoupper($syn_word, "UTF-8"));
+                        var_dump($forms);
                         if($forms !==   false) {
                             if (count($forms)) {
                                 $syn_word = $forms[0];
                             } else {
-                                $syn_word = trim(mb_strtoupper($syn_word, "UTF-8"));
+                                $syn_word = mb_strtoupper($syn_word, "UTF-8");
                             }
                         }
                         else {
-                            $syn_word = trim(mb_strtoupper($syn_word, "UTF-8"));
+                            $syn_word = mb_strtoupper($syn_word, "UTF-8");
                         }
-                        var_dump($syn_word);
+
                         $syn_records[]  =  Terms::where('baseterm', 'LIKE', $syn_word)->get();
                         $parsed_syn_words   ++;
                     }

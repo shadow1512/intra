@@ -165,7 +165,7 @@ class SearchController extends Controller
                                     $search_result[$section][$record]   = $search_result[$section][$record] + 1000000;
                                 }
                                 else {
-                                    $search_result[$section][$record]   = $words_records[$i][$section];
+                                    $search_result[$section][$record]   = $total;
                                 }
                             }
 
@@ -173,13 +173,11 @@ class SearchController extends Controller
                     }
                     asort($search_result[$section]);
                 }
-                var_dump($search_result);
                 //начинаем теперь пляски с базой
-                switch($found_sections) {
+                switch($section) {
                     case 'users':
                         $user_ids   =   array_keys($search_result['users']);
                         $found_records  =   User::find($user_ids);
-                        var_dump($found_records);
                         $assoc_records  =   array();
                         foreach($found_records as $record) {
                             $assoc_records[$record->id] =   $record;

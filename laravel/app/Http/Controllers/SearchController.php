@@ -264,9 +264,12 @@ class SearchController extends Controller
         $word_records = array();
 
         $forms = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
-        var_dump($forms);
-        if(count($forms)) {
-            $word = $forms[0];
+        if($forms   !== false) {
+            if (count($forms)) {
+                $word = $forms[0];
+            } else {
+                $word = trim(mb_strtoupper($word, "UTF-8"));
+            }
         }
         else {
             $word=  trim(mb_strtoupper($word, "UTF-8"));

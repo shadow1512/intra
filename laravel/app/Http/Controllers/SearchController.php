@@ -79,7 +79,6 @@ class SearchController extends Controller
                     ]);
                     //Если цифры или слова
                     if ($validator->fails()) {
-                        var_dump('word_way');
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                         //вот теперь можно убрать лишнее
@@ -107,7 +106,6 @@ class SearchController extends Controller
                                     //ищем как есть
                                     $words_records[]    =   $this->getSearchResultsByWord($word);
                                 }
-                                var_dump($words_records);
                             }
                         }
                         //цифры
@@ -148,7 +146,7 @@ class SearchController extends Controller
                     }
                 }
             }
-
+            var_dump($words_records);
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
@@ -157,6 +155,7 @@ class SearchController extends Controller
                 for($i = 0; $i < $parsed_words; $i++) {
                     $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
                 }
+                var_dump($found_sections);
                 //все уникальные найденные разделы
                 $found_sections =   array_unique($found_sections);
                 foreach($found_sections as $section) {

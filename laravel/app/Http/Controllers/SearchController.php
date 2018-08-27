@@ -356,7 +356,7 @@ class SearchController extends Controller
     private function getSearchResultsBySyns($word) {
         var_dump($word);
         DB::enableQueryLog();
-        $syns   =   Syns::where('term','LIKE',  $word);
+        $syns   =    DB::table("syns")->where('term',   'LIKE',  $word);
         $query = DB::getQueryLog();
         print_r($query);
         $syns_records = array();

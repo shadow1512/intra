@@ -17,6 +17,7 @@ use App\LibBook;
 use App\LibRazdel;
 use App\Terms;
 use cijic\phpMorphy\Facade\Morphy;
+use Illuminate\Support\Facades\Storage;
 
 class IndexerController extends Controller
 {
@@ -33,7 +34,8 @@ class IndexerController extends Controller
     {
         //
         Terms::truncate();
-
+        //создаем файлик, который потом добавим в словарь
+        Storage::put('pspell_custom.txt', "", 'public');
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -51,6 +53,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
+            Storage::append('pspell_custom.txt', $user->fname);
             //Фамилия
 
             $term = new Terms();
@@ -63,6 +66,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
+            Storage::append('pspell_custom.txt', $user->lname);
             //Отчество
 
             $term = new Terms();
@@ -75,6 +79,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
+            Storage::append('pspell_custom.txt', $user->mname);
             //Номер комнаты
 
             if(trim($user->room)) {

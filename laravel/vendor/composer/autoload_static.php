@@ -20,6 +20,9 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
+        '38a0826fbb44e0cfb3833eefafc5b802' => __DIR__ . '/../..' . '/correction/ReflectionTypeHint.php',
+        'c969d67b59ab968cfbed06ce5dba01a8' => __DIR__ . '/../..' . '/correction/Text/LangCorrect.php',
+        '480728a19961a93acdd5610c8f3503c4' => __DIR__ . '/../..' . '/correction/UTF8.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -603,6 +606,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Rooms' => __DIR__ . '/../..' . '/app/Rooms.php',
+        'App\\Syns' => __DIR__ . '/../..' . '/app/Syns.php',
         'App\\Terms' => __DIR__ . '/../..' . '/app/Terms.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'ArithmeticError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/ArithmeticError.php',

@@ -14,6 +14,7 @@ use App\LibRazdel;
 use cijic\phpMorphy\Facade\Morphy;
 use DB;
 use Config;
+use Text_LangCorrect;
 
 class SearchController extends Controller
 {

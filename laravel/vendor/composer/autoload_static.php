@@ -20,9 +20,6 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
         '801c31d8ed748cfa537fa45402288c95' => __DIR__ . '/..' . '/psy/psysh/src/functions.php',
         '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
-        '38a0826fbb44e0cfb3833eefafc5b802' => __DIR__ . '/../..' . '/correction/ReflectionTypeHint.php',
-        'c969d67b59ab968cfbed06ce5dba01a8' => __DIR__ . '/../..' . '/correction/Text/LangCorrect.php',
-        '480728a19961a93acdd5610c8f3503c4' => __DIR__ . '/../..' . '/correction/UTF8.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -4272,6 +4269,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'React\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/react/promise/src/PromisorInterface.php',
         'React\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/react/promise/src/RejectedPromise.php',
         'React\\Promise\\UnhandledRejectionException' => __DIR__ . '/..' . '/react/promise/src/UnhandledRejectionException.php',
+        'ReflectionTypeHint' => __DIR__ . '/../..' . '/correction/ReflectionTypeHint.php',
         'RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RolesTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',
         'SebastianBergmann\\CodeCoverage\\CoveredCodeNotExecutedException' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/Exception/CoveredCodeNotExecutedException.php',
@@ -5242,6 +5240,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
         'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
+        'Text_LangCorrect' => __DIR__ . '/../..' . '/correction/Text/LangCorrect.php',
         'Text_Template' => __DIR__ . '/..' . '/phpunit/php-text-template/src/Template.php',
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
@@ -5251,6 +5250,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'TranslationsTableSeeder' => __DIR__ . '/../..' . '/database/seeds/TranslationsTableSeeder.php',
         'TypeError' => __DIR__ . '/..' . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
+        'UTF8' => __DIR__ . '/../..' . '/correction/UTF8.php',
         'UsersTableSeeder' => __DIR__ . '/../..' . '/database/seeds/UsersTableSeeder.php',
         'VoyagerDatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/VoyagerDatabaseSeeder.php',
         'VoyagerDummyDatabaseSeeder' => __DIR__ . '/../..' . '/database/seeds/VoyagerDummyDatabaseSeeder.php',

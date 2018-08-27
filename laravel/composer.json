@@ -26,16 +26,12 @@
     },
     "autoload": {
         "classmap": [
-            "database"
+            "database",
+            "correction"
         ],
         "psr-4": {
             "App\\": "app/"
-        },
-        "files":    [
-            "correction/ReflectionTypeHint.php",
-            "correction/Text/LangCorrect.php",
-            "correction/UTF8.php"
-        ]
+        }
     },
     "autoload-dev": {
         "psr-4": {

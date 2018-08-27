@@ -60,10 +60,11 @@ class SearchController extends Controller
         $phrase = mb_substr($phrase, 0, 100);
 
         //Орфография, опечатки
-        $conf = pspell_config_create ( 'ru', '', '', "utf-8");
-        pspell_config_mode ( $conf, PSPELL_NORMAL);
+        //$conf = pspell_config_create ( 'ru', '', '', "utf-8");
+        //pspell_config_mode ( $conf, PSPELL_NORMAL);
         //pspell_config_personal($conf,   storage_path('app/public/dict/pspell_custom.aspell.ru.rws'));
-        $dict   =   pspell_new_config($conf);
+        //$dict   =   pspell_new_config($conf);
+        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
         //Раскладка
         $corrector = new Text_LangCorrect();
 
@@ -83,6 +84,7 @@ class SearchController extends Controller
                     $word = preg_replace("/[^0-9A-zА-я]/", "", $word);
                     //с цифрами ничего делать не надо
                     if(!is_int($word) && (mb_strlen($word) >= 3)) {
+                        var_dump($word);
                         var_dump('letters_way');
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
@@ -97,10 +99,12 @@ class SearchController extends Controller
                         else {
                             var_dump('not_in_voc');
                             //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest    =   pspell_suggest($dict,   mb_convert_encoding($word,  "KOI8-R",   "UTF-8"));
+                            //$suggest    =   pspell_suggest($dict,   mb_convert_encoding($word,  "KOI8-R",   "UTF-8"));
+                            $suggest    =   pspell_suggest($dict,   $word);
                             //берем только первый вариант, остальные уже не то
                             if(count($suggest)) {
-                                $word=  mb_convert_encoding($suggest[0],  "UTF-8",  "KOI8-R");
+                                //$word=  mb_convert_encoding($suggest[0],  "UTF-8",  "KOI8-R");
+                                $word=  $suggest[0];
                                 var_dump($word);
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }

@@ -256,7 +256,10 @@ class SearchController extends Controller
         }
 
 
-        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs, "books"  => $books,   "razdels"   =>  $razdels,   "deps"  =>  $deps,  "sections"  =>  $found_sections]);
+        return view('search.all', [ "news"   =>  $news, "users"  =>  $users, "docs"  => $docs,
+                                    "books"  => $books,   "razdels"   =>  $razdels,   "deps"  =>  $deps,
+                                    "sections"  =>  $found_sections,
+                                    "phrase"    =>  $phrase]);
     }
 
     private function getSearchResultsByWord($word) {

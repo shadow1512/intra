@@ -62,7 +62,7 @@ class SearchController extends Controller
         //Орфография, опечатки
         $conf = pspell_config_create ( 'ru', '', '', "koi8-r");
         pspell_config_mode ( $conf, PSPELL_NORMAL);
-        pspell_config_personal($conf,   storage_path('app/public/dict/pspell_custom.aspell.ru.rws'));
+        //pspell_config_personal($conf,   storage_path('app/public/dict/pspell_custom.aspell.ru.rws'));
         $dict   =   pspell_new_config($conf);
         //Раскладка
         $corrector = new Text_LangCorrect();

@@ -190,11 +190,14 @@ class SearchController extends Controller
         }
         //если что-то нашли по слову
         if(count($word_search_records)) {
+            var_dump("sorting");
             $by_razdels = array();
             //Нам интересно искать по разделам
             foreach($word_search_records as $record) {
                 $by_razdels[$record->section][] =   $record->record;
             }
+
+            var_dump($by_razdels);
             /*Нам не наплевать, что слово может встретиться для одной записи несколько раз. Например, для сотрудника в имени и отчестве
                 (Иван Иванович) или в новости в заголовке и тексе (или в тексте несколько раз). Куда важнее по каким разным поисковым терминам
                 запись вошла в выборку. Но при прочих равных надо учитывать количество вхождений*/
@@ -203,6 +206,7 @@ class SearchController extends Controller
                 asort($by_razdels[$section]);
             }
 
+            var_dump($by_razdels);
 
             //если еще и синонимы были и что-то нашлось
             if(count($syns_records)) {
@@ -246,6 +250,8 @@ class SearchController extends Controller
                 $word_records   =   $by_razdels;
             }
         }
+
+        return $word_records;
     }
 
     //Функция поиска результатов по синониму к слову

@@ -46,7 +46,7 @@
             <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} отделов</div>
             <ul class="docs_lst">
                 @foreach ($deps as $dep)
-                <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep-<name}}</span></a></li>
+                <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep->name}}</span></a></li>
                 @endforeach
             </ul>
         </div>
@@ -68,7 +68,7 @@
                 <div class="h __h_m search-res_cnt_i_b_h">{{count($razdels)}} разделов библиотек</div>
                 <ul class="docs_lst">
                 @foreach ($razdes as $razdel)
-                    <li class="docs_lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$razdel-<name}}</span></a></li>
+                    <li class="docs_lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$razdel->name}}</span></a></li>
                 @endforeach
                 </ul>
             </div>
@@ -112,7 +112,7 @@
         <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} отделов</div>
         <ul class="docs_lst">
             @foreach ($deps as $dep)
-                <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep-<name}}</span></a></li>
+                <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep->name}}</span></a></li>
             @endforeach
         </ul>
     @endif

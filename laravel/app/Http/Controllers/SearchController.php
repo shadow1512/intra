@@ -81,7 +81,7 @@ class SearchController extends Controller
                 //Если цифры или слова
                 if ($validator->fails()) {
                     var_dump('word_way');
-                    $word = preg_replace("/[^0-9A-zА-я]/", "", $word);
+                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
                     //с цифрами ничего делать не надо
                     if(!is_int($word) && (mb_strlen($word) >= 3)) {
                         var_dump($word);

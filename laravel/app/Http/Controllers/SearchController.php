@@ -392,10 +392,14 @@ class SearchController extends Controller
                 foreach($syn_words as $syn_word) {
                     $syn_word = preg_replace("/[^0-9A-zА-я]/iu", "", $syn_word);
                     //с цифрами ничего делать не надо
-                    if(mb_strlen($syn_word) >= 3) {
+                    if(mb_strlen($syn_word, "UTF-8") >= 3) {
                         $forms = Morphy::getBaseForm(trim(mb_strtoupper($syn_word, "UTF-8")));
-                        if(count($forms)) {
-                            $syn_word   =   $forms[0];
+                        if($forms !==   false) {
+                            if (count($forms)) {
+                                $syn_word = $forms[0];
+                            } else {
+                                $syn_word = trim(mb_strtoupper($syn_word, "UTF-8"));
+                            }
                         }
                         else {
                             $syn_word = trim(mb_strtoupper($syn_word, "UTF-8"));

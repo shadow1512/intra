@@ -56,6 +56,8 @@ class SearchController extends Controller
         - если в разделе нет совпадений, то внутри раздела запускаем поиск по частям каждого слова (т.е. полученный термин обрамляется %)
         - смотрим идентификаторы записей, которые набрали наибольшее количество совпадений - их выносим наверх по взвешиванию */
 
+        $news = $users = $deps = $books = $razdels  =   $found_sections =   array();
+
         $phrase = trim($request->input('phrase'));
         $phrase = mb_substr($phrase, 0, 100);
 
@@ -69,90 +71,197 @@ class SearchController extends Controller
             //итоговый массив со взвешенным списком
             $words_records = array();
             foreach($words as $word) {
-                var_dump($word);
-                //Если email, то со словом ничего не надо делать
-                $validator = Validator::make(array('word'   =>  $word), [
-                    'word'           =>  'email',
-                ]);
-                //Если цифры или слова
-                if ($validator->fails()) {
-                    var_dump('word_way');
-                    //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
-                    $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
-                    //вот теперь можно убрать лишнее
-                    var_dump("after-correction:" .   $word);
-                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
-                    //с цифрами ничего делать не надо
-                    if(!is_int($word) && (mb_strlen($word) >= 3)) {
-                        var_dump($word);
-                        var_dump('letters_way');
-                        /*Если человек вводит какое-то разумное слово, то если:
-                            - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
-                            - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
-                        //слово есть в словаре
-                        if(pspell_check($dict,  $word)) {
-                            var_dump('voc_present');
-                            $words_records[]    =   $this->getSearchResultsByWord($word);
-                        }
-                        //Слово не нашлось в словаре
-                        else {
-                            var_dump('not_in_voc');
-                            //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest    =   pspell_suggest($dict,   $word);
-                            //берем только первый вариант, остальные уже не то
-                            if(count($suggest)) {
-                                $word=  $suggest[0];
-                                //var_dump($word);
+                $word=  trim($word);
+                if(mb_strlen($word, "UTF-8")) {
+                    var_dump($word);
+                    //Если email, то со словом ничего не надо делать
+                    $validator = Validator::make(array('word'   =>  $word), [
+                        'word'           =>  'email',
+                    ]);
+                    //Если цифры или слова
+                    if ($validator->fails()) {
+                        var_dump('word_way');
+                        //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
+                        $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                        //вот теперь можно убрать лишнее
+                        var_dump("after-correction:" .   $word);
+                        $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                        //с цифрами ничего делать не надо
+                        if(!is_int($word) && (mb_strlen($word) >= 3)) {
+                            var_dump($word);
+                            var_dump('letters_way');
+                            /*Если человек вводит какое-то разумное слово, то если:
+                                - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
+                                - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
+                            //слово есть в словаре
+                            if(pspell_check($dict,  $word)) {
+                                var_dump('voc_present');
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
+                            //Слово не нашлось в словаре
+                            else {
+                                var_dump('not_in_voc');
+                                //пробуем в начале советы (опечатки, если было на русском)
+                                $suggest    =   pspell_suggest($dict,   $word);
+                                //берем только первый вариант, остальные уже не то
+                                if(count($suggest)) {
+                                    $word=  $suggest[0];
+                                    //var_dump($word);
+                                    $words_records[]    =   $this->getSearchResultsByWord($word);
+                                }
+                                else {
+                                    //ищем как есть
+                                    $words_records[]    =   $this->getSearchResultsByWord($word);
+                                }
+                            }
+                        }
+                        //цифры
+                        if(is_int($word)) {
+                            var_dump('digit_way');
+                            $digit_results  =   array();
+                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
+                            if(count($word_search_records)) {
+                                foreach($word_search_records as $record) {
+                                    $digit_results[$record->section][]  =   $record->record;
+                                }
+                                foreach($digit_results as $section  =>  $records) {
+                                    $digit_results[$section]    =   array_count_values($records);
+                                }
+                                $words_records[]    =   $digit_results;
+                            }
                         }
                     }
-                    //цифры
-                    if(is_int($word)) {
-                        var_dump('digit_way');
-                        $digit_results  =   array();
-                        $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
-                        if(count($word_search_records)) {
-                            foreach($word_search_records as $record) {
-                                $digit_results[$record->section][]  =   $record->record;
+                    else {
+                        var_dump('email_way');
+                        //email будем искать только по той части, что до @, просто потому, что все, что после люди путают
+                        $email_parts    =   explode("@",    $word);
+                        if(count($email_parts) > 1) {
+                            $email_part=   $email_parts[0];
+                            $email_results  =   array();
+                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $email_part.  '%')->get();
+                            if(count($word_search_records)) {
+                                foreach($word_search_records as $record) {
+                                    $email_results[$record->section][]  =   $record->record;
+                                }
+                                foreach($email_results as $section  =>  $records) {
+                                    $email_results[$section]    =   array_count_values($records);
+                                }
+                                $words_records[]    =   $email_results;
                             }
-                            foreach($digit_results as $section  =>  $records) {
-                                $digit_results[$section]    =   array_count_values($records);
-                            }
-                            $words_records[]    =   $digit_results;
                         }
-                    }
-                }
-                else {
-                    var_dump('email_way');
-                    //email будем искать только по той части, что до @, просто потому, что все, что после люди путают
-                    $email_parts    =   explode("@",    $word);
-                    if(count($email_parts) > 1) {
-                        $email_part=   $email_parts[0];
-                        $email_results  =   array();
-                        $word_search_records  =  Terms::where('baseterm', 'LIKE', $email_part.  '%')->get();
-                        if(count($word_search_records)) {
-                            foreach($word_search_records as $record) {
-                                $email_results[$record->section][]  =   $record->record;
-                            }
-                            foreach($email_results as $section  =>  $records) {
-                                $email_results[$section]    =   array_count_values($records);
-                            }
-                            $words_records[]    =   $email_results;
-                        }
-                    }
 
+                    }
                 }
             }
 
-            var_dump($words_records);
+            $search_result = array();
+            $parsed_words   =   count($words_records);
+            //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
+            if($parsed_words > 0) {
+                //по каждому отработанному слову проверяем найденные разделы
+                for($i = 0; $i < $parsed_words; $i++) {
+                    $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
+                }
+                //все уникальные найденные разделы
+                $found_sections =   array_unique($found_sections);
+                foreach($found_sections as $section) {
+                    $search_result[$section]    =   array();
+                    for($i = 0; $i < $parsed_words; $i++) {
+                        if(isset($words_records[$i][$section])) {
+                            foreach($words_records[$i][$section] as $record=>   $total) {
+                                if(array_key_exists($record,    $search_result[$section])) {
+                                    $search_result[$section][$record]   = $search_result[$section][$record] + 1000000;
+                                }
+                                else {
+                                    $search_result[$section][$record]   = $words_records[$i][$section];
+                                }
+                            }
+
+                        }
+                    }
+                    asort($search_result[$section]);
+                }
+                //начинаем теперь пляски с базой
+                switch($found_sections) {
+                    case 'users':
+                        $user_ids   =   array_keys($search_result['users']);
+                        $found_records  =   User::find($user_ids);
+                        $assoc_records  =   array();
+                        foreach($found_records as $record) {
+                            $assoc_records[$record->id] =   $record;
+                        }
+                        foreach($user_ids as $user_id) {
+                            $users[]    =   $assoc_records[$user_id];
+                        }
+                        unset($found_records);
+                        unset($assoc_records);
+                        break;
+
+                    case 'deps':
+                        $dep_ids   =   array_keys($search_result['deps']);
+                        $found_records  =   Dep::find($dep_ids);
+                        $assoc_records  =   array();
+                        foreach($found_records as $record) {
+                            $assoc_records[$record->id] =   $record;
+                        }
+                        foreach($dep_ids as $dep_id) {
+                            $deps[]    =   $assoc_records[$dep_id];
+                        }
+                        unset($found_records);
+                        unset($assoc_records);
+                        break;
+
+                    case 'librazdels':
+                        $lrazdel_ids   =   array_keys($search_result['librazdels']);
+                        $found_records  =   LibRazdel::find($lrazdel_ids);
+                        $assoc_records  =   array();
+                        foreach($found_records as $record) {
+                            $assoc_records[$record->id] =   $record;
+                        }
+                        foreach($lrazdel_ids as $lrazdel_id) {
+                            $razdels[]    =   $assoc_records[$lrazdel_id];
+                        }
+                        unset($found_records);
+                        unset($assoc_records);
+                        break;
+
+                    case 'libbooks':
+                        $lbook_ids   =   array_keys($search_result['libbooks']);
+                        $found_records  =   LibBook::find($lbook_ids);
+                        $assoc_records  =   array();
+                        foreach($found_records as $record) {
+                            $assoc_records[$record->id] =   $record;
+                        }
+                        foreach($lbook_ids as $lbook_id) {
+                            $books[]    =   $assoc_records[$lbook_id];
+                        }
+                        unset($found_records);
+                        unset($assoc_records);
+                        break;
+
+                    case 'news':
+                        $news_ids   =   array_keys($search_result['news']);
+                        $found_records  =   News::find($news_ids);
+                        $assoc_records  =   array();
+                        foreach($found_records as $record) {
+                            $assoc_records[$record->id] =   $record;
+                        }
+                        foreach($news_ids as $news_id) {
+                            $news[]    =   $assoc_records[$news_id];
+                        }
+                        unset($found_records);
+                        unset($assoc_records);
+                        break;
+
+                }
+            }
         }
         else {
             var_dump("empty");
         }
 
-        $news = $users = $docs = $books = array();
-        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs, "books"  => $books]);
+
+        return view('search.all', ["news"   =>  $news, "users"  =>  $users, "docs"  => $docs, "books"  => $books,   "razdels"   =>  $razdels,   "sections"  =>  $found_sections]);
     }
 
     private function getSearchResultsByWord($word) {

@@ -3,8 +3,8 @@
 @section('search')
 <ul class="search-res_lst">
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Все</a></li>
-    @if (count($users))
-    <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Сотрудники</a></li>
+    @if (count($users) || count($deps))
+    <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Сотрудники и отделы</a></li>
     @endif
     @if (count($news))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Новости</a></li>
@@ -12,13 +12,21 @@
     @if (count($docs))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Банк документов</a></li>
     @endif
-    @if (count($books))
+    @if (count($books) || count($razdels))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Прочее</a></li>
     @endif
 </ul>
 <div class="search-res_cnt">
     <div class="search-res_cnt_i __no-pad">
         <div class="search-res_cnt_i_b-right">
+            @if (count($deps))
+                <div class="h __h_m search-res_cnt_i_b_h">Отделов: {{count($deps)}}</div>
+                <ul class="search-res_section-lst">
+                    @foreach ($deps as $dep)
+                            <li class="search-res_section-lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" class="search-res_section-lst_i_lk">{{$dep->name}}</a></li>
+                    @endforeach
+                </ul>
+            @endif
             @if (count($users))
             <div class="h __h_m search-res_cnt_i_b_h">Сотрудников: {{count($users)}}</div>
             <ul class="profile_contacts_ul">
@@ -59,84 +67,44 @@
             @endif
         </div>
         <div class="search-res_cnt_i_b">
-            <div class="h __h_m search-res_cnt_i_b_h">6 разделов</div>
-            <ul class="search-res_section-lst">
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="search-res_cnt_i">
-        <ul class="profile_contacts_ul">
-            <li class="profile_contacts_li"><a href="" class="profile_contacts_lk">
-                    <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
-                    <div class="profile_contacts_info">
-                        <div class="profile_contacts_name">Ганощенко Вероника Викторовна</div>
-                        <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
-                        <div class="profile_contacts_place __out">Отсутствует</div>
-                    </div></a></li>
-            <li class="profile_contacts_li"><a href="" class="profile_contacts_lk">
-                    <div class="profile_contacts_pic"><img src="/images/faces/profile.jpg" alt="Ганощенко Вероника Викторовна"></div>
-                    <div class="profile_contacts_info">
-                        <div class="profile_contacts_name">Ганощенко Вероника Викторовна</div>
-                        <div class="profile_contacts_position">Ведущий специалист по персоналу</div>
-                        <div class="profile_contacts_place __in">В офисе</div>
-                    </div></a></li>
-        </ul>
-    </div>
-    <div class="search-res_cnt_i">
-        <ul class="news_ul">
-            <li class="news_li __important"><a href="" class="news_li_lk">Минтранс России утвердил перечень нарушений обязательных требований, служащих основаниями  для временного задержания судна</a>
-                <div class="news_li_date">13 декабря 2016</div>
-            </li>
-            <li class="news_li"><a href="" class="news_li_lk">Минтранс России утвердил перечень нарушений обязательных требований, служащих основаниями  для временного задержания судна</a>
-                <div class="news_li_date">13 декабря 2016</div>
-            </li>
-            <li class="news_li"><a href="" class="news_li_lk">Минтранс России утвердил перечень нарушений обязательных требований, служащих основаниями  для временного задержания судна</a>
-                <div class="news_li_date">13 декабря 2016</div>
-            </li>
-            <li class="news_li"><a href="" class="news_li_lk">Минтранс России утвердил перечень нарушений обязательных требований, служащих основаниями  для временного задержания судна</a>
-                <div class="news_li_date">13 декабря 2016</div>
-            </li>
-        </ul>
-    </div>
-    <div class="search-res_cnt_i">
-        <ul class="docs_lst">
-            <li class="docs_lst_i"><a href="" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">План маркетинговых мероприятий на апрель</span><span class="docs_lst_i_number">№2013-100 от 29.08.16</span></a></li>
-            <li class="docs_lst_i"><a href="" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">План маркетинговых мероприятий на апрель</span><span class="docs_lst_i_number">№2013-100 от 29.08.16</span></a></li>
-        </ul>
-    </div>
-    <div class="search-res_cnt_i">
-        <ul class="search-res_section-lst">
-            <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">Библиотека</a>
-                <ul class="search-res_section-lst_breadcrumbs">
-                    <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                    <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
+            @if (count($razdels))
+            <div class="h __h_m search-res_cnt_i_b_h">Разделов библиотеки: {{count($razdels)}}</div>
+                <ul class="search-res_section-lst">
+                    @foreach ($razdels as $razdel)
+                        <li class="search-res_section-lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" class="search-res_section-lst_i_lk">{{$razdel->name}}</a></li>
+                    @endforeach
                 </ul>
-            </li>
-            <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">Фото/видео с праздников</a>
-                <ul class="search-res_section-lst_breadcrumbs">
-                    <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                    <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
+            </div>
+            @endif
+        @if (count($books))
+            <div class="h __h_m search-res_cnt_i_b_h">Книг библиотеки: {{count($books)}}</div>
+                <ul class="search-res_section-lst">
+                    @foreach ($books as $book)
+                        <li class="search-res_section-lst_i"><a href="{{route('library.book', ["id"    =>  $book->id])}}" class="search-res_section-lst_i_lk">{{$book->title}}</a></li>
+                    @endforeach
                 </ul>
-            </li>
-        </ul>
+            </div>
+        @endif
+            <!--<ul class="search-res_section-lst">
+                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
+                    <ul class="search-res_section-lst_breadcrumbs">
+                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
+                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
+                    </ul>
+                </li>
+                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
+                    <ul class="search-res_section-lst_breadcrumbs">
+                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
+                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
+                    </ul>
+                </li>
+                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
+                    <ul class="search-res_section-lst_breadcrumbs">
+                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
+                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
+                    </ul>
+                </li>
+            </ul>-->
     </div>
 </div>
 @endsection

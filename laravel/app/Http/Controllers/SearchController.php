@@ -60,10 +60,6 @@ class SearchController extends Controller
         $phrase = mb_substr($phrase, 0, 100);
 
         //Орфография, опечатки
-        //$conf = pspell_config_create ( 'ru', '', '', "utf-8");
-        //pspell_config_mode ( $conf, PSPELL_NORMAL);
-        //pspell_config_personal($conf,   storage_path('app/public/dict/pspell_custom.aspell.ru.rws'));
-        //$dict   =   pspell_new_config($conf);
         $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
         //Раскладка
         $corrector = new Text_LangCorrect();
@@ -81,6 +77,10 @@ class SearchController extends Controller
                 //Если цифры или слова
                 if ($validator->fails()) {
                     var_dump('word_way');
+                    //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
+                    $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                    //вот теперь можно убрать лишнее
+                    var_dump("after-correction:" .   $word);
                     $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
                     //с цифрами ничего делать не надо
                     if(!is_int($word) && (mb_strlen($word) >= 3)) {
@@ -90,7 +90,6 @@ class SearchController extends Controller
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
-                        //if(pspell_check($dict,  mb_convert_encoding($word,  "KOI8-R",   "UTF-8"))) {
                         if(pspell_check($dict,  $word)) {
                             var_dump('voc_present');
                             $words_records[]    =   $this->getSearchResultsByWord($word);
@@ -99,20 +98,11 @@ class SearchController extends Controller
                         else {
                             var_dump('not_in_voc');
                             //пробуем в начале советы (опечатки, если было на русском)
-                            //$suggest    =   pspell_suggest($dict,   mb_convert_encoding($word,  "KOI8-R",   "UTF-8"));
                             $suggest    =   pspell_suggest($dict,   $word);
                             //берем только первый вариант, остальные уже не то
                             if(count($suggest)) {
-                                //$word=  mb_convert_encoding($suggest[0],  "UTF-8",  "KOI8-R");
                                 $word=  $suggest[0];
-                                var_dump($word);
-                                $words_records[]    =   $this->getSearchResultsByWord($word);
-                            }
-                            //если нет предложений, значит, нужно попробовать сменить раскладку
-                            else {
-                                var_dump('correction');
-                                $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
-                                var_dump($word);
+                                //var_dump($word);
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
                         }
@@ -166,7 +156,7 @@ class SearchController extends Controller
     }
 
     private function getSearchResultsByWord($word) {
-        var_dump('byword_search_start');
+        //var_dump('byword_search_start');
         $word_records = array();
 
         $forms = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
@@ -176,28 +166,28 @@ class SearchController extends Controller
         else {
             $word=  trim(mb_strtoupper($word, "UTF-8"));
         }
-        var_dump($word);
+        //var_dump($word);
         //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
         $syns_records   =   $this->getSearchResultsBySyns($word);
         //синонимы закончены
 
         //Продолжаем со словом
         $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
-        var_dump(count($word_search_records));
+        //var_dump(count($word_search_records));
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
         if(count($syns_records) && !count($word_search_records)) {
             $word_records    =   $syns_records;
         }
         //если что-то нашли по слову
         if(count($word_search_records)) {
-            var_dump("sorting");
+            //var_dump("sorting");
             $by_razdels = array();
             //Нам интересно искать по разделам
             foreach($word_search_records as $record) {
                 $by_razdels[$record->section][] =   $record->record;
             }
 
-            var_dump($by_razdels);
+            //var_dump($by_razdels);
             /*Нам не наплевать, что слово может встретиться для одной записи несколько раз. Например, для сотрудника в имени и отчестве
                 (Иван Иванович) или в новости в заголовке и тексе (или в тексте несколько раз). Куда важнее по каким разным поисковым терминам
                 запись вошла в выборку. Но при прочих равных надо учитывать количество вхождений*/
@@ -206,7 +196,7 @@ class SearchController extends Controller
                 asort($by_razdels[$section]);
             }
 
-            var_dump($by_razdels);
+            //var_dump($by_razdels);
 
             //если еще и синонимы были и что-то нашлось
             if(count($syns_records)) {

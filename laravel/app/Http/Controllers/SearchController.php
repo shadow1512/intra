@@ -375,16 +375,14 @@ class SearchController extends Controller
     //Функция поиска результатов по синониму к слову
     private function getSearchResultsBySyns($word) {
         $syns   =   Syns::where('term','LIKE',  $word)->get();
-        var_dump($syns);
         $syns_records = array();
         if(count($syns)) {
-            var_dump($word);
             //Сюда будем складывать обработанные результаты по каждой найденной фразе-синониму
             $parsed_syn_phrases =   0;
             foreach($syns as $syn) {
                 //Сюда будем складывать обработанные результаты по каждому слову из фразы-синонима
                 $syn_records = array();
-                $syn_words = explode(" ", $syn);
+                $syn_words = explode(" ", $syn->syn);
 
                 /*переменная, в которой храним количество проверенных слов во фразе-синониме, чтобы потом сравнивать с количеством вхождений найденных записей
                     в итоговую выборку. Цель - вычислить максимальное соответствие заданной фразе*/
@@ -393,9 +391,7 @@ class SearchController extends Controller
                     $syn_word = preg_replace("/[^0-9A-zА-я]/iu", "", $syn_word);
                     //с цифрами ничего делать не надо
                     if(mb_strlen($syn_word, "UTF-8") >= 3) {
-                        var_dump($syn_word);
                         $forms = Morphy::getBaseForm(mb_strtoupper($syn_word, "UTF-8"));
-                        var_dump($forms);
                         if($forms !==   false) {
                             if (count($forms)) {
                                 $syn_word = $forms[0];
@@ -413,7 +409,6 @@ class SearchController extends Controller
 
                 }
 
-                var_dump($syns_records);
                 $by_razdels = array();
                 $record_word_counter = array();
                 //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов

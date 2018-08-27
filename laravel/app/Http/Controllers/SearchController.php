@@ -282,6 +282,10 @@ class SearchController extends Controller
         //var_dump('byword_search_start');
         $word_records = array();
 
+        //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
+        $syns_records   =   $this->getSearchResultsBySyns(mb_strtoupper($word,  "UTF-8"));
+        //синонимы закончены
+
         $forms = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
         if($forms   !== false) {
             if (count($forms)) {
@@ -294,9 +298,6 @@ class SearchController extends Controller
             $word=  trim(mb_strtoupper($word, "UTF-8"));
         }
         //var_dump($word);
-        //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
-        $syns_records   =   $this->getSearchResultsBySyns($word);
-        //синонимы закончены
 
         //Продолжаем со словом
         $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();

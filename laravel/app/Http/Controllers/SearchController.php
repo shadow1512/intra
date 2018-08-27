@@ -66,7 +66,7 @@ class SearchController extends Controller
         //Раскладка
         $corrector = new Text_LangCorrect();
 
-        if(mb_strlen($phrase) > 3) {
+        if(mb_strlen($phrase) >= 3) {
             $words = explode(" ", $phrase);
             //итоговый массив со взвешенным списком
             $words_records = array();

@@ -60,7 +60,7 @@ class SearchController extends Controller
         $phrase = mb_substr($phrase, 0, 100);
 
         //Орфография, опечатки
-        $conf = pspell_config_create ( 'ru', '', '', "koi8-r");
+        $conf = pspell_config_create ( 'ru', '', '', "utf-8");
         pspell_config_mode ( $conf, PSPELL_NORMAL);
         //pspell_config_personal($conf,   storage_path('app/public/dict/pspell_custom.aspell.ru.rws'));
         $dict   =   pspell_new_config($conf);
@@ -88,7 +88,8 @@ class SearchController extends Controller
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
-                        if(pspell_check($dict,  mb_convert_encoding($word,  "KOI8-R",   "UTF-8"))) {
+                        //if(pspell_check($dict,  mb_convert_encoding($word,  "KOI8-R",   "UTF-8"))) {
+                        if(pspell_check($dict,  $word)) {
                             var_dump('voc_present');
                             $words_records[]    =   $this->getSearchResultsByWord($word);
                         }

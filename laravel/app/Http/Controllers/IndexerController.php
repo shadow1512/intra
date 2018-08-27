@@ -39,7 +39,7 @@ class IndexerController extends Controller
         $pspell_link = pspell_new_personal(storage_path('app/public/dict/pspell_custom.rws'),"ru", "", "", "UTF-8",
             PSPELL_NORMAL);
         // Setup the personal dictionary
-        $pspell_config = pspell_config_create("ru");
+        $pspell_config = pspell_config_create("ru", "", "", "UTF-8");
         pspell_config_personal($pspell_config, storage_path('app/public/dict/pspell_custom.rws'));
 
         //Секция "пользователи"

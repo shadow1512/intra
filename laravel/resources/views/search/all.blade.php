@@ -57,7 +57,7 @@
             <ul class="news_ul">
                 @foreach ($news as $new)
                     <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
-                        <div class="news_li_date">@convertdate($item->published_at)</div>
+                        <div class="news_li_date">@convertdate($new->published_at)</div>
                     </li>
                 @endforeach
             </ul>
@@ -123,7 +123,7 @@
         <ul class="news_ul">
             @foreach ($news as $new)
                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
-                    <div class="news_li_date">@convertdate($item->published_at)</div>
+                    <div class="news_li_date">@convertdate($new->published_at)</div>
                 </li>
             @endforeach
         </ul>

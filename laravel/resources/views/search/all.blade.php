@@ -2,7 +2,6 @@
 
 @section('search')
 <ul class="search-res_lst">
-    <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Все</a></li>
     @if (count($users) || count($deps))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Сотрудники и отделы</a></li>
     @endif
@@ -28,20 +27,20 @@
                 </ul>
             @endif
             @if (count($users))
-            <div class="h __h_m search-res_cnt_i_b_h">Сотрудников: {{count($users)}}</div>
-            <ul class="profile_contacts_ul">
-                @foreach ($users as $user)
-                <li class="profile_contacts_li">
-                    <div class="profile_contacts_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}"></div>
-                    <div class="profile_contacts_info">
-                        <div class="profile_contacts_status"></div><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->name}}</a>
-                        <div class="profile_contacts_position">{{$user->work_title}}</div>
-                        <div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
-                        <div class="profile_contacts_position">Телефон: {{$user->phone}}</div>
-                    </div>
-                </li>
-                @endforeach
-            </ul>
+                <div class="h __h_m search-res_cnt_i_b_h">Сотрудников: {{count($users)}}</div>
+                <ul class="profile_contacts_ul">
+                    @foreach ($users as $user)
+                    <li class="profile_contacts_li">
+                        <div class="profile_contacts_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}"></div>
+                        <div class="profile_contacts_info">
+                            <div class="profile_contacts_status"></div><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->name}}</a>
+                            <div class="profile_contacts_position">{{$user->work_title}}</div>
+                            <div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
+                            <div class="profile_contacts_position">Телефон: {{$user->phone}}</div>
+                        </div>
+                    </li>
+                    @endforeach
+                </ul>
             @endif
         </div>
         <div class="search-res_cnt_i_b">
@@ -68,43 +67,22 @@
         </div>
         <div class="search-res_cnt_i_b">
             @if (count($razdels))
-            <div class="h __h_m search-res_cnt_i_b_h">Разделов библиотеки: {{count($razdels)}}</div>
+                <div class="h __h_m search-res_cnt_i_b_h">Разделов библиотеки: {{count($razdels)}}</div>
                 <ul class="search-res_section-lst">
                     @foreach ($razdels as $razdel)
                         <li class="search-res_section-lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" class="search-res_section-lst_i_lk">{{$razdel->name}}</a></li>
                     @endforeach
                 </ul>
-            </div>
             @endif
-        @if (count($books))
-            <div class="h __h_m search-res_cnt_i_b_h">Книг библиотеки: {{count($books)}}</div>
+            @if (count($books))
+                <div class="h __h_m search-res_cnt_i_b_h">Книг библиотеки: {{count($books)}}</div>
                 <ul class="search-res_section-lst">
                     @foreach ($books as $book)
                         <li class="search-res_section-lst_i"><a href="{{route('library.book', ["id"    =>  $book->id])}}" class="search-res_section-lst_i_lk">{{$book->title}}</a></li>
                     @endforeach
                 </ul>
-            </div>
-        @endif
-            <!--<ul class="search-res_section-lst">
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-                <li class="search-res_section-lst_i"><a href="" class="search-res_section-lst_i_lk">План маркетинговых мероприятий</a>
-                    <ul class="search-res_section-lst_breadcrumbs">
-                        <li class="search-res_section-lst_breadcrumbs_i">Документы</li>
-                        <li class="search-res_section-lst_breadcrumbs_i">Планы маркетинговых мероприятий</li>
-                    </ul>
-                </li>
-            </ul>-->
+            @endif
+        </div>
     </div>
 </div>
 @endsection

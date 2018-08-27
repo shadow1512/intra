@@ -73,7 +73,6 @@ class SearchController extends Controller
             foreach($words as $word) {
                 $word=  trim($word);
                 if(mb_strlen($word, "UTF-8")) {
-                    var_dump($word);
                     //Если email, то со словом ничего не надо делать
                     $validator = Validator::make(array('word'   =>  $word), [
                         'word'           =>  'email',
@@ -84,23 +83,18 @@ class SearchController extends Controller
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                         //вот теперь можно убрать лишнее
-                        var_dump("after-correction:" .   $word);
                         $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
                         //с цифрами ничего делать не надо
                         if(!is_int($word) && (mb_strlen($word) >= 3)) {
-                            var_dump($word);
-                            var_dump('letters_way');
                             /*Если человек вводит какое-то разумное слово, то если:
                                 - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                                 - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                             //слово есть в словаре
                             if(pspell_check($dict,  $word)) {
-                                var_dump('voc_present');
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
                             //Слово не нашлось в словаре
                             else {
-                                var_dump('not_in_voc');
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest    =   pspell_suggest($dict,   $word);
                                 //берем только первый вариант, остальные уже не то
@@ -113,6 +107,7 @@ class SearchController extends Controller
                                     //ищем как есть
                                     $words_records[]    =   $this->getSearchResultsByWord($word);
                                 }
+                                var_dump(count($this->getSearchResultsByWord($word)));
                             }
                         }
                         //цифры
@@ -257,7 +252,7 @@ class SearchController extends Controller
             }
         }
         else {
-            var_dump("empty");
+            //
         }
 
 

@@ -1,6 +1,7 @@
 @extends('layouts.search')
 
 @section('search')
+    @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))
 <ul class="search-res_lst">
     @if (count($users) || count($deps))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Сотрудники и отделы</a></li>
@@ -15,6 +16,8 @@
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Прочее</a></li>
     @endif
 </ul>
+    @else
+        <div class="search-res_cnt"><h3>Результатов по фразе &laquo;&laquo;{{$phrase}}&raquo;&raquo; не дал результатов. Проверьте правильность введения запроса и попробуйте еще раз. Или вернитесь <a href="{{route('/')}}">на главную</a></h3></div>
 <div class="search-res_cnt">
     <div class="search-res_cnt_i __no-pad">
         <div class="search-res_cnt_i_b-right">

@@ -107,7 +107,7 @@ class SearchController extends Controller
                                     //ищем как есть
                                     $words_records[]    =   $this->getSearchResultsByWord($word);
                                 }
-                                var_dump(count($this->getSearchResultsByWord($word)));
+                                var_dump($words_records);
                             }
                         }
                         //цифры

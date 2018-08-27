@@ -69,40 +69,49 @@ class SearchController extends Controller
             //итоговый массив со взвешенным списком
             $words_records = array();
             foreach($words as $word) {
+                var_dump($word);
                 //Если email, то со словом ничего не надо делать
                 $validator = Validator::make(array('word'   =>  $word), [
                     'word'           =>  'email',
                 ]);
                 //Если цифры или слова
                 if ($validator->fails()) {
+                    var_dump('word_way');
                     $word = preg_replace("/[^0-9A-zА-я]/", "", $word);
                     //с цифрами ничего делать не надо
                     if(!is_int($word) && (mb_strlen($word) >= 3)) {
+                        var_dump('letters_way');
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         if(pspell_check($dict,  $word)) {
+                            var_dump('voc_present');
                             $words_records[]    =   $this->getSearchResultsByWord($word);
                         }
                         //Слово не нашлось в словаре
                         else {
+                            var_dump('not_in_voc');
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest    =   pspell_suggest($dict,   $word);
                             //берем только первый вариант, остальные уже не то
                             if(count($suggest)) {
+                                var_dump($suggest);
                                 $word=  $suggest[0];
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
                             //если нет предложений, значит, нужно попробовать сменить раскладку
                             else {
+                                var_dump('correction');
                                 $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                                var_dump($word);
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
                         }
                     }
                     //цифры
                     if(is_int($word)) {
+                        var_dump('digit_way');
                         $digit_results  =   array();
                         $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
                         if(count($word_search_records)) {
@@ -117,6 +126,7 @@ class SearchController extends Controller
                     }
                 }
                 else {
+                    var_dump('email_way');
                     //email будем искать только по той части, что до @, просто потому, что все, что после люди путают
                     $email_parts    =   explode("@",    $word);
                     if(count($email_parts) > 1) {
@@ -148,17 +158,18 @@ class SearchController extends Controller
     }
 
     private function getSearchResultsByWord($word) {
+        var_dump('byword_search_start');
         $word_records = array();
 
         $word = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
-
+        var_dump($word);
         //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
         $syns_records   =   $this->getSearchResultsBySyns($word);
         //синонимы закончены
 
         //Продолжаем со словом
         $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
-
+        var_dump($word_search_records);
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
         if(count($syns_records) && !count($word_search_records)) {
             $word_records    =   $syns_records;

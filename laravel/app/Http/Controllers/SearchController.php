@@ -94,18 +94,23 @@ class SearchController extends Controller
                             }
                             //Слово не нашлось в словаре
                             else {
+                                $total_found_by_word    =   0;
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest    =   pspell_suggest($dict,   $word);
                                 //берем только первый вариант, остальные уже не то
                                 if(count($suggest)) {
                                     $word=  $suggest[0];
                                     //var_dump($word);
-                                    $words_records[]    =   $this->getSearchResultsByWord($word);
+                                    $res= $this->getSearchResultsByWord($word);
+                                    $words_records[]    =   $res;
+                                    $total_found_by_word    =   count($res);
+                                    unset($res);
                                 }
-                                else {
+                                if(!$total_found_by_word)
                                     //ищем как есть
                                     $words_records[]    =   $this->getSearchResultsByWord($word);
                                 }
+                                if(count)
                             }
                         }
                         //цифры
@@ -355,10 +360,7 @@ class SearchController extends Controller
     //Функция поиска результатов по синониму к слову
     private function getSearchResultsBySyns($word) {
         var_dump($word);
-        DB::enableQueryLog();
-        $syns   =    DB::table("syns")->where('term',   'LIKE',  $word);
-        $query = DB::getQueryLog();
-        print_r($query);
+        $syns   =   Syns::where('term','LIKE',  $word);
         $syns_records = array();
         if(count($syns)) {
             //Сюда будем складывать обработанные результаты по каждой найденной фразе-синониму

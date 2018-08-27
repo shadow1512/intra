@@ -54,7 +54,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('local')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->fname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->fname);
             //Фамилия
 
             $term = new Terms();
@@ -67,7 +67,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('local')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->lname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->lname);
             //Отчество
 
             $term = new Terms();
@@ -80,7 +80,7 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            Storage::disk('local')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->mname);
+            Storage::disk('public')->append(Config::get('dict.dict_path') .   '/pspell_custom.txt', $user->mname);
             //Номер комнаты
 
             if(trim($user->room)) {

@@ -81,6 +81,7 @@ class SearchController extends Controller
                     if ($validator->fails()) {
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                        var_dump($word);
                         //вот теперь можно убрать лишнее
                         $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
                         //с цифрами ничего делать не надо

@@ -169,7 +169,13 @@ class SearchController extends Controller
         var_dump('byword_search_start');
         $word_records = array();
 
-        $word = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
+        $forms = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
+        if(count($forms)) {
+            $word = $forms[0];
+        }
+        else {
+            $word=  trim(mb_strtoupper($word, "UTF-8"));
+        }
         var_dump($word);
         //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
         $syns_records   =   $this->getSearchResultsBySyns($word);
@@ -177,7 +183,7 @@ class SearchController extends Controller
 
         //Продолжаем со словом
         $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
-        var_dump($word_search_records);
+        var_dump(count($word_search_records));
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
         if(count($syns_records) && !count($word_search_records)) {
             $word_records    =   $syns_records;
@@ -261,7 +267,13 @@ class SearchController extends Controller
                     $syn_word = preg_replace("/[^0-9A-zА-я]/", "", $syn_word);
                     //с цифрами ничего делать не надо
                     if(mb_strlen($syn_word) >= 3) {
-                        $syn_word = Morphy::getBaseForm(trim(mb_strtoupper($syn_word, "UTF-8")));
+                        $forms = Morphy::getBaseForm(trim(mb_strtoupper($syn_word, "UTF-8")));
+                        if(count($forms)) {
+                            $syn_word   =   $forms[0];
+                        }
+                        else {
+                            $syn_word = trim(mb_strtoupper($syn_word, "UTF-8"));
+                        }
                         $syn_records[]  =  Terms::where('baseterm', 'LIKE', $syn_word)->get();
                         $parsed_syn_words   ++;
                     }

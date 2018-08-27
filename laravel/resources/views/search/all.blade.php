@@ -18,6 +18,7 @@
 </ul>
     @else
         <div class="search-res_cnt"><h3>Результатов по фразе &laquo;&laquo;{{$phrase}}&raquo;&raquo; не дал результатов. Проверьте правильность введения запроса и попробуйте еще раз. Или вернитесь <a href="{{route('/')}}">на главную</a></h3></div>
+    @endif
 <div class="search-res_cnt">
     <div class="search-res_cnt_i __no-pad">
         <div class="search-res_cnt_i_b-right">

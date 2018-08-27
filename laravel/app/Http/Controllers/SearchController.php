@@ -106,7 +106,7 @@ class SearchController extends Controller
                                     $total_found_by_word    =   count($res);
                                     unset($res);
                                 }
-                                if(!$total_found_by_word)
+                                if(!$total_found_by_word) {
                                     //ищем как есть
                                     $words_records[]    =   $this->getSearchResultsByWord($word);
                                 }

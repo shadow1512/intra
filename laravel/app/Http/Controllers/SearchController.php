@@ -146,7 +146,6 @@ class SearchController extends Controller
                     }
                 }
             }
-            var_dump($words_records);
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
@@ -155,7 +154,6 @@ class SearchController extends Controller
                 for($i = 0; $i < $parsed_words; $i++) {
                     $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
                 }
-                var_dump($found_sections);
                 //все уникальные найденные разделы
                 $found_sections =   array_unique($found_sections);
                 foreach($found_sections as $section) {
@@ -175,11 +173,13 @@ class SearchController extends Controller
                     }
                     asort($search_result[$section]);
                 }
+                var_dump($search_result);
                 //начинаем теперь пляски с базой
                 switch($found_sections) {
                     case 'users':
                         $user_ids   =   array_keys($search_result['users']);
                         $found_records  =   User::find($user_ids);
+                        var_dump($found_records);
                         $assoc_records  =   array();
                         foreach($found_records as $record) {
                             $assoc_records[$record->id] =   $record;

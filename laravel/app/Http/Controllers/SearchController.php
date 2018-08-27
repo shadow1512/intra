@@ -96,11 +96,11 @@ class SearchController extends Controller
                         else {
                             var_dump('not_in_voc');
                             //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest    =   pspell_suggest($dict,   $word);
+                            $suggest    =   pspell_suggest($dict,   mb_convert_encoding($word,  "KOI8-R",   "UTF-8"));
                             //берем только первый вариант, остальные уже не то
                             if(count($suggest)) {
-                                var_dump($suggest);
-                                $word=  $suggest[0];
+                                $word=  mb_convert_encoding($suggest[0],  "UTF-8",  "KOI8-R");
+                                var_dump($word);
                                 $words_records[]    =   $this->getSearchResultsByWord($word);
                             }
                             //если нет предложений, значит, нужно попробовать сменить раскладку

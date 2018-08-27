@@ -375,6 +375,7 @@ class SearchController extends Controller
     //Функция поиска результатов по синониму к слову
     private function getSearchResultsBySyns($word) {
         $syns   =   Syns::where('term','LIKE',  $word)->get();
+        var_dump($syns);
         $syns_records = array();
         if(count($syns)) {
             var_dump($word);

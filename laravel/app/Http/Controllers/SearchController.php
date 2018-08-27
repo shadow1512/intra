@@ -56,7 +56,7 @@ class SearchController extends Controller
         - если в разделе нет совпадений, то внутри раздела запускаем поиск по частям каждого слова (т.е. полученный термин обрамляется %)
         - смотрим идентификаторы записей, которые набрали наибольшее количество совпадений - их выносим наверх по взвешиванию */
 
-        $news = $users = $deps = $books = $razdels  =   $found_sections =   array();
+        $news = $users = $deps = $books = $razdels  =  $docs    =    $found_sections =   array();
 
         $phrase = trim($request->input('phrase'));
         $phrase = mb_substr($phrase, 0, 100);

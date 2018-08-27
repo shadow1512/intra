@@ -157,94 +157,94 @@ class SearchController extends Controller
                 //все уникальные найденные разделы
                 $found_sections =   array_unique($found_sections);
                 foreach($found_sections as $section) {
-                    $search_result[$section]    =   array();
-                    for($i = 0; $i < $parsed_words; $i++) {
-                        if(isset($words_records[$i][$section])) {
-                            foreach($words_records[$i][$section] as $record=>   $total) {
-                                if(array_key_exists($record,    $search_result[$section])) {
-                                    $search_result[$section][$record]   = $search_result[$section][$record] + 1000000;
-                                }
-                                else {
-                                    $search_result[$section][$record]   = $total;
+                    $search_result[$section] = array();
+                    for ($i = 0; $i < $parsed_words; $i++) {
+                        if (isset($words_records[$i][$section])) {
+                            foreach ($words_records[$i][$section] as $record => $total) {
+                                if (array_key_exists($record, $search_result[$section])) {
+                                    $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
+                                } else {
+                                    $search_result[$section][$record] = $total;
                                 }
                             }
 
                         }
                     }
                     asort($search_result[$section]);
-                }
-                //начинаем теперь пляски с базой
-                switch($section) {
-                    case 'users':
-                        $user_ids   =   array_keys($search_result['users']);
-                        $found_records  =   User::find($user_ids);
-                        $assoc_records  =   array();
-                        foreach($found_records as $record) {
-                            $assoc_records[$record->id] =   $record;
-                        }
-                        foreach($user_ids as $user_id) {
-                            $users[]    =   $assoc_records[$user_id];
-                        }
-                        unset($found_records);
-                        unset($assoc_records);
-                        break;
 
-                    case 'deps':
-                        $dep_ids   =   array_keys($search_result['deps']);
-                        $found_records  =   Dep::find($dep_ids);
-                        $assoc_records  =   array();
-                        foreach($found_records as $record) {
-                            $assoc_records[$record->id] =   $record;
-                        }
-                        foreach($dep_ids as $dep_id) {
-                            $deps[]    =   $assoc_records[$dep_id];
-                        }
-                        unset($found_records);
-                        unset($assoc_records);
-                        break;
+                    //начинаем теперь пляски с базой
+                    switch ($section) {
+                        case 'users':
+                            $user_ids = array_keys($search_result['users']);
+                            $found_records = User::find($user_ids);
+                            $assoc_records = array();
+                            foreach ($found_records as $record) {
+                                $assoc_records[$record->id] = $record;
+                            }
+                            foreach ($user_ids as $user_id) {
+                                $users[] = $assoc_records[$user_id];
+                            }
+                            unset($found_records);
+                            unset($assoc_records);
+                            break;
 
-                    case 'librazdels':
-                        $lrazdel_ids   =   array_keys($search_result['librazdels']);
-                        $found_records  =   LibRazdel::find($lrazdel_ids);
-                        $assoc_records  =   array();
-                        foreach($found_records as $record) {
-                            $assoc_records[$record->id] =   $record;
-                        }
-                        foreach($lrazdel_ids as $lrazdel_id) {
-                            $razdels[]    =   $assoc_records[$lrazdel_id];
-                        }
-                        unset($found_records);
-                        unset($assoc_records);
-                        break;
+                        case 'deps':
+                            $dep_ids = array_keys($search_result['deps']);
+                            $found_records = Dep::find($dep_ids);
+                            $assoc_records = array();
+                            foreach ($found_records as $record) {
+                                $assoc_records[$record->id] = $record;
+                            }
+                            foreach ($dep_ids as $dep_id) {
+                                $deps[] = $assoc_records[$dep_id];
+                            }
+                            unset($found_records);
+                            unset($assoc_records);
+                            break;
 
-                    case 'libbooks':
-                        $lbook_ids   =   array_keys($search_result['libbooks']);
-                        $found_records  =   LibBook::find($lbook_ids);
-                        $assoc_records  =   array();
-                        foreach($found_records as $record) {
-                            $assoc_records[$record->id] =   $record;
-                        }
-                        foreach($lbook_ids as $lbook_id) {
-                            $books[]    =   $assoc_records[$lbook_id];
-                        }
-                        unset($found_records);
-                        unset($assoc_records);
-                        break;
+                        case 'librazdels':
+                            $lrazdel_ids = array_keys($search_result['librazdels']);
+                            $found_records = LibRazdel::find($lrazdel_ids);
+                            $assoc_records = array();
+                            foreach ($found_records as $record) {
+                                $assoc_records[$record->id] = $record;
+                            }
+                            foreach ($lrazdel_ids as $lrazdel_id) {
+                                $razdels[] = $assoc_records[$lrazdel_id];
+                            }
+                            unset($found_records);
+                            unset($assoc_records);
+                            break;
 
-                    case 'news':
-                        $news_ids   =   array_keys($search_result['news']);
-                        $found_records  =   News::find($news_ids);
-                        $assoc_records  =   array();
-                        foreach($found_records as $record) {
-                            $assoc_records[$record->id] =   $record;
-                        }
-                        foreach($news_ids as $news_id) {
-                            $news[]    =   $assoc_records[$news_id];
-                        }
-                        unset($found_records);
-                        unset($assoc_records);
-                        break;
+                        case 'libbooks':
+                            $lbook_ids = array_keys($search_result['libbooks']);
+                            $found_records = LibBook::find($lbook_ids);
+                            $assoc_records = array();
+                            foreach ($found_records as $record) {
+                                $assoc_records[$record->id] = $record;
+                            }
+                            foreach ($lbook_ids as $lbook_id) {
+                                $books[] = $assoc_records[$lbook_id];
+                            }
+                            unset($found_records);
+                            unset($assoc_records);
+                            break;
 
+                        case 'news':
+                            $news_ids = array_keys($search_result['news']);
+                            $found_records = News::find($news_ids);
+                            $assoc_records = array();
+                            foreach ($found_records as $record) {
+                                $assoc_records[$record->id] = $record;
+                            }
+                            foreach ($news_ids as $news_id) {
+                                $news[] = $assoc_records[$news_id];
+                            }
+                            unset($found_records);
+                            unset($assoc_records);
+                            break;
+
+                    }
                 }
             }
         }

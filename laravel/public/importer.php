@@ -19,8 +19,7 @@ if(isset($argv[1]) && ($argv[1] == 'parents')) {
     createDepartmentParents($conn);
     exit();
 }
-//$ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
-$ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken');
+$ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 curl_setopt($ch, CURLOPT_USERPWD, 'integra:Att3r0D0min4tu5');

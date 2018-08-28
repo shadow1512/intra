@@ -336,10 +336,10 @@ class SearchController extends Controller
                             $records=   array_unique(array_merge(array_keys($syns_records[$section]), array_keys($by_razdels[$section])));
                             foreach($records as $record) {
                                 $total_value = 0;
-                                if(isset($record,   $by_razdels[$section])) {
+                                if(array_key_exists($record,   $by_razdels[$section])) {
                                     $total_value += $by_razdels[$section][$record] * 10000;
                                 }
-                                if(isset($record,   $syns_records[$section])) {
+                                if(array_key_exists(($record,   $syns_records[$section])) {
                                     $total_value += $syns_records[$section][$record];
                                 }
                                 $section_records[$record]    = $total_value;

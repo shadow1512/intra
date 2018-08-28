@@ -337,7 +337,7 @@ class SearchController extends Controller
                             foreach($records as $record) {
                                 $total_value = 0;
                                 if(array_key_exists($record,   $by_razdels[$section])) {
-                                    $total_value += $by_razdels[$section][$record] * 10000;
+                                    $total_value += $by_razdels[$section][$record];
                                 }
                                 if(array_key_exists($record,   $syns_records[$section])) {
                                     $total_value += $syns_records[$section][$record];

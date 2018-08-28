@@ -379,6 +379,7 @@ class SearchController extends Controller
         if(count($syns)) {
             //Сюда будем складывать обработанные результаты по каждой найденной фразе-синониму
             $parsed_syn_phrases =   0;
+            //сейчас будет работать только для последнего синонима
             foreach($syns as $syn) {
                 //Сюда будем складывать обработанные результаты по каждому слову из фразы-синонима
                 $syn_records = array();
@@ -414,66 +415,51 @@ class SearchController extends Controller
                 //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
                 if($parsed_syn_words > 0) {
                     //по каждому отработанному слову проверяем найденные записи в индексе
+                    //для начала нужно понять, какие секции нашлись
+                    $found_sections =   array();
                     for($i = 0; $i < $parsed_syn_words; $i++) {
-                        //Нам интересно искать по разделам
-                        foreach($syn_records[$i] as $record) {
-                            $by_razdels[$record->section][$i][] =   $record->record;
+                        foreach ($syn_records[$i] as $record) {
+                            $found_sections[] = $record->section;
                         }
-                        /*Нам не наплевать, что слово может встретиться для одной записи несколько раз. Например, для сотрудника в имени и отчестве
+                    }
+                    $found_sections    =   array_unique($found_sections);
+
+                    for($i = 0; $i < $parsed_syn_words; $i++) {
+                        foreach($found_sections as $section) {
+                            $by_razdels[$section][$i]   =   array();
+                            foreach ($syn_records[$i] as $record) {
+                                if($section==   $record->section) {
+                                    $by_razdels[$section][$i][] =   $record->record;
+                                }
+                            }
+                            /*Нам не наплевать, что слово может встретиться для одной записи несколько раз. Например, для сотрудника в имени и отчестве
                             (Иван Иванович) или в новости в заголовке и тексе (или в тексте несколько раз). Куда важнее по каким разным поисковым терминам
                             запись вошла в выборку. Но при прочих равных надо учитывать количество вхождений*/
-                        foreach($by_razdels as $section =>  $by_word) {
-                            $record_word_counter[$section][$i]  =   array_count_values($by_razdels[$section][$i]);
-                            $by_razdels[$section][$i]           =   array_unique($by_razdels[$section][$i]);
+                            $by_razdels[$section][$i]   =   array_count_values($by_razdels[$section][$i]);
                         }
                     }
-                    //Теперь считаем сколько раз запись вошла в результат по каждому слову
+
+
+                    //Теперь считаем сколько раз запись вошла в результат-секцию по каждому слову
                     foreach($by_razdels as $section =>  $by_word) {
-                        $by_razdels[$section]['total'] = array();
-                        for($i = 0; $i < $parsed_syn_words; $i++) {
-                            $by_razdels[$section]['total'] = array_merge($by_razdels[$section]['total'],    $by_razdels[$section][$i]);
-                            unset($by_razdels[$section][$i]);
-                        }
-                        $record_word_counter[$section]['total']  =   array_count_values($by_razdels[$section]['total']);
-
-                        foreach($record_word_counter[$section]['total'] as $record  =>  $numcount) {
-                            /*Чем по большему количеству слов нашлась запись, тем выше ценность (умножаем на 1000).
-                            На 1000 потому что, если бы было на 10, то можно было бы 10 присутствиями одного слова в тексте компенсировать присутствие двух слов*/
-                            $record_word_counter[$section]['total'][$record]    =   $numcount   *   1000;
-                            for($i = 0; $i < $parsed_syn_words; $i++) {
-                                //если были несколько вхождений для одного слова, то надо добавить
-                                if(array_key_exists($record,    $record_word_counter[$section][$i])) {
-                                    $record_word_counter[$section]['total'][$record] = $record_word_counter[$section]['total'][$record] + $record_word_counter[$section][$i][$record];
-                                }
-                            }
-                        }
-
-                        asort($record_word_counter[$section]['total']);
-                    }
-                }
-
-                //Складдываем в одно хранилище для всех записей синонимов
-                if(count($record_word_counter)) {
-
-                    foreach($record_word_counter as $section    =>  $record_counter) {
                         if(!isset($syns_records[$section])) {
-                            $syns_records[$section] =   $record_counter['total'];
+                            $syns_records[$section] = array();
                         }
-                        else {
-                            foreach($record_counter as $record  => $weight) {
-                                if(array_key_exists($record,    $syns_records[$section])) {
-                                    $syns_records[$section][$record]    =   $syns_records[$section][$record] + $weight;
-                                }
-                                else {
-                                    $syns_records[$section][$record] = $weight;
+                        for($i = 0; $i < $parsed_syn_words; $i++) {
+                            $syns_records[$section] = array_merge($syns_records[$section],    array_keys($by_razdels[$section][$i]));
+                        }
+                        $syns_records[$section] =   array_count_values($syns_records[$section]);
+                        //теперь учтем более важное количество вхождения записи в результат по слову + количество вхождений записи в рамках одного слова
+                        foreach($syns_records[$section] as $record_id   =>  $numcounts) {
+                            $syns_records[$section][$record_id] =   $numcounts * 1000;
+                            for($i = 0; $i < $parsed_syn_words; $i++) {
+                                if(array_key_exists($record_id, $by_razdels[$section][$i])) {
+                                    $syns_records[$section][$record_id] =   $syns_records[$section][$record_id] +$by_razdels[$section][$i][$record_id];
                                 }
                             }
                         }
-                        asort($syns_records[$section]);
+                        asort($sybs_records[$section]);
                     }
-
-                    $parsed_syn_phrases ++;
-                    unset($record_word_counter);
                 }
             }
 

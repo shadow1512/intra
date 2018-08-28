@@ -34,7 +34,7 @@ if($status_code == 200) {
         $tok = trim($m[1]);
     }
 }
-print_r("Auth passed");
+print_r("Auth passed\r\n");
 curl_close($ch);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
@@ -150,7 +150,9 @@ if($status_code == 200) {
 
     }
 }
-
+else {
+    var_dump($status_code);
+}
 function createDepartmentParents($conn) {
     $deps = mysqli_query($conn, "SELECT * FROM deps_keys");
     if($deps) {

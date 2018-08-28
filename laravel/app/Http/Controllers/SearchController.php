@@ -143,11 +143,10 @@ class SearchController extends Controller
                         }
                     }
                     else {
-                        var_dump('email_way');
                         //email будем искать только по той части, что до @, просто потому, что все, что после люди путают
                         $email_parts    =   explode("@",    $word);
                         if(count($email_parts) > 1) {
-                            $email_part=   $email_parts[0];
+                            $email_part=   trim(mb_strtoupper($email_parts[0],  "UTF-8"));
                             $email_results  =   array();
                             $word_search_records  =  Terms::where('baseterm', 'LIKE', $email_part.  '%')->get();
                             if(count($word_search_records)) {

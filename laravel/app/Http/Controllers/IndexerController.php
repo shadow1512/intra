@@ -107,6 +107,16 @@ class IndexerController extends Controller
                 $term->save();
             }
 
+            //email
+            if(trim($user->email)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->email, "UTF-8"));
+                $term->term = $user->email;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->save();
+            }
+
             //должность. Тут веселее, т.к. состоит из нескольких слов
             if(trim($user->work_title)) {
                 $words = explode(" ", $user->work_title);

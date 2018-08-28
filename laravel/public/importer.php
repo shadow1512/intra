@@ -35,6 +35,7 @@ if($status_code == 200) {
     }
 }
 print_r("Auth passed\r\n");
+print_r("Token:"    .   $tpl    .   "\r\n");
 curl_close($ch);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');

@@ -86,7 +86,7 @@ if($status_code == 200) {
                         var_dump($obj_authdata);exit();
                     }
                     else {
-                        var_dump($url_data);var_dump($status_code_data);
+                        var_dump($url_data);var_dump($status_code_data);exit();
                     }
                 }
                 else {

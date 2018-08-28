@@ -411,7 +411,6 @@ class SearchController extends Controller
                 }
 
                 $by_razdels = array();
-                $record_word_counter = array();
                 //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
                 if($parsed_syn_words > 0) {
                     //по каждому отработанному слову проверяем найденные записи в индексе
@@ -458,7 +457,7 @@ class SearchController extends Controller
                                 }
                             }
                         }
-                        asort($sybs_records[$section]);
+                        asort($syns_records[$section]);
                     }
                 }
             }

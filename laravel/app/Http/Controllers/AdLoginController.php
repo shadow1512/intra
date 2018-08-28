@@ -27,9 +27,10 @@ class AdLoginController extends Controller
      */
     public function login(Request $request)
     {
-
+echo 'a';
         if (Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass'))) {
             $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
+            var_dump($user);
             if($user) {
                 $guid = $user->getConvertedGuid();
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.key', '=', $guid)->limit(1)->first();

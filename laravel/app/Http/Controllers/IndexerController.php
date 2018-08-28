@@ -37,10 +37,6 @@ class IndexerController extends Controller
         Terms::truncate();
         //создаем файлик, в который потом добавим в словарь
         // Setup the personal dictionary
-        $pspell_config = pspell_config_create("ru", "", "", "koi8-r");
-        pspell_config_mode($pspell_config,  PSPELL_NORMAL);
-        pspell_config_personal($pspell_config, storage_path('app/public/dict/pspell_custom.aspell.ru.pws'));
-        $pspell_link = pspell_new_config($pspell_config);
 
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
@@ -59,7 +55,6 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim( mb_convert_encoding(mb_strtolower($user->fname,   "UTF-8"),  "KOI8-R",   "UTF-8")));
             //Фамилия
 
             $term = new Terms();
@@ -72,7 +67,6 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim(mb_convert_encoding(mb_strtolower($user->lname,   "UTF-8"),  "KOI8-R",   "UTF-8")));
             //Отчество
 
             $term = new Terms();
@@ -85,7 +79,6 @@ class IndexerController extends Controller
             $term->record = $user->id;
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim(mb_convert_encoding(mb_strtolower($user->mname,   "UTF-8"),  "KOI8-R",   "UTF-8")));
             //Номер комнаты
 
             if(trim($user->room)) {
@@ -298,10 +291,6 @@ class IndexerController extends Controller
                 }
             }
         }
-
-        // Save the wordlist
-        pspell_save_wordlist($pspell_link);
-
     }
 
 

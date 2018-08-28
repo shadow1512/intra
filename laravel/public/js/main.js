@@ -13,7 +13,7 @@ $(document).ready(function(){
             }
         });
         if($("#hide_search_form").hasClass("hidden")) {
-            $("div.directory_searchform").parent().addClass("__hidden");
+            $("form.directory_searchform").parent().addClass("__hidden");
         }
     });
     $("a.header_search_btn").on("click", function(ev) {

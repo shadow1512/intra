@@ -33,9 +33,13 @@ if($status_code == 200) {
     $header = substr($res, 0, $header_size);
     if (preg_match('#^Token:\s*(.*)$#mi', $header, $m)) {
         $tok = trim($m[1]);
+        print_r("Auth passed\r\n");
     }
 }
-print_r("Auth passed\r\n");
+else {
+    print_r($status_code . "/r/n");
+}
+
 print_r("Token:"    .   $tok    .   "\r\n");
 curl_close($ch);
 

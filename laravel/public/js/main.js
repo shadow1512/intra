@@ -3,15 +3,19 @@
  */
 $(document).ready(function(){
 
-    $("a.directory_search").on("click",    function() {
+    $("a.directory_search").on("click",    function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).addClass("__hidden");
         var current_id  =   $(this).attr("id");
         $("a.directory").each(function() {
             if($(this).attr("id")   !=  current_id) {
                 $(this).removeClass("__hidden");
             }
-        })
-    })
+        });
+        if($("#hide_search_form").hasClass("hidden")) {
+            $("div.directory_searchform").parent().addClass("__hidden");
+        }
+    });
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
        $(this).parent().parent().submit();

@@ -348,7 +348,7 @@ class SearchController extends Controller
                         else {
                             $records=   array_keys($by_razdels[$section]);
                             foreach($records as $record) {
-                                $section_records[$record]    = $by_razdels[$section][$record] * 10000;
+                                $section_records[$record]    = $by_razdels[$section][$record];
                             }
                         }
                     }

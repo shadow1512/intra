@@ -84,9 +84,9 @@ class SearchController extends Controller
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                         //вот теперь можно убрать лишнее
                         $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
-                        var_dump($word);exit();
                         //с цифрами ничего делать не надо
                         if(!is_int($word) && (mb_strlen($word) >= 3)) {
+                            echo 'word-way';exit();
                             /*Если человек вводит какое-то разумное слово, то если:
                                 - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                                 - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
@@ -130,7 +130,8 @@ class SearchController extends Controller
                         }
                         //цифры
                         if(is_int($word)) {
-                            var_dump($word);
+                            echo 'digit-way';
+                            var_dump($word);exit();
                             $digit_results  =   array();
                             $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
                             if(count($word_search_records)) {

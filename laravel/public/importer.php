@@ -34,7 +34,7 @@ if($status_code == 200) {
         $tok = trim($m[1]);
     }
 }
-
+print_r("Auth passed");
 curl_close($ch);
 
 $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
@@ -45,6 +45,7 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 $res = curl_exec($ch);
 $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 if($status_code == 200) {
+    print_r("Structure starting");
     $tree = json_decode($res);
     foreach($tree as $obj) {
         if($obj->Active === true) {
@@ -113,7 +114,7 @@ if($status_code == 200) {
                             var_dump($obj_authdata);exit();
                         }
                         else {
-                            var_dump($status_code_data);
+                            var_dump($status_code_data);exit();
                         }
                         $date = date("Y-m-d H:i:s");
                         $insres = mysqli_query($conn,

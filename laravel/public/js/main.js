@@ -15,6 +15,9 @@ $(document).ready(function(){
         if($("#hide_search_form").hasClass("hidden")) {
             $("form.directory_searchform").parent().addClass("__hidden");
         }
+        else {
+            $("form.directory_searchform").parent().removeClass("__hidden");
+        }
     });
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

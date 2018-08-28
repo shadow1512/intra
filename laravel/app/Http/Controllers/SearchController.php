@@ -368,7 +368,7 @@ class SearchController extends Controller
                 $word_records   =   $by_razdels;
             }
         }
-
+        var_dump($word_records);
         return $word_records;
     }
 

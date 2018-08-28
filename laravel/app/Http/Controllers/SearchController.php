@@ -189,7 +189,7 @@ class SearchController extends Controller
 
                         }
                     }
-                    rsort($search_result[$section]);
+                    arsort($search_result[$section]);
 
                     //начинаем теперь пляски с базой
                     switch ($section) {
@@ -321,7 +321,7 @@ class SearchController extends Controller
                 запись вошла в выборку. Но при прочих равных надо учитывать количество вхождений*/
             foreach($by_razdels as $section =>  $records) {
                 $by_razdels[$section]  =   array_count_values($records);
-                rsort($by_razdels[$section]);
+                arsort($by_razdels[$section]);
             }
 
             //var_dump($by_razdels);
@@ -360,7 +360,7 @@ class SearchController extends Controller
                             }
                         }
                     }
-                    rsort($section_records);
+                    arsort($section_records);
                     $word_records[$section]    =    $section_records;
                 }
             }
@@ -456,7 +456,7 @@ class SearchController extends Controller
                                 }
                             }
                         }
-                        rsort($syns_records[$section]);
+                        arsort($syns_records[$section]);
                     }
                 }
             }

@@ -12,6 +12,8 @@
   padding: 25px 30px
   border-bottom: 1px solid $border
   @include transition(all .15s ease-in)
+  &:first-child
+    border-top: 1px solid $border
   &:last-child
     border-bottom: none
   &:hover
@@ -184,6 +186,15 @@
 
 .search-res_cnt
   border: 1px solid $border
+
+.search-res_cnt_nothing
+  background-color: $clear
+  padding: 30px
+  text-align: center
+
+.search-res_cnt_nothing_h
+  font-size: 30px
+  font-weight: bold
 
 .search-res_cnt_i
   display: none

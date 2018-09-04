@@ -16,7 +16,7 @@ gulp.task('sass', function () {
 });
 
 gulp.task('concat',function () {
-    return gulp.src(['./resources/styles/css/fonts.css', './resources/styles/css/base.css', './resources/styles/css/header.css', './resources/styles/css/main.css', './resources/styles/css/dinner.css', './resources/styles/css/directory.css', './resources/styles/css/docs.css', './resources/styles/css/library.css', './resources/styles/css/order.css', './resources/styles/css/profile.css', './resources/styles/css/project.css', './resources/styles/css/cosmetic.css'])
+    return gulp.src(['./resources/styles/css/base.css', './resources/styles/css/header.css', './resources/styles/css/main.css', './resources/styles/css/dinner.css', './resources/styles/css/directory.css', './resources/styles/css/docs.css', './resources/styles/css/library.css', './resources/styles/css/order.css', './resources/styles/css/profile.css', './resources/styles/css/project.css', './resources/styles/css/cosmetic.css'])
         .pipe(concat('styles.css'))
         .pipe(autoprefixer({
             browsers: ['> 1%', 'IE 8', 'last 20 versions'],

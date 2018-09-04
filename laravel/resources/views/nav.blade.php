@@ -6,7 +6,7 @@
                 @if (count($contacts))
             <ul class="main_top_phones_lst">
                     @foreach($contacts as $item)
-                <li class="main_top_phones_lst_i"><a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_lst_i_lk">{{$item->lname}} {{$item->fname}} {{$item->mname}}</a></li>
+                <li class="main_top_phones_lst_i"><a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_lst_i_lk" title="{{$item->lname}} {{$item->fname}} {{$item->mname}}">{{$item->lname}} {{$item->fname}} {{$item->mname}}</a></li>
                     @endforeach
             </ul>
                 @endif

@@ -295,7 +295,8 @@ class IndexerController extends Controller
 
     public function dirloader() {
 
-        $olddict    =   simplexml_load_file(Storage::disk('public')->get('/xml/sprav.xml'));
+        $xmlstring  =   file_get_contents(Storage::disk('public')->get('/xml/sprav.xml'));
+        $olddict    =   simplexml_load_string($xmlstring);
         var_dump($olddict);
     }
 

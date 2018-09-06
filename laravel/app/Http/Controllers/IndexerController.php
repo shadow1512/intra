@@ -19,6 +19,8 @@ use App\Terms;
 use cijic\phpMorphy\Facade\Morphy;
 use Illuminate\Support\Facades\Storage;
 use Config;
+use Illuminate\Support\Facades\Validator;
+
 
 class IndexerController extends Controller
 {
@@ -295,9 +297,49 @@ class IndexerController extends Controller
 
     public function dirloader() {
 
+        $record_counter =   0;
+        $processed_counter  =   0;
+
         $xmlstring  =   Storage::disk('public')->get('/xml/sprav.xml');
         $olddict    =   simplexml_load_string($xmlstring);
-        var_dump($olddict);
+        if($olddict->count() > 0) {
+            $items  =   $olddict->children();
+            foreach($items as $item) {
+                if(isset($item["phones"]["phone"]) && count($item["phones"]["phone"])) {
+                    foreach($item["phones"]["phone"] as $contact) {
+
+                        $validator = Validator::make(array('contact'   =>  $contact['value']), [
+                            'contact'           =>  'email',
+                        ]);
+                        if (!$validator->fails()) {
+                            $record =   User::where('email',    'LIKE', $contact['value'])->first();
+                            if(isset($item["bdate"]["value"]) && !empty($item["bdate"]["value"])) {
+                                $record->birthday   =   date("Y-m-d", strtotime($item["bdate"]["value"]));
+                            }
+                            if(isset($item["room"]["value"]) && !empty($item["room"]["value"])) {
+                                $record->room   =   $item["room"]["value"];
+                            }
+
+                            foreach($item["phones"]["phone"] as $contact_phone) {
+
+                                $validator = Validator::make(array('contact' => $contact_phone['value']), [
+                                    'contact' => 'email',
+                                ]);
+                                if ($validator->fails()) {
+                                    $record->phone   =   $contact_phone["value"];
+                                }
+                            }
+
+                            $record->save();
+                            $processed_counter ++;
+                        }
+                    }
+                }
+
+                $record_counter ++;
+            }
+        }
+        print_r($record_counter . " прочитано, "    .   $processed_counter  .   " обработано");
     }
 
 

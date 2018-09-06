@@ -172,7 +172,7 @@ $(document).ready(function(){
             } else {
                 $(this).addClass('__close');
             }
-            $(this).siblings(siblings).toggle(200);
+            $(this).siblings(siblings).toggle(250);
         })
     }
 

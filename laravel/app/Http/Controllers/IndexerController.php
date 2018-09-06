@@ -293,6 +293,12 @@ class IndexerController extends Controller
         }
     }
 
+    public function dirloader() {
+
+        $olddict    =   simplexml_load_file(Storage::disk('public')->get('/xml/sprav.xml'));
+        var_dump($olddict);
+    }
+
 
     /**
      * Show the form for creating a new resource.

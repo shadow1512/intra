@@ -133,7 +133,7 @@
 
 .menu_li_h
   color: $clear
-  font-family: $bold
+  font-weight: bold
   font-size: 16px
   opacity: 0.7
   position: relative
@@ -185,9 +185,8 @@
   color: $clear
   opacity: 0.6
   position: absolute
-  top: 50%
+  top: 6px
   right: 15px
-  margin-top: -10px
 
 .menu_li_inner
   background-color: $project-default-dark
@@ -198,7 +197,7 @@
   width: 250px
   visibility: hidden
   opacity: 0
-  @include transition(all .3s ease-in)
+  @include transition(all .2s ease-in)
 
 .menu_li_inner_lk
   color: $clear
@@ -380,17 +379,27 @@
   color: $clear
   font-size: 18px
   line-height: 22px
+  padding: 30px 15px 15px 15px
 
 .main_top_phones_people
-  padding: 30px 20px 15px 20px
   border-bottom: 1px solid rgba($clear, 0.2)
 
 .main_top_phones_lst
-  margin: 25px 0 0
-  padding: 0
+  margin: 0
+  padding: 0 15px 30px 15px
   list-style-type: none
-  height: 116px
+  height: 141px
   overflow: auto
+  &::-webkit-scrollbar
+    width: 8px
+  &::-webkit-scrollbar-track
+    background: #025691
+    border-radius: 5px
+  &::-webkit-scrollbar-thumb
+    background: #2b8ec6
+    border-radius: 5px
+  &::-webkit-scrollbar-thumb:hover
+    background: rgba(256, 256, 256, 0.8)
 
 .main_top_phones_lst_i
   margin: 0
@@ -399,6 +408,10 @@
     padding-bottom: 0
 
 .main_top_phones_lst_i_lk
+  white-space: nowrap
+  text-overflow: ellipsis
+  overflow: hidden
+  display: block
   color: $clear
   text-decoration: none
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTUiIHdpZHRoPSIxNSIgdmlld0JveD0iMCAwIDM2LjkxODAwNiAzNS4xIj48cGF0aCBkPSJNMjkuMjggMzUuMWMtLjIgMC0uNC0uMS0uNS0uMmwtMTAuMy03LjUtMTAuMyA3LjVjLS4zLjItLjguMi0xLjEgMHMtLjUtLjctLjMtMWwzLjktMTIuMS0xMC4zLTcuNWMtLjMtLjItLjUtLjctLjMtMSAuMS0uNC41LS42LjktLjZoMTIuN0wxNy41OC42Yy4xLS40LjUtLjYuOS0uNnMuOC4zLjkuNmwzLjkgMTIuMWgxMi43Yy40IDAgLjguMy45LjYuMS40IDAgLjgtLjMgMWwtMTAuMyA3LjUgMy45IDEyLjFjLjEuNCAwIC44LS4zIDEtLjIuMi0uNC4yLS42LjJ6bS0xMC44LTkuN2MuMiAwIC40LjEuNS4ybDguNSA2LjItMy4zLTEwYy0uMS0uNCAwLS44LjMtMWw4LjUtNi4yaC0xMC41Yy0uNCAwLS44LS4zLS45LS42bC0zLjMtMTAtMy4zIDEwYy0uMS40LS41LjYtLjkuNkgzLjU4bDguNSA2LjJjLjMuMi41LjcuMyAxbC0zLjMgMTAgOC41LTYuMmMuNS0uMS43LS4yLjktLjJ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)

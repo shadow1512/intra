@@ -18,7 +18,7 @@
         @if (Auth::check())
         <div class="header_login"><a href="" class="header_login_name ic-down __js_header_login">
                 <div class="header_login_name_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->fname}} {{Auth::user()->lname}}" class="header_login_name_img"></div>
-                <div class="header_login_name_tx">{{Auth::user()->fname}} {{Auth::user()->lname}}</div></a>
+                <div class="header_login_name_tx" title="{{Auth::user()->fname}} {{Auth::user()->lname}}">{{Auth::user()->fname}} {{Auth::user()->lname}}</div></a>
             <div class="header_login_nav __hidden">
                 <ul class="header_login_nav_ul">
                     <li class="header_login_nav_li"><a href="{{ route('profile') }}" class="header_login_nav_lk">Настройки профиля</a></li>
@@ -43,7 +43,7 @@
                         <button class="btn __full-width">Войти</button>
                     </div>
                 </form>
-                <div class="header_login_nav_lks"><!--<a href="" class="header_login_nav_lk">Зарегистрироваться</a><a href="" class="header_login_nav_lk __margin-top_m">Забыли пароль</a>--></div>
+                <!--<div class="header_login_nav_lks"><a href="" class="header_login_nav_lk">Зарегистрироваться</a><a href="" class="header_login_nav_lk __margin-top_m">Забыли пароль</a></div>-->
             </div>
         </div>
         @endif

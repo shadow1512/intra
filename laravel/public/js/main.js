@@ -21,8 +21,19 @@ $(document).ready(function(){
     });
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-       $(this).parent().parent().submit();
+        var searchValue = $("input.header_search_it").val();
+        localStorage.setItem('searchValue', searchValue);
+        $(this).parent().parent().submit();
     });
+
+    function getSavedValue (id){
+        if (!localStorage.getItem(id)) {
+            return "";
+        }
+        return localStorage.getItem(id);
+    }
+
+    $("input.header_search_it").val(getSavedValue('searchValue'));
 
     $(document).on("click", "a.logout", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
@@ -121,14 +132,38 @@ $(document).ready(function(){
     function open (link, cnt, parent) {
         $(link).on('click', function(event) {
             event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-            $(this).parents(parent).children(cnt).toggle();
+            $(this).parents(parent).children(cnt).toggle(250);
             $(parent).removeClass('__active');
             $(this).parents(parent).addClass('__active');
         })
     }
 
-    open('.__js_header_login', '.header_login_nav');
     open('.order_calendar_btn', '.order_calendar_cnt', '.order_calendar_i');
+
+    function toggleDropdown (link, cnt) {
+        $(link).click(function(event){
+            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+            myDropDown = $(this).next(cnt);
+            if( myDropDown.is(':visible') ) {
+                $(this).removeClass('__active');
+                myDropDown.fadeOut(200); 
+            } else {
+                myDropDown.fadeIn(200); 
+                $(this).addClass('__active');
+            }
+            return false; 
+        });
+
+        $('html').click(function(e) {
+            $(cnt).fadeOut(200);
+        });
+            
+        $(cnt).click(function(e){
+            e.stopPropagation();
+        });
+    }
+
+    toggleDropdown('.__js_header_login', '.header_login_nav');
 
     function toggleMenu (el, siblings) {
         $(el).click(function () {
@@ -137,7 +172,7 @@ $(document).ready(function(){
             } else {
                 $(this).addClass('__close');
             }
-            $(this).siblings(siblings).toggle(500);
+            $(this).siblings(siblings).toggle(250);
         })
     }
 

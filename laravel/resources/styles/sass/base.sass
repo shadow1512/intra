@@ -75,7 +75,7 @@ article, aside, figcaption, figure, footer, header, nav, section, time
 body
   font:
     size: em($basefontsize)
-    family: $roman
+    family: Arial, sans-serif
   color: $base
   line-height: 1.4em
 
@@ -88,7 +88,7 @@ p
 
 .p
   font:
-    family: $roman
+    family: Arial, sans-serif
     size: em(15, $basefontsize)
   line-height: 1.4em
 
@@ -184,19 +184,20 @@ h3
 .__h_l
   font:
     size: em(34, $basefontsize)
-    family: $roman
+    family: Arial, sans-serif
   line-height: 1.2em
 
 .__h_m
   font:
     size: em(18, $basefontsize)
-    family: $medium
+    family: Arial, sans-serif
   line-height: 1.2em
 
 .__h_s
   font:
     size: em(14, $basefontsize)
-    family: $bold
+    family: Arial, sans-serif
+    font-weight: bold
   line-height: 1.4em
 
 .__h_xs
@@ -213,7 +214,7 @@ h3
 
 .dscr
   font:
-    family: $light
+    family: Arial, sans-serif
     size: em(16, $basefontsize)
     line-height: 1.4em
 
@@ -221,8 +222,9 @@ h3
 
 .blockquote
   font:
-    family: $roman_italic
+    family: Arial, sans-serif
     size: em(15, $basefontsize)
+  font-style: italic
   margin-left: 4em
   padding-left: 10px
   margin-bottom: 1.4em
@@ -231,7 +233,7 @@ h3
 
 .img-descr
   font:
-    family: $roman
+    family: Arial, sans-serif
     size: em(12, $basefontsize)
   color: $normal
   margin-bottom: 1.7em
@@ -245,10 +247,10 @@ h3
 .th
   font:
     weight: normal
-    family: $medium
+    family: Arial, sans-serif
   span
     font:
-      family: $roman
+      family: Arial, sans-serif
 
 .th,.td
   padding: 16px
@@ -262,7 +264,7 @@ h3
 /* Buttons */
 .btn
   font:
-    family: $roman
+    family: Arial, sans-serif
     size: em($basefontsize)
   line-height: 1em
   background-color: $project-default
@@ -332,7 +334,7 @@ h3
 /* Buttons-links */
 .btn-link
   font:
-    family: $roman
+    family: Arial, sans-serif
     size: em($basefontsize)
   line-height: 1em
   color: $project-default
@@ -432,7 +434,7 @@ h3
 
 .it
   font:
-    family: $roman
+    family: Arial, sans-serif
   @include border-radius(3px)
   @include transition(border .2s ease-in 0s)
   padding: 10px 12px

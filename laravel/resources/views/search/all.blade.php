@@ -18,7 +18,11 @@
     @endif
 </ul>
     @else
-        <div class="search-res_cnt"><h3>Результатов по фразе &laquo;&laquo;{{$phrase}}&raquo;&raquo; не дал результатов. Проверьте правильность введения запроса и попробуйте еще раз. Или вернитесь <a href="{{route('home')}}">на главную</a></h3></div>
+        <div class="search-res_cnt_nothing">
+            <p class="search-res_cnt_nothing_h">Не найдено</p>
+            <p>Результатов по фразе &laquo;{{$phrase}}&raquo; не найдено.</p>
+            <p>Проверьте правильность введения запроса и попробуйте еще раз. Или вернитесь <a href="{{route('home')}}">на главную</a>.</p>
+         </div>
     @endif
 <div class="search-res_cnt">
 @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))

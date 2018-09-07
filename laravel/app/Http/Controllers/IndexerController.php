@@ -305,6 +305,7 @@ class IndexerController extends Controller
         if($olddict->count() > 0) {
             $items  =   $olddict->children();
             foreach($items as $item) {
+                var_dump($item);exit();
                 if(isset($item["phones"]["phone"]) && count($item["phones"]["phone"])) {
                     foreach($item["phones"]["phone"] as $contact) {
 

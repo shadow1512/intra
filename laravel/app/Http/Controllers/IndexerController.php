@@ -18,6 +18,7 @@ use App\LibRazdel;
 use App\Terms;
 use cijic\phpMorphy\Facade\Morphy;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManager;
 use Config;
 use Illuminate\Support\Facades\Validator;
 

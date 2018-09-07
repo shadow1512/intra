@@ -305,29 +305,28 @@ class IndexerController extends Controller
         if(($olddict->count() > 0) &&  ($olddict->children()->count()   >   0)){
             $items  =   $olddict->children()->children();
             foreach($items as $item) {
-                var_dump($item->phones);exit();
-                if(isset($item["phones"]["phone"]) && count($item["phones"]["phone"])) {
-                    foreach($item["phones"]["phone"] as $contact) {
+                if(isset($item->phones->phone) && count($item->phones->phone)) {
+                    foreach($item->phones->phone as $contact) {
 
-                        $validator = Validator::make(array('contact'   =>  $contact['value']), [
+                        $validator = Validator::make(array('contact'   =>  $contact->value), [
                             'contact'           =>  'email',
                         ]);
                         if (!$validator->fails()) {
-                            $record =   User::where('email',    'LIKE', $contact['value'])->first();
-                            if(isset($item["bdate"]["value"]) && !empty($item["bdate"]["value"])) {
-                                $record->birthday   =   date("Y-m-d", strtotime($item["bdate"]["value"]));
+                            $record =   User::where('email',    'LIKE', $contact->value)->first();
+                            if(isset($item->bdate->value) && !empty($item->bdate->value)) {
+                                $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
                             }
-                            if(isset($item["room"]["value"]) && !empty($item["room"]["value"])) {
-                                $record->room   =   $item["room"]["value"];
+                            if(isset($item->room->value) && !empty($item->room->value)) {
+                                $record->room   =   $item->room->value;
                             }
 
-                            foreach($item["phones"]["phone"] as $contact_phone) {
+                            foreach($item->phones->phone as $contact_phone) {
 
-                                $validator = Validator::make(array('contact' => $contact_phone['value']), [
+                                $validator = Validator::make(array('contact' => $contact_phone->value), [
                                     'contact' => 'email',
                                 ]);
                                 if ($validator->fails()) {
-                                    $record->phone   =   $contact_phone["value"];
+                                    $record->phone   =   $contact_phone->value;
                                 }
                             }
 

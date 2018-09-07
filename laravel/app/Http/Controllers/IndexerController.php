@@ -334,7 +334,7 @@ class IndexerController extends Controller
                                     }
 
                                     if(Storage::disk('public')->exists('/xml/iphotos/'    .   $item->id   .   ".jpg")) {
-                                        $path   =   Storage::disk('public')->put(Config::get('image.avatar_path'), Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg"), 'public');
+                                        $path   =   Storage::disk('public')->put(Config::get('image.avatar_path')   .   '/' .   $item->id   .   ".jpg", Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg"), 'public');
                                         $size   =   Storage::disk('public')->getSize($path);
                                         $type   =   Storage::disk('public')->getMimetype($path);
 

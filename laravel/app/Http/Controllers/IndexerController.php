@@ -333,9 +333,8 @@ class IndexerController extends Controller
                                         }
                                     }
 
-                                    $bindata    =   Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg");
-                                    if($bindata) {
-                                        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $bindata, 'public');
+                                    if(Storage::disk('public')->exists('/xml/iphotos/'    .   $item->id   .   ".jpg")) {
+                                        $path   =   Storage::disk('public')->put(Config::get('image.avatar_path'), Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg"), 'public');
                                         $size   =   Storage::disk('public')->getSize($path);
                                         $type   =   Storage::disk('public')->getMimetype($path);
 

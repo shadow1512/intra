@@ -859,6 +859,7 @@ return array(
     'EditUsersAddNumpark' => $baseDir . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
     'EditUsersAddPosition' => $baseDir . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',
     'EditUsersDatafieldsNullable' => $baseDir . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',
+    'EditUsersEditRoom' => $baseDir . '/database/migrations/2018_09_07_035126_edit_users_edit_room.php',
     'EditUsersEmailNullable' => $baseDir . '/database/migrations/2018_05_31_125907_edit_users_email_nullable.php',
     'EditUsersFullnames' => $baseDir . '/database/migrations/2018_05_31_112135_edit_users_fullnames.php',
     'EditUsersName' => $baseDir . '/database/migrations/2018_05_31_115935_edit_users_name.php',

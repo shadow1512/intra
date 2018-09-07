@@ -314,25 +314,28 @@ class IndexerController extends Controller
                             ]);
                             if (!$validator->fails()) {
                                 $record =   User::where('email',    'LIKE', $contact->value)->first();
-                                if(isset($item->bdate->value) && !empty($item->bdate->value)) {
-                                    $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
-                                }
-                                if(isset($item->room->value) && !empty($item->room->value)) {
-                                    $record->room   =   $item->room->value;
-                                }
 
-                                foreach($item->phones->phone as $contact_phone) {
-
-                                    $validator = Validator::make(array('contact' => $contact_phone->value), [
-                                        'contact' => 'email',
-                                    ]);
-                                    if ($validator->fails()) {
-                                        $record->phone   =   $contact_phone->value;
+                                if($record) {
+                                    if(isset($item->bdate->value) && !empty($item->bdate->value)) {
+                                        $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
                                     }
-                                }
+                                    if(isset($item->room->value) && !empty($item->room->value)) {
+                                        $record->room   =   $item->room->value;
+                                    }
 
-                                $record->save();
-                                $processed_counter ++;
+                                    foreach($item->phones->phone as $contact_phone) {
+
+                                        $validator = Validator::make(array('contact' => $contact_phone->value), [
+                                            'contact' => 'email',
+                                        ]);
+                                        if ($validator->fails()) {
+                                            $record->phone   =   $contact_phone->value;
+                                        }
+                                    }
+
+                                    $record->save();
+                                    $processed_counter ++;
+                                }
                             }
                         }
                     }

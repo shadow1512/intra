@@ -333,12 +333,36 @@ class IndexerController extends Controller
                                         }
                                     }
 
+                                    $bindata    =   Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg");
+                                    if($bindata) {
+                                        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $bindata, 'public');
+                                        $size   =   Storage::disk('public')->getSize($path);
+                                        $type   =   Storage::disk('public')->getMimetype($path);
+
+                                        if($size <= 3000000) {
+                                            if ($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+                                                $manager = new ImageManager(array('driver' => 'imagick'));
+                                                $image = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
+                                                $record->avatar = Storage::disk('public')->url($path);
+                                            }
+                                        }
+                                    }
+
                                     $record->save();
                                     $processed_counter ++;
                                 }
+                                else {
+                                    print_r("Пропущена запись: "    .   $item->fname->value .   "   "   .   $item->lname->value .   ", причина - нет записи в базе СЭД, email: "    .   $contact->value);
+                                }
                             }
                         }
+                        else {
+                            print_r("Пропущена запись: "    .   $item->fname->value .   "   "   .   $item->lname->value .   ", причина - контакты для связи пустые");
+                        }
                     }
+                }
+                else {
+                    print_r("Пропущена запись: "    .   $item->fname->value .   "   "   .   $item->lname->value .   ", причина - нет контактов для связи");
                 }
 
                 $record_counter ++;

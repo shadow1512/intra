@@ -187,7 +187,7 @@ $(document).ready(function(){
             }
             $(this).siblings(siblings).toggle(250);
 
-            alert($(el).index());
+            alert($('.menu_li_h').index(el));
             /*var date = new Date(new Date().getTime() + 60 * 10000000);
             document.cookie = "hide_dinner=1; path=/; expires=" + date.toUTCString();*/
         })

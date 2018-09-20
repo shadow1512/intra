@@ -48,6 +48,7 @@ Route::get('/kitchen/bills', 'RoomsController@index')->name('kitchen.bills');
 
 Route::get('/staff', 'RoomsController@index')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');
+Route::post('/search/directory', 'SearchController@directory')->name('search.directory');
 
 Route::post('/auth/login', 'AdLoginController@login')->name('auth.login');
 Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');

@@ -114,17 +114,17 @@ class SearchController extends Controller
                             }
                             if(!$total_found_by_word) {
                                 //ищем как есть
-                                $res= $this->getSearchResultsByWord($word);
+                                /*$res= $this->getSearchResultsByWord($word);
                                 $words_records[]    =   $res;
                                 $total_found_by_word    =   count($res);
                                 unset($res);
-                                if(!$total_found_by_word) {
+                                if(!$total_found_by_word) {*/
                                     $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
                                     $res= $this->getSearchResultsByWord($oldword);
                                     $words_records[]    =   $res;
                                     $total_found_by_word    =   count($res);
                                     unset($res);
-                                }
+                                //}
                             }
                         }
                         //цифры
@@ -276,7 +276,7 @@ class SearchController extends Controller
                                     "phrase"    =>  $phrase]);
     }
 
-    private function getSearchResultsByWord($word) {
+    private function getSearchResultsByWord($word,  $sections_to_find   =   array()) {
         //var_dump('byword_search_start');
         $word_records = array();
 
@@ -298,7 +298,12 @@ class SearchController extends Controller
         //var_dump($word);
 
         //Продолжаем со словом
-        $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
+        if(count($sections_to_find)) {
+            $word_search_records = Terms::where('baseterm', 'LIKE', $word)->whereIn('section',  $sections_to_find)->get();
+        }
+        else {
+            $word_search_records = Terms::where('baseterm', 'LIKE', $word)->get();
+        }
         //var_dump(count($word_search_records));
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
         if(count($syns_records) && !count($word_search_records)) {
@@ -462,5 +467,86 @@ class SearchController extends Controller
         }
 
         return $syns_records;
+    }
+
+    /*Функция поиска по атрибутам
+    В принципе просто набор отдельных поисковых функций.
+    Взвешивание идет в начале по пересечению списков, потом по объединению. А уже потом по внутренней сортировке*/
+    public function directory(Request $request) {
+
+        $users = array();
+        $found_sections =   array("users");
+
+        //кусок поиска по фамилии/имени/отчеству
+        $allname = trim($request->input('allname'));
+        $allname = mb_substr($allname, 0, 100);
+
+        //Орфография, опечатки
+        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
+        //Раскладка
+        $corrector = new Text_LangCorrect();
+
+        if(mb_strlen($allname) >= 3) {
+            $words = explode(" ", $allname);
+            //итоговый массив со взвешенным списком
+            $words_records = array();
+            foreach ($words as $word) {
+                $word = trim($word);
+                if (mb_strlen($word, "UTF-8")) {
+
+                    //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
+                    $oldword = $word;
+                    $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                    //вот теперь можно убрать лишнее
+                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                    //с цифрами ничего делать не надо
+                    if (mb_strlen($word) >= 3) {
+                        /*Если человек вводит какое-то разумное слово, то если:
+                            - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
+                            - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
+                        //слово есть в словаре
+                        $total_found_by_word = 0;
+
+                        if (pspell_check($dict, $word)) {
+                            $res = $this->getSearchResultsByWord($word, array("users"));
+                            $words_records[] = $res;
+                            $total_found_by_word = count($res);
+                            unset($res);
+                        } //Слово не нашлось в словаре
+                        else {
+                            //пробуем в начале советы (опечатки, если было на русском)
+                            $suggest = pspell_suggest($dict, $word);
+                            //берем только первый вариант, остальные уже не то
+                            if (count($suggest)) {
+                                $word = $suggest[0];
+                                //var_dump($word);
+                                $res = $this->getSearchResultsByWord($word, array("users"));
+                                $words_records[] = $res;
+                                $total_found_by_word = count($res);
+                                unset($res);
+                            }
+                        }
+                        if (!$total_found_by_word) {
+                            //ищем как есть
+                            /*$res = $this->getSearchResultsByWord($word);
+                            $words_records[] = $res;
+                            $total_found_by_word = count($res);
+                            unset($res);
+                            if (!$total_found_by_word) {*/
+                                $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                                $res = $this->getSearchResultsByWord($oldword, array("users"));
+                                $words_records[] = $res;
+                                $total_found_by_word = count($res);
+                                unset($res);
+                            //}
+                        }
+                    }
+                }
+            }
+        }
+        
+        return view('search.all', [ "users"  =>  $users,
+            "sections"  =>  $found_sections,
+            "phrase"    =>  $phrase]);
     }
 }

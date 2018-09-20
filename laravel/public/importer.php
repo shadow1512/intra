@@ -42,72 +42,46 @@ else {
 print_r("Token:"    .   $tok    .   "\r\n");
 curl_close($ch);
 
-$ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
+if($tok) {
+    $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
 //curl_setopt($ch, CURLOPT_HEADER, true);
-curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-$res = curl_exec($ch);
-$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-if($status_code == 200) {
-    print_r("Structure starting");
-    $tree = json_decode($res);
-    foreach($tree as $obj) {
-        if($obj->Active === true) {
+    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $res = curl_exec($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if($status_code == 200) {
+        print_r("Structure starting");
+        $tree = json_decode($res);
+        foreach($tree as $obj) {
+            if($obj->Active === true) {
 
-            if($obj->ExecutiveType == 0) {
-                $res    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
-                if($res && $res->num_rows > 0) {
-                    $row = $res->fetch_assoc();
-                    $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
-                    $dep    =   mysqli_query($conn, "SELECT updated_at FROM deps WHERE id=" . $row['dep_id']);
-                    if($dep && $dep->num_rows > 0) {
-                        $rowdep = $dep->fetch_assoc();
-                        if($mdate > $rowdep['updated_at']){
-                            mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "')");
+                if($obj->ExecutiveType == 0) {
+                    $res    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
+                    if($res && $res->num_rows > 0) {
+                        $row = $res->fetch_assoc();
+                        $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
+                        $dep    =   mysqli_query($conn, "SELECT updated_at FROM deps WHERE id=" . $row['dep_id']);
+                        if($dep && $dep->num_rows > 0) {
+                            $rowdep = $dep->fetch_assoc();
+                            if($mdate > $rowdep['updated_at']){
+                                mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "')");
+                            }
+
                         }
-
-                    }
-                }
-                else {
-                    $date = date("Y-m-d H:i:s");
-                    mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
-                    $dep_id = mysqli_insert_id($conn);
-                    mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`, `parent_key`) VALUES ('" . $obj->UID . "', $dep_id, '" . $obj->Parent . "')");
-                }
-            }
-            else {
-                $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
-                if($res && $res->num_rows > 0) {
-                    $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
-                    $chauthdata = curl_init($url_data);
-                    //curl_setopt($ch, CURLOPT_HEADER, true);
-                    curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
-                    curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
-                    curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
-                    $resauthdata = curl_exec($chauthdata);
-                    $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
-                    if($status_code_data == 200) {
-                        $obj_authdata = json_decode($resauthdata);
-                        var_dump($obj_authdata);exit();
                     }
                     else {
-                        var_dump($url_data);var_dump($status_code_data);exit();
+                        $date = date("Y-m-d H:i:s");
+                        mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
+                        $dep_id = mysqli_insert_id($conn);
+                        mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`, `parent_key`) VALUES ('" . $obj->UID . "', $dep_id, '" . $obj->Parent . "')");
                     }
                 }
                 else {
-                    $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
-                    //curl_setopt($ch, CURLOPT_HEADER, true);
-                    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-                    curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                    $res = curl_exec($ch);
-                    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-                    if($status_code == 200) {
-                        $obj = json_decode($res);
-
-
-                        $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                    $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
+                    if($res && $res->num_rows > 0) {
+                        $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
+                        $chauthdata = curl_init($url_data);
                         //curl_setopt($ch, CURLOPT_HEADER, true);
                         curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
                         curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
@@ -119,45 +93,74 @@ if($status_code == 200) {
                             var_dump($obj_authdata);exit();
                         }
                         else {
-                            var_dump($status_code_data);exit();
+                            var_dump($url_data);var_dump($status_code_data);exit();
                         }
-                        $date = date("Y-m-d H:i:s");
-                        $insres = mysqli_query($conn,
-                            "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
+                    }
+                    else {
+                        $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
+                        //curl_setopt($ch, CURLOPT_HEADER, true);
+                        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        $res = curl_exec($ch);
+                        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                        if($status_code == 200) {
+                            $obj = json_decode($res);
+
+
+                            $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                            //curl_setopt($ch, CURLOPT_HEADER, true);
+                            curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
+                            curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                            curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
+                            $resauthdata = curl_exec($chauthdata);
+                            $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
+                            if($status_code_data == 200) {
+                                $obj_authdata = json_decode($resauthdata);
+                                var_dump($obj_authdata);exit();
+                            }
+                            else {
+                                var_dump($status_code_data);exit();
+                            }
+                            $date = date("Y-m-d H:i:s");
+                            $insres = mysqli_query($conn,
+                                "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
                                     VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Patronymic . "', '" . $obj->Surname . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
-                        if(!$insres) {
-                            printf("Error: %s\n", mysqli_error($conn));
-                        }
-                        $user_id = mysqli_insert_id($conn);
-                        mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
-
-                        $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
-                        if($dep && $dep->num_rows > 0) {
-                            $rowdep = $dep->fetch_assoc();
-                            $chef = 0;
-                            if($obj->Leader) {
-                                $chef = 1;
-                            }
-                            $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', $chef)";
-                            $insres =   mysqli_query($conn, $query);
-
                             if(!$insres) {
                                 printf("Error: %s\n", mysqli_error($conn));
-                                printf("Error: %s\n", $query);exit();
+                            }
+                            $user_id = mysqli_insert_id($conn);
+                            mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
+
+                            $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
+                            if($dep && $dep->num_rows > 0) {
+                                $rowdep = $dep->fetch_assoc();
+                                $chef = 0;
+                                if($obj->Leader) {
+                                    $chef = 1;
+                                }
+                                $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
+                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $obj->Post . "', '" . $date . "', '" . $date . "', $chef)";
+                                $insres =   mysqli_query($conn, $query);
+
+                                if(!$insres) {
+                                    printf("Error: %s\n", mysqli_error($conn));
+                                    printf("Error: %s\n", $query);exit();
+                                }
                             }
                         }
                     }
                 }
             }
-        }
 
+        }
+    }
+    else {
+        var_dump($status_code);
     }
 }
-else {
-    var_dump($status_code);
-}
+
 function createDepartmentParents($conn) {
     $deps = mysqli_query($conn, "SELECT * FROM deps_keys");
     if($deps) {

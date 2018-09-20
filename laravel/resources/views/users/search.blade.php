@@ -25,25 +25,26 @@
     @endif
     </div>
     <div class="content_extra @if (!$startsearch)__hidden @endif">
-        <form class="directory_searchform">
+        <form class="directory_searchform" method="POST" action="{{route('search.directory')}}">
+            {{ csrf_field() }}
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="ФИО" class="it">
+                <input type="text" placeholder="ФИО" class="it" name="allname">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Комната" class="it">
+                <input type="text" placeholder="Комната" class="it" name="room">
             </div>
             <div class="field directory_searchform_field">
-                <input type="email" placeholder="E-mail" class="it">
+                <input type="email" placeholder="E-mail" class="it" name="email">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Средства связи" class="it">
+                <input type="text" placeholder="Телефон" class="it" name="phone">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Должность" class="it">
+                <input type="text" placeholder="Должность" class="it" name="worktitle">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Дата рождения с" class="it it-mail">
-                <input type="text" placeholder="Дата рождения по" class="it it-mail">
+                <input type="text" placeholder="Дата рождения с" class="it it-mail" name="birthday_start">
+                <input type="text" placeholder="Дата рождения по" class="it it-mail" name="birthday_finish">
             </div>
             <button class="btn __invert directory_searchform_btn">Найти</button>
         </form>

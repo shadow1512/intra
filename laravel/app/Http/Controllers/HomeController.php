@@ -56,7 +56,7 @@ class HomeController extends Controller
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
         }
 
-        return view('home', ['news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers, 'rooms'  =>  $rooms, 'contacts'  =>  $contacts]);
+        return view('home', ['news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers, 'rooms'  =>  $rooms, 'contacts'  =>  $contacts,  'hide_dinner'   =>Cookie::get('hide_dinner')]);
     }
 
     function parking()

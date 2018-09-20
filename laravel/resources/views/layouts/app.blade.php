@@ -11,7 +11,7 @@
             @yield('dinner')
             <div class="content_i_container">
                 <aside class="staff">
-                    <div id="open-dinner" class="staff_i __dinner">
+                    <div id="open-dinner" class="staff_i __dinner" @if ($hide_dinner) style="display:block"@endif>
                         <div class="h __h_m">Столовая<span class="__color_link">&nbsp;+</span></div>
                     </div>
                     @yield('birthday')

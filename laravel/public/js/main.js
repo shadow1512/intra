@@ -195,12 +195,16 @@ $(document).ready(function(){
         $(el).click(function () {
             $(block).fadeOut(200);
             $(openBlock).show();
+            var date = new Date(new Date().getTime() + 60 * 10000000);
+            document.cookie = "hide_dinner=1; path=/; expires=" + date.toUTCString();
         })
     }
     function showDinner (el, block) {
         $(el).click(function () {
             $(this).hide();
             $(block).fadeIn(200);
+            var date = new Date(new Date().getTime() + 60 * 10000000);
+            document.cookie = "hide_dinner=0; path=/; expires=" + date.toUTCString();
         })
     }
 

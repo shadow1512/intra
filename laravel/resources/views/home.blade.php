@@ -49,7 +49,7 @@
 @endsection
 
 @section('dinner')
-    <div class="main_top_dinner">
+    <div class="main_top_dinner"    @if ($hide_dinner) style="display:none"@endif>
         <div class="h __h_m">Столовая<span class="main_top_dinner_status">(Открыта)</span></div>
         <div class="main_top_dinner_info"><span class="main_top_dinner_info_i">Завтраки: с&nbsp;10.30 до&nbsp;11.30</span><span class="main_top_dinner_info_i">Обеды: с&nbsp;13.00 до&nbsp;16.00</span></div>
         <div class="main_top_dinner_hide">Свернуть –</div>

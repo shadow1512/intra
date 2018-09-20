@@ -13,6 +13,7 @@ class EncryptCookies extends BaseEncrypter
      */
     protected $except = [
         //
-        'hide_directory_search'
+        'hide_directory_search',
+        'hide_dinner'
     ];
 }

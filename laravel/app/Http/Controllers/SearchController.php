@@ -547,6 +547,8 @@ class SearchController extends Controller
         
         return view('search.all', [ "users"  =>  $users,
             "deps"      =>  array(),
+            "news"   =>  array(), "docs"  => array(),
+            "books"  => array(),   "razdels"   =>  array(),
             "sections"  =>  $found_sections,
             "phrase"    =>  $allname]);
     }

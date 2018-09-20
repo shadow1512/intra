@@ -35,7 +35,7 @@ $(document).ready(function(){
 
     $("input.header_search_it").val(getSavedValue('searchValue'));
 
-    $(document).on("click", "a.logout", function(ev) {
+    $(document).on("click", "a.header_login_nav_lk.logout", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).parent().submit();
     });
@@ -46,7 +46,7 @@ $(document).ready(function(){
         if ($(this).hasClass('__collapsed')) {
            $(this).children('.reserve_table_filled_inner').slideToggle(200);
         }
-    })
+    });
 
 
     $(document).on("submit", "#login_form", function(ev) {

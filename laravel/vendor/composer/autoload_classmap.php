@@ -863,6 +863,7 @@ return array(
     'EditUsersEmailNullable' => $baseDir . '/database/migrations/2018_05_31_125907_edit_users_email_nullable.php',
     'EditUsersFullnames' => $baseDir . '/database/migrations/2018_05_31_112135_edit_users_fullnames.php',
     'EditUsersName' => $baseDir . '/database/migrations/2018_05_31_115935_edit_users_name.php',
+    'EditUsersNullableFields' => $baseDir . '/database/migrations/2018_09_20_154201_edit_users_nullable_fields.php',
     'EditUsersPhoneLength' => $baseDir . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',
     'EditeUsersAddattributes' => $baseDir . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
     'Elasticsearch\\Client' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',

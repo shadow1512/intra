@@ -1333,6 +1333,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersEmailNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_125907_edit_users_email_nullable.php',
         'EditUsersFullnames' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_112135_edit_users_fullnames.php',
         'EditUsersName' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_115935_edit_users_name.php',
+        'EditUsersNullableFields' => __DIR__ . '/../..' . '/database/migrations/2018_09_20_154201_edit_users_nullable_fields.php',
         'EditUsersPhoneLength' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',
         'EditeUsersAddattributes' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
         'Elasticsearch\\Client' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',

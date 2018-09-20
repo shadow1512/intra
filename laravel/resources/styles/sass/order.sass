@@ -240,18 +240,21 @@
   @include transition(all .15s ease-in)
   &:hover
     border: 1px solid #0089cf
-    &:after
-      content: 'Забронировать'
-      background-color: #0089cf
-      padding: 15px
-      position: absolute
-      left: 0
-      bottom: -51px
-      width: 100%
-      text-align: center
-      color: $clear
-      border-radius: 5px
-      cursor: pointer
+    .reserve_table_column_btn
+      opacity: 1
+.reserve_table_column_btn
+  opacity: 0
+  background-color: #0089cf
+  padding: 15px
+  position: absolute
+  left: 0
+  bottom: -51px
+  width: 100%
+  text-align: center
+  color: $clear
+  border-radius: 5px
+  cursor: pointer
+  @include transition(all .15s ease-in)
 .reserve_table_column_h
   background-color: $clear
   padding: 15px

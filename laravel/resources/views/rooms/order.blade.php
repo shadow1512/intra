@@ -8,114 +8,119 @@
     </div>
     <div class="reserve_table">
         <div class="reserve_table_column">
-            <div class="reserve_table_column_h">
-                <div class="reserve_table_column_h_date">10 сентября</div>
-                <div class="reserve_table_column_h_weekday">Понедельник</div>
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">10 сентября</div>
+            <div class="reserve_table_column_h_weekday">Понедельник</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        <div style="top: 120px;" class="reserve_table_filled __one __collapsed">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>
-            <div class="reserve_table_column_line">9:00</div>
-            <div class="reserve_table_column_line">10:00</div>
-            <div class="reserve_table_column_line">11:00</div>
-            <div class="reserve_table_column_line">12:00</div>
-            <div class="reserve_table_column_line">13:00</div>
-            <div class="reserve_table_column_line">14:00</div>
-            <div class="reserve_table_column_line">15:00</div>
-            <div class="reserve_table_column_line">16:00</div>
-            <div class="reserve_table_column_line">17:00</div>
-            <div class="reserve_table_column_line">18:00</div>
-            <div style="top: 120px;" class="reserve_table_filled __one __collapsed">
-                <div class="reserve_table_filled_inner">
-                <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
-                <div class="reserve_table_filled_cnt">
-                    <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
-                    <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
-                    <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
-                </div>
-                </div>
-            </div>
-            <div style="top: 320px;" class="reserve_table_filled __two">
-                <div class="reserve_table_filled_inner">
-                <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
-                <div class="reserve_table_filled_cnt">
-                    <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
-                    <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
-                    <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
-                </div>
-                </div>
             </div>
         </div>
-        <div class="reserve_table_column">
-            <div class="reserve_table_column_h">
-                <div class="reserve_table_column_h_date">11 сентября</div>
-                <div class="reserve_table_column_h_weekday">Вторник</div>
+        <div style="top: 320px;" class="reserve_table_filled __two">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>
-            <div class="reserve_table_column_line">9:00</div>
-            <div class="reserve_table_column_line">10:00</div>
-            <div class="reserve_table_column_line">11:00</div>
-            <div class="reserve_table_column_line">12:00</div>
-            <div class="reserve_table_column_line">13:00</div>
-            <div class="reserve_table_column_line">14:00</div>
-            <div class="reserve_table_column_line">15:00</div>
-            <div class="reserve_table_column_line">16:00</div>
-            <div class="reserve_table_column_line">17:00</div>
-            <div class="reserve_table_column_line">18:00</div>
-            <div style="top: 320px;" class="reserve_table_filled __three">
-                <div class="reserve_table_filled_inner">
-                <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
-                <div class="reserve_table_filled_cnt">
-                    <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
-                    <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
-                    <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
-                </div>
-                </div>
             </div>
         </div>
-        <div class="reserve_table_column">
-            <div class="reserve_table_column_h">
-                <div class="reserve_table_column_h_date">12 сентября</div>
-                <div class="reserve_table_column_h_weekday">Среда</div>
-            </div>
-            <div class="reserve_table_column_line">9:00</div>
-            <div class="reserve_table_column_line">10:00</div>
-            <div class="reserve_table_column_line">11:00</div>
-            <div class="reserve_table_column_line">12:00</div>
-            <div class="reserve_table_column_line">13:00</div>
-            <div class="reserve_table_column_line">14:00</div>
-            <div class="reserve_table_column_line">15:00</div>
-            <div class="reserve_table_column_line">16:00</div>
-            <div class="reserve_table_column_line">17:00</div>
-            <div class="reserve_table_column_line">18:00</div>
         </div>
         <div class="reserve_table_column">
-            <div class="reserve_table_column_h">
-                <div class="reserve_table_column_h_date">13 сентября</div>
-                <div class="reserve_table_column_h_weekday">Четверг</div>
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">11 сентября</div>
+            <div class="reserve_table_column_h_weekday">Вторник</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        <div style="top: 320px;" class="reserve_table_filled __three">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>
-            <div class="reserve_table_column_line">9:00</div>
-            <div class="reserve_table_column_line">10:00</div>
-            <div class="reserve_table_column_line">11:00</div>
-            <div class="reserve_table_column_line">12:00</div>
-            <div class="reserve_table_column_line">13:00</div>
-            <div class="reserve_table_column_line">14:00</div>
-            <div class="reserve_table_column_line">15:00</div>
-            <div class="reserve_table_column_line">16:00</div>
-            <div class="reserve_table_column_line">17:00</div>
-            <div class="reserve_table_column_line">18:00</div>
+            </div>
+        </div>
         </div>
         <div class="reserve_table_column">
-            <div class="reserve_table_column_h">
-                <div class="reserve_table_column_h_date">14 сентября</div>
-                <div class="reserve_table_column_h_weekday">Пятница</div>
-            </div>
-            <div class="reserve_table_column_line">9:00</div>
-            <div class="reserve_table_column_line">10:00</div>
-            <div class="reserve_table_column_line">11:00</div>
-            <div class="reserve_table_column_line">12:00</div>
-            <div class="reserve_table_column_line">13:00</div>
-            <div class="reserve_table_column_line">14:00</div>
-            <div class="reserve_table_column_line">15:00</div>
-            <div class="reserve_table_column_line">16:00</div>
-            <div class="reserve_table_column_line">17:00</div>
-            <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">12 сентября</div>
+            <div class="reserve_table_column_h_weekday">Среда</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">13 сентября</div>
+            <div class="reserve_table_column_h_weekday">Четверг</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">14 сентября</div>
+            <div class="reserve_table_column_h_weekday">Пятница</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
         </div>
     </div>
 </div>

@@ -23,8 +23,8 @@
     </div>
     <ul class="menu_ul">
         <li class="menu_li">
-            <div class="menu_li_h">Полезная информация</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[0]) style="display:none"@endif>Полезная информация</div>
+            <ul class="menu_li_lst" @if ($hide_menues[0]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="http://www.kodeks.ru/about.html" class="menu_li_lk">Информация о&nbsp;Консорциуме</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816800315" class="menu_li_lk">Регламент административной деятельности</a></li>
                 <li class="menu_li_lst_i"><a href="http://intra.lan.kodeks.net/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
@@ -32,8 +32,8 @@
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Программный комплекс</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[1]) style="display:none"@endif>Программный комплекс</div>
+            <ul class="menu_li_lst" @if ($hide_menues[1]) style="display:none"@endif>
                 <li class="menu_li_lst_i __inner"><a href="http://172.16.2.4:8000/kodeks/" class="menu_li_lk">Кодекс</a>
                     <div class="menu_li_inner">
                         <a href="http://172.16.2.4:8000/kodeks/?nd=777714396" class="menu_li_inner_lk">Помощник бухгалтера</a>
@@ -64,15 +64,15 @@
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Административно-управленческая деятельность</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[2]) style="display:none"@endif>Административно-управленческая деятельность</div>
+            <ul class="menu_li_lst" @if ($hide_menues[2]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="http://172.16.0.223/SedKodeks/news/index.html" class="menu_li_lk">СЭД</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=777717302" class="menu_li_lk">БУД</a></li>
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Автоматические системы</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[3]) style="display:none"@endif>Автоматические системы</div>
+            <ul class="menu_li_lst" @if ($hide_menues[3]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="http://ask.kodeks.ru/" class="menu_li_lk">АСВО</a></li>
                 <li class="menu_li_lst_i"><a href="http://hotline2.kodeks.ru/" class="menu_li_lk">АСГЛ</a></li>
                 <li class="menu_li_lst_i"><a href="http://spp.kodeks.ru" class="menu_li_lk">СПП</a></li>
@@ -87,9 +87,9 @@
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Резерв переговорных</div>
+            <div class="menu_li_h" @if ($hide_menues[4]) style="display:none"@endif>Резерв переговорных</div>
             @if (count($rooms))
-            <ul class="menu_li_lst">
+            <ul class="menu_li_lst" @if ($hide_menues[4]) style="display:none"@endif>
                 @foreach($rooms as $room)
                 <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
                 @endforeach
@@ -97,16 +97,16 @@
             @endif
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Заказы и&nbsp;заявки</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[5]) style="display:none"@endif>Заказы и&nbsp;заявки</div>
+            <ul class="menu_li_lst" @if ($hide_menues[5]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="{{route("services.teh")}}" class="menu_li_lk">Техобслуживание</a></li>
                 <li class="menu_li_lst_i"><a href="{{route("services.cartridge")}}" class="menu_li_lk">Картриджи</a></li>
                 <li class="menu_li_lst_i"><a href="{{route("services.mail")}}" class="menu_li_lk">Почтовая доставка</a></li>
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h">Неформальный Кодекс</div>
-            <ul class="menu_li_lst">
+            <div class="menu_li_h" @if ($hide_menues[6]) style="display:none"@endif>Неформальный Кодекс</div>
+            <ul class="menu_li_lst" @if ($hide_menues[6]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="{{route("foto")}}" class="menu_li_lk">Фото и&nbsp;видео с&nbsp;праздников</a></li>
                 <li class="menu_li_lst_i"><a href="{{route("library")}}" class="menu_li_lk">Библиотека</a></li>
             </ul>

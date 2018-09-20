@@ -180,16 +180,20 @@ $(document).ready(function(){
 
     function toggleMenu (el, siblings) {
         $(el).click(function () {
+            var date = new Date(new Date().getTime() + 60 * 10000000);
+            var index   =   $('.menu_li_h').index(this);
+
             if ($(this).hasClass('__close')) {
                 $(this).removeClass('__close');
+                document.cookie = "hide_menu_"   +   index+  "=0; path=/; expires=" + date.toUTCString();
             } else {
                 $(this).addClass('__close');
+                document.cookie = "hide_menu_"   +   index+  "=1; path=/; expires=" + date.toUTCString();
             }
             $(this).siblings(siblings).toggle(250);
 
-            alert($('.menu_li_h').index(this));
-            /*var date = new Date(new Date().getTime() + 60 * 10000000);
-            document.cookie = "hide_dinner=1; path=/; expires=" + date.toUTCString();*/
+
+
         })
     }
 

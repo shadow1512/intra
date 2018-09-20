@@ -155,7 +155,7 @@ class UserController extends Controller
             }
         }
 
-        $hide_search_form = $request->cookie('hide_search_form');
+        $hide_search_form = $request->cookie('hide_directory_search');
 
         return view('users.search', [   "crumbs"                =>  $crumbs,
                                         "directory_name"        =>  $directory_name,

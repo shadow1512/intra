@@ -15,14 +15,14 @@ $(document).ready(function(){
             var date = new Date(new Date().getTime() + 60 * 10000000);
             document.cookie = "hide_directory_search=0; path=/; expires=" + date.toUTCString();
         }
-        
+
         $("a.directory_search").each(function() {
             if($(this).attr("id")   !=  current_id) {
                 $(this).removeClass("__hidden");
             }
         });
 
-        if($("#hide_search_form").hasClass("hidden")) {
+        if($("#hide_search_form").hasClass("__hidden")) {
             $("form.directory_searchform").parent().addClass("__hidden");
         }
         else {

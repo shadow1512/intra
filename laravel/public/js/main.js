@@ -220,10 +220,8 @@ $(document).ready(function(){
     showDinner('#open-dinner', '.main_top_dinner');
 
 
-    setTimeout(function() {
-        alert("b");
+    setInterval(function() {
         if($("div.__js-modal-camera").hasClass("__vis")) {
-            alert("a");
             $("#kitchen_cam2").attr("src",  "http://intra-unix.kodeks.net/img/cam2.jpg");
             $("#kitchen_cam1").attr("src",  "http://intra-unix.kodeks.net/img/cam1.jpg");
         }

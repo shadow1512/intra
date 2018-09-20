@@ -36,7 +36,7 @@
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             <div class="modal_cnt">
                 <div class="dinner">
-                    {{  $kitchen_menu   }}
+                    {!! $kitchen_menu   !!}
                 </div>
             </div>
         </div>

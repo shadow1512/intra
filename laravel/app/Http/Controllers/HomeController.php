@@ -65,6 +65,8 @@ class HomeController extends Controller
         $res = curl_exec($ch);
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $kitchen_menu   =   "";
+
+        var_dump($res);
         if($status_code == 200) {
             preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
             if(count($matches)) {

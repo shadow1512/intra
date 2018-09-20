@@ -219,5 +219,13 @@ $(document).ready(function(){
     hideDinner('.main_top_dinner_hide', '.main_top_dinner', '#open-dinner');
     showDinner('#open-dinner', '.main_top_dinner');
 
+
+    setTimeout(function() {
+        if($("div.__js-modal-camera").hasClass("__vis")) {
+            $("#kitchen_cam2").attr("src",  "http://intra-unix.kodeks.net/img/cam2.jpg");
+            $("#kitchen_cam1").attr("src",  "http://intra-unix.kodeks.net/img/cam1.jpg");
+        }
+    }, 2000);
+
 });
 

@@ -242,8 +242,8 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/FNj74AcY4Hc" ></iframe></div>
-                        <div class="dinner_camera_i"><iframe width="100%" height="100%" src="https://www.youtube.com/embed/FNj74AcY4Hc" ></iframe></div>
+                        <div class="dinner_camera_i"><img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/></div>
+                        <div class="dinner_camera_i"><img id="kitchen_cam1" src="http://intra-unix.kodeks.net/img/cam1.jpg"/></div>
                     </div>
                 </div>
             </div>

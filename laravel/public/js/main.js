@@ -222,8 +222,8 @@ $(document).ready(function(){
 
     setInterval(function() {
         if($("div.__js-modal-camera").hasClass("__vis")) {
-            $("#kitchen_cam2").attr("src",  "http://intra-unix.kodeks.net/img/cam2.jpg");
-            $("#kitchen_cam1").attr("src",  "http://intra-unix.kodeks.net/img/cam1.jpg");
+            $("#kitchen_cam2").attr("src",  "http://intra-unix.kodeks.net/img/cam2.jpg?uid="    +   new Date().getTime());
+            $("#kitchen_cam1").attr("src",  "http://intra-unix.kodeks.net/img/cam1.jpg?uid="    +   new Date().getTime());
         }
     }, 2000);
 

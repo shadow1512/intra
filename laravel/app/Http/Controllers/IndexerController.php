@@ -300,6 +300,7 @@ class IndexerController extends Controller
 
         $record_counter =   0;
         $processed_counter  =   0;
+        $counter_added      =   0;
 
         $xmlstring  =   Storage::disk('public')->get('/xml/sprav.xml');
         $olddict    =   simplexml_load_string($xmlstring);
@@ -316,45 +317,51 @@ class IndexerController extends Controller
                             if (!$validator->fails()) {
                                 $record =   User::where('email',    'LIKE', $contact->value)->first();
 
-                                if($record) {
-                                    if(isset($item->bdate->value) && !empty($item->bdate->value)) {
-                                        $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
-                                    }
-                                    if(isset($item->room->value) && !empty($item->room->value)) {
-                                        $record->room   =   $item->room->value;
-                                    }
+                                if(!$record) {
+                                    $record=    new User();
+                                    $counter_added  ++;
+                                }
 
-                                    foreach($item->phones->phone as $contact_phone) {
+                                if(isset($item->fullname->value) && !empty($item->fullname->value)) {
+                                    $record->name   =   $item->fullname->value;
+                                }
+                                if(isset($item->bdate->value) && !empty($item->bdate->value)) {
+                                    $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
+                                }
+                                if(isset($item->startdate->value) && !empty($item->startdate->value)) {
+                                    $record->workstart   =   date("Y-m-d", strtotime($item->startdate->value));
+                                }
+                                if(isset($item->room->value) && !empty($item->room->value)) {
+                                    $record->room   =   $item->room->value;
+                                }
 
-                                        $validator = Validator::make(array('contact' => $contact_phone->value), [
-                                            'contact' => 'email',
-                                        ]);
-                                        if ($validator->fails()) {
-                                            $record->phone   =   $contact_phone->value;
+                                foreach($item->phones->phone as $contact_phone) {
+
+                                    $validator = Validator::make(array('contact' => $contact_phone->value), [
+                                        'contact' => 'email',
+                                    ]);
+                                    if ($validator->fails()) {
+                                        $record->phone   =   $contact_phone->value;
+                                    }
+                                }
+
+                                if(Storage::disk('public')->exists('/xml/iphotos/'    .   $item->id   .   ".jpg")) {
+                                    $path   =   Config::get('image.avatar_path')   .   '/' .   $item->id   .   ".jpg";
+                                    Storage::disk('public')->put($path, Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg"), 'public');
+                                    $size   =   Storage::disk('public')->getSize($path);
+                                    $type   =   Storage::disk('public')->getMimetype($path);
+
+                                    if($size <= 3000000) {
+                                        if ($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+                                            $manager = new ImageManager(array('driver' => 'imagick'));
+                                            $image = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
+                                            $record->avatar = Storage::disk('public')->url($path);
                                         }
                                     }
-
-                                    if(Storage::disk('public')->exists('/xml/iphotos/'    .   $item->id   .   ".jpg")) {
-                                        $path   =   Config::get('image.avatar_path')   .   '/' .   $item->id   .   ".jpg";
-                                        Storage::disk('public')->put($path, Storage::disk('public')->get('/xml/iphotos/'    .   $item->id   .   ".jpg"), 'public');
-                                        $size   =   Storage::disk('public')->getSize($path);
-                                        $type   =   Storage::disk('public')->getMimetype($path);
-
-                                        if($size <= 3000000) {
-                                            if ($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
-                                                $manager = new ImageManager(array('driver' => 'imagick'));
-                                                $image = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
-                                                $record->avatar = Storage::disk('public')->url($path);
-                                            }
-                                        }
-                                    }
-
-                                    $record->save();
-                                    $processed_counter ++;
                                 }
-                                else {
-                                    print_r("Пропущена запись: "    .   $item->fname->value .   "   "   .   $item->lname->value .   ", причина - нет записи в базе СЭД, email: "    .   $contact->value);
-                                }
+
+                                $record->save();
+                                $processed_counter ++;
                             }
                         }
                         else {

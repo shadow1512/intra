@@ -43,8 +43,7 @@
                 <input type="text" placeholder="Должность" class="it" name="worktitle">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Дата рождения с" class="it it-mail" name="birthday_start">
-                <input type="text" placeholder="Дата рождения по" class="it it-mail" name="birthday_finish">
+                <input type="text" placeholder="Подразделение" class="it" name="dep">
             </div>
             <button class="btn __invert directory_searchform_btn">Найти</button>
         </form>

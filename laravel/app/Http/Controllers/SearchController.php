@@ -586,7 +586,109 @@ class SearchController extends Controller
                 unset($assoc_records);
             }
         }
-        
+
+
+        //кусок поиска по комнате
+        $room = trim($request->input('room'));
+        $room = mb_substr($room, 0, 100);
+        $room   =   (int)$room;
+        $users_by_room  =   array();
+        $user_ids   =   array();
+        if($room) {
+            $room_records   =   User::where('room', '=',    $room)->get();
+            foreach($room_records   as $record) {
+                $user_ids[] =   $record->id;
+            }
+            $room_sim_records   =   User::where('room', 'LIKE',    '%'  .   $room   .   '%')->get();
+            foreach($room_sim_records   as $record) {
+                if(!in_array($record->id,   $user_ids)) {
+                    $user_ids[] =   $record->id;
+                    $room_records->push($record);
+                }
+            }
+
+            $users_by_room  =   $room_records;
+            unset($room_records);
+            unset($user_ids);
+        }
+
+        //кусок поиска по email
+        $email = trim($request->input('email'));
+        $email = mb_substr($email, 0, 100);
+        $users_by_email  =   array();
+        if($email) {
+            $email_records   =   User::where('email', 'LIKE',    '%'  .   $email   .   '%')->get();
+            $users_by_email  =   $email_records;
+            unset($email_records);
+        }
+
+        //кусок поиска по телефону
+        $phone = trim($request->input('phone'));
+        $phone = mb_substr($phone, 0, 100);
+        $phone   =   (int)$phone;
+        $users_by_phone  =   array();
+        $user_ids   =   array();
+        if($phone) {
+            $phone_records   =   User::where('phone', '=',    $phone)->get();
+            foreach($phone_records   as $record) {
+                $user_ids[] =   $record->id;
+            }
+            $phone_sim_records   =   User::where('phone', 'LIKE',    '%'  .   $phone   .   '%')->get();
+            foreach($room_sim_records   as $record) {
+                if(!in_array($record->id,   $user_ids)) {
+                    $user_ids[] =   $record->id;
+                    $phone_records->push($record);
+                }
+            }
+
+            $users_by_phone  =   $phone_records;
+            unset($phone_records);
+            unset($user_ids);
+        }
+
+        $all_found_records  =   array();
+        foreach($users as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   ++;
+            }
+        }
+        foreach($users_by_room as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   ++;
+            }
+        }
+        foreach($users_by_phone as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   ++;
+            }
+        }
+        foreach($users_by_email as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   ++;
+            }
+        }
+
+        krsort($all_found_records);
+
+        unset($users_by_email);
+        unset($users_by_phone);
+        unset($users_by_room);
+        unset($users);
+
+        $users  =   array();
+
+        $user_ids = array_keys($all_found_records);
+        $found_records = User::find($user_ids);
+        $assoc_records = array();
+        foreach ($found_records as $record) {
+            $assoc_records[$record->id] = $record;
+        }
+        foreach ($user_ids as $user_id) {
+            $users[] = $assoc_records[$user_id];
+        }
+        unset($found_records);
+        unset($assoc_records);
+
         return view('search.all', [ "users"  =>  $users,
             "deps"      =>  array(),
             "news"   =>  array(), "docs"  => array(),

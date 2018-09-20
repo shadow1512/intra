@@ -543,6 +543,18 @@ class SearchController extends Controller
                     }
                 }
             }
+
+            $user_ids = array_keys($search_result['users']);
+            $found_records = User::find($user_ids);
+            $assoc_records = array();
+            foreach ($found_records as $record) {
+                $assoc_records[$record->id] = $record;
+            }
+            foreach ($user_ids as $user_id) {
+                $users[] = $assoc_records[$user_id];
+            }
+            unset($found_records);
+            unset($assoc_records);
         }
         
         return view('search.all', [ "users"  =>  $users,

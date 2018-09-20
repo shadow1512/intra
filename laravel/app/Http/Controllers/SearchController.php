@@ -649,27 +649,38 @@ class SearchController extends Controller
         $all_found_records  =   array();
         foreach($users as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   ++;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
             }
         }
         foreach($users_by_room as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   ++;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
             }
         }
         foreach($users_by_phone as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   ++;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
             }
         }
         foreach($users_by_email as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   ++;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
             }
         }
 
         krsort($all_found_records);
-
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);
@@ -689,11 +700,34 @@ class SearchController extends Controller
         unset($found_records);
         unset($assoc_records);
 
+        $phrase =   "";
+        if($allname)    {
+            $phrase =   "ФИО: " .   $allname;
+        }
+        if($phone)    {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "телефон: " .   $phone;
+        }
+        if($room)    {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "комната: " .   $room;
+        }
+        if($email)    {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "email: " .   $email;
+        }
+
         return view('search.all', [ "users"  =>  $users,
             "deps"      =>  array(),
             "news"   =>  array(), "docs"  => array(),
             "books"  => array(),   "razdels"   =>  array(),
             "sections"  =>  $found_sections,
-            "phrase"    =>  $allname]);
+            "phrase"    =>  $phrase]);
     }
 }

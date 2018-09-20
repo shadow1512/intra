@@ -476,7 +476,7 @@ class SearchController extends Controller
 
         $users = array();
         $found_sections =   array("users");
-
+        $parsed_words   =   0;
         //кусок поиска по фамилии/имени/отчеству
         $allname = trim($request->input('allname'));
         $allname = mb_substr($allname, 0, 100);
@@ -542,19 +542,49 @@ class SearchController extends Controller
                         }
                     }
                 }
+
+                $parsed_words ++;
             }
 
-            $user_ids = array_keys($search_result['users']);
-            $found_records = User::find($user_ids);
-            $assoc_records = array();
-            foreach ($found_records as $record) {
-                $assoc_records[$record->id] = $record;
+            $search_result = array();
+            $parsed_words   =   count($words_records);
+            //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
+            if($parsed_words > 0) {
+                //по каждому отработанному слову проверяем найденные разделы
+                for ($i = 0; $i < $parsed_words; $i++) {
+                    $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
+                }
+                //все уникальные найденные разделы
+                $found_sections = array_unique($found_sections);
+                foreach ($found_sections as $section) {
+                    $search_result[$section] = array();
+                    for ($i = 0; $i < $parsed_words; $i++) {
+                        if (isset($words_records[$i][$section])) {
+                            foreach ($words_records[$i][$section] as $record => $total) {
+                                if (array_key_exists($record, $search_result[$section])) {
+                                    $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
+                                } else {
+                                    $search_result[$section][$record] = $total;
+                                }
+                            }
+
+                        }
+                    }
+                    arsort($search_result[$section]);
+                }
+
+                $user_ids = array_keys($search_result['users']);
+                $found_records = User::find($user_ids);
+                $assoc_records = array();
+                foreach ($found_records as $record) {
+                    $assoc_records[$record->id] = $record;
+                }
+                foreach ($user_ids as $user_id) {
+                    $users[] = $assoc_records[$user_id];
+                }
+                unset($found_records);
+                unset($assoc_records);
             }
-            foreach ($user_ids as $user_id) {
-                $users[] = $assoc_records[$user_id];
-            }
-            unset($found_records);
-            unset($assoc_records);
         }
         
         return view('search.all', [ "users"  =>  $users,

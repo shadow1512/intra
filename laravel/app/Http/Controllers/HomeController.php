@@ -58,8 +58,24 @@ class HomeController extends Controller
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
         }
 
+        //Меню
+        $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $kitchen_menu   =   "";
+        if($status_code == 200) {
+            preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
+            if(count($matches)) {
+                $kitchen_menu   =   $matches[1];
+            }
+        }
+
         $hide_menues    =   array(Cookie::get('hide_menu_0'),   Cookie::get('hide_menu_1'), Cookie::get('hide_menu_2'), Cookie::get('hide_menu_3'), Cookie::get('hide_menu_4'), Cookie::get('hide_menu_5'), Cookie::get('hide_menu_6'));
-        return view('home', ['news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers, 'rooms'  =>  $rooms, 'contacts'  =>  $contacts,  'hide_dinner'   =>Cookie::get('hide_dinner'),   'hide_menues'   =>  $hide_menues]);
+        return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
+                                'rooms'  =>  $rooms, 'contacts'  =>  $contacts,  'hide_dinner'   =>Cookie::get('hide_dinner'),   'hide_menues'   =>  $hide_menues,
+                                'kitchen_menu'  =>  $kitchen_menu]);
     }
 
     function parking()

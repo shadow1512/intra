@@ -7,11 +7,20 @@ $(document).ready(function(){
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).addClass("__hidden");
         var current_id  =   $(this).attr("id");
+        if(current_id== "hide_search_form") {
+            var date = new Date(new Date().getTime() + 60 * 10000000);
+            document.cookie = "hide_directory_search=1; path=/; expires=" + date.toUTCString();
+        }
+        else {
+            var date = new Date(new Date().getTime() + 60 * 10000000);
+            document.cookie = "hide_directory_search=0; path=/; expires=" + date.toUTCString();
+        }
         $("a.directory").each(function() {
             if($(this).attr("id")   !=  current_id) {
                 $(this).removeClass("__hidden");
             }
         });
+
         if($("#hide_search_form").hasClass("hidden")) {
             $("form.directory_searchform").parent().addClass("__hidden");
         }

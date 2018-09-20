@@ -68,7 +68,7 @@ class UserController extends Controller
         return $crumbs;
     }
 
-    public function search($id = null)
+    public function search($id = null, Request $request)
     {
         $rootdeps           = array();
         $counts             = array();
@@ -155,12 +155,12 @@ class UserController extends Controller
             }
         }
 
-
+        $hide_search_form = $request->cookie('hide_search_form');
 
 
         return view('users.search', [   "crumbs"            =>  $crumbs,
                                         "directory_name"    =>  $directory_name,
-                                        "startsearch"       =>  true,
+                                        "startsearch"       =>  $hide_search_form,
                                         "users"             =>  $users,
                                         "rootdeps"          =>  $rootdeps,
                                         "deps"              =>  $deps,

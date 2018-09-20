@@ -44,7 +44,7 @@ $(document).ready(function(){
     $('.reserve_table_filled').on('click', function(event) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
         if ($(this).hasClass('__collapsed')) {
-           $(this).children('.reserve_table_filled_inner').slideToggle();
+           $(this).children('.reserve_table_filled_inner').slideToggle(200);
         }
     })
 

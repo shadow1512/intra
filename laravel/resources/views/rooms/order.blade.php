@@ -27,7 +27,7 @@
             <div class="reserve_table_filled_inner">
             <div class="reserve_table_filled_img"><img src="http://intra-new.dmz/storage/users/faces/7c8IqkMcv9z3lwNk6LHhKmWnsrVej0UbVgvacsuc.jpeg"></div>
             <div class="reserve_table_filled_cnt">
-                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">Обсуждение приложения для ios</div>
                 <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
                 <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>
@@ -37,7 +37,7 @@
             <div class="reserve_table_filled_inner">
             <div class="reserve_table_filled_img"><img src="http://intra-new.dmz/storage/users/faces/7c8IqkMcv9z3lwNk6LHhKmWnsrVej0UbVgvacsuc.jpeg"></div>
             <div class="reserve_table_filled_cnt">
-                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">Обсуждение приложения для ios</div>
                 <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
                 <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>

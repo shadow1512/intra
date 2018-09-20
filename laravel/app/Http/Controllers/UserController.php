@@ -157,16 +157,14 @@ class UserController extends Controller
 
         $hide_search_form = $request->cookie('hide_search_form');
 
-        var_dump($hide_search_form);
-
-        return view('users.search', [   "crumbs"            =>  $crumbs,
-                                        "directory_name"    =>  $directory_name,
-                                        "startsearch"       =>  $hide_search_form,
-                                        "users"             =>  $users,
-                                        "rootdeps"          =>  $rootdeps,
-                                        "deps"              =>  $deps,
-                                        "counts"            =>  $counts,
-                                        "currentDep"        =>  $currentDep]);
+        return view('users.search', [   "crumbs"                =>  $crumbs,
+                                        "directory_name"        =>  $directory_name,
+                                        "hide_search_form"      =>  $hide_search_form,
+                                        "users"                 =>  $users,
+                                        "rootdeps"              =>  $rootdeps,
+                                        "deps"                  =>  $deps,
+                                        "counts"                =>  $counts,
+                                        "currentDep"            =>  $currentDep]);
     }
     /**
      * Show the form for creating a new resource.

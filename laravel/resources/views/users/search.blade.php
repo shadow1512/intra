@@ -3,10 +3,10 @@
 @section('pathform')
     <div class="content_header">
     <h1 class="h __h_m __margin-top_m">{{$directory_name}}</h1>
-        <a href="" class="directory_search @if ($startsearch)__hidden @endif"   id="show_search_form">Поиск сотрудника
+        <a href="" class="directory_search @if (!$hide_search_form)__hidden @endif"   id="show_search_form">Поиск сотрудника
         <svg class="directory_search_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg>
         </a>
-        <a href="" class="directory_search @if (!$startsearch)__hidden @endif"  id="hide_search_form">Закрыть поиск
+        <a href="" class="directory_search @if ($hide_search_form)__hidden @endif"  id="hide_search_form">Закрыть поиск
         <svg class="directory_search_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg>
         </a>
     @if (count($crumbs))
@@ -24,7 +24,7 @@
          @endif
     @endif
     </div>
-    <div class="content_extra @if (!$startsearch)__hidden @endif">
+    <div class="content_extra @if ($hide_search_form)__hidden @endif">
         <form class="directory_searchform" method="POST" action="{{route('search.directory')}}">
             {{ csrf_field() }}
             <div class="field directory_searchform_field">

@@ -40,6 +40,15 @@ $(document).ready(function(){
         $(this).parent().submit();
     });
 
+    // открытие плитки с бронированием кабинета
+    $('.reserve_table_filled').on('click', function(event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        if ($(this).hasClass('__collapsed')) {
+           $(this).children('.reserve_table_filled_inner').slideToggle();
+        }
+    })
+
+
     $(document).on("submit", "#login_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("action");
@@ -107,12 +116,13 @@ $(document).ready(function(){
     popUp('.__js-modal-bill-lk', '.__js-modal-bill');
     popUp('.__js-modal-camera-lk', '.__js-modal-camera');
     popUp('.__js-modal-profile-lk', '.__js-modal-profile');
-    popUp('.order_calendar_cnt_add', '.__js-modal-order', function(but, win) {
+    popUp('.reserve_table_column_btn', '.__js-modal-order');
+    /* popUp('.order_calendar_cnt_add', '.__js-modal-order', function(but, win) {
         if($(but).parent().parent().hasClass("__active")) {
             var dd = $(but).parent().children("span.order_date").text();
             $(win).find("input[name='input_date_booking']").val(dd);
         }
-    });
+    }); */
 
 
 

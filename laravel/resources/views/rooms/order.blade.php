@@ -1,118 +1,127 @@
 @extends('layouts.static', ['class' => '__order'])
 
 @section('news')
-<div class="order">
-    <h1 class="h __h_m __center order_h">Заказ помещения "{{$room->name}}"</h1>
-    <div class="order_calendar">
-        <div class="order_calendar_row __t">
-            <div class="order_calendar_i">пн</div>
-            <div class="order_calendar_i">вт</div>
-            <div class="order_calendar_i">ср</div>
-            <div class="order_calendar_i">чт</div>
-            <div class="order_calendar_i">пт</div>
-            <div class="order_calendar_i">сб</div>
-            <div class="order_calendar_i">вс</div>
+<div class="reserve">
+    <div class="reserve_h">
+        <h1 class="h __h_m reserve_h_t">Бронирование: каб. 218</h1>
+        <div class="reserve_slide"><a href="" class="reserve_slide_prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a><span class="reserve_slide_tx">10 сентября &ndash; 16 сентября</span><a href="" class="reserve_slide_next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M0 1.4L1.4 0l9.7 9.7-9.7 9.7L0 18l8.3-8.3"/></svg></a></div>
+    </div>
+    <div class="reserve_table">
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">10 сентября</div>
+            <div class="reserve_table_column_h_weekday">Понедельник</div>
         </div>
-        @for ($numweeks = 1; $numweeks <= 4; $numweeks++)
-            <div class="order_calendar_row">
-                @php
-                    $numday = date("w");
-                    if($numday == 0) {
-                        $numday = 7;
-                    }
-                @endphp
-                @for ($daysweek = 1; $daysweek <=7; $daysweek++)
-                    <div class="order_calendar_i @if(($numweeks == 1) && ($numday > $daysweek) && ($daysweek < 6))__disabled @endif @if($daysweek >= 6)__day-off @endif">
-                        @if(($numweeks == 1) && ($numday > $daysweek) && ($daysweek < 6))
-                            @php
-                                $curdate = new DateTime();
-                                $period = $numday - $daysweek;
-                                $caldate = $curdate->sub(new DateInterval("P" . $period . "D"));
-                            @endphp
-                            <div class="order_calendar_date">{{$caldate->format("j")}} {{$caldate->format("M")}}</div>
-                        @else
-                            @php
-                                $curdate = new DateTime();
-                                $period = ($daysweek - $numday) + 7*($numweeks - 1);
-                                $caldate = $curdate->add(new DateInterval("P" . $period . "D"));
-                            @endphp
-                            <div class="order_calendar_i_inner">
-                                <div class="order_calendar_date">{{$caldate->format("j")}} {{$caldate->format("M")}}</div><a href="" class="btn order_calendar_btn">Забронировать</a>
-                                <div class="order_calendar_conference">
-                                    <ul class="order_calendar_conference_lst">
-                                        @php
-                                            $index = strtotime($caldate->format("Y") . '-' . $caldate->format("m") . '-' . $caldate->format("d"));
-                                        @endphp
-                                        @if(isset($bookings[$index]) && count($bookings[$index]))
-                                            @php
-                                                $periods = array();
-                                                $numperiods = 1;
-                                                $start  = 600;
-                                                $end    = 1200;
-
-                                                foreach($bookings[$index] as $booking) {
-                                                    $ts = $booking["time_start"];
-                                                    $ts = explode(":", $ts);
-
-                                                    $te = $booking["time_end"];
-                                                    $te = explode(":", $te);
-
-                                                    $period_start = (int)$ts[0] * 60 + (int)$ts[1];
-                                                    if($period_start == $start) {
-                                                        if(isset($periods[$numperiods - 1])) {
-                                                            $periods[$numperiods - 1]["length"] += ((int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
-                                                        }
-                                                        else {
-                                                            $periods[$numperiods - 1]   =   array(  "used"      => true,
-                                                                                                    "length"    => (int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
-                                                        }
-                                                    }
-                                                    else {
-                                                        $numperiods ++;
-
-                                                        $periods[$numperiods - 1]   =   array(  "used"      => false,
-                                                                                                "length"    => (int)$ts[0] * 60 + (int)$ts[1] - $start);
-                                                        $numperiods ++;
-                                                        $periods[$numperiods - 1]   =   array(  "used"      => true,
-                                                                                                "length"    => (int)$te[0] * 60 + (int)$te[1] - (int)$ts[0] * 60 - (int)$ts[1]);
-                                                    }
-                                                    $start = (int)$te[0] * 60 + (int)$te[1];
-                                                }
-                                            @endphp
-                                            @foreach($periods as $period)
-                                                <li style="width: {{round($period["length"]/600 * 100)}}%" class="order_calendar_conference_i @if($period["used"]) __booked @endif"></li>
-                                            @endforeach
-                                        @else
-                                            <li style="width: 100%" class="order_calendar_conference_i"></li>
-                                        @endif
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="order_calendar_cnt"><a href="" title="Закрыть" class="order_calendar_cnt_close"><svg class="order_calendar_cnt_close_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a>
-                                <div class="order_calendar_cnt_date">{{$caldate->format("j")}} {{$caldate->format("M")}}, {{$caldate->format("D")}}</div>
-                                <span class="order_date" style="display:none">{{$caldate->format("Y-m-d")}}</span>
-                                @if(isset($bookings[$index]) && count($bookings[$index]))
-                                    @foreach($bookings[$index] as $booking)
-                                <div class="order_calendar_cnt_i">
-                                    <div class="order_calendar_cnt_time">{{date("H:i", strtotime($booking->date_book . " " . $booking->time_start))}} – {{date("H:i", strtotime($booking->date_book . " " . $booking->time_end))}}</div>
-                                    <div class="order_calendar_cnt_t">{{$booking->name}}</div>
-                                    <div class="order_calendar_cnt_contact">
-                                        <p>{{$booking->person_name}}</p>
-                                        <p>{{$booking->person_phone}}</p><a href="{{$booking->person_email}}">{{$booking->person_email}}</a>
-                                    </div>
-                                </div>
-                                    @endforeach
-                                @endif
-                                <a href="" class="order_calendar_cnt_add">
-                                    Забронировать помещение<br/>"{{$room->name}}"
-                                    <svg class="order_calendar_cnt_add_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 34 34"><path d="M17 34C7.6 34 0 26.4 0 17S7.6 0 17 0s17 7.6 17 17-7.6 17-17 17zm0-32C8.7 2 2 8.7 2 17s6.7 15 15 15 15-6.7 15-15S25.3 2 17 2z"/><path d="M8 16h18v2H8z"/><path d="M16 8h2v18h-2z"/></svg>
-                                </a>
-                            </div>
-                        @endif
-                    </div>
-                @endfor
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        <div style="top: 120px;" class="reserve_table_filled __one __collapsed">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
             </div>
-        @endfor
+            </div>
+        </div>
+        <div style="top: 320px;" class="reserve_table_filled __two">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">11 сентября</div>
+            <div class="reserve_table_column_h_weekday">Вторник</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        <div style="top: 320px;" class="reserve_table_filled __three">
+            <div class="reserve_table_filled_inner">
+            <div class="reserve_table_filled_img"><img src="./images/faces/profile_1.jpg"></div>
+            <div class="reserve_table_filled_cnt">
+                <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>
+                <div class="reserve_table_filled_cnt_bl">13:15 &ndash; 13:30</div>
+                <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
+            </div>
+            </div>
+        </div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">12 сентября</div>
+            <div class="reserve_table_column_h_weekday">Среда</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">13 сентября</div>
+            <div class="reserve_table_column_h_weekday">Четверг</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        </div>
+        <div class="reserve_table_column">
+        <div class="reserve_table_column_h">
+            <div class="reserve_table_column_h_date">14 сентября</div>
+            <div class="reserve_table_column_h_weekday">Пятница</div>
+        </div>
+        <div class="reserve_table_column_line">9:00</div>
+        <div class="reserve_table_column_line">10:00</div>
+        <div class="reserve_table_column_line">11:00</div>
+        <div class="reserve_table_column_line">12:00</div>
+        <div class="reserve_table_column_line">13:00</div>
+        <div class="reserve_table_column_line">14:00</div>
+        <div class="reserve_table_column_line">15:00</div>
+        <div class="reserve_table_column_line">16:00</div>
+        <div class="reserve_table_column_line">17:00</div>
+        <div class="reserve_table_column_line">18:00</div>
+        <div class="reserve_table_column_btn">Забронировать</div>
+        </div>
     </div>
 </div>
 <!--modal-->

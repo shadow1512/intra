@@ -376,7 +376,7 @@ class IndexerController extends Controller
                 $record_counter ++;
             }
         }
-        print_r($record_counter . " прочитано, "    .   $processed_counter  .   " обработано");
+        print_r($record_counter . " прочитано, "    .   $processed_counter  .   " обработано, "    .   $counter_added  .   " добавлено");
     }
 
 

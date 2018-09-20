@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Cookie;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
 use Adldap\Laravel\Facades\Adldap;
 use App\News;

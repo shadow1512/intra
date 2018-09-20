@@ -193,3 +193,145 @@
   &:hover
     opacity: 1
 
+.reserve
+  background-color: $clear
+  border: 1px solid #e3e9ed
+  padding-bottom: 100px
+  overflow: auto
+.reserve_h
+  padding: 30px
+  position: relative
+  text-align: center
+.reserve_h_t
+  position: absolute
+  left: 30px
+  top: 50%
+  margin-top: -11px
+.reserve_slide
+  font-size: 1.2em
+  line-height: 1.2em
+  padding-left: 230px
+  padding-right: 230px
+.reserve_slide_prev,
+.reserve_slide_next
+  display: inline-block
+  vertical-align: middle
+  @include transition(all .15s ease-in)
+  svg
+    fill: #0089cf
+    width: 15px
+    height: 20px
+  &:hover
+    opacity: 0.8
+.reserve_slide_prev
+  margin-right: 30px
+.reserve_slide_next
+  margin-left: 30px
+.reserve_table
+  &:after
+    clear: both
+    content: ''
+    display: table-cell
+.reserve_table_column
+  float: left
+  width: 20%
+  position: relative;
+  border: 1px solid #e3e9ed
+  @include transition(all .15s ease-in)
+  &:hover
+    border: 1px solid #0089cf
+    &:after
+      content: 'Забронировать'
+      background-color: #0089cf
+      padding: 15px
+      position: absolute
+      left: 0
+      bottom: -51px
+      width: 100%
+      text-align: center
+      color: $clear
+      border-radius: 5px
+      cursor: pointer
+.reserve_table_column_h
+  background-color: $clear
+  padding: 15px
+  text-align: center
+.reserve_table_column_h_weekday
+  color: #97a7b7
+.reserve_table_column_line
+  background-color: #f6f7f8
+  padding: 15px
+  text-align: right
+  border-top: 1px solid #e3e9ed
+  color: #97a7b7
+.reserve_table_filled
+  padding: 7px 10px
+  position: absolute
+  left: 0
+  width: 100%
+  cursor: pointer
+  &.__collapsed
+    .reserve_table_filled_inner
+      display: none
+  &.__one
+    background-color: #edd3d3
+    border-top: 2px solid #b02121
+    color: #b02121
+  &.__two
+    background-color: #ede0d3
+    border-top: 2px solid #b06921
+    color: #b06921
+  &.__three
+    background-color: #ededd3
+    border-top: 2px solid #b0b021
+    color: #b0b021
+  &.__four
+    background-color: #e0edd3
+    border-top: 2px solid #69b021
+    color: #69b021
+  &.__five
+    background-color: #d3edd3
+    border-top: 2px solid #21b021
+    color: #21b021
+  &.__six
+    background-color: #d3ede0
+    border-top: 2px solid #21b069
+    color: #21b069
+  &.__seven
+    background-color: #d3eded
+    border-top: 2px solid #21b0b0
+    color: #21b0b0
+  &.__eight
+    background-color: #d3e0ed
+    border-top: 2px solid #2169b0
+    color: #2169b0
+  &.__night
+    background-color: #d3d3ed
+    border-top: 2px solid #2121b0
+    color: #2121b0
+  &.__ten
+    background-color: #e0d3ed
+    border-top: 2px solid #6921b0
+    color: #6921b0
+  &.__eleven
+    background-color: #edd3ed
+    border-top: 2px solid #b021b0
+    color: #b021b0
+  &.__twelve
+    background-color: #edd3e0
+    border-top: 2px solid #b02169
+    color: #b02169
+.reserve_table_filled_img
+  width: 30px
+  height: 30px
+  float: left
+  img
+    border-radius: 50%
+    max-width: 100%
+    max-height: 100%
+.reserve_table_filled_cnt
+  padding-left: 45px
+  .reserve_table_filled_cnt_bl
+    margin-top: 10px
+    &:first-child
+      margin-top: 0

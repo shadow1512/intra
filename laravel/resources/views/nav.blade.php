@@ -23,7 +23,7 @@
     </div>
     <ul class="menu_ul">
         <li class="menu_li">
-            <div class="menu_li_h@if($hide_menues[0]) __close@endif">Полезная информация</div>
+            <div class="menu_li_h @if($hide_menues[0]) __close @endif">Полезная информация</div>
             <ul class="menu_li_lst" @if ($hide_menues[0]) style="display:none"@endif>
                 <li class="menu_li_lst_i"><a href="http://www.kodeks.ru/about.html" class="menu_li_lk">Информация о&nbsp;Консорциуме</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816800315" class="menu_li_lk">Регламент административной деятельности</a></li>

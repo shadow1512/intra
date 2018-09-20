@@ -19,6 +19,8 @@ $(document).ready(function(){
             $("form.directory_searchform").parent().removeClass("__hidden");
         }
     });
+
+    
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var searchValue = $("input.header_search_it").val();
@@ -36,6 +38,7 @@ $(document).ready(function(){
     $("input.header_search_it").val(getSavedValue('searchValue'));
 
     $(document).on("click", "#profile_logout_button", function(ev) {
+        alert("a");
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         alert($(this).parent());
         $(this).parent().submit();

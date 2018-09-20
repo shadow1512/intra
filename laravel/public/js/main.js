@@ -38,9 +38,7 @@ $(document).ready(function(){
     $("input.header_search_it").val(getSavedValue('searchValue'));
 
     $("#profile_logout_button").on("click", function(ev) {
-        alert("a");
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-        alert($(this).parent());
         $(this).parent().submit();
     });
 

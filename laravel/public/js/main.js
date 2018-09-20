@@ -186,6 +186,10 @@ $(document).ready(function(){
                 $(this).addClass('__close');
             }
             $(this).siblings(siblings).toggle(250);
+
+            alert($(el).index());
+            /*var date = new Date(new Date().getTime() + 60 * 10000000);
+            document.cookie = "hide_dinner=1; path=/; expires=" + date.toUTCString();*/
         })
     }
 

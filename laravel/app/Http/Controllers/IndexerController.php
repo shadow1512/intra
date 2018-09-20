@@ -319,6 +319,7 @@ class IndexerController extends Controller
 
                                 if(!$record) {
                                     $record=    new User();
+                                    $record->email =    $contact->value;
                                     $counter_added  ++;
                                 }
 

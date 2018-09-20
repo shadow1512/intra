@@ -71,7 +71,7 @@
             </ul>
         </li>
         <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[0]) __close @endif">Автоматические системы</div>
+            <div class="menu_li_h @if($hide_menues[3]) __close @endif">Автоматические системы</div>
             <ul class="menu_li_lst" @if($hide_menues[3]) style="display:none" @endif>
                 <li class="menu_li_lst_i"><a href="http://ask.kodeks.ru/" class="menu_li_lk">АСВО</a></li>
                 <li class="menu_li_lst_i"><a href="http://hotline2.kodeks.ru/" class="menu_li_lk">АСГЛ</a></li>

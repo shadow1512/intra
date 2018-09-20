@@ -68,7 +68,7 @@ class UserController extends Controller
         return $crumbs;
     }
 
-    public function search($id = null, Request $request)
+    public function search(Request $request, $id = null)
     {
         $rootdeps           = array();
         $counts             = array();

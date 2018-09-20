@@ -157,10 +157,7 @@ class UserController extends Controller
             }
         }
 
-        var_dump(Cookie::get('hide_directory_search'));
         $hide_search_form = Cookie::get('hide_directory_search');
-
-        var_dump($hide_search_form);
 
         return view('users.search', [   "crumbs"                =>  $crumbs,
                                         "directory_name"        =>  $directory_name,

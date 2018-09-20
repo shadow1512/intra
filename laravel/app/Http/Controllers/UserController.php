@@ -155,6 +155,7 @@ class UserController extends Controller
             }
         }
 
+        var_dump($request->cookie);
         $hide_search_form = $request->cookie('hide_directory_search');
 
         var_dump($hide_search_form);

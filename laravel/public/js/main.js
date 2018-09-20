@@ -20,7 +20,7 @@ $(document).ready(function(){
         }
     });
 
-    
+
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var searchValue = $("input.header_search_it").val();

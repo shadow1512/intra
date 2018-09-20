@@ -267,14 +267,24 @@
   border-top: 1px solid #e3e9ed
   color: #97a7b7
 .reserve_table_filled
-  padding: 7px 10px
+  padding: 10px
   position: absolute
   left: 0
   width: 100%
   cursor: pointer
   &.__collapsed
-    .reserve_table_filled_inner
-      display: none
+    padding: 3px 10px
+    @include transition(all .5s ease)
+    height: 26px
+    overflow: hidden
+    &:hover
+      padding: 10px
+      height: auto
+      z-index: 9999
+      .reserve_table_filled_cnt_bl
+        &.__ellipsis
+          white-space: normal
+          text-overflow: visible
   &.__one
     background-color: #edd3d3
     border-top: 2px solid #b02121
@@ -324,12 +334,18 @@
     border-top: 2px solid #b02169
     color: #b02169
 .reserve_table_filled_img
-  width: 30px
-  height: 30px
+  width: 18px
+  height: 18px
   float: left
   img
     border-radius: 50%
     max-width: 100%
     max-height: 100%
 .reserve_table_filled_cnt
-  padding-left: 45px
+  padding-left: 30px
+  font-size: 14px
+.reserve_table_filled_cnt_bl
+  &.__ellipsis
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis

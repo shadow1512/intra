@@ -52,15 +52,6 @@ $(document).ready(function(){
         $(this).parent().submit();
     });
 
-    // открытие плитки с бронированием кабинета
-    $('.reserve_table_filled').on('click', function(event) {
-        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-        if ($(this).hasClass('__collapsed')) {
-           $(this).children('.reserve_table_filled_inner').slideToggle(200);
-        }
-    });
-
-
     $(document).on("submit", "#login_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("action");

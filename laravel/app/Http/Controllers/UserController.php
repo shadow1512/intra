@@ -14,6 +14,8 @@ use DB;
 use PDO;
 use Auth;
 
+use Cookie;
+use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use DateTime;
@@ -68,7 +70,7 @@ class UserController extends Controller
         return $crumbs;
     }
 
-    public function search(Request $request, $id = null)
+    public function search($id = null)
     {
         $rootdeps           = array();
         $counts             = array();
@@ -155,8 +157,8 @@ class UserController extends Controller
             }
         }
 
-        var_dump($request->cookie);
-        $hide_search_form = $request->cookie('hide_directory_search');
+        var_dump(Cookie::get('hide_directory_search'));
+        $hide_search_form = Cookie::get('hide_directory_search');
 
         var_dump($hide_search_form);
 

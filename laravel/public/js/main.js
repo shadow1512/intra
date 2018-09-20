@@ -221,6 +221,7 @@ $(document).ready(function(){
 
 
     setTimeout(function() {
+        alert("b");
         if($("div.__js-modal-camera").hasClass("__vis")) {
             alert("a");
             $("#kitchen_cam2").attr("src",  "http://intra-unix.kodeks.net/img/cam2.jpg");

@@ -81,18 +81,18 @@ class UserController extends Controller
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
             $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title')
+                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
-                ->orderBy('users.name', 'asc')
-                ->limit(20)->get();
+                ->orderBy('deps_peoples.chef', 'desc')->orderBy('users.name', 'asc')
+                ->limit(200)->get();
         }
         else {
             $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title')
+                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-                ->orderBy('users.name', 'asc')
-                ->limit(20)->get();
+                ->orderBy('deps_peoples.chef', 'desc')->orderBy('users.name', 'asc')
+                ->limit(100)->get();
         }
 
         if(!is_null($id)) {

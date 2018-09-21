@@ -31,7 +31,7 @@
                     <div class="reserve_table_filled_cnt_bl">Борисов В.</div>
                   </div>
                 </div>
-                <div style="top: 332px; height: 104px;" class="reserve_table_filled __two">
+                <div style="top: 332px; height: 104px;" class="reserve_table_filled __two" title="Обсуждение приложения для ios, 10:00 - 10:30, Борисов В.">
                   <div class="reserve_table_filled_img"><img src="http://intra-new.dmz/storage/users/faces/7c8IqkMcv9z3lwNk6LHhKmWnsrVej0UbVgvacsuc.jpeg"></div>
                   <div class="reserve_table_filled_cnt">
                     <div class="reserve_table_filled_cnt_bl">Обсуждение приложения для ios</div>
@@ -56,7 +56,7 @@
                 <div class="reserve_table_column_line">17:00</div>
                 <div class="reserve_table_column_line">18:00</div>
                 <div class="reserve_table_column_btn">Забронировать</div>
-                <div style="top: 320px; height: 104px;" class="reserve_table_filled __three">
+                <div style="top: 320px; height: 104px;" class="reserve_table_filled __three" title="Обсуждение приложения для ios, 10:00 - 10:30, Борисов В.">
                   <div class="reserve_table_filled_img"><img src="http://intra-new.dmz/storage/users/faces/7c8IqkMcv9z3lwNk6LHhKmWnsrVej0UbVgvacsuc.jpeg"></div>
                   <div class="reserve_table_filled_cnt">
                     <div class="reserve_table_filled_cnt_bl">Дэдлайн</div>

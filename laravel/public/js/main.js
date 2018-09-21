@@ -52,6 +52,19 @@ $(document).ready(function(){
         $(this).parent().submit();
     });
 
+    function openReserveBlock () {
+        var reserveHeight;
+        $('.reserve_table_filled.__collapsed').hover(function () {
+            reserveHeight = $(this).css('height');
+            $(this).css('height', 'auto');
+            $(this).addClass('__open');
+        }, function () {
+            $(this).removeClass('__open');
+            $(this).css('height', reserveHeight);
+        });
+    }
+    openReserveBlock();
+
     $(document).on("submit", "#login_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("action");

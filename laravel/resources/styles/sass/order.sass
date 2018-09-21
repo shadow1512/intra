@@ -275,11 +275,10 @@
   &.__collapsed
     padding: 3px 10px
     @include transition(all .5s ease)
-    height: 26px
+    min-height: 26px
     overflow: hidden
-    &:hover
+    &.__open
       padding: 10px
-      height: auto
       z-index: 9999
       .reserve_table_filled_cnt_bl
         &.__ellipsis

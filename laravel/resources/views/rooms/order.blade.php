@@ -43,10 +43,10 @@
         @if (isset($bookings[strtotime($caldate->format("Y-m-d"))]))
           @foreach ($bookings[strtotime($caldate->format("Y-m-d"))] as  $booking)
             @php
-              $daystarttime   =   strtotime($booking->date_book . " 09:00:00");
-              $bookstarttime  =   strtotime($booking->date_book . " " . $booking->time_start);
-              $hours    = date("H", ($bookstarttime - $daystarttime));
-              $minutes  = date("i", ($bookstarttime - $daystarttime));
+              $daystarttime = new DateTime($booking->date_book . " 09:00:00");
+              $daystarttime->sub(new DateInterval('PT9H'));
+              $hours    = $daystarttime->format("H");
+              $minutes  = $daystarttime->format("i");
               var_dump($hours);var_dump($minutes);
               $offset = 73  + (($hours*60  + $minutes) / 30)  * 26;
             @endphp

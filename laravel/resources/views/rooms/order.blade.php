@@ -10,6 +10,7 @@
 
     $caldate      = new DateTime();
     $weekenddate  = new DateTime();
+
     if(!is_null($dir)) {
         if($dir ==  "prev"  &&  $num    >   0) {
             $caldate->sub(new DateInterval("P"  .   $num    .   "W"));
@@ -17,7 +18,7 @@
         }
         if($dir ==  "next"  &&  $num    >   0) {
             $caldate->add(new DateInterval("P"  .   $num    .   "W"));
-            $weekenddate->sub(new DateInterval("P"  .   $num    .   "W"));
+            $weekenddate->add(new DateInterval("P"  .   $num    .   "W"));
         }
     }
     //номер дня недели
@@ -58,7 +59,7 @@
       }
       if($dir== "prev") {
         if($num>  1) {
-          $dirnext  = "next";
+          $dirnext  = "prev";
           $numnext  = $num- 1;
         }
         else {
@@ -73,7 +74,8 @@
               <h1 class="h __h_m reserve_h_t">Бронирование: {{$room->name}}</h1>
               <div class="reserve_slide">
                   <a @if(!is_null($dirprev)) href="{{route("rooms.book.otherweeks", ["id"  =>  $room->id,  "direction" =>  $dirprev, "num" =>  $numprev])}}" @else href="{{route("rooms.book", ["id"  =>  $room->id])}}" @endif class="reserve_slide_prev">
-                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a><span class="reserve_slide_tx">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}} &ndash; {{$weekenddate->format("j")}} {{$month_names[$weekenddate->format("n") - 1]}}</span>
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a>
+                  <span class="reserve_slide_tx">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}} &ndash; {{$weekenddate->format("j")}} {{$month_names[$weekenddate->format("n") - 1]}}</span>
                   <a @if(!is_null($dirnext)) href="{{route("rooms.book.otherweeks", ["id"  =>  $room->id,  "direction" =>  $dirnext, "num" =>  $numnext])}}" @else href="{{route("rooms.book", ["id"  =>  $room->id])}}" @endif class="reserve_slide_next">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M0 1.4L1.4 0l9.7 9.7-9.7 9.7L0 18l8.3-8.3"/></svg></a>
               </div>

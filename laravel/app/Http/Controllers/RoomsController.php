@@ -32,11 +32,22 @@ class RoomsController extends Controller
     {
         $room = Rooms::findOrFail($id);
         //
-        $curdate = new DateTime();
-        $caldate = $curdate->add(new DateInterval("P30D"));
-        $bookings = Booking::select('room_bookings.*', 'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email')
+        $curweekday = date("N");
+        $subperiod  = 0;
+        if($curweekday  > 1) {
+            $subperiod  = $curweekday - 1;
+        }
+        $caldate = new DateTime();
+        if($subperiod) {
+            $caldate = $caldate->sub(new DateInterval("P" . $subperiod . "D"));
+        }
+        $findate    =   $caldate->add(new DateInterval("P4D"));
+
+        $bookings = Booking::select('room_bookings.*',
+                                            'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar',
+                                            'TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
             ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
-            ->whereBetween('date_book', [date("Y-m-d"), $caldate])
+            ->whereBetween('date_book', [$caldate,  $findate])
             ->orderBy('date_book')
             ->orderBy('time_start')
             ->get();

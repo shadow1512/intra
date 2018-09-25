@@ -48,6 +48,7 @@ $(document).on("submit", "#room_order_form", function(ev) {
         dataType: "json",
         data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
         success: function(msg) {
+            msg=    JSON.parse(msg);
             if(msg[0] == "success") {
                 location.reload(true);
             }
@@ -55,12 +56,10 @@ $(document).on("submit", "#room_order_form", function(ev) {
                 if(msg[0] == "error") {
                     if(msg[1]) {
                         alert('a');
-                        var message =   JSON.parse(msg[1]);
-                        alert(message);
-                        alert(message.message);
-                        alert(message["message"]);
-                        if(message.message) {
-                            if(message.message  == "crossing detected") {
+                        alert(msg[1].message);
+                        alert(msg[1]["message"]);
+                        if(msg[1]["message"]) {
+                            if(msg[1]["message"]  == "crossing detected") {
                                 $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
                             }
                         }

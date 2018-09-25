@@ -156,6 +156,7 @@
             </div>
             <div class="field"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
           </form>
+              <div class="error" atyle="display:none;"></div>
         @else
           <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
         @endif

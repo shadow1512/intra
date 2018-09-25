@@ -35,6 +35,7 @@ $(document).on("click", "#submit_room_order_form", function(ev) {
 });
 
 $(document).on("submit", "#room_order_form", function(ev) {
+    $("div.error").html("").hide();
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
     var form = $(this);
@@ -50,8 +51,20 @@ $(document).on("submit", "#room_order_form", function(ev) {
             if(msg[0] == "success") {
                 location.reload(true);
             }
-            if(msg[0] == "error") {
-                alert("Во время сохранения заказа произошли ошибки");
+            else {
+                if(msg[0] == "error") {
+                    if(msg[1]   &&  (msg[1].length >  0))    {
+                        if(msg[1].message== "crossing detected") {
+                            $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
+                        }
+                    }
+                    else {
+                        $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
+                    }
+                }
+                else {
+                    $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
+                }
             }
         }
     });

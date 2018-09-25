@@ -43,11 +43,10 @@
         @if (isset($bookings[strtotime($caldate->format("Y-m-d"))]))
           @foreach ($bookings[strtotime($caldate->format("Y-m-d"))] as  $booking)
             @php
-              $daystarttime = new DateTime($booking->date_book . " 09:00:00");
+              $daystarttime = new DateTime($booking->date_book . " "  . $booking->time_start);
               $daystarttime->sub(new DateInterval('PT9H'));
               $hours    = $daystarttime->format("H");
               $minutes  = $daystarttime->format("i");
-              var_dump($hours);var_dump($minutes);
               $offset = 73  + (($hours*60  + $minutes) / 30)  * 26;
             @endphp
                 <div style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">

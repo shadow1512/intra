@@ -53,6 +53,9 @@ $(document).on("submit", "#room_order_form", function(ev) {
             }
             else {
                 if(msg[0] == "error") {
+                    alert(msg[1]);
+                    alert(msg[1].message);
+                    alert(msg[1]["message"]);
                     if(msg[1]   &&  msg[1]["message"])    {
                         if(msg[1]["message"]== "crossing detected") {
                             $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();

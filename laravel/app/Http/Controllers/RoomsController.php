@@ -44,8 +44,8 @@ class RoomsController extends Controller
         $findate    =   $caldate->add(new DateInterval("P4D"));
 
         $bookings = Booking::select('room_bookings.*',
-                                            'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar',
-                                            'TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
+                                            'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar')
+            ->selectRaw('TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
             ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
             ->whereBetween('date_book', [$caldate,  $findate])
             ->orderBy('date_book')

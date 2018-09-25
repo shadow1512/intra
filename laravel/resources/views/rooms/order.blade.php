@@ -2,27 +2,84 @@
 
 @section('news')
 <div class="reserve">
+  @php
+    $css_classes  = array("__one",  "__two",  "__three",  "__four", "__five", "__six",  "__seven",  "__eight");
+    $month_names  = array("января", "февраля",  "марта",  "апреля", "мая",  "июня", "июля", "августа",  "сентября", "октября",  "ноября", "декабря");
+    $day_names    = array("понедельник",  "вторник",  "среда",  "четверг",  "пятница",  "суббота",  "воскресенье");
+    $index  = 0;
+
+    $caldate      = new DateTime();
+    $weekenddate  = new DateTime();
+    if(!is_null($dir)) {
+        if($dir ==  "prev"  &&  $num    >   0) {
+            $caldate->sub(new DateInterval("P"  .   $num    .   "W"));
+            $weekenddate->sub(new DateInterval("P"  .   $num    .   "W"));
+        }
+        if($dir ==  "next"  &&  $num    >   0) {
+            $caldate->add(new DateInterval("P"  .   $num    .   "W"));
+            $weekenddate->sub(new DateInterval("P"  .   $num    .   "W"));
+        }
+    }
+    //номер дня недели
+    $curweekday = $caldate->format("N");
+
+    $subperiod  = 0;
+    $addperiod  = 0;
+    if($curweekday  > 1) {
+      $subperiod  = $curweekday - 1;
+    }
+    if($curweekday  < 7) {
+      $addperiod  = 7 - $curweekday;
+    }
+
+    if($subperiod) {
+      $caldate->sub(new DateInterval("P" . $subperiod . "D"));
+    }
+
+    if($addperiod) {
+      $weekenddate->add(new DateInterval("P" . $addperiod . "D"));
+    }
+
+    $dirprev  = "prev";
+    $dirnext  = "next";
+    $numprev  = 1;
+    $numnext  = 1;
+    if(!is_null($dir))  {
+      if($dir== "next") {
+        if($num>  1) {
+          $dirprev  = "next";
+          $numprev  = $num- 1;
+        }
+        else {
+          $dirprev  = null;
+          $numprev  = 0;
+        }
+        $numnext  = $num+ 1;
+      }
+      if($dir== "prev") {
+        if($num>  1) {
+          $dirnext  = "next";
+          $numnext  = $num- 1;
+        }
+        else {
+          $dirnext  = null;
+          $numnext  = 0;
+        }
+        $numprev  = $num+ 1;
+      }
+    }
+  @endphp
             <div class="reserve_h">
               <h1 class="h __h_m reserve_h_t">Бронирование: {{$room->name}}</h1>
-              <div class="reserve_slide"><a href="" class="reserve_slide_prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a><span class="reserve_slide_tx">10 сентября &ndash; 16 сентября</span><a href="" class="reserve_slide_next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M0 1.4L1.4 0l9.7 9.7-9.7 9.7L0 18l8.3-8.3"/></svg></a></div>
+              <div class="reserve_slide">
+                @if(!is_null($dirprev))
+                  <a @if(!is_null($dirprev)) href="{{route("rooms.book.otherweeks", ["id"  =>  $room->id,  "direction" =>  $dirprev, "num" =>  $numprev])}}" @else href="{{route("rooms.book", ["id"  =>  $room->id])}}" @endif class="reserve_slide_prev">
+                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a><span class="reserve_slide_tx">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}} &ndash; {{$weekenddate->format("j")}} {{$month_names[$weekenddate->format("n") - 1]}}</span>
+                  <a @if(!is_null($dirnext)) href="{{route("rooms.book.otherweeks", ["id"  =>  $room->id,  "direction" =>  $dirnext, "num" =>  $numnext])}}" @else href="{{route("rooms.book", ["id"  =>  $room->id])}}" @endif class="reserve_slide_next">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M0 1.4L1.4 0l9.7 9.7-9.7 9.7L0 18l8.3-8.3"/></svg></a>
+              </div>
             </div>
             <div class="reserve_table">
-              @php
-                $css_classes  = array("__one",  "__two",  "__three",  "__four", "__five", "__six",  "__seven",  "__eight");
-                $month_names  = array("января", "февраля",  "марта",  "апреля", "мая",  "июня", "июля", "августа",  "сентября", "октября",  "ноября", "декабря");
-                $day_names    = array("понедельник",  "вторник",  "среда",  "четверг",  "пятница",  "суббота",  "воскресенье");
-                $index  = 0;
-                //номер дня недели
-                $curweekday = date("N");
-                $subperiod  = 0;
-                if($curweekday  > 1) {
-                  $subperiod  = $curweekday - 1;
-                }
-                $caldate = new DateTime();
-                if($subperiod) {
-                  $caldate->sub(new DateInterval("P" . $subperiod . "D"));
-                }
-              @endphp
 @for ($i = 0;  $i<=4;  $i++)
               <div class="reserve_table_column">
                 <span style="display:none" class="source_date">{{$caldate->format("Y-m-d")}}</span>
@@ -60,6 +117,9 @@
                 </div>
             @php
               $index  = $index  + 1;
+              if($index ==  8) {
+                $index  = 0;
+              }
             @endphp
           @endforeach
         @endif

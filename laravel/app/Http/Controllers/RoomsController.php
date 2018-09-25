@@ -28,19 +28,30 @@ class RoomsController extends Controller
 
     }
 
-    public function book($id)
+    public function book($id,   $dir    =   null,   $num    =   0)
     {
         $room = Rooms::findOrFail($id);
         //
-        $curweekday = date("N");
+
+        $caldate = new DateTime();
+        if(!is_null($dir)) {
+            if($dir ==  "prev"  &&  $num    >   0) {
+                $caldate->sub(new DateInterval("P"  .   $num    .   "W"));
+            }
+            if($dir ==  "next"  &&  $num    >   0) {
+                $caldate->add(new DateInterval("P"  .   $num    .   "W"));
+            }
+        }
+        $curweekday = $caldate->format("N");
+
         $subperiod  = 0;
         if($curweekday  > 1) {
             $subperiod  = $curweekday - 1;
         }
-        $caldate = new DateTime();
         if($subperiod) {
             $caldate = $caldate->sub(new DateInterval("P" . $subperiod . "D"));
         }
+
         $startdate    =   $caldate->format("Y-m-d");
         $caldate->add(new DateInterval("P4D"));
 
@@ -58,7 +69,7 @@ class RoomsController extends Controller
             $bookings_by_dates[strtotime($booking->date_book)][] = $booking;
         }
 
-        return view('rooms.order', ['room'    =>  $room, 'bookings'   =>  $bookings_by_dates]);
+        return view('rooms.order', ['room'    =>  $room, 'bookings'   =>  $bookings_by_dates,  'dir'   =>  $dir,   'num'   =>  $num]);
     }
 
     public function createbooking($id, Request $request) {

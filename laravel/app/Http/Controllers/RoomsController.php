@@ -41,14 +41,14 @@ class RoomsController extends Controller
         if($subperiod) {
             $caldate = $caldate->sub(new DateInterval("P" . $subperiod . "D"));
         }
-        $startdate    =   $caldate;
+        $startdate    =   $caldate->format("Y-m-d");
         $caldate->add(new DateInterval("P4D"));
 
         $bookings = Booking::select('room_bookings.*',
                                             'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar')
             ->selectRaw('TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
             ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
-            ->whereBetween('date_book', [$startdate,  $caldate])
+            ->whereBetween('date_book', [$startdate,  $caldate->format("Y-m-d") .   " 23:59:59"])
             ->orderBy('date_book')
             ->orderBy('time_start')
             ->get();

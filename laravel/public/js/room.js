@@ -49,19 +49,15 @@ $(document).on("submit", "#room_order_form", function(ev) {
         data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
         success: function(msg) {
             msg=    JSON.parse(msg);
-            if(msg[0] == "success") {
+            if(msg.result == "success") {
                 location.reload(true);
             }
             else {
-                if(msg[0] == "error") {
-                    if(msg[1]) {
-                        alert('a');
-                        alert(msg[1].message);
-                        alert(msg[1]["message"]);
-                        if(msg[1]["message"]) {
-                            if(msg[1]["message"]  == "crossing detected") {
-                                $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
-                            }
+                if(msg.result == "error") {
+                    if(msg.message) {
+
+                        if(msg[1]["message"]  == "crossing detected") {
+                            $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
                         }
                         else {
                             $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();

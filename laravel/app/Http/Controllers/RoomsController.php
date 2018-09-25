@@ -96,14 +96,14 @@ class RoomsController extends Controller
                                     })->exists();
 
             if($exists) {
-                return response()->json(['error', array("messsage"  =>  "crossing detected")]);
+                return response()->json(['result'    =>  'error',  'messsage' =>  'crossing detected']);
             }
             else {
                 $date = date("Y-m-d H:i:s");
                 DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
                     'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
                     'created_at' => $date, 'updated_at' => $date]);
-                return response()->json(['success']);
+                return response()->json(['result'   =>  'success']);
             }
         }
     }

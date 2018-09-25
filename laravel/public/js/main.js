@@ -133,7 +133,7 @@ $(document).ready(function(){
     popUp('.__js-modal-camera-lk', '.__js-modal-camera');
     popUp('.__js-modal-profile-lk', '.__js-modal-profile');
     popUp('.reserve_table_column_btn', '.__js-modal-order', function(but,   win) {
-        if($(but).parent().children("span.source_date").length()    >   0) {
+        if($(but).parent().children("span.source_date").length   >   0) {
             var dd = $(but).parent().children("span.source_date").text();
             $(win).find("input[name='input_date_booking']").val(dd);
         }

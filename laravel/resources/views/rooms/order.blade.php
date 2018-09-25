@@ -42,11 +42,18 @@
                 <div class="reserve_table_column_btn">Забронировать</div>
         @if (isset($bookings[strtotime($caldate->format("Y-m-d"))]))
           @foreach ($bookings[strtotime($caldate->format("Y-m-d"))] as  $booking)
-                <div style="top: 125px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">
+            @php
+              $daystarttime   =   strtotime($booking->date_book . " 09:00:00");
+              $bookstarttime  =   strtotime($booking->date_book . " " . $booking->time_start);
+              $hours    = date("H", ($bookstarttime - $daystarttime));
+              $minutes  = date("i", ($bookstarttime - $daystarttime));
+              $offset = 73  + (($hours*60  + $minutes) / 30)  * 26;
+            @endphp
+                <div style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">
                   <div title="{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}" class="reserve_table_filled_img"><img src="{{$booking->avatar}}"></div>
                   <div class="reserve_table_filled_cnt">
-                    <div class="reserve_table_filled_cnt_bl @if ($booking->duration < 120)__ellipsis @endif">{{$booking->title}}</div>
-                    <div class="reserve_table_filled_cnt_bl">{{$booking->time_start}} &ndash; {{$booking->time_end}}</div>
+                    <div class="reserve_table_filled_cnt_bl @if ($booking->duration < 120)__ellipsis @endif">{{$booking->name}}</div>
+                    <div class="reserve_table_filled_cnt_bl">{{mb_substr($booking->time_start,  0,  5)}} &ndash; {{mb_substr($booking->time_end,  0,  5)}}</div>
                     <div class="reserve_table_filled_cnt_bl">{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}.</div>
                   </div>
                 </div>

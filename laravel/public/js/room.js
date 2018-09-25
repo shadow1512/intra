@@ -53,12 +53,15 @@ $(document).on("submit", "#room_order_form", function(ev) {
             }
             else {
                 if(msg[0] == "error") {
-                    alert(msg[1]);
-                    alert(msg[1].message);
-                    alert(msg[1]["message"]);
-                    if(msg[1]   &&  msg[1]["message"])    {
-                        if(msg[1]["message"]== "crossing detected") {
-                            $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
+                    if(msg[1]) {
+                        var message =   JSON.parse(msg[1]);
+                        if(message.message) {
+                            if(message.message  == "crossing detected") {
+                                $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
+                            }
+                        }
+                        else {
+                            $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
                         }
                     }
                     else {

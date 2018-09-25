@@ -40,9 +40,7 @@
                 <div class="reserve_table_column_line">16:00</div>
                 <div class="reserve_table_column_line">17:00</div>
                 <div class="reserve_table_column_line">18:00</div>
-                @if (Auth::check())
                 <div class="reserve_table_column_btn">Забронировать</div>
-                @endif
         @if (isset($bookings[strtotime($caldate->format("Y-m-d"))]))
           @foreach ($bookings[strtotime($caldate->format("Y-m-d"))] as  $booking)
             @php
@@ -78,24 +76,28 @@
     <div class="modal-cnt __form">
       <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
       <div class="modal_cnt">
-        <div class="h light_h __h_m">Забронировать время</div>
-        <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create', ["id"  =>  $room->id])}}">
-          {{ csrf_field() }}
-          <input type="hidden" name="input_date_booking" id="input_date_booking"/>
-          <div class="field">
-            <label for="input_name" class="lbl">Название мероприятия:</label>
-            <input id="input_name" name="input_name" type="text" value="" class="it">
-          </div>
-          <div class="field">
-            <label for="input_time_start" class="lbl">Время начала:</label>
-            <input id="input_time_start" name="input_time_start" type="text" value="" class="it">
-          </div>
-          <div class="field">
-            <label for="input_time_end" class="lbl">Время окончания:</label>
-            <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
-          </div>
-          <div class="field"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
-        </form>
+        @if (Auth::check())
+          <div class="h light_h __h_m">Забронировать время</div>
+          <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create', ["id"  =>  $room->id])}}">
+            {{ csrf_field() }}
+            <input type="hidden" name="input_date_booking" id="input_date_booking"/>
+            <div class="field">
+              <label for="input_name" class="lbl">Название мероприятия:</label>
+              <input id="input_name" name="input_name" type="text" value="" class="it">
+            </div>
+            <div class="field">
+              <label for="input_time_start" class="lbl">Время начала:</label>
+              <input id="input_time_start" name="input_time_start" type="text" value="" class="it">
+            </div>
+            <div class="field">
+              <label for="input_time_end" class="lbl">Время окончания:</label>
+              <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
+            </div>
+            <div class="field"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
+          </form>
+        @else
+          <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
+        @endif
       </div>
     </div>
   </div>

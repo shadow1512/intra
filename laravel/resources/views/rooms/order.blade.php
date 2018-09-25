@@ -25,6 +25,7 @@
               @endphp
 @for ($i = 0;  $i<=4;  $i++)
               <div class="reserve_table_column">
+                <span style="display:none" class="source_date">{{$caldate->format("Y-m-d")}}</span>
                 <div class="reserve_table_column_h">
                   <div class="reserve_table_column_h_date">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}}</div>
                   <div class="reserve_table_column_h_weekday">{{$day_names[$caldate->format("N")  - 1]}}</div>

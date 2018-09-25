@@ -3,7 +3,7 @@
 @section('news')
 <div class="reserve">
             <div class="reserve_h">
-              <h1 class="h __h_m reserve_h_t">Бронирование: каб. {{$room->name}}</h1>
+              <h1 class="h __h_m reserve_h_t">Бронирование: {{$room->name}}</h1>
               <div class="reserve_slide"><a href="" class="reserve_slide_prev"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M9.7 0l1.4 1.4-8.3 8.3 8.3 8.3-1.4 1.4L0 9.7"/></svg></a><span class="reserve_slide_tx">10 сентября &ndash; 16 сентября</span><a href="" class="reserve_slide_next"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.1 19.4"><path d="M0 1.4L1.4 0l9.7 9.7-9.7 9.7L0 18l8.3-8.3"/></svg></a></div>
             </div>
             <div class="reserve_table">
@@ -20,13 +20,12 @@
                 }
                 $caldate = new DateTime();
                 if($subperiod) {
-                  $caldate = $caldate->sub(new DateInterval("P" . $subperiod . "D"));
+                  $caldate->sub(new DateInterval("P" . $subperiod . "D"));
                 }
-
               @endphp
 @for ($i = 0;  $i<=4;  $i++)
             @php
-              $printdate  = $caldate->add(new DateInterval("P" . $i . "D"));
+              $printdate  = $caldate->add(new DateInterval("P1D"));
             @endphp
               <div class="reserve_table_column">
                 <div class="reserve_table_column_h">

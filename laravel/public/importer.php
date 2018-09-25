@@ -50,6 +50,7 @@ if($tok) {
     $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if($status_code == 200) {
         $tree = json_decode($res);
+        var_dump($tree);exit();
         foreach($tree as $obj) {
             if($obj->Active === true) {
 

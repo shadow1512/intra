@@ -57,7 +57,9 @@
                     <div class="reserve_table_filled_cnt_bl">{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}.</div>
                   </div>
                 </div>
-            {{$index  = $index  + 1}}
+            @php
+              $index  = $index  + 1;
+            @endphp
           @endforeach
         @endif
         @php
@@ -66,5 +68,6 @@
               </div>
 @endfor
           </div>
+</div>
 <!--eo modal-->
 @endsection

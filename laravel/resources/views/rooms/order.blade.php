@@ -47,6 +47,7 @@
               $bookstarttime  =   strtotime($booking->date_book . " " . $booking->time_start);
               $hours    = date("H", ($bookstarttime - $daystarttime));
               $minutes  = date("i", ($bookstarttime - $daystarttime));
+              var_dump($hours);var_dump($minutes);
               $offset = 73  + (($hours*60  + $minutes) / 30)  * 26;
             @endphp
                 <div style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">

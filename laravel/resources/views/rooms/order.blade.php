@@ -44,6 +44,7 @@
                 <div class="reserve_table_column_line">17:00</div>
                 <div class="reserve_table_column_line">18:00</div>
                 <div class="reserve_table_column_btn">Забронировать</div>
+        @if (isset($bookings[strtotime($printdate->format("Y-m-d"))))
           @foreach ($bookings[strtotime($printdate->format("Y-m-d"))] as  $booking)
                 <div style="top: 125px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">
                   <div title="{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}" class="reserve_table_filled_img"><img src="{{$booking->avatar}}"></div>
@@ -55,6 +56,7 @@
                 </div>
             {{$index  = $index  + 1}}
           @endforeach
+        @endif
               </div>
 @endfor
           </div>

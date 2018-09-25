@@ -96,7 +96,7 @@ class RoomsController extends Controller
                                     })->exists();
 
             if($exists) {
-                return response()->json(['result'    =>  'error',  'messsage' =>  'crossing detected']);
+                return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);
             }
             else {
                 $date = date("Y-m-d H:i:s");

@@ -40,7 +40,9 @@
                 <div class="reserve_table_column_line">16:00</div>
                 <div class="reserve_table_column_line">17:00</div>
                 <div class="reserve_table_column_line">18:00</div>
+                @if (Auth::check())
                 <div class="reserve_table_column_btn">Забронировать</div>
+                @endif
         @if (isset($bookings[strtotime($caldate->format("Y-m-d"))]))
           @foreach ($bookings[strtotime($caldate->format("Y-m-d"))] as  $booking)
             @php

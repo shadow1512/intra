@@ -144,7 +144,7 @@
             <input type="hidden" name="input_date_booking" id="input_date_booking"/>
             <div class="field">
               <label for="input_name" class="lbl">Название мероприятия:</label>
-              <input id="input_name" name="input_name" type="text" value="" class="it">
+              <input id="input_name" name="input_name" type="text" value="" class="it" maxlength="60">
             </div>
             <div class="field">
               <label for="input_time_start" class="lbl">Время начала:</label>

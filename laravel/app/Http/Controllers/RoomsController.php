@@ -79,7 +79,7 @@ class RoomsController extends Controller
         $time_end      = trim($request->input('input_time_end'));
 
         $validator = Validator::make($request->all(), [
-            'input_name'            => 'required|max:255',
+            'input_name'            => 'required|max:90',
             'input_date_booking'    => 'required',
             'input_time_start'      => 'required',
             'input_time_end'        => 'required',
@@ -89,11 +89,22 @@ class RoomsController extends Controller
             return response()->json(['error', $validator]);
         }
         else {
-            $date = date("Y-m-d H:i:s");
-            DB::table('room_bookings')->insert(['room_id' => $id, 'name'    =>  $name, 'date_book' =>  $date_booking,
-                    'user_id'  =>  Auth::user()->id,  'time_start'   =>  $time_start,   'time_end' =>  $time_end,
-                    'created_at'    =>  $date, 'updated_at' => $date]);
-            return response()->json(['success']);
+            //Нужно проверить, что не перекрывается по датам
+            $exists =   Booking::whereDate('date_book',    $date_booking)
+                            ->where(function($query) {
+                                        $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
+                                    })->exists();
+
+            if($exists) {
+                return response()->json(['error', 'time crossing']);
+            }
+            else {
+                $date = date("Y-m-d H:i:s");
+                DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
+                    'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
+                    'created_at' => $date, 'updated_at' => $date]);
+                return response()->json(['success']);
+            }
         }
     }
 

@@ -48,7 +48,6 @@ $(document).on("submit", "#room_order_form", function(ev) {
         dataType: "json",
         data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
         success: function(msg) {
-            msg=    JSON.parse(msg);
             if(msg.result == "success") {
                 location.reload(true);
             }

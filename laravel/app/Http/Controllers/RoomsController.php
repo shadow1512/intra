@@ -43,12 +43,6 @@ class RoomsController extends Controller
         }
         $findate    =   $caldate->add(new DateInterval("P4D"));
 
-        DB::listen(function($sql, $bindings, $time) {
-            var_dump($sql);
-            var_dump($bindings);
-            var_dump($time);
-        });
-
         $bookings = Booking::select('room_bookings.*',
                                             'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar')
             ->selectRaw('TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
@@ -60,16 +54,6 @@ class RoomsController extends Controller
 
         var_dump($bookings);
 
-        $bookings = Booking::select('room_bookings.*',
-            'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar')
-            ->selectRaw('TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
-            ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
-            ->whereBetween('date_book', [$caldate,  $findate])
-            ->orderBy('date_book')
-            ->orderBy('time_start')
-            ->toSql();
-
-        dd($bookings);
         $bookings_by_dates = array();
         foreach($bookings as $booking) {
             $bookings_by_dates[strtotime($booking->date_book)][] = $booking;

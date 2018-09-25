@@ -56,7 +56,7 @@
             {{$index  = $index  + 1}}
           @endforeach
               </div>
-@endforeach
+@endfor
           </div>
 <!--eo modal-->
 @endsection

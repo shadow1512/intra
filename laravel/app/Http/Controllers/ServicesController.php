@@ -10,9 +10,6 @@ use App\Rooms;
 
 class ServicesController extends Controller
 {
-    public $rooms;
-
-    public $contacts;
     /**
      * Create a new controller instance.
      *
@@ -22,13 +19,6 @@ class ServicesController extends Controller
     {
         $this->middleware('auth');
 
-        //Комнаты
-        $this->rooms = Rooms::orderBy('name')->get();
-        //Контакты выбранные
-        if(Auth::check()) {
-            $this->contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone")
-                ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
-        }
     }
 
     /**
@@ -38,16 +28,16 @@ class ServicesController extends Controller
      */
     public function teh()
     {
-        return view('services.teh', ["rooms"    =>  $this->rooms, "contacts"  =>  $this->contacts]);
+        return view('services.teh');
     }
 
     public function cartridge()
     {
-        return view('services.cartridge', ["rooms"    =>  $this->rooms, "contacts"  =>  $this->contacts]);
+        return view('services.cartridge');
     }
 
     public function mail()
     {
-        return view('services.mail', ["rooms"    =>  $this->rooms, "contacts"  =>  $this->contacts]);
+        return view('services.mail');
     }
 }

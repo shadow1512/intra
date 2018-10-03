@@ -3,7 +3,7 @@
 @section('view')
 <div class="profile_i">
     <div class="profile_aside">
-        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
+        <div class="profile_aside_pic __birthday"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
             <p class="profile_aside_invoice_i">1 650 ₽</p></a>
     </div>

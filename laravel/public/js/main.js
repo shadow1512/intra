@@ -33,16 +33,20 @@ $(document).ready(function(){
 
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-        var searchValue = $("input.header_search_it").val();
-        localStorage.setItem('searchValue', searchValue);
         $(this).parent().parent().submit();
     });
 
+    $(".header_search_form").submit(function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var searchValue = $("input.header_search_it").val();
+        sessionStorage.setItem('searchValue', searchValue);
+    });
+
     function getSavedValue (id){
-        if (!localStorage.getItem(id)) {
+        if (!sessionStorage.getItem(id)) {
             return "";
         }
-        return localStorage.getItem(id);
+        return sessionStorage.getItem(id);
     }
 
     $("input.header_search_it").val(getSavedValue('searchValue'));

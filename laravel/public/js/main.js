@@ -36,11 +36,10 @@ $(document).ready(function(){
         $(this).parent().parent().submit();
     });
 
-    /* $(".header_search_form").submit(function(ev) {
-        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $(".header_search_form").submit(function(ev) {
         var searchValue = $("input.header_search_it").val();
         sessionStorage.setItem('searchValue', searchValue);
-    }); */
+    });
 
     function getSavedValue (id){
         if (!sessionStorage.getItem(id)) {

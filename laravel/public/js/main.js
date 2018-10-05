@@ -9,7 +9,7 @@ $(document).ready(function(){
         'select': {width:"100%", disable_search: true, no_results_text:'Ничего не найдено'}
     }
     for (var selector in chosenConfig) {
-        $(selector).chosen(config[selector]);
+        $(selector).chosen(chosenConfig[selector]);
     }
     //Код для пункта "Не выбрано"
     $('select').on('change', function(event) {

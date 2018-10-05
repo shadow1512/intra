@@ -138,7 +138,9 @@
       <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
       <div class="modal_cnt">
         @if (Auth::check())
-          <div class="h light_h __h_m">Забронировать время</div>
+          <div class="profile_form_h">
+            <div class="h light_h __h_m">Забронировать время</div>
+          </div>
           <form class="profile_form" id="room_order_form" action="{{route('rooms.book.create', ["id"  =>  $room->id])}}">
             {{ csrf_field() }}
             <input type="hidden" name="input_date_booking" id="input_date_booking"/>
@@ -147,14 +149,17 @@
               <input id="input_name" name="input_name" type="text" value="" class="it" maxlength="60">
             </div>
             <div class="field">
-              <label for="input_time_start" class="lbl">Время начала:</label>
-              <input id="input_time_start" name="input_time_start" type="text" value="" class="it">
+              <div class="field_half">
+                <label for="input_time_start" class="lbl">Время начала:</label>
+                <input id="input_time_start" name="input_time_start" type="text" value="" class="it">
+              </div>
+              <div class="field_half">
+                <label for="input_time_end" class="lbl">Время окончания:</label>
+                <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
+              </div>
+              <span class="field_dash">&ndash;</span>
             </div>
-            <div class="field">
-              <label for="input_time_end" class="lbl">Время окончания:</label>
-              <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
-            </div>
-            <div class="field"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
+            <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
           </form>
               <div class="error" atyle="display:none;"></div>
         @else
@@ -165,4 +170,54 @@
   </div>
 </div>
 <!--eo modal-->
+
+<!-- change modal -->
+<div class="overlay __js-modal-change-order">
+  <div class="modal-w">
+    <div class="modal-cnt __form">
+      <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+      <div class="modal_cnt">
+        <div class="profile_form_h">
+          <div class="h light_h __h_m">Бронь: 12345</div>
+        </div>
+          <form class="profile_form" id="room_change_form">
+            <div class="field">
+              <label for="input_name" class="lbl">Название брони:</label>
+              <input id="input_name" name="input_name" type="text" value="" class="it" maxlength="60">
+            </div>
+            <div class="field">
+              <label for="input_date" class="lbl">Дата брони:</label>
+              <select id="input_date" name="input_date">
+                <option value="0901">1 сентября</option>
+                <option value="0902">2 сентября</option>
+              </select>
+            </div>
+            <div class="field">
+              <div class="field_half">
+                <label for="input_time_start" class="lbl">Время начала:</label>
+                <input id="input_time_start" name="input_time_start" type="text" value="" class="it">
+              </div>
+              <div class="field_half">
+                <label for="input_time_end" class="lbl">Время окончания:</label>
+                <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
+              </div>
+              <span class="field_dash">&ndash;</span>
+            </div>
+            <div class="field">
+              <label for="input_room" class="lbl">Кабинет:</label>
+              <select id="input_room" name="input_room">
+                <option value="218">Кабинет 218</option>
+                <option value="219">Кабинет 219</option>
+              </select>
+            </div>
+            <div class="field">
+              <a href="#" class="btn profile_form_btn __cancel __margin-right_l" id="cancel_room_order_form">Отменить бронь</a>
+              <a href="#" class="btn profile_form_btn" id="submit_room_order_form">Сохранить</a>
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- eo change modal -->
 @endsection

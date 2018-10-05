@@ -3,6 +3,23 @@
  */
 $(document).ready(function(){
 
+    // chosen select
+
+    var chosenConfig = {
+        'select': {width:"100%", disable_search: true, no_results_text:'Ничего не найдено'}
+    }
+    for (var selector in chosenConfig) {
+        $(selector).chosen(config[selector]);
+    }
+    //Код для пункта "Не выбрано"
+    $('select').on('change', function(event) {
+        if($(this).val() === "0") {
+            $(this).val([]);
+            $('select').trigger('chosen:updated');
+        }
+    });
+    // eo chosen select
+
     $("a.directory_search").on("click",    function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).addClass("__hidden");
@@ -141,6 +158,7 @@ $(document).ready(function(){
             $(win).find("input[name='input_date_booking']").val(dd);
         }
     });
+    popUp('.reserve_table_filled', '.__js-modal-change-order');
 
     //eo modal window
 

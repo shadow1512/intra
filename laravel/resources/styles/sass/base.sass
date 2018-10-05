@@ -431,7 +431,20 @@ h3
   &.__e .chosen-container-single.chosen-with-drop .chosen-single div:before,
   &.__e .chosen-container-single.chosen-with-drop .chosen-single div:after
     background-color: lighten($normal, 25%)
-
+.field_half
+  display: inline-block
+  width: 50%
+  margin-right: -4px
+  vertical-align: top
+  &:first-child
+    padding-right: 10px
+  &:last-child
+    padding-left: 10px
+.field_dash
+  position: absolute
+  top: 50%
+  left: 50%
+  margin-left: -4px
 .it
   font:
     family: Arial, sans-serif

@@ -3,6 +3,23 @@
  */
 $(document).ready(function(){
 
+    // chosen select
+
+    var chosenConfig = {
+        'select': {width:"100%", disable_search: true, no_results_text:'Ничего не найдено'}
+    }
+    for (var selector in chosenConfig) {
+        $(selector).chosen(chosenConfig[selector]);
+    }
+    //Код для пункта "Не выбрано"
+    $('select').on('change', function(event) {
+        if($(this).val() === "0") {
+            $(this).val([]);
+            $('select').trigger('chosen:updated');
+        }
+    });
+    // eo chosen select
+
     $("a.directory_search").on("click",    function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $(this).addClass("__hidden");
@@ -33,16 +50,19 @@ $(document).ready(function(){
 
     $("a.header_search_btn").on("click", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-        var searchValue = $("input.header_search_it").val();
-        localStorage.setItem('searchValue', searchValue);
         $(this).parent().parent().submit();
     });
 
+    $(".header_search_form").submit(function(ev) {
+        var searchValue = $("input.header_search_it").val();
+        sessionStorage.setItem('searchValue', searchValue);
+    });
+
     function getSavedValue (id){
-        if (!localStorage.getItem(id)) {
+        if (!sessionStorage.getItem(id)) {
             return "";
         }
-        return localStorage.getItem(id);
+        return sessionStorage.getItem(id);
     }
 
     $("input.header_search_it").val(getSavedValue('searchValue'));
@@ -138,6 +158,7 @@ $(document).ready(function(){
             $(win).find("input[name='input_date_booking']").val(dd);
         }
     });
+    popUp('.reserve_table_filled', '.__js-modal-change-order');
 
     //eo modal window
 

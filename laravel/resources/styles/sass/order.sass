@@ -278,9 +278,13 @@
     @include transition(all .5s ease)
     min-height: 26px
     overflow: hidden
+    .reserve_table_filled_img
+      margin-top: 0
     &.__open
       padding: 10px
       z-index: 9999
+      .reserve_table_filled_img
+        margin-top: 3px
       .reserve_table_filled_cnt_bl
         &.__ellipsis
           white-space: normal
@@ -333,10 +337,18 @@
     background-color: #edd3e0
     border-top: 2px solid #b02169
     color: #b02169
+  &.__inactive
+    background-color: #dddddd 
+    border-top: 2px solid #6f6f6f
+    color: #6f6f6f
+    .reserve_table_filled_img
+      img
+        border-radius: 0
 .reserve_table_filled_img
   width: 18px
   height: 18px
   float: left
+  margin-top: 3px
   img
     border-radius: 50%
     max-width: 100%

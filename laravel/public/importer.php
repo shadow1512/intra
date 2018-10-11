@@ -64,7 +64,7 @@ if($tok) {
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
                             if($mdate > $rowdep['updated_at']){
-                                mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['dep_id']);
+                                mysqli_query($conn, "UPDATE deps SET `name`='" . $obj->Name . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['dep_id']);
                             }
 
                         }
@@ -90,8 +90,7 @@ if($tok) {
                             $rowuser = $user->fetch_assoc();
                             if ($mdate > $rowuser['updated_at']) {
                                 mysqli_query($conn,
-                                    "UPDATE users (`name`, `updated_at`) 
-                                    VALUES ('" . $obj->Name . "', '" . $date . "')");
+                                    "UPDATE users SET `name`='" . $obj->Name . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
                             }
 
                             $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
@@ -108,7 +107,7 @@ if($tok) {
                                 if($obj_authdata->Pruz) {
                                     $pruz   =  1;
                                 }
-                                $query  =   "UPDATE user_keys (`parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->Parent . "', '" . $obj_authdata->UserSID . "', " . $pruz . ",  '" . $obj_authdata->Username . "') WHERE user_id=" . $row["user_id"];
+                                $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . $obj_authdata->Username . "' WHERE user_id=" . $row["user_id"];
                                 $updres =   mysqli_query($conn, $query);
                                 if(!$updres) {
                                     printf("Error: %s\n", mysqli_error($conn));
@@ -116,7 +115,7 @@ if($tok) {
                                     var_dump($obj_authdata);
                                 }
                             } else {
-                                mysqli_query($conn, "UPDATE user_keys (`parent_key`) VALUES ('" . $obj->Parent . "') WHERE user_id=" . $row["user_id"]);
+                                mysqli_query($conn, "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "' WHERE user_id=" . $row["user_id"]);
                                 print("error:no AD data for " . $row["user_id"] . "\r\n");
                             }
 
@@ -142,8 +141,7 @@ if($tok) {
                                         $post = $obj_data->Post;
                                     }
                                 }
-                                $query = "UPDATE deps_peoples (`work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES ('" . $post . "', '" . $date . "', '" . $date . "', $chef) WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
+                                $query = "UPDATE deps_peoples SET `work_title`='" . $post . "', `created_at`='" . $date . "', `updated_at`='" . $date . "', `chef`=$chef WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
                                 mysqli_query($conn, $query);
                             }
                         }
@@ -221,7 +219,7 @@ if($tok) {
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");
                         $row = $res->fetch_assoc();
-                        mysqli_query($conn, "UPDATE deps (deleted_at, updated_at) VALUES ('" . date("Y-m-d H:i:s") . "',    '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['dep_id']);
+                        mysqli_query($conn, "UPDATE deps SET `deleted_at`='" . date("Y-m-d H:i:s") . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['dep_id']);
                     }
                 }
                 else {
@@ -230,7 +228,7 @@ if($tok) {
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");
                         $row = $res->fetch_assoc();
-                        mysqli_query($conn, "UPDATE users (deleted_at, updated_at) VALUES ('" . date("Y-m-d H:i:s") . "',    '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['user_id']);
+                        mysqli_query($conn, "UPDATE users SET `deleted_at`='" . date("Y-m-d H:i:s") . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['user_id']);
                     }
                 }
             }

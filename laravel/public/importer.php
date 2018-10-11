@@ -172,6 +172,7 @@ if($tok) {
                                 if(!$insres) {
                                     printf("Error: %s\n", mysqli_error($conn));
                                     var_dump($query);
+                                    var_dump($obj_authdata);
                                 }
                                 exit();
                             }

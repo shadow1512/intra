@@ -196,7 +196,7 @@ if($tok) {
             }
             else {
                 if($obj->ExecutiveType == 0) {
-                    print("dep\r\n");
+                    print("dep: no active\r\n");
                     $res = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");
@@ -205,7 +205,7 @@ if($tok) {
                     }
                 }
                 else {
-                    print("user\r\n");
+                    print("user: no active\r\n");
                     $res = mysqli_query($conn, "SELECT user_id FROM users_keys WHERE `key`='" . $obj->UID . "'");
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");

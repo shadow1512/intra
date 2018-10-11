@@ -104,7 +104,17 @@ if($tok) {
                             $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
                             if ($status_code_data == 200) {
                                 $obj_authdata = json_decode($resauthdata);
-                                mysqli_query($conn, "UPDATE user_keys (`parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->Parent . "', '" . $obj_authdata->UserSID . "', " . $obj_authdata->Pruz . ",  '" . $obj_authdata->Username . "') WHERE user_id=" . $row["user_id"]);
+                                $pruz   =   false;
+                                if($obj_authdata->Pruz) {
+                                    $pruz   =   true;
+                                }
+                                $query  =   "UPDATE user_keys (`parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->Parent . "', '" . $obj_authdata->UserSID . "', " . $pruz . ",  '" . $obj_authdata->Username . "') WHERE user_id=" . $row["user_id"];
+                                $updres =   mysqli_query($conn, $query);
+                                if(!$updres) {
+                                    printf("Error: %s\n", mysqli_error($conn));
+                                    var_dump($query);
+                                    var_dump($obj_authdata);
+                                }
                             } else {
                                 mysqli_query($conn, "UPDATE user_keys (`parent_key`) VALUES ('" . $obj->Parent . "') WHERE user_id=" . $row["user_id"]);
                                 print("error:no AD data for " . $row["user_id"] . "\r\n");
@@ -167,14 +177,17 @@ if($tok) {
                             $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
                             if($status_code_data == 200) {
                                 $obj_authdata = json_decode($resauthdata);
-                                $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $obj_authdata->Pruz .   ",  '"  .   $obj_authdata->Username .   "')";
+                                $pruz   =   false;
+                                if($obj_authdata->Pruz) {
+                                    $pruz   =   true;
+                                }
+                                $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $pruz .   ",  '"  .   $obj_authdata->Username .   "')";
                                 $insres =mysqli_query($conn, $query);
                                 if(!$insres) {
                                     printf("Error: %s\n", mysqli_error($conn));
                                     var_dump($query);
                                     var_dump($obj_authdata);
                                 }
-                                exit();
                             }
                             else {
                                 mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");

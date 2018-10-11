@@ -114,11 +114,26 @@ if($tok) {
                             if ($dep && $dep->num_rows > 0) {
                                 $rowdep = $dep->fetch_assoc();
                                 $chef = 0;
-                                if ($obj->Leader) {
-                                    $chef = 1;
+                                $post   =   "";
+
+                                $ch_data = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
+                                //curl_setopt($ch, CURLOPT_HEADER, true);
+                                curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+                                curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                                $res_data = curl_exec($ch_data);
+                                $status_code = curl_getinfo($ch_data, CURLINFO_HTTP_CODE);
+                                if($status_code == 200) {
+                                    $obj_data = json_decode($res);
+                                    if ($obj_data->Leader) {
+                                        $chef = 1;
+                                    }
+                                    if ($obj_data->Post) {
+                                        $post = $obj_data->Post;
+                                    }
                                 }
                                 $query = "UPDATE deps_peoples (`work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES ('" . $obj->Post . "', '" . $date . "', '" . $date . "', $chef) WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
+                                                        VALUES ('" . $post . "', '" . $date . "', '" . $date . "', $chef) WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
                                 mysqli_query($conn, $query);
                             }
                         }

@@ -167,7 +167,6 @@ if($tok) {
                             $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
                             if($status_code_data == 200) {
                                 $obj_authdata = json_decode($resauthdata);
-                                var_dump($obj_authdata);exit();
                                 $insres =mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $obj_authdata->Pruz .   ",  '"  .   $obj_authdata->Username .   "')");
                                 if(!$insres) {
                                     printf("Error: %s\n", mysqli_error($conn));

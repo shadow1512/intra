@@ -64,7 +64,7 @@ if($tok) {
                         if($dep && $dep->num_rows > 0) {
                             $rowdep = $dep->fetch_assoc();
                             if($mdate > $rowdep['updated_at']){
-                                mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "')");
+                                mysqli_query($conn, "UPDATE deps (name, updated_at) VALUES ('" . $obj->Name . "', '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['dep_id']);
                             }
 
                         }
@@ -79,23 +79,48 @@ if($tok) {
                 }
                 else {
                     print("user\r\n");
+                    $date = date("Y-m-d H:i:s");
                     $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
                     if($res && $res->num_rows > 0) {
                         print("action:update\r\n");
-                        $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
-                        $chauthdata = curl_init($url_data);
-                        //curl_setopt($ch, CURLOPT_HEADER, true);
-                        curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
-                        curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
-                        curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
-                        $resauthdata = curl_exec($chauthdata);
-                        $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
-                        if($status_code_data == 200) {
-                            $obj_authdata = json_decode($resauthdata);
-                            var_dump($obj_authdata);exit();
-                        }
-                        else {
-                            var_dump($url_data);var_dump($status_code_data);exit();
+                        $row = $res->fetch_assoc();
+                        $mdate = date("Y-m-d H:i:s", strtotime($obj->ModifyDate));
+                        $user    =   mysqli_query($conn, "SELECT updated_at FROM users WHERE id=" . $row['user_id']);
+                        if($user && $user->num_rows > 0) {
+                            $rowuser = $user->fetch_assoc();
+                            if ($mdate > $rowuser['updated_at']) {
+                                mysqli_query($conn,
+                                    "UPDATE users (`name`, `updated_at`) 
+                                    VALUES ('" . $obj->Name . "', '" . $date . "')");
+                            }
+
+                            $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
+                            $chauthdata = curl_init($url_data);
+                            //curl_setopt($ch, CURLOPT_HEADER, true);
+                            curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
+                            curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                            curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
+                            $resauthdata = curl_exec($chauthdata);
+                            $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
+                            if ($status_code_data == 200) {
+                                $obj_authdata = json_decode($resauthdata);
+                                mysqli_query($conn, "UPDATE user_keys (`parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->Parent . "', '" . $obj_authdata->UserSID . "', " . $obj_authdata->Pruz . ",  '" . $obj_authdata->Username . "') WHERE user_id=" . $row["user_id"]);
+                            } else {
+                                mysqli_query($conn, "UPDATE user_keys (`parent_key`) VALUES ('" . $obj->Parent . "') WHERE user_id=" . $row["user_id"]);
+                                print("error:no AD data for " . $row["user_id"] . "\r\n");
+                            }
+
+                            $dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
+                            if ($dep && $dep->num_rows > 0) {
+                                $rowdep = $dep->fetch_assoc();
+                                $chef = 0;
+                                if ($obj->Leader) {
+                                    $chef = 1;
+                                }
+                                $query = "UPDATE deps_peoples (`work_title`, `created_at`, `updated_at`, `chef`)
+                                                        VALUES ('" . $obj->Post . "', '" . $date . "', '" . $date . "', $chef) WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
+                                mysqli_query($conn, $query);
+                            }
                         }
                     }
                     else {
@@ -109,22 +134,6 @@ if($tok) {
                         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
                         if($status_code == 200) {
                             $obj = json_decode($res);
-
-
-                            $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
-                            //curl_setopt($ch, CURLOPT_HEADER, true);
-                            curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
-                            curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
-                            curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
-                            $resauthdata = curl_exec($chauthdata);
-                            $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
-                            if($status_code_data == 200) {
-                                $obj_authdata = json_decode($resauthdata);
-                                var_dump($obj_authdata);exit();
-                            }
-                            else {
-                                var_dump($status_code_data);exit();
-                            }
                             $date = date("Y-m-d H:i:s");
                             $insres = mysqli_query($conn,
                                 "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
@@ -134,7 +143,21 @@ if($tok) {
                                 printf("Error: %s\n", mysqli_error($conn));
                             }
                             $user_id = mysqli_insert_id($conn);
-                            mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
+                            $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                            //curl_setopt($ch, CURLOPT_HEADER, true);
+                            curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
+                            curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                            curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
+                            $resauthdata = curl_exec($chauthdata);
+                            $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
+                            if($status_code_data == 200) {
+                                $obj_authdata = json_decode($resauthdata);
+                                mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $obj_authdata->Pruz .   ",  '"  .   $obj_authdata->Username .   "')");
+                            }
+                            else {
+                                mysqli_query($conn, "INSERT INTO user_keys (`key`, `user_id`, `parent_key`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "')");
+                                print("error:no AD data for $user_id\r\n");
+                            }
 
                             $dep    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
                             if($dep && $dep->num_rows > 0) {
@@ -156,7 +179,26 @@ if($tok) {
                     }
                 }
             }
-
+            else {
+                if($obj->ExecutiveType == 0) {
+                    print("dep\r\n");
+                    $res = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
+                    if ($res && $res->num_rows > 0) {
+                        print("action:delete\r\n");
+                        $row = $res->fetch_assoc();
+                        mysqli_query($conn, "UPDATE deps (deleted_at, updated_at) VALUES ('" . date("Y-m-d H:i:s") . "',    '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['dep_id']);
+                    }
+                }
+                else {
+                    print("user\r\n");
+                    $res = mysqli_query($conn, "SELECT user_id FROM users_keys WHERE `key`='" . $obj->UID . "'");
+                    if ($res && $res->num_rows > 0) {
+                        print("action:delete\r\n");
+                        $row = $res->fetch_assoc();
+                        mysqli_query($conn, "UPDATE users (deleted_at, updated_at) VALUES ('" . date("Y-m-d H:i:s") . "',    '" . date("Y-m-d H:i:s") . "') WHERE id=" . $row['user_id']);
+                    }
+                }
+            }
         }
     }
     else {

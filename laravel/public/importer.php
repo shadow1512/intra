@@ -107,7 +107,7 @@ if($tok) {
                                 if($obj_authdata->Pruz) {
                                     $pruz   =  1;
                                 }
-                                $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . $obj_authdata->Username . "' WHERE user_id=" . $row["user_id"];
+                                $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . addslashes($obj_authdata->Username) . "' WHERE user_id=" . $row["user_id"];
                                 $updres =   mysqli_query($conn, $query);
                                 if(!$updres) {
                                     printf("Error: %s\n", mysqli_error($conn));
@@ -179,7 +179,7 @@ if($tok) {
                                 if($obj_authdata->Pruz) {
                                     $pruz   =   1;
                                 }
-                                $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $pruz .   ",  '"  .   $obj_authdata->Username .   "')";
+                                $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $pruz .   ",  '"  .   addslashes($obj_authdata->Username) .   "')";
                                 $insres =mysqli_query($conn, $query);
                                 if(!$insres) {
                                     printf("Error: %s\n", mysqli_error($conn));

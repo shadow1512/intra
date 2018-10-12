@@ -36,8 +36,6 @@ class AdLoginController extends Controller
             $user = Adldap::getProvider('default')->search()->users()->find($login);
             if($user) {
                 $sid = $user->getConvertedSid();
-                var_dump($user->getConvertedSid());
-                var_dump($user->getObjectSid());
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.sid', '=', $sid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);

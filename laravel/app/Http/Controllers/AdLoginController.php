@@ -27,10 +27,12 @@ class AdLoginController extends Controller
      */
     public function login(Request $request)
     {
-        /*var_dump(Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass')));
-        var_dump($request->input('login'));
-        var_dump($request->input('pass'));*/
-        if (Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass'))) {
+        $login  =   mb_strtolower(trim($request->input('login')),   "UTF-8");
+        if(!(mb_substr($login,    0,  5)  ==  'work\\')) {
+            $login  =   'work\\'    .   $login;
+        }
+        var_dump($login);
+        if (Adldap::getProvider('default')->auth()->attempt($login, $request->input('pass'))) {
             $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
             if($user) {
                 $sid = $user->getConvertedSid();

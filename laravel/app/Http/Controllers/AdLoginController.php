@@ -28,16 +28,16 @@ class AdLoginController extends Controller
     public function login(Request $request)
     {
         $login  =   mb_strtolower(trim($request->input('login')),   "UTF-8");
+        $authlogin  =   $login;
         if(!(mb_substr($login,    0,  5)  ==  'work\\')) {
-            $login  =   'work\\'    .   $login;
+            $authlogin  =   'work\\'    .   $login;
         }
-        var_dump($login);
-        if (Adldap::getProvider('default')->auth()->attempt($login, $request->input('pass'))) {
-            $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
+        if (Adldap::getProvider('default')->auth()->attempt($authlogin, $request->input('pass'))) {
+            $user = Adldap::getProvider('default')->search()->users()->find($login);
             if($user) {
                 $sid = $user->getConvertedSid();
-                /*var_dump($user->getConvertedSid());
-                var_dump($user->getObjectSid());*/
+                var_dump($user->getConvertedSid());
+                var_dump($user->getObjectSid());
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.sid', '=', $sid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);

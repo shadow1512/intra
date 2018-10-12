@@ -27,15 +27,15 @@ class AdLoginController extends Controller
      */
     public function login(Request $request)
     {
-        var_dump(Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass')));
+        /*var_dump(Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass')));
         var_dump($request->input('login'));
-        var_dump($request->input('pass'));
+        var_dump($request->input('pass'));*/
         if (Adldap::getProvider('default')->auth()->attempt($request->input('login'), $request->input('pass'))) {
             $user = Adldap::getProvider('default')->search()->users()->find($request->input('login'));
             if($user) {
                 $sid = $user->getConvertedSid();
-                var_dump($user->getConvertedSid());
-                var_dump($user->getObjectSid());
+                /*var_dump($user->getConvertedSid());
+                var_dump($user->getObjectSid());*/
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.sid', '=', $sid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);

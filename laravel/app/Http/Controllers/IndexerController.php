@@ -404,47 +404,47 @@ class IndexerController extends Controller
                     $department_name   =   Dep::where("parent_id", "=",    $parent_id)->value("name");
 
                     $dom = new DOMDocument('1.0', 'utf-8');
-                    $data       =   $dom->createChild("data");
+                    $data       =   $dom->createElement("data");
                     $datanode   =   $dom->appendChild($data);
-                    $user       =   $dom->createChild("user");
+                    $user       =   $dom->createElement("user");
                     $usernode   =   $datanode->appendChild($user);
-                    $login      =   $dom->createChild("login",  $user->ad_login);
+                    $login      =   $dom->createElement("login",  $user->ad_login);
                     $loginnode  =   $usernode->appendChild($login);
-                    $fname      =   $dom->createChild("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));
+                    $fname      =   $dom->createElement("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);
-                    $mname      =   $dom->createChild("mname",  preg_replace("[А-я  \-]\ius",   "", $user->mname));
+                    $mname      =   $dom->createElement("mname",  preg_replace("[А-я  \-]\ius",   "", $user->mname));
                     $mnamenode  =   $usernode->appendChild($mname);
-                    $lname      =   $dom->createChild("lname",  preg_replace("[А-я  \-]\ius",   "", $user->lname));
+                    $lname      =   $dom->createElement("lname",  preg_replace("[А-я  \-]\ius",   "", $user->lname));
                     $lnamenode  =   $usernode->appendChild($lname);
 
-                    $phones         =   $dom->createChild("phones");
+                    $phones         =   $dom->createElement("phones");
                     $phonesnode     =   $usernode->appendChild($phones);
-                    $localphone     =   $dom->createChild("localphone", preg_replace("[^0-9]\ius",   "", $user->phone));
+                    $localphone     =   $dom->createElement("localphone", preg_replace("[^0-9]\ius",   "", $user->phone));
                     $localphonenode =   $phonesnode->appendChild($localphone);
-                    $mobilephone     =   $dom->createChild("mobilephone", preg_replace("[^0-9]\ius",   "", $user->mobile_phone));
+                    $mobilephone     =   $dom->createElement("mobilephone", preg_replace("[^0-9]\ius",   "", $user->mobile_phone));
                     $mobilephonenode =   $phonesnode->appendChild($mobilephone);
 
-                    $address        =   $dom->createChild("address");
+                    $address        =   $dom->createElement("address");
                     $addressnode    =   $usernode->appendChild($address);
-                    $room           =   $dom->createChild("room", preg_replace("[^0-9]\ius",   "", $user->room));
+                    $room           =   $dom->createElement("room", preg_replace("[^0-9]\ius",   "", $user->room));
                     $roomnode       =   $addressnode->appendChild($room);
 
-                    $email          =   $dom->createChild("emails");
+                    $email          =   $dom->createElement("emails");
                     $emailnode      =   $usernode->appendChild($email);
 
-                    $work           =   $dom->createChild("work");
+                    $work           =   $dom->createElement("work");
                     $worknode       =   $usernode->appendChild($work);
-                    $worktitle      =   $dom->createChild("worktitle", $user->work_title);
+                    $worktitle      =   $dom->createElement("worktitle", $user->work_title);
                     $worktitlenode  =   $worknode->appendChild($worktitle);
-                    $division       =   $dom->createChild("division", $user->depname);
+                    $division       =   $dom->createElement("division", $user->depname);
                     $divisionnode   =   $worknode->appendChild($division);
-                    $department     =   $dom->createChild("department", $department_name);
+                    $department     =   $dom->createElement("department", $department_name);
                     $departmentnode =   $worknode->appendChild($department);
 
-                    $desc           =   $dom->createChild("description",    $user->position_desc);
+                    $desc           =   $dom->createElement("description",    $user->position_desc);
                     $descnode       =   $usernode->appendChild($desc);
 
-                    $photo          =   $dom->createChild("photopath",  Config::get('app.url')  .   $user->avatar);
+                    $photo          =   $dom->createElement("photopath",  Config::get('app.url')  .   $user->avatar);
                     $photonode      =   $usernode->appendChild($photo);
 
                     Storage::disk('public')->put('/xml/export/'    .   $caldate->format("Ymd")   .   '/'    .   $user->id   .   '.xml', $dom->saveXML(), 'public');

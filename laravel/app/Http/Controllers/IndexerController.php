@@ -400,7 +400,7 @@ class IndexerController extends Controller
                 Storage::disk('public')->makeDirectory('/xml/export/' . $caldate->format("Ymd") . '/');
             }
             foreach($up_users as $user) {
-                    $parent_id  =   mb_substr($user->parent_id, 0,  2,  "UTF-8");
+                    $parent_id  =   mb_substr($user->parent_id, 0,  4,  "UTF-8");
                     $department_name   =   Dep::where("parent_id", "=",    $parent_id)->value("name");
 
                     $dom = new DOMDocument('1.0', 'utf-8');
@@ -410,23 +410,23 @@ class IndexerController extends Controller
                     $usernode   =   $datanode->appendChild($userel);
                     $login      =   $dom->createElement("login",  $user->user_login);
                     $loginnode  =   $usernode->appendChild($login);
-                    $fname      =   $dom->createElement("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));
+                    $fname      =   $dom->createElement("fname",  preg_replace("/[А-я  \-]/ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);
-                    $mname      =   $dom->createElement("mname",  preg_replace("[А-я  \-]\ius",   "", $user->mname));
+                    $mname      =   $dom->createElement("mname",  preg_replace("/[А-я  \-]/ius",   "", $user->mname));
                     $mnamenode  =   $usernode->appendChild($mname);
-                    $lname      =   $dom->createElement("lname",  preg_replace("[А-я  \-]\ius",   "", $user->lname));
+                    $lname      =   $dom->createElement("lname",  preg_replace("/[А-я  \-]/ius",   "", $user->lname));
                     $lnamenode  =   $usernode->appendChild($lname);
 
                     $phones         =   $dom->createElement("phones");
                     $phonesnode     =   $usernode->appendChild($phones);
-                    $localphone     =   $dom->createElement("localphone", preg_replace("[^0-9]\ius",   "", $user->phone));
+                    $localphone     =   $dom->createElement("localphone", preg_replace("/[^0-9]/ius",   "", $user->phone));
                     $localphonenode =   $phonesnode->appendChild($localphone);
-                    $mobilephone     =   $dom->createElement("mobilephone", preg_replace("[^0-9]\ius",   "", $user->mobile_phone));
+                    $mobilephone     =   $dom->createElement("mobilephone", preg_replace("/[^0-9]/ius",   "", $user->mobile_phone));
                     $mobilephonenode =   $phonesnode->appendChild($mobilephone);
 
                     $address        =   $dom->createElement("address");
                     $addressnode    =   $usernode->appendChild($address);
-                    $room           =   $dom->createElement("room", preg_replace("[^0-9]\ius",   "", $user->room));
+                    $room           =   $dom->createElement("room", preg_replace("/[^0-9]/ius",   "", $user->room));
                     $roomnode       =   $addressnode->appendChild($room);
 
                     $email          =   $dom->createElement("emails");

@@ -397,8 +397,9 @@ class IndexerController extends Controller
                         ->whereBetween("users.updated_at",    [$start, $finish])->get();
         if($up_users->count()) {
             if(!Storage::disk('public')->exists('/xml/export/'    .   $caldate->format("Ymd")   .   '/')) {
-                Storage::disk('public')->makeDirectory('/xml/export/'    .   $caldate->format("Ymd")   .   '/');
-                foreach($up_users as $user) {
+                Storage::disk('public')->makeDirectory('/xml/export/' . $caldate->format("Ymd") . '/');
+            }
+            foreach($up_users as $user) {
                     $parent_id  =   mb_substr($user->parent_id, 0,  2,  "UTF-8");
                     $department_name   =   Dep::where("parent_id", "=",    $parent_id)->value("name");
 
@@ -446,9 +447,7 @@ class IndexerController extends Controller
                     $photo          =   $dom->createChild("photopath",  Config::get('app.url')  .   $user->avatar);
                     $photonode      =   $usernode->appendChild($photo);
 
-                    var_dump($dom->saveXML());
                     Storage::disk('public')->put('/xml/export/'    .   $caldate->format("Ymd")   .   '/'    .   $user->id   .   '.xml', $dom->saveXML(), 'public');
-                }
             }
         }
     }

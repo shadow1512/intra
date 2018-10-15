@@ -406,8 +406,8 @@ class IndexerController extends Controller
                     $dom = new DOMDocument('1.0', 'utf-8');
                     $data       =   $dom->createElement("data");
                     $datanode   =   $dom->appendChild($data);
-                    $user       =   $dom->createElement("user");
-                    $usernode   =   $datanode->appendChild($user);
+                    $userel     =   $dom->createElement("user");
+                    $usernode   =   $datanode->appendChild($userel);
                     $login      =   $dom->createElement("login",  $user->user_login);
                     $loginnode  =   $usernode->appendChild($login);
                     $fname      =   $dom->createElement("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));

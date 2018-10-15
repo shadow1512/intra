@@ -413,11 +413,11 @@ class IndexerController extends Controller
                     $sid        =   $dom->createElement("sid",  $user->sid);
                     $sidnode    =   $usernode->appendChild($sid);
 
-                    $fname      =   $dom->createElement("fname",  preg_replace("/[А-я  \-]/ius",   "", $user->fname));
+                    $fname      =   $dom->createElement("fname",  preg_replace("/[^А-я  \-]/ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);
-                    $mname      =   $dom->createElement("mname",  preg_replace("/[А-я  \-]/ius",   "", $user->mname));
+                    $mname      =   $dom->createElement("mname",  preg_replace("/[^А-я  \-]/ius",   "", $user->mname));
                     $mnamenode  =   $usernode->appendChild($mname);
-                    $lname      =   $dom->createElement("lname",  preg_replace("/[А-я  \-]/ius",   "", $user->lname));
+                    $lname      =   $dom->createElement("lname",  preg_replace("/[^А-я  \-]/ius",   "", $user->lname));
                     $lnamenode  =   $usernode->appendChild($lname);
 
                     $phones         =   $dom->createElement("phones");
@@ -432,7 +432,7 @@ class IndexerController extends Controller
                     $room           =   $dom->createElement("room", preg_replace("/[^0-9]/ius",   "", $user->room));
                     $roomnode       =   $addressnode->appendChild($room);
 
-                    $email          =   $dom->createElement("emails");
+                    $email          =   $dom->createElement("emails",   $user->email);
                     $emailnode      =   $usernode->appendChild($email);
 
                     $work           =   $dom->createElement("work");

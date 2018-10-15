@@ -22,6 +22,7 @@ use Intervention\Image\ImageManager;
 use Config;
 use DateTime;
 use DateInterval;
+use DOMDocument;
 use Illuminate\Support\Facades\Validator;
 
 

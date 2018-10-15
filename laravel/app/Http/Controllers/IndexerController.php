@@ -410,6 +410,9 @@ class IndexerController extends Controller
                     $usernode   =   $datanode->appendChild($userel);
                     $login      =   $dom->createElement("login",  $user->user_login);
                     $loginnode  =   $usernode->appendChild($login);
+                    $sid        =   $dom->createElement("sid",  $user->sid);
+                    $sidnode    =   $usernode->appendChild($sid);
+
                     $fname      =   $dom->createElement("fname",  preg_replace("/[А-я  \-]/ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);
                     $mname      =   $dom->createElement("mname",  preg_replace("/[А-я  \-]/ius",   "", $user->mname));

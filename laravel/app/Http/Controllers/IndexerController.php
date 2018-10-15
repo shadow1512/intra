@@ -389,7 +389,7 @@ class IndexerController extends Controller
         $caldate->sub(new DateInterval("P1D"));
         $start =   $caldate->format("Y-m-d H:i:s");
 
-        $up_users   =   User::select("users.*", "deps_peoples.work_title",  "deps.name as depname",    "deps.parent_id",   "user_keys.sid",    "user_keys.ad_login")
+        $up_users   =   User::select("users.*", "deps_peoples.work_title",  "deps.name as depname",    "deps.parent_id",   "user_keys.sid",    "user_keys.user_login")
                         ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
                         ->leftJoin("deps",  "deps.id",  "=",    "deps_peoples.dep_id")
                         ->leftJoin("user_keys",  "users.id",  "=",    "user_keys.user_id")

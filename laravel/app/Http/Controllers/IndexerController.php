@@ -446,6 +446,7 @@ class IndexerController extends Controller
                     $photo          =   $dom->createChild("photopath",  Config::get('app.url')  .   $user->avatar);
                     $photonode      =   $usernode->appendChild($photo);
 
+                    var_dump($dom->saveXML());
                     Storage::disk('public')->put('/xml/export/'    .   $caldate->format("Ymd")   .   '/'    .   $user->id   .   '.xml', $dom->saveXML(), 'public');
                 }
             }

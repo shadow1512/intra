@@ -51,7 +51,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://intra.lan.kodeks.net'),
+    'url' => env('APP_URL', 'http://intra-new.dmz'),
 
     /*
     |--------------------------------------------------------------------------

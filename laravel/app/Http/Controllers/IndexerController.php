@@ -20,6 +20,8 @@ use cijic\phpMorphy\Facade\Morphy;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Config;
+use DateTime;
+use DateInterval;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -380,6 +382,74 @@ class IndexerController extends Controller
         print_r($record_counter . " прочитано, "    .   $processed_counter  .   " обработано, "    .   $counter_added  .   " добавлено");
     }
 
+    public function createXMLFromUpdatedUsers() {
+
+        $caldate = new DateTime();
+        $finish  =   $caldate->format("Y-m-d H:i:s");
+        $caldate->sub(new DateInterval("P1D"));
+        $start =   $caldate->format("Y-m-d H:i:s");
+
+        $up_users   =   User::select("users.*", "deps_peoples.work_title",  "deps.name as depname",    "deps.parent_id",   "user_keys.sid",    "user_keys.ad_login")
+                        ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
+                        ->leftJoin("deps",  "deps.id",  "=",    "deps_peoples.dep_id")
+                        ->leftJoin("user_keys",  "users.id",  "=",    "user_keys.user_id")
+                        ->whereBetween("users.updated_at",    [$start, $finish])->get();
+        if($up_users->count()) {
+            if(!Storage::disk('public')->exists('/xml/export/'    .   $caldate->format("Ymd")   .   '/')) {
+                Storage::disk('public')->makeDirectory('/xml/export/'    .   $caldate->format("Ymd")   .   '/');
+                foreach($up_users as $user) {
+                    $parent_id  =   mb_substr($user->parent_id, 0,  2,  "UTF-8");
+                    $department_name   =   Dep::where("parent_id", "=",    $parent_id)->value("name");
+
+                    $dom = new DOMDocument('1.0', 'utf-8');
+                    $data       =   $dom->createChild("data");
+                    $datanode   =   $dom->appendChild($data);
+                    $user       =   $dom->createChild("user");
+                    $usernode   =   $datanode->appendChild($user);
+                    $login      =   $dom->createChild("login",  $user->ad_login);
+                    $loginnode  =   $usernode->appendChild($login);
+                    $fname      =   $dom->createChild("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));
+                    $fnamenode  =   $usernode->appendChild($fname);
+                    $mname      =   $dom->createChild("mname",  preg_replace("[А-я  \-]\ius",   "", $user->mname));
+                    $mnamenode  =   $usernode->appendChild($mname);
+                    $lname      =   $dom->createChild("lname",  preg_replace("[А-я  \-]\ius",   "", $user->lname));
+                    $lnamenode  =   $usernode->appendChild($lname);
+
+                    $phones         =   $dom->createChild("phones");
+                    $phonesnode     =   $usernode->appendChild($phones);
+                    $localphone     =   $dom->createChild("localphone", preg_replace("[^0-9]\ius",   "", $user->phone));
+                    $localphonenode =   $phonesnode->appendChild($localphone);
+                    $mobilephone     =   $dom->createChild("mobilephone", preg_replace("[^0-9]\ius",   "", $user->mobile_phone));
+                    $mobilephonenode =   $phonesnode->appendChild($mobilephone);
+
+                    $address        =   $dom->createChild("address");
+                    $addressnode    =   $usernode->appendChild($address);
+                    $room           =   $dom->createChild("room", preg_replace("[^0-9]\ius",   "", $user->room));
+                    $roomnode       =   $addressnode->appendChild($room);
+
+                    $email          =   $dom->createChild("emails");
+                    $emailnode      =   $usernode->appendChild($email);
+
+                    $work           =   $dom->createChild("work");
+                    $worknode       =   $usernode->appendChild($work);
+                    $worktitle      =   $dom->createChild("worktitle", $user->work_title);
+                    $worktitlenode  =   $worknode->appendChild($worktitle);
+                    $division       =   $dom->createChild("division", $user->depname);
+                    $divisionnode   =   $worknode->appendChild($division);
+                    $department     =   $dom->createChild("department", $department_name);
+                    $departmentnode =   $worknode->appendChild($department);
+
+                    $desc           =   $dom->createChild("description",    $user->position_desc);
+                    $descnode       =   $usernode->appendChild($desc);
+
+                    $photo          =   $dom->createChild("photopath",  Config::get('app.url')  .   $user->avatar);
+                    $photonode      =   $usernode->appendChild($photo);
+
+                    Storage::disk('public')->put('/xml/export/'    .   $caldate->format("Ymd")   .   '/'    .   $user->id   .   '.xml', $dom->saveXML(), 'public');
+                }
+            }
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

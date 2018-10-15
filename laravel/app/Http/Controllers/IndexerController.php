@@ -408,7 +408,7 @@ class IndexerController extends Controller
                     $datanode   =   $dom->appendChild($data);
                     $user       =   $dom->createElement("user");
                     $usernode   =   $datanode->appendChild($user);
-                    $login      =   $dom->createElement("login",  $user->ad_login);
+                    $login      =   $dom->createElement("login",  $user->user_login);
                     $loginnode  =   $usernode->appendChild($login);
                     $fname      =   $dom->createElement("fname",  preg_replace("[А-я  \-]\ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);

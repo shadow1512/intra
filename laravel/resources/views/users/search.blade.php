@@ -62,7 +62,7 @@
         @if (count($users))
         <ul class="directory_lst">
             @foreach($users as $user)
-            <li class="directory_lst_i">
+            <li class="directory_lst_i @if ($user->birthday ==  date("Y-m-d")) __birthday @endif">
                 <div class="directory_lst_i_pic"><img src="{{$user->avatar}}" class="directory_lst_i_img"></div>
                 <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{$user->name}}</a>
                     <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>

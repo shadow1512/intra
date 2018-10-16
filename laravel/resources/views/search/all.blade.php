@@ -31,7 +31,7 @@
                 @if (count($users))
                     <ul class="profile_contacts_ul">
                         @foreach ($users as $user)
-                            <li class="profile_contacts_li @if ($user->birthday ==  date("Y-m-d")) __birthday @endif">
+                            <li class="profile_contacts_li @if (mb_substr($user->birthday, 5) ==  date("m-d")) __birthday @endif">
                                 <div class="profile_contacts_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}"></div>
                                 <div class="profile_contacts_info">
                                     <div class="profile_contacts_status"></div><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->name}}</a>

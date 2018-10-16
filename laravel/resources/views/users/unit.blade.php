@@ -14,7 +14,12 @@
                 <div class="profile_info_position">{{ $user->position }}</div>
             </div>
             <div class="profile_info_i">
-                <div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>@convertdate($user->birthday)</span></div>
+                <div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>
+                        @php
+                            $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
+                            $month  =   $months[date("n", strtotime($user->birthday))   -1];
+                            $day    =   date("j",   strtotime($user->birthday));
+                        @endphp {{ $day }} {{ $month }}</span></div>
                 <div class="profile_info_address"><strong>Адрес:&nbsp;</strong><span>{{ $user->address }}</span></div>
                 <div class="profile_info_room"><strong>Комната:&nbsp;</strong><span>{{ $user->room }}</span></div>
                 <div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{ $user->phone }}</span></div>

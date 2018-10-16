@@ -5,7 +5,7 @@
     @include('profile.contacts')
     <div class="profile_i">
         <div class="profile_aside">
-            <div class="profile_aside_pic@if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif"><img src="{{ $user->avatar }}" alt="{{ $user->name }}"></div>
+            <div class="profile_aside_pic @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif"><img src="{{ $user->avatar }}" alt="{{ $user->name }}"></div>
         </div>
         <div class="profile_info">
             <div class="profile_info_i">

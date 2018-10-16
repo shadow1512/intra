@@ -111,8 +111,6 @@ if($tok) {
                                 $updres =   mysqli_query($conn, $query);
                                 if(!$updres) {
                                     printf("Error: %s\n", mysqli_error($conn));
-                                    var_dump($query);
-                                    var_dump($obj_authdata);
                                 }
                             } else {
                                 mysqli_query($conn, "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "' WHERE user_id=" . $row["user_id"]);
@@ -183,8 +181,6 @@ if($tok) {
                                 $insres =mysqli_query($conn, $query);
                                 if(!$insres) {
                                     printf("Error: %s\n", mysqli_error($conn));
-                                    var_dump($query);
-                                    var_dump($obj_authdata);
                                 }
                             }
                             else {

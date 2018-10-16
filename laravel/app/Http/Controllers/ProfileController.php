@@ -32,7 +32,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone")
+        $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone","users.birthday")
             ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
         return view('profile.view', ['contacts'    =>  $contacts]);

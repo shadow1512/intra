@@ -31,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         Blade::directive('convertdate', function ($expression) {
             $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
             $month  =   $months[date("n", strtotime($expression))   -1];
+            dd($expression);
             return "<?php echo date('j', strtotime($expression)) . ' ' . '$month'; ?>";
         });
     }

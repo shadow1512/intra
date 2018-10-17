@@ -363,10 +363,41 @@ class IndexerController extends Controller
                                     $record = User::where('email', 'LIKE', $contact->value)->first();
                                 }
 
+                                //кусочек проверки по прочим признакам
                                 if (!$record) {
-                                    $record = new User();
-                                    $record->email = $contact->value;
-                                    $counter_added++;
+                                    if (isset($item->fullname->value) && !empty($item->fullname->value)) {
+                                        $lname = $fname = $mname = "";
+                                        $names = explode(" ", $item->fullname->value);
+                                        if (isset($names[0])) {
+                                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                                        }
+                                        if (isset($names[1])) {
+                                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                        }
+                                        if (isset($names[2])) {
+                                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                                        }
+                                        if ($lname && $fname && $mname) {
+                                            $record = User::where('fname', 'LIKE', $fname)
+                                                ->where('lname', 'LIKE', $lname)
+                                                ->where('mname', 'LIKE', $mname)->first();
+                                            if (!$record) {
+                                                $record = new User();
+                                                $record->email = $contact->value;
+                                                $counter_added++;
+                                            }
+                                        }
+                                        else {
+                                            print_r($item->fullname->value . ": в базе нет, но ФИО ($lname $fname $mname) не введено полностью\r\n");
+                                            //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
+                                            continue;
+                                        }
+                                    }
+                                    else {
+                                        print_r($item->id . ": пустой fullname\r\n");
+                                        //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
+                                        continue;
+                                    }
                                 }
                             }
                         }
@@ -395,7 +426,6 @@ class IndexerController extends Controller
                                 ->where('mname', 'LIKE', $mname)->first();
                             if (!$record) {
                                 $record = new User();
-
                                 $counter_added++;
                             }
                         }
@@ -461,6 +491,11 @@ class IndexerController extends Controller
                         else {
                             if(empty($record->email)) {
                                 $record->email  =   $contact_phone->value;
+                            }
+                            else {
+                                if($record->email   !=   $contact_phone->value) {
+                                    $record->email_secondary    =   $contact_phone->value;
+                                }
                             }
                         }
                     }

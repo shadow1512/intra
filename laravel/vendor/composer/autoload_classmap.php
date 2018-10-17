@@ -858,6 +858,7 @@ return array(
     'EditTermsTableAddDefaultBaseterm' => $baseDir . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
     'EditUsersAddAddressDescription' => $baseDir . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
     'EditUsersAddCityPhone' => $baseDir . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
+    'EditUsersAddEmailSecondary' => $baseDir . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',
     'EditUsersAddNumpark' => $baseDir . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
     'EditUsersAddPosition' => $baseDir . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',
     'EditUsersDatafieldsNullable' => $baseDir . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',

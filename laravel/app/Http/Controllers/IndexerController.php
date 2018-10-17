@@ -333,13 +333,13 @@ class IndexerController extends Controller
                                         $lname = $fname = $mname = "";
                                         $names = explode(" ", $item->fullname->value);
                                         if (isset($names[0])) {
-                                            $lname = trim($names[0]);
+                                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                                         }
                                         if (isset($names[1])) {
-                                            $fname = trim($names[1]);
+                                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
                                         }
                                         if (isset($names[2])) {
-                                            $mname = trim($names[2]);
+                                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
                                         }
                                         if ($lname && $fname && $mname) {
                                             $record = User::where('email', 'LIKE', $contact->value)
@@ -381,13 +381,13 @@ class IndexerController extends Controller
                         $lname = $fname = $mname = "";
                         $names = explode(" ", $item->fullname->value);
                         if (isset($names[0])) {
-                            $lname = trim($names[0]);
+                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                         }
                         if (isset($names[1])) {
-                            $fname = trim($names[1]);
+                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
                         }
                         if (isset($names[2])) {
-                            $mname = trim($names[2]);
+                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
                         }
                         if ($lname && $fname && $mname) {
                             $record = User::where('fname', 'LIKE', $fname)
@@ -421,16 +421,16 @@ class IndexerController extends Controller
                     $record->name   =   $item->fullname->value;
                     $names = explode(" ", $item->fullname->value);
                     if (isset($names[0])    &&  trim($names[0])  &&  empty($record->lname)) {
-                        $record->lname = trim($names[0]);
+                        $record->lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                     }
                     if (isset($names[1])    &&  trim($names[1])  &&  empty($record->fname)) {
-                        $record->fname = trim($names[1]);
+                        $record->fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
                     }
                     if (isset($names[2])    &&  trim($names[2])  &&  empty($record->mname)) {
-                        $record->mname = trim($names[2]);
+                        $record->mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
                     }
                 }
-                
+
                 if(isset($item->bdate->value) && !empty($item->bdate->value)) {
                     $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
                 }
@@ -457,6 +457,11 @@ class IndexerController extends Controller
                                 $record->phone = $contact_phone->value;
                             }
 
+                        }
+                        else {
+                            if(empty($record->email)) {
+                                $record->email  =   $contact_phone->value;
+                            }
                         }
                     }
                 }

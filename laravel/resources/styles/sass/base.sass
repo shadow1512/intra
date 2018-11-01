@@ -4,7 +4,7 @@
 
 //* reset
 //---------------------------------------------------------------------------------- */
-html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i,  dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td
   @include indentnull
   border: 0
   outline: 0
@@ -49,7 +49,6 @@ input:focus
 
 button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner, input[type="file"] > input[type="button"]::-moz-focus-inner
   border: none
-
 
 input[type="radio"]:focus
   -moz-outline-radius: 12px !important
@@ -101,6 +100,7 @@ a
     text-decoration: none
     &:hover
       text-decoration: underline
+
 .lk
   cursor: pointer
   color: $link
@@ -111,18 +111,20 @@ a
 strong
   font-weight: 700
 
-
 ul, ol
   list-style-position: outside
   margin-left: 1.5em
   margin-bottom: 1.4em
   li
     margin-bottom: 1em
+
 ol
   counter-reset: section
   list-style-type: none
+
 ol li
   counter-increment: section
+
 ol li:before
   content: counters(section, ".") ". "
 
@@ -143,6 +145,7 @@ ul li ol li
   display: block
   float: left
   margin-left: -1.2em
+
 .ol_i:before
   margin-left: -1.2em
 
@@ -168,6 +171,7 @@ ul li ol li
 
   &.__number
     margin-left: 1.1em
+
 h1
   margin-bottom: 0.6em
 
@@ -218,8 +222,6 @@ h3
     size: em(16, $basefontsize)
     line-height: 1.4em
 
-
-
 .blockquote
   font:
     family: Arial, sans-serif
@@ -252,7 +254,7 @@ h3
     font:
       family: Arial, sans-serif
 
-.th,.td
+.th, .td
   padding: 16px
   border: 1px solid lighten($normal, 25)
   text-align: left
@@ -277,40 +279,41 @@ h3
   border-top: none
   border-right: none
   border-left: none
-  border-bottom: 1px solid darken( $project-default, 1 )
-  box-shadow: 0 1px 1px rgba(0,0,0,0.15) /* no prefixes */
+  border-bottom: 1px solid darken($project-default, 1)
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15)
+  /* no prefixes */
   cursor: pointer
   @include transition(background-color .15s ease-in 0s)
   &:hover
-    background-color: lighten( $project-default, 10 )
+    background-color: lighten($project-default, 10)
   &:active
-    background-color: darken( $project-default, 15 )
-    border-bottom: 1px solid darken( $project-default, 20 )
+    background-color: darken($project-default, 15)
+    border-bottom: 1px solid darken($project-default, 20)
   &:disabled
     background: $project-default
-    color: lighten( desaturate( $project-default, 13 ), 13 )
+    color: lighten(desaturate($project-default, 13), 13)
   &.__default
     background-color: $default
     color: $base
-    border-bottom: 1px solid darken( $default, 20 )
+    border-bottom: 1px solid darken($default, 20)
     &:hover
-      background-color: darken( $default, 5 )
+      background-color: darken($default, 5)
     &:active
-      background-color: darken( $default, 10 )
+      background-color: darken($default, 10)
     &:disabled
       background-color: $default
-      color: darken( $default, 24 )
+      color: darken($default, 24)
   &.__green
     background-color: $green
     color: $clear
-    border-bottom: 1px solid darken( $green, 1 )
+    border-bottom: 1px solid darken($green, 1)
     &:hover
-      background-color: darken( $green, 5 )
+      background-color: darken($green, 5)
     &:active
-      background-color: darken( $green, 10 )
+      background-color: darken($green, 10)
     &:disabled
-      background-color: lighten( $green, 10 )
-      color: lighten( $green, 5 )
+      background-color: lighten($green, 10)
+      color: lighten($green, 5)
   &.__full-width
     width: 100%
     display: block
@@ -321,14 +324,14 @@ h3
   &.__invert
     background-color: $inverse
     color: $clear
-    border-bottom: 1px solid darken( $inverse, 1 )
+    border-bottom: 1px solid darken($inverse, 1)
     &:hover
-      background-color: darken( $inverse, 5 )
+      background-color: darken($inverse, 5)
     &:active
-      background-color: darken( $inverse, 10 )
+      background-color: darken($inverse, 10)
     &:disabled
-      background-color: lighten( $inverse, 10 )
-      color: lighten( $inverse, 5 )
+      background-color: lighten($inverse, 10)
+      color: lighten($inverse, 5)
 /* /Buttons */
 
 /* Buttons-links */
@@ -348,26 +351,28 @@ h3
   @include transition(background-color .15s ease-in 0s)
   &:hover
     color: $clear
-    border: 1px solid lighten( $project-default, 10 )
-    background-color: lighten( $project-default, 10 )
-    transition: background 200ms ease /* IE 10, Fx 16+, Op 12.1+ */
+    border: 1px solid lighten($project-default, 10)
+    background-color: lighten($project-default, 10)
+    transition: background 200ms ease
+  /* IE 10, Fx 16+, Op 12.1+ */
   &:active
     color: $clear
-    border: 1px solid darken( $project-default, 15 )
-    background-color: darken( $project-default, 15 )
+    border: 1px solid darken($project-default, 15)
+    background-color: darken($project-default, 15)
 
   &.__base
-    color: darken( $base, 15 )
-    border: 1px solid darken( $base, 15 )
+    color: darken($base, 15)
+    border: 1px solid darken($base, 15)
     &:hover
       color: $clear
-      border: 1px solid darken( $base, 5 )
-      background-color: darken( $base, 5 )
-      transition: background 200ms ease /* IE 10, Fx 16+, Op 12.1+ */
+      border: 1px solid darken($base, 5)
+      background-color: darken($base, 5)
+      transition: background 200ms ease
+    /* IE 10, Fx 16+, Op 12.1+ */
     &:active
       color: $clear
-      border: 1px solid darken( $base, 20 )
-      background-color: darken( $base, 20 )
+      border: 1px solid darken($base, 20)
+      background-color: darken($base, 20)
   &.__no-border
     font:
       size: em(12, $basefontsize)
@@ -410,7 +415,7 @@ h3
   &.__e .chosen-container-single:hover .chosen-single
     border: 1px solid lighten($form-elem, 30%)
 
-  &.__e .selectBox:hover+.field_e
+  &.__e .selectBox:hover + .field_e
     border: none
 
   &.__e .selectBox.selectBox-menuShowing
@@ -431,6 +436,7 @@ h3
   &.__e .chosen-container-single.chosen-with-drop .chosen-single div:before,
   &.__e .chosen-container-single.chosen-with-drop .chosen-single div:after
     background-color: lighten($normal, 25%)
+
 .field_half
   display: inline-block
   width: 50%
@@ -440,11 +446,13 @@ h3
     padding-right: 10px
   &:last-child
     padding-left: 10px
+
 .field_dash
   position: absolute
   top: 50%
   left: 50%
   margin-left: -4px
+
 .it
   font:
     family: Arial, sans-serif
@@ -464,9 +472,11 @@ h3
   &:disabled::-webkit-input-placeholder
     color: lighten($normal, 25%)
   &:disabled::-moz-placeholder
-    color: lighten($normal, 25%) /* Firefox 19+ */
+    color: lighten($normal, 25%)
+  /* Firefox 19+ */
   &:disabled:-moz-placeholder
-    color: lighten($normal, 25%) /* Firefox 18- */
+    color: lighten($normal, 25%)
+  /* Firefox 18- */
   &:disabled:-ms-input-placeholder
     color: lighten($normal, 25%)
 
@@ -477,6 +487,7 @@ h3
 
 textarea
   resize: vertical
+
 .lbl
   display: block
   margin-bottom: 10px
@@ -519,7 +530,6 @@ textarea
 
 .__e .field_help
   display: none
-
 
 /* checkbox */
 .ich:not(:checked), .ich:checked, .ir:not(:checked), .ir:checked
@@ -572,23 +582,23 @@ textarea
 
 .ich:not(:checked) + label:after
   opacity: 0
-  @include transform (scale(0))
+  @include transform(scale(0))
 
 .ich:checked + label:after
   opacity: 1
-  @include transform (scale(1))
+  @include transform(scale(1))
 
 .ich:disabled:not(:checked) + label:before, .ich:disabled:checked + label:before
   box-shadow: none
   border-color: lighten($normal, 25%)
-  background: lighten( $normal, 32 )
+  background: lighten($normal, 32)
 
 .ich:disabled:checked + label:after
   color: $normal
-  background:  url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAKCAYAAAEY6eRSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpi/P//PwMIMDFAAUAAMcJF9u7dew7EAAgghj179tiDRIH0fxANEEAMIAIq4MkCVPYHqCoQiE/BRMVBNEAAwU2CAaBKbyC1BYglWKACx4CUJVRewtnZmRHEAAgguAXIGGhsDQsDGgCa8BNI3QXJ/gHiWKjKn0B8DewIIIMLqOIrEINccwNohxbcDqCkEEwlDAMEGIazsQGoV9YBMRsQZ8G8EwCkuIBWLENT7AOk1kIVXwdiR6CalyC3cUIDxAmI/wJxDBB/A+LV6Iox4gdoKj+Q2gfERlA5DMUYmpCcxAekWICK3+HyIwDAm5yeDBD0gQAAAABJRU5ErkJggg==') 50% 50% no-repeat
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAKCAYAAAEY6eRSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAO1JREFUeNpi/P//PwMIMDFAAUAAMcJF9u7dew7EAAgghj179tiDRIH0fxANEEAMIAIq4MkCVPYHqCoQiE/BRMVBNEAAwU2CAaBKbyC1BYglWKACx4CUJVRewtnZmRHEAAgguAXIGGhsDQsDGgCa8BNI3QXJ/gHiWKjKn0B8DewIIIMLqOIrEINccwNohxbcDqCkEEwlDAMEGIazsQGoV9YBMRsQZ8G8EwCkuIBWLENT7AOk1kIVXwdiR6CalyC3cUIDxAmI/wJxDBB/A+LV6Iox4gdoKj+Q2gfERlA5DMUYmpCcxAekWICK3+HyIwDAm5yeDBD0gQAAAABJRU5ErkJggg==') 50% 50% no-repeat
 
 .ich:disabled + label
-  color: lighten( $normal, 7 )
+  color: lighten($normal, 7)
 
 /* radio
 .ir:not(:checked) + label:before, .ir:checked + label:before
@@ -636,13 +646,13 @@ textarea
   transition: all .2s
   margin-top: -0.12em
 
-.ir:disabled+label:before
+.ir:disabled + label:before
   content: ''
   @include position(absolute, -0.12em null null 0)
   width: 18px
   height: 18px
   border: 1px solid lighten($normal, 25%)
-  background: lighten( $normal, 32 )
+  background: lighten($normal, 32)
   @include border-radius(50%)
 
 .ir:disabled:checked + label:after
@@ -650,7 +660,8 @@ textarea
   height: 8px
   @include position(absolute, 5px null null 5px)
   margin-top: -0.12em
-  background: lighten( $normal, 14 )
+  background: lighten($normal, 14)
+
 .ir:disabled + label
   color: #aaa
 
@@ -674,6 +685,7 @@ textarea
 
 .chosen-container.chosen-with-drop .chosen-drop
   left: 0
+
 .chosen-container a
   cursor: pointer
 
@@ -693,7 +705,6 @@ textarea
   box-shadow: none
   @include transition(border .2s ease-in 0s)
 
-
 .chosen-container-single .chosen-single:hover
   border: 1px solid lighten($form-elem, 30%)
 
@@ -705,6 +716,7 @@ textarea
   background: $clear
   border: 1px solid transparent
   box-shadow: 1px 2px 6px rgba(0, 0, 0, .3)
+
 .chosen-container-single .chosen-default
   color: $normal
 
@@ -754,6 +766,7 @@ textarea
 .chosen-container .chosen-results li.active-result
   display: list-item
   cursor: pointer
+
 .chosen-container .chosen-results li.disabled-result
   display: list-item
   cursor: default
@@ -776,10 +789,12 @@ textarea
 .chosen-container .chosen-results li.highlighted
   background: $form-elem
   color: $clear
-  transition: background 200ms ease /* IE 10, Fx 16+, Op 12.1+ */
+  transition: background 200ms ease
+/* IE 10, Fx 16+, Op 12.1+ */
 
 .chosen-container .chosen-results .result-selected
   color: $normal
+
 .chosen-container .chosen-results .result-selected.highlighted
   color: $clear
 
@@ -823,17 +838,18 @@ textarea
   background-color: $form-elem
 
 .chosen-container-single .chosen-single div:before
-  @include transform (rotate(45deg))
+  @include transform(rotate(45deg))
+
 .chosen-container-single .chosen-single div:after
   margin-left: 5px
-  @include transform (rotate(-45deg))
+  @include transform(rotate(-45deg))
 
 .chosen-container-single.chosen-with-drop .chosen-single div:before
-  @include transform (rotate(-45deg))
+  @include transform(rotate(-45deg))
   transition: all .2s
 
 .chosen-container-single.chosen-with-drop .chosen-single div:after
-  @include transform (rotate(45deg))
+  @include transform(rotate(45deg))
   transition: all .2s
 
 .chosen-container-single.chosen-disabled .chosen-single
@@ -856,7 +872,8 @@ textarea
 
 .chosen-container-single .chosen-search input[type="text"]
   margin: 1px 0
-  padding: 4px 20px 4px 5px /* 20px - место под иконку */
+  padding: 4px 20px 4px 5px
+  /* 20px - место под иконку */
   width: 100%
   height: auto
   outline: 0
@@ -869,7 +886,7 @@ textarea
 .chosen-search input
   background: url('data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAYAAAHnix0jAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAgRJREFUeNpiuHnzJgMQP////z8DEwMDQw0QSwIxAyNIBgo6AQIIxDEDMk6BlJwCCTHB5AACCCQlBKTfwQTU1NTAsiCByVCx/yACIIBgJt4A4n1AnAVSyQJk5ACxBlTlWSA2BmmfzoAA/DAbk6ECskAcj+5KGPAACCCY4GogngLEB5EkvwMxJ8hiEABZ3gXEoQyYgBOIrwKxNszuciCexYAd3IExmKCeTQNidiCeCsSbgdgRKn/31q1bLrgcjgJAbgQqrgcIIGSFi4DYHYhfAXEYEF+HKYR5BgReA7EokkEB0HArQXbjAzRFILABiP8hRy1MITZQC8QZyAo5cSjkAOLPMA7Ijb9xKFwGxN7IJtpA3SOCpGgpEFsh62JB0uALddMtII4D4r9A/AuI2YgKcCD4CQxLdiZCqkCKgDFTCBBgyCayAnE31Po9QLwWmihAhmlCY8sCiFuAuA05irH5JR+aD52AuACLA0DpeQaU7QQN3gSopRgGRgBxETSDvWUgDEA50xhqyXMgPoYsyQQN/ktEGgYDoBh5Cg0CBnQD1wGxORCrk2AgKD/JAfFGbAYeAOJwaEGTQYRhDdDEbwfKoNjCEAT2g9IQELsC8TVoqjwF1QCyVAsabqA8mQXNDxeA2AsapgzIBSYDBaAHiHNBqR2YfHahFMVkghJQggaFKTBR/wZibwDFJIb9Fo4KEwAAAABJRU5ErkJggg==') 100% 50% no-repeat
 
-.localytics-chosen.loading+.chosen-container-single .chosen-single span
+.localytics-chosen.loading + .chosen-container-single .chosen-single span
   display: block
   border-top: 3px solid rgba(64, 64, 64, 0.2)
   border-right: 3px solid rgba(64, 64, 64, 0.2)
@@ -884,7 +901,7 @@ textarea
   width: 14px
   height: 14px
 
-.localytics-chosen.loading+.chosen-container-single .chosen-single .search-choice-close
+.localytics-chosen.loading + .chosen-container-single .chosen-single .search-choice-close
   display: none
 
 input[type=text],
@@ -931,7 +948,6 @@ input[type=password]
     -webkit-transform: rotate(360deg)
     transform: rotate(360deg)
 
-
 @keyframes load8
   from
     -webkit-transform: rotate(0deg)
@@ -940,12 +956,13 @@ input[type=password]
     -webkit-transform: rotate(360deg)
     transform: rotate(360deg)
 
-
 .h_default
   color: $base
+
 .h_vacancies
   color: $inverse
   margin-bottom: 15px
+
 .h_directory, .h_content
   color: $base
   display: block
@@ -954,10 +971,13 @@ input[type=password]
   .h_tx
     color: $normal
     font-size: em(14, 36)
+
 .h_tx
   display: block
+
 .__in
   color: $green
+
 .__out
   color: $alert
 
@@ -1010,16 +1030,19 @@ input[type=password]
 .pagination
   position: relative
   text-align: center
+
 .pagination_ul
   margin: 0
   padding: 0
   list-style-type: none
+
 .pagination_li
   display: inline-block
   width: 2.2em
   font-size: em(14, $basefontsize)
   line-height: 1.08em
   margin-bottom: 1.08em
+
 .pagination_lk
   display: block
   margin: 0 4px
@@ -1027,23 +1050,26 @@ input[type=password]
   color: lighten($active, 7%)
   text-decoration: underline
   @include transition(all .15s ease-in)
+
 .__active .pagination_lk, .pagination_lk:hover
   background: $active
   color: $clear
   text-decoration: none
   @include border-radius(3px)
+
 .__previous, .__next
   text-transform: uppercase
   width: 8.8em
+
 .__previous .pagination_lk, .__next .pagination_lk, .__previous .pagination_lk:hover, .__next .pagination_lk:hover
   background: none
   color: lighten($active, 7%)
+
 .__off .pagination_lk, .__off .pagination_lk:hover
   background: none
   color: #a8a8a8
   text-decoration: none
   cursor: auto
-
 
 /* 6 Образцы */
 .list
@@ -1129,26 +1155,31 @@ input[type=password]
   &.__vis
     visibility: visible
     opacity: 1
+
 .modal-w,
 .overlay:after
   display: inline-block
   vertical-align: middle
   width: 99%
   z-index: 99999
+
 .modal-w
   padding: 25px 0
+
 .overlay:after
   content: ''
   width: 0
   height: 100%
+
 .modal-cnt
   position: relative
   background: $clear
-  box-shadow: 0 0 24px -3px rgba(0,0,0,0.69)
+  box-shadow: 0 0 24px -3px rgba(0, 0, 0, 0.69)
   margin: 0 auto
   max-width: 860px
   min-width: 780px
   width: 80%
+
 .modal-close
   cursor: pointer
   background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMzQiIHdpZHRoPSIzNCIgdmlld0JveD0iMCAwIDI3LjM3NTU5IDI3LjQ1NDE2Ij48Zz48cGF0aCBkPSJNMCAyNi4xMUwyNi4wMzMuMWwxLjM0MyAxLjM0NC0yNi4wMzMgMjYuMDF6Ii8+PHBhdGggZD0iTTAgMS4zNDNMMS4zNDMgMGwyNi4wMjIgMjYuMDItMS4zNDQgMS4zNDV6Ii8+PC9nPjwvc3ZnPg==)
@@ -1164,6 +1195,7 @@ input[type=password]
   transition: all 0.2s ease-in
   &:hover
     opacity: 0.9
+
 .modal_cnt
   padding: 35px 70px
   text-align: center
@@ -1178,6 +1210,7 @@ input[type=password]
   position: absolute
   top: 10px
   left: 15px
+
 .breadcrumbs_i
   display: inline-block
   margin: 0
@@ -1187,6 +1220,7 @@ input[type=password]
   &:last-child
     &:after
       content: ''
+
 .breadcrumbs_i_lk
   padding-left: 5px
   padding-right: 5px
@@ -1195,7 +1229,158 @@ input[type=password]
   &:hover
     text-decoration: underline
 
+//datapicker
 
+.ui-datepicker .selected-start:not(.selected-end) a,
+.ui-datepicker .selected-end:not(.selected-start) a
+  background: #F3FDD5
 
+.ui-datepicker .selected.first-of-month:not(.selected-start) a
+  border-left: 2px dotted #D4E7F6
+  padding-left: 1px
 
+.ui-datepicker .selected.last-of-month:not(.selected-end) a
+  border-right: 2px dotted #D4E7F6
+  padding-right: 1px
 
+#date_range_multiple
+  width: 350px
+
+#tabs
+  display: none
+  position: absolute
+  z-index: 999
+  min-width: 95%
+  padding: 15px 0
+
+.ui-tabs .ui-tabs-nav li
+  margin-bottom: 0
+  padding-bottom: 10px
+  margin-right: 0
+  border: 0
+  float: unset
+  display: inline-block
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active a
+  border: 1px solid #0069D6
+  background-color: rgba(0, 141, 203, 0.18)
+
+.ui-tabs .ui-tabs-nav .ui-tabs-anchor
+  border: 1px solid #ddd
+  float: unset
+  color: #555555
+
+.ui-tabs .ui-tabs-nav li a
+  -webkit-border-radius: 0
+  -moz-border-radius: 0
+  border-radius: 0
+  float: unset
+
+.ui-tabs .ui-tabs-nav li:first-child
+  margin-right: -4px
+  z-index: 999
+
+.ui-tabs .ui-tabs-nav
+  text-align: center
+  padding-bottom: 7px
+
+.ui-widget .ui-widget
+  margin: 0 auto
+  border: 0
+
+.ui-datepicker .ui-datepicker-header
+  background-color: transparent
+
+.ui-datepicker td .ui-state-hover,
+.ui-datepicker td .ui-state-active,
+.ui-datepicker td .ui-state-highlight
+  -webkit-border-radius: 50%
+  -moz-border-radius: 50%
+  border-radius: 50%
+  background-color: #cbeaf5
+  color: gray
+
+.ui-datepicker-calendar td.ui-datepicker-today .ui-state-default
+  background-color: #008dcb
+  color: #fff
+
+.ui-datepicker .selected-start:not(.selected-end) a, .ui-datepicker .selected-end:not(.selected-start) a
+  background-color: #008dcb
+  color: #fff
+
+.ui-datepicker td
+  padding: 0
+
+.ui-datepicker .ui-datepicker-next,
+.ui-datepicker .ui-datepicker-prev
+  border: 1px solid transparent
+  background-color: transparent
+  &:hover
+    opacity: 0.9
+
+.ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor, .ui-tabs .ui-tabs-nav li.ui-state-disabled .ui-tabs-anchor, .ui-tabs .ui-tabs-nav li.ui-tabs-loading .ui-tabs-anchor
+  cursor: default
+
+.ui-tabs .ui-tabs-panel
+  padding: 0 20px
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next
+  position: absolute
+  top: 2px
+  width: 1.8em
+  height: 1.8em
+
+.ui-datepicker .ui-datepicker-next
+  right: 2px
+
+.ui-datepicker-prev span,
+.ui-datepicker-next span
+  background-image: none !important
+  display: none
+
+.ui-datepicker-prev:before,
+.ui-datepicker-next:before
+  content: ''
+  background-image: url('datepicker/images/ui-icons_454545_256x240.png')
+  display: block
+  position: absolute
+  left: 50%
+  margin-left: -8px
+  top: 50%
+  margin-top: -8px
+  width: 16px
+  height: 16px
+
+.ui-datepicker-next:before
+  background-position: -32px -16px
+
+.ui-datepicker-prev:before
+  background-position: -96px -16px
+
+#date_range .ui-datepicker .ui-datepicker-group:first-child
+  border-right: 1px solid #ddd
+
+#date_range .ui-datepicker-calendar td.ui-datepicker-today .ui-state-default
+  background-color: #0093c3
+  opacity: 1
+  padding: 4px
+  border: 0
+
+.ui-datepicker-year
+  display: none
+
+input#datetabs
+  color: #7c7c7c
+
+.ui-datepicker .selected.first-of-month:not(.selected-start) a
+  border: 0
+  padding-left: 5px
+
+//icons for input
+.__ic-input
+  background-color: transparent
+  -webkit-background-size: 10px
+  background-size: 15px
+  background-repeat: no-repeat
+  background-position: 10px 50%
+  padding-left: 35px

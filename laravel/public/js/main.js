@@ -314,8 +314,6 @@ $('#date_range').datepicker({
     showOtherMonths: true,
     selectOtherMonths: true,
     onSelect: function(dateText, inst, extensionRange) {
-        console.log((extensionRange.startDateText + ' - ' + extensionRange.endDateText));
-        // extensionRange - объект расширения
         $('#datetabs').val(extensionRange.startDateText + ' - ' + extensionRange.endDateText);
     }
 });

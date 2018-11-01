@@ -323,4 +323,3 @@ $('#date_range').datepicker({
 $('#date_one').datepicker("setDate", null);
 $('#date_one').find(".ui-datepicker-current-day").removeClass("ui-datepicker-current-day");
 });
-});

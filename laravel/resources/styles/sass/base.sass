@@ -1276,10 +1276,12 @@ input[type=password]
   border-radius: 0
   float: unset
 
-.ui-tabs .ui-tabs-nav li:first-child
+.ui-tabs .ui-tabs-nav li.ui-tabs-active[aria-controls="tabs-1"]
   margin-right: -4px
   z-index: 999
-
+.ui-tabs .ui-tabs-nav li.ui-tabs-active[aria-controls="tabs-2"]
+  margin-left: -4px
+  z-index: 999
 .ui-tabs .ui-tabs-nav
   text-align: center
   padding-bottom: 7px

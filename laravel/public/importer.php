@@ -19,10 +19,10 @@ if(isset($argv[1]) && ($argv[1] == 'parents')) {
     createDepartmentParents($conn);
     exit();
 }
-$ch = curl_init('http://172.16.0.76/Test/EseddApi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
+$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-curl_setopt($ch, CURLOPT_USERPWD, 'integra:Att3r0D0min4tu5');
+curl_setopt($ch, CURLOPT_USERPWD, 'slava_u_s:fH10081958');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $res = curl_exec($ch);
@@ -41,7 +41,7 @@ else {
 curl_close($ch);
 
 if($tok) {
-    $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjects');
+    $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/GlobalCatalogue/GetGKObjects');
 //curl_setopt($ch, CURLOPT_HEADER, true);
     curl_setopt($ch, CURLINFO_HEADER_OUT, true);
     curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
@@ -93,7 +93,7 @@ if($tok) {
                                     "UPDATE users SET `name`='" . $obj->Name . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
                             }
 
-                            $url_data = 'http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID;
+                            $url_data = 'http://172.16.0.223/SedKodeks/eseddapi/Access/GetUser?uid=' . $obj->UID;
                             $chauthdata = curl_init($url_data);
                             //curl_setopt($ch, CURLOPT_HEADER, true);
                             curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
@@ -123,7 +123,7 @@ if($tok) {
                                 $chef = 0;
                                 $post   =   "";
 
-                                $ch_data = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
+                                $ch_data = curl_init('http://172.16.0.223/SedKodeks/eseddapi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
                                 //curl_setopt($ch, CURLOPT_HEADER, true);
                                 curl_setopt($ch, CURLINFO_HEADER_OUT, true);
                                 curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
@@ -146,7 +146,7 @@ if($tok) {
                     }
                     else {
                         print("action:insert\r\n");
-                        $ch = curl_init('http://172.16.0.76/Test/EseddApi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
+                        $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
                         //curl_setopt($ch, CURLOPT_HEADER, true);
                         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
                         curl_setopt($ch, CURLOPT_HTTPHEADER, array("Token: $tok"));
@@ -164,7 +164,7 @@ if($tok) {
                                 printf("Error: %s\n", mysqli_error($conn));
                             }
                             $user_id = mysqli_insert_id($conn);
-                            $chauthdata = curl_init('http://172.16.0.76/Test/EseddApi/Access/GetUser?uid=' . $obj->UID);
+                            $chauthdata = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Access/GetUser?uid=' . $obj->UID);
                             //curl_setopt($ch, CURLOPT_HEADER, true);
                             curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
                             curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));

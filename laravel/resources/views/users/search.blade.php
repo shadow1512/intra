@@ -28,22 +28,37 @@
         <form class="directory_searchform" method="POST" action="{{route('search.directory')}}">
             {{ csrf_field() }}
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="ФИО" class="it" name="allname">
+                <input type="text" placeholder="ФИО" class="it __ic-input ic_name" name="allname">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Комната" class="it" name="room">
+                <input type="text" placeholder="Должность" class="it __ic-input ic_position" name="worktitle">
             </div>
             <div class="field directory_searchform_field">
-                <input type="email" placeholder="E-mail" class="it" name="email">
+                <input type="text" placeholder="Подразделение" class="it __ic-input ic_subdivision" name="dep">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Телефон" class="it" name="phone">
+                <input type="text" placeholder="Телефон" class="it __ic-input ic_phone" name="phone">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Должность" class="it" name="worktitle">
+                <input type="email" placeholder="E-mail" class="it __ic-input ic_mail" name="email">
             </div>
             <div class="field directory_searchform_field">
-                <input type="text" placeholder="Подразделение" class="it" name="dep">
+                <input type="text" placeholder="Комната" class="it __ic-input ic_room" name="room">
+            </div>
+            <div class="field directory_searchform_field">
+                <input id="datetabs" type="text" placeholder="Дата рождения" name="Date" class="it __ic-input ic_birthday">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#tabs-1" class="one-montha">Точная дата</a></li>
+                        <li><a href="#tabs-2" class="perioda">Период</a></li>
+                    </ul>
+                    <div id="tabs-1">
+                        <div id="date_one"></div>
+                    </div>
+                    <div id="tabs-2">
+                        <div id="date_range"></div>
+                    </div>
+                </div>
             </div>
             <button class="btn __invert directory_searchform_btn">Найти</button>
         </form>

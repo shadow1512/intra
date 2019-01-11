@@ -22,7 +22,8 @@ if(isset($argv[1]) && ($argv[1] == 'parents')) {
 $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-curl_setopt($ch, CURLOPT_USERPWD, 'slava_u_s:fH10081958');
+//curl_setopt($ch, CURLOPT_USERPWD, 'slava_u_s:fH10081958');
+curl_setopt($ch, CURLOPT_USERPWD, 'integra:Att3r0D0min4tu5');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 $res = curl_exec($ch);

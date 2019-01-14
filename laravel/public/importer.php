@@ -23,6 +23,9 @@ $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/98
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 curl_setopt($ch, CURLOPT_USERPWD, 'WORK\slava_u_s:fH10081958');
+curl_setopt($ch, CURLOPT_VERBOSE, true);
+curl_setopt($ch, CURLOPT_FAILONERROR, true);
+curl_setopt($ch, CURLOPT_STDERR, $fp_err);
 //curl_setopt($ch, CURLOPT_USERPWD, 'integra:Att3r0D0min4tu5');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 //curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -36,6 +39,7 @@ if($status_code == 200) {
     }
 }
 else {
+    var_dump($fp_err);
     print_r($status_code . "/r/n");
 }
 

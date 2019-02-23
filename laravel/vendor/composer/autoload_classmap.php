@@ -849,6 +849,7 @@ return array(
     'Dotenv\\Loader' => $vendorDir . '/vlucas/phpdotenv/src/Loader.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
     'EditDepartmentsKeys' => $baseDir . '/database/migrations/2018_05_31_000251_edit_departments_keys.php',
+    'EditDepsPeopleEditChefColumn' => $baseDir . '/database/migrations/2019_02_23_183215_edit_deps_people_edit_chef_column.php',
     'EditDepsPeoplesWorktitle' => $baseDir . '/database/migrations/2018_05_31_120255_edit_deps_peoples_worktitle.php',
     'EditDepsPeoplesWorktitleNullable' => $baseDir . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
     'EditDeptPeopleChef' => $baseDir . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',

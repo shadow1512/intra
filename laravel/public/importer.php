@@ -7,6 +7,10 @@
  */
 require_once __DIR__ . '/hiercode.php';
 
+//изначально запускается простое копирование данных из СЭДД, данные переносятся как есть
+//Потом запускается parents режим - чтобы на основании кодов СЭДД правильно выстроить зависимости подразделений
+//Потом запускается struct режим - чтобы на основании правильных зависимостей построить структуру, основанную на кодах
+//Потом запускается chefs режим - чтобы на основании структуру подразделений правильно проставить веса сотрудникам
 $conn = mysqli_connect("localhost", "phpmyadmin", "dhgstef", "intradb") or die("No DB connection");
 $conn->set_charset("utf8");
 $tok = null;
@@ -17,6 +21,10 @@ if(isset($argv[1]) && ($argv[1] == 'struct')) {
 }
 if(isset($argv[1]) && ($argv[1] == 'parents')) {
     createDepartmentParents($conn);
+    exit();
+}
+if(isset($argv[1]) && ($argv[1] == 'chefs')) {
+    updateChefs($conn);
     exit();
 }
 $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -294,6 +302,28 @@ function createDepartmentStructure($conn, $parent_id) {
             mysqli_query($conn, "UPDATE deps SET parent_id='" . $dep_code . "' WHERE id=" . $row["id"]);
             createDepartmentStructure($conn, $row["id"]);
             $index ++;
+        }
+    }
+}
+
+function updateChefs($conn) {
+
+    $max    =   2;
+    $levels     =   mysqli_query($conn, "SELECT MAX(LENGTH(parent_id)) as max FROM deps");
+    $levels_row = $levels->fetch_array(MYSQLI_ASSOC);
+    if($levels_row) {
+        $max    =   $levels_row["max"];
+    }
+    $positions = mysqli_query($conn, "SELECT * FROM deps_peoples");
+    if($positions) {
+        while($row = $positions->fetch_assoc()) {
+            $dep    =   mysqli_query($conn, "SELECT parent_id FROM deps WHERE id=" . $row["dep_id"]);
+            $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
+            if($row_dep) {
+                $cur_length =   mb_strlen($row_dep["parent_id"]);
+                $chef   =   floor($max/$cur_length);
+                mysqli_query($conn, "UPDATE deps_peoples SET chef=" .   $chef   .   " WHERE id="    .   $row["dep_id"]);
+            }
         }
     }
 }

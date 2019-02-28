@@ -16,7 +16,7 @@ $conn->set_charset("utf8");
 $tok = null;
 
 if(isset($argv[1]) && ($argv[1] == 'struct')) {
-    createDepartmentStructure($conn, 2);
+    createDepartmentStructure($conn, 51);
     exit();
 }
 if(isset($argv[1]) && ($argv[1] == 'parents')) {

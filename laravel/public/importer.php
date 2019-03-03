@@ -329,7 +329,7 @@ function updateChefs($conn) {
         while($row = $positions->fetch_assoc()) {
             $dep    =   mysqli_query($conn, "SELECT parent_id FROM deps WHERE id=" . $row["dep_id"]);
             $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
-            if($row_dep) {
+            if($row_dep && ($row["chef"] == 1)) {
                 $cur_length =   mb_strlen($row_dep["parent_id"], "UTF-8");
                 $chef   =   floor($max/$cur_length);
                 mysqli_query($conn, "UPDATE deps_peoples SET chef=" .   $chef   .   " WHERE id="    .   $row["id"]);

@@ -340,12 +340,12 @@ function updateChefs($conn) {
 
 function cleanStructData($conn) {
 
-    mysqli_query($conn, "TRUNCTATE deps");
-    mysqli_query($conn, "TRUNCTATE deps_keys");
-    mysqli_query($conn, "TRUNCTATE peoples");
-    mysqli_query($conn, "TRUNCTATE users");
-    mysqli_query($conn, "TRUNCTATE user_contacts");
-    mysqli_query($conn, "TRUNCTATE user_keys");
+    mysqli_query($conn, "TRUNCTATE deps") or die(mysqli_error($conn));
+    mysqli_query($conn, "TRUNCTATE deps_keys") or die(mysqli_error($conn));;
+    mysqli_query($conn, "TRUNCTATE peoples") or die(mysqli_error($conn));;
+    mysqli_query($conn, "TRUNCTATE users") or die(mysqli_error($conn));;
+    mysqli_query($conn, "TRUNCTATE user_contacts") or die(mysqli_error($conn));;
+    mysqli_query($conn, "TRUNCTATE user_keys") or die(mysqli_error($conn));;
 }
 
 ?>

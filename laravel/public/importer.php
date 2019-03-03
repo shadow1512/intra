@@ -16,7 +16,11 @@ $conn->set_charset("utf8");
 $tok = null;
 
 if(isset($argv[1]) && ($argv[1] == 'struct')) {
-    createDepartmentStructure($conn, 51);
+    $dep    =   mysqli_query($conn, "SELECT id FROM deps WHERE parent_id is NULL");
+    $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
+    if($row_dep) {
+        createDepartmentStructure($conn, $row_dep["id"]);
+    }
     exit();
 }
 if(isset($argv[1]) && ($argv[1] == 'parents')) {
@@ -27,14 +31,18 @@ if(isset($argv[1]) && ($argv[1] == 'chefs')) {
     updateChefs($conn);
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'clean')) {
+    cleanStructData($conn);
+    exit();
+}
 
 $fp_err =   null;
-//$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
-$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/174ad969-eb42-4b3e-a6e3-972c6ef9d3de');
+$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
+//$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/174ad969-eb42-4b3e-a6e3-972c6ef9d3de');
 curl_setopt($ch, CURLOPT_HEADER, true);
 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-//curl_setopt($ch, CURLOPT_USERPWD, 'WORK\slava_u_s:fH10081958');
-curl_setopt($ch, CURLOPT_USERPWD, 'work\abelyaevskiy:1Wolfh0und1');
+curl_setopt($ch, CURLOPT_USERPWD, 'work\slava_u_s:fH10081958');
+//curl_setopt($ch, CURLOPT_USERPWD, 'work\abelyaevskiy:1Wolfh0und1');
 //curl_setopt($ch, CURLOPT_VERBOSE, true);
 //curl_setopt($ch, CURLOPT_FAILONERROR, true);
 //curl_setopt($ch, CURLOPT_STDERR, $fp_err);
@@ -51,7 +59,6 @@ if($status_code == 200) {
     }
 }
 else {
-    var_dump($fp_err);
     print_r($status_code . "/r/n");
 }
 
@@ -323,12 +330,22 @@ function updateChefs($conn) {
             $dep    =   mysqli_query($conn, "SELECT parent_id FROM deps WHERE id=" . $row["dep_id"]);
             $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
             if($row_dep) {
-                $cur_length =   mb_strlen($row_dep["parent_id"]);
+                $cur_length =   mb_strlen($row_dep["parent_id"], "UTF-8");
                 $chef   =   floor($max/$cur_length);
-                mysqli_query($conn, "UPDATE deps_peoples SET chef=" .   $chef   .   " WHERE id="    .   $row["dep_id"]);
+                mysqli_query($conn, "UPDATE deps_peoples SET chef=" .   $chef   .   " WHERE id="    .   $row["id"]);
             }
         }
     }
+}
+
+function cleanStructData($conn) {
+
+    mysqli_query($conn, "TRUNCTATE deps");
+    mysqli_query($conn, "TRUNCTATE deps_keys");
+    mysqli_query($conn, "TRUNCTATE peoples");
+    mysqli_query($conn, "TRUNCTATE users");
+    mysqli_query($conn, "TRUNCTATE user_contacts");
+    mysqli_query($conn, "TRUNCTATE user_keys");
 }
 
 ?>

@@ -75,8 +75,6 @@ if($tok) {
     if($status_code == 200) {
         $tree = json_decode($res);
         foreach($tree as $obj) {
-            print("leader:" .   $obj->IsChief    .   "\r\n");
-            continue;
             if($obj->Active === true) {
 
                 if($obj->ExecutiveType == 0) {
@@ -158,7 +156,7 @@ if($tok) {
                                 $status_code = curl_getinfo($ch_data, CURLINFO_HTTP_CODE);
                                 if($status_code == 200) {
                                     $obj_data = json_decode($res);
-                                    if ($obj_data->Leader) {
+                                    if ($obj->IsChief) {
                                         $chef = 1;
                                     }
                                     if ($obj_data->Post) {

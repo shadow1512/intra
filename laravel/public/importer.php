@@ -75,7 +75,7 @@ if($tok) {
     if($status_code == 200) {
         $tree = json_decode($res);
         foreach($tree as $obj) {
-            print("leader:" .   $obj->Leader    .   "\r\n");
+            print("leader:" .   $obj->IsChief    .   "\r\n");
             continue;
             if($obj->Active === true) {
 

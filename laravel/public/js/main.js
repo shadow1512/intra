@@ -96,11 +96,11 @@ $(document).on("submit", "#login_form", function(ev) {
             data: "login=" + $("#input_login").val().trim() + "&pass=" + $("#input_pass").val().trim() + "&_token=" + $("input[name='_token']").val(),
             success: function(msg) {
                 if (msg[0] == "ok") {
-                    alert(msg[1]);
                     location.reload(true);
                 }
                 if (msg[0] == "error") {
                     if (msg[1] == "no linked user") {
+                        alert(msg[2]);
                         alert("Нет привязанного пользователя СЭД");
                     }
                     if (msg[1] == "wrong credentials") {

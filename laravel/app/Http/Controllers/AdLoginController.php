@@ -39,10 +39,10 @@ class AdLoginController extends Controller
                 $user = User::select("users.id")->leftJoin('user_keys', 'user_keys.user_id', '=', 'users.id')->where('user_keys.sid', '=', $sid)->limit(1)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);
-                    return response()->json(['ok',  $sid]);
+                    return response()->json(['ok']);
                 }
                 else {
-                    return response()->json(['error', 'no linked user']);
+                    return response()->json(['error', 'no linked user', $sid]);
                 }
             }
             else {

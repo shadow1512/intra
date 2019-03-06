@@ -331,7 +331,7 @@ function updateChefs($conn) {
             $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
             if($row_dep && ($row["chef"] == 1)) {
                 $cur_length =   mb_strlen($row_dep["parent_id"], "UTF-8");
-                $chef   =   floor($max/$cur_length);
+                $chef   =  $max - $cur_length;
                 mysqli_query($conn, "UPDATE deps_peoples SET chef=" .   $chef   .   " WHERE id="    .   $row["id"]);
             }
         }

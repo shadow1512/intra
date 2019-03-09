@@ -338,6 +338,10 @@ class IndexerController extends Controller
                                         }
                                         if (isset($names[1])) {
                                             $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                            //маленький хак на левое имя
+                                            if($fname   ==  "Янина") {
+                                                $fname  =   "Яна";
+                                            }
                                         }
                                         if (isset($names[2])) {
                                             $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
@@ -383,6 +387,9 @@ class IndexerController extends Controller
                                         }
                                         if (isset($names[1])) {
                                             $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                            if($fname   ==  "Янина") {
+                                                $fname  =   "Яна";
+                                            }
                                         }
                                         if (isset($names[2])) {
                                             $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
@@ -439,6 +446,10 @@ class IndexerController extends Controller
                         }
                         if (isset($names[1])) {
                             $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+
+                            if($fname   ==  "Янина") {
+                                $fname  =   "Яна";
+                            }
                         }
                         if (isset($names[2])) {
                             $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
@@ -491,6 +502,10 @@ class IndexerController extends Controller
                     }
                     if (isset($names[1])    &&  trim($names[1])  &&  empty($record->fname)) {
                         $record->fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+
+                        if($record->fname   ==  "Янина") {
+                            $record->fname  =   "Яна";
+                        }
                     }
                     if (isset($names[2])    &&  trim($names[2])  &&  empty($record->mname)) {
                         $record->mname = preg_replace("/[^А-я]/ius",    "", $names[2]);

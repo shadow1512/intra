@@ -180,9 +180,15 @@ if($tok) {
                         if($status_code == 200) {
                             $obj = json_decode($res);
                             $date = date("Y-m-d H:i:s");
+                            //Хак для ошибки в СЭДД, которую они потом поправят
+                            if($obj->Patronymic ==  "Иванова") {
+                                $obj->Patronymic    =   "Ивановна";
+                            }
                             $insres = mysqli_query($conn,
                                 "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
-                                    VALUES ('" . $obj->Name . "', 2, '" . $obj->FirstName . "', '" . $obj->Patronymic . "', '" . $obj->Surname . "', '" . $obj->Phone . "',
+                                    VALUES ('" . $obj->Name . "', 2, '" . preg_replace("/[^А-я]/ius",    "", $obj->FirstName) . "', '" .
+                                            preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', '" .
+                                            preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
                             if(!$insres) {
                                 printf("Error: %s\n", mysqli_error($conn));

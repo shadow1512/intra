@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Deps_Peoples;
 use App\Deps_Temporal;
 use App\User;
 use App\Dep;
@@ -605,6 +606,23 @@ class IndexerController extends Controller
                 }
 
                 $record->save();
+
+                $user_id    =   $record->id;
+                $works  =   Deps_Peoples::Where("people_id",    $user_id)->count();
+                if($works   === 0) {
+                    if ($user_id && isset($item->depnum->value) && !empty($item->depnum->value) && isset($item->worktitle->value) && !empty($item->worktitle->value)) {
+                        $dep = Deps_Temporal::where("source_id", $item->depnum->value)->first();
+                        if ($dep) {
+                            $dp = new Deps_Peoples();
+                            $dp->people_id  = $user_id;
+                            $dp->dep_id     =   $dep->sedd_dep_id;
+                            $dp->work_title =   $item->worktitle->value;
+
+                            $dp->save();
+                        }
+                    }
+                }
+
                 $processed_counter ++;
             }
         }

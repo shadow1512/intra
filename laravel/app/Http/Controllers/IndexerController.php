@@ -305,7 +305,7 @@ class IndexerController extends Controller
         $processed_counter  =   0;
         $counter_added      =   0;
 
-        $xmlstring  =   Storage::disk('public')->get('/xml/org.xml');
+        $xmlstring  =   Storage::disk('public')->get('/xml/org-all.xml');
         $olddict    =   simplexml_load_string($xmlstring);
         if(($olddict->count() > 0) &&  ($olddict->children()->count()   >   0)) {
             $items = $olddict->children()->children();

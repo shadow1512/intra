@@ -56,6 +56,7 @@ Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
 
 Route::get('/indexer', 'IndexerController@index')->name('indexer.index');
 Route::get('/indexer/dir', 'IndexerController@dirloader')->name('indexer.dir');
+Route::get('/indexer/struct', 'IndexerController@sructloader')->name('indexer.struct');
 Route::get('/indexer/xml', 'IndexerController@createXMLFromUpdatedUsers')->name('indexer.xml');
 
 

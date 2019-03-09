@@ -337,12 +337,6 @@ function createOldDepartmentStructure($conn, $parent_id) {
             $parent_code    = $parent_row["parent_code"];
         }
     }
-    else {
-        for($i = 0; $i < CODE_LENGTH; $i++) {
-            $parent_code .= $code->digit_to_char[0];
-        }
-
-    }
 
     $deps = mysqli_query($conn, "SELECT * FROM deps_temporal WHERE parent_id=" . $parent_id);
     if($deps) {

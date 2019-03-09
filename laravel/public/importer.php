@@ -23,6 +23,10 @@ if(isset($argv[1]) && ($argv[1] == 'struct')) {
     }
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'oldstruct')) {
+    createOldDepartmentStructure($conn, 536000001);
+    exit();
+}
 if(isset($argv[1]) && ($argv[1] == 'parents')) {
     createDepartmentParents($conn);
     exit();
@@ -317,6 +321,46 @@ function createDepartmentStructure($conn, $parent_id) {
 
             mysqli_query($conn, "UPDATE deps SET parent_id='" . $dep_code . "' WHERE id=" . $row["id"]);
             createDepartmentStructure($conn, $row["id"]);
+            $index ++;
+        }
+    }
+}
+
+function createOldDepartmentStructure($conn, $parent_id) {
+    $code = new HierCode(CODE_LENGTH);
+    $parent_code    = null;
+
+    if($parent_id != 536000001) {
+        $parent_dep = mysqli_query($conn, "SELECT * FROM deps_temporal WHERE source_id=" . $parent_id);
+        if($parent_dep && $parent_dep->num_rows > 0) {
+            $parent_row     = $parent_dep->fetch_assoc();
+            $parent_code    = $parent_row["parent_code"];
+        }
+    }
+    else {
+        for($i = 0; $i < CODE_LENGTH; $i++) {
+            $parent_code .= $code->digit_to_char[0];
+        }
+
+    }
+
+    $deps = mysqli_query($conn, "SELECT * FROM deps_temporal WHERE parent_id=" . $parent_id);
+    if($deps) {
+        $index = 0;
+        $dep_code = $parent_code;
+        while($row = $deps->fetch_assoc()) {
+            if($index == 0) {
+                for($i = 0; $i < CODE_LENGTH; $i++) {
+                    $dep_code .= $code->digit_to_char[0];
+                }
+            }
+            else {
+                $code->setValue($dep_code);
+                $dep_code = $code->getNextCode();
+            }
+
+            mysqli_query($conn, "UPDATE deps_temporal SET parent_code='" . $dep_code . "' WHERE source_id=" . $row["source_id"]);
+            createOldDepartmentStructure($conn, $row["source_id"]);
             $index ++;
         }
     }

@@ -330,8 +330,9 @@ class IndexerController extends Controller
                                     /*есть шанс сверить их по имени+фамилии+отчеству, проблема в том, что в телефонном справочнике у подавляющего большинства сотрудников
                                         эти поля не заполнены, а заполнено только общее поле ФИО. Обнадеживает, что вроде бы заполнено единообразно*/
                                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
+                                        preg_replace("/\s/ius",    "\x20", $item->fullname->value);
                                         $lname = $fname = $mname = "";
-                                        $names = explode(" ", $item->fullname->value);
+                                        $names = explode( "\x20", $item->fullname->value);
                                         if (isset($names[0])) {
                                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                                         }
@@ -353,9 +354,17 @@ class IndexerController extends Controller
                                             }
                                         }
                                         else {
-                                            print_r($contact->value . ": в базе дважды, но ФИО ($lname $fname $mname) не введено полностью\r\n");
-                                            //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
-                                            $nocreate   =   true;
+                                            //попытка найти по имени и фамилии
+                                            if ($lname && $fname) {
+                                                $record = User::where('email', 'LIKE', $contact->value)
+                                                    ->where('fname', 'LIKE', $fname)
+                                                    ->where('lname', 'LIKE', $lname)->first();
+                                                if (!$record) {
+                                                    print_r($contact->value . ": в базе дважды, но по ФИ ($lname $fname) не находится\r\n");
+                                                    //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
+                                                    $nocreate   =   true;
+                                                }
+                                            }
                                         }
                                     }
                                 }
@@ -366,8 +375,9 @@ class IndexerController extends Controller
                                 //кусочек проверки по прочим признакам
                                 if (!$record) {
                                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
+                                        preg_replace("/\s/ius",    "\x20", $item->fullname->value);
                                         $lname = $fname = $mname = "";
-                                        $names = explode(" ", $item->fullname->value);
+                                        $names = explode( "\x20", $item->fullname->value);
                                         if (isset($names[0])) {
                                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                                         }
@@ -388,9 +398,21 @@ class IndexerController extends Controller
                                             }
                                         }
                                         else {
-                                            print_r($item->fullname->value . ": в базе нет, но ФИО ($lname $fname $mname) не введено полностью\r\n");
-                                            //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
-                                            continue;
+                                            if ($lname && $fname) {
+                                                $record = User::where('fname', 'LIKE', $fname)
+                                                    ->where('lname', 'LIKE', $lname)->first();
+                                                if (!$record) {
+                                                    $record = new User();
+                                                    $record->email = $contact->value;
+                                                    $counter_added++;
+                                                }
+
+                                            }
+                                            else {
+                                                print_r($item->fullname->value . ": в базе нет, но ФИО ($lname $fname $mname) не введено полностью\r\n");
+                                                //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
+                                                continue;
+                                            }
                                         }
                                     }
                                     else {
@@ -409,8 +431,9 @@ class IndexerController extends Controller
                     //но может быть проблема, что такой пользователь есть по ФИО
 
                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
+                        preg_replace("/\s/ius",    "\x20", $item->fullname->value);
                         $lname = $fname = $mname = "";
-                        $names = explode(" ", $item->fullname->value);
+                        $names = explode( "\x20", $item->fullname->value);
                         if (isset($names[0])) {
                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                         }
@@ -430,9 +453,21 @@ class IndexerController extends Controller
                             }
                         }
                         else {
-                            print_r($item->fullname->value . ": в базе нет, но ФИО ($lname $fname $mname) не введено полностью\r\n");
-                            //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
-                            continue;
+                            if ($lname && $fname) {
+                                $record = User::where('fname', 'LIKE', $fname)
+                                    ->where('lname', 'LIKE', $lname)->first();
+                                if (!$record) {
+                                    $record = new User();
+                                    $record->email = $contact->value;
+                                    $counter_added++;
+                                }
+
+                            }
+                            else {
+                                print_r($item->fullname->value . ": в базе нет, но ФИО ($lname $fname $mname) не введено полностью\r\n");
+                                //В этом случае надо просто вывести сообщение на экран, создавать новую запись не надо
+                                continue;
+                            }
                         }
                     }
                     else {
@@ -448,8 +483,9 @@ class IndexerController extends Controller
                 }
 
                 if(isset($item->fullname->value) && !empty($item->fullname->value)) {
+                    preg_replace("/\s/ius",    "\x20", $item->fullname->value);
+                    $names = explode( "\x20", $item->fullname->value);
                     $record->name   =   $item->fullname->value;
-                    $names = explode(" ", $item->fullname->value);
                     if (isset($names[0])    &&  trim($names[0])  &&  empty($record->lname)) {
                         $record->lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                     }

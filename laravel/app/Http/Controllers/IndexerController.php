@@ -334,9 +334,9 @@ class IndexerController extends Controller
                                     /*есть шанс сверить их по имени+фамилии+отчеству, проблема в том, что в телефонном справочнике у подавляющего большинства сотрудников
                                         эти поля не заполнены, а заполнено только общее поле ФИО. Обнадеживает, что вроде бы заполнено единообразно*/
                                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
-                                        $item->fullname->value  =   preg_replace("/\s/ius",    "\\\\x20", $item->fullname->value);
+                                        $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                                         $lname = $fname = $mname = "";
-                                        $names = explode( "\x20", $item->fullname->value);
+                                        $names = explode( " ", $item->fullname->value);
                                         if (isset($names[0])) {
                                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                                         }
@@ -383,9 +383,9 @@ class IndexerController extends Controller
                                 //кусочек проверки по прочим признакам
                                 if (!$record) {
                                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
-                                        $item->fullname->value  =   preg_replace("/\s/ius",    "\\\\x20", $item->fullname->value);
+                                        $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                                         $lname = $fname = $mname = "";
-                                        $names = explode( "\x20", $item->fullname->value);
+                                        $names = explode( " ", $item->fullname->value);
                                         if (isset($names[0])) {
                                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                                         }
@@ -442,9 +442,9 @@ class IndexerController extends Controller
                     //но может быть проблема, что такой пользователь есть по ФИО
 
                     if (isset($item->fullname->value) && !empty($item->fullname->value)) {
-                        $item->fullname->value  =   preg_replace("/\s/ius",    "\\\\x20", $item->fullname->value);
+                        $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                         $lname = $fname = $mname = "";
-                        $names = explode( "\x20", $item->fullname->value);
+                        $names = explode( " ", $item->fullname->value);
                         if (isset($names[0])) {
                             $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                         }
@@ -498,8 +498,8 @@ class IndexerController extends Controller
                 }
 
                 if(isset($item->fullname->value) && !empty($item->fullname->value)) {
-                    $item->fullname->value  =   preg_replace("/\s/ius",    "\\\\x20", $item->fullname->value);
-                    $names = explode( "\x20", $item->fullname->value);
+                    $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
+                    $names = explode( " ", $item->fullname->value);
                     $record->name   =   $item->fullname->value;
                     if (isset($names[0])    &&  trim($names[0])  &&  empty($record->lname)) {
                         $record->lname = preg_replace("/[^А-я]/ius",    "", $names[0]);

@@ -368,7 +368,7 @@ function createDepsLink($conn) {
     $deps = mysqli_query($conn, "SELECT * FROM deps_temporal");
     if($deps) {
         while ($row = $deps->fetch_assoc()) {
-            $linkdep = mysqli_query($conn, "SELECT id FROM deps WHERE name='" . $row['name'] . "%' AND LENGTH(parent_id)=" . mb_strlen($row['parent_code'], "UTF-8") .   " LIMIT 1");
+            $linkdep = mysqli_query($conn, "SELECT id FROM deps WHERE name LIKE '" . $row['name'] . "%' AND LENGTH(parent_id)=" . mb_strlen($row['parent_code'], "UTF-8") .   " LIMIT 1");
             if ($linkdep) {
                 $rowlink    =   $linkdep->fetch_assoc();
                 mysqli_query($conn, "UPDATE deps_temporal SET sedd_dep_id="  .   $rowlink['id']    .   " WHERE id=" .   $row["id"]);

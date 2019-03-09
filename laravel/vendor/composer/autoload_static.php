@@ -1331,6 +1331,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditRoomsChangeAvailable' => __DIR__ . '/../..' . '/database/migrations/2018_06_13_175300_edit_rooms_change_available.php',
         'EditTemporalDepsTable' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_213849_edit_temporal_deps_table.php',
         'EditTemporalDepsTableAddBoss' => __DIR__ . '/../..' . '/database/migrations/2019_03_10_011117_edit_temporal_deps_table_add_boss.php',
+        'EditTemporalDepsTableAddBossNullable' => __DIR__ . '/../..' . '/database/migrations/2019_03_10_014505_edit_temporal_deps_table_add_boss_nullable.php',
         'EditTemporalDepsTableAddParentCode' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_233259_edit_temporal_deps_table_add_parent_code.php',
         'EditTemporalDepsTableAddSourceId' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_214354_edit_temporal_deps_table_add_source_id.php',
         'EditTermsTableAddDefaultBaseterm' => __DIR__ . '/../..' . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',

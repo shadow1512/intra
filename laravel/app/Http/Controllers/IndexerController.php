@@ -108,11 +108,41 @@ class IndexerController extends Controller
                 $term->save();
             }
 
+            //городской телефон
+            if(trim($user->city_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->city_phone, "UTF-8"));
+                $term->term = $user->city_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->save();
+            }
+
+            //мобильный телефон
+            if(trim($user->mobile_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->mobile_phone, "UTF-8"));
+                $term->term = $user->mobile_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->save();
+            }
+
             //email
             if(trim($user->email)) {
                 $term = new Terms();
                 $term->baseterm = trim(mb_strtoupper($user->email, "UTF-8"));
                 $term->term = $user->email;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->save();
+            }
+
+            //email secondary
+            if(trim($user->email_secondary)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->email_secondary, "UTF-8"));
+                $term->term = $user->email_secondary;
                 $term->section = 'users';
                 $term->record = $user->id;
                 $term->save();
@@ -534,7 +564,10 @@ class IndexerController extends Controller
                 if(isset($item->fullname->value) && !empty($item->fullname->value)) {
                     $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                     $names = explode( " ", $item->fullname->value);
-                    $record->name   =   $item->fullname->value;
+                    //не надо заменять данные из СЭД
+                    /*if(empty($record->name)) {
+                        $record->name   =   $item->fullname->value;
+                    }*/
                     if (isset($names[0])    &&  trim($names[0])  &&  empty($record->lname)) {
                         $record->lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
                     }

@@ -112,7 +112,7 @@ if($tok) {
                 else {
                     print("user\r\n");
                     $date = date("Y-m-d H:i:s");
-                    $res    =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE `key`='" . $obj->UID . "'");
+                    $res    =   mysqli_query($conn, "SELECT user_id, sid FROM user_keys WHERE `key`='" . $obj->UID . "'");
                     if($res && $res->num_rows > 0) {
                         print("action:update\r\n");
                         $row = $res->fetch_assoc();
@@ -122,7 +122,9 @@ if($tok) {
                             $rowuser = $user->fetch_assoc();
                             if ($mdate > $rowuser['updated_at']) {
                                 mysqli_query($conn,
-                                    "UPDATE users SET `name`='" . $obj->Name . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
+                                    "UPDATE users SET `name`='" . $obj->Name . "', `fname`='"   .   preg_replace("/[^А-я]/ius",    "", $obj->FirstName) .
+                                    "', `mname`='" .    preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', `lname`='" .
+                                    preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
                             }
 
                             $url_data = 'http://172.16.0.223/SedKodeks/eseddapi/Access/GetUser?uid=' . $obj->UID;
@@ -138,6 +140,10 @@ if($tok) {
                                 $pruz   =  0;
                                 if($obj_authdata->Pruz) {
                                     $pruz   =  1;
+                                }
+                                //Хак для Насти Рябининой
+                                if($sid ==  "S-1-5-21-3953116633-1604536341-3751884121-10009") {
+                                    $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
                                 }
                                 $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . addslashes($obj_authdata->Username) . "' WHERE user_id=" . $row["user_id"];
                                 $updres =   mysqli_query($conn, $query);
@@ -215,6 +221,11 @@ if($tok) {
                                 if($obj_authdata->Pruz) {
                                     $pruz   =   1;
                                 }
+                                //Хак для Настя Рябининой
+                                if($obj->UID    ==  "4027a2c2-c369-4bea-8fe5-4a9664c612b1") {
+                                    $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
+                                }
+
                                 $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $pruz .   ",  '"  .   addslashes($obj_authdata->Username) .   "')";
                                 $insres =mysqli_query($conn, $query);
                                 if(!$insres) {
@@ -410,6 +421,7 @@ function cleanStructData($conn) {
     mysqli_query($conn, "TRUNCATE user_contacts") or die(mysqli_error($conn));
     mysqli_query($conn, "TRUNCATE user_keys") or die(mysqli_error($conn));
     mysqli_query($conn, "TRUNCATE deps_temporal") or die(mysqli_error($conn));
+    mysqli_query($conn, "TRUNCATE terms") or die(mysqli_error($conn));
 
     mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 1");
 }

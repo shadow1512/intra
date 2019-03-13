@@ -646,12 +646,15 @@ class IndexerController extends Controller
                     if ($user_id && isset($item->depnum->value) && !empty($item->depnum->value) && isset($item->worktitle->value) && !empty($item->worktitle->value)) {
                         $dep = Deps_Temporal::where("source_id", $item->depnum->value)->first();
                         if ($dep) {
-                            $dp = new Deps_Peoples();
-                            $dp->people_id  = $user_id;
-                            $dp->dep_id     =   $dep->sedd_dep_id;
-                            $dp->work_title =   $item->worktitle->value;
+                            if(!is_null($dep->sedd_dep_id)) {
+                                $dp = new Deps_Peoples();
+                                $dp->people_id  = $user_id;
+                                $dp->dep_id     =   $dep->sedd_dep_id;
+                                $dp->work_title =   $item->worktitle->value;
 
-                            $dp->save();
+                                $dp->save();
+                            }
+
                         }
                     }
                 }

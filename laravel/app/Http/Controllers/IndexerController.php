@@ -662,6 +662,7 @@ class IndexerController extends Controller
                 $processed_counter ++;
             }
         }
+        User::where('avatar',   NULL)->update(['avatar' => '/images/faces/default.svg']);
         print_r($record_counter . " прочитано, "    .   $processed_counter  .   " обработано, "    .   $counter_added  .   " добавлено");
     }
 

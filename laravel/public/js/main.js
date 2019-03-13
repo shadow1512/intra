@@ -100,7 +100,7 @@ $(document).on("submit", "#login_form", function(ev) {
                 }
                 if (msg[0] == "error") {
                     if (msg[1] == "no linked user") {
-                        //alert(msg[2]);
+                        alert(msg[2]);
                         alert("Нет привязанного пользователя СЭД");
                     }
                     if (msg[1] == "wrong credentials") {

@@ -361,6 +361,8 @@ class IndexerController extends Controller
                 }
             }
         }
+
+        print("Загружено $record_counter    подразделений\r\n");
     }
 
     public function dirloader() {

@@ -72,6 +72,19 @@ else {
 
 curl_close($ch);
 
+$counter_deps   =   0;
+$counter_users  =   0;
+$counter_added_deps     =   0;
+$counter_added_users    =   0;
+$counter_updated_deps     =   0;
+$counter_updated_users    =   0;
+$counter_deleted_deps     =   0;
+$counter_deleted_users    =   0;
+$counter_ignored_deps     =   0;
+$counter_ignored_users    =   0;
+
+
+
 if($tok) {
     $ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/GlobalCatalogue/GetGKObjects');
 //curl_setopt($ch, CURLOPT_HEADER, true);
@@ -86,7 +99,10 @@ if($tok) {
             if($obj->Active === true) {
 
                 if($obj->ExecutiveType == 0) {
-                    print("dep\r\n");
+
+                    $counter_deps   ++;
+
+                    print("dep:"    .   $obj->Name  .   "\r\n");
                     $res    =   mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
                     if($res && $res->num_rows > 0) {
                         print("action:update\r\n");
@@ -97,6 +113,10 @@ if($tok) {
                             $rowdep = $dep->fetch_assoc();
                             if($mdate > $rowdep['updated_at']){
                                 mysqli_query($conn, "UPDATE deps SET `name`='" . $obj->Name . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['dep_id']);
+                                $counter_updated_deps ++;
+                            }
+                            else {
+                                $counter_ignored_deps ++;
                             }
 
                         }
@@ -107,10 +127,13 @@ if($tok) {
                         mysqli_query($conn, "INSERT INTO deps (name, created_at, updated_at) VALUES ('" . $obj->Name . "', '" . $date . "', '" . $date . "')");
                         $dep_id = mysqli_insert_id($conn);
                         mysqli_query($conn, "INSERT INTO deps_keys (`key`, `dep_id`, `parent_key`) VALUES ('" . $obj->UID . "', $dep_id, '" . $obj->Parent . "')");
+                        $counter_added_deps ++;
                     }
                 }
                 else {
-                    print("user\r\n");
+                    $counter_users   ++;
+
+                    print("user"    .   $obj->Name  .   "\r\n");
                     $date = date("Y-m-d H:i:s");
                     $res    =   mysqli_query($conn, "SELECT user_id, sid FROM user_keys WHERE `key`='" . $obj->UID . "'");
                     if($res && $res->num_rows > 0) {
@@ -125,40 +148,39 @@ if($tok) {
                                     "UPDATE users SET `name`='" . $obj->Name . "', `fname`='"   .   preg_replace("/[^А-я]/ius",    "", $obj->FirstName) .
                                     "', `mname`='" .    preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', `lname`='" .
                                     preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
-                            }
 
-                            $url_data = 'http://172.16.0.223/SedKodeks/eseddapi/Access/GetUser?uid=' . $obj->UID;
-                            $chauthdata = curl_init($url_data);
-                            //curl_setopt($ch, CURLOPT_HEADER, true);
-                            curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
-                            curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
-                            curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
-                            $resauthdata = curl_exec($chauthdata);
-                            $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
-                            if ($status_code_data == 200) {
-                                $obj_authdata = json_decode($resauthdata);
-                                $pruz   =  0;
-                                if($obj_authdata->Pruz) {
-                                    $pruz   =  1;
-                                }
-                                //Хак для Насти Рябининой
-                                if($sid ==  "S-1-5-21-3953116633-1604536341-3751884121-10009") {
-                                    $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
-                                }
-                                $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . addslashes($obj_authdata->Username) . "' WHERE user_id=" . $row["user_id"];
-                                $updres =   mysqli_query($conn, $query);
-                                if(!$updres) {
-                                    printf("Error: %s\n", mysqli_error($conn));
-                                }
-                            } else {
-                                mysqli_query($conn, "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "' WHERE user_id=" . $row["user_id"]);
-                                print("error:no AD data for " . $row["user_id"] . "\r\n");
-                            }
+                                $counter_updated_users ++;
 
-                            $dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
-                            if ($dep && $dep->num_rows > 0) {
-                                $rowdep = $dep->fetch_assoc();
-                                $chef = 0;
+                                $url_data = 'http://172.16.0.223/SedKodeks/eseddapi/Access/GetUser?uid=' . $obj->UID;
+                                $chauthdata = curl_init($url_data);
+                                //curl_setopt($ch, CURLOPT_HEADER, true);
+                                curl_setopt($chauthdata, CURLINFO_HEADER_OUT, true);
+                                curl_setopt($chauthdata, CURLOPT_HTTPHEADER, array("Token: $tok"));
+                                curl_setopt($chauthdata, CURLOPT_RETURNTRANSFER, true);
+                                $resauthdata = curl_exec($chauthdata);
+                                $status_code_data = curl_getinfo($chauthdata, CURLINFO_HTTP_CODE);
+                                if ($status_code_data == 200) {
+                                    $obj_authdata = json_decode($resauthdata);
+                                    $pruz   =  0;
+                                    if($obj_authdata->Pruz) {
+                                        $pruz   =  1;
+                                    }
+                                    //Хак для Насти Рябининой
+                                    if($sid ==  "S-1-5-21-3953116633-1604536341-3751884121-10009") {
+                                        $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
+                                    }
+                                    $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . addslashes($obj_authdata->Username) . "' WHERE user_id=" . $row["user_id"];
+                                    $updres =   mysqli_query($conn, $query);
+                                    if(!$updres) {
+                                        printf("Error: %s\n", mysqli_error($conn));
+                                    }
+                                }
+                                else {
+                                    mysqli_query($conn, "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "' WHERE user_id=" . $row["user_id"]);
+                                    print("error:no AD data for " . $row["user_id"] . "\r\n");
+                                }
+
+                                $chef   =   0;
                                 $post   =   "";
 
                                 $ch_data = curl_init('http://172.16.0.223/SedKodeks/eseddapi/GlobalCatalogue/GetGKObjectByUID?uid=' . $obj->UID);
@@ -177,8 +199,30 @@ if($tok) {
                                         $post = $obj_data->Post;
                                     }
                                 }
-                                $query = "UPDATE deps_peoples SET `work_title`='" . $post . "', `created_at`='" . $date . "', `updated_at`='" . $date . "', `chef`=$chef WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
-                                mysqli_query($conn, $query);
+
+                                $dep = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->Parent . "'");
+                                if ($dep && $dep->num_rows > 0) {
+                                    $rowdep = $dep->fetch_assoc();
+
+                                    $query = "DELETE FROM deps_peoples WHERE dep_id=" . $rowdep['dep_id'] . " AND user_id=" . $row["user_id"];
+                                    mysqli_query($conn, $query);
+
+                                    $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
+                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $post . "', '" . $date . "', '" . $date . "', $chef)";
+                                    $insres =   mysqli_query($conn, $query);
+
+                                    if(!$insres) {
+                                        printf("Error: %s\n", mysqli_error($conn));
+                                        printf("Error: %s\n", $query);exit();
+                                    }
+
+                                }
+                                else {
+                                    print("Dep not found to link"   .   $obj->Parent    .   "\r\n");
+                                }
+                            }
+                            else {
+                                $counter_ignored_users ++;
                             }
                         }
                     }
@@ -204,6 +248,9 @@ if($tok) {
                                             preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', '" .
                                             preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
+
+                            $counter_added_users ++;
+
                             if(!$insres) {
                                 printf("Error: %s\n", mysqli_error($conn));
                             }
@@ -253,36 +300,55 @@ if($tok) {
                                     printf("Error: %s\n", $query);exit();
                                 }
                             }
+                            else {
+                                print("Dep not found to link"   .   $obj->Parent    .   "\r\n");
+                            }
                         }
                     }
                 }
             }
             else {
                 if($obj->ExecutiveType == 0) {
-                    print("dep: no active\r\n");
+                    $counter_deps   ++;
+                    print("dep: "   .   $obj->Name  .   " not active\r\n");
                     $res = mysqli_query($conn, "SELECT dep_id FROM deps_keys WHERE `key`='" . $obj->UID . "'");
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");
                         $row = $res->fetch_assoc();
                         mysqli_query($conn, "UPDATE deps SET `deleted_at`='" . date("Y-m-d H:i:s") . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['dep_id']);
+
+                        $counter_deleted_deps   ++;
                     }
+                    else {
+                        $counter_ignored_deps ++;
+                    }
+
                 }
                 else {
-                    print("user: no active\r\n");
+                    $counter_users   ++;
+                    print("user: "   .   $obj->Name  .   " not active\r\n");
                     $res = mysqli_query($conn, "SELECT user_id FROM users_keys WHERE `key`='" . $obj->UID . "'");
                     if ($res && $res->num_rows > 0) {
                         print("action:delete\r\n");
                         $row = $res->fetch_assoc();
                         mysqli_query($conn, "UPDATE users SET `deleted_at`='" . date("Y-m-d H:i:s") . "', `updated_at`='" . date("Y-m-d H:i:s") . "' WHERE id=" . $row['user_id']);
+
+                        $counter_deleted_users   ++;
+                    }
+                    else {
+                        $counter_ignored_users   ++;
                     }
                 }
             }
         }
     }
     else {
-        var_dump($status_code);
+        print("Status code for API request:"    .   $status_code);
     }
 }
+
+print("Всего подразделений: $counter_deps\r\nДобавлено: $counter_added_deps\r\nОбновлено: $counter_updated_deps\r\nУдалено: $counter_deleted_deps\r\nПроигнорировано: $counter_ignored_deps\r\n\r\n");
+print("Всего сотрудников: $counter_users\r\nДобавлено: $counter_added_users\r\nОбновлено: $counter_updated_users\r\nУдалено: $counter_deleted_users\r\nПроигнорировано: $counter_ignored_users\r\n\r\n");
 
 function createDepartmentParents($conn) {
     $deps = mysqli_query($conn, "SELECT * FROM deps_keys");
@@ -299,6 +365,8 @@ function createDepartmentParents($conn) {
         }
 
     }
+
+    print("Зависимости подразделений созданы\r\n");
 }
 
 function createDepartmentStructure($conn, $parent_id) {
@@ -339,6 +407,8 @@ function createDepartmentStructure($conn, $parent_id) {
             $index ++;
         }
     }
+
+    print("Логическая структура подразделений создана\r\n");
 }
 
 function createOldDepartmentStructure($conn, $parent_id) {
@@ -373,19 +443,33 @@ function createOldDepartmentStructure($conn, $parent_id) {
             $index ++;
         }
     }
+
+    print("Логическая структура подразделений старого телефонного справочника создана\r\n");
 }
 
 function createDepsLink($conn) {
+    $total_counter  =   0;
+    $numlinks       =   0;
+
+    $notfound   =   "";
     $deps = mysqli_query($conn, "SELECT * FROM deps_temporal");
     if($deps) {
         while ($row = $deps->fetch_assoc()) {
+            $total_counter  ++;
             $linkdep = mysqli_query($conn, "SELECT id FROM deps WHERE name LIKE '" . $row['name'] . "%' AND LENGTH(parent_id)=" . mb_strlen($row['parent_code'], "UTF-8") .   " LIMIT 1");
             if ($linkdep) {
+                $numlinks   ++;
                 $rowlink    =   $linkdep->fetch_assoc();
                 mysqli_query($conn, "UPDATE deps_temporal SET sedd_dep_id="  .   $rowlink['id']    .   " WHERE id=" .   $row["id"]);
             }
+            else {
+                $notfound   .=  $row["name"]    .   " " .   $row["parent_code"] .   "\r\n";
+            }
         }
     }
+
+    print("Связи между одинаковыми подразделениями в СЭДД и старом телефонном справочнике созданы\r\nВсего подразделений: $total_counter\r\nНайдены связи в структуре СЭДД для: $numlinks\r\n\r\n");
+    print("Перечень непривязанных подразделений:\r\n\r\n$notfound");
 }
 
 function updateChefs($conn) {
@@ -408,6 +492,8 @@ function updateChefs($conn) {
             }
         }
     }
+
+    print("Иерархия должностей выстроена\r\n");
 }
 
 function cleanStructData($conn) {
@@ -424,6 +510,8 @@ function cleanStructData($conn) {
     mysqli_query($conn, "TRUNCATE terms") or die(mysqli_error($conn));
 
     mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 1");
+
+    print("Очищены таблицы deps, deps_keys, deps_peoples, users, user_contacts, user_keys, deps_temporal, terms\r\n");
 }
 
 ?>

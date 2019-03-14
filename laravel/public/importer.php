@@ -457,7 +457,7 @@ function createDepsLink($conn) {
         while ($row = $deps->fetch_assoc()) {
             $total_counter  ++;
             $linkdep = mysqli_query($conn, "SELECT id FROM deps WHERE name LIKE '" . $row['name'] . "%' AND LENGTH(parent_id)=" . mb_strlen($row['parent_code'], "UTF-8") .   " LIMIT 1");
-            if ($linkdep) {
+            if ($linkdep    &&  $linkdep->num_rows  >   0) {
                 $numlinks   ++;
                 $rowlink    =   $linkdep->fetch_assoc();
                 mysqli_query($conn, "UPDATE deps_temporal SET sedd_dep_id="  .   $rowlink['id']    .   " WHERE id=" .   $row["id"]);

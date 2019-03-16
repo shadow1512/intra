@@ -10,6 +10,7 @@ use DateTime;
 use DateInterval;
 use DB;
 use Auth;
+use View;
 
 class RoomsController extends Controller
 {

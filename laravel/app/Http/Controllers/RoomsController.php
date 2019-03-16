@@ -95,10 +95,15 @@ class RoomsController extends Controller
             DB::enableQueryLog();
             $exists =   Booking::whereDate('date_book',    $date_booking)
                             ->where("room_id",  "=",    $id)
-                            ->where(function($query) use ($time_start,  $time_end) {
+                             ->where(function($query) use ($time_start,  $time_end) {
                                         $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end])
-                                            ->orWhereBetween($time_start, ['time_start', 'time_end'])->orWhereBetween($time_end, ['time_start', 'time_end']);
-                                    })->exists();
+                                         ->orWhere(function($query) use ($time_start,  $time_end) {
+                                             $query->whereTime('time_start', '<',    $time_start)->whereTime('time_end', '>',    $time_end);
+                                         })
+                                        ->orWhere(function($query) use ($time_start,  $time_end) {
+                                            $query->whereTime('time_start', '>', $time_start)->whereTime('time_end', '<', $time_end);
+                                        });
+                                        })->exists();
             print_r(DB::getQueryLog());exit();
 
             if($exists) {
@@ -160,7 +165,12 @@ class RoomsController extends Controller
                 ->whereDate('date_book',    $date_booking)
                 ->where(function($query) use ($time_start,  $time_end) {
                     $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end])
-                        ->orWhereBetween($time_start, ['time_start', 'time_end'])->orWhereBetween($time_end, ['time_start', 'time_end']);
+                        ->orWhere(function($query) use ($time_start,  $time_end) {
+                            $query->whereTime('time_start', '<',    $time_start)->whereTime('time_end', '>',    $time_end);
+                        })
+                        ->orWhere(function($query) use ($time_start,  $time_end) {
+                            $query->whereTime('time_start', '>',    $time_start)->whereTime('time_end', '<',    $time_end);
+                        });
                 })->exists();
 
             if($exists) {

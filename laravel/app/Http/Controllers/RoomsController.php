@@ -131,7 +131,51 @@ class RoomsController extends Controller
     }
 
     public function savebooking($id, Request $request) {
+        $name           =   trim($request->input('input_name'));
+        $date_booking   =   trim($request->input('input_date_booking'));
+        $time_start     =   trim($request->input('input_time_start_change'));
+        $time_end       =   trim($request->input('input_time_end_change'));
+        $room           =   trim($request->input('input_room'));
 
+        $validator = Validator::make($request->all(), [
+            'input_name'            =>  'required|max:90',
+            'input_date_booking'    =>  'required',
+            'input_time_start'      =>  'required',
+            'input_time_end'        =>  'required',
+            'input_room'            =>  'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error', $validator]);
+        }
+        else {
+            //Нужно проверить, что не перекрывается по датам
+            $exists =   Booking::where("id",    "<>",    $id)
+                ->where("room_id",  "=",    $room)
+                ->whereDate('date_book',    $date_booking)
+                ->where(function($query) use ($time_start,  $time_end) {
+                    $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
+                })->exists();
+
+            if($exists) {
+                return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);
+            }
+            else {
+                $date = date("Y-m-d H:i:s");
+                if (Auth::check()) {
+                    $booking    =   Booking::findOrFail($id);
+                    $booking->room_id       =   $room;
+                    $booking->name          =   $name;
+                    $booking->date_book     =   $date_booking;
+                    $booking->time_start    =   $time_start;
+                    $booking->time_end      =   $time_end;
+                    $booking->updated_at    =   $date;
+                    $booking->save();
+
+                    return response()->json(['result' => 'success']);
+                }
+            }
+        }
     }
 
     public function deletebooking($id) {

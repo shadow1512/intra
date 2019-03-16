@@ -162,7 +162,7 @@
             </div>
             <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
           </form>
-              <div class="error" atyle="display:none;"></div>
+              <div class="error" style="display:none;"></div>
         @else
           <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
         @endif
@@ -175,8 +175,6 @@
 <div class="overlay __js-modal-change-order">
   <div class="modal-w">
     <div class="modal-cnt __form">
-      <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
-
     </div>
   </div>
 </div>

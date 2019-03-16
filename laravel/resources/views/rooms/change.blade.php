@@ -1,3 +1,11 @@
+@php
+  $month_names  = array("января", "февраля",  "марта",  "апреля", "мая",  "июня", "июля", "августа",  "сентября", "октября",  "ноября", "декабря");
+  $daystarttime = new DateTime($booking->date_book . " "  . $booking->time_start);
+  $currentdate  = new DateTime($booking->date_book . " "  . $booking->time_start);
+@endphp
+
+<div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+@if (Auth::check())
 <div class="profile_form_h">
         <div class="h light_h __h_m">Бронь: {{$booking->id}}</div>
 </div>
@@ -10,20 +18,34 @@
     </div>
     <div class="field">
       <label for="input_date" class="lbl">Дата брони:</label>
-      <select id="input_date" name="input_date">
-        <option value="0901">1 сентября</option>
-        <option value="0902">2 сентября</option>
+      <select id="input_date" name="input_date_booking">
+        @for ($i  = 3;  $i  >= 0;  $i--)
+          @php
+            $currentdate->sub(new DateInterval("P1D"));
+          @endphp
+        <option value="{{$currentdate->format("dmY")}}">{{$currentdate->format("j")}} {{$month_names[$currentdate->format("n") - 1]}}</option>
+        @endfor
+        <option value="{{$daystarttime->format("dmY")}}">{{$daystarttime->format("j")}} {{$month_names[$daystarttime->format("n") - 1]}}</option>
+          @php
+            $currentdate  = $daystarttime;
+          @endphp
+          @for ($i  = 0;  $i  <= 3;  $i++)
+            @php
+              $currentdate->add(new DateInterval("P1D"));
+            @endphp
+            <option value="{{$currentdate->format("dmY")}}">{{$currentdate->format("j")}} {{$month_names[$currentdate->format("n") - 1]}}</option>
+          @endfor
       </select>
     </div>
     <div class="field">
       <div class="field_half">
         <label for="input_time_start" class="lbl">Время начала:</label>
-        <input id="input_time_start" name="input_time_start" type="text" value="{{$booking->time_start}}" class="it">
+        <input id="input_time_start_change" name="input_time_start" type="text" value="{{$booking->time_start}}" class="it">
       </div>
       <span class="field_dash">&ndash;</span>
       <div class="field_half">
         <label for="input_time_end" class="lbl">Время окончания:</label>
-        <input id="input_time_end" name="input_time_end" type="text" value="{{$booking->time_end}}" class="it">
+        <input id="input_time_end_change" name="input_time_end" type="text" value="{{$booking->time_end}}" class="it">
       </div>
     </div>
     <div class="field">
@@ -45,3 +67,7 @@
     <a href="#" class="btn profile_form_btn" id="submit_room_order_form">Сохранить</a>
   </div>
 </form>
+<div class="error" style="display:none;"></div>
+@else
+  <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
+@endif

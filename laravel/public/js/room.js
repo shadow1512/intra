@@ -24,7 +24,33 @@ $("#input_time_end").datetimepicker({
     },
 });
 
-$(document).on("click", "#input_time_start,#input_time_end", function() {
+$("#input_time_start_change").datetimepicker({
+    lang:'ru',
+    datepicker:false,
+    timepicker:true,
+    format:'H:i',
+    step: 30,
+    onShow:function( ct ){
+        this.setOptions({
+            maxTime:$('#input_time_end_change').val()?$('#input_time_end_change').val():false
+        })
+    },
+});
+
+$("#input_time_end_change").datetimepicker({
+    lang:'ru',
+    datepicker:false,
+    timepicker:true,
+    format:'H:i',
+    step: 30,
+    onShow:function( ct ){
+        this.setOptions({
+            minTime:$('#input_time_start_change').val()?$('#input_time_start_change').val():false
+        })
+    },
+});
+
+$(document).on("click", "#input_time_start,#input_time_end,#input_time_start_change,#input_time_end_change", function() {
    $(this).datetimepicker('toggle');
 });
 
@@ -34,7 +60,7 @@ $(document).on("click", "#submit_room_order_form", function(ev) {
     return false;
 });
 
-$(document).on("submit", "#room_order_form", function(ev) {
+$(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     $("div.error").html("").hide();
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");

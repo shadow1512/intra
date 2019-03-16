@@ -61,6 +61,7 @@ class RoomsController extends Controller
             ->selectRaw('TIMESTAMPDIFF(MINUTE,  room_bookings.time_start,   room_bookings.time_end) as duration')
             ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
             ->whereBetween('date_book', [$startdate,  $caldate->format("Y-m-d") .   " 23:59:59"])
+            ->where('room_id',  '=',    $id)
             ->orderBy('date_book')
             ->orderBy('time_start')
             ->get();
@@ -150,14 +151,13 @@ class RoomsController extends Controller
         }
         else {
             //Нужно проверить, что не перекрывается по датам
-            DB::enableQueryLog();
             $exists =   Booking::where("id",    "<>",    $id)
                 ->where("room_id",  "=",    $room)
                 ->whereDate('date_book',    $date_booking)
                 ->where(function($query) use ($time_start,  $time_end) {
                     $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
                 })->exists();
-            print_r(DB::getQueryLog());exit();
+
             if($exists) {
                 return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);
             }

@@ -160,7 +160,7 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
 popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
     var url=    $(but).attr("data-url");
     $.ajax({
-        type: "POST",
+        type: "GET",
         url: url,
         cache: false,
         async: true,

@@ -2,6 +2,7 @@
   $month_names  = array("января", "февраля",  "марта",  "апреля", "мая",  "июня", "июля", "августа",  "сентября", "октября",  "ноября", "декабря");
   $daystarttime = new DateTime($booking->date_book . " "  . $booking->time_start);
   $currentdate  = new DateTime($booking->date_book . " "  . $booking->time_start);
+  $currentdate->sub(new DateInterval("P5D"));
 @endphp
 
 <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
@@ -21,11 +22,11 @@
       <select id="input_date" name="input_date_booking">
         @for ($i  = 3;  $i  >= 0;  $i--)
           @php
-            $currentdate->sub(new DateInterval("P1D"));
+            $currentdate->add(new DateInterval("P1D"));
           @endphp
         <option value="{{$currentdate->format("dmY")}}">{{$currentdate->format("j")}} {{$month_names[$currentdate->format("n") - 1]}}</option>
         @endfor
-        <option value="{{$daystarttime->format("dmY")}}">{{$daystarttime->format("j")}} {{$month_names[$daystarttime->format("n") - 1]}}</option>
+        <option value="{{$daystarttime->format("dmY")}}" selected="selected">{{$daystarttime->format("j")}} {{$month_names[$daystarttime->format("n") - 1]}}</option>
           @php
             $currentdate  = $daystarttime;
           @endphp
@@ -40,12 +41,12 @@
     <div class="field">
       <div class="field_half">
         <label for="input_time_start" class="lbl">Время начала:</label>
-        <input id="input_time_start_change" name="input_time_start" type="text" value="{{$booking->time_start}}" class="it">
+        <input id="input_time_start_change" name="input_time_start_change" type="text" value="{{$booking->time_start}}" class="it">
       </div>
       <span class="field_dash">&ndash;</span>
       <div class="field_half">
         <label for="input_time_end" class="lbl">Время окончания:</label>
-        <input id="input_time_end_change" name="input_time_end" type="text" value="{{$booking->time_end}}" class="it">
+        <input id="input_time_end_change" name="input_time_end_change" type="text" value="{{$booking->time_end}}" class="it">
       </div>
     </div>
     <div class="field">

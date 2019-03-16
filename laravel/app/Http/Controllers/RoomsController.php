@@ -93,6 +93,7 @@ class RoomsController extends Controller
         else {
             //Нужно проверить, что не перекрывается по датам
             $exists =   Booking::whereDate('date_book',    $date_booking)
+                            ->where("room_id",  "=",    $id)
                             ->where(function($query) use ($time_start,  $time_end) {
                                         $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
                                     })->exists();

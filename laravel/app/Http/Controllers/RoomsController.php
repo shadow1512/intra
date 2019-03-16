@@ -92,7 +92,7 @@ class RoomsController extends Controller
         }
         else {
             //Нужно проверить, что не перекрывается по датам
-            DB::enableQueryLog();
+            //DB::enableQueryLog();
             $exists =   Booking::whereDate('date_book',    $date_booking)
                             ->where("room_id",  "=",    $id)
                              ->where(function($query) use ($time_start,  $time_end) {
@@ -104,7 +104,7 @@ class RoomsController extends Controller
                                             $query->whereTime('time_start', '>', $time_start)->whereTime('time_end', '<', $time_end);
                                         });
                                         })->exists();
-            print_r(DB::getQueryLog());exit();
+            //print_r(DB::getQueryLog());exit();
 
             if($exists) {
                 return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);

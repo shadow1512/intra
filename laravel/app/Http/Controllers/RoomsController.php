@@ -138,11 +138,11 @@ class RoomsController extends Controller
         $room           =   trim($request->input('input_room'));
 
         $validator = Validator::make($request->all(), [
-            'input_name'            =>  'required|max:90',
-            'input_date_booking'    =>  'required',
-            'input_time_start'      =>  'required',
-            'input_time_end'        =>  'required',
-            'input_room'            =>  'required',
+            'input_name'                =>  'required|max:90',
+            'input_date_booking'        =>  'required',
+            'input_time_start_change'   =>  'required',
+            'input_time_end_change'     =>  'required',
+            'input_room'                =>  'required',
         ]);
 
         if ($validator->fails()) {

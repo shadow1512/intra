@@ -187,7 +187,7 @@ class RoomsController extends Controller
                 $booking->delete();
             }
         }
-        return redirect(route('rooms.book', ["id"  =>  $booking->id]));
+        return redirect(route('rooms.book', ["id"  =>  $booking->room_id]));
     }
 
     /**

@@ -1,7 +1,7 @@
 <div class="profile_form_h">
         <div class="h light_h __h_m">Бронь: {{$booking->id}}</div>
 </div>
-<form class="profile_form" id="room_change_form" action="{{route('rooms.book.change', ["id"  =>  $booking->id])}}">
+<form class="profile_form" id="room_change_form" action="{{route('rooms.book.save', ["id"  =>  $booking->id])}}">
   {{ csrf_field() }}
   <div class="profile_form_inner-cnt">
     <div class="field">

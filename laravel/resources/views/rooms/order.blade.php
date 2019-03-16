@@ -81,7 +81,6 @@
               </div>
             </div>
             <div class="reserve_table">
-                <span style="display:none;" id="change_url">{{route('rooms.book.view')}}</span>
 @for ($i = 0;  $i<=4;  $i++)
               <div class="reserve_table_column">
                 <span style="display:none" class="source_date">{{$caldate->format("Y-m-d")}}</span>
@@ -109,7 +108,7 @@
               $minutes  = $daystarttime->format("i");
               $offset = 73  + (($hours*60  + $minutes) / 30)  * 26;
             @endphp
-                <div id="bookid_{{$booking->id}}" style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">
+                <div data-url="{{route('rooms.book.view', ["id"    =>  $booking->id])}}" style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif">
                   <div title="{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}" class="reserve_table_filled_img"><img src="{{$booking->avatar}}"></div>
                   <div class="reserve_table_filled_cnt">
                     <div class="reserve_table_filled_cnt_bl @if ($booking->duration < 120)__ellipsis @endif">{{$booking->name}}</div>

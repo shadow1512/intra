@@ -158,10 +158,7 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
     }
 });
 popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
-    var url =   $("#change_url").text();
-    var id  =   $(but).attr("id").split("_");
-    id= id[1];
-    url=    url+id;
+    var url=    $(but).attr("data-url");
     $.ajax({
         type: "POST",
         url: url,

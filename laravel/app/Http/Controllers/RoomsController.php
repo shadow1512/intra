@@ -108,6 +108,30 @@ class RoomsController extends Controller
         }
     }
 
+    public function viewbooking($id) {
+        $booking =  Booking::findOrFail($id);
+        $room   =   Rooms::findOrFail($booking->room_id);
+        $rooms  =   Rooms::orderBy('name')->get();
+        if($booking->user_id    ==  Auth::user()->id) {
+            return response()->json(['result'   =>  'success',  'html'  =>  view('rooms.change', ['room'    =>  $room, 'bookings'   =>  $booking,   'rooms' =>  $rooms])]);
+        }
+        else {
+            return response()->json(['result'   =>  'error',    'text'  =>  'Вы не можете изменять это бронирование, т.к. не вы его создавали']);
+        }
+    }
+
+    public function savebooking($id, Request $request) {
+
+    }
+
+    public function deletebooking($id) {
+        $booking = Booking::findOrFail($id);
+        if($booking->user_id    ==  Auth::user()->id) {
+            $booking->delete();
+        }
+        return redirect(route('rooms.book', ["id"  =>  $booking->id]));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

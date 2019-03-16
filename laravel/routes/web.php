@@ -20,6 +20,9 @@ Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
 Route::get('/rooms/book/{id}/{direction}/{num}', 'RoomsController@book')->name('rooms.book.otherweeks');
 Route::post('/rooms/book/{id}', 'RoomsController@createbooking')->name('rooms.book.create');
+Route::get('/rooms/book/view/{id}', 'RoomsController@viewbooking')->name('rooms.book.view');
+Route::post('/rooms/book/save/{id}', 'RoomsController@savebooking')->name('rooms.book.save');
+Route::get('/rooms/book/delete/{id}', 'RoomsController@deletebooking')->name('rooms.book.delete');
 
 Route::get('/services/teh', 'ServicesController@teh')->name('services.teh');
 Route::get('/services/cartridge', 'ServicesController@cartridge')->name('services.cartridge');

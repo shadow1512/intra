@@ -157,7 +157,27 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
         $(win).find("input[name='input_date_booking']").val(dd);
     }
 });
-popUp('.reserve_table_filled', '.__js-modal-change-order');
+popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
+    var url =   $("#change_url").text();
+    var id  =   $(but).attr("id").split("_");
+    id= id[1];
+    url=    url+id;
+    $.ajax({
+        type: "POST",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        success: function(msg) {
+            if (msg["result"] == "success") {
+                $("div.__js-modal-change-order").find("div.__form").html(msg["html"]);
+            }
+            if (msg["result"] == "error") {
+                $("div.__js-modal-change-order").find("div.__form").html("<h3>" +   msg["text"] +   "</h3>");
+            }
+        }
+    });
+});
 
 //eo modal window
 

@@ -119,7 +119,7 @@ class RoomsController extends Controller
         if (Auth::check()) {
             if($booking->user_id    ==  Auth::user()->id) {
                 $html   =   View::make('rooms.change', ['room'    =>  $room, 'bookings'   =>  $booking,   'rooms' =>  $rooms]);
-                return response()->json(['result'   =>  'success',  'html'  =>  $html-render()]);
+                return response()->json(['result'   =>  'success',  'html'  =>  $html->render()]);
             }
             else {
                 return response()->json(['result'   =>  'error',    'text'  =>  'Вы не можете изменять это бронирование, т.к. не вы его создавали']);

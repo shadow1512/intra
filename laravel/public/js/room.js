@@ -59,6 +59,11 @@ $(document).on("click", "#submit_room_order_form", function(ev) {
     $("#room_order_form").submit();
     return false;
 });
+$(document).on("click", "#submit_room_change_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $("#room_change_form").submit();
+    return false;
+});
 
 $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     $("div.error").html("").hide();

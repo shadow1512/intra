@@ -65,7 +65,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg>
 Отменить бронь
 </a>
-    <a href="#" class="btn profile_form_btn" id="submit_room_order_form">Сохранить</a>
+    <a href="#" class="btn profile_form_btn" id="submit_room_change_form">Сохранить</a>
   </div>
 </form>
 <div class="error" style="display:none;"></div>

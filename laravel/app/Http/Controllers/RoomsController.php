@@ -96,7 +96,8 @@ class RoomsController extends Controller
             $exists =   Booking::whereDate('date_book',    $date_booking)
                             ->where("room_id",  "=",    $id)
                             ->where(function($query) use ($time_start,  $time_end) {
-                                        $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
+                                        $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end])
+                                            ->orWhereBetween($time_start, ['time_start', 'time_end'])->orWhereBetween($time_end, ['time_start', 'time_end']);
                                     })->exists();
             print_r(DB::getQueryLog());exit();
 
@@ -158,7 +159,8 @@ class RoomsController extends Controller
                 ->where("room_id",  "=",    $room)
                 ->whereDate('date_book',    $date_booking)
                 ->where(function($query) use ($time_start,  $time_end) {
-                    $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end]);
+                    $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end])
+                        ->orWhereBetween($time_start, ['time_start', 'time_end'])->orWhereBetween($time_end, ['time_start', 'time_end']);
                 })->exists();
 
             if($exists) {

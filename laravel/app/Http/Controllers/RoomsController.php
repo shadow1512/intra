@@ -100,10 +100,12 @@ class RoomsController extends Controller
             }
             else {
                 $date = date("Y-m-d H:i:s");
-                DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
-                    'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
-                    'created_at' => $date, 'updated_at' => $date]);
-                return response()->json(['result'   =>  'success']);
+                if (Auth::check()) {
+                    DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
+                        'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
+                        'created_at' => $date, 'updated_at' => $date]);
+                    return response()->json(['result' => 'success']);
+                }
             }
         }
     }
@@ -112,12 +114,20 @@ class RoomsController extends Controller
         $booking =  Booking::findOrFail($id);
         $room   =   Rooms::findOrFail($booking->room_id);
         $rooms  =   Rooms::orderBy('name')->get();
-        if($booking->user_id    ==  Auth::user()->id) {
-            return response()->json(['result'   =>  'success',  'html'  =>  view('rooms.change', ['room'    =>  $room, 'bookings'   =>  $booking,   'rooms' =>  $rooms])]);
+
+        if (Auth::check()) {
+            if($booking->user_id    ==  Auth::user()->id) {
+                $html   =   View::make('rooms.change', ['room'    =>  $room, 'bookings'   =>  $booking,   'rooms' =>  $rooms]);
+                return response()->json(['result'   =>  'success',  'html'  =>  $html-render()]);
+            }
+            else {
+                return response()->json(['result'   =>  'error',    'text'  =>  'Вы не можете изменять это бронирование, т.к. не вы его создавали']);
+            }
         }
         else {
-            return response()->json(['result'   =>  'error',    'text'  =>  'Вы не можете изменять это бронирование, т.к. не вы его создавали']);
+            return response()->json(['result'   =>  'error',    'text'  =>  'Вы не можете изменять это бронирование, т.к. вы не авторизованы']);
         }
+
     }
 
     public function savebooking($id, Request $request) {
@@ -126,8 +136,10 @@ class RoomsController extends Controller
 
     public function deletebooking($id) {
         $booking = Booking::findOrFail($id);
-        if($booking->user_id    ==  Auth::user()->id) {
-            $booking->delete();
+        if (Auth::check()) {
+            if ($booking->user_id == Auth::user()->id) {
+                $booking->delete();
+            }
         }
         return redirect(route('rooms.book', ["id"  =>  $booking->id]));
     }

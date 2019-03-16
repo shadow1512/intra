@@ -28,10 +28,13 @@
     </div>
     <div class="field">
       <label for="input_room" class="lbl">Кабинет:</label>
+      @if (count($rooms))
       <select id="input_room" name="input_room">
-        <option value="218">Кабинет 218</option>
-        <option value="219">Кабинет 219</option>
+        @foreach($rooms as $room)
+        <option value="{{$room->id}}" @if ($booking->room_id ==  $room->id) selected="selected" @endif>{{$room->name}}</option>
+        @endforeach
       </select>
+      @endif
     </div>
   </div>
   <div class="profile_form_submit">

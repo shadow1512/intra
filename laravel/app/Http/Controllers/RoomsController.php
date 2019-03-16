@@ -113,12 +113,11 @@ class RoomsController extends Controller
 
     public function viewbooking($id) {
         $booking =  Booking::findOrFail($id);
-        $room   =   Rooms::findOrFail($booking->room_id);
         $rooms  =   Rooms::orderBy('name')->get();
 
         if (Auth::check()) {
             if($booking->user_id    ==  Auth::user()->id) {
-                $html   =   View::make('rooms.change', ['room'    =>  $room, 'bookings'   =>  $booking,   'rooms' =>  $rooms]);
+                $html   =   View::make('rooms.change', ['booking'   =>  $booking,   'rooms' =>  $rooms]);
                 return response()->json(['result'   =>  'success',  'html'  =>  $html->render()]);
             }
             else {

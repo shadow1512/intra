@@ -24,9 +24,9 @@
           @php
             $currentdate->add(new DateInterval("P1D"));
           @endphp
-        <option value="{{$currentdate->format("dmY")}}">{{$currentdate->format("j")}} {{$month_names[$currentdate->format("n") - 1]}}</option>
+        <option value="{{$currentdate->format("Y-m-d")}}">{{$currentdate->format("j")}} {{$month_names[$currentdate->format("n") - 1]}}</option>
         @endfor
-        <option value="{{$daystarttime->format("dmY")}}" selected="selected">{{$daystarttime->format("j")}} {{$month_names[$daystarttime->format("n") - 1]}}</option>
+        <option value="{{$daystarttime->format("Y-m-d")}}" selected="selected">{{$daystarttime->format("j")}} {{$month_names[$daystarttime->format("n") - 1]}}</option>
           @php
             $currentdate  = $daystarttime;
           @endphp

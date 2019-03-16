@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="reserve_table">
-                <span style="display:none;" id="change_url">{{route('rooms.book.change')}}</span>
+                <span style="display:none;" id="change_url">{{route('rooms.book.view')}}</span>
 @for ($i = 0;  $i<=4;  $i++)
               <div class="reserve_table_column">
                 <span style="display:none" class="source_date">{{$caldate->format("Y-m-d")}}</span>

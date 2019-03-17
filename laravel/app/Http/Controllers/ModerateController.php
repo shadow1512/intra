@@ -570,6 +570,9 @@ class ModerateController extends Controller
         $chefs          =   $request->get('chefs');
 
         var_dump($request->input('deps'));
+        var_dump($request->get('deps'));
+        var_dump($request->input('deps[]'));
+        var_dump($request->get('deps[]'));
         exit();
         foreach($request->input('deps') as $key => $value) {
             $dep_id =   $value;

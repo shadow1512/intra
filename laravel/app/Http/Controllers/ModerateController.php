@@ -516,7 +516,7 @@ class ModerateController extends Controller
     public function usersedit($id)
     {
         $user       =   User::findOrFail($id);
-        $deps       =   Dep::whereNotNull("parent_id")->order("parent_id")->order("LENGTH(parent_id)");
+        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderBy("LENGTH(parent_id)");
         $works      =   Deps_Peoples::where("people_id",    "=",    $id);
 
         return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps]);

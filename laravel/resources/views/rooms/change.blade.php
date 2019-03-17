@@ -1,6 +1,7 @@
 @php
   $month_names  = array("января", "февраля",  "марта",  "апреля", "мая",  "июня", "июля", "августа",  "сентября", "октября",  "ноября", "декабря");
   $daystarttime = new DateTime($booking->date_book . " "  . $booking->time_start);
+  $dayendtime   = new DateTime($booking->date_book . " "  . $booking->time_end);
   $currentdate  = new DateTime($booking->date_book . " "  . $booking->time_start);
   $currentdate->sub(new DateInterval("P5D"));
 @endphp
@@ -41,12 +42,12 @@
     <div class="field">
       <div class="field_half">
         <label for="input_time_start" class="lbl">Время начала:</label>
-        <input id="input_time_start_change" name="input_time_start_change" type="text" value="{{$booking->time_start}}" class="it">
+        <input id="input_time_start_change" name="input_time_start_change" type="text" value="{{$daystarttime->format("H:i")}}" class="it">
       </div>
       <span class="field_dash">&ndash;</span>
       <div class="field_half">
         <label for="input_time_end" class="lbl">Время окончания:</label>
-        <input id="input_time_end_change" name="input_time_end_change" type="text" value="{{$booking->time_end}}" class="it">
+        <input id="input_time_end_change" name="input_time_end_change" type="text" value="{{$dayendtime->format("H:i")}}" class="it">
       </div>
     </div>
     <div class="field">

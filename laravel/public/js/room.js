@@ -7,8 +7,8 @@ $("#input_time_start").datetimepicker({
     onShow:function( ct ){
         this.setOptions({
             maxTime:$('#input_time_end').val()?$('#input_time_end').val():false
-        })
-    },
+        });
+    }
 });
 
 $("#input_time_end").datetimepicker({
@@ -20,34 +20,8 @@ $("#input_time_end").datetimepicker({
     onShow:function( ct ){
         this.setOptions({
             minTime:$('#input_time_start').val()?$('#input_time_start').val():false
-        })
-    },
-});
-
-$("#input_time_start_change").datetimepicker({
-    lang:'ru',
-    datepicker:false,
-    timepicker:true,
-    format:'H:i',
-    step: 30,
-    onShow:function( ct ){
-        this.setOptions({
-            maxTime:$('#input_time_end_change').val()?$('#input_time_end_change').val():false
-        })
-    },
-});
-
-$("#input_time_end_change").datetimepicker({
-    lang:'ru',
-    datepicker:false,
-    timepicker:true,
-    format:'H:i',
-    step: 30,
-    onShow:function( ct ){
-        this.setOptions({
-            minTime:$('#input_time_start_change').val()?$('#input_time_start_change').val():false
-        })
-    },
+        });
+    }
 });
 
 $(document).on("click", "#input_time_start,#input_time_end,#input_time_start_change,#input_time_end_change", function() {
@@ -70,14 +44,14 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
     var form = $(this);
-
+    var token   =   $(this).find("input[name='_token']").val();
     $.ajax({
         type: "POST",
         url: url,
         cache: false,
         async: true,
         dataType: "json",
-        data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
+        data: form.serialize() + "&_token=" + token,
         success: function(msg) {
             if(msg.result == "success") {
                 location.reload(true);

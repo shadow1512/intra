@@ -168,6 +168,32 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
         success: function(msg) {
             if (msg["result"] == "success") {
                 $("div.__js-modal-change-order").find("div.__form").html(msg["html"]);
+
+                $("#input_time_start_change").datetimepicker({
+                    lang:'ru',
+                    datepicker:false,
+                    timepicker:true,
+                    format:'H:i',
+                    step: 30,
+                    onShow:function( ct ){
+                        this.setOptions({
+                            maxTime:$('#input_time_end_change').val()?$('#input_time_end_change').val():false
+                        });
+                    }
+                });
+
+                $("#input_time_end_change").datetimepicker({
+                    lang:'ru',
+                    datepicker:false,
+                    timepicker:true,
+                    format:'H:i',
+                    step: 30,
+                    onShow:function( ct ){
+                        this.setOptions({
+                            minTime:$('#input_time_start_change').val()?$('#input_time_start_change').val():false
+                        });
+                    }
+                });
             }
             if (msg["result"] == "error") {
                 $("div.__js-modal-change-order").find("div.__form").html("<div class=\"modal_h\"><a href=\"#\" title=\"Закрыть\" class=\"modal-close\"></a></div><h3>" +   msg["text"] +   "</h3>");

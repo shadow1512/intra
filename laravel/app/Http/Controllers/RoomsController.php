@@ -141,18 +141,18 @@ class RoomsController extends Controller
     }
 
     public function savebooking($id, Request $request) {
-        $name           =   trim($request->input('input_name'));
-        $date_booking   =   trim($request->input('input_date_booking'));
+        $name           =   trim($request->input('input_name_change'));
+        $date_booking   =   trim($request->input('input_date_booking_change'));
         $time_start     =   trim($request->input('input_time_start_change'));
         $time_end       =   trim($request->input('input_time_end_change'));
         $room           =   trim($request->input('input_room'));
 
         $validator = Validator::make($request->all(), [
-            'input_name'                =>  'required|max:90',
-            'input_date_booking'        =>  'required',
-            'input_time_start_change'   =>  'required',
-            'input_time_end_change'     =>  'required',
-            'input_room'                =>  'required',
+            'input_name_change'                 =>  'required|max:90',
+            'input_date_booking_change'         =>  'required',
+            'input_time_start_change'           =>  'required',
+            'input_time_end_change'             =>  'required',
+            'input_room'                        =>  'required',
         ]);
 
         if ($validator->fails()) {

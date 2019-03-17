@@ -15,12 +15,12 @@
   {{ csrf_field() }}
   <div class="profile_form_inner-cnt">
     <div class="field">
-      <label for="input_name" class="lbl">Название брони:</label>
-      <input id="input_name" name="input_name" type="text" value="{{$booking->name}}" class="it" maxlength="60">
+      <label for="input_name_change" class="lbl">Название брони:</label>
+      <input id="input_name_change" name="input_name_change" type="text" value="{{$booking->name}}" class="it" maxlength="60">
     </div>
     <div class="field">
-      <label for="input_date" class="lbl">Дата брони:</label>
-      <select id="input_date" name="input_date_booking">
+      <label for="input_date_booking_change" class="lbl">Дата брони:</label>
+      <select id="input_date_booking_change" name="input_date_booking_change">
         @for ($i  = 3;  $i  >= 0;  $i--)
           @php
             $currentdate->add(new DateInterval("P1D"));
@@ -41,12 +41,12 @@
     </div>
     <div class="field">
       <div class="field_half">
-        <label for="input_time_start" class="lbl">Время начала:</label>
+        <label for="input_time_start_change" class="lbl">Время начала:</label>
         <input id="input_time_start_change" name="input_time_start_change" type="text" value="{{$daystarttime->format("H:i")}}" class="it">
       </div>
       <span class="field_dash">&ndash;</span>
       <div class="field_half">
-        <label for="input_time_end" class="lbl">Время окончания:</label>
+        <label for="input_time_end_change" class="lbl">Время окончания:</label>
         <input id="input_time_end_change" name="input_time_end_change" type="text" value="{{$dayendtime->format("H:i")}}" class="it">
       </div>
     </div>

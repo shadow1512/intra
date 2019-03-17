@@ -573,6 +573,8 @@ class ModerateController extends Controller
         var_dump($request->get('deps'));
         var_dump($request->input('deps[]'));
         var_dump($request->get('deps[]'));
+
+        var_dump($request->all());
         exit();
         foreach($request->input('deps') as $key => $value) {
             $dep_id =   $value;

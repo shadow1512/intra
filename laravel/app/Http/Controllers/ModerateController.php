@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Deps_Peoples;
 use Auth;
 use App\User;
+use App\Dep;
 use DB;
 use App\News;
 use App\Rooms;

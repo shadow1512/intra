@@ -569,6 +569,11 @@ class ModerateController extends Controller
         $work_titles    =   $request->get('work_title');
         $chefs          =   $request->get('chef');
 
+        $max        =    2;
+        $deps       =   Dep::selectRaw("MAX(LENGTH(parent_id)) as max")->first();
+        $max        =   $deps["max"];
+
+
         foreach($request->input('dep') as $key => $value) {
             $dep_id =   $value;
             $work   =   $work_titles[$key];
@@ -581,8 +586,12 @@ class ModerateController extends Controller
             $dp->people_id      =   $id;
             $dp->dep_id         =   $value;
             $dp->work_title     =   $work;
-            $dp->chef           =   $chef;
 
+            $curDep     =   Dep::findOrFail($id);
+            $cur_length =   mb_strlen($curDep["parent_id"], "UTF-8");
+            $chef       =  $max - $cur_length;
+            $dp->chef           =   $chef;
+        
             $dp->save();
         }
         return redirect(route('moderate.users.start'));

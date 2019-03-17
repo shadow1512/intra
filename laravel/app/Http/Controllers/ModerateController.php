@@ -525,16 +525,16 @@ class ModerateController extends Controller
     public function usersupdate($id, Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'numpark'           =>  'integer',
-            'position_desc'     =>  'string|max:255',
+            'numpark'           =>  'nullable|integer',
+            'position_desc'     =>  'nullable|string|max:255',
             'lname'             =>  'string|max:255|required',
             'fname'             =>  'string|max:255|required',
-            'mname'             =>  'string|max:255',
-            'phone'             =>  'string|max:3',
-            'city_phone'        =>  'string|max:15',
-            'mobile_phone'      =>  'string|max:18',
-            'email'             =>  'string|email',
-            'email_secondary'   =>  'string|email',
+            'mname'             =>  'nullable|string|max:255',
+            'phone'             =>  'nullable|string|max:3',
+            'city_phone'        =>  'nullable|string|max:15',
+            'mobile_phone'      =>  'nullable|string|max:18',
+            'email'             =>  'nullable|string|email',
+            'email_secondary'   =>  'nullable|string|email',
         ]);
         if ($validator->fails()) {
             return redirect()->route('moderate.users.edit', ["id"   =>  $id])

@@ -527,6 +527,14 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'numpark'           =>  'integer',
             'position_desc'     =>  'string|max:255',
+            'lname'             =>  'string|max:255|required',
+            'fname'             =>  'string|max:255|required',
+            'mname'             =>  'string|max:255',
+            'phone'             =>  'string|max:3',
+            'city_phone'        =>  'string|max:15',
+            'mobile_phone'      =>  'string|max:18',
+            'email'             =>  'string|email',
+            'email_secondary'   =>  'string|email',
         ]);
         if ($validator->fails()) {
             return redirect()->route('moderate.users.edit')
@@ -541,11 +549,41 @@ class ModerateController extends Controller
         if($request->input('birthday')) {
             $user->birthday = date("Y-m-d", strtotime($request->input('birthday')));
         }
+
+        $user->lname            =   $request->input('lname');
+        $user->fname            =   $request->input('fname');
+        $user->mname            =   $request->input('mname');
+
+        $user->email            =   $request->input('email');
+        $user->email_secondary  =   $request->input('email_secondary');
+        $user->phone            =   $request->input('phone');
+        $user->city_phone       =   $request->input('city_phone');
+        $user->mobile_phone     =   $request->input('mobile_phone');
+
         $user->numpark          =   $request->input('numpark');
         $user->position_desc    =   $request->input('position_desc');
         $user->updated_at = date("Y-m-d H:i:s");
         $user->save();
 
+        Deps_Peoples::where("people_id",   "=",    $id)->delete();
+        $work_titles    =   $request->get('work_title');
+        $chefs          =   $request->get('chefs');
+        foreach($request->get('deps') as $key => $value) {
+            $dep_id =   $value;
+            $work   =   $work_titles[$key];
+            $chef   =   0;
+            if(isset($chefs[$key])) {
+                $chef=  $chefs[$key];
+            }
+            $dp =   new Deps_Peoples();
+
+            $dp->people_id      =   $id;
+            $dp->dep_id         =   $value;
+            $dp->work_title     =   $work;
+            $dp->chef           =   $chef;
+
+            $dp->save();
+        }
         return redirect(route('moderate.users.start'));
     }
 

@@ -137,7 +137,7 @@
                                 <div class="col-md-6">
                                     <select id="dep{{$index}}" class="form-control" name="dep[]">
                                         @foreach ($deps as $dep)
-                                            <option value="{{$dep->id}}" @if ($work->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)-@endfor{{$dep->name}}</option>
+                                            <option value="{{$dep->id}}" @if ($work->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -155,8 +155,22 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="form-group{{ $errors->has('chefs') ? ' has-error' : '' }}">
+                                    <label for="work_title" class="col-md-4 control-label">Руководитель</label>
+
+                                    <div class="col-md-6">
+                                        <input id="chef{{$index}}" type="checkbox" class="form-control" name="chef[]" value="1" @if ($work->chef) checked="checked" @endif>
+
+                                        @if ($errors->has('chef'.$index))
+                                            <span class="help-block">
+                                    <strong>{{ $errors->first('chef'.$index) }}</strong>
+                                </span>
+                                        @endif
+                                    </div>
+                                </div>
                                 @php $index ++; @endphp
                             @endforeach
+                            <h2>Дополнительные данные</h2>
                             <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                 <label for="birthday" class="col-md-4 control-label">День рождения</label>
 
@@ -166,6 +180,19 @@
                                     @if ($errors->has('birthday'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('birthday') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('workstart') ? ' has-error' : '' }}">
+                                <label for="workstart" class="col-md-4 control-label">Дата начала работы в компании</label>
+
+                                <div class="col-md-6">
+                                    <input id="workstart" type="text" class="form-control" name="workstart" value="@if ($user->workstart) {{ date("d.m.Y", strtotime($user->workstart)) }} @endif">
+
+                                    @if ($errors->has('workstart'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('workstart') }}</strong>
                                     </span>
                                     @endif
                                 </div>

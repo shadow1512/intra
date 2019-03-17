@@ -537,7 +537,7 @@ class ModerateController extends Controller
             'email_secondary'   =>  'string|email',
         ]);
         if ($validator->fails()) {
-            return redirect()->route('moderate.users.edit')
+            return redirect()->route('moderate.users.edit', ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }

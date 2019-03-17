@@ -43,6 +43,21 @@ if(isset($argv[1]) && ($argv[1] == 'clean')) {
     cleanStructData($conn);
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'setadmin')) {
+    if(isset($argv[2]) && isset($argv[3])) {
+        $level  =   (int)$argv[3];
+        if($level > 0) {
+            createModerator($conn,  $argv[2],   $level);
+        }
+        else {
+            print("Передан неверный уровень прав\r\n");
+        }
+    }
+    else {
+        print("Передан неверное количество аргументов\r\n");
+    }
+    exit();
+}
 
 $fp_err =   null;
 //$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -494,6 +509,31 @@ function updateChefs($conn) {
     }
 
     print("Иерархия должностей выстроена\r\n");
+}
+
+function createModerator($conn, $email, $level) {
+
+    $person_obj     =   mysqli_query($conn, "SELECT id FROM users WHERE email LIKE '"   .   $email  .   "' LIMIT 1");
+    if($person_obj && ($person_obj->num_rows > 0)) {
+        if($level   ==  "admin") {
+            $level  =   1;
+        }
+        if($level   ==  "moderate_content") {
+            $level  =   3;
+        }
+        if($level   ==  "moderate_persons") {
+            $level  =   4;
+        }
+        $oerson =   $person_obj->fetch_assoc();
+        mysqli_query($conn, "UPDATE users SET role_id=$level WHERE id=" .   $person["id"]) or die(mysqli_error($conn));
+
+        print("Права предоставлены\r\n");
+    }
+    else {
+        print("Пользователя с таким контактом не найдено\r\n");
+    }
+
+
 }
 
 function cleanStructData($conn) {

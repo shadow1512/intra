@@ -519,6 +519,8 @@ class ModerateController extends Controller
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderBy("LENGTH(parent_id)");
         $works      =   Deps_Peoples::where("people_id",    "=",    $id);
 
+        var_dump($works);
+
         return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps]);
     }
 

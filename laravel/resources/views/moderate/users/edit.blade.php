@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('mobile_phone') ? ' has-error' : '' }}">
-                                <label for="mobile_phone" class="col-md-4 control-label">Городской телефон</label>
+                                <label for="mobile_phone" class="col-md-4 control-label">Мобильный телефон</label>
 
                                 <div class="col-md-6">
                                     <input id="mobile_phone" type="text" class="form-control" name="mobile_phone" value="@if ($user->mobile_phone) {{ $user->mobile_phone }}  @endif">
@@ -131,7 +131,7 @@
                             <h2>Должности</h2>
                             @foreach ($works as $work)
                                 @php $index = 1; @endphp
-                            <div class="form-group{{ $errors->has('workstart') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('dep' .   $index) ? ' has-error' : '' }}">
                                 <label for="dep{{$index}}" class="col-md-4 control-label">Подразделение</label>
 
                                 <div class="col-md-6">

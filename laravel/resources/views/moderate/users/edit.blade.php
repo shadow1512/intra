@@ -156,7 +156,7 @@
                                 </div>
                             </div>
                                 <div class="form-group{{ $errors->has('chefs') ? ' has-error' : '' }}">
-                                    <label for="work_title" class="col-md-4 control-label">Руководитель</label>
+                                    <label for="chef{{$index}}" class="col-md-4 control-label">Руководитель</label>
 
                                     <div class="col-md-6">
                                         <input id="chef{{$index}}" type="checkbox" class="form-control" name="chef[]" value="1" @if ($work->chef) checked="checked" @endif>

@@ -567,9 +567,7 @@ class ModerateController extends Controller
 
         Deps_Peoples::where("people_id",   "=",    $id)->delete();
         $work_titles    =   $request->get('work_title');
-        $chefs          =   $request->get('chefs');
-
-        var_dump($request->input('dep'));
+        $chefs          =   $request->get('chef');
 
         foreach($request->input('dep') as $key => $value) {
             $dep_id =   $value;

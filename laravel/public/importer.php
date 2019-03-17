@@ -524,7 +524,7 @@ function createModerator($conn, $email, $level) {
         if($level   ==  "moderate_persons") {
             $level  =   4;
         }
-        $oerson =   $person_obj->fetch_assoc();
+        $person =   $person_obj->fetch_assoc();
         mysqli_query($conn, "UPDATE users SET role_id=$level WHERE id=" .   $person["id"]) or die(mysqli_error($conn));
 
         print("Права предоставлены\r\n");

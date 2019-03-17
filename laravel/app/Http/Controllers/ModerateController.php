@@ -587,11 +587,11 @@ class ModerateController extends Controller
             $dp->dep_id         =   $value;
             $dp->work_title     =   $work;
 
-            $curDep     =   Dep::findOrFail($id);
+            $curDep     =   Dep::findOrFail($value);
             $cur_length =   mb_strlen($curDep["parent_id"], "UTF-8");
             $chef       =  $max - $cur_length;
             $dp->chef           =   $chef;
-        
+
             $dp->save();
         }
         return redirect(route('moderate.users.start'));

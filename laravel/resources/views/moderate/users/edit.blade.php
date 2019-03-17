@@ -24,19 +24,139 @@
                                 <small id="avatarHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
 
-                            <div class="form-group{{ $errors->has('workstart') ? ' has-error' : '' }}">
-                                <label for="workstart" class="col-md-4 control-label">Начало работы в компании</label>
+                            <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
+                                <label for="lname" class="col-md-4 control-label">Фамилия</label>
 
                                 <div class="col-md-6">
-                                    <input id="workstart" type="text" class="form-control" name="workstart" value="@if ($user->workstart) {{ date("d.m.Y", strtotime($user->workstart)) }} @endif" autofocus>
+                                    <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus required>
 
-                                    @if ($errors->has('workstart'))
+                                    @if ($errors->has('lname'))
                                         <span class="help-block">
-                                        <strong>{{ $errors->first('workstart') }}</strong>
+                                        <strong>{{ $errors->first('lname') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
+                                <label for="fname" class="col-md-4 control-label">Имя</label>
+
+                                <div class="col-md-6">
+                                    <input id="fname" type="text" class="form-control" name="fname" value="@if ($user->fname) {{ $user->fname }}  @endif" required>
+
+                                    @if ($errors->has('fname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('l]fname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('mname') ? ' has-error' : '' }}">
+                                <label for="mname" class="col-md-4 control-label">Отчество</label>
+
+                                <div class="col-md-6">
+                                    <input id="mname" type="text" class="form-control" name="mname" value="@if ($user->mname) {{ $user->mname }}  @endif">
+
+                                    @if ($errors->has('mname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('mname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">Рабочий email</label>
+
+                                <div class="col-md-6">
+                                    <input id="email" type="text" class="form-control" name="email" value="@if ($user->email) {{ $user->email }}  @endif">
+
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('email_secondary') ? ' has-error' : '' }}">
+                                <label for="email" class="col-md-4 control-label">Дополнительный email</label>
+
+                                <div class="col-md-6">
+                                    <input id="email_secondary" type="text" class="form-control" name="email_secondary" value="@if ($user->email_secondary) {{ $user->email_secondary }}  @endif">
+
+                                    @if ($errors->has('email_secondary'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email_secondary') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
+                                <label for="phone" class="col-md-4 control-label">Местный телефон</label>
+
+                                <div class="col-md-6">
+                                    <input id="phone" type="text" class="form-control" name="phone" value="@if ($user->phone) {{ $user->phone }}  @endif" maxlength="3">
+
+                                    @if ($errors->has('phone'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('city_phone') ? ' has-error' : '' }}">
+                                <label for="city_phone" class="col-md-4 control-label">Городской телефон</label>
+
+                                <div class="col-md-6">
+                                    <input id="city_phone" type="text" class="form-control" name="city_phone" value="@if ($user->city_phone) {{ $user->city_phone }}  @endif">
+
+                                    @if ($errors->has('city_phone'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('city_phone') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('mobile_phone') ? ' has-error' : '' }}">
+                                <label for="mobile_phone" class="col-md-4 control-label">Городской телефон</label>
+
+                                <div class="col-md-6">
+                                    <input id="mobile_phone" type="text" class="form-control" name="mobile_phone" value="@if ($user->mobile_phone) {{ $user->mobile_phone }}  @endif">
+
+                                    @if ($errors->has('mobile_phone'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('mobile_phone') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <h2>Должности</h2>
+                            @foreach ($works as $work)
+                                @php $index = 1; @endphp
+                            <div class="form-group{{ $errors->has('workstart') ? ' has-error' : '' }}">
+                                <label for="dep{{$index}}" class="col-md-4 control-label">Подразделение</label>
+
+                                <div class="col-md-6">
+                                    <select id="dep{{$index}}" class="form-control" name="dep[]">
+                                        @foreach ($deps as $dep)
+                                            <option value="{{$dep->id}}" @if ($work->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)-@endfor{{$dep->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group{{ $errors->has('work_title') ? ' has-error' : '' }}">
+                                <label for="work_title" class="col-md-4 control-label">Должность</label>
+
+                                <div class="col-md-6">
+                                    <input id="work_title{{$index}}" type="text" class="form-control" name="work_title[]" value="@if ($work->work_title) {{ $work->work_title }} @endif">
+
+                                    @if ($errors->has('work_title'.$index))
+                                        <span class="help-block">
+                                    <strong>{{ $errors->first('work_title'.$index) }}</strong>
+                                </span>
+                                    @endif
+                                </div>
+                            </div>
+                                @php $index ++; @endphp
+                            @endforeach
                             <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                 <label for="birthday" class="col-md-4 control-label">День рождения</label>
 

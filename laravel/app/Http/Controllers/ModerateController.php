@@ -563,6 +563,7 @@ class ModerateController extends Controller
         $user->numpark          =   $request->input('numpark');
         $user->position_desc    =   $request->input('position_desc');
         $user->updated_at = date("Y-m-d H:i:s");
+
         $user->save();
 
         Deps_Peoples::where("people_id",   "=",    $id)->delete();
@@ -594,6 +595,16 @@ class ModerateController extends Controller
             }
             $dp->chef           =   $chef;
             $dp->save();
+
+            $user->name =   $user->lname    .   " " .   mb_substr($user->fname, 0,  1)  .   ".";
+            if($user->mname) {
+                $user->name =   $user->name .   mb_substr($user->mname, 0,  1)  .   ".";
+            }
+            if($work)   {
+                $user->name . " - " .   $work;
+            }
+
+            $user->save();
         }
         return redirect(route('moderate.users.start'));
     }

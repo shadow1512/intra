@@ -663,7 +663,7 @@ class IndexerController extends Controller
 
                 $names= $record->lname  .   " " .   mb_substr($record->fname,   0,  1,  "UTF-8")    .   ".";
                 if($record->mname) {
-                    $names  .=  mb_substr($record->fname,   0,  1,  "UTF-8")    .   ".";
+                    $names  .=  mb_substr($record->mname,   0,  1,  "UTF-8")    .   ".";
                 }
 
                 $works= Deps_Peoples::where("people_id",    $record->id)->first();

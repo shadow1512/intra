@@ -630,7 +630,7 @@ class SearchController extends Controller
         $email = mb_substr($email, 0, 100);
         $users_by_email  =   array();
         if($email) {
-            $email_records   =   User::where('email', 'LIKE',    '%'  .   $email   .   '%')->get();
+            $email_records   =   User::where('email', 'LIKE',    '%'  .   $email   .   '%')->orWhere('email_secondary', 'LIKE',    '%'  .   $email   .   '%')->get();
             $users_by_email  =   $email_records;
             unset($email_records);
         }
@@ -642,12 +642,17 @@ class SearchController extends Controller
         $users_by_phone  =   array();
         $user_ids   =   array();
         if($phone) {
-            $phone_records   =   User::where('phone', '=',    $phone)->get();
+            $phone_records   =   User::where('phone', '=',    $phone)
+                    ->orWhere("city_phone",    'LIKE', '%' .   $phone. '%')
+                    ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')->get();
             foreach($phone_records   as $record) {
                 $user_ids[] =   $record->id;
             }
-            $phone_sim_records   =   User::where('phone', 'LIKE',    '%'  .   $phone   .   '%')->get();
-            foreach($room_sim_records   as $record) {
+            $phone_sim_records   =   User::where('phone', 'LIKE',    '%'  .   $phone   .   '%')
+                ->orWhere("city_phone",    'LIKE', '%' .   $phone. '%')
+                ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')
+                ->get();
+            foreach($phone_sim_records   as $record) {
                 if(!in_array($record->id,   $user_ids)) {
                     $user_ids[] =   $record->id;
                     $phone_records->push($record);

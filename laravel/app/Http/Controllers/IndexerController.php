@@ -671,8 +671,8 @@ class IndexerController extends Controller
                     $names  .=  " - "   .   $works->work_title;
                 }
 
-                //$record->name=   $names;
-                $record->name=  null;
+                $record->name=   $names;
+                //$record->name=  null;
                 $record->save();
 
                 $processed_counter ++;

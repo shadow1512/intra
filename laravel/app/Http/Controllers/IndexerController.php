@@ -667,7 +667,7 @@ class IndexerController extends Controller
                 }
 
                 $works= Deps_Peoples::where("people_id",    $record->id)->first();
-                if($works->work_title) {
+                if($works   &&  $works->work_title) {
                     $names  .=  " - "   .   $works->work_title;
                 }
 

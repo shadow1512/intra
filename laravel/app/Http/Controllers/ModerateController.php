@@ -601,7 +601,7 @@ class ModerateController extends Controller
                 $user->name =   $user->name .   mb_substr($user->mname, 0,  1)  .   ".";
             }
             if($work)   {
-                $user->name . " - " .   $work;
+                $user->name =   $user->name . " - " .   $work;
             }
 
             $user->save();

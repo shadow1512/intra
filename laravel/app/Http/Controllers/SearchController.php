@@ -126,6 +126,20 @@ class SearchController extends Controller
                                     unset($res);
                                 //}
                             }
+                            //здесь может быть часть email
+                            if(!$total_found_by_word) {
+                                $email_results  =   array();
+                                $word_search_records  =  Terms::where('baseterm', 'LIKE', $oldword.  '%')->get();
+                                if(count($word_search_records)) {
+                                    foreach($word_search_records as $record) {
+                                        $email_results[$record->section][]  =   $record->record;
+                                    }
+                                    foreach($email_results as $section  =>  $records) {
+                                        $email_results[$section]    =   array_count_values($records);
+                                    }
+                                    $words_records[]    =   $email_results;
+                                }
+                            }
                         }
                         //цифры
                         if(is_numeric($word)) {
@@ -159,7 +173,6 @@ class SearchController extends Controller
                                 $words_records[]    =   $email_results;
                             }
                         }
-
                     }
                 }
             }

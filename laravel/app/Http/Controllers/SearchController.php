@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Deps_Peoples;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\News;
@@ -289,7 +290,7 @@ class SearchController extends Controller
                                     "phrase"    =>  $phrase]);
     }
 
-    private function getSearchResultsByWord($word,  $sections_to_find   =   array()) {
+    private function getSearchResultsByWord($word,  $sections_to_find   =   array(),    $partials_to_find   =   array()) {
         //var_dump('byword_search_start');
         $word_records = array();
 
@@ -311,10 +312,24 @@ class SearchController extends Controller
         //var_dump($word);
 
         //Продолжаем со словом
-        if(count($sections_to_find)) {
-            $word_search_records = Terms::where('baseterm', 'LIKE', $word)->whereIn('section',  $sections_to_find)->get();
+        if(count($sections_to_find) &&  count($partials_to_find)) {
+            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
+                ->whereIn('section',  $sections_to_find)
+                ->whereIn('partial',  $partials_to_find)
+                ->get();
+
         }
-        else {
+        if(count($sections_to_find) &&  !count($partials_to_find)) {
+            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
+                ->whereIn('section',  $sections_to_find)
+                ->get();
+        }
+        if(!count($sections_to_find) &&  count($partials_to_find)) {
+            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
+                ->whereIn('partial',  $partials_to_find)
+                ->get();
+        }
+        if(!count($sections_to_find) &&  !count($partials_to_find)) {
             $word_search_records = Terms::where('baseterm', 'LIKE', $word)->get();
         }
         //var_dump(count($word_search_records));
@@ -664,8 +679,127 @@ class SearchController extends Controller
             unset($user_ids);
         }
 
+        //кусок поиска по должности
+        $worktitle              = trim($request->input('worktitle'));
+        $worktitle              = mb_substr($worktitle, 0, 100);
+        $users_by_worktitle     =   array();
+        //Орфография, опечатки
+        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
+        //Раскладка
+        $corrector = new Text_LangCorrect();
+
+        if(mb_strlen($worktitle) >= 3) {
+            $words = explode(" ", $worktitle);
+            //итоговый массив со взвешенным списком
+            $words_records = array();
+            foreach ($words as $word) {
+                $word = trim($word);
+                if (mb_strlen($word, "UTF-8")) {
+
+                    //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
+                    $oldword = $word;
+                    $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                    //вот теперь можно убрать лишнее
+                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                    //с цифрами ничего делать не надо
+                    if (mb_strlen($word) >= 3) {
+                        /*Если человек вводит какое-то разумное слово, то если:
+                            - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
+                            - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
+                        //слово есть в словаре
+                        $total_found_by_word = 0;
+
+                        if (pspell_check($dict, $word)) {
+                            $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
+                            $words_records[] = $res;
+                            $total_found_by_word = count($res);
+                            unset($res);
+                        } //Слово не нашлось в словаре
+                        else {
+                            //пробуем в начале советы (опечатки, если было на русском)
+                            $suggest = pspell_suggest($dict, $word);
+                            //берем только первый вариант, остальные уже не то
+                            if (count($suggest)) {
+                                $word = $suggest[0];
+                                //var_dump($word);
+                                $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
+                                $words_records[] = $res;
+                                $total_found_by_word = count($res);
+                                unset($res);
+                            }
+                        }
+                        if (!$total_found_by_word) {
+                            //ищем как есть
+                            /*$res = $this->getSearchResultsByWord($word);
+                            $words_records[] = $res;
+                            $total_found_by_word = count($res);
+                            unset($res);
+                            if (!$total_found_by_word) {*/
+                            $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                            $res = $this->getSearchResultsByWord($oldword, array("users"), array("work"));
+                            $words_records[] = $res;
+                            $total_found_by_word = count($res);
+                            unset($res);
+                            //}
+                        }
+                    }
+                }
+
+                $parsed_words ++;
+            }
+
+            $search_result = array();
+            $parsed_words   =   count($words_records);
+            //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
+            if($parsed_words > 0) {
+                //по каждому отработанному слову проверяем найденные разделы
+                for ($i = 0; $i < $parsed_words; $i++) {
+                    $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
+                }
+                //все уникальные найденные разделы
+                $found_sections = array_unique($found_sections);
+                foreach ($found_sections as $section) {
+                    $search_result[$section] = array();
+                    for ($i = 0; $i < $parsed_words; $i++) {
+                        if (isset($words_records[$i][$section])) {
+                            foreach ($words_records[$i][$section] as $record => $total) {
+                                if (array_key_exists($record, $search_result[$section])) {
+                                    $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
+                                } else {
+                                    $search_result[$section][$record] = $total;
+                                }
+                            }
+
+                        }
+                    }
+                    arsort($search_result[$section]);
+                }
+
+                $user_ids = array_keys($search_result['users']);
+                $found_records = User::find($user_ids);
+                $assoc_records = array();
+                foreach ($found_records as $record) {
+                    $assoc_records[$record->id] = $record;
+                }
+                foreach ($user_ids as $user_id) {
+                    $users_by_worktitle[] = $assoc_records[$user_id];
+                }
+                unset($found_records);
+                unset($assoc_records);
+            }
+        }
+
+
         $all_found_records  =   array();
         foreach($users as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
+            }
+        }
+        foreach($users_by_worktitle as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
             }
@@ -703,6 +837,7 @@ class SearchController extends Controller
         unset($users_by_phone);
         unset($users_by_room);
         unset($users);
+        unset($users_by_worktitle);
 
         $users  =   array();
 
@@ -739,6 +874,12 @@ class SearchController extends Controller
                 $allname    .=  ", ";
             }
             $phrase =   "email: " .   $email;
+        }
+        if($worktitle)    {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "должность: " .   $worktitle;
         }
 
         return view('search.all', [ "users"  =>  $users,

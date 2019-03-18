@@ -865,6 +865,7 @@ return array(
     'EditTemporalDepsTableAddParentCode' => $baseDir . '/database/migrations/2019_03_09_233259_edit_temporal_deps_table_add_parent_code.php',
     'EditTemporalDepsTableAddSourceId' => $baseDir . '/database/migrations/2019_03_09_214354_edit_temporal_deps_table_add_source_id.php',
     'EditTermsTableAddDefaultBaseterm' => $baseDir . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
+    'EditTermsTableAddPartial' => $baseDir . '/database/migrations/2019_03_19_010218_edit_terms_table_add_partial.php',
     'EditUsersAddAddressDescription' => $baseDir . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
     'EditUsersAddCityPhone' => $baseDir . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
     'EditUsersAddEmailSecondary' => $baseDir . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',

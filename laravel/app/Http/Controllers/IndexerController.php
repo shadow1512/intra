@@ -61,6 +61,7 @@ class IndexerController extends Controller
             $term->term = trim($user->fname);
             $term->section = 'users';
             $term->record = $user->id;
+            $term->partial  =   'fname';
             $term->save();
 
             //Фамилия
@@ -73,6 +74,7 @@ class IndexerController extends Controller
             $term->term = trim($user->lname);
             $term->section = 'users';
             $term->record = $user->id;
+            $term->partial  =   'lname';
             $term->save();
 
             //Отчество
@@ -85,6 +87,7 @@ class IndexerController extends Controller
             $term->term = trim($user->mname);
             $term->section = 'users';
             $term->record = $user->id;
+            $term->partial  =   'mname';
             $term->save();
 
             //Номер комнаты
@@ -95,6 +98,7 @@ class IndexerController extends Controller
                 $term->term = $user->room;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'room';
                 $term->save();
             }
 
@@ -105,6 +109,7 @@ class IndexerController extends Controller
                 $term->term = $user->phone;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'phone';
                 $term->save();
             }
 
@@ -115,6 +120,7 @@ class IndexerController extends Controller
                 $term->term = $user->city_phone;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'phone';
                 $term->save();
             }
 
@@ -125,6 +131,7 @@ class IndexerController extends Controller
                 $term->term = $user->mobile_phone;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'phone';
                 $term->save();
             }
 
@@ -135,6 +142,7 @@ class IndexerController extends Controller
                 $term->term = $user->email;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'email';
                 $term->save();
             }
 
@@ -145,6 +153,7 @@ class IndexerController extends Controller
                 $term->term = $user->email_secondary;
                 $term->section = 'users';
                 $term->record = $user->id;
+                $term->partial  =   'email';
                 $term->save();
             }
 
@@ -162,6 +171,7 @@ class IndexerController extends Controller
                             $term->term = trim($word);
                             $term->section = 'users';
                             $term->record = $user->id;
+                            $term->partial  =   'work';
                             $term->save();
                         }
                     }
@@ -187,6 +197,7 @@ class IndexerController extends Controller
                             $term->term = trim($word);
                             $term->section = 'deps';
                             $term->record = $dep->id;
+                            $term->partial  =   'dep';
                             $term->save();
                         }
                     }

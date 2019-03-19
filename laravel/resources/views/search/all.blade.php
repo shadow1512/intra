@@ -80,7 +80,12 @@
                         <ul class="news_ul">
                             @foreach ($news as $new)
                                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
-                                    <div class="news_li_date">@convertdate($new->published_at)</div>
+                                    <div class="news_li_date">@php
+                                        $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
+                                        $month  =   $months[date("n", strtotime($news->published_at))   -1];
+                                        $day    =   date("j",   strtotime($news->published_at));
+                                        $year   =   date("Y",   strtotime($news->published_at));
+                                        @endphp {{ $day }} {{ $month }} {{ $year }}</div>
                                 </li>
                             @endforeach
                         </ul>

@@ -5,7 +5,7 @@
     <div class="profile_aside">
         <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
-            <!--<p class="profile_aside_invoice_i">1 650 ₽</p></a>-->
+            <!--<p class="profile_aside_invoice_i">1 650 ₽</p><--></a>
     </div>
     <div class="profile_info">
         <div class="profile_info_i">
@@ -44,7 +44,7 @@
             @endif
         </div>
         <div class="profile_info_i">
-            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span></p>
+            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span>,<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a></p>
         </div>
         <div class="profile_info_i">
             <div class="profile_info_i_requests">

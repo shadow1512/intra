@@ -38,7 +38,7 @@ class ProfileController extends Controller
 
         $user   =   User::select("users.*", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-            ->where('user.id', '=', Auth::user()->id)->first();
+            ->where('users.id', '=', Auth::user()->id)->first();
 
         return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user]);
     }

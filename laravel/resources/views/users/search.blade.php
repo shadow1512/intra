@@ -79,7 +79,7 @@
             @foreach($users as $user)
             <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
                 <div class="directory_lst_i_pic"><img src="{{$user->avatar}}" class="directory_lst_i_img"></div>
-                <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{$user->name}}</a>
+                <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</a>
                     <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
                     <div class="directory_lst_i_name_status"></div>
                 </div>

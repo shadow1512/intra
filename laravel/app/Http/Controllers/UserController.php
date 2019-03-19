@@ -40,9 +40,11 @@ class UserController extends Controller
 
     public function unit($id)
     {
-        $user = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+        $user = User::select("users.*", "deps_peoples.work_title", "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', $id)->first();
+
+        $dep    =   Dep::findOrFail($user->dep_id);
 
         $contacts   =   array();
 
@@ -52,7 +54,7 @@ class UserController extends Controller
         }
 
 
-        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts]);
+        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts,  'dep'   =>  $dep]);
     }
 
     protected function getCrumbs($id) {

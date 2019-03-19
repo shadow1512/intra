@@ -26,7 +26,7 @@
                 <div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>
             </div>
             <div class="profile_info_i">
-                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->work_title }}</span></p>
+                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->work_title }}</span>, <a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a></p>
             </div><a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в контакты</a>
         </div>
     </div>

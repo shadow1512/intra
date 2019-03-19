@@ -82,9 +82,9 @@
                                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
                                     <div class="news_li_date">@php
                                         $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
-                                        $month  =   $months[date("n", strtotime($news->published_at))   -1];
-                                        $day    =   date("j",   strtotime($news->published_at));
-                                        $year   =   date("Y",   strtotime($news->published_at));
+                                        $month  =   $months[date("n", strtotime($new->published_at))   -1];
+                                        $day    =   date("j",   strtotime($new->published_at));
+                                        $year   =   date("Y",   strtotime($new->published_at));
                                         @endphp {{ $day }} {{ $month }} {{ $year }}</div>
                                 </li>
                             @endforeach

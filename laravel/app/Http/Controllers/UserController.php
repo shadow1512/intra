@@ -46,15 +46,19 @@ class UserController extends Controller
 
         $dep    =   Dep::findOrFail($user->dep_id);
 
-        $contacts   =   array();
-
+        $contacts       =   array();
+        $contact_ids    =   array();
         if(Auth::check()) {
             $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone","users.birthday")
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
+
+            foreach($contacts as $contact) {
+                $contact_ids[]  =   $contact->id;
+            }
         }
 
 
-        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts,  'dep'   =>  $dep]);
+        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'dep'   =>  $dep]);
     }
 
     protected function getCrumbs($id) {

@@ -43,6 +43,7 @@ Route::get('/people/new', 'UserController@index')->name('people.new');
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
 Route::get('/profile/add/{id}', 'ProfileController@addcontact')->name('profile.addcontact');
+Route::get('/profile/delete/{id}', 'ProfileController@deletecontact')->name('profile.deletecontact');
 Route::get('/profile/deleteavatar', 'ProfileController@deleteavatar')->name('profile.deleteavatar');
 Route::post('/profile/updateavatar', 'ProfileController@updateavatar')->name('profile.updateavatar');
 

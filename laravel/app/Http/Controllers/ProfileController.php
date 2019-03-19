@@ -104,6 +104,15 @@ class ProfileController extends Controller
         return redirect('/people/unit/' . $id);
     }
 
+    public function deletecontact($id)
+    {
+        if (Auth::check()) {
+            DB::table('user_contacts')->where('user_id', Auth::user()->id)->where('contact_id', $id)->delete();
+        }
+
+        return redirect('/people/unit/' . $id);
+    }
+
     public function deleteavatar()
     {
         $default = Config::get('image.default_avatar');

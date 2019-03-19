@@ -36,7 +36,11 @@
     </div>
     <div class="footer_bottom">
         <div class="footer_copyright">
-            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2018</div>
+            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019, rev=
+                @php
+                    echo exec('git log --pretty=format:"%h" --max-count=1');
+                @endphp
+            </div>
             <div class="footer_copyright_tx __margin-top_s">Исключительные авторские и&nbsp;смежные права принадлежат АО&nbsp;&laquo;Кодекс&raquo;.</div>
         </div>
     </div>

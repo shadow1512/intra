@@ -40,10 +40,9 @@ class UserController extends Controller
 
     public function unit($id)
     {
-        $user = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-            ->select('users.*', 'deps.name as depname', 'deps.id as depid')
-            ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-            ->findOrFail($id);
+        $user = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+            ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->where('users.id', $id)->first();
 
         $contacts   =   array();
 

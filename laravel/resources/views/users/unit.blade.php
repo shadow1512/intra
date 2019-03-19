@@ -10,7 +10,7 @@
         <div class="profile_info">
             <div class="profile_info_i">
                 <div class="profile_info_name">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</div>
-                <div class="profile_info_place __in">В офисе</div>
+                <!--<div class="profile_info_place __in">В офисе</div>-->
                 <div class="profile_info_position">{{ $user->work_title }}</div>
             </div>
             <div class="profile_info_i">

@@ -11,7 +11,7 @@
             <div class="profile_info_i">
                 <div class="profile_info_name">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</div>
                 <div class="profile_info_place __in">В офисе</div>
-                <div class="profile_info_position">{{ $user->position }}</div>
+                <div class="profile_info_position">{{ $user->work_title }}</div>
             </div>
             <div class="profile_info_i">
                 <div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>
@@ -26,7 +26,7 @@
                 <div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>
             </div>
             <div class="profile_info_i">
-                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>
+                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->work_title }}</span></p>
             </div><a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в контакты</a>
         </div>
     </div>

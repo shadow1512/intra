@@ -44,7 +44,7 @@
             @endif
         </div>
         <div class="profile_info_i">
-            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span>,<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a></p>
+            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span>@if(!is_null($dep)),<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a>@endif</p>
         </div>
         <div class="profile_info_i">
             <div class="profile_info_i_requests">

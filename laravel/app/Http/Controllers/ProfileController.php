@@ -41,7 +41,11 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', '=', Auth::user()->id)->first();
 
-        $dep    =   Dep::findOrFail($user->dep_id);
+        $dep    =   null;
+        if($user->dep_id)   {
+            $dep    =   Dep::findOrFail($user->dep_id);
+        }
+
         return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep]);
     }
 

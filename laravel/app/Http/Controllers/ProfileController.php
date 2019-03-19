@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\User;
+use App\Dep;
 use DB;
 use PDO;
 use Config;
@@ -36,11 +37,12 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
-        $user   =   User::select("users.*", "deps_peoples.work_title")
+        $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', '=', Auth::user()->id)->first();
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user]);
+        $dep    =   Dep::findOrFail($user->dep_id);
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep]);
     }
 
     public function edit()

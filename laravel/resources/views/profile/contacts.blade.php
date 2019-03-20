@@ -1,6 +1,6 @@
+@if (count($contacts))
 <div class="profile_contacts">
     <div class="h __h_m h_profile_contacts">Мои контакты</div>
-    @if (count($contacts))
     <ul class="profile_contacts_ul">
         @foreach($contacts as $item)
         <li class="profile_contacts_li @if (mb_substr($item->birthday,  5) ==  date("m-d")) __birthday @endif">
@@ -14,5 +14,5 @@
         </li>
         @endforeach
     </ul>
-    @endif
 </div>
+@endif

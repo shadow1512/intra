@@ -2,7 +2,9 @@
 
 @section('news')
 <div class="content_i_w">
-    @include('profile.contacts')
+    @if (Auth::check())
+        @include('profile.contacts')
+    @endif
     <div class="profile_i">
         <div class="profile_aside">
             <div class="profile_aside_pic @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif"><img src="{{ $user->avatar }}" alt="{{ $user->name }}"></div>
@@ -28,7 +30,7 @@
             <div class="profile_info_i">
                 <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->work_title }}</span>,<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a></p>
             </div>
-            @if(!in_array($user->id,    $contact_ids))
+            @if(!in_array($user->id,    $contact_ids) && (Auth::check()))
                 <a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в контакты</a>
             @endif
         </div>

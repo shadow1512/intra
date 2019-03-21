@@ -28,7 +28,7 @@
                 <div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>
             </div>
             <div class="profile_info_i">
-                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>
+                @if($user->position_desc)<p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>@endif
                 @if (count($crumbs))
                     <ul class="breadcrumbs_unit">
                         @foreach ($crumbs as $crumb)

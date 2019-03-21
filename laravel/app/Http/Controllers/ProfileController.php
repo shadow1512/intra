@@ -46,7 +46,9 @@ class ProfileController extends Controller
             $dep    =   Dep::findOrFail($user->dep_id);
         }
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep]);
+        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
+
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps]);
     }
 
     public function edit()

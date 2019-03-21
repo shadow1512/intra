@@ -1,4 +1,40 @@
-$("#input_mobile_phone").mask("(999) 999-9999");
+$("#input_mobile_phone").mask("+7(999) 999-9999");
+$("#input_city_phone").mask("8(999) 999-9999");
+
+$("#input_mobile_phone").on("blur", function() {
+    var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+
+    if( last.length == 5 ) {
+        var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+
+        var lastfour = last.substr(1,4);
+
+        var first = $(this).val().substr( 0, 9 );
+
+        $(this).val( first + move + '-' + lastfour );
+    }
+});
+
+$("#input_city_phone").on("blur", function() {
+    var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+
+    if( last.length == 5 ) {
+        var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+
+        var lastfour = last.substr(1,4);
+
+        var first = $(this).val().substr( 0, 9 );
+
+        $(this).val( first + move + '-' + lastfour );
+    }
+});
+
+$("#input_birthday").datetimepicker({
+    lang:'ru',
+    format:'d.m.Y',
+    timepicker:false,
+    //formatDate:'Y-m-d H:i',
+});
 
 $(document).on("click", "#delete_avatar", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

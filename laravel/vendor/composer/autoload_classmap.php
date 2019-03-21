@@ -436,6 +436,7 @@ return array(
     'CreatePermissionTable' => $baseDir . '/database/migrations/2016_11_30_135954_create_permission_table.php',
     'CreatePostsTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_posts_table.php',
     'CreateRolesTable' => $baseDir . '/database/migrations/2016_10_21_190000_create_roles_table.php',
+    'CreateSavedProfiles' => $baseDir . '/database/migrations/2019_03_22_011849_create_saved_profiles.php',
     'CreateSettingsTable' => $baseDir . '/database/migrations/2016_10_21_190000_create_settings_table.php',
     'CreateTemporalDepsTable' => $baseDir . '/database/migrations/2019_03_09_213115_create_temporal_deps_table.php',
     'CreateTermsTable' => $baseDir . '/database/migrations/2018_08_22_234033_create_terms_table.php',

@@ -105,7 +105,7 @@
                             </div>
                             <div class="field">
                                 <label for="input_birthday" class="lbl">Дата рождения:</label>
-                                <input id="input_room" name="input_birthday" type="text" value="@if ($user->birthday) {{ date("d.m.Y", strtotime($user->birthday)) }} @endif" class="it">
+                                <input id="input_birthday" name="input_birthday" type="text" value="@if ($user->birthday) {{ date("d.m.Y", strtotime($user->birthday)) }} @endif" class="it">
                             </div>
                             <div class="field">
                                 <label for="input_room" class="lbl">Комната:</label>

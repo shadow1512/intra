@@ -906,6 +906,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'CreatePermissionTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_30_135954_create_permission_table.php',
         'CreatePostsTable' => __DIR__ . '/../..' . '/database/migrations/2016_01_01_000000_create_posts_table.php',
         'CreateRolesTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_190000_create_roles_table.php',
+        'CreateSavedProfiles' => __DIR__ . '/../..' . '/database/migrations/2019_03_22_011849_create_saved_profiles.php',
         'CreateSettingsTable' => __DIR__ . '/../..' . '/database/migrations/2016_10_21_190000_create_settings_table.php',
         'CreateTemporalDepsTable' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_213115_create_temporal_deps_table.php',
         'CreateTermsTable' => __DIR__ . '/../..' . '/database/migrations/2018_08_22_234033_create_terms_table.php',

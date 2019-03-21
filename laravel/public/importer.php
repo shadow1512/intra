@@ -548,6 +548,7 @@ function cleanStructData($conn) {
     mysqli_query($conn, "TRUNCATE user_keys") or die(mysqli_error($conn));
     mysqli_query($conn, "TRUNCATE deps_temporal") or die(mysqli_error($conn));
     mysqli_query($conn, "TRUNCATE terms") or die(mysqli_error($conn));
+    mysqli_query($conn, "TRUNCATE profiles_saved") or die(mysqli_error($conn));
 
     mysqli_query($conn, "SET FOREIGN_KEY_CHECKS = 1");
 

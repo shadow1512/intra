@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\User;
 use App\Dep;
+use App\Profiles_Saved;
 use DB;
 use PDO;
 use Config;
@@ -64,29 +65,64 @@ class ProfileController extends Controller
         $address        = trim($request->input('input_address'));
         $room           = trim($request->input('input_room'));
         $phone          = trim($request->input('input_phone'));
+        $birthday       = trim($request->input('input_birthday'));
         $mobile_phone   = trim($request->input('input_mobile_phone'));
+        $city_phone     = trim($request->input('input_city_phone'));
+        $email          = trim($request->input('input_email'));
+        $email_secondary= trim($request->input('input_email_secondary'));
+        $work_title     = trim($request->input('input_work_title'));
+        $dep_id         = trim($request->input('input_dep'));
         $position_desc  = trim($request->input('input_position_desc'));
 
         $validator = Validator::make($request->all(), [
-            'input_fname'           => 'required|max:255',
-            'input_mname'           => 'max:255',
-            'input_lname'           => 'required|max:255',
-            'input_address'         => 'max:255',
-            'input_room'            => 'max:3',
-            'input_phone'           => 'max:24',
-            'input_mobile_phone'    => 'max:24',
-            'input_position_desc'   => 'max:255',
+            'position_desc'     =>  'nullable|string|max:255',
+            'lname'             =>  'string|max:255|required',
+            'fname'             =>  'string|max:255|required',
+            'mname'             =>  'nullable|string|max:255',
+            'phone'             =>  'nullable|string|max:3',
+            'room'              =>  'nullable|string|max:3',
+            'city_phone'        =>  'nullable|string|max:15',
+            'mobile_phone'      =>  'nullable|string|max:18',
+            'email'             =>  'nullable|string|email',
+            'email_secondary'   =>  'nullable|string|email',
+            'work_title'        =>  'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
             return response()->json(['error', $validator]);
         }
         else {
-            DB::table('users')->where("id", "=", Auth::user()->id)
-                ->update(['fname' => $fname, 'lname'    =>  $lname, 'mname' =>  $mname,
-                            'room'  =>  $room,  'address'   =>  $address,   'phone' =>  $phone,
-                            'mobile_phone'  =>  $mobile_phone,  'position_desc' =>  $position_desc,
-                            'updated_at' => date("Y-m-d H:i:s")]);
+
+            $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
+            if($ps) {
+                $ps->delete();
+            }
+            $ps =   new Profiles_Saved();
+
+            $ps->user_id    =   Auth::user()->id;
+            $ps->fname  =   $fname;
+            $ps->mname  =   $mname;
+            $ps->lname  =   $lname;
+            $ps->email  =   $email;
+            $ps->address=   $address;
+            $ps->email_secondary  =   $email_secondary;
+            $ps->phone  =   $phone;
+            $ps->city_phone  =   $city_phone;
+            $ps->mobile_phone  =   $mobile_phone;
+            $ps->room  =   $room;
+
+            $birthday_parts =   explode(".",    $birthday);
+            if(count($birthday_parts)   ==  3) {
+                $birthday   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+            }
+
+            $ps->birthday   =   $birthday;
+            $ps->dep_id     =   $dep_id;
+            $ps->work_title =   $work_title;
+            $ps->position_desc =   $position_desc;
+
+            $ps->save();
+
             return response()->json(['success']);
         }
 

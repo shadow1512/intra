@@ -90,8 +90,11 @@ class ProfileController extends Controller
 
     }
 
-    public function addcontact($id)
+    public function addcontact($id, $url    =   null)
     {
+        if(is_null($url)) {
+            $url    =   '/people/unit/' . $id;
+        }
         if (Auth::check()) {
             $user = DB::table('user_contacts')->where('user_id', Auth::user()->id)->where('contact_id', $id)->first();
             if (!$user) {
@@ -101,16 +104,19 @@ class ProfileController extends Controller
             }
         }
 
-        return redirect('/people/unit/' . $id);
+        return redirect($url);
     }
 
-    public function deletecontact($id)
+    public function deletecontact($id, $url    =   null)
     {
+        if(is_null($url)) {
+            $url    =   '/people/unit/' . $id;
+        }
         if (Auth::check()) {
             DB::table('user_contacts')->where('user_id', Auth::user()->id)->where('contact_id', $id)->delete();
         }
 
-        return redirect('/people/unit/' . $id);
+        return redirect($url);
     }
 
     public function deleteavatar()

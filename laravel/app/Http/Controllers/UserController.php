@@ -163,6 +163,21 @@ class UserController extends Controller
             }
         }
 
+        $contacts           =   array();
+        $search_contacts    =   array();
+        $contact_ids       =   array();
+
+        if(Auth::check()) {
+            $contacts = User::select("users.*", "deps_peoples.work_title")
+                ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
+
+            foreach($contacts as $contact) {
+                $contact_ids[]  =   $contact->id;
+            }
+        }
+
+
         $hide_search_form = Cookie::get('hide_directory_search');
 
         return view('users.search', [   "crumbs"                =>  $crumbs,
@@ -172,7 +187,10 @@ class UserController extends Controller
                                         "rootdeps"              =>  $rootdeps,
                                         "deps"                  =>  $deps,
                                         "counts"                =>  $counts,
-                                        "currentDep"            =>  $currentDep]);
+                                        "currentDep"            =>  $currentDep,
+                                        "contacts"              =>  $contacts,
+                                        "search_contacts"       =>  $search_contacts,
+                                        "contact_ids"           =>  $contact_ids]);
     }
     /**
      * Show the form for creating a new resource.

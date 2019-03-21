@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-md-6"> {{ $item->name }} (<span style="color:red">{{ $item->numphotos }}</span>)</div>
                 <div class="col-md-3"><a href="{{ route('moderate.foto.edit', ["id" => $item->id]) }}"><span class="glyphicon glyphicon-edit"></span></a></div>
-                <div class="col-md-3"><form method="POST" action="{{ route('moderate.foto.delete', ["id" => $item->id]) }}">{{ method_field('DELETE') }}{{ csrf_field() }}<a href="" class="deleteRecord"><span class="glyphicon glyphicon-remove-sign"></span></a></form></div>
+                <div class="col-md-3"><form method="POST" action="{{ route('moderate.foto.deleteimage', ["id" => $item->id]) }}">{{ method_field('DELETE') }}{{ csrf_field() }}<a href="" class="deleteRecord"><span class="glyphicon glyphicon-remove-sign"></span></a></form></div>
             </div>
                 @endforeach
             @endif

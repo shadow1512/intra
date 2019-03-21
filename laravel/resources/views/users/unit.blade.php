@@ -30,7 +30,7 @@
             <div class="profile_info_i">
                 <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>
                 @if (count($crumbs))
-                    <ul class="breadcrumbs">
+                    <ul class="breadcrumbs unit">
                         @foreach ($crumbs as $crumb)
                             <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
                         @endforeach

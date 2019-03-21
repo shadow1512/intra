@@ -94,6 +94,7 @@ class UserController extends Controller
                 ->limit(200)->get();
         }
         else {
+            $currentDep     = Dep::wherenull("parent_id")->first();
             $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')

@@ -92,7 +92,8 @@ class ProfileController extends Controller
 
     public function addcontact($id, $url    =   null)
     {
-        if(is_null($url)) {
+        $url    =   Request::input('url');
+        if(empty($url)) {
             $url    =   '/people/unit/' . $id;
         }
         if (Auth::check()) {
@@ -109,7 +110,8 @@ class ProfileController extends Controller
 
     public function deletecontact($id, $url    =   null)
     {
-        if(is_null($url)) {
+        $url    =   Request::input('url');
+        if(empty($url)) {
             $url    =   '/people/unit/' . $id;
         }
         if (Auth::check()) {

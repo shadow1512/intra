@@ -83,7 +83,7 @@
                 <div class="profile_form_cnt">
                     <div class="profile_form_photo">
                         <div class="profile_form_photo_h">Фотография:</div>
-                        <div class="profile_aside_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->name}}" title="{{Auth::user()->name}}" id="img_avatar"></div>
+                        <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}" id="img_avatar"></div>
                         <input type="file" id="input_avatar" name="input_avatar" class="profile_form_photo_it">
                         <input type="hidden" name="avatar_url" id="avatar_url" value="{{route('profile.updateavatar')}}">
                         <label for="input_avatar" class="profile_form_photo_label">Загрузить новую фотографию</label>
@@ -93,38 +93,66 @@
                         <div class="profile_form_info_left">
                             <div class="field">
                                 <label for="input_lname" class="lbl">Фамилия:</label>
-                                <input id="input_lname" name="input_lname" type="text" value="{{Auth::user()->lname}}" class="it">
+                                <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it">
                             </div>
                             <div class="field">
                                 <label for="input_fname" class="lbl">Имя:</label>
-                                <input id="input_fname" name="input_fname" type="text" value="{{Auth::user()->fname}}" class="it">
+                                <input id="input_fname" name="input_fname" type="text" value="{{$user->fname}}" class="it">
                             </div>
                             <div class="field">
                                 <label for="input_mname" class="lbl">Отчество:</label>
-                                <input id="input_mname" name="input_mname" type="text" value="{{Auth::user()->mname}}" class="it">
+                                <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_birthday" class="lbl">Дата рождения:</label>
+                                <input id="input_room" name="input_birthday" type="text" value="@if ({{$user->birthday}}) {{ date("d.m.Y", strtotime($user->birthday)) }} @endif" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_room" class="lbl">Комната:</label>
+                                <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_dep" class="lbl">Подразделение:</label>
+                                <select id="input_dep" class="form-control" name="input_dep">
+                                    @foreach ($deps as $dep)
+                                        <option value="{{$dep->id}}" @if ($user->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="profile_form_info_right">
                             <div class="field">
-                                <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
-                                <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{Auth::user()->mobile_phone}}" class="it">
-                            </div>
-                            <div class="field">
                                 <label for="input_phone" class="lbl">Местный телефон:</label>
-                                <input id="input_phone" name="input_phone" type="text" value="{{Auth::user()->phone}}" class="it">
+                                <input id="input_phone" name="input_phone" type="text" value="{{$user->phone}}" class="it">
                             </div>
                             <div class="field">
-                                <label for="input_room" class="lbl">Комната:</label>
-                                <input id="input_room" name="input_room" type="text" value="{{Auth::user()->room}}" class="it">
+                                <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
+                                <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_room" class="lbl">Городской телефон:</label>
+                                <input id="input_room" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_email" class="lbl">Email:</label>
+                                <input id="input_email" name="input_email" type="text" value="{{$user->email}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_email_secondary" class="lbl">Дополнительный email:</label>
+                                <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it">
+                            </div>
+                            <div class="field">
+                                <label for="input_work_title" class="lbl">Должность:</label>
+                                <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it">
                             </div>
                         </div>
                         <div class="field __no-margin">
                             <label for="input_address" class="lbl">Адрес:</label>
-                            <input id="input_address" name="input_address" type="text" value="{{Auth::user()->address}}" class="it">
+                            <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it">
                         </div>
                         <div class="field">
                             <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                            <textarea id="input_position_desc" name="input_position_desc" class="it">{{Auth::user()->position_desc}}</textarea>
+                            <textarea id="input_position_desc" name="input_position_desc" class="it">{{$user->position_desc}}</textarea>
                         </div>
                     </div>
                 </div>

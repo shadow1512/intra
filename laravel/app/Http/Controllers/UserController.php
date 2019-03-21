@@ -44,7 +44,7 @@ class UserController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', $id)->first();
 
-        $dep    =   Dep::findOrFail($user->dep_id);
+        $crumbs    =   $this->getCrumbs($user->dep_id);
 
         $contacts       =   array();
         $contact_ids    =   array();
@@ -58,7 +58,7 @@ class UserController extends Controller
         }
 
 
-        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'dep'   =>  $dep]);
+        return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
     }
 
     protected function getCrumbs($id) {
@@ -66,7 +66,7 @@ class UserController extends Controller
         $currentDep     = Dep::findOrFail($id);
         $parent = $currentDep->parent_id;
         $length = mb_strlen($parent, "UTF-8");
-        if($length > 2) {
+        while($length > 2) {
             $parent = mb_substr($parent, 0, $length - 2);
             $dep = Dep::where('parent_id', '=', $parent)->firstOrFail();
             $crumbs[] = $dep;

@@ -28,7 +28,14 @@
                 <div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>
             </div>
             <div class="profile_info_i">
-                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->work_title }}</span>,<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a></p>
+                <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{ $user->position_desc }}</span></p>
+                @if (count($crumbs))
+                    <ul class="breadcrumbs">
+                        @foreach ($crumbs as $crumb)
+                            <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
             @if(!in_array($user->id,    $contact_ids) && (Auth::check()))
                 <a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в контакты</a>

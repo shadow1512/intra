@@ -96,7 +96,7 @@ class UserController extends Controller
         else {
             $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
-                ->leftJoin('deps', 'deps.dep_id', '=', 'deps.id')
+                ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->orderBy('deps_peoples.chef', 'desc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.name', 'asc')
                 ->limit(100)->get();
         }

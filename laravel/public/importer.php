@@ -181,8 +181,12 @@ if($tok) {
                                         $pruz   =  1;
                                     }
                                     //Хак для Насти Рябининой
-                                    if($sid ==  "S-1-5-21-3953116633-1604536341-3751884121-10009") {
+                                    if($row['sid'] ==  "S-1-5-21-3953116633-1604536341-3751884121-10009") {
                                         $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
+                                    }
+                                    //Хак для Алены Кувшиновой
+                                    if($row['sid'] ==  "S-1-5-21-3953116633-1604536341-3751884121-11693") {
+                                        $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-11693";
                                     }
                                     $query  =   "UPDATE user_keys SET `parent_key`='" . $obj->Parent . "',  `sid`='" . $obj_authdata->UserSID . "',  `ad_deleted`=$pruz, `user_login`='" . addslashes($obj_authdata->Username) . "' WHERE user_id=" . $row["user_id"];
                                     $updres =   mysqli_query($conn, $query);
@@ -287,6 +291,11 @@ if($tok) {
                                 if($obj->UID    ==  "4027a2c2-c369-4bea-8fe5-4a9664c612b1") {
                                     $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-10009";
                                 }
+                                //Хак для Алены Кувшиновой
+                                if($obj->UID    ==  "2c0d37c3-0de2-4391-ab90-e365e52a705c") {
+                                    $obj_authdata->UserSID  =   "S-1-5-21-3953116633-1604536341-3751884121-11693";
+                                }
+
 
                                 $query  =   "INSERT INTO user_keys (`key`, `user_id`, `parent_key`,  `sid`,  `ad_deleted`, `user_login`) VALUES ('" . $obj->UID . "', $user_id, '" . $obj->Parent . "', '"  .   $obj_authdata->UserSID  .   "', "   .   $pruz .   ",  '"  .   addslashes($obj_authdata->Username) .   "')";
                                 $insres =mysqli_query($conn, $query);

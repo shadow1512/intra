@@ -1,7 +1,7 @@
 <nav class="content_i menu">
     <div class="main_top_phones">
         <div class="main_top_phones_people">
-            <div class="main_top_phones_h">Телефонный справочник</div>
+            <a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_h">Телефонный справочник</a>
             @if (Auth::check())
                 @if (count($contacts))
             <ul class="main_top_phones_lst">

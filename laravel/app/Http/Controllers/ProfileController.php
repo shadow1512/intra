@@ -43,14 +43,15 @@ class ProfileController extends Controller
             ->where('users.id', '=', Auth::user()->id)->first();
 
         $dep    =   $ps     =   null;
-        if($user->dep_id)   {
-            $dep    =   Dep::findOrFail($user->dep_id);
-        }
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
         if($ps_record) {
             $ps=    $ps_record;
             $user   =   $ps;
+        }
+
+        if($user->dep_id)   {
+            $dep    =   Dep::findOrFail($user->dep_id);
         }
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();

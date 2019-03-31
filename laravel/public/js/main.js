@@ -196,7 +196,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                 });
             }
             if (msg["result"] == "error") {
-                $("div.__js-modal-change-order").find("div.__form").html("<div class=\"modal_h\"><a href=\"#\" title=\"Закрыть\" class=\"modal-close\"></a></div><h3>" +   msg["text"] +   "</h3>");
+                $("div.__js-modal-change-order").find("div.__form").html("<div class=\"modal_h\"><a href=\"#\" title=\"Закрыть\" class=\"modal-close\"></a></div><div class=\"profile_form_h\"><div class=\"h light_h __h_m\">Вы не можете забронировать переговорную</div><div class=\"h light_h __h_m\">" +   msg["text"] +   "</div>");
             }
         }
     });

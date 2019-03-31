@@ -71,5 +71,8 @@
 </form>
 <div class="error" style="display:none;"></div>
 @else
-  <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
+  <div class="profile_form_h">
+    <div class="h light_h __h_m">Вы не можете забронировать переговорную</div>
+    <div class="h light_h __h_m">Для бронирования переговорных вы должны быть авторизованы на портале</div>
+  </div>
 @endif

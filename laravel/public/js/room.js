@@ -4,8 +4,8 @@ $("#input_time_start").datetimepicker({
     timepicker:true,
     format:'H:i',
     step: 30,
-    minHour: 9,
-    maxHour: 18,
+    minTime: '09:00',
+    maxTime: '18:30',
     maxMinutes: 30,
     onShow:function( ct ){
         this.setOptions({
@@ -20,10 +20,8 @@ $("#input_time_end").datetimepicker({
     timepicker:true,
     format:'H:i',
     step: 30,
-    minHour: 9,
-    minMinutes: 30,
-    maxHour: 19,
-    maxMinutes: 00,
+    minTime: '09:30',
+    maxTime: '19:00',
     onShow:function( ct ){
         this.setOptions({
             minTime:$('#input_time_start').val()?$('#input_time_start').val():false

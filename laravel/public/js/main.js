@@ -175,6 +175,8 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     timepicker:true,
                     format:'H:i',
                     step: 30,
+                    minTime: '09:00',
+                    maxTime: '18:30',
                     onShow:function( ct ){
                         this.setOptions({
                             maxTime:$('#input_time_end_change').val()?$('#input_time_end_change').val():false
@@ -188,6 +190,8 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     timepicker:true,
                     format:'H:i',
                     step: 30,
+                    minTime: '09:30',
+                    maxTime: '19:00',
                     onShow:function( ct ){
                         this.setOptions({
                             minTime:$('#input_time_start_change').val()?$('#input_time_start_change').val():false

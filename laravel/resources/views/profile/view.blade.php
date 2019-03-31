@@ -93,15 +93,15 @@
                         <div class="profile_form_info_left">
                             <div class="field">
                                 <label for="input_lname" class="lbl">Фамилия:</label>
-                                <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it">
+                                <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it"  maxlength="255">
                             </div>
                             <div class="field">
                                 <label for="input_fname" class="lbl">Имя:</label>
-                                <input id="input_fname" name="input_fname" type="text" value="{{$user->fname}}" class="it">
+                                <input id="input_fname" name="input_fname" type="text" value="{{$user->fname}}" class="it"  maxlength="255">
                             </div>
                             <div class="field">
                                 <label for="input_mname" class="lbl">Отчество:</label>
-                                <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it">
+                                <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it" maxlength="255">
                             </div>
                             <div class="field">
                                 <label for="input_birthday" class="lbl">Дата рождения:</label>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="field">
                                 <label for="input_room" class="lbl">Комната:</label>
-                                <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it">
+                                <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="3">
                             </div>
                             <div class="field">
                                 <label for="input_dep" class="lbl">Подразделение:</label>
@@ -127,32 +127,32 @@
                             </div>
                             <div class="field">
                                 <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
-                                <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it">
+                                <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it" maxlength="18">
                             </div>
                             <div class="field">
                                 <label for="input_room" class="lbl">Городской телефон:</label>
-                                <input id="input_room" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it">
+                                <input id="input_room" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it" maxlength="15">
                             </div>
                             <div class="field">
                                 <label for="input_email" class="lbl">Email:</label>
-                                <input id="input_email" name="input_email" type="text" value="{{$user->email}}" class="it">
+                                <input id="input_email" name="input_email" type="text" value="{{$user->email}}" class="it" maxlength="255">
                             </div>
                             <div class="field">
                                 <label for="input_email_secondary" class="lbl">Дополнительный email:</label>
-                                <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it">
+                                <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it" maxlength="255">
                             </div>
                             <div class="field">
                                 <label for="input_work_title" class="lbl">Должность:</label>
-                                <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it">
+                                <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
                             </div>
                         </div>
                         <div class="field __no-margin">
                             <label for="input_address" class="lbl">Адрес:</label>
-                            <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it">
+                            <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it" maxlength="255">
                         </div>
                         <div class="field">
                             <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                            <textarea id="input_position_desc" name="input_position_desc" class="it">{{$user->position_desc}}</textarea>
+                            <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$user->position_desc}}</textarea>
                         </div>
                     </div>
                 </div>

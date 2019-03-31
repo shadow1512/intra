@@ -125,14 +125,6 @@ $(document).on("submit", "#profile_update_form", function(ev) {
     var form = $(this);
     var flag = true;
 
-    var fname = lname = "";
-    fname   = $("#input_fname").val().trim();
-    lname   = $("#input_lname").val().trim();
-
-    if(!fname || !lname) {
-        flag = false;
-        alert("Имя и фамилия являются обязательными полями");
-    }
     if(flag) {
         $.ajax({
             type: "POST",
@@ -146,7 +138,11 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     location.reload(true);
                 }
                 if(msg[0] == "error") {
-                    alert("Во время сохранения профиля произошли ошибки");
+                    var errors  =   msg[1];
+                    for(var key in errors) {
+                        $(key).css("border 1px #ff0000");
+                        alert(errors[k]);
+                    }
                 }
             }
         });

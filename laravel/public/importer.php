@@ -568,7 +568,7 @@ function createTest($conn) {
 
     $insres = mysqli_query($conn,
         "INSERT INTO users (`name`, `role_id`, `avatar`, `fname`, `lname`, `created_at`, `updated_at`) 
-                                    VALUES ('" . $name . "', 2, '"  .   $avatar .   "', '" . $fname . "', '" .  $lname . "', '" . $date . "', '" . $date . "')");
+                                    VALUES ('" . $name . "', 2, '"  .   $pic .   "', '" . $fname . "', '" .  $lname . "', '" . $date . "', '" . $date . "')");
 
     if(!$insres) {
         printf("Error: %s\n", mysqli_error($conn));

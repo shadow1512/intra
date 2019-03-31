@@ -12,6 +12,9 @@
             <div class="profile_info_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</div>
         <!--<div class="profile_info_place __in">В офисе</div>-->
             <div class="profile_info_position">{{$user->work_title}}</div>
+            @if(!is_null($ps))
+                <div class="profile_info_position"><span style="color:red">Ваши последние изменения в профиле еще не были одобрены помощником директора управления</span></div>
+            @endif
         </div>
         <div class="profile_info_i">
             <div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>
@@ -77,6 +80,9 @@
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             <div class="profile_form_h">
                 <div class="h light_h __h_m">Настройки профиля</div>
+                @if(!is_null($ps))
+                    <div class="profile_info_position"><span style="color:red">Ваши последние изменения в профиле еще не были одобрены помощником директора управления</span></div>
+                @endif
             </div>
             <form class="profile_form" id="profile_update_form" action="{{route('profile.update')}}">
                 {{ csrf_field() }}

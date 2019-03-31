@@ -42,14 +42,20 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', '=', Auth::user()->id)->first();
 
-        $dep    =   null;
+        $dep    =   $ps     =   null;
         if($user->dep_id)   {
             $dep    =   Dep::findOrFail($user->dep_id);
         }
 
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
+        if($ps_record) {
+            $ps=    $ps_record;
+            $user   =   $ps;
+        }
+
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps]);
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps]);
     }
 
     public function edit()

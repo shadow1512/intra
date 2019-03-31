@@ -140,7 +140,8 @@ class ProfileController extends Controller
             $ps->phone  =   $phone;
             $ps->city_phone  =   $city_phone;
             $ps->mobile_phone  =   $mobile_phone;
-            $ps->room  =   $room;
+            $ps->room       =   $room;
+            $ps->avatar     =   Auth::user()->avatar;
 
             $birthday_parts =   explode(".",    $birthday);
             if(count($birthday_parts)   ==  3) {

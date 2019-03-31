@@ -556,6 +556,7 @@ function createTest($conn) {
     $work   =   "Тестовая должность";
     $sid    =   "S-1-5-21-3953116633-1604536341-3751884121-7154";
     $login  =   "WORK\\\\tempuser1";
+    $pic    =   "/images/faces/default.svg";
     $name   =   $lname  .   " " .   $fname  .   ", "    .   $work;
     $dep_id =   0;
     $dep    =   mysqli_query($conn, "SELECT id FROM deps WHERE parent_id is NOT NULL ORDER BY RAND() LIMIT 1");
@@ -566,8 +567,8 @@ function createTest($conn) {
 
 
     $insres = mysqli_query($conn,
-        "INSERT INTO users (`name`, `role_id`, `fname`, `lname`, `created_at`, `updated_at`) 
-                                    VALUES ('" . $name . "', 2, '" . $fname . "', '" .  $lname . "', '" . $date . "', '" . $date . "')");
+        "INSERT INTO users (`name`, `role_id`, `avatar`, `fname`, `lname`, `created_at`, `updated_at`) 
+                                    VALUES ('" . $name . "', 2, '"  .   $avatar .   "', '" . $fname . "', '" .  $lname . "', '" . $date . "', '" . $date . "')");
 
     if(!$insres) {
         printf("Error: %s\n", mysqli_error($conn));

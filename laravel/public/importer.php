@@ -58,6 +58,10 @@ if(isset($argv[1]) && ($argv[1] == 'setadmin')) {
     }
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'createtest')) {
+    addTest($conn);
+    exit();
+}
 
 $fp_err =   null;
 //$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -543,6 +547,54 @@ function createModerator($conn, $email, $level) {
     }
 
 
+}
+
+function createTest($conn) {
+    $date   =   date("Y-m-d H:i:s");
+    $lname  =   "Тестовый";
+    $fname  =   "Пользователь";
+    $work   =   "Тестовая должность";
+    $sid    =   "";
+    $login  =   "WORK\\\\tempuser1";
+    $name   =   $lname  .   " " .   $fname  .   ", "    .   $work;
+    $dep_id =   0;
+    $dep    =   mysqli_query($conn, "SELECT id FROM deps WHERE parent_id is NOT NULL ORDER BY RAND() LIMIT 1");
+    $row_dep    =   $dep->fetch_array(MYSQLI_ASSOC);
+    if($row_dep) {
+        $dep_id =   $row_dep["id"];
+    }
+
+
+    $insres = mysqli_query($conn,
+        "INSERT INTO users (`name`, `role_id`, `fname`, `lname`, `created_at`, `updated_at`) 
+                                    VALUES ('" . $name . "', 2, '" . $fname . "', '" .  $lname . "', '" . $date . "', '" . $date . "')");
+
+    if(!$insres) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+
+    $user_id = mysqli_insert_id($conn);
+
+    $insres = mysqli_query($conn,
+        "INSERT INTO user_keys (`user_id`, `sid`, `user_login`) 
+                                    VALUES ($user_id,'" . $sid . "', '" .  $login . "')");
+
+    if(!$insres) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+
+    $insres = mysqli_query($conn,
+        "INSERT INTO deps_peoples (`people_id`, `dep_id`, `work_title`,  `created_at`, `updated_at`) 
+                                    VALUES ($user_id, $dep_id, '" .  $work . "', '" .   $date   .   "', '"  .   $date   .   "')");
+
+    if(!$insres) {
+        printf("Error: %s\n", mysqli_error($conn));
+        exit();
+    }
+
+    print("Тестовый пользователь создан\r\n");
 }
 
 function cleanStructData($conn) {

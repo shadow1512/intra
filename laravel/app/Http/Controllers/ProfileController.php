@@ -74,6 +74,31 @@ class ProfileController extends Controller
         $dep_id         = trim($request->input('input_dep'));
         $position_desc  = trim($request->input('input_position_desc'));
 
+        $messages   =   array(  "input_lname.string"    =>  "Фамилия должна быть строкой символов",
+                                "input_lname.max"       =>  "Фамилия не может быть длиннее, чем 255 символов",
+                                "input_lname.required"  =>  "Фамилия - обязательное поле",
+                                "input_fname.string"    =>  "Имя должно быть строкой символов",
+                                "input_fname.max"       =>  "Имя не может быть длиннее, чем 255 символов",
+                                "input_fname.required"  =>  "Имя - обязательное поле",
+                                "input_position_desc.string"    =>  "Описание деятельности должно быть строкой символов",
+                                "input_position_desc.max"       =>  "Описание деятельности должно быть не более 255 символов",
+                                "input_mname.string"    =>  "Отчество должно быть строкой символов",
+                                "input_mname.max"       =>  "Отчество не может быть длиннее, чем 255 символов",
+                                "input_phone.string"    =>  "Местный телефон должен быть строкой символов",
+                                "input_phone.max"       =>  "Местный телефон не может быть длиннее, чем 3 символа",
+                                "input_city_phone.string"    =>  "Городской телефон должен быть строкой символов",
+                                "input_city_phone.max"       =>  "Городской телефон не может быть длиннее, чем 15 символов",
+                                "input_mobile_phone.string"    =>  "Мобильный телефон должен быть строкой символов",
+                                "input_mobile_phone.max"       =>  "Мобильный телефон не может быть длиннее, чем 18 символов",
+                                "input_room.string"    =>  "Номер комнаты должен быть строкой символов",
+                                "input_room.max"       =>  "Номер комнаты не может быть длиннее, чем 3 символа",
+                                "input_email.string"    =>  "Email должен быть строкой символов",
+                                "input_email.email"       =>  "Некорректный формат email",
+                                "input_email_secondary.string"    =>  "Дополнительный Email должен быть строкой символов",
+                                "input_email_secondary.email"     =>  "Некорректный формат дополнительного email",
+                                "input_work_title.string"    =>  "Должность должна быть строкой символов",
+                                "input_work_title.max"       =>  "Должность должна быть не более 255 символов"
+                                );
         $validator = Validator::make($request->all(), [
             'input_position_desc'     =>  'nullable|string|max:255',
             'input_lname'             =>  'string|max:255|required',
@@ -86,7 +111,7 @@ class ProfileController extends Controller
             'input_email'             =>  'nullable|string|email',
             'input_email_secondary'   =>  'nullable|string|email',
             'input_work_title'        =>  'nullable|string|max:255',
-        ]);
+        ],  $messages);
 
         if ($validator->fails()) {
             return response()->json(['error', $validator->errors()]);

@@ -123,15 +123,15 @@
                         <div class="profile_form_info_right">
                             <div class="field">
                                 <label for="input_phone" class="lbl">Местный телефон:</label>
-                                <input id="input_phone" name="input_phone" type="text" value="{{$user->phone}}" class="it">
+                                <input id="input_phone" name="input_phone" type="text" value="{{$user->phone}}" class="it" maxlength="3">
                             </div>
                             <div class="field">
                                 <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
                                 <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it" maxlength="18">
                             </div>
                             <div class="field">
-                                <label for="input_room" class="lbl">Городской телефон:</label>
-                                <input id="input_room" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it" maxlength="15">
+                                <label for="input_city_phone" class="lbl">Городской телефон:</label>
+                                <input id="input_city_phone" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it" maxlength="15">
                             </div>
                             <div class="field">
                                 <label for="input_email" class="lbl">Email:</label>

@@ -63,14 +63,16 @@ class UserController extends Controller
 
     protected function getCrumbs($id) {
         $crumbs = array();
-        $currentDep     = Dep::findOrFail($id);
-        $parent = $currentDep->parent_id;
-        $length = mb_strlen($parent, "UTF-8");
-        while($length > 2) {
-            $parent = mb_substr($parent, 0, $length - 2);
-            $dep = Dep::where('parent_id', '=', $parent)->firstOrFail();
-            $crumbs[] = $dep;
-            $length = $length - 2;
+        $currentDep     = Dep::find($id);
+        if($currentDep) {
+            $parent = $currentDep->parent_id;
+            $length = mb_strlen($parent, "UTF-8");
+            while ($length > 2) {
+                $parent = mb_substr($parent, 0, $length - 2);
+                $dep = Dep::where('parent_id', '=', $parent)->firstOrFail();
+                $crumbs[] = $dep;
+                $length = $length - 2;
+            }
         }
         return $crumbs;
     }

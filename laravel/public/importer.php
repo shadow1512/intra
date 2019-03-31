@@ -59,7 +59,7 @@ if(isset($argv[1]) && ($argv[1] == 'setadmin')) {
     exit();
 }
 if(isset($argv[1]) && ($argv[1] == 'createtest')) {
-    addTest($conn);
+    createTest($conn);
     exit();
 }
 

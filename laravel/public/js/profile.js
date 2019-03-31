@@ -142,6 +142,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     var errors  =   msg[1];
                     for(var key in errors) {
                         $("#"+key).css("border 1px solid #ff0000");
+                        alert("#"+key);
                         alert(errors[key]);
                     }
                 }

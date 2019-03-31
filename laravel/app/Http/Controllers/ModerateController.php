@@ -69,11 +69,11 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
-            'fulltext'      =>  'string|max:10000',
-            'importancy'    =>  'integer',
+            'fulltext'      =>  'nullable|string|max:10000',
+            'importancy'    =>  'nullable|integer',
         ]);
         if ($validator->fails()) {
-            return redirect()->route('moderate.news.edit')
+            return redirect()->route('moderate.news.create')
                 ->withErrors($validator)
                 ->withInput();
         }

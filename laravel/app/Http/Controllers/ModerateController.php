@@ -41,7 +41,7 @@ class ModerateController extends Controller
     public function index()
     {
         //новости
-        $news = News::orderBy('importancy', 'desc')->limit(5)->get();
+        $news = News::orderBy('importancy', 'desc')->limit(50)->get();
         return view('moderate.news.list', ['news'    =>  $news]);
     }
 

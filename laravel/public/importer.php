@@ -554,7 +554,7 @@ function createTest($conn) {
     $lname  =   "Тестовый";
     $fname  =   "Пользователь";
     $work   =   "Тестовая должность";
-    $sid    =   "";
+    $sid    =   "S-1-5-21-3953116633-1604536341-3751884121-7154";
     $login  =   "WORK\\\\tempuser1";
     $name   =   $lname  .   " " .   $fname  .   ", "    .   $work;
     $dep_id =   0;

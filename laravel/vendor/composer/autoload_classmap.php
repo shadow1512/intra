@@ -859,6 +859,7 @@ return array(
     'EditDepsPeoplesWorktitleNullable' => $baseDir . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
     'EditDeptPeopleChef' => $baseDir . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',
     'EditGalleryNullablePublishedAt' => $baseDir . '/database/migrations/2018_06_15_012303_edit_gallery_nullable_published_at.php',
+    'EditNewsDefaultImportancy' => $baseDir . '/database/migrations/2019_04_01_014839_edit_news_default_importancy.php',
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
     'EditRoomsChangeAvailable' => $baseDir . '/database/migrations/2018_06_13_175300_edit_rooms_change_available.php',
     'EditTemporalDepsTable' => $baseDir . '/database/migrations/2019_03_09_213849_edit_temporal_deps_table.php',

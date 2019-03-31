@@ -1339,6 +1339,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditTermsTableAddDefaultBaseterm' => __DIR__ . '/../..' . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
         'EditTermsTableAddPartial' => __DIR__ . '/../..' . '/database/migrations/2019_03_19_010218_edit_terms_table_add_partial.php',
         'EditUserKeysKeyNullable' => __DIR__ . '/../..' . '/database/migrations/2019_03_31_211354_edit_user_keys_key_nullable.php',
+        'EditUserKeysParentKeyNullable' => __DIR__ . '/../..' . '/database/migrations/2019_03_31_211747_edit_user_keys_parent_key__nullable.php',
         'EditUsersAddAddressDescription' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
         'EditUsersAddCityPhone' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
         'EditUsersAddEmailSecondary' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',

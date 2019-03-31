@@ -62,6 +62,10 @@ if(isset($argv[1]) && ($argv[1] == 'createtest')) {
     createTest($conn);
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'deletetest')) {
+    deleteTest($conn);
+    exit();
+}
 
 $fp_err =   null;
 //$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -596,6 +600,25 @@ function createTest($conn) {
     }
 
     print("Тестовый пользователь создан\r\n");
+}
+
+function deleteTest($conn) {
+    $sid    =   "S-1-5-21-3953116633-1604536341-3751884121-7154";
+    $user       =   mysqli_query($conn, "SELECT user_id FROM user_keys WHERE sid='$sid' LIMIT 1");
+    if($user    &&  $user->num_rows >   0) {
+        $row_user    =   $user->fetch_array(MYSQLI_ASSOC);
+        $user_id    =   $row_user["user_id"];
+
+        mysqli_query($conn, "DELETE FROM deps_peoples WHERE people_id=$user_id");
+        mysqli_query($conn, "DELETE FROM users WHERE id=$user_id");
+        mysqli_query($conn, "DELETE FROM user_contacts WHERE user_id=$user_id OR contact_id=$user_id");
+        mysqli_query($conn, "DELETE FROM user_keys WHERE user_id=$user_id");
+        mysqli_query($conn, "DELETE FROM terms WHERE record=$user_id AND section='users'");
+        mysqli_query($conn, "DELETE FROM profiles_saved WHERE user_id=$user_id");
+        mysqli_query($conn, "DELETE FROM room_bookings WHERE user_id=$user_id");
+    }
+
+    print("Тестовый пользователь удален\r\n");
 }
 
 function cleanStructData($conn) {

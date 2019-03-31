@@ -124,6 +124,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
     var url = $(this).attr("action");
     var form = $(this);
     var flag = true;
+    $("input, textarea").css("border 1px solid #d9d9d9");
 
     if(flag) {
         $.ajax({
@@ -140,7 +141,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                 if(msg[0] == "error") {
                     var errors  =   msg[1];
                     for(var key in errors) {
-                        $(key).css("border 1px #ff0000");
+                        $(key).css("border 1px solid #ff0000");
                         alert(errors[key]);
                     }
                 }

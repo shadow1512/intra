@@ -75,21 +75,21 @@ class ProfileController extends Controller
         $position_desc  = trim($request->input('input_position_desc'));
 
         $validator = Validator::make($request->all(), [
-            'position_desc'     =>  'nullable|string|max:255',
-            'lname'             =>  'string|max:255|required',
-            'fname'             =>  'string|max:255|required',
-            'mname'             =>  'nullable|string|max:255',
-            'phone'             =>  'nullable|string|max:3',
-            'room'              =>  'nullable|string|max:3',
-            'city_phone'        =>  'nullable|string|max:15',
-            'mobile_phone'      =>  'nullable|string|max:18',
-            'email'             =>  'nullable|string|email',
-            'email_secondary'   =>  'nullable|string|email',
-            'work_title'        =>  'nullable|string|max:255',
+            'input_position_desc'     =>  'nullable|string|max:255',
+            'input_lname'             =>  'string|max:255|required',
+            'input_fname'             =>  'string|max:255|required',
+            'input_mname'             =>  'nullable|string|max:255',
+            'input_phone'             =>  'nullable|string|max:3',
+            'input_room'              =>  'nullable|string|max:3',
+            'input_city_phone'        =>  'nullable|string|max:15',
+            'input_mobile_phone'      =>  'nullable|string|max:18',
+            'input_email'             =>  'nullable|string|email',
+            'input_email_secondary'   =>  'nullable|string|email',
+            'input_work_title'        =>  'nullable|string|max:255',
         ]);
 
         if ($validator->fails()) {
-            return response()->json(['error', $validator]);
+            return response()->json(['error', $validator->errors()]);
         }
         else {
 

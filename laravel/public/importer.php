@@ -714,12 +714,10 @@ function getDinnerBills($conn) {
                                                         }
                                                     }
                                                     else {
-                                                        var_dump($names);
                                                         print("Не найдена связь для сотрудника "  .   $user->textContent   .   ". http://intra.lan.kodeks.net/cooking/"  .   $dep->getAttribute('href')   .   "\r\n");
                                                     }
                                                 }
                                                 else {
-                                                    var_dump($names);
                                                     print("Не выделены имя и фамилия для сотрудника:  "  .   $user->textContent   .   ". http://intra.lan.kodeks.net/cooking/"  .   $dep->getAttribute('href')   .   "\r\n");
                                                 }
                                             }

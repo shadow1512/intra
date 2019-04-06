@@ -626,6 +626,7 @@ function deleteTest($conn) {
 }
 
 function getDinnerBills($conn) {
+    var_dump(preg_replace("/[^А-я]/ius",    "", "Алёна"));
     $total_inserted =   0;
 
     $ch = curl_init('http://intra.lan.kodeks.net/cooking/');
@@ -697,8 +698,8 @@ function getDinnerBills($conn) {
 
                                                         if(!is_null($linkRowUser)) {
                                                             $summ   =   (int)$users_and_bills->item($i+1)->textContent;
-                                                            $insres = mysqli_query($conn,
-                                                                "INSERT INTO users_dinner_bills (`user_id`, `date_created`, `summ`) VALUES ("   .   $linkRowUser["id"]  .   ", '"   .   date("Y-m-d")   .   "', $summ)");
+                                                            /*$insres = mysqli_query($conn,
+                                                                "INSERT INTO users_dinner_bills (`user_id`, `date_created`, `summ`) VALUES ("   .   $linkRowUser["id"]  .   ", '"   .   date("Y-m-d")   .   "', $summ)");*/
                                                             if(!$insres) {
                                                                 printf("Error: %s\n", mysqli_error($conn)   .   "\r\n");
                                                             }
@@ -712,6 +713,7 @@ function getDinnerBills($conn) {
                                                     }
                                                 }
                                                 else {
+                                                    var_dump($names);
                                                     print("Не выделены имя и фамилия для сотрудника:  "  .   $user->textContent   .   ". http://intra.lan.kodeks.net/cooking/"  .   $dep->getAttribute('href')   .   "\r\n");
                                                 }
                                             }

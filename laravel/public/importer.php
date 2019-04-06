@@ -674,7 +674,7 @@ function getDinnerBills($conn) {
                                                         unset($names[$j]);
                                                     }
                                                 }
-                                                $names  =   array_values($names);
+                                                $names  =   array_values($names);var_dump($names);
                                                 if (isset($names[0])) {
                                                     $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                                                 }

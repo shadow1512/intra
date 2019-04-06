@@ -647,10 +647,6 @@ function getDinnerBills($conn) {
                 $deps  =   $doc->getElementsByTagName("a");
                 if($deps   &&  ($deps->count() >   0)) {
                     foreach($deps   as $dep) {
-                        $linkdep = mysqli_query($conn, "SELECT id FROM deps WHERE name LIKE '" . $dep->textContent . "%' AND LENGTH(parent_id)=" . CODE_LENGTH .   " LIMIT 1");
-                        if ($linkdep    &&  $linkdep->num_rows  >   0) {
-                            $linkRow = $linkdep->fetch_assoc();
-
                             $ch = curl_init('http://intra.lan.kodeks.net/cooking/' . $dep->getAttribute('href'));
                             curl_setopt($ch, CURLINFO_HEADER_OUT, true);
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -683,11 +679,11 @@ function getDinnerBills($conn) {
                                                     $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
                                                 }
                                                 if ($lname && $fname) {
-                                                    $linkuser = mysqli_query($conn, "SELECT id FROM users LEFT JOIN deps_peoples ON (users.id  = deps_peoples.people_id) WHERE fname LIKE '" . $fname . "' AND lname LIKE '" . $lname . "' AND dep_id=" .   $linkRow["id"]);
+                                                    $linkuser = mysqli_query($conn, "SELECT id FROM users WHERE fname LIKE '" . $fname . "' AND lname LIKE '" . $lname . "'");
                                                     if ($linkuser    &&  $linkuser->num_rows  >   0) {
                                                         $linkRowUser    =   null;
                                                         if($linkuser->num_rows  >   1) {
-                                                            $linkuser = mysqli_query($conn, "SELECT id FROM users LEFT JOIN deps_peoples ON (users.id  = deps_peoples.people_id) WHERE fname LIKE '" . $fname . "' AND lname LIKE '" . $lname . "' AND mname LIKE '" . $mname . "' AND dep_id=" .   $linkRow["id"]);
+                                                            $linkuser = mysqli_query($conn, "SELECT id FROM users WHERE fname LIKE '" . $fname . "' AND lname LIKE '" . $lname . "' AND mname LIKE '" . $mname . "'");
                                                             if ($linkuser    &&  $linkuser->num_rows  >   0) {
                                                                 $linkRowUser = $linkuser->fetch_assoc();
                                                             }
@@ -735,10 +731,6 @@ function getDinnerBills($conn) {
                             else {
                                 print("Ошибка получения файла со списком сотрудников: http://intra.lan.kodeks.net/cooking/"  .   $dep->getAttribute('href')   .   "\r\n");
                             }
-                        }
-                        else {
-                            print("Не найдена связь для департамента "  .   $dep->textContent   .   ", список сотрудников игнорируется\r\n");
-                        }
                     }
                 }
                 else {

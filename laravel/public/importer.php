@@ -639,7 +639,7 @@ function getDinnerBills($conn) {
         $doc = new DomDocument('1.0', 'utf-8');
         preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
         if (count($matches)) {
-            $doc->loadHTML("<body>"   .   $matches[1] .   "</body>");
+            $doc->loadHTML("<?xml encoding=\"utf-8\" ?><body>"   .   $matches[1] .   "</body>");
             var_dump($doc);
             if($doc) {
                 $deps  =   $doc->getElementsByTagName("a");

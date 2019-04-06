@@ -640,6 +640,7 @@ function getDinnerBills($conn) {
         preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
         if (count($matches)) {
             $doc->loadHTML("<body>"   .   $matches[1] .   "</body>");
+            var_dump($doc);
             if($doc) {
                 $deps  =   $doc->getElementsByTagName("a");
                 if($deps   &&  ($deps->count() >   0)) {

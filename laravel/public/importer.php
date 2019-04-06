@@ -636,8 +636,10 @@ function getDinnerBills($conn) {
         Связано это с тем, что он ругается на <br>, например, а такие теги присутствуют в получаемом документе*/
         libxml_use_internal_errors(true);
         $res=   iconv("windows-1251",    "utf-8",   $res);
+        var_dump($res);
         $doc = new DomDocument('1.0', 'utf-8');
         $doc->loadHTML($res);
+        var_dump($doc);
         if($doc) {
             $deps  =   $doc->getElementsByTagName("a");
             if($deps   &&  ($deps->count() >   0)) {

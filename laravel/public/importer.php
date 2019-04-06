@@ -669,9 +669,9 @@ function getDinnerBills($conn) {
                                                 $names  =   preg_replace("/\s/ius",    " ", $user->textContent);
                                                 $lname = $fname = $mname = "";
                                                 $names = explode( " ", $names);
-                                                for($i= 0;  $i<count($names);   $i++) {
-                                                    if(empty($names[$i])) {
-                                                        unset($names[$i]);
+                                                for($j= 0;  $j<count($names);   $j++) {
+                                                    if(empty($names[$j])) {
+                                                        unset($names[$j]);
                                                     }
                                                 }
                                                 $names  =   array_values($names);

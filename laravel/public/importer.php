@@ -704,13 +704,13 @@ function getDinnerBills($conn) {
                                                         if(!is_null($linkRowUser)) {
                                                             $summ   =   (int)$users_and_bills->item($i+1)->textContent;
                                                             /*$insres = mysqli_query($conn,
-                                                                "INSERT INTO users_dinner_bills (`user_id`, `date_created`, `summ`) VALUES ("   .   $linkRowUser["id"]  .   ", '"   .   date("Y-m-d")   .   "', $summ)");*/
+                                                                "INSERT INTO users_dinner_bills (`user_id`, `date_created`, `summ`) VALUES ("   .   $linkRowUser["id"]  .   ", '"   .   date("Y-m-d")   .   "', $summ)");
                                                             if(!$insres) {
                                                                 printf("Error: %s\n", mysqli_error($conn)   .   "\r\n");
                                                             }
                                                             else {
                                                                 $total_inserted ++;
-                                                            }
+                                                            }*/
                                                         }
                                                     }
                                                     else {

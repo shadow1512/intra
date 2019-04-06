@@ -66,6 +66,10 @@ if(isset($argv[1]) && ($argv[1] == 'deletetest')) {
     deleteTest($conn);
     exit();
 }
+if(isset($argv[1]) && ($argv[1] == 'getdinnerbills')) {
+    getDinnerBills($conn);
+    exit();
+}
 
 $fp_err =   null;
 //$ch = curl_init('http://172.16.0.223/SedKodeks/eseddapi/Authenticate/GetToken/984dca20-c795-4b90-b4d2-a2f4640b83f2');
@@ -619,6 +623,37 @@ function deleteTest($conn) {
     }
 
     print("Тестовый пользователь удален\r\n");
+}
+
+function getDinnerBills($conn) {
+    $ch = curl_init('http://intra.lan.kodeks.net/cooking/');
+    curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $res = curl_exec($ch);
+    $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    if($status_code == 200) {
+        $res=   iconv("windows-1251",    "utf-8",   $res);
+        $doc = new DomDocument('1.0', 'utf-8');
+        $doc->loadHTML($res);
+        if($doc) {
+            $deps  =   $doc->getElementsByTagName("a");
+            if($deps   &&  ($deps->count() >   0)) {
+                foreach($deps   as $dep) {
+                    var_dump($dep->nodeValue);
+                    var_dump($dep->getAttribute('href'));
+                }
+            }
+            else {
+                print("Пустой список департаментов.\r\n");
+            }
+        }
+        else {
+            print("Ошибка преобразования файла со списком департаментов. Проблема со структурой\r\n");
+        }
+    }
+    else {
+        print("Ошибка получения файла со списком департаментов\r\n");
+    }
 }
 
 function cleanStructData($conn) {

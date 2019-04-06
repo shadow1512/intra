@@ -914,6 +914,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'CreateTranslationsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_14_005015_create_translations_table.php',
         'CreateUserKeys' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_111123_create_user_keys.php',
         'CreateUsersContacts' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_230859_create_users_contacts.php',
+        'CreateUsersDinnerBills' => __DIR__ . '/../..' . '/database/migrations/2019_04_06_163207_create_users_dinner_bills.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2015_12_31_00000_create_users_table.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
         'Cron\\CronExpression' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/CronExpression.php',

@@ -636,24 +636,28 @@ function getDinnerBills($conn) {
         Связано это с тем, что он ругается на <br>, например, а такие теги присутствуют в получаемом документе*/
         libxml_use_internal_errors(true);
         $res=   iconv("windows-1251",    "utf-8",   $res);
-        var_dump($res);
         $doc = new DomDocument('1.0', 'utf-8');
-        $doc->loadHTML($res);
-        var_dump($doc);
-        if($doc) {
-            $deps  =   $doc->getElementsByTagName("a");
-            if($deps   &&  ($deps->count() >   0)) {
-                foreach($deps   as $dep) {
-                    var_dump($dep->textContent);
-                    var_dump($dep->getAttribute('href'));
+        preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
+        if (count($matches)) {
+            $doc->loadHTML("<body>"   .   $matches[1] .   "</body>");
+            if($doc) {
+                $deps  =   $doc->getElementsByTagName("a");
+                if($deps   &&  ($deps->count() >   0)) {
+                    foreach($deps   as $dep) {
+                        var_dump($dep->textContent);
+                        var_dump($dep->getAttribute('href'));
+                    }
+                }
+                else {
+                    print("Пустой список департаментов.\r\n");
                 }
             }
             else {
-                print("Пустой список департаментов.\r\n");
+                print("Ошибка преобразования файла со списком департаментов. Проблема со структурой\r\n");
             }
         }
         else {
-            print("Ошибка преобразования файла со списком департаментов. Проблема со структурой\r\n");
+            print("Нет тега body. Проблема со структурой\r\n");
         }
     }
     else {

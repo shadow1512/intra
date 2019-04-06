@@ -632,6 +632,9 @@ function getDinnerBills($conn) {
     $res = curl_exec($ch);
     $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
     if($status_code == 200) {
+        /*Внимание!! Тут отключается вывод ошибок в буфер и ошибки передаются на обработку в скрипты.
+        Связано это с тем, что он ругается на <br>, например, а такие теги присутствуют в получаемом документе*/
+        libxml_use_internal_errors(true);
         $res=   iconv("windows-1251",    "utf-8",   $res);
         $doc = new DomDocument('1.0', 'utf-8');
         $doc->loadHTML($res);
@@ -639,7 +642,7 @@ function getDinnerBills($conn) {
             $deps  =   $doc->getElementsByTagName("a");
             if($deps   &&  ($deps->count() >   0)) {
                 foreach($deps   as $dep) {
-                    var_dump($dep->nodeValue);
+                    var_dump($dep->textContent);
                     var_dump($dep->getAttribute('href'));
                 }
             }

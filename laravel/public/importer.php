@@ -680,6 +680,19 @@ function getDinnerBills($conn) {
                                                 }
                                                 if (isset($names[1])) {
                                                     $fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
+                                                    //Набор косяков в названии сотрудников
+                                                    if($fname   ==  "Анстасия") {
+                                                        $fname  =   "Анастасия";
+                                                    }
+                                                    if($fname   ==  "Екатерна") {
+                                                        $fname  =   "Екатерина";
+                                                    }
+                                                    if($fname   ==  "Алексагндра") {
+                                                        $fname  =   "Александра";
+                                                    }
+                                                    if($fname   ==  "Кирил") {
+                                                        $fname  =   "Кирилл";
+                                                    }
                                                 }
                                                 if (isset($names[2])) {
                                                     $mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
@@ -703,14 +716,14 @@ function getDinnerBills($conn) {
 
                                                         if(!is_null($linkRowUser)) {
                                                             $summ   =   (int)$users_and_bills->item($i+1)->textContent;
-                                                            /*$insres = mysqli_query($conn,
+                                                            $insres = mysqli_query($conn,
                                                                 "INSERT INTO users_dinner_bills (`user_id`, `date_created`, `summ`) VALUES ("   .   $linkRowUser["id"]  .   ", '"   .   date("Y-m-d")   .   "', $summ)");
                                                             if(!$insres) {
                                                                 printf("Error: %s\n", mysqli_error($conn)   .   "\r\n");
                                                             }
                                                             else {
                                                                 $total_inserted ++;
-                                                            }*/
+                                                            }
                                                         }
                                                     }
                                                     else {

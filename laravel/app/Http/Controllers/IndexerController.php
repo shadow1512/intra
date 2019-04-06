@@ -414,18 +414,24 @@ class IndexerController extends Controller
                                         $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                                         $lname = $fname = $mname = "";
                                         $names = explode( " ", $item->fullname->value);
+                                        for($i= 0;  $i<count($names);   $i++) {
+                                            if(empty($names[$i])) {
+                                                unset($names[$i]);
+                                            }
+                                        }
+                                        $names  =   array_values($names);
                                         if (isset($names[0])) {
-                                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                                            $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                                         }
                                         if (isset($names[1])) {
-                                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                            $fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
                                             //маленький хак на левое имя
                                             if($fname   ==  "Янина") {
                                                 $fname  =   "Яна";
                                             }
                                         }
                                         if (isset($names[2])) {
-                                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                                            $mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
                                         }
                                         if ($lname && $fname && $mname) {
                                             $record = User::where('email', 'LIKE', $contact->value)
@@ -463,17 +469,23 @@ class IndexerController extends Controller
                                         $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                                         $lname = $fname = $mname = "";
                                         $names = explode( " ", $item->fullname->value);
+                                        for($i= 0;  $i<count($names);   $i++) {
+                                            if(empty($names[$i])) {
+                                                unset($names[$i]);
+                                            }
+                                        }
+                                        $names  =   array_values($names);
                                         if (isset($names[0])) {
-                                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                                            $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                                         }
                                         if (isset($names[1])) {
-                                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                            $fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
                                             if($fname   ==  "Янина") {
                                                 $fname  =   "Яна";
                                             }
                                         }
                                         if (isset($names[2])) {
-                                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                                            $mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
                                         }
                                         if ($lname && $fname && $mname) {
                                             $record = User::where('fname', 'LIKE', $fname)
@@ -522,18 +534,24 @@ class IndexerController extends Controller
                         $item->fullname->value  =   preg_replace("/\s/ius",    " ", $item->fullname->value);
                         $lname = $fname = $mname = "";
                         $names = explode( " ", $item->fullname->value);
+                        for($i= 0;  $i<count($names);   $i++) {
+                            if(empty($names[$i])) {
+                                unset($names[$i]);
+                            }
+                        }
+                        $names  =   array_values($names);
                         if (isset($names[0])) {
-                            $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                            $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                         }
                         if (isset($names[1])) {
-                            $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                            $fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
 
                             if($fname   ==  "Янина") {
                                 $fname  =   "Яна";
                             }
                         }
                         if (isset($names[2])) {
-                            $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                            $mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
                         }
                         if ($lname && $fname && $mname) {
                             $record = User::where('fname', 'LIKE', $fname)
@@ -581,18 +599,25 @@ class IndexerController extends Controller
                     /*if(empty($record->name)) {
                         $record->name   =   $item->fullname->value;
                     }*/
+                    for($i= 0;  $i<count($names);   $i++) {
+                        if(empty($names[$i])) {
+                            unset($names[$i]);
+                        }
+                    }
+                    $names  =   array_values($names);
+
                     if (isset($names[0])    &&  trim($names[0])  &&  empty($record->lname)) {
-                        $record->lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                        $record->lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                     }
                     if (isset($names[1])    &&  trim($names[1])  &&  empty($record->fname)) {
-                        $record->fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                        $record->fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
 
                         if($record->fname   ==  "Янина") {
                             $record->fname  =   "Яна";
                         }
                     }
                     if (isset($names[2])    &&  trim($names[2])  &&  empty($record->mname)) {
-                        $record->mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                        $record->mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
                     }
                 }
 
@@ -723,11 +748,11 @@ class IndexerController extends Controller
                     $sid        =   $dom->createElement("sid",  $user->sid);
                     $sidnode    =   $usernode->appendChild($sid);
 
-                    $fname      =   $dom->createElement("fname",  preg_replace("/[^А-я  \-]/ius",   "", $user->fname));
+                    $fname      =   $dom->createElement("fname",  preg_replace("/[^А-яЁё  \-]/ius",   "", $user->fname));
                     $fnamenode  =   $usernode->appendChild($fname);
-                    $mname      =   $dom->createElement("mname",  preg_replace("/[^А-я  \-]/ius",   "", $user->mname));
+                    $mname      =   $dom->createElement("mname",  preg_replace("/[^А-яЁё  \-]/ius",   "", $user->mname));
                     $mnamenode  =   $usernode->appendChild($mname);
-                    $lname      =   $dom->createElement("lname",  preg_replace("/[^А-я  \-]/ius",   "", $user->lname));
+                    $lname      =   $dom->createElement("lname",  preg_replace("/[^А-яЁё  \-]/ius",   "", $user->lname));
                     $lnamenode  =   $usernode->appendChild($lname);
 
                     $phones         =   $dom->createElement("phones");

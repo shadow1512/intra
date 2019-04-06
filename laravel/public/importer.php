@@ -172,9 +172,9 @@ if($tok) {
                             $rowuser = $user->fetch_assoc();
                             if ($mdate > $rowuser['updated_at']) {
                                 mysqli_query($conn,
-                                    "UPDATE users SET `name`='" . $obj->Name . "', `fname`='"   .   preg_replace("/[^А-я]/ius",    "", $obj->FirstName) .
-                                    "', `mname`='" .    preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', `lname`='" .
-                                    preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
+                                    "UPDATE users SET `name`='" . $obj->Name . "', `fname`='"   .   preg_replace("/[^А-яЁё]/ius",    "", $obj->FirstName) .
+                                    "', `mname`='" .    preg_replace("/[^А-яЁё]/ius",    "", $obj->Patronymic) . "', `lname`='" .
+                                    preg_replace("/[^А-яЁё]/ius",    "", $obj->Surname) . "', `updated_at`='" . $date . "' WHERE id="  .   $row["user_id"]);
 
                                 $counter_updated_users ++;
 
@@ -275,9 +275,9 @@ if($tok) {
                             }
                             $insres = mysqli_query($conn,
                                 "INSERT INTO users (`name`, `role_id`, `fname`, `mname`, `lname`, `phone`, `email`, `room`, `mobile_phone`, created_at, updated_at) 
-                                    VALUES ('" . $obj->Name . "', 2, '" . preg_replace("/[^А-я]/ius",    "", $obj->FirstName) . "', '" .
-                                            preg_replace("/[^А-я]/ius",    "", $obj->Patronymic) . "', '" .
-                                            preg_replace("/[^А-я]/ius",    "", $obj->Surname) . "', '" . $obj->Phone . "',
+                                    VALUES ('" . $obj->Name . "', 2, '" . preg_replace("/[^А-яЁё]/ius",    "", $obj->FirstName) . "', '" .
+                                            preg_replace("/[^А-яЁё]/ius",    "", $obj->Patronymic) . "', '" .
+                                            preg_replace("/[^А-яЁё]/ius",    "", $obj->Surname) . "', '" . $obj->Phone . "',
                                             '" . $obj->EMail . "', '" . $obj->Address . "', '" . $obj->MobilePhone . "', '" . $date . "', '" . $date . "')");
 
                             $counter_added_users ++;
@@ -626,12 +626,6 @@ function deleteTest($conn) {
 }
 
 function getDinnerBills($conn) {
-    var_dump(preg_replace("/[^А-яЁё]/ius",    "", "Алёна"));
-    $d=   array("анна","","кирилл","слава");
-    var_dump($d);
-    unset($d[1]);
-    var_dump($d);
-    exit();
     $total_inserted =   0;
 
     $ch = curl_init('http://intra.lan.kodeks.net/cooking/');
@@ -675,14 +669,20 @@ function getDinnerBills($conn) {
                                                 $names  =   preg_replace("/\s/ius",    " ", $user->textContent);
                                                 $lname = $fname = $mname = "";
                                                 $names = explode( " ", $names);
+                                                for($i= 0;  $i<count($names);   $i++) {
+                                                    if(empty($names[$i])) {
+                                                        unset($names[$i]);
+                                                    }
+                                                }
+                                                $names  =   array_values($names);
                                                 if (isset($names[0])) {
-                                                    $lname = preg_replace("/[^А-я]/ius",    "", $names[0]);
+                                                    $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                                                 }
                                                 if (isset($names[1])) {
-                                                    $fname = preg_replace("/[^А-я]/ius",    "", $names[1]);
+                                                    $fname = preg_replace("/[^А-яЁё]/ius",    "", $names[1]);
                                                 }
                                                 if (isset($names[2])) {
-                                                    $mname = preg_replace("/[^А-я]/ius",    "", $names[2]);
+                                                    $mname = preg_replace("/[^А-яЁё]/ius",    "", $names[2]);
                                                 }
                                                 if ($lname && $fname) {
                                                     $linkuser = mysqli_query($conn, "SELECT id FROM users WHERE fname LIKE '" . $fname . "' AND lname LIKE '" . $lname . "'");

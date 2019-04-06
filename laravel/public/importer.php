@@ -626,7 +626,12 @@ function deleteTest($conn) {
 }
 
 function getDinnerBills($conn) {
-    var_dump(preg_replace("/[^А-я]/ius",    "", "Алёна"));
+    var_dump(preg_replace("/[^А-яЁё]/ius",    "", "Алёна"));
+    $d=   array("анна","","кирилл","слава");
+    var_dump($d);
+    unset($d[1]);
+    var_dump($d);
+    exit();
     $total_inserted =   0;
 
     $ch = curl_init('http://intra.lan.kodeks.net/cooking/');

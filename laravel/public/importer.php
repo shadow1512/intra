@@ -670,7 +670,7 @@ function getDinnerBills($conn) {
                                                 $lname = $fname = $mname = "";
                                                 $names = explode( " ", $names);
                                                 for($j= 0;  $j<count($names);   $j++) {
-                                                    if(empty($names[$j])) {
+                                                    if(empty(trim($names[$j]))) {
                                                         unset($names[$j]);
                                                     }
                                                 }

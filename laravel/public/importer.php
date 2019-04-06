@@ -674,7 +674,7 @@ function getDinnerBills($conn) {
                                                         unset($names[$j]);
                                                     }
                                                 }
-                                                $names  =   array_values($names);var_dump($names);
+                                                $names  =   array_values($names);
                                                 if (isset($names[0])) {
                                                     $lname = preg_replace("/[^А-яЁё]/ius",    "", $names[0]);
                                                 }
@@ -714,6 +714,7 @@ function getDinnerBills($conn) {
                                                         }
                                                     }
                                                     else {
+                                                        var_dump($names);
                                                         print("Не найдена связь для сотрудника "  .   $user->textContent   .   ". http://intra.lan.kodeks.net/cooking/"  .   $dep->getAttribute('href')   .   "\r\n");
                                                     }
                                                 }

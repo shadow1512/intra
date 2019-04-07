@@ -48,6 +48,15 @@ class HomeController extends Controller
             ->whereRaw("ADDDATE(workstart, INTERVAL 1 MONTH) >= '" . date("Y-m-d") . "'")
             ->orderBy('workstart', 'desc')->get();
 
+        //счет в столовой
+        $summ   =   0;
+        $bills  =   array();
+        if (Auth::check()) {
+            $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
+            $summ   =   $bill->summ;
+            $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
+        }
+
         //Меню
         $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
@@ -66,7 +75,9 @@ class HomeController extends Controller
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
-                                'kitchen_menu'  =>  $kitchen_menu]);
+                                'kitchen_menu'  =>  $kitchen_menu,
+                                'summ'          =>  $summ,
+                                'bills'         =>  $bills]);
     }
 
     function parking()

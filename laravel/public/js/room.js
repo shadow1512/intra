@@ -49,6 +49,7 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
     var form = $(this);
+    $(form).find("input").css("border", "1px solid #d9d9d9");
     var token   =   $(this).find("input[name='_token']").val();
     $.ajax({
         type: "POST",
@@ -61,22 +62,24 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
             if(msg.result == "success") {
                 location.reload(true);
             }
-            else {
-                if(msg.result == "error") {
-                    if(msg.message) {
-                        if(msg.message  == "crossing detected") {
-                            $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
-                        }
-                        else {
-                            $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
-                        }
-                    }
-                    else {
-                        $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
-                    }
+            if(msg[0] == "error") {
+                if(msg.message  == "crossing detected") {
+                    $("div.error").html("Не удалось создать бронь переговорной. Время начала или окончания пересекаются со временем ранее созданной брони").show();
+                }
+                else if(msg.message  == "time start too early") {
+                    $("div.error").html("Время начала брони раньше максимально раннего 09:00").show();
+                    $("#"   +   msg.field).css("border", "1px solid #ff0000");
+                }
+                else if(msg.message  == "time end too late") {
+                    $("div.error").html("Время окончания брони позже максимально позднего 19:00").show();
+                    $("#"   +   msg.field).css("border", "1px solid #ff0000");
                 }
                 else {
-                    $("div.error").html("В процессе создания произошли непредвиденные ошибки. Свяжитесь с администратором портала").show();
+                    var errors  =   msg[1];
+                    for(var key in errors) {
+                        $("#"+key).css("border", "1px solid #ff0000");
+                        $("div.error").html(errors[key]).show();
+                    }
                 }
             }
         }

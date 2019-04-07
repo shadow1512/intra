@@ -80,17 +80,32 @@ class RoomsController extends Controller
         $time_start    = trim($request->input('input_time_start'));
         $time_end      = trim($request->input('input_time_end'));
 
+        $messages   =   array(  "input_name.required"           =>  "Название мероприятия - обязательное поле",
+                                "input_name.max"                =>  "Название мероприятие не должно быть длиннее, чем 90 символов",
+                                "input_date_booking.required"   =>  "Дата бронирования - обязательное поле",
+                                "input_time_start.required"     =>  "Время начала бронирования - обязательное поле",
+                                "input_time_end.required"       =>  "Время окончания бронирования - обязательное поле",
+                                "input_time_start.date_format"  =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
+                                "input_time_end.date_format"    =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ"
+        );
+
         $validator = Validator::make($request->all(), [
             'input_name'            => 'required|max:90',
             'input_date_booking'    => 'required',
-            'input_time_start'      => 'required',
-            'input_time_end'        => 'required',
-        ]);
+            'input_time_start'      => 'required|date_format:H:i',
+            'input_time_end'        => 'required|date_format:H:i',
+        ],  $messages);
 
         if ($validator->fails()) {
-            return response()->json(['error', $validator]);
+            return response()->json(['error', $validator->errors()]);
         }
         else {
+            if($time_start  <   Config::get('rooms.time_start_default')) {
+                return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start']);
+            }
+            if($time_end  <   Config::get('rooms.time_end_default')) {
+                return response()->json(['error',  'message' =>  'time end too late',    'field' =>  'input_time_end']);
+            }
             //Нужно проверить, что не перекрывается по датам
             //DB::enableQueryLog();
             $exists =   Booking::whereDate('date_book',    $date_booking)
@@ -107,7 +122,7 @@ class RoomsController extends Controller
             //print_r(DB::getQueryLog());exit();
 
             if($exists) {
-                return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);
+                return response()->json(['error',  'message' =>  'crossing detected']);
             }
             else {
                 $date = date("Y-m-d H:i:s");
@@ -147,18 +162,35 @@ class RoomsController extends Controller
         $time_end       =   trim($request->input('input_time_end_change'));
         $room           =   trim($request->input('input_room'));
 
+        $messages   =   array(  "input_name_change.required"            =>  "Название мероприятия - обязательное поле",
+                                "input_name_change.max"                 =>  "Название мероприятие не должно быть длиннее, чем 90 символов",
+                                "input_date_booking_change.required"    =>  "Дата бронирования - обязательное поле",
+                                "input_time_start_change.required"      =>  "Время начала бронирования - обязательное поле",
+                                "input_time_end_change.required"        =>  "Время окончания бронирования - обязательное поле",
+                                "input_time_start.date_format"  =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
+                                "input_time_end.date_format"    =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ",
+                                "input_room.required"                   =>  "Комната - обязательное поле"
+        );
+
         $validator = Validator::make($request->all(), [
             'input_name_change'                 =>  'required|max:90',
             'input_date_booking_change'         =>  'required',
-            'input_time_start_change'           =>  'required',
-            'input_time_end_change'             =>  'required',
+            'input_time_start_change'           =>  'required|date_format:H:i',
+            'input_time_end_change'             =>  'required|date_format:H:i',
             'input_room'                        =>  'required',
-        ]);
+        ],  $messages);
 
         if ($validator->fails()) {
-            return response()->json(['error', $validator]);
+            return response()->json(['error', $validator->errors()]);
         }
         else {
+
+            if($time_start  <   Config::get('rooms.time_start_default')) {
+                return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start_change']);
+            }
+            if($time_end  <   Config::get('rooms.time_end_default')) {
+                return response()->json(['error',  'message' =>  'time end too late',    'field' =>  'input_time_end_change']);
+            }
             //Нужно проверить, что не перекрывается по датам
             $exists =   Booking::where("id",    "<>",    $id)
                 ->where("room_id",  "=",    $room)
@@ -174,7 +206,7 @@ class RoomsController extends Controller
                 })->exists();
 
             if($exists) {
-                return response()->json(['result'    =>  'error',  'message' =>  'crossing detected']);
+                return response()->json(['error',  'message' =>  'crossing detected']);
             }
             else {
                 $date = date("Y-m-d H:i:s");

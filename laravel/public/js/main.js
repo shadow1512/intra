@@ -155,6 +155,10 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
     if ($(but).parent().children("span.source_date").length > 0) {
         var dd = $(but).parent().children("span.source_date").text();
         $(win).find("input[name='input_date_booking']").val(dd);
+        $(win).find("div.error").html("").hide();
+        $(win).find("input[name='input_time_start']").val("");
+        $(win).find("input[name='input_time_end']").val("");
+        $(win).find("input[name='input_name']").val("");
     }
 });
 popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {

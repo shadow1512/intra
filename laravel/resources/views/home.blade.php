@@ -54,8 +54,20 @@
 
 @section('dinner')
     <div class="main_top_dinner"    @if ($hide_dinner) style="display:none"@endif>
-        <div class="h __h_m">Столовая<span class="main_top_dinner_status">(Открыта)</span></div>
-        <div class="main_top_dinner_info"><span class="main_top_dinner_info_i">Завтраки: с&nbsp;10.30 до&nbsp;11.30</span><span class="main_top_dinner_info_i">Обеды: с&nbsp;13.00 до&nbsp;16.00</span></div>
+        <div class="h __h_m">Столовая<span class="main_top_dinner_status">
+                @php
+                    $currTime  =   date("H:i");
+                    $status =   false;
+                    if(count($ditems)) {
+                        foreach($ditems as $item) {
+                            if(($item->time_start    <=  $currTime) &&  ($currTime   <=  $item->time_end)) {
+                                $status =   true;
+                            }
+                        }
+                    }
+                @endphp
+                @if($status) (Открыта) @endif</span></div>
+        <div class="main_top_dinner_info">@if (count($ditems)) @foreach($ditems as $item)<span class="main_top_dinner_info_i">{{$item->name}}: с&nbsp;{{$item->time_start}} до&nbsp;{{$item->time_end}}</span>@endforeach @endif</div>
         <div class="main_top_dinner_hide">Свернуть –</div>
         <ul class="main_top_dinner_lst">
             <li class="main_top_dinner_lst_i @if (!Auth::check())__logout @endif"><a href="" class="main_top_dinner_lst_lk __js-modal-dinner-lk">

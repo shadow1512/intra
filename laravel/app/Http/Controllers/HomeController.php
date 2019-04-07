@@ -9,6 +9,7 @@ use Adldap\Laravel\Facades\Adldap;
 use App\News;
 use App\User;
 use App\Rooms;
+use App\Dinner_slots;
 use DB;
 use Auth;
 
@@ -57,6 +58,9 @@ class HomeController extends Controller
             $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
         }
 
+        //режим работы столовой
+        $items  =   Dinner_slots::get();
+
         //Меню
         $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
@@ -77,7 +81,8 @@ class HomeController extends Controller
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
                                 'kitchen_menu'  =>  $kitchen_menu,
                                 'summ'          =>  $summ,
-                                'bills'         =>  $bills]);
+                                'bills'         =>  $bills,
+                                'ditems'        =>  $items]);
     }
 
     function parking()

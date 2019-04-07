@@ -3,10 +3,10 @@ $("#input_time_start").datetimepicker({
     datepicker:false,
     timepicker:true,
     format:'H:i',
-    step: 30,
-    minTime: '09:00',
-    maxTime: '18:30',
-    maxMinutes: 30,
+    step:30,
+    minTime:'09:00',
+    maxTime:'18:30',
+    mask:true,
     onShow:function( ct ){
         this.setOptions({
             maxTime:$('#input_time_end').val()?$('#input_time_end').val():false
@@ -19,9 +19,10 @@ $("#input_time_end").datetimepicker({
     datepicker:false,
     timepicker:true,
     format:'H:i',
-    step: 30,
-    minTime: '09:30',
-    maxTime: '19:00',
+    step:30,
+    minTime:'09:30',
+    maxTime:'19:00',
+    mask:true,
     onShow:function( ct ){
         this.setOptions({
             minTime:$('#input_time_start').val()?$('#input_time_start').val():false

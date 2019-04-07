@@ -67,7 +67,7 @@
                     }
                 @endphp
                 @if($status) (Открыта) @endif</span></div>
-        <div class="main_top_dinner_info">@if (count($ditems)) @foreach($ditems as $item)<span class="main_top_dinner_info_i">{{$item->name}}: с&nbsp;{{\Carbon\Carbon::parse($item->time_start)->format("H.i")}} до&nbsp;{{$item->time_end}}</span>@endforeach @endif</div>
+        <div class="main_top_dinner_info">@if (count($ditems)) @foreach($ditems as $item)<span class="main_top_dinner_info_i">{{$item->name}}: с&nbsp;{{\Carbon\Carbon::parse($item->time_start)->format("H.i")}} до&nbsp;{{\Carbon\Carbon::parse($item->time_end)->format("H.i")}}</span>@endforeach @endif</div>
         <div class="main_top_dinner_hide">Свернуть –</div>
         <ul class="main_top_dinner_lst">
             <li class="main_top_dinner_lst_i @if (!Auth::check())__logout @endif"><a href="" class="main_top_dinner_lst_lk __js-modal-dinner-lk">

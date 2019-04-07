@@ -110,4 +110,11 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::put('/foto/store', 'ModerateController@fotostore')->name('moderate.foto.store');
     Route::put('/foto/update/image/{id}', 'ModerateController@fotoupdateimage')->name('moderate.foto.updateimage');
     Route::delete('/foto/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
+
+    Route::get('/dinner/', 'ModerateController@dinnerlist')->name('moderate.dinner.list');
+    Route::get('/dinner/create', 'ModerateController@dinnercreate')->name('moderate.dinner.create');
+    Route::get('/dinner/edit/{id}', 'ModerateController@dinneredit')->name('moderate.dinner.edit');
+    Route::put('/dinner/update/{id}', 'ModerateController@dinnerupdate')->name('moderate.dinner.update');
+    Route::put('/dinner/store', 'ModerateController@dinnerstore')->name('moderate.dinner.store');
+    Route::delete('/dinner/delete/{id}', 'ModerateController@dinnerdelete')->name('moderate.dinner.delete');
 });

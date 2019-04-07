@@ -133,6 +133,77 @@ class ModerateController extends Controller
         return redirect(route('moderate'));
     }
 
+    public function dinnerlist()
+    {
+        //новости
+        $items = Dinner_slots::orderBy('time_start', 'asc')->limit(10)->get();
+        return view('moderate.dinner.list', ['items'    =>  $items]);
+    }
+
+    public function dinnercreate()
+    {
+        return view('moderate.dinner.create');
+    }
+
+    public function dinneredit($id)
+    {
+        $item = Dinner_slots::findOrFail($id);
+        return view('moderate.dinner.edit', ['item'    =>  $item]);
+    }
+
+    public function dinnerdelete($id)
+    {
+        $item = Dinner_slots::findOrFail($id);
+        $item->delete();
+
+        return redirect(route('moderate.dinner.list'));
+    }
+
+    public function dinnerstore(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'          =>  'required|string|max:191',
+            'time_start'    =>  'nullable|date_format:H:i',
+            'time_end'      =>  'nullable|date_format:H:i',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.dinner.create')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        Dinner_slots::create([
+            'name'              =>  $request->input('name'),
+            'time_start'        =>  $request->input('time_start'),
+            'time_end'          =>  $request->input('time_end'),
+        ]);
+
+        return redirect(route('moderate.dinner.list'));
+    }
+
+    public function dinnerupdate(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name'          =>  'required|string|max:191',
+            'time_start'    =>  'nullable|date_format:H:i',
+            'time_end'      =>  'nullable|date_format:H:i',
+        ]);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.dinner.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $item = Dinner_slots::findOrFail($id);
+        $item->name            = $request->input('name');
+        $item->time_start      = $request->input('time_start');
+        $item->time_end        = $request->input('time_end');
+
+        $item->save();
+
+        return redirect(route('moderate.dinner.list'));
+    }
+
     public function rooms()
     {
         //Комнаты

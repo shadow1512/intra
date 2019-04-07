@@ -45,6 +45,7 @@
                     @if (Auth::check())
                     <ul class="nav navbar-nav">
                         <li><a href="{{ route('moderate') }}">Новости</a></li>
+                        <li><a href="{{ route('moderate.dinner.index') }}">Столовая</a></li>
                         <li><a href="{{ route('moderate.library.index') }}">Библиотека</a></li>
                         <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
                         <li><a href="{{ route('moderate.users.start') }}">Сотрудники</a></li>

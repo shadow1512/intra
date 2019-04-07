@@ -214,6 +214,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     step: 30,
                     minTime: '09:00',
                     maxTime: '18:30',
+                    mask:true,
                     onShow:function( ct ){
                         this.setOptions({
                             maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()?$("div.__js-modal-change-order").find('#input_time_end_change').val():false
@@ -229,6 +230,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     step: 30,
                     minTime: '09:30',
                     maxTime: '19:00',
+                    mask:true,
                     onShow:function( ct ){
                         this.setOptions({
                             minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()?$("div.__js-modal-change-order").find('#input_time_start_change').val():false

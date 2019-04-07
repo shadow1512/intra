@@ -64,6 +64,38 @@ $(document).ready(function($) {
         //formatDate:'Y-m-d H:i',
     });
 
+    $("#time_start").datetimepicker({
+        lang:'ru',
+        datepicker:false,
+        timepicker:true,
+        format:'H:i',
+        step: 30,
+        minTime: '06:00',
+        maxTime: '19:30',
+        mask:true,
+        onShow:function( ct ){
+            this.setOptions({
+                maxTime:$('#time_end').val()?$('#time_end').val():false
+            });
+        }
+    });
+
+    $("#time_end").datetimepicker({
+        lang:'ru',
+        datepicker:false,
+        timepicker:true,
+        format:'H:i',
+        step: 30,
+        minTime: '06:00',
+        maxTime: '19:00',
+        mask:true,
+        onShow:function( ct ){
+            this.setOptions({
+                minTime:$('#time_start').val()?$('#time_start').val():false
+            });
+        }
+    });
+
     $('#avatar').fileupload({
         dataType: 'json',
         url: $("#avatar_url").val(),

@@ -159,6 +159,7 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
         $(win).find("input[name='input_time_start']").val("");
         $(win).find("input[name='input_time_end']").val("");
         $(win).find("input[name='input_name']").val("");
+        $(win).find("input").css("border", "1px solid #d9d9d9");
     }
 });
 popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {

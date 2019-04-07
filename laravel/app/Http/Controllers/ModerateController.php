@@ -19,6 +19,7 @@ use App\LibBook;
 use App\LibRazdel;
 use App\Gallery;
 use App\GalleryPhoto;
+use App\Dinner_slots;
 use PDO;
 use Config;
 use Illuminate\Http\Request;

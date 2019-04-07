@@ -160,6 +160,38 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
         $(win).find("input[name='input_time_end']").val("");
         $(win).find("input[name='input_name']").val("");
         $(win).find("input").css("border", "1px solid #d9d9d9");
+
+        $(win).find("#input_time_start").datetimepicker({
+            lang:'ru',
+            datepicker:false,
+            timepicker:true,
+            format:'H:i',
+            step:30,
+            minTime:'09:00',
+            maxTime:'18:30',
+            mask:true,
+            onShow:function( ct ){
+                this.setOptions({
+                    maxTime:$(win).find('#input_time_end').val()?$(win).find('#input_time_end').val():false
+                });
+            }
+        });
+
+        $(win).find("#input_time_end").datetimepicker({
+            lang:'ru',
+            datepicker:false,
+            timepicker:true,
+            format:'H:i',
+            step:30,
+            minTime:'09:30',
+            maxTime:'19:00',
+            mask:true,
+            onShow:function( ct ){
+                this.setOptions({
+                    minTime:$(win).find('#input_time_start').val()?$(win).find('#input_time_start').val():false
+                });
+            }
+        });
     }
 });
 popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
@@ -174,7 +206,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
             if (msg["result"] == "success") {
                 $("div.__js-modal-change-order").find("div.__form").html(msg["html"]);
 
-                $("#input_time_start_change").datetimepicker({
+                $("div.__js-modal-change-order").find("#input_time_start_change").datetimepicker({
                     lang:'ru',
                     datepicker:false,
                     timepicker:true,
@@ -184,12 +216,12 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     maxTime: '18:30',
                     onShow:function( ct ){
                         this.setOptions({
-                            maxTime:$('#input_time_end_change').val()?$('#input_time_end_change').val():false
+                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()?$("div.__js-modal-change-order").find('#input_time_end_change').val():false
                         });
                     }
                 });
 
-                $("#input_time_end_change").datetimepicker({
+                $("div.__js-modal-change-order").find("#input_time_end_change").datetimepicker({
                     lang:'ru',
                     datepicker:false,
                     timepicker:true,
@@ -199,7 +231,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     maxTime: '19:00',
                     onShow:function( ct ){
                         this.setOptions({
-                            minTime:$('#input_time_start_change').val()?$('#input_time_start_change').val():false
+                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()?$("div.__js-modal-change-order").find('#input_time_start_change').val():false
                         });
                     }
                 });

@@ -104,7 +104,7 @@ class RoomsController extends Controller
             if($time_start  <   Config::get('rooms.time_start_default')) {
                 return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start']);
             }
-            if($time_end  <   Config::get('rooms.time_end_default')) {
+            if($time_end  >   Config::get('rooms.time_end_default')) {
                 return response()->json(['error',  'message' =>  'time end too late',    'field' =>  'input_time_end']);
             }
             //Нужно проверить, что не перекрывается по датам
@@ -189,7 +189,7 @@ class RoomsController extends Controller
             if($time_start  <   Config::get('rooms.time_start_default')) {
                 return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start_change']);
             }
-            if($time_end  <   Config::get('rooms.time_end_default')) {
+            if($time_end  >   Config::get('rooms.time_end_default')) {
                 return response()->json(['error',  'message' =>  'time end too late',    'field' =>  'input_time_end_change']);
             }
             //Нужно проверить, что не перекрывается по датам

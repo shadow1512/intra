@@ -578,6 +578,22 @@ class ModerateController extends Controller
 
     }
 
+    public function fotodelete($id, Request $request)
+    {
+        $item = Gallery::findOrFail($id);
+        $item->delete();
+
+        return redirect(route('moderate.foto.index'));
+    }
+
+    public function fotodeleteimage($photo_id)
+    {
+        $photo     = GalleryPhoto::findOrFail($photo_id);
+        $photo->delete();
+
+        return redirect(route('moderate.foto.edit', ["id"   =>  $photo->gallery_id]));
+    }
+
     public function users($letter = "А")
     {
         $users = User::where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();

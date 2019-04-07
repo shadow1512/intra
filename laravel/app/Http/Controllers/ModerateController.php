@@ -730,4 +730,27 @@ class ModerateController extends Controller
         return response()->json(['ok', $default]);
     }
 
+    public function adminslist() {
+
+    }
+
+    public function adminscreate() {
+
+    }
+
+    public function adminsstore(Request $request) {
+
+    }
+
+    public function adminsedit($id) {
+
+    }
+
+    public function adminsupdate($id, Request $request) {
+
+    }
+
+    public function adminsdelete($id) {
+
+    }
 }

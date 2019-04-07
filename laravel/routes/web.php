@@ -118,4 +118,11 @@ Route::group(['prefix' => 'moderate'], function () {
     Route::put('/dinner/update/{id}', 'ModerateController@dinnerupdate')->name('moderate.dinner.update');
     Route::put('/dinner/store', 'ModerateController@dinnerstore')->name('moderate.dinner.store');
     Route::delete('/dinner/delete/{id}', 'ModerateController@dinnerdelete')->name('moderate.dinner.delete');
+
+    Route::get('/admins/', 'ModerateController@adminslist')->name('moderate.admins.list');
+    Route::get('/admins/create', 'ModerateController@adminscreate')->name('moderate.admins.create');
+    Route::get('/admins/edit/{id}', 'ModerateController@adminsedit')->name('moderate.admins.edit');
+    Route::put('/admins/update/{id}', 'ModerateController@adminsupdate')->name('moderate.admins.update');
+    Route::put('/admins/store', 'ModerateController@adminsstore')->name('moderate.admins.store');
+    Route::delete('/admins/delete/{id}', 'ModerateController@adminsdelete')->name('moderate.admins.delete');
 });

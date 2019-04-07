@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use DateTime;
 use DateInterval;
 use DB;
+use Config;
 use Auth;
 use View;
 

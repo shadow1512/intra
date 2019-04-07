@@ -3,9 +3,13 @@
 @section('view')
 <div class="profile_i">
     <div class="profile_aside">
-        <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a><a href="" class="profile_aside_invoice __js-modal-bill-lk">
+        <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}"></div><a href="" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a>
+        @if($summ   >   0)
+        <a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
-            <!--<p class="profile_aside_invoice_i">1 650 ₽</p><--></a>
+            <p class="profile_aside_invoice_i">{{$summ}} ₽</p>
+        </a>
+        @endif
     </div>
     <div class="profile_info">
         <div class="profile_info_i">
@@ -164,6 +168,46 @@
                 </div>
                 <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_profile_form">Сохранить</a></div>
             </form>
+        </div>
+    </div>
+</div>
+<!--eo modal-->
+@endsection
+
+@section('dinner_bills')
+    @php
+        $months =   array(  "1"     =>  "январь",
+                            "2"     =>  "февраль",
+                            "3"     =>  "март",
+                            "4"     =>  "апрель",
+                            "5"     =>  "май",
+                            "6"     =>  "июнь",
+                            "7"     =>  "июль",
+                            "8"     =>  "август",
+                            "9"     =>  "сентябрь",
+                            "10"    =>  "октябрь",
+                            "11"    =>  "ноябрь",
+                            "12"    =>  "декабрь");
+        $index  =   0;
+    @endphp
+<!--modal-->
+<div class="overlay __js-modal-bill">
+    <div class="modal-w">
+        <div class="modal-cnt">
+            <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+            <div class="modal_cnt">
+                <div class="dinner">
+                    <div class="dinner_top h __h_m">Мой счет</div>
+                    <ul class="bill_lst">
+                        @foreach($bills as $bill)
+                            <li class="bill_lst_i @if ($index    ==  0)__current @endif">
+                                <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">{{$months[$bill->mdc]}}</span></div>
+                                <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$bill->ms}} ₽</span></div>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -19,6 +19,7 @@
 <!--footer-->
 @include('footer')
 <!--eo footer-->
+@yield('dinner_bills')
 <script src="{{ asset('/js/libs/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('/js/libs/jquery-ui.min.js') }}"></script>
 <script src="{{ asset('/js/libs/chosen.jquery.min.js') }}"></script>

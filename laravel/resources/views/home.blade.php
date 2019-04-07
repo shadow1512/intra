@@ -66,7 +66,7 @@
                     <div class="main_top_dinner_lst_tx">Веб-камера в&nbsp;столовой</div></a></li>
             @if ($summ  >   0)
             <li class="main_top_dinner_lst_i"><a href="" class="main_top_dinner_lst_lk __js-modal-bill-lk">
-                    <div class="main_top_dinner_lst_price"{{$summ}} руб.</div>
+                    <div class="main_top_dinner_lst_price">{{$summ}} руб.</div>
                     <div class="main_top_dinner_lst_tx">Счет за&nbsp;столовую</div></a></li>
             @endif
         </ul>

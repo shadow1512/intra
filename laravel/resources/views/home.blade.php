@@ -54,19 +54,19 @@
 
 @section('dinner')
     <div class="main_top_dinner"    @if ($hide_dinner) style="display:none"@endif>
-        <div class="h __h_m">Столовая<span class="main_top_dinner_status">
-                @php
-                    $currTime  =   date("H:i:s");
-                    $status =   false;
-                    if(count($ditems)) {
-                        foreach($ditems as $item) {
-                            if(($item->time_start    <=  $currTime) &&  ($currTime   <=  $item->time_end)) {
-                                $status =   true;
-                            }
+        <div class="h __h_m">Столовая
+            @php
+                $currTime  =   date("H:i:s");
+                $status =   false;
+                if(count($ditems)) {
+                    foreach($ditems as $item) {
+                        if(($item->time_start    <=  $currTime) &&  ($currTime   <=  $item->time_end)) {
+                            $status =   true;
                         }
                     }
-                @endphp
-                @if($status) (Открыта) @endif</span></div>
+                }
+            @endphp
+            @if($status)<span class="main_top_dinner_status"> (Открыта) </span> @else <span class="main_top_dinner_status __close"> (Закрыта) </span> @endif</div>
         <div class="main_top_dinner_info">@if (count($ditems)) @foreach($ditems as $item)<span class="main_top_dinner_info_i">{{$item->name}}: с&nbsp;{{\Carbon\Carbon::parse($item->time_start)->format("H.i")}} до&nbsp;{{\Carbon\Carbon::parse($item->time_end)->format("H.i")}}</span>@endforeach @endif</div>
         <div class="main_top_dinner_hide">Свернуть –</div>
         <ul class="main_top_dinner_lst">

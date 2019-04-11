@@ -7,9 +7,9 @@
                 <div class="footer_lst_i_h">Сотрудникам</div>
             </li>
             <li class="footer_lst_i"><a href="{{route("people.root")}}" class="footer_lst_i_lk">Справочник сотрудников</a></li>
-            <li class="footer_lst_i"><a href="{{route("kitchen.camera")}}" class="footer_lst_i_lk">Веб-камеры в&nbsp;столовой</a></li>
-            <li class="footer_lst_i"><a href="{{route("kitchen.menu")}}" class="footer_lst_i_lk">Меню на&nbsp;сегодня</a></li>
-            <li class="footer_lst_i"><a href="{{route("kitchen.bills")}}" class="footer_lst_i_lk">Cчёт за&nbsp;столовую</a></li>
+            <li class="footer_lst_i"><a href="{{route("kitchen.camera")}}" class="footer_lst_i_lk __js-modal-camera-lk">Веб-камеры в&nbsp;столовой</a></li>
+            <li class="footer_lst_i"><a href="{{route("kitchen.menu")}}" class="footer_lst_i_lk __js-modal-dinner-lk">Меню на&nbsp;сегодня</a></li>
+            <li class="footer_lst_i"><a href="{{route("kitchen.bills")}}" class="footer_lst_i_lk __js-modal-bill-lk">Cчёт за&nbsp;столовую</a></li>
             <li class="footer_lst_i"><a href="{{route("staff")}}" class="footer_lst_i_lk">Полезные документы</a></li>
         </ul>
         <ul class="footer_lst">

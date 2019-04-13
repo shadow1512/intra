@@ -176,8 +176,8 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
             ],
             mask:true,
             onShow:function( ct ){
+                alert($(win).find('#input_time_end').val());
                 this.setOptions({
-                    alert($(win).find('#input_time_end').val());
                     maxTime:$(win).find('#input_time_end').val()?$(win).find('#input_time_end').val():'18:30'
                 });
             }

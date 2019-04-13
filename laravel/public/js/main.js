@@ -176,9 +176,8 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
             ],
             mask:true,
             onShow:function( ct ){
-                alert($(win).find('#input_time_end').val());
                 this.setOptions({
-                    maxTime:$(win).find('#input_time_end').val()?$(win).find('#input_time_end').val():'18:30'
+                    maxTime:$(win).find('#input_time_end').val()=='__:__'?'18:30':$(win).find('#input_time_end').val()
                 });
             }
         });
@@ -199,7 +198,7 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
             mask:true,
             onShow:function( ct ){
                 this.setOptions({
-                    minTime:$(win).find('#input_time_start').val()?$(win).find('#input_time_start').val():'09:30'
+                    minTime:$(win).find('#input_time_start').val()=='__:__'?'09:30':$(win).find('#input_time_start').val()
                 });
             }
         });
@@ -233,7 +232,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     mask:true,
                     onShow:function( ct ){
                         this.setOptions({
-                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()?$("div.__js-modal-change-order").find('#input_time_end_change').val():'18:30'
+                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()=='__:__'?'18:30':$("div.__js-modal-change-order").find('#input_time_end_change').val()
                         });
                     }
                 });
@@ -254,7 +253,7 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     mask:true,
                     onShow:function( ct ){
                         this.setOptions({
-                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()?$("div.__js-modal-change-order").find('#input_time_start_change').val():'09:30'
+                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()=='__:__'?'09:30':$("div.__js-modal-change-order").find('#input_time_start_change').val()
                         });
                     }
                 });

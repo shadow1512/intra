@@ -169,10 +169,15 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
             step:30,
             minTime:'09:00',
             maxTime:'18:30',
+            validateOnBlur:false,
+            allowTimes:[
+                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'
+            ],
             mask:true,
             onShow:function( ct ){
                 this.setOptions({
-                    maxTime:$(win).find('#input_time_end').val()?$(win).find('#input_time_end').val():false
+                    maxTime:$(win).find('#input_time_end').val()?$(win).find('#input_time_end').val():'18:30'
                 });
             }
         });
@@ -183,12 +188,17 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
             timepicker:true,
             format:'H:i',
             step:30,
+            validateOnBlur:false,
             minTime:'09:30',
             maxTime:'19:00',
+            allowTimes:[
+                '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+            ],
             mask:true,
             onShow:function( ct ){
                 this.setOptions({
-                    minTime:$(win).find('#input_time_start').val()?$(win).find('#input_time_start').val():false
+                    minTime:$(win).find('#input_time_start').val()?$(win).find('#input_time_start').val():'09:30'
                 });
             }
         });
@@ -211,13 +221,18 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     datepicker:false,
                     timepicker:true,
                     format:'H:i',
+                    validateOnBlur:false,
                     step: 30,
                     minTime: '09:00',
                     maxTime: '18:30',
+                    allowTimes:[
+                        '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'
+                    ],
                     mask:true,
                     onShow:function( ct ){
                         this.setOptions({
-                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()?$("div.__js-modal-change-order").find('#input_time_end_change').val():false
+                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()?$("div.__js-modal-change-order").find('#input_time_end_change').val():'18:30'
                         });
                     }
                 });
@@ -227,13 +242,18 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
                     datepicker:false,
                     timepicker:true,
                     format:'H:i',
+                    validateOnBlur:false,
                     step: 30,
                     minTime: '09:30',
                     maxTime: '19:00',
+                    allowTimes:[
+                        '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+                    ],
                     mask:true,
                     onShow:function( ct ){
                         this.setOptions({
-                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()?$("div.__js-modal-change-order").find('#input_time_start_change').val():false
+                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()?$("div.__js-modal-change-order").find('#input_time_start_change').val():'09:30'
                         });
                     }
                 });

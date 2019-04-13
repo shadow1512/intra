@@ -59,7 +59,9 @@ class ProfileController extends Controller
         //счет в столовой
         $summ   =   0;
         $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
-        $summ   =   $bill->summ;
+        if($bill) {
+            $summ   =   $bill->summ;
+        }
         $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
 
         return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills]);

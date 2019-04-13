@@ -84,8 +84,8 @@ class RoomsController extends Controller
         $messages   =   array(  "input_name.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
                                 "input_name.max"                =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
                                 "input_date_booking.required"   =>  "Дата бронирования - обязательное поле",
-                                "input_time_start.not_regex"    =>  "Поле \"время начала\" обязательно для заполнения",
-                                "input_time_end.not_regex"      =>  "Поле \"время окончания\" обязательно для заполнения",
+                                "input_time_start.required"     =>  "Поле \"время начала\" обязательно для заполнения",
+                                "input_time_end.required"       =>  "Поле \"время окончания\" обязательно для заполнения",
                                 "input_time_start.date_format"  =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
                                 "input_time_end.date_format"    =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ"
         );
@@ -93,8 +93,8 @@ class RoomsController extends Controller
         $validator = Validator::make($request->all(), [
             'input_name'            => 'required|max:90',
             'input_date_booking'    => 'required',
-            'input_time_start'      => 'not_regex:/^__:__$/ius|date_format:H:i',
-            'input_time_end'        => 'not_regex:/^__:__$/ius|date_format:H:i',
+            'input_time_start'      => 'required|date_format:H:i',
+            'input_time_end'        => 'required|date_format:H:i',
         ],  $messages);
 
         if ($validator->fails()) {
@@ -164,21 +164,21 @@ class RoomsController extends Controller
         $room           =   trim($request->input('input_room'));
 
         $messages   =   array(  "input_name_change.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
-            "input_name_change.max"                =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
-            "input_date_booking_change.required"   =>  "Поле \"дата бронирования\" обязательно для заполнения",
-            "input_time_start_change.not_regex"    =>  "Поле \"время начала\" обязательно для заполнения",
-            "input_time_end.not_change_regex"      =>  "Поле \"время окончания\" обязательно для заполнения",
-            "input_time_start_change.date_format"  =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
-            "input_time_end_change.date_format"    =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ",
-            "input_room.required"                  =>  "Поле \"комната\" обязательно для заполнения"
+            "input_name_change.max"                 =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
+            "input_date_booking_change.required"    =>  "Поле \"дата бронирования\" обязательно для заполнения",
+            "input_time_start_change.required"      =>  "Поле \"время начала\" обязательно для заполнения",
+            "input_time_end_change.required"        =>  "Поле \"время окончания\" обязательно для заполнения",
+            "input_time_start_change.date_format"   =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
+            "input_time_end_change.date_format"     =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ",
+            "input_room.required"                   =>  "Поле \"комната\" обязательно для заполнения"
         );
 
         $validator = Validator::make($request->all(), [
             'input_name_change'            => 'required|max:90',
             'input_date_booking_change'    => 'required',
-            'input_time_start_change'      => 'not_regex:/^__:__$/ius|date_format:H:i',
-            'input_time_end_change'        => 'not_regex:/^__:__$/ius|date_format:H:i',
-            'input_room'                   =>  'required',
+            'input_time_start_change'      => 'required|date_format:H:i',
+            'input_time_end_change'        => 'required|date_format:H:i',
+            'input_room'                   => 'required',
         ],  $messages);
 
         if ($validator->fails()) {

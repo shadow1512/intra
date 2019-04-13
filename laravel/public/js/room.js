@@ -4,11 +4,23 @@ $(document).on("click", "#input_time_start,#input_time_end,#input_time_start_cha
 
 $(document).on("click", "#submit_room_order_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    if($("#room_order_form").find('#input_time_end').val()  ==  '__:__') {
+        $("#room_order_form").find('#input_time_end').val("");
+    }
+    if($("#room_order_form").find('#input_time_start').val()  ==  '__:__') {
+        $("#room_order_form").find('#input_time_start').val("");
+    }
     $("#room_order_form").submit();
     return false;
 });
 $(document).on("click", "#submit_room_change_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    if($("#room_change_form").find('#input_time_end_change').val()  ==  '__:__') {
+        $("#room_change_form").find('#input_time_end_change').val("");
+    }
+    if($("#room_change_form").find('#input_time_start_change').val()  ==  '__:__') {
+        $("#room_change_form").find('#input_time_start_change').val("");
+    }
     $("#room_change_form").submit();
     return false;
 });

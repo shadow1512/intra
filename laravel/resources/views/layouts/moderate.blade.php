@@ -44,13 +44,24 @@
                     <!-- Left Side Of Navbar -->
                     @if (Auth::check())
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ route('moderate') }}">Новости</a></li>
-                        <li><a href="{{ route('moderate.dinner.list') }}">Столовая</a></li>
+                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  4)
+                        <li><a href="{{ route('moderate.news.list') }}">Новости</a></li>
                         <li><a href="{{ route('moderate.library.index') }}">Библиотека</a></li>
-                        <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
-                        <li><a href="{{ route('moderate.users.start') }}">Сотрудники</a></li>
-                        <li><a href="{{ route('moderate.admins.list') }}">Модераторы</a></li>
                         <li><a href="{{ route('moderate.foto.index') }}">Фото/видео с праздников</a></li>
+                        @endif
+                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  6)
+                        <li><a href="{{ route('moderate.dinner.list') }}">Столовая</a></li>
+                        @endif
+                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  5)
+                        <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
+                        @endif
+                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  3)
+                        <li><a href="{{ route('moderate.users.start') }}">Сотрудники</a></li>
+                        @endif
+                        @if (Auth::user()->role_id  ==  1)
+                        <li><a href="{{ route('moderate.admins.list') }}">Модераторы</a></li>
+                        @endif
+
                     </ul>
                     @endif
 

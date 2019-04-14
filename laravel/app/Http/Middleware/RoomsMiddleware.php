@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class ModerateMiddleware
+class RoomsMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,9 @@ class ModerateMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!in_array(Auth::user()->role_id, array(1,3,4,5,6)))
+        if (!(Auth::user()->role_id   ==  5))
         {
-            return redirect('/');
+            return redirect('/moderate');
         }
 
         return $next($request);

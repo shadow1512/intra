@@ -68,61 +68,78 @@ Route::get('/indexer/xml', 'IndexerController@createXMLFromUpdatedUsers')->name(
 //Auth::routes();
 
 
-Route::group(['prefix' => 'moderate'], function () {
-    Route::get('/', 'ModerateController@index')->name('moderate');
-    Route::get('/news/create', 'ModerateController@newscreate')->name('moderate.news.create');
-    Route::get('/news/edit/{id}', 'ModerateController@newsedit')->name('moderate.news.edit');
-    Route::put('/news/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
-    Route::put('/news/store', 'ModerateController@newsstore')->name('moderate.news.store');
-    Route::delete('/news/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
-    Route::get('/rooms', 'ModerateController@rooms')->name('moderate.rooms.index');
-    Route::get('/rooms/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
-    Route::get('/rooms/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
-    Route::put('/rooms/update/{id}', 'ModerateController@roomsupdate')->name('moderate.rooms.update');
-    Route::put('/rooms/store', 'ModerateController@roomsstore')->name('moderate.rooms.store');
-    Route::delete('/rooms/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
-    Route::get('/library', 'ModerateController@library')->name('moderate.library.index');
-    Route::get('/library/razdel/create', 'ModerateController@librarycreate')->name('moderate.library.create');
-    Route::get('/library/razdel/edit/{id}', 'ModerateController@libraryedit')->name('moderate.library.edit');
-    Route::put('/library/razdel/update/{id}', 'ModerateController@libraryupdate')->name('moderate.library.update');
-    Route::put('/library/razdel/store', 'ModerateController@librarystore')->name('moderate.library.store');
-    Route::delete('/library/razdel/delete/{id}', 'ModerateController@librarydelete')->name('moderate.library.delete');
-    Route::get('/library/book/create', 'ModerateController@librarycreatebook')->name('moderate.library.createbook');
-    Route::get('/library/book/edit/{id}', 'ModerateController@libraryeditbook')->name('moderate.library.editbook');
-    Route::put('/library/book/update/{id}', 'ModerateController@libraryupdatebook')->name('moderate.library.updatebook');
-    Route::put('/library/book/store', 'ModerateController@librarystorebook')->name('moderate.library.storebook');
-    Route::delete('/library/book/delete/{id}', 'ModerateController@librarydeletebook')->name('moderate.library.deletebook');
-    Route::put('/library/book/update/cover/{id}', 'ModerateController@libraryupdatebookcover')->name('moderate.library.updatebookcover');
-    Route::get('/library/book/delete/cover/{id}', 'ModerateController@librarydeletebookcover')->name('moderate.library.deletebookcover');
-    Route::put('/library/book/update/file/{id}', 'ModerateController@libraryupdatebookfile')->name('moderate.library.updatebookfile');
-    Route::get('/library/book/delete/file/{id}', 'ModerateController@librarydeletebookfile')->name('moderate.library.deletebookfile');
+Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], function () {
+    Route::group(['prefix'  =>  'news', 'middleware'    =>  ['content','admin']],   function() {
+        Route::get('/', 'ModerateController@newslist')->name('moderate.news.list');
+        Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');
+        Route::get('/edit/{id}', 'ModerateController@newsedit')->name('moderate.news.edit');
+        Route::put('/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
+        Route::put('/store', 'ModerateController@newsstore')->name('moderate.news.store');
+        Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
+    });
 
-    Route::get('/users', 'ModerateController@users')->name('moderate.users.start');
-    Route::get('/users/{letter}', 'ModerateController@users')->name('moderate.users.index');
-    Route::get('/users/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
-    Route::put('/users/update/{id}', 'ModerateController@usersupdate')->name('moderate.users.update');
-    Route::put('/users/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
-    Route::get('/users/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');
-    Route::get('/foto', 'ModerateController@foto')->name('moderate.foto.index');
-    Route::get('/foto/create', 'ModerateController@fotocreate')->name('moderate.foto.create');
-    Route::get('/foto/edit/{id}', 'ModerateController@fotoedit')->name('moderate.foto.edit');
-    Route::put('/foto/update/{id}', 'ModerateController@fotoupdate')->name('moderate.foto.update');
-    Route::put('/foto/store', 'ModerateController@fotostore')->name('moderate.foto.store');
-    Route::delete('/foto/delete/{id}', 'ModerateController@fotodelete')->name('moderate.foto.delete');
-    Route::put('/foto/update/image/{id}', 'ModerateController@fotoupdateimage')->name('moderate.foto.updateimage');
-    Route::delete('/foto/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
+    Route::group(['prefix'  =>  'library', 'middleware'    =>  ['content','admin']],   function() {
+        Route::get('/', 'ModerateController@library')->name('moderate.library.index');
+        Route::get('/razdel/create', 'ModerateController@librarycreate')->name('moderate.library.create');
+        Route::get('/razdel/edit/{id}', 'ModerateController@libraryedit')->name('moderate.library.edit');
+        Route::put('/razdel/update/{id}', 'ModerateController@libraryupdate')->name('moderate.library.update');
+        Route::put('/razdel/store', 'ModerateController@librarystore')->name('moderate.library.store');
+        Route::delete('/razdel/delete/{id}', 'ModerateController@librarydelete')->name('moderate.library.delete');
+        Route::get('/book/create', 'ModerateController@librarycreatebook')->name('moderate.library.createbook');
+        Route::get('/book/edit/{id}', 'ModerateController@libraryeditbook')->name('moderate.library.editbook');
+        Route::put('/book/update/{id}', 'ModerateController@libraryupdatebook')->name('moderate.library.updatebook');
+        Route::put('/book/store', 'ModerateController@librarystorebook')->name('moderate.library.storebook');
+        Route::delete('/book/delete/{id}', 'ModerateController@librarydeletebook')->name('moderate.library.deletebook');
+        Route::put('/book/update/cover/{id}', 'ModerateController@libraryupdatebookcover')->name('moderate.library.updatebookcover');
+        Route::get('/book/delete/cover/{id}', 'ModerateController@librarydeletebookcover')->name('moderate.library.deletebookcover');
+        Route::put('/book/update/file/{id}', 'ModerateController@libraryupdatebookfile')->name('moderate.library.updatebookfile');
+        Route::get('/book/delete/file/{id}', 'ModerateController@librarydeletebookfile')->name('moderate.library.deletebookfile');
+    });
 
-    Route::get('/dinner/', 'ModerateController@dinnerlist')->name('moderate.dinner.list');
-    Route::get('/dinner/create', 'ModerateController@dinnercreate')->name('moderate.dinner.create');
-    Route::get('/dinner/edit/{id}', 'ModerateController@dinneredit')->name('moderate.dinner.edit');
-    Route::put('/dinner/update/{id}', 'ModerateController@dinnerupdate')->name('moderate.dinner.update');
-    Route::put('/dinner/store', 'ModerateController@dinnerstore')->name('moderate.dinner.store');
-    Route::delete('/dinner/delete/{id}', 'ModerateController@dinnerdelete')->name('moderate.dinner.delete');
+    Route::group(['prefix'  =>  'foto', 'middleware'    =>  ['content','admin']],   function() {
+        Route::get('/', 'ModerateController@foto')->name('moderate.foto.index');
+        Route::get('/create', 'ModerateController@fotocreate')->name('moderate.foto.create');
+        Route::get('/edit/{id}', 'ModerateController@fotoedit')->name('moderate.foto.edit');
+        Route::put('/update/{id}', 'ModerateController@fotoupdate')->name('moderate.foto.update');
+        Route::put('/store', 'ModerateController@fotostore')->name('moderate.foto.store');
+        Route::delete('/delete/{id}', 'ModerateController@fotodelete')->name('moderate.foto.delete');
+        Route::put('/update/image/{id}', 'ModerateController@fotoupdateimage')->name('moderate.foto.updateimage');
+        Route::delete('/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
+    });
 
-    Route::get('/admins/', 'ModerateController@adminslist')->name('moderate.admins.list');
-    Route::get('/admins/create', 'ModerateController@adminscreate')->name('moderate.admins.create');
-    Route::get('/admins/edit/{id}', 'ModerateController@adminsedit')->name('moderate.admins.edit');
-    Route::put('/admins/update/{id}', 'ModerateController@adminsupdate')->name('moderate.admins.update');
-    Route::put('/admins/store', 'ModerateController@adminsstore')->name('moderate.admins.store');
-    Route::delete('/admins/delete/{id}', 'ModerateController@adminsdelete')->name('moderate.admins.delete');
+    Route::group(['prefix'  =>  'rooms', 'middleware'    =>  ['rooms','admin']],   function() {
+        Route::get('/', 'ModerateController@rooms')->name('moderate.rooms.index');
+        Route::get('/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
+        Route::get('/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
+        Route::put('/update/{id}', 'ModerateController@roomsupdate')->name('moderate.rooms.update');
+        Route::put('/store', 'ModerateController@roomsstore')->name('moderate.rooms.store');
+        Route::delete('/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
+    });
+
+    Route::group(['prefix'  =>  'users', 'middleware'    =>  ['support','admin']],   function() {
+        Route::get('/', 'ModerateController@users')->name('moderate.users.start');
+        Route::get('/{letter}', 'ModerateController@users')->name('moderate.users.index');
+        Route::get('/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
+        Route::put('/update/{id}', 'ModerateController@usersupdate')->name('moderate.users.update');
+        Route::put('/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
+        Route::get('/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');
+    });
+
+    Route::group(['prefix'  =>  'dinner', 'middleware'    =>  ['aho','admin']],   function() {
+        Route::get('/', 'ModerateController@dinnerlist')->name('moderate.dinner.list');
+        Route::get('/create', 'ModerateController@dinnercreate')->name('moderate.dinner.create');
+        Route::get('/edit/{id}', 'ModerateController@dinneredit')->name('moderate.dinner.edit');
+        Route::put('/update/{id}', 'ModerateController@dinnerupdate')->name('moderate.dinner.update');
+        Route::put('/store', 'ModerateController@dinnerstore')->name('moderate.dinner.store');
+        Route::delete('/delete/{id}', 'ModerateController@dinnerdelete')->name('moderate.dinner.delete');
+    });
+
+    Route::group(['prefix'  =>  'admins', 'middleware'    =>  ['admin']],   function() {
+        Route::get('/', 'ModerateController@adminslist')->name('moderate.admins.list');
+        Route::get('/create', 'ModerateController@adminscreate')->name('moderate.admins.create');
+        Route::get('/edit/{id}', 'ModerateController@adminsedit')->name('moderate.admins.edit');
+        Route::put('/update/{id}', 'ModerateController@adminsupdate')->name('moderate.admins.update');
+        Route::put('/store', 'ModerateController@adminsstore')->name('moderate.admins.store');
+        Route::delete('/delete/{id}', 'ModerateController@adminsdelete')->name('moderate.admins.delete');
+    });
 });

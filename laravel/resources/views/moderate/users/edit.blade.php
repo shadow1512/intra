@@ -223,13 +223,17 @@
                                     @endif
                                 </div>
                             </div>
+                            @if (Auth::user()->role_id  ==  1)
                             <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
                                 <label for="role_id" class="col-md-4 control-label">Роль</label>
 
                                 <div class="col-md-6">
                                     <select class="custom-select" id="role_id" name="role_id">
-                                        <option value="1" @if ($user->role_id == 1) selected @endif>Модератор</option>
-                                        <option value="2" @if ($user->role_id == 2) selected @endif>Пользователь</option>
+                                        <option value="3" @if ($user->role_id == 3) selected @endif>Помощник директора</option>
+                                        <option value="2" @if ($user->role_id == 2) selected @endif>Сотрудник</option>
+                                        <option value="4" @if ($user->role_id == 4) selected @endif>Модератор новостей, фото, библиотеки</option>
+                                        <option value="5" @if ($user->role_id == 5) selected @endif>Секретариат</option>
+                                        <option value="6" @if ($user->role_id == 6) selected @endif>АХУ</option>
                                     </select>
 
                                     @if ($errors->has('role_id'))
@@ -239,6 +243,9 @@
                                     @endif
                                 </div>
                             </div>
+                            @else
+                                <input type="hidden" name="role_id" id="role_id" value="{{ $user->role_id }}"/>
+                            @endif
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

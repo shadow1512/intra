@@ -32,14 +32,32 @@ class ModerateController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('moderate');
+        //$this->middleware('moderate');
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() {
+        if(Auth::user()->role_id   ==  1) {
+            return redirect(route('moderate.users.list'));
+        }
+        if(Auth::user()->role_id   ==  3) {
+            return redirect(route('moderate.users.list'));
+        }
+        if(Auth::user()->role_id   ==  4) {
+            return redirect(route('moderate.news.list'));
+        }
+        if(Auth::user()->role_id   ==  5) {
+            return redirect(route('moderate.rooms.list'));
+        }
+        if(Auth::user()->role_id   ==  6) {
+            return redirect(route('moderate.dinner.list'));
+        }
+    }
+
+    public function newslist()
     {
         //новости
         $news = News::orderBy('importancy', 'desc')->limit(50)->get();
@@ -62,7 +80,7 @@ class ModerateController extends Controller
         $news = News::findOrFail($id);
         $news->delete();
 
-        return redirect(route('moderate'));
+        return redirect(route('moderate.news.list'));
     }
 
     public function newsstore(Request $request)
@@ -96,7 +114,7 @@ class ModerateController extends Controller
             'importancy'        =>  $importancy
         ]);
 
-        return redirect(route('moderate'));
+        return redirect(route('moderate.news.list'));
     }
 
     public function newsupdate(Request $request, $id)
@@ -131,7 +149,7 @@ class ModerateController extends Controller
         $news->updated_at = date("Y-m-d H:i:s");
         $news->save();
 
-        return redirect(route('moderate'));
+        return redirect(route('moderate.news.list'));
     }
 
     public function dinnerlist()
@@ -614,6 +632,7 @@ class ModerateController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'numpark'           =>  'nullable|integer',
+            'role_id'           =>  'required|integer',
             'position_desc'     =>  'nullable|string|max:255',
             'lname'             =>  'string|max:255|required',
             'fname'             =>  'string|max:255|required',
@@ -637,6 +656,8 @@ class ModerateController extends Controller
         if($request->input('birthday')) {
             $user->birthday = date("Y-m-d", strtotime($request->input('birthday')));
         }
+
+        $user->role_id          =   $request->input('role_id');
 
         $user->lname            =   $request->input('lname');
         $user->fname            =   $request->input('fname');

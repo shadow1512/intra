@@ -223,7 +223,7 @@
                                     @endif
                                 </div>
                             </div>
-                            @if (Auth::user()->role_id  ==  1)
+                            @if ((Auth::user()->role_id  ==  1) && ($user->role_id !== 1))
                             <div class="form-group{{ $errors->has('role_id') ? ' has-error' : '' }}">
                                 <label for="role_id" class="col-md-4 control-label">Роль</label>
 

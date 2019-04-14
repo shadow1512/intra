@@ -230,6 +230,7 @@ class ModerateController extends Controller
         //Комнаты
         $rooms = Rooms::selectRaw('rooms.*, count(room_bookings.id) as numbookings')
             ->leftJoin('room_bookings', 'rooms.id', '=', 'room_bookings.room_id')
+            ->where('room_bookings.approved',   '=',    0)
             ->groupBy(['room_bookings.room_id',  'rooms.id'])
             ->orderBy('name', 'desc')->get();
 

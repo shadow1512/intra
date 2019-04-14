@@ -11,7 +11,7 @@
             @if (count($bookings))
             @foreach($bookings as $booking)
             <div class="row">
-                <div class="col-md-4">{{ $bookings->name }}</div>
+                <div class="col-md-4">{{ $booking->name }}</div>
                 <div class="col-md-1">{{date("d.m.Y",   strtotime($booking->date_book))}}</div>
                 <div class="col-md-1">{{ $booking->time_start}}</div>
                 <div class="col-md-1">{{ $booking->time_end}}</div>

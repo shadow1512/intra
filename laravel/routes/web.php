@@ -71,7 +71,7 @@ Route::get('/indexer/xml', 'IndexerController@createXMLFromUpdatedUsers')->name(
 Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], function () {
     Route::get('/', 'ModerateController@index')->name('moderate');
 
-    Route::group(['prefix'  =>  'news', 'middleware'    =>  ['content','admin']],   function() {
+    Route::group(['prefix'  =>  'news', 'middleware'    =>  ['content']],   function() {
         Route::get('/', 'ModerateController@newslist')->name('moderate.news.list');
         Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');
         Route::get('/edit/{id}', 'ModerateController@newsedit')->name('moderate.news.edit');
@@ -80,7 +80,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     });
 
-    Route::group(['prefix'  =>  'library', 'middleware'    =>  ['content','admin']],   function() {
+    Route::group(['prefix'  =>  'library', 'middleware'    =>  ['content']],   function() {
         Route::get('/', 'ModerateController@library')->name('moderate.library.index');
         Route::get('/razdel/create', 'ModerateController@librarycreate')->name('moderate.library.create');
         Route::get('/razdel/edit/{id}', 'ModerateController@libraryedit')->name('moderate.library.edit');
@@ -98,7 +98,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::get('/book/delete/file/{id}', 'ModerateController@librarydeletebookfile')->name('moderate.library.deletebookfile');
     });
 
-    Route::group(['prefix'  =>  'foto', 'middleware'    =>  ['content','admin']],   function() {
+    Route::group(['prefix'  =>  'foto', 'middleware'    =>  ['content']],   function() {
         Route::get('/', 'ModerateController@foto')->name('moderate.foto.index');
         Route::get('/create', 'ModerateController@fotocreate')->name('moderate.foto.create');
         Route::get('/edit/{id}', 'ModerateController@fotoedit')->name('moderate.foto.edit');
@@ -109,7 +109,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::delete('/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
     });
 
-    Route::group(['prefix'  =>  'rooms', 'middleware'    =>  ['rooms','admin']],   function() {
+    Route::group(['prefix'  =>  'rooms', 'middleware'    =>  ['rooms']],   function() {
         Route::get('/', 'ModerateController@rooms')->name('moderate.rooms.index');
         Route::get('/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
         Route::get('/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
@@ -118,7 +118,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::delete('/delete/{id}', 'ModerateController@roomsdelete')->name('moderate.rooms.delete');
     });
 
-    Route::group(['prefix'  =>  'users', 'middleware'    =>  ['support','admin']],   function() {
+    Route::group(['prefix'  =>  'users', 'middleware'    =>  ['support']],   function() {
         Route::get('/', 'ModerateController@users')->name('moderate.users.start');
         Route::get('/{letter}', 'ModerateController@users')->name('moderate.users.index');
         Route::get('/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
@@ -127,7 +127,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::get('/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');
     });
 
-    Route::group(['prefix'  =>  'dinner', 'middleware'    =>  ['aho','admin']],   function() {
+    Route::group(['prefix'  =>  'dinner', 'middleware'    =>  ['aho']],   function() {
         Route::get('/', 'ModerateController@dinnerlist')->name('moderate.dinner.list');
         Route::get('/create', 'ModerateController@dinnercreate')->name('moderate.dinner.create');
         Route::get('/edit/{id}', 'ModerateController@dinneredit')->name('moderate.dinner.edit');

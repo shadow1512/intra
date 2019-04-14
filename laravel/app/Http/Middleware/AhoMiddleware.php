@@ -16,7 +16,7 @@ class AhoMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!(Auth::user()->role_id   ==  6))
+        if (!(Auth::user()->role_id   ==  6 ||  Auth::user()->role_id   ==  1))
         {
             return redirect('/moderate');
         }

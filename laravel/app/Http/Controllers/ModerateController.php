@@ -40,6 +40,8 @@ class ModerateController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index() {
+        var_dump(Auth::user()->role_id);
+
         if(Auth::user()->role_id   ==  1) {
             return redirect(route('moderate.users.start'));
         }

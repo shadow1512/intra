@@ -128,9 +128,14 @@ class RoomsController extends Controller
             else {
                 $date = date("Y-m-d H:i:s");
                 if (Auth::check()) {
+                    $approved   =   0;
+                    $room = Rooms::findOrFail($id);
+                    if($room->available) {
+                        $approved   =   1;
+                    }
                     DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
                         'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
-                        'created_at' => $date, 'updated_at' => $date]);
+                        'created_at' => $date, 'updated_at' => $date,   'approved'  =>  $approved]);
                     return response()->json(['result' => 'success']);
                 }
             }

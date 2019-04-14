@@ -69,6 +69,8 @@ Route::get('/indexer/xml', 'IndexerController@createXMLFromUpdatedUsers')->name(
 
 
 Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], function () {
+    Route::get('/', 'ModerateController@index')->name('moderate');
+    
     Route::group(['prefix'  =>  'news', 'middleware'    =>  ['content','admin']],   function() {
         Route::get('/', 'ModerateController@newslist')->name('moderate.news.list');
         Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');

@@ -52,7 +52,7 @@ class ModerateController extends Controller
             return redirect(route('moderate.news.list'));
         }
         if(Auth::user()->role_id   ==  5) {
-            return redirect(route('moderate.rooms.list'));
+            return redirect(route('moderate.rooms.index'));
         }
         if(Auth::user()->role_id   ==  6) {
             return redirect(route('moderate.dinner.list'));

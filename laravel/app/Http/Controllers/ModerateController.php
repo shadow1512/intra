@@ -41,10 +41,10 @@ class ModerateController extends Controller
      */
     public function index() {
         if(Auth::user()->role_id   ==  1) {
-            return redirect(route('moderate.users.list'));
+            return redirect(route('moderate.users.start'));
         }
         if(Auth::user()->role_id   ==  3) {
-            return redirect(route('moderate.users.list'));
+            return redirect(route('moderate.users.start'));
         }
         if(Auth::user()->role_id   ==  4) {
             return redirect(route('moderate.news.list'));

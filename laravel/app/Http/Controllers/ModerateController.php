@@ -15,6 +15,7 @@ use App\Dep;
 use DB;
 use App\News;
 use App\Rooms;
+use App\Booking;
 use App\LibBook;
 use App\LibRazdel;
 use App\Gallery;
@@ -227,7 +228,11 @@ class ModerateController extends Controller
     public function rooms()
     {
         //Комнаты
-        $rooms = Rooms::orderBy('name')->get();
+        $rooms = Rooms::selectRaw('rooms.*, count(room_bookings.id) as numbookings')
+            ->leftJoin('room_bookings', 'rooms.id', '=', 'room_bookings.room_id')
+            ->groupBy('room_bookings.room_id')
+            ->orderBy('name', 'desc')->get();
+
         return view('moderate.rooms.list', ['rooms'    =>  $rooms]);
     }
 
@@ -299,6 +304,34 @@ class ModerateController extends Controller
         }
         $room->updated_at = date("Y-m-d H:i:s");
         $room->save();
+
+        return redirect(route('moderate.rooms.index'));
+    }
+
+    public function bookingslist($id) {
+        $room = Rooms::findOrFail($id);
+        if(is_null($room->available)) {
+            $bookings = Booking::select('room_bookings.*',
+                'users.phone as phone', 'users.email as email', 'users.fname as fname',  'users.lname as lname', 'users.mname as mname')
+                ->leftJoin("users", 'room_bookings.user_id', '=', 'users.id')
+                ->where('room_id',  '=',    $id)
+                ->where('approved', '=',    0)
+                ->orderBy('date_book')
+                ->orderBy('time_start')
+                ->get();
+
+            return view('moderate.rooms.bookingslist', ['bookings'    =>  $bookings,    'room'  =>  $room]);
+        }
+    }
+
+    public function bookingconfirm($id) {
+
+        $booking    = Booking::findOrFail($id);
+        $room       = Rooms::findOrFail($booking->room_id);
+        if(is_null($room->available)) {
+            $booking->approved  =   1;
+            $booking->save();
+        }
 
         return redirect(route('moderate.rooms.index'));
     }

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Auth;
 
-class RoomsMiddleware
+class AdminMiddleware
 {
     /**
      * Handle an incoming request.

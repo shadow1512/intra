@@ -407,11 +407,18 @@
   color: $clear
   font-size: 18px
   line-height: 22px
-  padding: 4px 15px 17px 20px
+  padding: 4px 43px 17px 20px
   text-decoration: none
   display: block
   position: relative
   border-bottom: 1px solid #3782b7
+  a
+    text-decoration: none
+    color: $clear
+    @include transition(all .15s ease-in)
+    &:hover
+      text-decoration: none
+      opacity: .7
 
 .main_top_phones_people
   border-bottom: 1px solid rgba($clear, 0.2)

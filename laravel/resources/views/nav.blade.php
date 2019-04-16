@@ -1,10 +1,14 @@
 <nav class="content_i menu">
     <div class="main_top_phones">
         <div class="main_top_phones_people">
-            <a href="{{route("people.search")}}" class="main_top_phones_h">
-                Телефонный справочник
-                <svg class="main_top_phones_search_lk_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg>
-            </a>
+            <div class="main_top_phones_h">
+                <a href="{{route("people.search")}}">
+                    Телефонный справочник
+                </a>
+                <a href="{{route("people.search")}}">
+                    <svg class="main_top_phones_search_lk_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.559735 31.560434"><g><path d="M12.9 25.8C5.8 25.8 0 20 0 12.9S5.8 0 12.9 0s12.9 5.8 12.9 12.9S20 25.8 12.9 25.8zm0-24c-6.1 0-11.1 5-11.1 11.1S6.8 24 12.9 24 24 19 24 12.9 19 1.8 12.9 1.8zM21.165 22.58l1.415-1.414 8.98 8.98-1.414 1.414z"/></g></svg>
+                </a>
+            </div>
             @if (Auth::check())
                 @if (count($contacts))
             <ul class="main_top_phones_lst">

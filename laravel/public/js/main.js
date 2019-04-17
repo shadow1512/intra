@@ -306,7 +306,8 @@ function toggleDropdown(link, cnt) {
     });
 
     // Неавторизованный пользователь нажимает "авторизоваться" в меню навигации
-    $('.__js_auth').click(function() {
+    $('.__js_auth').click(function(e) {
+        e.stopPropagation();
         $('.header_login_nav').fadeIn(200);
 
     });

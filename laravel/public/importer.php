@@ -551,7 +551,7 @@ function createModerator($conn, $email, $level) {
         print("Права предоставлены\r\n");
     }
     else {
-        print("Пользователя с таким контактом не найдено\r\n");
+        print("Пользователь с таким контактом не найден\r\n");
     }
 
 

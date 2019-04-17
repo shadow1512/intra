@@ -38,7 +38,9 @@
                 @endif
             </div>
             @if(!in_array($user->id,    $contact_ids) && (Auth::check()))
-                <a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в контакты</a>
+                <a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в Мои контакты</a>
+            @else
+                <a href="{{route('profile.deletecontact', ['id' => $user->id])}}" class="btn profile_info_i_btn __ghost">Удалить из Моих контактов</a>
             @endif
         </div>
     </div>

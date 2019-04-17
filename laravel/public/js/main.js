@@ -291,11 +291,6 @@ open('.order_calendar_btn', '.order_calendar_cnt', '.order_calendar_i');
 
 function toggleDropdown(link, cnt) {
 
-    // Неавторизованный пользователь нажимает "авторизоваться" в меню навигации
-    if (link === $('.__js_auth')) {
-        cnt = $('.header_login_nav');
-        link = $('.__js_header_login');
-    }
 
     $(link).click(function(event) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
@@ -310,6 +305,11 @@ function toggleDropdown(link, cnt) {
         return false;
     });
 
+    // Неавторизованный пользователь нажимает "авторизоваться" в меню навигации
+    $('.__js_auth').click(function() {
+        $('.header_login_nav').fadeIn(200);
+
+    });
 
     $('html').click(function(e) {
         $(cnt).fadeOut(200);
@@ -322,7 +322,6 @@ function toggleDropdown(link, cnt) {
 }
 
 toggleDropdown('.__js_header_login', '.header_login_nav');
-toggleDropdown('.__js_auth');
 
 function toggleMenu(el, siblings) {
     $(el).click(function() {

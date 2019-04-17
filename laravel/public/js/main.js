@@ -322,7 +322,7 @@ function toggleDropdown(link, cnt) {
 }
 
 toggleDropdown('.__js_header_login', '.header_login_nav');
-
+toggleDropdown('.__js_auth');
 
 function toggleMenu(el, siblings) {
     $(el).click(function() {

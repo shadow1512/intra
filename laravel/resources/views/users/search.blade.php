@@ -11,7 +11,7 @@
         </a>
     @if (count($crumbs))
     <ul class="breadcrumbs">
-        <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Справочник</a></li>
+        <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
         @foreach ($crumbs as $crumb)
         <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
         @endforeach
@@ -19,7 +19,7 @@
     @else
          @if ($directory_name != "Консорциум Кодекс")
                 <ul class="breadcrumbs">
-                    <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Справочник</a></li>
+                    <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
                 </ul>
          @endif
     @endif

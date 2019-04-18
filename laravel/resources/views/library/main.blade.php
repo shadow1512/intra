@@ -33,7 +33,7 @@
                     @foreach($books as $book)
                     <li class="library_lst_i"><img src="{{$book->image}}" class="library_lst_i_img">
                         <div class="library_lst_i_info">
-                            <div class="library_lst_i_t">{{$book->name}}</div>
+                            {{--<div class="library_lst_i_t">{{$book->name}}</div>--}}
                             <div class="library_lst_i_dscr">{{$book->anno}}</div>
                             <div class="library_lst_i_author">{{$book->authors}}</div>
                             <div class="library_lst_i_author">{{$book->year}}</div>

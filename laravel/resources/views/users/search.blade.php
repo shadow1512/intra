@@ -104,6 +104,11 @@
                     <div class="h __h_m">Вы недавно искали</div>
         </div>
         <div class="content_tx __no-pad">
+          <div class="department">
+            <script src="/js/d3.v3.min.js"></script>
+            <script src="/js/draw.js" ></script>
+          </div>
+
             <ul class="directory_lst">
                 @foreach($search_contacts as $contact)
                     <li class="directory_lst_i @if (mb_substr($contact->birthday,  5) ==  date("m-d")) __birthday @endif">

@@ -1,4 +1,4 @@
-var width = 700,
+var width = 650,
     height = 650,
     radius = Math.min(width, height) / 2;
 
@@ -228,5 +228,5 @@ d3.csv('/js/personal_data.csv', function(error, data) {
     .attr("dy", ".35em")
     .attr("y", "2em")
     .attr("text-anchor", "middle")
-    .text('человек работает в Кодексе');
+    .html('<tspan x="0em" y="1.5em">человек работает</tspan> <tspan x="0em" y="3em">в Кодексе</tspan>');
 });

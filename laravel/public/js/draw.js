@@ -29,14 +29,14 @@ svg.append("g")
 
 svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-d3.csv('personal_data.csv', function(error, data) {
+d3.csv('/js/personal_data.csv', function(error, data) {
 
   data.forEach(function(d) {
     d.color  =  d.color;
     d.score  = +d.score;
     d.label  =  d.label;
     d.url  =  d.url;
-    d.icon  =  "../images/person.svg";
+    d.icon  =  "/images/person.svg";
   });
 
   var key = function(d){ return d.data.label; };

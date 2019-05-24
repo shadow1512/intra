@@ -131,10 +131,12 @@
         @endif
     @else
         <div class="content_tx __no-pad">
-            <div class="department">
-              <script src="/js/d3.v3.min.js"></script>
-              <script src="/js/draw.js" ></script>
-            </div>
+            @if(empty($currentDep->parent_id))
+              <div class="department">
+                <script src="/js/d3.v3.min.js"></script>
+                <script src="/js/draw.js" ></script>
+              </div>
+            @endif
             @if (count($users))
                 <ul class="directory_lst">
                     @foreach($users as $user)

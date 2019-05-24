@@ -61,8 +61,11 @@ d3.csv('/js/personal_data.csv', function(error, data) {
   })
   .call(wrap, 120)
   .attr("class", "department_label")
+  .on("mouseover", function(d) {
+    d3.select(this).moveToFront();
+  })
   .on("click", function(d,i) {
-    window.open(d.data.url);
+    window.open(d.data.url, "_self");
   });
 
   function wrap(text, width) {

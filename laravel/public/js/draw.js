@@ -23,8 +23,6 @@ var svg = d3.select(".department").append("svg")
 svg.append("g")
 	.attr("class", "department_slices");
 svg.append("g")
-	.attr("class", "department_labels");
-svg.append("g")
 	.attr("class", "department_lines");
 
 svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
@@ -50,24 +48,6 @@ d3.csv('/js/personal_data.csv', function(error, data) {
       .attr("d", arc);
 
   // label
-	var label = svg.select(".department_labels").selectAll("text")
-		.data(pie(data), key);
-
-  label.enter().append("text")
-  .attr("dy", ".35em")
-  .attr("x", "1em")
-  .text(function(d) {
-    return d.data.label;
-  })
-  .call(wrap, 120)
-  .attr("class", "department_label")
-  .on("mouseover", function(d) {
-    d3.select(this).moveToFront();
-  })
-  .on("click", function(d,i) {
-    window.open(d.data.url, "_self");
-  });
-
   function wrap(text, width) {
     text.each(function () {
       var text = d3.select(this),
@@ -106,7 +86,36 @@ d3.csv('/js/personal_data.csv', function(error, data) {
     return d.startAngle + (d.endAngle - d.startAngle)/2;
   }
 
-  label.transition().duration(1000)
+  d3.selection.prototype.moveToFront = function() {
+    return this.each(function(){
+      this.parentNode.appendChild(this);
+    });
+  };
+  d3.selection.prototype.moveToBack = function() {
+    return this.each(function() {
+      var firstChild = this.parentNode.firstChild;
+      if (firstChild) {
+          this.parentNode.insertBefore(this, firstChild);
+      }
+    });
+  };
+
+  // score
+  var score = svg.selectAll(".department_score")
+    .data(pie(data))
+    .enter().append("g")
+    .attr("class", "department_score");
+
+  score.append("text")
+  .attr("dy", ".35em")
+  .attr("x", "1em")
+  .text(function(d) {
+    return d.data.label;
+  })
+  .call(wrap, 120)
+  .attr("class", "department_label");
+
+  score.selectAll(".department_label").transition().duration(1000)
     .attrTween("transform", function(d) {
       this._current = this._current || d;
       var interpolate = d3.interpolate(this._current, d);
@@ -114,8 +123,8 @@ d3.csv('/js/personal_data.csv', function(error, data) {
       return function(t) {
         var d2 = interpolate(t);
         var outerLabelArc = d3.svg.arc()
-        	.innerRadius(radius * 0.87)
-        	.outerRadius(radius * 0.87);
+        	.innerRadius(radius * 0.2)
+        	.outerRadius(radius * 0.2);
         var pos = outerLabelArc.centroid(d2);
         return "translate("+ pos +")";
       };
@@ -129,15 +138,6 @@ d3.csv('/js/personal_data.csv', function(error, data) {
         return midAngle(d2) < Math.PI ? "middle":"end";
       };
     });
-
-	label.exit()
-		.remove();
-
-  // score
-  var score = svg.selectAll(".department_score")
-    .data(pie(data))
-    .enter().append("g")
-    .attr("class", "department_score");
 
   score.append("circle")
     .attr("class", "department_circle")
@@ -175,20 +175,6 @@ d3.csv('/js/personal_data.csv', function(error, data) {
         return "translate("+ pos +")";
       };
     });
-
-  d3.selection.prototype.moveToFront = function() {
-    return this.each(function(){
-      this.parentNode.appendChild(this);
-    });
-  };
-  d3.selection.prototype.moveToBack = function() {
-    return this.each(function() {
-      var firstChild = this.parentNode.firstChild;
-      if (firstChild) {
-          this.parentNode.insertBefore(this, firstChild);
-      }
-    });
-  };
 
   score.on("mouseover", function(d) {
     d3.select(this).moveToFront();

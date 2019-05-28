@@ -7,7 +7,7 @@
             {{ csrf_field() }}
             <div class="field">
                 <label for="roomnum" class="lbl">Уточните комнату, в которой стоит принтер:</label>
-                <input type="text" id="roomnum" name="roomnum" class="it" value="{{Auth::user()->room}}"></input>
+                <input type="text" id="roomnum" name="roomnum" class="it" value=""></input>
             </div>
             <div class="field"><a href="#" class="btn profile_form_btn" id="submit_profile_form">OK</a></div>
         </form>

@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="row">
-                <div class="col-md-12"><h3>Список бронирований для подтверждения для комнаты {{$room->name}}</h3></div>
+                <div class="col-md-12"><h3>Список бронирований для &laquo;{{$room->name}}&raquo;</h3></div>
             </div>
             @if (count($bookings))
             @foreach($bookings as $booking)

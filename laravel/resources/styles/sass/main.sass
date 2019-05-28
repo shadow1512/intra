@@ -377,35 +377,53 @@
   padding: 15px 20px
   position: relative
   text-align: center
+  color: #90bad7
+  span
+    font-weight: bold
+    opacity: .9
+    color: $clear
+    @include transition(all .15s ease-in)
+    &:hover
+      opacity: 0.7
+      text-decoration: none
+      cursor: pointer
 
 .main_top_phones_search_lk
   text-decoration: none
   color: $clear
   padding-left: 25px
   position: relative
-  margin-left: -15px
   text-align: center
   @include transition(all .15s ease-in)
   &:hover
     opacity: 0.7
 
 .main_top_phones_search_lk_ic
-  width: 14px
-  height: 14px
+  width: 19px
+  height: 19px
   fill: $clear
   position: absolute
-  left: 0
+  right: 22px
   top: 50%
-  margin-top: -7px
+  margin-top: -17px
   @include transition(all .15s ease-in)
 
 .main_top_phones_h
   color: $clear
   font-size: 18px
   line-height: 22px
-  margin: 15px 15px 40px 15px
+  padding: 4px 43px 17px 20px
   text-decoration: none
   display: block
+  position: relative
+  border-bottom: 1px solid #3782b7
+  a
+    text-decoration: none
+    color: $clear
+    @include transition(all .15s ease-in)
+    &:hover
+      text-decoration: none
+      opacity: .7
 
 .main_top_phones_people
   border-bottom: 1px solid rgba($clear, 0.2)
@@ -413,9 +431,9 @@
 
 .main_top_phones_lst
   margin: 0
-  padding: 0 15px 30px 15px
+  padding: 15px 15px 15px 22px
   list-style-type: none
-  height: 141px
+  height: 148px
   overflow: auto
   &::-webkit-scrollbar
     width: 8px
@@ -441,9 +459,9 @@
   display: block
   color: $clear
   text-decoration: none
-  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMTUiIHdpZHRoPSIxNSIgdmlld0JveD0iMCAwIDM2LjkxODAwNiAzNS4xIj48cGF0aCBkPSJNMjkuMjggMzUuMWMtLjIgMC0uNC0uMS0uNS0uMmwtMTAuMy03LjUtMTAuMyA3LjVjLS4zLjItLjguMi0xLjEgMHMtLjUtLjctLjMtMWwzLjktMTIuMS0xMC4zLTcuNWMtLjMtLjItLjUtLjctLjMtMSAuMS0uNC41LS42LjktLjZoMTIuN0wxNy41OC42Yy4xLS40LjUtLjYuOS0uNnMuOC4zLjkuNmwzLjkgMTIuMWgxMi43Yy40IDAgLjguMy45LjYuMS40IDAgLjgtLjMgMWwtMTAuMyA3LjUgMy45IDEyLjFjLjEuNCAwIC44LS4zIDEtLjIuMi0uNC4yLS42LjJ6bS0xMC44LTkuN2MuMiAwIC40LjEuNS4ybDguNSA2LjItMy4zLTEwYy0uMS0uNCAwLS44LjMtMWw4LjUtNi4yaC0xMC41Yy0uNCAwLS44LS4zLS45LS42bC0zLjMtMTAtMy4zIDEwYy0uMS40LS41LjYtLjkuNkgzLjU4bDguNSA2LjJjLjMuMi41LjcuMyAxbC0zLjMgMTAgOC41LTYuMmMuNS0uMS43LS4yLjktLjJ6IiBmaWxsPSIjZmZmIi8+PC9zdmc+)
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMi4wMzEiIGhlaWdodD0iMTMuMDE2Ij48cGF0aCBkPSJNNi4wMjEuMDEzYzEuNDU1IDAgMi45OTggMS4yMjYgMi45OTggMi4xNDF2Mi4xNDJjMCAuODI1LS4zNDIgMi40MDItMS4yNjIgMy4xMjZhLjg1Ni44NTYgMCAwIDAtLjMxOS43NzUuODU1Ljg1NSAwIDAgMCAuNDkzLjY3OGwzLjcyOSAxLjc3Yy4wMjkuMDEzLjM1Ny4wNjguMzU3LjUyNmwuMDAxIDEuODM3SC4wMjd2LTEuODY5YzAtLjM0Mi4yNTYtLjQ0OC4zNTctLjQ5NWwzLjc2NC0xLjc3NmEuODU3Ljg1NyAwIDAgMCAuMTc4LTEuNDQ4Yy0uODktLjcxNS0xLjMwNS0yLjI4Ny0xLjMwNS0zLjEyNFYyLjE1NGMwLS44OTYgMS41NTktMi4xNDEgMy0yLjE0MSIgZmlsbD0iI2IyY2ZlMyIvPjwvc3ZnPg==)
   background-repeat: no-repeat
-  background-position: 0 50%
+  background-position: 0 40%
   padding-left: 25px
   &:hover
     text-decoration: underline
@@ -454,16 +472,20 @@
   opacity: 0.6
   color: $clear
   height: 116px
-  margin: 25px 0 0
+  margin: 25px 0 11px
 
 .main_top_phones_logout_tx
-  margin-top: 5px
+  padding: 25px 26px
+  line-height: 1.3em
 
 .main_top_phones_logout_ic
-  width: 50px
-  height: 50px
+  width: 19px
+  height: 19px
   fill: $clear
   margin: 0 auto
+  position: absolute
+  left: -3px
+  opacity: .7
 
 .main_top_dinner
   margin-left: 311px

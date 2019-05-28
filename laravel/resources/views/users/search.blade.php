@@ -11,7 +11,7 @@
         </a>
     @if (count($crumbs))
     <ul class="breadcrumbs">
-        <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Справочник</a></li>
+        <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
         @foreach ($crumbs as $crumb)
         <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
         @endforeach
@@ -19,7 +19,7 @@
     @else
          @if ($directory_name != "Консорциум Кодекс")
                 <ul class="breadcrumbs">
-                    <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Справочник</a></li>
+                    <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
                 </ul>
          @endif
     @endif
@@ -73,7 +73,7 @@
     @if((mb_strlen($currentDep->parent_id,   "UTF-8")    ==  0) &&  (count($contacts)   ||  count($search_contacts)))
         @if (count($contacts))
         <div class="content_i_header __with-ic"><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
-                    <div class="h __h_m">Избранные</div>
+                    <div class="h __h_m">Мои контакты</div>
         </div>
         <div class="content_tx __no-pad">
                 <ul class="directory_lst">
@@ -89,7 +89,7 @@
                                 <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
                             </div>
-                            <div class="directory_lst_i_action"><a href="{{route("profile.deletecontact",   ["id"   =>  $contact->id,  "url"   =>  route("people.dept",    ["id"   =>  $currentDep->id])])}}" title="Удалить из избранного" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>
+                            <div class="directory_lst_i_action"><a href="{{route("profile.deletecontact",   ["id"   =>  $contact->id,  "url"   =>  route("people.dept",    ["id"   =>  $currentDep->id])])}}" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>
                         </li>
                     @endforeach
                 </ul>
@@ -118,7 +118,7 @@
                             <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
                         </div>
                         @if(!in_array($user->id,    $contact_ids))
-                            <div class="directory_lst_i_action"><a href="{{route("profile.addcontact",   ["id"   =>  $contact->id,  "url"   =>  route("people.dept",    ["id"   =>  $currentDep->id])])}}" title="Добавить в избранное" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg></a></div>
+                            <div class="directory_lst_i_action"><a href="{{route("profile.addcontact",   ["id"   =>  $contact->id,  "url"   =>  route("people.dept",    ["id"   =>  $currentDep->id])])}}" title="Добавить в Мои контакты" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_add" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg></a></div>
                         @endif
                     </li>
                 @endforeach
@@ -131,6 +131,12 @@
         @endif
     @else
         <div class="content_tx __no-pad">
+            @if(empty($currentDep->parent_id))
+              <div class="department">
+                <script src="/js/d3.v3.min.js"></script>
+                <script src="/js/draw.js" ></script>
+              </div>
+            @endif
             @if (count($users))
                 <ul class="directory_lst">
                     @foreach($users as $user)
@@ -145,7 +151,7 @@
                                 <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                             </div>
-                            <!--<div class="directory_lst_i_action"><a href="" title="Удалить из избранного" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
+                            <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
                         </li>
                     @endforeach
                 </ul>

@@ -23,7 +23,7 @@ class NewsController extends Controller
     {
         //новости
         $news = News::orderBy('importancy', 'desc')->paginate(25);
-        $news->withParam('/news/');
+        $news->withPath('/news/');
 
         return view('news.fulllist', ['news'    =>  $news]);
     }

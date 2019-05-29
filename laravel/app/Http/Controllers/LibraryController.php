@@ -33,11 +33,11 @@ class LibraryController extends Controller
             $books = LibBook::leftJoin('lib_books_razdels', 'lib_books.id', '=', 'lib_books_razdels.book_id')
                 ->where('lib_books_razdels.razdel_id', '=', $id)
                 ->orderBy('name', 'desc')->paginate(8);
-            $books->withParam('/library/razdel/'    .   $id);
+            $books->withPath('/library/razdel/'    .   $id);
         }
         else {
             $books = LibBook::orderBy('name', 'desc')->paginate(8);
-            $books->withParam('/library/');
+            $books->withPath('/library/');
         }
         //разделы
         $razdels = LibRazdel::selectRaw("lib_razdels.id, name, count(lib_books_razdels.book_id) as numbooks")

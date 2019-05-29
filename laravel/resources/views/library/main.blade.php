@@ -42,6 +42,7 @@
                     @endforeach
                 </ul>
                 @endif
+                {{$books->links('library.pages')}}
             </div>
         </div>
     </div>

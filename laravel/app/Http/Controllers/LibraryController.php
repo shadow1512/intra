@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\LibBook;
 use App\LibRazdel;
-use DB;
+use Illuminate\Support\Facades\DB;
 
 class LibraryController extends Controller
 {
@@ -32,16 +32,19 @@ class LibraryController extends Controller
             $curRazdel = LibRazdel::findOrFail($id);
             $books = LibBook::leftJoin('lib_books_razdels', 'lib_books.id', '=', 'lib_books_razdels.book_id')
                 ->where('lib_books_razdels.razdel_id', '=', $id)
-                ->orderBy('name', 'desc')->get();
+                ->orderBy('name', 'desc')->paginate(8);
+            $books->withParam('/library/razdel/'    .   $id);
         }
         else {
-            $books = LibBook::orderBy('name', 'desc')->get();
+            $books = LibBook::orderBy('name', 'desc')->paginate(8);
+            $books->withParam('/library/');
         }
         //разделы
         $razdels = LibRazdel::selectRaw("lib_razdels.id, name, count(lib_books_razdels.book_id) as numbooks")
         ->leftJoin('lib_books_razdels', 'lib_razdels.id', '=', 'lib_books_razdels.razdel_id')
             ->groupBy(['lib_books_razdels.razdel_id', 'lib_razdels.id', 'lib_razdels.name'])
             ->orderBy('name', 'desc')->get();
+
 
 
         return view('library.main', [   'razdels'       =>  $razdels,

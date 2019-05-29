@@ -16,19 +16,6 @@
         @endforeach
     @endif
     </ul>
-    <!--<nav class="pagination pagination_news">
-        <ul class="pagination_ul">
-            <li class="pagination_li __previous __off"><a href="#" class="pagination_lk">назад</a></li>
-            <li class="pagination_li __active"><a href="#" class="pagination_lk">1</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">2</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">3</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">4</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">5</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">6</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">7</a></li>
-            <li class="pagination_li"><a href="#" class="pagination_lk">8</a></li>
-            <li class="pagination_li __next"><a href="#" class="pagination_lk">далее</a></li>
-        </ul>
-    </nav>-->
+    {{$news->links('news.pages')}}
 </div>
 @endsection

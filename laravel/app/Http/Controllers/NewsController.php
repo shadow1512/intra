@@ -21,7 +21,9 @@ class NewsController extends Controller
     public function index()
     {
         //новости
-        $news = News::orderBy('importancy', 'desc')->get();
+        $news = News::orderBy('importancy', 'desc')->get()->paginate(25);
+        $news->withParam('/news/');
+
         return view('news.fulllist', ['news'    =>  $news]);
     }
 

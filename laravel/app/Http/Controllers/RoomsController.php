@@ -72,7 +72,7 @@ class RoomsController extends Controller
             $bookings_by_dates[strtotime($booking->date_book)][] = $booking;
         }
 
-        return view('rooms.order.source', ['room'    =>  $room, 'bookings'   =>  $bookings_by_dates,  'dir'   =>  $dir,   'num'   =>  $num]);
+        return view('rooms.order', ['room'    =>  $room, 'bookings'   =>  $bookings_by_dates,  'dir'   =>  $dir,   'num'   =>  $num]);
     }
 
     public function createbooking($id, Request $request) {

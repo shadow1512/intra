@@ -305,7 +305,7 @@ $(document).ready(function($) {
 
     $(document).on("submit", "#createbook_form", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-        if($("#book_file_create").files[0].size >= 5000000) {
+        if($("#book_file_create").files[0]  &&  $("#book_file_create").files[0].size >= 5000000) {
             alert('Нельзя загрузить файл более 5мб');
         }
         else {

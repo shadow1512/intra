@@ -308,14 +308,14 @@ $(document).ready(function($) {
         if(($("#book_file_create"))[0].files.length >   0) {
             if(($("#book_file_create"))[0].files[0].size >= 5000000) {
                 alert('Нельзя загрузить файл более 5мб');
+                return false;
             }
             else {
-                $(this).submit();
+                return true;
             }
         }
         else {
-            $(this).submit();
-        }
+            return true;
 
     });
 }); 

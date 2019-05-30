@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Создать новую книгу в библиотеке</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.storebook') }}" enctype="multipart/form-data">
+                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.storebook') }}" enctype="multipart/form-data" id="createbook_form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -83,11 +83,11 @@
                             <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="book_file_create" name="book_file" aria-describedby="fileHelpInline">
                                 <label class="custom-file-label" for="book_file_create">Выберите файл</label>
-                                <small id="fileHelpInline" class="text-muted">Файл не более 30мб</small>
+                                <small id="fileHelpInline" class="text-muted">Файл не более 5мб</small>
                             </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
-                                    <button type="submit" class="btn btn-primary">
+                                    <button type="submit" class="btn btn-primary" id="createbook_form_button">
                                         Создать
                                     </button>
                                 </div>

@@ -304,18 +304,11 @@ $(document).ready(function($) {
     });
 
     $(document).on("submit", "#createbook_form", function(ev) {
-        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         if(($("#book_file_create"))[0].files.length >   0) {
             if(($("#book_file_create"))[0].files[0].size >= 5000000) {
                 alert('Нельзя загрузить файл более 5мб');
                 return false;
             }
-            else {
-                return true;
-            }
-        }
-        else {
-            return true;
         }
     });
 }); 

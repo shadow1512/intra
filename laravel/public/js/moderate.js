@@ -210,8 +210,8 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 30000000) {
-                alert("Для книги используйте файл менее 30мб");
+            if(totalSize > 5000000) {
+                alert("Для книги используйте файл менее 5мб");
                 return false;
             }
             progress = document.createElement("div");
@@ -226,6 +226,16 @@ $(document).ready(function($) {
 
             if(data.result[0] == "ok") {
                 $("#nofile").replaceWith(data.result[1]);
+            }
+            else {
+                var errMessage = "Файл загружен не был. Причина - ";
+
+                if(data.result[1] == "file wrong type") {
+                    errMessage += "для загрузки необходимо выбрать файл jpeg или png";
+                }
+                if(data.result[1] == "file too large") {
+                    errMessage += "для загрузки доступны изображения не более 3мб";
+                }
             }
         },
         fail: function (e, data) {

@@ -178,7 +178,7 @@
         <div class="h __h_m search-res_cnt_i_b_h">Книг библиотеки: {{count($books)}}</div>
         <ul class="search-res_section-lst">
             @foreach ($books as $book)
-                <li class="search-res_section-lst_i"><a href="{{route('library.book', ["id"    =>  $book->id])}}" class="search-res_section-lst_i_lk">{{$book->title}}</a></li>
+                <li class="search-res_section-lst_i"><a href="{{$book->file}}" class="search-res_section-lst_i_lk">{{$book->name}}</a></li>
             @endforeach
         </ul>
     @endif

@@ -526,6 +526,11 @@ class ModerateController extends Controller
 
     private function librarystorebookcover($id, $request)
     {
+        $fsize  =   $request->file('cover')->getSize();
+        if($fsize   >=  3000000) {
+            return array('error', 'file too large');
+        }
+
         $path   =   Storage::disk('public')->putFile(Config::get('image.cover_path'), $request->file('cover'), 'public');
         $size   =   Storage::disk('public')->getSize($path);
         $type   =   Storage::disk('public')->getMimetype($path);
@@ -549,14 +554,25 @@ class ModerateController extends Controller
 
     private function librarystorebookfile($id, $request)
     {
+        $fsize  =   $request->file('book_file')->getSize();
+        if($fsize   >=  5000000) {
+            return array('error', 'file too large');
+        }
+
         $path   =   Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book_file'), 'public');
+        $size   =   Storage::disk('public')->getSize($path);
 
-        DB::table('lib_books')->where("id", "=", $id)
-            ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+        if($size <= 5000000) {
+            DB::table('lib_books')->where("id", "=", $id)
+                ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
 
-        $html = "<a href=\"" .  Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
-        $html .= "<small id=\"filelinkHelpInline\" class=\"text-muted\"><a href=\"" . route('moderate.library.deletebookfile', ["id"    =>  $id]) . "\" id=\"delete_file\">Удалить</a></small>";
-        return array('ok', $html, Storage::disk('public')->url($path));
+            $html = "<a href=\"" . Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
+            $html .= "<small id=\"filelinkHelpInline\" class=\"text-muted\"><a href=\"" . route('moderate.library.deletebookfile', ["id" => $id]) . "\" id=\"delete_file\">Удалить</a></small>";
+            return array('ok', $html, Storage::disk('public')->url($path));
+        }
+        else {
+            return array('error', 'file too large');
+        }
     }
 
     public function librarydeletebookcover($id)

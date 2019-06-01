@@ -327,7 +327,7 @@ class IndexerController extends Controller
             //Текст Тут веселее, т.к. состоит из нескольких слов
 
             if(trim($record->fulltext)) {
-                $words   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    " ", $recrd->fulltext);
+                $words   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    " ", $record->fulltext);
                 $words = explode(" ", $words);
                 if(count($words)) {
                     foreach($words as $word) {

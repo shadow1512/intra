@@ -215,6 +215,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
@@ -240,6 +241,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
@@ -260,6 +262,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
@@ -281,6 +284,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
@@ -306,6 +310,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {
@@ -326,6 +331,7 @@ class IndexerController extends Controller
                 if(count($words)) {
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word   =   preg_replace("/[^А-яЁёA-z0-9]/ius",    "", $word);
                             $term = new Terms();
                             $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
                             if($baseform && count($baseform)) {

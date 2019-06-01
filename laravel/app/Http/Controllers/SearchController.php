@@ -84,7 +84,7 @@ class SearchController extends Controller
                         $oldword    =   $word;
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                         //вот теперь можно убрать лишнее
-                        $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                        $word = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $word);
                         //с цифрами ничего делать не надо
                         if(!is_numeric($word) && (mb_strlen($word) >= 3)) {
                             /*Если человек вводит какое-то разумное слово, то если:
@@ -120,7 +120,7 @@ class SearchController extends Controller
                                 $total_found_by_word    =   count($res);
                                 unset($res);
                                 if(!$total_found_by_word) {*/
-                                    $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                                    $oldword = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $oldword);
                                     $res= $this->getSearchResultsByWord($oldword);
                                     $words_records[]    =   $res;
                                     $total_found_by_word    =   count($res);
@@ -130,7 +130,7 @@ class SearchController extends Controller
                             //здесь может быть часть email
                             if(!$total_found_by_word) {
                                 $email_results  =   array();
-                                $word_search_records  =  Terms::where('baseterm', 'LIKE', $oldword.  '%')->get();
+                                $word_search_records  =  Terms::where('baseterm', 'LIKE', $oldword.  '%')->orWhere('term',  'LIKE', $oldword.   '%')->get();
                                 if(count($word_search_records)) {
                                     foreach($word_search_records as $record) {
                                         $email_results[$record->section][]  =   $record->record;
@@ -145,7 +145,7 @@ class SearchController extends Controller
                         //цифры
                         if(is_numeric($word)) {
                             $digit_results  =   array();
-                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->get();
+                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $word)->orWhere('term',   'LIKE', $word)->get();
                             if(count($word_search_records)) {
                                 foreach($word_search_records as $record) {
                                     $digit_results[$record->section][]  =   $record->record;
@@ -163,7 +163,7 @@ class SearchController extends Controller
                         if(count($email_parts) > 1) {
                             $email_part=   trim(mb_strtoupper($email_parts[0],  "UTF-8"));
                             $email_results  =   array();
-                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $email_part.  '%')->get();
+                            $word_search_records  =  Terms::where('baseterm', 'LIKE', $email_part.  '%')->orWhere('term', 'LIKE', $email_part.  '%')->get();
                             if(count($word_search_records)) {
                                 foreach($word_search_records as $record) {
                                     $email_results[$record->section][]  =   $record->record;

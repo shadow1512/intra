@@ -1347,6 +1347,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditTemporalDepsTableAddBossNullable' => __DIR__ . '/../..' . '/database/migrations/2019_03_10_014505_edit_temporal_deps_table_add_boss_nullable.php',
         'EditTemporalDepsTableAddParentCode' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_233259_edit_temporal_deps_table_add_parent_code.php',
         'EditTemporalDepsTableAddSourceId' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_214354_edit_temporal_deps_table_add_source_id.php',
+        'EditTermsAddTermsIndex' => __DIR__ . '/../..' . '/database/migrations/2019_06_01_154343_edit_terms_add_terms_index.php',
         'EditTermsTableAddDefaultBaseterm' => __DIR__ . '/../..' . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
         'EditTermsTableAddPartial' => __DIR__ . '/../..' . '/database/migrations/2019_03_19_010218_edit_terms_table_add_partial.php',
         'EditUserKeysKeyNullable' => __DIR__ . '/../..' . '/database/migrations/2019_03_31_211354_edit_user_keys_key_nullable.php',

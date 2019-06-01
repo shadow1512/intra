@@ -68,6 +68,7 @@ class SearchController extends Controller
         $corrector = new Text_LangCorrect();
 
         if(mb_strlen($phrase) >= 3) {
+            $phrase = preg_replace("/[^0-9A-zА-яЁё]/iu", " ", $phrase);
             $words = explode(" ", $phrase);
             //итоговый массив со взвешенным списком
             $words_records = array();
@@ -83,8 +84,6 @@ class SearchController extends Controller
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                         $oldword    =   $word;
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
-                        //вот теперь можно убрать лишнее
-                        $word = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $word);
                         //с цифрами ничего делать не надо
                         if(!is_numeric($word) && (mb_strlen($word) >= 3)) {
                             /*Если человек вводит какое-то разумное слово, то если:
@@ -130,7 +129,7 @@ class SearchController extends Controller
                             //здесь может быть часть email
                             if(!$total_found_by_word) {
                                 $email_results  =   array();
-                                $word_search_records  =  Terms::where('baseterm', 'LIKE', $oldword.  '%')->orWhere('term',  'LIKE', $oldword.   '%')->get();
+                                $word_search_records  =  Terms::where('baseterm', 'LIKE', $oldword.  '%')->orWhere('term',  'LIKE', $oldword)->get();
                                 if(count($word_search_records)) {
                                     foreach($word_search_records as $record) {
                                         $email_results[$record->section][]  =   $record->record;

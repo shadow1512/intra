@@ -877,6 +877,7 @@ return array(
     'EditTemporalDepsTableAddBossNullable' => $baseDir . '/database/migrations/2019_03_10_014505_edit_temporal_deps_table_add_boss_nullable.php',
     'EditTemporalDepsTableAddParentCode' => $baseDir . '/database/migrations/2019_03_09_233259_edit_temporal_deps_table_add_parent_code.php',
     'EditTemporalDepsTableAddSourceId' => $baseDir . '/database/migrations/2019_03_09_214354_edit_temporal_deps_table_add_source_id.php',
+    'EditTermsAddTermsIndex' => $baseDir . '/database/migrations/2019_06_01_154343_edit_terms_add_terms_index.php',
     'EditTermsTableAddDefaultBaseterm' => $baseDir . '/database/migrations/2018_08_24_200506_edit_terms_table_add_default_baseterm.php',
     'EditTermsTableAddPartial' => $baseDir . '/database/migrations/2019_03_19_010218_edit_terms_table_add_partial.php',
     'EditUserKeysKeyNullable' => $baseDir . '/database/migrations/2019_03_31_211354_edit_user_keys_key_nullable.php',

@@ -25,19 +25,32 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
     const FORMAT_KEY = 'datetime_format';
     const TIMEZONE_KEY = 'datetime_timezone';
 
-    private $format;
-    private $timezone;
+    private $defaultContext;
 
-    private static $supportedTypes = array(
+    private static $supportedTypes = [
         \DateTimeInterface::class => true,
         \DateTimeImmutable::class => true,
         \DateTime::class => true,
-    );
+    ];
 
-    public function __construct(?string $format = \DateTime::RFC3339, \DateTimeZone $timezone = null)
+    /**
+     * @param array $defaultContext
+     */
+    public function __construct($defaultContext = [], \DateTimeZone $timezone = null)
     {
-        $this->format = $format;
-        $this->timezone = $timezone;
+        $this->defaultContext = [
+            self::FORMAT_KEY => \DateTime::RFC3339,
+            self::TIMEZONE_KEY => null,
+        ];
+
+        if (!\is_array($defaultContext)) {
+            @trigger_error('Passing configuration options directly to the constructor is deprecated since Symfony 4.2, use the default context instead.', E_USER_DEPRECATED);
+
+            $defaultContext = [self::FORMAT_KEY => (string) $defaultContext];
+            $defaultContext[self::TIMEZONE_KEY] = $timezone;
+        }
+
+        $this->defaultContext = array_merge($this->defaultContext, $defaultContext);
     }
 
     /**
@@ -45,20 +58,21 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
      *
      * @throws InvalidArgumentException
      */
-    public function normalize($object, $format = null, array $context = array())
+    public function normalize($object, $format = null, array $context = [])
     {
         if (!$object instanceof \DateTimeInterface) {
             throw new InvalidArgumentException('The object must implement the "\DateTimeInterface".');
         }
 
-        $format = isset($context[self::FORMAT_KEY]) ? $context[self::FORMAT_KEY] : $this->format;
+        $dateTimeFormat = $context[self::FORMAT_KEY] ?? $this->defaultContext[self::FORMAT_KEY];
         $timezone = $this->getTimezone($context);
 
         if (null !== $timezone) {
-            $object = (new \DateTimeImmutable('@'.$object->getTimestamp()))->setTimezone($timezone);
+            $object = clone $object;
+            $object = $object->setTimezone($timezone);
         }
 
-        return $object->format($format);
+        return $object->format($dateTimeFormat);
     }
 
     /**
@@ -74,9 +88,9 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
      *
      * @throws NotNormalizableValueException
      */
-    public function denormalize($data, $class, $format = null, array $context = array())
+    public function denormalize($data, $class, $format = null, array $context = [])
     {
-        $dateTimeFormat = isset($context[self::FORMAT_KEY]) ? $context[self::FORMAT_KEY] : null;
+        $dateTimeFormat = $context[self::FORMAT_KEY] ?? null;
         $timezone = $this->getTimezone($context);
 
         if ('' === $data || null === $data) {
@@ -131,7 +145,7 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
      */
     private function formatDateTimeErrors(array $errors)
     {
-        $formattedErrors = array();
+        $formattedErrors = [];
 
         foreach ($errors as $pos => $message) {
             $formattedErrors[] = sprintf('at position %d: %s', $pos, $message);
@@ -142,7 +156,7 @@ class DateTimeNormalizer implements NormalizerInterface, DenormalizerInterface, 
 
     private function getTimezone(array $context)
     {
-        $dateTimeZone = array_key_exists(self::TIMEZONE_KEY, $context) ? $context[self::TIMEZONE_KEY] : $this->timezone;
+        $dateTimeZone = $context[self::TIMEZONE_KEY] ?? $this->defaultContext[self::TIMEZONE_KEY];
 
         if (null === $dateTimeZone) {
             return null;

@@ -111,6 +111,7 @@
                 <div data-url="{{route('rooms.book.view', ["id"    =>  $booking->id])}}" style="top: {{$offset}}px; height: {{($booking->duration / 30)  * 26}}px;" class="reserve_table_filled {{$css_classes[$index]}} @if ($booking->duration < 120)__collapsed @endif @if (($booking->approved == 0) && ($room->available  ==  0)) __inactive @endif">
                   <div title="{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}" class="reserve_table_filled_img"><img src="@if (($booking->approved == 0) && ($room->available  ==  0))/images/icons/time_icon.svg @else {{$booking->avatar}} @endif"></div>
                   <div class="reserve_table_filled_cnt">
+                    @if (($booking->approved == 0) && ($room->available  ==  0))<div class="reserve_table_filled_cnt_bl">Бронь ожидает подтверждения</div>@endif
                     <div class="reserve_table_filled_cnt_bl @if ($booking->duration < 120)__ellipsis @endif">{{$booking->name}}</div>
                     <div class="reserve_table_filled_cnt_bl">{{mb_substr($booking->time_start,  0,  5)}} &ndash; {{mb_substr($booking->time_end,  0,  5)}}</div>
                     <div class="reserve_table_filled_cnt_bl">{{$booking->lname}} {{mb_substr($booking->fname, 0,  1)}}.</div>

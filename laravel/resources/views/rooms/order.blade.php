@@ -160,10 +160,10 @@
                   <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
                 </div>
               </div>
+                <div class="error"></div>
             </div>
             <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
           </form>
-            <div class="error" style="display:none;margin:20px;"></div>
         @else
             <div class="profile_form_h">
                 <div class="h light_h __h_m">Вы не можете забронировать переговорную</div>

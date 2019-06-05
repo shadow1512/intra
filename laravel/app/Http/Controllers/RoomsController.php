@@ -81,13 +81,13 @@ class RoomsController extends Controller
         $time_start    = trim($request->input('input_time_start'));
         $time_end      = trim($request->input('input_time_end'));
 
-        $messages   =   array(  "input_name.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
-                                "input_name.max"                =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
-                                "input_date_booking.required"   =>  "Дата бронирования - обязательное поле",
-                                "input_time_start.required"     =>  "Поле \"время начала\" обязательно для заполнения",
-                                "input_time_end.required"       =>  "Поле \"время окончания\" обязательно для заполнения",
-                                "input_time_start.date_format"  =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
-                                "input_time_end.date_format"    =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ"
+        $messages   =   array(  "input_name.required"           =>  "Поле обязательно для заполнения",
+                                "input_name.max"                =>  "Поле не должно быть длиннее, чем 90 символов",
+                                "input_date_booking.required"   =>  "Поле обязательно для заполнения",
+                                "input_time_start.required"     =>  "Поле обязательно для заполнения",
+                                "input_time_end.required"       =>  "Поле обязательно для заполнения",
+                                "input_time_start.date_format"  =>  "Время должно быть в формате ЧЧ:ММ",
+                                "input_time_end.date_format"    =>  "Время должно быть в формате ЧЧ:ММ"
         );
 
         $validator = Validator::make($request->all(), [

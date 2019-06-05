@@ -160,7 +160,7 @@ popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
         $(win).find("input[name='input_time_end']").val("");
         $(win).find("input[name='input_name']").val("");
         $(win).find("input").on("focus", function() {
-          $(this).parents(".field").removeClass("__e");
+          $(this).parent().removeClass("__e");
           $(this).parent().find(".field_e").remove();
         });
 

@@ -4,16 +4,16 @@
     @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))
 <ul class="search-res_lst">
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Все</a></li>
-    @if (count($users) || count($deps))
+    @if ((count($users) || count($deps)) && (count($news)   ||  count($docs)    ||  count($books) || count($razdels)))
     <li class="search-res_lst_i" style="width:340px;"><a href="" class="search-res_lst_i_lk">Сотрудники и отделы</a></li>
     @endif
-    @if (count($news))
+    @if (count($news)   &&  (count($docs)    ||  count($books) || count($razdels)   ||  count($users) || count($deps)))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Новости</a></li>
     @endif
-    @if (count($docs))
+    @if (count($docs)   &&  (count($books) || count($razdels)   ||  count($users) || count($deps)   ||  count($news)))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Банк документов</a></li>
     @endif
-    @if (count($books) || count($razdels))
+    @if ((count($books) || count($razdels)) &&  (count($users) || count($deps)   ||  count($news)   ||  count($docs)))
     <li class="search-res_lst_i"><a href="" class="search-res_lst_i_lk">Прочее</a></li>
     @endif
 </ul>

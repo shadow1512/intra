@@ -28,6 +28,7 @@
 @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))
     @if (count($users)  &&  !count($deps) && !count($news) && !count($books) && !count($razdels))
             <div class="search-res_cnt_i">
+                <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} сотрудников</div>
                 @if (count($users))
                     <ul class="profile_contacts_ul">
                         @foreach ($users as $user)
@@ -76,7 +77,7 @@
                 @endif
                 @if (count($news))
                     <div class="search-res_cnt_i_b">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} новости</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} новостей</div>
                         <ul class="news_ul">
                             @foreach ($news as $new)
                                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
@@ -124,6 +125,7 @@
 @if (count($users) || count($deps))
     <div class="search-res_cnt_i">
     @if (count($users))
+            <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} сотрудников</div>
             <ul class="profile_contacts_ul">
                 @foreach ($users as $user)
                     <li class="profile_contacts_li @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
@@ -150,6 +152,7 @@
 @endif
 @if (count($news))
     <div class="search-res_cnt_i">
+        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} новостей</div>
         <ul class="news_ul">
             @foreach ($news as $new)
                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>

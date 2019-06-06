@@ -19,6 +19,7 @@
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
+    <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </head>
 <body>
     <div id="app">
@@ -99,6 +100,5 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </body>
 </html>

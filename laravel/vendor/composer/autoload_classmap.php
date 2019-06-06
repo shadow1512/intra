@@ -4850,6 +4850,7 @@ return array(
     'TranslationsTableSeeder' => $baseDir . '/database/seeds/TranslationsTableSeeder.php',
     'TypeError' => $vendorDir . '/symfony/polyfill-php70/Resources/stubs/TypeError.php',
     'UTF8' => $baseDir . '/correction/UTF8.php',
+    'Unisharp\\Ckeditor\\ServiceProvider' => $vendorDir . '/unisharp/laravel-ckeditor/ServiceProvider.php',
     'UpdateHelper\\ComposerPlugin' => $vendorDir . '/kylekatarnls/update-helper/src/UpdateHelper/ComposerPlugin.php',
     'UpdateHelper\\UpdateHelper' => $vendorDir . '/kylekatarnls/update-helper/src/UpdateHelper/UpdateHelper.php',
     'UpdateHelper\\UpdateHelperInterface' => $vendorDir . '/kylekatarnls/update-helper/src/UpdateHelper/UpdateHelperInterface.php',

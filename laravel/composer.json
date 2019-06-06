@@ -17,7 +17,8 @@
         "laravel/tinker": "~1.0",
         "league/flysystem": "^1.0",
         "sleimanx2/plastic": "^0.5.3",
-        "tcg/voyager": "^1.0"
+        "tcg/voyager": "^1.0",
+        "unisharp/laravel-ckeditor": "^4.7"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <script src="{{ asset('vendor/unisharp/laravel-ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script>
         CKEDITOR.replace( 'annotation' );
         CKEDITOR.replace( 'fulltext' );

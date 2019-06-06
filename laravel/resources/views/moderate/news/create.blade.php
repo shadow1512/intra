@@ -90,7 +90,7 @@
     </div>
     <script src="{{ asset('js/ckeditor/ckeditor.js') }}"></script>
     <script>
-        CKEDITOR.replace( 'annotation' );
-        CKEDITOR.replace( 'fulltext' );
+        $('#annotation').ckeditor();
+        $('#fulltext').ckeditor();
     </script>
 @endsection

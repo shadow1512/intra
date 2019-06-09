@@ -475,7 +475,7 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
                 location.href('/profile/');
             }
             if(msg[0] == "error") {
-                if(msg.message= "auth error") {
+                if(msg.message== "auth error") {
                     alert("Для создания заявки необходимо авторизоваться на портале");
                     return;
                 }

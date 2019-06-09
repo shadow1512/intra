@@ -107,6 +107,7 @@ class ServicesController extends Controller
                 $tr =   new Technical_Request();
                 $tr->type_request   =   $trequest;
                 $tr->room           =   $room;
+                $tr->user_id        =   Auth::user()->id;
                 $tr->fio            =   $user->name;
                 $tr->dep            =   $dpname;
                 if($trequest  ==  "cartridge") {

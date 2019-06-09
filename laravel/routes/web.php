@@ -51,7 +51,7 @@ Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');
 Route::get('/kitchen/bills', 'RoomsController@index')->name('kitchen.bills');
 
-Route::get('/staff', 'RoomsController@index')->name('staff');
+Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');
 Route::post('/search/directory', 'SearchController@directory')->name('search.directory');
 

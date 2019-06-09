@@ -93,4 +93,10 @@ class HomeController extends Controller
         //Комнаты
         return view('users.parking', ['users'   =>  $users]);
     }
+
+    function staff()
+    {
+        //Полезные документы
+        return view('staff');
+    }
 }

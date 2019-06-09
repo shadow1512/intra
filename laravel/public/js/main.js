@@ -449,13 +449,13 @@ $(document).on("click", "#submit_cartridge_change_form", function(ev) {
     return false;
 });
 
-$(document).on("click", "#tech_service_form", function(ev) {
+$(document).on("click", "#submit_tech_service_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     $("#tech_service_form").submit();
     return false;
 });
 
-$(document).on("submit", "#cartridge_change_form, #submit_tech_service_form", function(ev) {
+$(document).on("submit", "#cartridge_change_form, #tech_service_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
     $(form).find("div").removeClass("__e");

@@ -90,20 +90,25 @@ class ServicesController extends Controller
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->where('users.id', '=', Auth::user()->id)->first();
 
-                $dep    =   Dep::findOrFail($user->dep_id);
-                $length = mb_strlen($dep->parent_id, "UTF-8");
-                $parent_root  =   $dep->parent_id;
-                if ($length > 2) {
-                    $parent_root = mb_substr($dep->parent_id, 0, 2);
+                $dpname =   null;
+                if($user->dep_id) {
+                    $dep    =   Dep::findOrFail($user->dep_id);
+                    $length = mb_strlen($dep->parent_id, "UTF-8");
+                    $parent_root  =   $dep->parent_id;
+                    if ($length > 2) {
+                        $parent_root = mb_substr($dep->parent_id, 0, 2);
+                    }
+
+                    $rootdep = Dep::where('parent_id', '=', $parent_root)->firstOrFail();
+                    $dpname =   $rootdep->name;
                 }
 
-                $rootdep = Dep::where('parent_id', '=', $parent_root)->firstOrFail();
 
                 $tr =   new Technical_Request();
                 $tr->type_request   =   $trequest;
                 $tr->room           =   $room;
                 $tr->fio            =   $user->name;
-                $tr->dep            =   $rootdep->name;
+                $tr->dep            =   $dpname;
                 if($trequest  ==  "cartridge") {
                     $tr->printer    =   $printer;
                 }

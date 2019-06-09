@@ -442,3 +442,47 @@ $('#date_range').datepicker({
 $('#date_one').datepicker("setDate", null);
 $('#date_one').find(".ui-datepicker-current-day").removeClass("ui-datepicker-current-day");
 });
+
+$(document).on("click", "#submit_cartridge_change_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $("#cartridge_change_form").submit();
+    return false;
+});
+
+$(document).on("click", "#submit_tech_service_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $("#tech_service_form").submit();
+    return false;
+});
+
+$(document).on("submit", "#submit_cartridge_change_form, #submit_tech_service_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    var url = $(this).attr("action");
+    $(form).find("div").removeClass("__e");
+    $(form).find(".field_e").remove();
+    var token   =   $(this).find("input[name='_token']").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        data: form.serialize() + "&_token=" + token,
+        success: function(msg) {
+            if(msg.result == "success") {
+                location.href('/profile/');
+            }
+            if(msg[0] == "error") {
+                if(msg.message= "auth error") {
+                    alert("Для создания заявки необходимо авторизоваться на портале");
+                    return;
+                }
+                var errors  =   msg[1];
+                for(var key in errors) {
+                    $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                }
+            }
+        }
+    });
+});

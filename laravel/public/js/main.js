@@ -472,7 +472,7 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
         data: form.serialize() + "&_token=" + token,
         success: function(msg) {
             if(msg.result == "success") {
-                location.href('/profile/');
+                location.href   =   '/profile/';
             }
             if(msg[0] == "error") {
                 if(msg.message== "auth error") {

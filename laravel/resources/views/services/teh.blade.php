@@ -3,7 +3,7 @@
 @section('content')
 <div class="main_news">
     <div class="h __h_m">Заявка на техническое обслуживание</div>
-    <form class="profile_form" id="tech_service_form" action="{{route('services.store')}}">
+    <form class="profile_form" id="tech_service_form" action="{{route('services.store')}}" method="POST">
         <input type="hidden" name="type_request" id="type_request" value="teh"/>
         {{ csrf_field() }}
         <div class="field">

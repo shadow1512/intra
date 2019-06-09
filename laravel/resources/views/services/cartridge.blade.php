@@ -3,7 +3,7 @@
 @section('content')
     <div class="main_news">
         <div class="h __h_m">Заявка на замену картриджа</div>
-        <form class="profile_form" id="cartridge_change_form" action="{{route('services.store')}}">
+        <form class="profile_form" id="cartridge_change_form" action="{{route('services.store')}}" method="POST">
             <input type="hidden" name="type_request" id="type_request" value="cartridge"/>
             {{ csrf_field() }}
             <div class="field">

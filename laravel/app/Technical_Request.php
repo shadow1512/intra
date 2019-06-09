@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class Technical_Request extends Model
 {
     //
-    protected $table = 'technical_request';
+    protected $table = 'technical_requests';
 }

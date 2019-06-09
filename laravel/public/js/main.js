@@ -458,6 +458,7 @@ $(document).on("click", "#submit_tech_service_form", function(ev) {
 $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
+    var form    =   $(this);
     $(form).find("div").removeClass("__e");
     $(form).find(".field_e").remove();
     var token   =   $(this).find("input[name='_token']").val();

@@ -63,7 +63,7 @@
                                 @if ($request->type_request    ==  "teh")Заявка на техническое обслуживание@endif
                                 @if ($request->type_request    ==  "cartridge")Заявка на замену картриджа@endif
                             </div>
-                            <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created))}}</div>
+                            <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created_at))}}</div>
                         </div>
                         <div class="profile_info_i_requests_i_right">
                             <div class="profile_info_i_requests_i_status @if($request->status    ==  "rejected") __fail @endif">

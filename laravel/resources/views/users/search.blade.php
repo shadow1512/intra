@@ -137,7 +137,7 @@
                 <script src="/js/draw.js" ></script>
               </div>
             @endif
-            @if (count($users))
+            @if (!empty($currentDep->parent_id) &&  count($users))
                 <ul class="directory_lst">
                     @foreach($users as $user)
                         <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
@@ -155,7 +155,8 @@
                         </li>
                     @endforeach
                 </ul>
-            @else
+            @endif
+            @if (!empty($currentDep->parent_id) &&  !count($users))
                 <div class="content_i_header __with-ic">
                     <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
                 </div>

@@ -53,28 +53,32 @@
         <div class="profile_info_i">
             <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span>@if(!is_null($dep)),<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a>@endif</p>
         </div>
-        <div class="profile_info_i">
-            <div class="profile_info_i_requests">
-            <div class="profile_info_i_requests_i">
-                <div class="profile_info_i_requests_i_left">
-                <div>Заявка на техническое обслуживание</div>
-                <div class="profile_info_i_requests_i_time">5 августа 16:19</div>
-                </div>
-                <div class="profile_info_i_requests_i_right">
-                <div class="profile_info_i_requests_i_status">На рассмотрении</div>
+        @if (count($requests))
+            <div class="profile_info_i">
+                <div class="profile_info_i_requests">
+                    @foreach($requests as $request)
+                    <div class="profile_info_i_requests_i">
+                        <div class="profile_info_i_requests_i_left">
+                            <div>
+                                @if ($request->type_request    ==  "teh")Заявка на техническое обслуживание@endif
+                                @if ($request->type_request    ==  "cartridge")Заявка на замену картриджа@endif
+                            </div>
+                            <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created))}}</div>
+                        </div>
+                        <div class="profile_info_i_requests_i_right">
+                            <div class="profile_info_i_requests_i_status @if($request->status    ==  "rejected") __fail @endif">
+                                @if(is_null($request->status))На рассмотрении@endif
+                                @if($request->status    ==  "inprogress")В работе@endif
+                                @if($request->status    ==  "complete")Выполнена@endif
+                                @if($request->status    ==  "rejected")Отклонена@endif
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
-            <div class="profile_info_i_requests_i">
-                <div class="profile_info_i_requests_i_left">
-                <div>Заявка на техническое обслуживание</div>
-                <div class="profile_info_i_requests_i_time">5 августа 16:19</div>
-                </div>
-                <div class="profile_info_i_requests_i_right">
-                <div class="profile_info_i_requests_i_status __fail">Отклонена</div>
-                </div>
-            </div>
-            </div>
-        </div>
+        @endif
+
     </div>
 </div>
 <!--modal-->

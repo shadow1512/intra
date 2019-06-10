@@ -12,6 +12,7 @@ use Auth;
 use App\User;
 use App\Dep;
 use App\Profiles_Saved;
+use App\Technical_Request;
 use DB;
 use PDO;
 use Config;
@@ -64,7 +65,9 @@ class ProfileController extends Controller
         }
         $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills]);
+        $tr     =   Technical_Request::where('user_id', '=',    Auth::user()->id)->order("created_at",  "desc")->limit(5)->get();
+
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr]);
     }
 
     public function edit()

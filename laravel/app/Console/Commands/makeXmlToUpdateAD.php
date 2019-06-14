@@ -63,7 +63,7 @@ class makeXmlToUpdateAD extends Command
                 Storage::disk('public')->makeDirectory('/xml/export/' . $caldate->format("Ymd") . '/');
             }
             foreach($up_users as $user) {
-                $parent_id  =   mb_substr($user->parent_id, 0,  4,  "UTF-8");
+                $parent_id  =   mb_substr($user->parent_id, 0,  2,  "UTF-8");
                 $department_name   =   Dep::where("parent_id", "=",    $parent_id)->value("short_name");
 
                 $dom = new DOMDocument('1.0', 'utf-8');
@@ -112,7 +112,7 @@ class makeXmlToUpdateAD extends Command
                 $desc           =   $dom->createElement("description",    $user->position_desc);
                 $descnode       =   $usernode->appendChild($desc);
 
-                $photo          =   $dom->createElement("photopath",  Config::get('app.url')  .   $user->avatar);
+                $photo          =   $dom->createElement("photopath",  $user->avatar);
                 $photonode      =   $usernode->appendChild($photo);
 
                 Storage::disk('public')->put('/xml/export/'    .   $caldate->format("Ymd")   .   '/'    .   $user->id   .   '.xml', $dom->saveXML(), 'public');

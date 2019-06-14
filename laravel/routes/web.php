@@ -59,11 +59,8 @@ Route::post('/search/directory', 'SearchController@directory')->name('search.dir
 Route::post('/auth/login', 'AdLoginController@login')->name('auth.login');
 Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
 
-Route::get('/indexer', 'IndexerController@index')->name('indexer.index');
 Route::get('/indexer/dir', 'IndexerController@dirloader')->name('indexer.dir');
 Route::get('/indexer/struct', 'IndexerController@structloader')->name('indexer.struct');
-Route::get('/indexer/xml', 'IndexerController@createXMLFromUpdatedUsers')->name('indexer.xml');
-
 
 
 //Auth::routes();

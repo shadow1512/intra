@@ -14,7 +14,7 @@
                                 <label for="title" class="col-md-4 control-label">Название</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -27,7 +27,7 @@
                                 <label for="authors" class="col-md-4 control-label">Авторы</label>
 
                                 <div class="col-md-6">
-                                    <input id="authors" type="text" class="form-control" name="authors" value="{{ old('authors') }}" required>
+                                    <input id="authors" type="text" class="form-control" name="authors" value="{{ old('authors') }}">
 
                                     @if ($errors->has('authors'))
                                         <span class="help-block">

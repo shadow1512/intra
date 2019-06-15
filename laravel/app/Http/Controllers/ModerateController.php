@@ -438,12 +438,23 @@ class ModerateController extends Controller
     public function libraryupdatebook($id, Request $request)
     {
         //
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "authors.required"          =>  "Поле обязательно для заполнения",
+            "authors.max"               =>  "Поле не должно быть длиннее, чем 255 символов",
+            "anno.max"                  =>  "Поле не должно быть длиннее, чем 1000 символов",
+            "year.integer"              =>  "Поле должно быть целым числом, обозначающим год без других символов"
+        );
+
         $validator = Validator::make($request->all(), [
             'name'      =>  'required|string|max:255',
             'authors'   =>  'required|string|max:255',
-            'anno'      =>  'string|max:1000',
-            'year'      =>  'integer',
-        ]);
+            'anno'      =>  'nullable|string|max:1000',
+            'year'      =>  'nullable|integer',
+        ],  $messages);
+
+
         if ($validator->fails()) {
             return redirect()->route('moderate.library.editbook')
                 ->withErrors($validator)
@@ -472,12 +483,22 @@ class ModerateController extends Controller
 
     public function librarystorebook(Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "authors.required"          =>  "Поле обязательно для заполнения",
+            "authors.max"               =>  "Поле не должно быть длиннее, чем 255 символов",
+            "anno.max"                  =>  "Поле не должно быть длиннее, чем 1000 символов",
+            "year.integer"              =>  "Поле должно быть целым числом, обозначающим год без других символов"
+        );
+
         $validator = Validator::make($request->all(), [
             'name'      =>  'required|string|max:255',
             'authors'   =>  'required|string|max:255',
-            'anno'      =>  'string|max:1000',
-            'year'      =>  'integer',
-        ]);
+            'anno'      =>  'nullable|string|max:1000',
+            'year'      =>  'nullable|integer',
+        ],  $messages);
+
         if ($validator->fails()) {
             return redirect()->route('moderate.library.createbook')
                 ->withErrors($validator)

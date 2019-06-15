@@ -3,6 +3,7 @@
 @section('content')
     <div class="main_news">
         <div class="h __h_m">Заявка на замену картриджа</div>
+        @if(!is_null($user))
         <form class="profile_form" id="cartridge_change_form" action="{{route('services.store')}}" method="POST">
             <input type="hidden" name="type_request" id="type_request" value="cartridge"/>
             {{ csrf_field() }}
@@ -92,5 +93,8 @@
             <div class="field"><a href="#" class="btn profile_form_btn" id="submit_cartridge_change_form">Отправить заявку</a></div>
         </form>
         <div class="news_li_date">После отправки заявка поступит в сервисный отдел УКОТ и специалисты рассмотрят ее.<br/><br/>Статус вашей заявки вы сможете контролировать через <a href="/profile">ваш профиль</a></div>
+        @else
+            <div class="news_li_date">Для отправки заявки на замену картриджа на портале, необходимо <a href="#" id="cartridge_auth">авторизоваться</a></div>
+        @endif
     </div>
 @endsection

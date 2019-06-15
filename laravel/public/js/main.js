@@ -315,6 +315,13 @@ function toggleDropdown(link, cnt) {
 
     });
 
+    //авторизация со страниц техобслуживания
+    $("#teh_auth,   #cartridge_auth").click(function(e) {
+        e.stopPropagation();
+        $('.header_login_nav').fadeIn(200);
+
+    });
+
     $('html').click(function(e) {
         $(cnt).fadeOut(200);
     });

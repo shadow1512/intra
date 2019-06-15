@@ -88,7 +88,7 @@
             </div>
             <div class="field">
                 <label for="user_comment" class="lbl">Комментарии</label>
-                <textarea id="user_comment" name="user_comment" class="it" maxlength="255">{{$comment}}</textarea>
+                <textarea id="user_comment" name="user_comment" class="it" maxlength="255"></textarea>
             </div>
             <div class="field"><a href="#" class="btn profile_form_btn" id="submit_cartridge_change_form">Отправить заявку</a></div>
         </form>

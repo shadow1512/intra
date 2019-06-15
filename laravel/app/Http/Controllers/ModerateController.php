@@ -148,7 +148,7 @@ class ModerateController extends Controller
             'fulltext'      =>  'string|max:10000',
             'importancy'    =>  'integer',
         ],  $messages);
-        
+
         if ($validator->fails()) {
             return redirect()->route('moderate.news.edit')
                 ->withErrors($validator)

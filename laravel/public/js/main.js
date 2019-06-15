@@ -305,6 +305,9 @@ function toggleDropdown(link, cnt) {
             myDropDown.fadeIn(200);
             $(this).addClass('__active');
         }
+
+        $("#input_login").focus();
+        
         return false;
     });
 
@@ -312,6 +315,7 @@ function toggleDropdown(link, cnt) {
     $('.__js_auth').click(function(e) {
         e.stopPropagation();
         $('.header_login_nav').fadeIn(200);
+        $("#input_login").focus();
 
     });
 

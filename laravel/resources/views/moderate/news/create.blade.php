@@ -14,7 +14,7 @@
                                 <label for="title" class="col-md-3 control-label">Заголовок новости</label>
 
                                 <div class="col-md-9">
-                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+                                    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" autofocus>
 
                                     @if ($errors->has('title'))
                                         <span class="help-block">
@@ -27,7 +27,7 @@
                                 <label for="annotation" class="col-md-3 control-label">Аннотация</label>
 
                                 <div class="col-md-9">
-                                    <textarea id="annotation" class="form-control" name="annotation" required>{{ old('annotation') }}</textarea>
+                                    <textarea id="annotation" class="form-control" name="annotation">{{ old('annotation') }}</textarea>
 
                                     @if ($errors->has('annotation'))
                                         <span class="help-block">

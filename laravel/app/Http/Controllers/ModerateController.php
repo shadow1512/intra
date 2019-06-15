@@ -87,12 +87,23 @@ class ModerateController extends Controller
 
     public function newsstore(Request $request)
     {
+        $messages   =   array(
+            "title.required"                =>  "Поле обязательно для заполнения",
+            "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
+            "annotation.required"           =>  "Поле обязательно для заполнения",
+            "annotation.max"                =>  "Поле не должно быть длиннее, чем 1000 символов",
+            "fulltext.max"                  =>  "Поле не должно быть длиннее, чем 10000 символов",
+            "importancy.integer"            =>  "Поле должно содержать целое число"
+
+        );
+
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
             'fulltext'      =>  'nullable|string|max:10000',
             'importancy'    =>  'nullable|integer',
-        ]);
+        ],  $mwssages);
+
         if ($validator->fails()) {
             return redirect()->route('moderate.news.create')
                 ->withErrors($validator)

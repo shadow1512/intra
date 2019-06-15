@@ -102,7 +102,7 @@ class ModerateController extends Controller
             'annotation'    =>  'required|string|max:1000',
             'fulltext'      =>  'nullable|string|max:10000',
             'importancy'    =>  'nullable|integer',
-        ],  $mwssages);
+        ],  $messages);
 
         if ($validator->fails()) {
             return redirect()->route('moderate.news.create')

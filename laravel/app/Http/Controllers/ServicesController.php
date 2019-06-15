@@ -30,14 +30,24 @@ class ServicesController extends Controller
      */
     public function teh()
     {
-        $user   =   User::findOrFail(Auth::user()->id);
+        $user=  null;
+
+        if (Auth::check()) {
+            $user = User::findOrFail(Auth::user()->id);
+        }
 
         return view('services.teh', ['user' =>  $user]);
     }
 
     public function cartridge()
     {
-        return view('services.cartridge');
+        $user=  null;
+
+        if (Auth::check()) {
+            $user = User::findOrFail(Auth::user()->id);
+        }
+
+        return view('services.cartridge', ['user' =>  $user]);
     }
 
     public function mail()

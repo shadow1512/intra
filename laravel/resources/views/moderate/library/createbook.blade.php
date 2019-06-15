@@ -10,7 +10,7 @@
                         <form class="form-horizontal" method="POST" action="{{ route('moderate.library.storebook') }}" enctype="multipart/form-data" id="createbook_form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
-                            <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="title" class="col-md-4 control-label">Название</label>
 
                                 <div class="col-md-6">

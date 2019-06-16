@@ -43,12 +43,13 @@ class makeCsvDirectoryInfographics extends Command
     public function handle()
     {
         //
-        $deps   =   Dep::whereNotNull('short_name')->orderByDesc('short_name')->get();
+        $deps   =   Dep::whereNotNull('short_name')->orderBy('short_name')->get();
         if(count($deps)) {
             $bar = $this->output->createProgressBar(count($deps));
 
 
             $path   =   Storage::disk('public')->put(Config::get('image.directory_path')    .   'public_data.csv', '', 'public');
+            var_dump($path);exit();
             $writer = Writer::createFromPath($path, 'w+');
             $writer->insertOne(["label","score","color","url"]);
             foreach($deps as $dep) {
@@ -63,7 +64,7 @@ class makeCsvDirectoryInfographics extends Command
 
                 $num    =   Deps_Peoples::whereIn('dep_id', $ids_to_find)->count('people_id');
 
-                $writer->insertOne([$dep->name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);
+                $writer->insertOne([$dep->short_name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);
 
                 $bar->advance();
             }

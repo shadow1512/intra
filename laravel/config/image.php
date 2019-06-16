@@ -23,7 +23,7 @@ return array(
     'cover_path'        =>  '/library/covers',
     'book_path'         =>  '/library/books',
     'gallery_path'      =>  '/gallery',
-    'directory_path'    =>  '/directory',
+    'directory_path'    =>  storage_path('app/public/directory'),
     'photo_thumb_width' => 150,
     'cover_width'       =>  200,
     'cover_height'      =>  280,

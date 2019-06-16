@@ -43,7 +43,7 @@ class makeCsvDirectoryInfographics extends Command
     public function handle()
     {
         //
-        $deps   =   Dep::whereNotNull('short_name')->orderBy('short_name')->get();
+        $deps   =   Dep::whereNotNull('short_name')->orderBy('RAND()')->get();
         if(count($deps)) {
             $bar = $this->output->createProgressBar(count($deps));
 

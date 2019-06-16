@@ -55,7 +55,7 @@ class makeCsvDirectoryInfographics extends Command
 
                 //Собираем вместе всю численность сотрудников по текущему и дочерним департаментам
 
-                $children_deps  =   Dep::whereRaw('parent_id LIKE ' .   $dep->parent_id .   '%')->get();
+                $children_deps  =   Dep::whereRaw("parent_id LIKE '" .   $dep->parent_id .   "%'")->get();
                 $ids_to_find    =   array($dep->id);
                 foreach($children_deps as $chdep) {
                     $ids_to_find[]  =   $chdep->id;

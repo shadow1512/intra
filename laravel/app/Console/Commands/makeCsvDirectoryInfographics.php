@@ -61,6 +61,8 @@ class makeCsvDirectoryInfographics extends Command
 
                 $num    =   Deps_Peoples::whereIn('dep_id', $ids_to_find)->count('people_id');
 
+
+
                 $writer->insertOne([$dep->short_name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);
 
                 $bar->advance();

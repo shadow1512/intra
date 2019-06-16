@@ -27,7 +27,7 @@ svg.append("g")
 
 svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-d3.csv('/storage/public/directory/public_data.csv', function(error, data) {
+d3.csv('/storage/directory/public_data.csv', function(error, data) {
 
   data.forEach(function(d) {
     d.color  =  d.color;

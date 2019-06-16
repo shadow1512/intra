@@ -47,10 +47,7 @@ class makeCsvDirectoryInfographics extends Command
         if(count($deps)) {
             $bar = $this->output->createProgressBar(count($deps));
 
-
-            $path   =   Storage::disk('public')->put(Config::get('image.directory_path')    .   'public_data.csv', '', 'public');
-            var_dump($path);exit();
-            $writer = Writer::createFromPath($path, 'w+');
+            $writer = Writer::createFromPath(Config::get('image.directory_path')    .   'public_data.csv', 'w+');
             $writer->insertOne(["label","score","color","url"]);
             foreach($deps as $dep) {
 

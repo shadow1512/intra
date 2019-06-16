@@ -45,6 +45,7 @@ return array(
     'ONGR\\ElasticsearchDSL\\' => array($vendorDir . '/ongr/elasticsearch-dsl/src'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
     'League\\Flysystem\\' => array($vendorDir . '/league/flysystem/src'),
+    'League\\Csv\\' => array($vendorDir . '/league/csv/src'),
     'Laravel\\Tinker\\' => array($vendorDir . '/laravel/tinker/src'),
     'LaravelAuthLdap\\' => array($vendorDir . '/aparticka/laravel-auth-ldap/src'),
     'Larapack\\VoyagerHooks\\' => array($vendorDir . '/larapack/voyager-hooks/src'),

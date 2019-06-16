@@ -15,7 +15,8 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         //
         Commands\buildsearchindex::class,
-        Commands\makeXmlToUpdateAD::class
+        Commands\makeXmlToUpdateAD::class,
+        Commands\makeCsvDirectoryInfographics::class
     ];
 
     /**
@@ -28,6 +29,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('searchindex:create')->hourly();
         $schedule->command('addxml:create')->daily();
+        $schedule->command('maindepcsv:create')->daily();
     }
 
     /**

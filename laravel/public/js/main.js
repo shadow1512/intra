@@ -307,7 +307,7 @@ function toggleDropdown(link, cnt) {
         }
 
         $("#input_login").focus();
-        
+
         return false;
     });
 

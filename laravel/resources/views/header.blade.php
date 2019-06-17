@@ -22,6 +22,9 @@
             <div class="header_login_nav __hidden">
                 <ul class="header_login_nav_ul">
                     <li class="header_login_nav_li"><a href="{{ route('profile') }}" class="header_login_nav_lk">Настройки профиля</a></li>
+                    @if (in_array(Auth::user()->role_id,    array(1, 3, 4,  5,  6)))
+                        <li class="header_login_nav_li"><a href="{{ route('moderate') }}" class="header_login_nav_lk">Инструменты администрирования</a></li>
+                    @endif
                     <li class="header_login_nav_li"><form method="POST" action="{{ route('auth.logout') }}">{{ csrf_field() }}<a class="header_login_nav_lk logout" id="profile_logout_button">Выйти</a></form></li>
                 </ul>
             </div>

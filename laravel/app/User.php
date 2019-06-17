@@ -2,8 +2,8 @@
 
 namespace App;
 
-use Users_Moderators_Rules;
-use Deps_Peoples;
+use App\Users_Moderators_Rules;
+use App\Deps_Peoples;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;

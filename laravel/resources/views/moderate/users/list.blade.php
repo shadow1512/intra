@@ -9,7 +9,7 @@
                 <div class="col-md-9"><h3>Сотрудники</h3></div>
                 <div class="col-md-3"></div>
             </div>
-            @if (count($users)  >   50)
+            @if ($mode  ==  'letters')
             <div class="row">
                 <div class="col-md-12">
                     <a href="{{ route('moderate.users.index', ['letter' =>  'А'])}}">А</a>

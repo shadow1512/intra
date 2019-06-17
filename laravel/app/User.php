@@ -2,14 +2,15 @@
 
 namespace App;
 
+use Users_Moderators_Rules;
+use Deps_Peoples;
+
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends \TCG\Voyager\Models\User
 {
     use Notifiable;
-    use App\Users_Moderators_Rules;
-    use App\Deps_Peoples;
     /**
      * The attributes that are mass assignable.
      *

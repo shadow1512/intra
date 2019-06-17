@@ -711,7 +711,10 @@ class ModerateController extends Controller
 
     public function users($letter = "А")
     {
-        $users = User::where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+        $users  =   User::ByModerator(Auth::user()->id)->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+        if(count($users)    >   50) {
+            $users = User::ByModerator(Auth::user()->id)->where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+        }
 
         return view('moderate.users.list', ['users'    =>  $users]);
     }

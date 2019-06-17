@@ -6,9 +6,10 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="row">
-                <div class="col-md-9"><h3>Сотрудники компании</h3></div>
+                <div class="col-md-9"><h3>Сотрудники</h3></div>
                 <div class="col-md-3"></div>
             </div>
+            @if (count($users)  >   50)
             <div class="row">
                 <div class="col-md-12">
                     <a href="{{ route('moderate.users.index', ['letter' =>  'А'])}}">А</a>
@@ -42,6 +43,7 @@
                     <a href="{{ route('moderate.users.index', ['letter' =>  'Я'])}}">Я</a>
                 <div>
             </div>
+            @endif
             @if (count($users))
                 @foreach($users as $item)
             <div class="row">

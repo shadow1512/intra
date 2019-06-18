@@ -49,19 +49,16 @@ class User extends \TCG\Voyager\Models\User
                         $parent_codes[] =   $root_dep->parent_id;
                     }
 
-                    $whereClause    =   "";
-                    if(count($parent_codes) >   0) {
-                        $whereClause    =   "[";
-                        foreach($parent_codes as $code) {
-                            if($whereClause <>  "[") {
-                                $whereClause    .=  ",";
+                    $deps   =   Dep::where(function($query) use($parent_codes) {
+                        foreach($parent_codes as $key   =>  $code) {
+                            if($key ==  0) {
+                                $query->where('parent_id',  'LIKE', $code.  '%');
                             }
-                            $whereClause    .=  "['parent_id',  'LIKE', '"  .   $code.  "%']";
+                            else {
+                                $query->orWhere('parent_id',  'LIKE', $code.  '%');
+                            }
                         }
-                        $whereClause    .=  "]";
-                    }
-
-                    $deps   =   Dep::where($whereClause)->get();
+                    })->get();
 
                     if(count($deps)) {
                         $dep_ids    =   array();

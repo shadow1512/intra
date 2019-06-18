@@ -4,6 +4,8 @@ namespace App;
 
 use App\Users_Moderators_Rules;
 use App\Deps_Peoples;
+use App\Dep;
+use Auth;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -31,24 +33,57 @@ class User extends \TCG\Voyager\Models\User
 
     public function scopeByModerator($query, $moderator)
     {
-        $records    =   Users_Moderators_Rules::where('user_id',    '=',    $moderator)->where('section',   '=',    'deps')->get();
-        if(count($records)) {
-            $record_ids =   array();
-            foreach($records as $record) {
-                $record_ids[]   =   $record->record;
-            }
-
-            $users  =   Deps_Peoples::whereIn('dep_id', $record_ids)->get();
-            if(count($users)) {
-                $user_ids   =   array();
-                foreach($users as $user) {
-                    $user_ids[] =   $user->people_id;
+        if(Auth::user()->role_id    <>  1) {
+            $records    =   Users_Moderators_Rules::where('user_id',    '=',    $moderator)->where('section',   '=',    'deps')->get();
+            if(count($records)) {
+                $record_ids =   array();
+                foreach($records as $record) {
+                    $record_ids[]   =   $record->record;
                 }
 
+                $root_deps  =   Dep::whereIn('id',  $record_ids)->get();
+
+                if(count($root_deps)) {
+                    $parent_codes   =   array();
+                    foreach($root_deps as $root_dep) {
+                        $parent_codes[] =   $root_dep->parent_id;
+                    }
+
+                    $whereClause    =   '';
+                    if(count($parent_codes) >   0) {
+                        $whereClause    =   '[';
+                        foreach($parent_codes as $code) {
+                            if($whereClause <>  '[') {
+                                $whereClause    .=  ',';
+                            }
+                            $whereClause    .=  '["parent_id",  "LIKE", "'  .   $code.  '%"]';
+                        }
+                        $whereClause    .=  ']';
+                    }
+
+                    $deps   =   Dep::where($whereClause)->get();
+
+                    if(count($deps)) {
+                        $dep_ids    =   array();
+                        foreach($deps as $dep) {
+                            $dep_ids[]  =   $dep->id;
+                        }
+
+                        $users  =   Deps_Peoples::whereIn('dep_id', $dep_ids)->get();
+                        if(count($users)) {
+                            $user_ids   =   array();
+                            foreach($users as $user) {
+                                $user_ids[] =   $user->people_id;
+                            }
+                            return $query->whereIn('id', $user_ids);
+                        }
+                    }
+
+                }
 
             }
 
-            return $query->whereIn('id', $user_ids);
+            return $query->whereNull('id');
         }
     }
 }

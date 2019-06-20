@@ -64,18 +64,28 @@ $(document).ready(function($) {
         //formatDate:'Y-m-d H:i',
     });
 
+    $("#dinner_slot_create, #dinner_slot_update").on("submit",  function() {
+        if($('#time_end').val()  ==  '__:__') {
+            $('#time_end').val("");
+        }
+        if($('#time_start').val()  ==  '__:__') {
+            $('#time_start').val("");
+        }
+    });
+
     $("#time_start").datetimepicker({
         lang:'ru',
         datepicker:false,
         timepicker:true,
         format:'H:i',
-        step: 30,
-        minTime: '06:00',
-        maxTime: '19:30',
+        step: 5,
+        minTime: '09:00',
+        maxTime: '18:00',
         mask:true,
+        validateOnBlur:false,
         onShow:function( ct ){
             this.setOptions({
-                maxTime:$('#time_end').val()?$('#time_end').val():false
+                maxTime:$('#time_end').val()=='__:__' || $('#time_end').val()==''?'18:00':$('#time_end').val()
             });
         }
     });
@@ -85,13 +95,14 @@ $(document).ready(function($) {
         datepicker:false,
         timepicker:true,
         format:'H:i',
-        step: 30,
-        minTime: '06:00',
-        maxTime: '19:00',
+        step: 5,
+        minTime: '09:00',
+        maxTime: '18:00',
         mask:true,
+        validateOnBlur:false,
         onShow:function( ct ){
             this.setOptions({
-                minTime:$('#time_start').val()?$('#time_start').val():false
+                minTime:$('#time_start').val()=='__:__' || $('#time_start').val()==''?'09:00':$('#time_start').val()
             });
         }
     });

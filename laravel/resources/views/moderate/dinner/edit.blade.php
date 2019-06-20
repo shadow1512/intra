@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{  $item->name }}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('moderate.dinner.update', ["id" => $item->id]) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('moderate.dinner.update', ["id" => $item->id]) }}" id="dinner_slot_update">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $item->id }}"/>

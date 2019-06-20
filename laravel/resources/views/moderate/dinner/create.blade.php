@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">Создать слот</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('moderate.dinner.store') }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('moderate.dinner.store') }}" id="dinner_slot_create">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

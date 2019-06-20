@@ -208,7 +208,7 @@ class ModerateController extends Controller
             "name.required"             =>  "Поле обязательно для заполнения",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
             "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
-            "time_утв.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+            "time_end.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
         );
 
         $validator = Validator::make($request->all(), [
@@ -237,7 +237,7 @@ class ModerateController extends Controller
             "name.required"             =>  "Поле обязательно для заполнения",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
             "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
-            "time_утв.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+            "time_end.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
         );
 
         $validator = Validator::make($request->all(), [

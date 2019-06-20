@@ -478,7 +478,7 @@ class ModerateController extends Controller
 
 
         if ($validator->fails()) {
-            return redirect()->route('moderate.library.editbook')
+            return redirect()->route('moderate.library.editbook', ["id" =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }

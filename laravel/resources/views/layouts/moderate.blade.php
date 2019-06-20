@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/css/moderate.extend.css') }}" rel="stylesheet">
     <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
     <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
     <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>

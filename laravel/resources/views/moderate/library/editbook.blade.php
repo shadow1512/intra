@@ -19,7 +19,7 @@
                                     <input id="name" type="text" class="form-control" name="name" value="{{ $book->name }}" autofocus>
 
                                     @if ($errors->has('name'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif

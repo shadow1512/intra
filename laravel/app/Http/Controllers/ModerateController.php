@@ -204,11 +204,18 @@ class ModerateController extends Controller
 
     public function dinnerstore(Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
+            "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+            "time_утв.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+        );
+
         $validator = Validator::make($request->all(), [
             'name'          =>  'required|string|max:191',
             'time_start'    =>  'nullable|date_format:H:i',
             'time_end'      =>  'nullable|date_format:H:i',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.dinner.create')
                 ->withErrors($validator)
@@ -226,13 +233,20 @@ class ModerateController extends Controller
 
     public function dinnerupdate(Request $request, $id)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
+            "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+            "time_утв.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+        );
+
         $validator = Validator::make($request->all(), [
             'name'          =>  'required|string|max:191',
             'time_start'    =>  'nullable|date_format:H:i',
             'time_end'      =>  'nullable|date_format:H:i',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
-            return redirect()->route('moderate.dinner.edit')
+            return redirect()->route('moderate.dinner.edit',    ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -280,9 +294,13 @@ class ModerateController extends Controller
 
     public function roomsstore(Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
+        );
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:50',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.rooms.create')
                 ->withErrors($validator)
@@ -308,11 +326,16 @@ class ModerateController extends Controller
     public function roomsupdate(Request $request, $id)
     {
         //
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
+        );
+
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:50',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
-            return redirect()->route('moderate.rooms.edit')
+            return redirect()->route('moderate.rooms.edit', ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -395,11 +418,15 @@ class ModerateController extends Controller
     public function libraryupdate($id, Request $request)
     {
         //
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 128 символов",
+        );
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:128',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
-            return redirect()->route('moderate.library.edit')
+            return redirect()->route('moderate.library.edit',   ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -414,9 +441,13 @@ class ModerateController extends Controller
 
     public function librarystore(Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 128 символов",
+        );
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:128',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.library.create')
                 ->withErrors($validator)
@@ -665,9 +696,13 @@ class ModerateController extends Controller
 
     public function fotostore(Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+        );
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:255',
-        ]);
+        ],  $messages);
 
         if ($validator->fails()) {
             return redirect()->route('moderate.foto.create')
@@ -732,6 +767,22 @@ class ModerateController extends Controller
 
     public function usersupdate($id, Request $request)
     {
+        $messages   =   array(
+            "lname.required"             =>  "Поле обязательно для заполнения",
+            "lname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "fname.required"             =>  "Поле обязательно для заполнения",
+            "fname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "mname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "phone.max"                  =>  "Поле не должно быть длиннее, чем 3 цифры - это местный номер",
+            "city_phone.max"             =>  "Поле не должно быть длиннее, чем 18 символов",
+            "mobile_phone.max"           =>  "Поле не должно быть длиннее, чем 18 символов",
+            "email.email"                =>  "Поле должно быть формата email",
+            "email_secondary.email"      =>  "Поле должно быть формата email",
+            "position_desc.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
+            "numpark.integer"            =>  "Поле должно быть номером места, числом",
+            "role_id.required"           =>  "Поля обязательно для заполнения",
+            "role_id.integer"            =>  "Поле должно быть числом",
+        );
         $validator = Validator::make($request->all(), [
             'numpark'           =>  'nullable|integer',
             'role_id'           =>  'required|integer',
@@ -744,7 +795,7 @@ class ModerateController extends Controller
             'mobile_phone'      =>  'nullable|string|max:18',
             'email'             =>  'nullable|string|email',
             'email_secondary'   =>  'nullable|string|email',
-        ]);
+        ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.users.edit', ["id"   =>  $id])
                 ->withErrors($validator)

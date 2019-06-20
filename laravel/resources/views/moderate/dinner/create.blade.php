@@ -14,10 +14,10 @@
                                 <label for="name" class="col-md-4 control-label">Наименование слота</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                     @if ($errors->has('name'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
@@ -30,7 +30,7 @@
                                     <input id="time_start" type="text" class="form-control" name="time_start" value="@if (old('time_start')){{ date("H:i", strtotime(old('time_start'))) }} @endif"/>
 
                                     @if ($errors->has('time_start'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('time_start') }}</strong>
                                     </span>
                                     @endif
@@ -43,7 +43,7 @@
                                     <input id="time_end" type="text" class="form-control" name="time_end" value="@if (old('time_end')){{ date("H:i", strtotime(old('time_end'))) }} @endif"/>
 
                                     @if ($errors->has('time_end'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('time_end') }}</strong>
                                     </span>
                                     @endif

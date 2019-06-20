@@ -14,10 +14,10 @@
                                 <label for="name" class="col-md-4 control-label">Название</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                     @if ($errors->has('name'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
@@ -31,7 +31,7 @@
                                     <input id="published_at_gallery" type="text" class="form-control" name="published_at" value="@if (old('published_at')) {{ date("d.m.Y", strtotime(old('published_at'))) }} @endif" autofocus>
 
                                     @if ($errors->has('published_at'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('published_at') }}</strong>
                                     </span>
                                     @endif

@@ -19,7 +19,7 @@
                                     <input id="title" type="text" class="form-control" name="title" value="{{ $news->title }}" autofocus>
 
                                     @if ($errors->has('title'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('title') }}</strong>
                                     </span>
                                     @endif
@@ -32,7 +32,7 @@
                                     <textarea id="annotation" class="form-control" name="annotation">{!! $news->annotation !!}</textarea>
 
                                     @if ($errors->has('annotation'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('annotation') }}</strong>
                                     </span>
                                     @endif
@@ -45,7 +45,7 @@
                                     <textarea id="fulltext" class="form-control" name="fulltext">{!! $news->fulltext !!}</textarea>
 
                                     @if ($errors->has('fulltext'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('fulltext') }}</strong>
                                     </span>
                                     @endif
@@ -58,7 +58,7 @@
                                     <input id="importancy" type="text" class="form-control" name="importancy" value="{{ $news->importancy }}"/>
 
                                     @if ($errors->has('importancy'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('importancy') }}</strong>
                                     </span>
                                     @endif
@@ -71,7 +71,7 @@
                                     <input id="published_at" type="text" class="form-control" name="published_at" value="{{ date("d.m.Y H:i", strtotime($news->published_at)) }}"/>
 
                                     @if ($errors->has('published_at'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('published_at') }}</strong>
                                     </span>
                                     @endif

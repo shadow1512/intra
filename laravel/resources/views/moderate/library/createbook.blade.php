@@ -17,7 +17,7 @@
                                     <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" autofocus>
 
                                     @if ($errors->has('name'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('name') }}</strong>
                                     </span>
                                     @endif
@@ -30,7 +30,7 @@
                                     <input id="authors" type="text" class="form-control" name="authors" value="{{ old('authors') }}">
 
                                     @if ($errors->has('authors'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('authors') }}</strong>
                                     </span>
                                     @endif
@@ -43,7 +43,7 @@
                                     <textarea id="anno" class="form-control" name="anno">{{ old('anno') }}</textarea>
 
                                     @if ($errors->has('anno'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('anno') }}</strong>
                                     </span>
                                     @endif
@@ -56,13 +56,13 @@
                                     <input id="year" type="text" class="form-control" name="year" value="{{ old('year') }}" />
 
                                     @if ($errors->has('year'))
-                                        <span class="help-block">
+                                        <span class="help-block error">
                                         <strong>{{ $errors->first('year') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group{{ $errors->has('razdels') ? ' has-error' : '' }}">
                                 @if (count($razdels))
                                     <div class="col-md-6 col-md-offset-4">
                                         @foreach ($razdels as $razdel)
@@ -71,6 +71,11 @@
                                                 <label class="form-check-label" for="razdel_{{$razdel->id}}">{{$razdel->name}}</label>
                                             </div>
                                         @endforeach
+                                            @if ($errors->has('razdels'))
+                                            <span class="help-block error">
+                                                <strong>{{ $errors->first('razdels') }}</strong>
+                                            </span>
+                                            @endif
                                     </div>
                                  @endif
                             </div>

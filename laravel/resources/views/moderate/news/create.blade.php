@@ -27,7 +27,7 @@
                                 <label for="annotation" class="col-md-3 control-label">Аннотация</label>
 
                                 <div class="col-md-9">
-                                    <textarea id="annotation" class="form-control" name="annotation">{{ old('annotation') }}</textarea>
+                                    <textarea id="annotation" class="form-control" name="annotation">{!! old('annotation') !!}</textarea>
 
                                     @if ($errors->has('annotation'))
                                         <span class="help-block">
@@ -40,7 +40,7 @@
                                 <label for="fulltext" class="col-md-3 control-label">Полный текст</label>
 
                                 <div class="col-md-9">
-                                    <textarea id="fulltext" class="form-control" name="fulltext">{{ old('fulltext') }}</textarea>
+                                    <textarea id="fulltext" class="form-control" name="fulltext">{!! old('fulltext') !!}</textarea>
 
                                     @if ($errors->has('fulltext'))
                                         <span class="help-block">

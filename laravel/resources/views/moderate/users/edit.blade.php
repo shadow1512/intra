@@ -27,7 +27,7 @@
                             <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
                                 <label for="lname" class="col-md-2 control-label">Фамилия</label>
 
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus required>
 
                                     @if ($errors->has('lname'))
@@ -37,7 +37,11 @@
                                     @endif
                                 </div>
 
-                                <div class="col-md-5">
+                                <div class="col-md-2">
+                                    <input type="button" name="lname_copy" id="lname_copy" value="Копировать"/>
+                                </div>
+
+                                <div class="col-md-4">
                                     <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus required>
 
                                     @if ($errors->has('lname'))

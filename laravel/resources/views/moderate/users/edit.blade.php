@@ -25,9 +25,19 @@
                             </div>
 
                             <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
-                                <label for="lname" class="col-md-4 control-label">Фамилия</label>
+                                <label for="lname" class="col-md-2 control-label">Фамилия</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-5">
+                                    <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus required>
+
+                                    @if ($errors->has('lname'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('lname') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+
+                                <div class="col-md-5">
                                     <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus required>
 
                                     @if ($errors->has('lname'))

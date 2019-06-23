@@ -36,11 +36,10 @@ class AdLoginController extends Controller
             $login= mb_substr($login,    5);
         }
 
-        $user = Adldap::getProvider('default')->search()->users()->find('den');
+        $user = Adldap::getProvider('default')->search()->where('cn',   '=',    $login)->first();
         var_dump($user);
-        var_dump($login);
         exit();
-        
+
         if (Adldap::getProvider('default')->auth()->attempt($authlogin, $request->input('pass'))) {
             $user = Adldap::getProvider('default')->search()->users()->find('den');
             var_dump($user);

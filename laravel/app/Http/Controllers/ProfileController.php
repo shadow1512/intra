@@ -164,7 +164,7 @@ class ProfileController extends Controller
             $ps->dep_id     =   $dep_id;
             $ps->work_title =   $work_title;
             $ps->position_desc =   $position_desc;
-
+            $ps->creator_id =   Auth::user()->id;
             $ps->save();
 
             return response()->json(['success']);

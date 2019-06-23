@@ -11,6 +11,7 @@ namespace App\Http\Controllers;
 use App\Deps_Peoples;
 use Auth;
 use App\User;
+use App\Profiles_Saved;
 use App\Dep;
 use DB;
 use App\News;
@@ -753,6 +754,10 @@ class ModerateController extends Controller
             $users = User::ByModerator(Auth::user()->id)->where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
         }
 
+        foreach($users as $user) {
+            $count  =   Profiles_Saved::where("user_id", "=",    $user->id)->where("approved",   "=",    0)->count();
+            $user->count_updated    =   $count;
+        }
         return view('moderate.users.list', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
 

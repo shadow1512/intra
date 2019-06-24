@@ -767,7 +767,9 @@ class ModerateController extends Controller
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
         $works      =   Deps_Peoples::where("people_id",    "=",    $id)->get();
 
-        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps]);
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->where("approved", "=",    0)->orderBy("updated_at",    "desc")->first();
+
+        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,  'ps'    =>  $ps_record]);
     }
 
     public function usersupdate($id, Request $request)

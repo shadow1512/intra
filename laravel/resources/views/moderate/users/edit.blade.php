@@ -50,11 +50,11 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus>
+                                    <input id="ps_lname" type="text" class="form-control" name="ps_lname" value="@if ($ps->lname) {{ $ps->lname }}  @endif" autofocus>
                                 </div>
                                 @endif
                             </div>
-                            <div class="form-group{{ $errors->has('fname') ? ' has-error' : '' }}">
+                            <div class="form-group{{ $errors->has('ps_fname') ? ' has-error' : '' }}">
                                 <label for="fname" class="col-md-2 control-label">Имя</label>
 
                                 <div class="col-md-4">
@@ -66,21 +66,15 @@
                                     </span>
                                     @endif
                                 </div>
-
+                                @if(!is_null($ps)   &&  (mb_strtolower($user->fname,    "UTF-8")    !=  mb_strtolower($ps->fname,    "UTF-8")))
                                 <div class="col-md-2">
                                     <input type="button" name="fname_copy" id="fname_copy" value="Копировать"/>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="fname" type="text" class="form-control" name="fname" value="@if ($user->fname) {{ $user->fname }}  @endif">
-
-                                    @if ($errors->has('fname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('fname') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input id="ps_fname" type="text" class="form-control" name="ps_fname" value="@if ($ps->fname) {{ $ps->fname }}  @endif">
                                 </div>
-
+                                @endif
                             </div>
 
                             <div class="form-group{{ $errors->has('mname') ? ' has-error' : '' }}">
@@ -95,20 +89,15 @@
                                     </span>
                                     @endif
                                 </div>
-
+                                @if(!is_null($ps)   &&  (mb_strtolower($user->mname,    "UTF-8")    !=  mb_strtolower($ps->mname,    "UTF-8")))
                                 <div class="col-md-2">
                                     <input type="button" name="mname_copy" id="mname_copy" value="Копировать"/>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="mname" type="text" class="form-control" name="mname" value="@if ($user->mname) {{ $user->mname }}  @endif">
-
-                                    @if ($errors->has('mname'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('mname') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input id="ps_mname" type="text" class="form-control" name="ps_mname" value="@if ($ps->mname) {{ $ps->mname }}  @endif">
                                 </div>
+                                @endif
                             </div>
                             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-2 control-label">Рабочий email</label>
@@ -122,19 +111,15 @@
                                     </span>
                                     @endif
                                 </div>
-
+                                @if(!is_null($ps)   &&  (mb_strtolower($user->email,    "UTF-8")    !=  mb_strtolower($ps->email,    "UTF-8")))
                                 <div class="col-md-2">
                                     <input type="button" name="email_copy" id="email_copy" value="Копировать"/>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="email" type="text" class="form-control" name="email" value="@if ($user->email) {{ $user->email }}  @endif">
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input id="ps_email" type="text" class="form-control" name="ps_email" value="@if ($ps->email) {{ $ps->email }}  @endif">
                                 </div>
+                                @endif
                             </div>
                             <div class="form-group{{ $errors->has('email_secondary') ? ' has-error' : '' }}">
                                 <label for="email" class="col-md-2 control-label">Дополнительный email</label>
@@ -148,20 +133,15 @@
                                     </span>
                                     @endif
                                 </div>
-
+                                @if(!is_null($ps)   &&  (mb_strtolower($user->email_secondary,    "UTF-8")    !=  mb_strtolower($ps->email_secondary,    "UTF-8")))
                                 <div class="col-md-2">
                                     <input type="button" name="email_secondary_copy" id="email_secondary_copy" value="Копировать"/>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="email_secondary" type="text" class="form-control" name="email_secondary" value="@if ($user->email_secondary) {{ $user->emai_secondary }}  @endif">
-
-                                    @if ($errors->has('email_secondary'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('email_secondary') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input id="ps_email_secondary" type="text" class="form-control" name="ps_email_secondary" value="@if ($ps->email_secondary) {{ $ps->emai_secondary }}  @endif">
                                 </div>
+                                @endif
                             </div>
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="col-md-2 control-label">Местный телефон</label>
@@ -175,20 +155,15 @@
                                     </span>
                                     @endif
                                 </div>
+                                @if(!is_null($ps)   &&  (mb_strtolower($user->phone,    "UTF-8")    !=  mb_strtolower($ps->phone,    "UTF-8")))
                                 <div class="col-md-2">
                                     <input type="button" name="phone_copy" id="phone_copy" value="Копировать"/>
                                 </div>
 
                                 <div class="col-md-4">
-                                    <input id="phone" type="text" class="form-control" name="phone" value="@if ($user->phone) {{ $user->phone }}  @endif">
-
-                                    @if ($errors->has('phone'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('phone') }}</strong>
-                                    </span>
-                                    @endif
+                                    <input id="ps_phone" type="text" class="form-control" name="ps_phone" value="@if ($ps->phone) {{ $ps->phone }}  @endif">
                                 </div>
-
+                                @endif
                             </div>
                             <div class="form-group{{ $errors->has('city_phone') ? ' has-error' : '' }}">
                                 <label for="city_phone" class="col-md-2 control-label">Городской телефон</label>

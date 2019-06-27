@@ -64,6 +64,8 @@
                                 @if ($request->type_request    ==  "cartridge")Заявка на замену картриджа@endif
                             </div>
                             <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created_at))}}</div>
+                            <!-- <div>Задача в Redmine: <a href="">#1234567</a></div>
+                            <div>Примечание сотрудника УКОТ</div> -->
                         </div>
                         <div class="profile_info_i_requests_i_right">
                             <div class="profile_info_i_requests_i_status @if($request->status    ==  "rejected") __fail @endif">
@@ -72,6 +74,7 @@
                                 @if($request->status    ==  "complete")Выполнена@endif
                                 @if($request->status    ==  "rejected")Отклонена@endif
                             </div>
+                            <div>Ответственный сотрудник УКОТ:<br>Коробов Р.А., тел.&nbsp;321</div>
                         </div>
                     </div>
                     @endforeach

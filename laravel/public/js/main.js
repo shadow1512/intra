@@ -51,19 +51,19 @@ $("a.header_search_btn").on("click", function(ev) {
     $(this).parent().parent().submit();
 });
 
-$(".header_search_form").submit(function(ev) {
-    var searchValue = $("input.header_search_it").val();
-    sessionStorage.setItem('searchValue', searchValue);
-});
-
-function getSavedValue(id) {
-    if (!sessionStorage.getItem(id)) {
-        return "";
-    }
-    return sessionStorage.getItem(id);
-}
-
-$("input.header_search_it").val(getSavedValue('searchValue'));
+// $(".header_search_form").submit(function(ev) {
+//     var searchValue = $("input.header_search_it").val();
+//     sessionStorage.setItem('searchValue', searchValue);
+// });
+//
+// function getSavedValue(id) {
+//     if (!sessionStorage.getItem(id)) {
+//         return "";
+//     }
+//     return sessionStorage.getItem(id);
+// }
+//
+// $("input.header_search_it").val(getSavedValue('searchValue'));
 
 $("#profile_logout_button").on("click", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

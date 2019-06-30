@@ -922,6 +922,8 @@ class SearchController extends Controller
         $bdates =   explode("-",    $bdates);
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
 
+            $year   =   date("Y");
+            
             $searchDate1 =   trim($bdates[0])  .   "." .   $year;
             $searchDate2 =   trim($bdates[1])  .   "." .   $year;
 

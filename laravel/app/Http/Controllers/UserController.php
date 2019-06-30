@@ -74,7 +74,7 @@ class UserController extends Controller
                 $length = $length - 2;
             }
         }
-        return $crumbs;
+        return array_reverse($crumbs);
     }
 
     public function search($id = null)

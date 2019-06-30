@@ -925,21 +925,22 @@ class SearchController extends Controller
             $searchDate1 =   $bdates[0]  .   "." .   $year;
             $searchDate2 =   $bdates[1]  .   "." .   $year;
 
-            $dt = date("z", strtotime($searchDate1));
-            $dt1 = date("z", strtotime($searchDate2));
+            $dt = date("Y-m-d", strtotime($searchDate1));
+            $dt1 = date("Y-m-d", strtotime($searchDate2));
 
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetweeb(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])->get();
+                ->whereBetween(DB::raw("MONTH(birthday)"), [DB::raw("MONTH($dt)"), DB::raw("MONTH($dt1)")])
+                ->whereBetween(DB::raw("DAY(birthday)"), [DB::raw("DAY($dt)"), DB::raw("DAY($dt1)")])->get();
             $users_by_birthday  =   $birthday_records;
         }
         if(isset($bdates[0])    &&  $bdates[0]) {
             $year       =   date("Y");
             $searchDate =   $bdates[0]  .   "." .   $year;
-            $dt = date("z", strtotime($searchDate));
+            $dt = date("Y-m-d", strtotime($searchDate));
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->where(DB::raw("DAYOFYEAR(birthday)"), '=',    $dt)->get();
+                ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH($dt)"))->where((DB::raw("DAY(birthday)"), '=',    DB::raw("DAY($dt)"))->get();
             $users_by_birthday  =   $birthday_records;
         }
 

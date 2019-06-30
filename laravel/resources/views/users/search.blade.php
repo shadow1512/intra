@@ -47,7 +47,7 @@
                 <input type="text" placeholder="Комната" class="it __ic-input ic_room" name="room">
             </div>
             <div class="field directory_searchform_field">
-                <input id="datetabs" type="text" placeholder="Дата рождения" name="Date" autocomplete="off" class="it __ic-input ic_birthday">
+                <input id="datetabs" type="text" placeholder="Дата рождения" name="birthdate" autocomplete="off" class="it __ic-input ic_birthday">
                 <div id="tabs">
                     <ul>
                         <li><a href="#tabs-1" class="one-montha">Точная дата</a></li>

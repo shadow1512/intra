@@ -392,7 +392,7 @@ $('#date_one').datepicker({
     currentText: 'Сегодня',
     setDate: null,
     changeYear: false,
-    dateFormat: 'dd M',
+    dateFormat: 'd.m',
     altField: '#datetabs',
     monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
         'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'
@@ -423,7 +423,7 @@ $('#date_range').datepicker({
     prevText: 'Предыдущий',
     setDate: null,
     changeYear: false,
-    dateFormat: 'dd M',
+    dateFormat: 'd.m',
     nextText: 'Следующий',
     currentText: 'Сегодня',
     monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',

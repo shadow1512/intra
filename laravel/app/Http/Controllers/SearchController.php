@@ -920,10 +920,10 @@ class SearchController extends Controller
 
         //надо посмотреть, период это или точная дата
         $bdates =   explode("-",    $bdates);
-        if(isset($bdates[0])    &&  isset($bdates[1])   &&  $bdates[0]  &&  $bdates[1]) {
+        if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
             $year       =   date("Y");
-            $searchDate1 =   $bdates[0]  .   "." .   $year;
-            $searchDate2 =   $bdates[1]  .   "." .   $year;
+            $searchDate1 =   trim($bdates[0])  .   "." .   $year;
+            $searchDate2 =   trim($bdates[1])  .   "." .   $year;
 
             $dt = date("Y-m-d", strtotime($searchDate1));
             $dt1 = date("Y-m-d", strtotime($searchDate2));
@@ -934,9 +934,9 @@ class SearchController extends Controller
                 ->whereBetween(DB::raw("DAY(birthday)"), [DB::raw("DAY('$dt')"), DB::raw("DAY('$dt1')")])->get();
             $users_by_birthday  =   $birthday_records;
         }
-        if(isset($bdates[0])    &&  $bdates[0]) {
+        elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             $year       =   date("Y");
-            $searchDate =   $bdates[0]  .   "." .   $year;
+            $searchDate =   trim($bdates[0])  .   "." .   $year;
             $dt = date("Y-m-d", strtotime($searchDate));
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -1048,17 +1048,17 @@ class SearchController extends Controller
             }
             $phrase =   "должность: " .   $worktitle;
         }
-        if(isset($bdates[0])    &&  isset($bdates[1])   &&  $bdates[0]  &&  $bdates[1]) {
+        if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
             if($allname) {
                 $allname    .=  ", ";
             }
-            $phrase =   "день рождения, период с: " .   $bdates[0]  .   " по "  .   $bdates[1];
+            $phrase =   "день рождения, период с: " .   trim($bdates[0])  .   " по "  .   trim($bdates[1]);
         }
-        if(isset($bdates[0])    &&  $bdates[0]) {
+        elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             if($allname) {
                 $allname    .=  ", ";
             }
-            $phrase =   "день рождения: " .   $bdates[0];
+            $phrase =   "день рождения: " .   trim($bdates[0]);
         }
 
         return view('search.all', [ "users"  =>  $users,

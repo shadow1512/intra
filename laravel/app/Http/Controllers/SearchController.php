@@ -930,12 +930,12 @@ class SearchController extends Controller
 
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetween(DB::raw("MONTH(birthday)"), [DB::raw("MONTH('$dt')"), DB::raw("MONTH('$dt1')")])
-                ->whereBetween(DB::raw("DAY(birthday)"), [DB::raw("DAY('$dt')"), DB::raw("DAY('$dt1')")]);
-            $sql    =   $birthday_records->toSql();
+                ->whereBetween(DB::raw("MONTH(birthday)"), ["MONTH('$dt')", "MONTH('$dt1')"])
+                ->whereBetween(DB::raw("DAY(birthday)"), ["DAY('$dt')", "DAY('$dt1')"])->get();
+            /*$sql    =   $birthday_records->toSql();
             $bindings = $birthday_records->getBindings();
             var_dump($sql);
-            var_dump($bindings);exit();
+            var_dump($bindings);exit();*/
             $users_by_birthday  =   $birthday_records;
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
@@ -944,7 +944,7 @@ class SearchController extends Controller
             $dt = date("Y-m-d", strtotime($searchDate));
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->get();
+                ->where(DB::raw("MONTH(birthday)"), '=',    "MONTH('$dt')")->where(DB::raw("DAY(birthday)"), '=',    "DAY('$dt')")->get();
             $users_by_birthday  =   $birthday_records;
         }
 

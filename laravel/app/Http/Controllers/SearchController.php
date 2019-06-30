@@ -941,7 +941,7 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->whereRaw("((MONTH(birthday) BETWEEN MONTH('$dt') AND MONTH('$dt1')) AND (DAY(birthday) BETWEEN DAY('$dt') AND DAY('$dt1')) OR ((MONTH(birthday) BETWEEN MONTH('$dt2') AND MONTH('$dt2')) AND (DAY(birthday) BETWEEN DAY('$dt3') AND DAY('$dt3'))")->get();
+                    ->whereRaw("((MONTH(birthday) BETWEEN MONTH('$dt') AND MONTH('$dt1')) AND (DAY(birthday) BETWEEN DAY('$dt') AND DAY('$dt1')) OR ((MONTH(birthday) BETWEEN MONTH('$dt2') AND MONTH('$dt3')) AND (DAY(birthday) BETWEEN DAY('$dt2') AND DAY('$dt3'))")->get();
 
             }
             else {

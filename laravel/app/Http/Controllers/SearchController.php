@@ -944,7 +944,7 @@ class SearchController extends Controller
             $dt = date("Y-m-d", strtotime($searchDate));
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->where(DB::raw("MONTH(birthday)"), '=',    "MONTH('$dt')")->where(DB::raw("DAY(birthday)"), '=',    "DAY('$dt')")->get();
+                ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->get();
             $users_by_birthday  =   $birthday_records;
         }
 

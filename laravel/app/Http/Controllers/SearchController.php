@@ -213,8 +213,10 @@ class SearchController extends Controller
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
                             }
-                            foreach ($user_ids as $user_id) {
-                                $users[] = $assoc_records[$user_id];
+                            if(count($assoc_records)) {
+                                foreach ($user_ids as $user_id) {
+                                    $users[] = $assoc_records[$user_id];
+                                }
                             }
                             unset($found_records);
                             unset($assoc_records);
@@ -227,8 +229,10 @@ class SearchController extends Controller
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
                             }
-                            foreach ($dep_ids as $dep_id) {
-                                $deps[] = $assoc_records[$dep_id];
+                            if(count($assoc_records)) {
+                                foreach ($dep_ids as $dep_id) {
+                                    $deps[] = $assoc_records[$dep_id];
+                                }
                             }
                             unset($found_records);
                             unset($assoc_records);
@@ -241,8 +245,10 @@ class SearchController extends Controller
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
                             }
-                            foreach ($lrazdel_ids as $lrazdel_id) {
-                                $razdels[] = $assoc_records[$lrazdel_id];
+                            if(count($assoc_records)) {
+                                foreach ($lrazdel_ids as $lrazdel_id) {
+                                    $razdels[] = $assoc_records[$lrazdel_id];
+                                }
                             }
                             unset($found_records);
                             unset($assoc_records);
@@ -255,8 +261,10 @@ class SearchController extends Controller
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
                             }
-                            foreach ($lbook_ids as $lbook_id) {
-                                $books[] = $assoc_records[$lbook_id];
+                            if(count($assoc_records)) {
+                                foreach ($lbook_ids as $lbook_id) {
+                                    $books[] = $assoc_records[$lbook_id];
+                                }
                             }
                             unset($found_records);
                             unset($assoc_records);
@@ -269,8 +277,10 @@ class SearchController extends Controller
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
                             }
-                            foreach ($news_ids as $news_id) {
-                                $news[] = $assoc_records[$news_id];
+                            if(count($assoc_records)) {
+                                foreach ($news_ids as $news_id) {
+                                    $news[] = $assoc_records[$news_id];
+                                }
                             }
                             unset($found_records);
                             unset($assoc_records);
@@ -526,7 +536,6 @@ class SearchController extends Controller
                     //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                     $oldword = $word;
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
-                    var_dump($word);
                     //вот теперь можно убрать лишнее
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
@@ -538,7 +547,6 @@ class SearchController extends Controller
                         $total_found_by_word = 0;
 
                         if (pspell_check($dict, $word)) {
-                            echo 'spell checked';
                             $res = $this->getSearchResultsByWord($word, array("users"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
@@ -547,7 +555,6 @@ class SearchController extends Controller
                         else {
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest = pspell_suggest($dict, $word);
-                            var_dump($suggest);
                             //берем только первый вариант, остальные уже не то
                             if (count($suggest)) {
                                 $word = $suggest[0];
@@ -895,8 +902,10 @@ class SearchController extends Controller
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
-                foreach ($user_ids as $user_id) {
-                    $users_by_worktitle[] = $assoc_records[$user_id];
+                if(count($assoc_records)) {
+                    foreach ($user_ids as $user_id) {
+                        $users_by_worktitle[] = $assoc_records[$user_id];
+                    }
                 }
                 unset($found_records);
                 unset($assoc_records);
@@ -963,8 +972,10 @@ class SearchController extends Controller
         foreach ($found_records as $record) {
             $assoc_records[$record->id] = $record;
         }
-        foreach ($user_ids as $user_id) {
-            $users[] = $assoc_records[$user_id];
+        if(count($assoc_records)) {
+            foreach ($user_ids as $user_id) {
+                $users[] = $assoc_records[$user_id];
+            }
         }
         unset($found_records);
         unset($assoc_records);

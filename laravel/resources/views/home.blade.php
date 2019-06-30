@@ -42,7 +42,7 @@
     @if (count($newusers))
     <ul class="staff_ul">
         @foreach ($newusers as $user)
-            <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
+            <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk" title="Работает с {{ date("d.m.Y", strtotime($user->workstart)) }}"><img src="{{ $user->avatar }}" alt="" class="staff_img">
                     <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
                     <div class="staff_tx">{{ $user->work_title }}</div></a></li>
         @endforeach

@@ -923,7 +923,7 @@ class SearchController extends Controller
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
 
             $year   =   date("Y");
-            
+
             $searchDate1 =   trim($bdates[0])  .   "." .   $year;
             $searchDate2 =   trim($bdates[1])  .   "." .   $year;
 
@@ -931,11 +931,13 @@ class SearchController extends Controller
             $dm =   date("m", strtotime($searchDate1));
             $dm1 =   date("m", strtotime($searchDate2));
             if($dm1 <   $dm) {
-                $dt     = date("m-d", strtotime($searchDate1));
-                $dt1    =   "12-31";
+                $dt     = date("Y-m-d", strtotime($searchDate1));
+                $dt1    =   "2019-12-31";
 
-                $dt2    =   "01-01";
-                $dt3    =   date("m-d", strtotime($searchDate2));
+                $dt2    =   "2020-01-01";
+                $year   = (int)$year    +   1;
+                $searchDate2 =   trim($bdates[1])  .   "." .   $year;
+                $dt3    =   date("Y-m-d", strtotime($searchDate2));
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')

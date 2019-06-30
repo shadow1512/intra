@@ -913,6 +913,36 @@ class SearchController extends Controller
         }
 
 
+        //кусок поиска по дню рождения
+        $bdates = trim($request->input('birthdate'));
+        $users_by_birthday  =   array();
+        $user_ids   =   array();
+
+        //надо посмотреть, период это или точная дата
+        $bdates =   explode("-",    $bdates);
+        if(isset($bdates[0])    &&  isset($bdates[1])   &&  $bdates[0]  &&  $bdates[1]) {
+            $year       =   date("Y");
+            $searchDate1 =   $bdates[0]  .   "." .   $year;
+            $searchDate2 =   $bdates[1]  .   "." .   $year;
+
+            $dt = date("z", strtotime($searchDate1));
+            $dt1 = date("z", strtotime($searchDate2));
+
+            $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->whereBetweeb(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])->get();
+            $users_by_birthday  =   $birthday_records;
+        }
+        if(isset($bdates[0])    &&  $bdates[0]) {
+            $year       =   date("Y");
+            $searchDate =   $bdates[0]  .   "." .   $year;
+            $dt = date("z", strtotime($searchDate));
+            $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->where(DB::raw("DAYOFYEAR(birthday)"), '=',    $dt)->get();
+            $users_by_birthday  =   $birthday_records;
+        }
+
         $all_found_records  =   array();
         foreach($users as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
@@ -931,6 +961,14 @@ class SearchController extends Controller
             }
         }
         foreach($users_by_room as $user) {
+            if(array_key_exists($user->id,  $all_found_records)) {
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            }
+            else {
+                $all_found_records[$user->id]   =   1;
+            }
+        }
+        foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
             }
@@ -959,6 +997,7 @@ class SearchController extends Controller
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);
+        unset($users_by_birthday);
         unset($users);
         unset($users_by_worktitle);
 
@@ -1007,6 +1046,18 @@ class SearchController extends Controller
                 $allname    .=  ", ";
             }
             $phrase =   "должность: " .   $worktitle;
+        }
+        if(isset($bdates[0])    &&  isset($bdates[1])   &&  $bdates[0]  &&  $bdates[1]) {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "день рождения, период с: " .   $bdates[0]  .   " по "  .   $bdates[1];
+        }
+        if(isset($bdates[0])    &&  $bdates[0]) {
+            if($allname) {
+                $allname    .=  ", ";
+            }
+            $phrase =   "день рождения: " .   $bdates[0];
         }
 
         return view('search.all', [ "users"  =>  $users,

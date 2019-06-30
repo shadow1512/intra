@@ -925,12 +925,13 @@ class SearchController extends Controller
             $searchDate1 =   trim($bdates[0])  .   "." .   $year;
             $searchDate2 =   trim($bdates[1])  .   "." .   $year;
 
-            $dt = date("Y-m-d", strtotime($searchDate1));
-            $dt1 = date("Y-m-d", strtotime($searchDate2));
+            $dt = date("m-d", strtotime($searchDate1));
+            $dt1 = date("m-d", strtotime($searchDate2));
 
             $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereRaw("(MONTH(birthday) BETWEEN MONTH('$dt') AND MONTH('$dt1')) AND (DAY(birthday) BETWEEN DAY('$dt') AND DAY('$dt1'))")->get();
+
             $users_by_birthday  =   $birthday_records;
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {

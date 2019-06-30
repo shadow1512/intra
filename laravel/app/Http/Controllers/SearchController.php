@@ -932,6 +932,7 @@ class SearchController extends Controller
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereBetween(DB::raw("MONTH(birthday)"), [DB::raw("MONTH('$dt')"), DB::raw("MONTH('$dt1')")])
                 ->whereBetween(DB::raw("DAY(birthday)"), [DB::raw("DAY('$dt')"), DB::raw("DAY('$dt1')")])->get();
+            var_dump($birthday_records);
             $users_by_birthday  =   $birthday_records;
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {

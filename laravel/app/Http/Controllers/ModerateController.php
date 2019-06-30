@@ -208,14 +208,16 @@ class ModerateController extends Controller
         $messages   =   array(
             "name.required"             =>  "Поле обязательно для заполнения",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
+            "time_start.required"       =>  "Поле обязательно для заполнения",
+            "time_end.required"         =>  "Поле обязательно для заполнения",
             "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
             "time_end.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
         );
 
         $validator = Validator::make($request->all(), [
             'name'          =>  'required|string|max:191',
-            'time_start'    =>  'nullable|date_format:H:i',
-            'time_end'      =>  'nullable|date_format:H:i',
+            'time_start'    =>  'required|date_format:H:i',
+            'time_end'      =>  'required|date_format:H:i',
         ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.dinner.create')
@@ -239,12 +241,14 @@ class ModerateController extends Controller
             "name.max"                  =>  "Поле не должно быть длиннее, чем 191 символ",
             "time_start.date_format"    =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
             "time_end.date_format"      =>  "Поле должно быть заполнено в формате ЧЧ:ММ",
+            "time_start.required"       =>  "Поле обязательно для заполнения",
+            "time_end.required"         =>  "Поле обязательно для заполнения",
         );
 
         $validator = Validator::make($request->all(), [
             'name'          =>  'required|string|max:191',
-            'time_start'    =>  'nullable|date_format:H:i',
-            'time_end'      =>  'nullable|date_format:H:i',
+            'time_start'    =>  'required|date_format:H:i',
+            'time_end'      =>  'required|date_format:H:i',
         ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.dinner.edit',    ["id"   =>  $id])

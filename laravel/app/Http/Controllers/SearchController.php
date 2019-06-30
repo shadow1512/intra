@@ -526,8 +526,9 @@ class SearchController extends Controller
                     //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                     $oldword = $word;
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
+                    var_dump($word);
                     //вот теперь можно убрать лишнее
-                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                    $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
@@ -537,6 +538,7 @@ class SearchController extends Controller
                         $total_found_by_word = 0;
 
                         if (pspell_check($dict, $word)) {
+                            echo 'spell checked';
                             $res = $this->getSearchResultsByWord($word, array("users"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
@@ -545,6 +547,7 @@ class SearchController extends Controller
                         else {
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest = pspell_suggest($dict, $word);
+                            var_dump($suggest);
                             //берем только первый вариант, остальные уже не то
                             if (count($suggest)) {
                                 $word = $suggest[0];
@@ -562,7 +565,7 @@ class SearchController extends Controller
                             $total_found_by_word = count($res);
                             unset($res);
                             if (!$total_found_by_word) {*/
-                                $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                                $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                                 $res = $this->getSearchResultsByWord($oldword, array("users"));
                                 $words_records[] = $res;
                                 $total_found_by_word = count($res);
@@ -701,7 +704,7 @@ class SearchController extends Controller
                     $oldword = $word;
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                     //вот теперь можно убрать лишнее
-                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                    $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
@@ -736,7 +739,7 @@ class SearchController extends Controller
                             $total_found_by_word = count($res);
                             unset($res);
                             if (!$total_found_by_word) {*/
-                            $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                            $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"), array("work"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
@@ -811,7 +814,7 @@ class SearchController extends Controller
                     $oldword = $word;
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                     //вот теперь можно убрать лишнее
-                    $word = preg_replace("/[^0-9A-zА-я]/iu", "", $word);
+                    $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
@@ -846,7 +849,7 @@ class SearchController extends Controller
                             $total_found_by_word = count($res);
                             unset($res);
                             if (!$total_found_by_word) {*/
-                            $oldword = preg_replace("/[^0-9A-zА-я]/iu", "", $oldword);
+                            $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"), array("work"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);

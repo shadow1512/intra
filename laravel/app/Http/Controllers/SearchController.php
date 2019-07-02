@@ -555,6 +555,7 @@ class SearchController extends Controller
                         else {
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest = pspell_suggest($dict, $word);
+                            var_dump($suggest);
                             //берем только первый вариант, остальные уже не то
                             if (count($suggest)) {
                                 $word = $suggest[0];
@@ -839,7 +840,6 @@ class SearchController extends Controller
                         else {
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest = pspell_suggest($dict, $word);
-                            var_dump($suggest);
                             //берем только первый вариант, остальные уже не то
                             if (count($suggest)) {
                                 $word = $suggest[0];

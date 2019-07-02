@@ -24,14 +24,18 @@
     <div class="staff_i">
         <div class="h __h_m">Дни рождения</div>
         @if (count($users))
-            <ul class="staff_ul __birthday">
-                @foreach ($users as $user)
-                    <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
-                            <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
-                            <div class="staff_tx">{{ $user->work_title }}</div></a></li>
-                @endforeach
-                <!--<li class="staff_li"><a href="{{route('people.birthday')}}" class="staff_li_more">Еще у <span>3</span> человек</a></li>-->
-            </ul>
+          <ul class="staff_ul __birthday">
+              @foreach ($users as $user)
+                  <li class="staff_li">
+                    <a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
+                      <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
+                      <div class="staff_tx">{{ $user->work_title }}</div>
+                      <div class="birthday_ic" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                    </a>
+                  </li>
+              @endforeach
+              <!--<li class="staff_li"><a href="{{route('people.birthday')}}" class="staff_li_more">Еще у <span>3</span> человек</a></li>-->
+          </ul>
         @endif
     </div>
 @endsection

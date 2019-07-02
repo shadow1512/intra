@@ -521,7 +521,7 @@ class SearchController extends Controller
         $allname = mb_substr($allname, 0, 100);
 
         //Орфография, опечатки
-        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_BAD_SPELLERS);
+        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
         //Раскладка
         $corrector = new Text_LangCorrect();
 
@@ -555,7 +555,7 @@ class SearchController extends Controller
                         else {
                             //пробуем в начале советы (опечатки, если было на русском)
                             $suggest = pspell_suggest($dict, $word);
-                            var_dump($suggest);
+                            //var_dump($suggest);
                             //берем только первый вариант, остальные уже не то
                             if (count($suggest)) {
                                 $word = $suggest[0];

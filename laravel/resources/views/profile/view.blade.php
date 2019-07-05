@@ -14,6 +14,7 @@
     <div class="profile_info">
         <div class="profile_info_i">
             <div class="profile_info_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</div>
+            <!-- <div class="profile_info_name unchecked_name"><span class="tx_change">{{$user->lname}}</span> {{$user->lname}} {{$user->fname}} {{$user->mname}} <i class="ic-wait"></i></div> -->
         <!--<div class="profile_info_place __in">В офисе</div>-->
             <div class="profile_info_position">{{$user->work_title}}</div>
         </div>
@@ -30,9 +31,11 @@
             @endif
             @if($user->room)
                 <div class="profile_info_room"><strong>Комната:&nbsp;</strong><span>{{$user->room}}</span></div>
+                <!-- <div class="profile_info_room unchecked_tx">Комната:&nbsp;</strong><span>{{$user->room}}</span> <i class="ic-wait"></i></div> -->
             @endif
             @if($user->phone)
                 <div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{$user->phone}}</span></div>
+                <!-- <div class="profile_info_phone unchecked_tx">Телефон:&nbsp;</strong><span>{{$user->phone}}</span> <i class="ic-wait"></i></div> -->
             @endif
             @if($user->city_phone)
                 <div class="profile_info_phone"><strong>Городской телефон:&nbsp;</strong><span>{{$user->city_phone}}</span></div>
@@ -107,7 +110,7 @@
                         </div>
                       @endif
                         <div class="profile_form_info_left">
-                            <!-- <div class="field __unchecked">
+                            <!-- <div class="field unchecked_field">
                                 <label for="input_lname" class="lbl">Фамилия:</label>
                                 <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it"  maxlength="255">
                                 <i class="ic-wait"></i>

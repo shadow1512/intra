@@ -44,8 +44,8 @@ class UserController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', $id)->first();
 
-        $crumbs    =   $this->getCrumbs($user->dep_id);
-
+        $crumbs    =    $this->getCrumbs($user->dep_id);
+        $crumbs[]  =    Dep::find($id);
         $contacts       =   array();
         $contact_ids    =   array();
         if(Auth::check()) {

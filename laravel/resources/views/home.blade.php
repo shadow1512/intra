@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('news')
+    @php $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");@endphp
     <div class="main_news">
         <div class="h __h_m">Новости консорциума</div>
         @if (count($news))
@@ -8,7 +9,6 @@
                 @foreach($news as $item)
                     <li class="news_li __important"><a href="{{ route('news.item', ['id' => $item->id])}}" class="news_li_lk">{{ $item->title }}</a>
                         <div class="news_li_date">@php
-                                $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
                                 $month  =   $months[date("n", strtotime($item->published_at))   -1];
                                 $day    =   date("j",   strtotime($item->published_at));
                             @endphp {{ $day }} {{ $month }}</div>
@@ -21,11 +21,33 @@
 @endsection
 
 @section('birthday')
+    @php
+        $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
+        $grouped_users  =   array();
+    @endphp
     <div class="staff_i">
         <div class="h __h_m">Дни рождения</div>
         @if (count($users))
+            @php
+                foreach ($users as $user) {
+                    $day    =   date("d.m", strtotime($user->birthday));
+                    if(isset($grouped_users[$day])) {
+                        $grouped_users[$day][]  =   $user;
+                    }
+                    else {
+                        $grouped_users[$day]  =   array();
+                        $grouped_users[$day][]  =   $user;
+                    }
+                }
+            @endphp
           <ul class="staff_ul __birthday">
-              <!-- <li class="staff_date"><strong>27 июня</strong></li> -->
+              @foreach ($grouped_users as $day  =>  $users)
+                  @php
+                    $user   =   current($users);
+                    $month  =   $months[date("n", strtotime($user->birthday))   -1];
+                    $day    =   date("j",   strtotime($user->birthday));
+                  @endphp
+              <li class="staff_date"><strong>{{ $day }} {{ $month }}</strong></li>
               @foreach ($users as $user)
                   <li class="staff_li">
                     <a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
@@ -36,6 +58,7 @@
                   </li>
               @endforeach
               <!--<li class="staff_li"><a href="{{route('people.birthday')}}" class="staff_li_more">Еще у <span>3</span> человек</a></li>-->
+              @endforeach
           </ul>
         @endif
     </div>

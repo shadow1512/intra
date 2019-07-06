@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         //дни рождения
         $dt = date("z");
-        $dt1 = $dt + 5;
+        $dt1 = $dt + 3;
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])

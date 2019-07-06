@@ -36,12 +36,13 @@ class HomeController extends Controller
         $news = News::orderBy('importancy', 'desc')->limit(15)->get();
 
         //дни рождения
-        $dt = date("z");
+        $dt = (int)date("z");
+
         $dt1 = $dt + 3;
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])
-                ->orderBy('birthday', 'asc')->get();
+                ->whereBetween(DB::raw("DAYOFYEAR(birthday) - 1"), [$dt, $dt1])
+                ->orderByRaw('DAYOFYEAR(birthday)', 'asc')->get();
 
         //новые сотрудники
         $newusers = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.workstart")

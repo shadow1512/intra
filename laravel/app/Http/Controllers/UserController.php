@@ -45,7 +45,7 @@ class UserController extends Controller
             ->where('users.id', $id)->first();
 
         $crumbs    =    $this->getCrumbs($user->dep_id);
-        $crumbs[]  =    Dep::find($id);
+        $crumbs[]  =    Dep::find($user->dep_id);
         $contacts       =   array();
         $contact_ids    =   array();
         if(Auth::check()) {

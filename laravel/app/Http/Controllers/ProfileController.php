@@ -48,7 +48,6 @@ class ProfileController extends Controller
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->where("approved", "=",    0)->orderBy("updated_at",    "desc")->first();
         if($ps_record) {
             $ps=    $ps_record;
-            $user   =   $ps;
         }
 
         if($user->dep_id)   {

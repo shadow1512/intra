@@ -117,26 +117,82 @@
                                 <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it"  maxlength="255">
                                 <i class="ic-wait"></i>
                             </div> -->
+                                @if(!is_null($ps)   &&  ($ps->lname  != $user->lname))
+                            <div class="field unchecked_field">
+                                <label for="input_lname" class="lbl">Фамилия:</label>
+                                <input id="input_lname" name="input_lname" type="text" value="{{$ps->lname}}" class="it"  maxlength="255">
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_lname" class="lbl">Фамилия:</label>
                                 <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it"  maxlength="255">
                             </div>
+                                @endif
+
+                                @if(!is_null($ps)   &&  ($ps->lname  != $user->lname))
+                            <div class="field unchecked_field">
+                                <label for="input_fname" class="lbl">Имя:</label>
+                                <input id="input_fname" name="input_fname" type="text" value="{{$ps->fname}}" class="it"  maxlength="255">
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_fname" class="lbl">Имя:</label>
                                 <input id="input_fname" name="input_fname" type="text" value="{{$user->fname}}" class="it"  maxlength="255">
                             </div>
+                                @endif
+
+                                @if(!is_null($ps)   &&  ($ps->lname  != $user->mname))
+                            <div class="field unchecked_field">
+                                <label for="input_mname" class="lbl">Отчество:</label>
+                                <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it" maxlength="255">
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_mname" class="lbl">Отчество:</label>
                                 <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it" maxlength="255">
                             </div>
+                                @endif
+
+                                @if(!is_null($ps)   &&  ($ps->birthday  != $user->birthday))
+                            <div class="field unchecked_field">
+                                <label for="input_birthday" class="lbl">Дата рождения:</label>
+                                <input id="input_birthday" name="input_birthday" type="text" value="@if ($ps->birthday) {{ date("d.m.Y", strtotime($ps->birthday)) }} @endif" class="it">
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_birthday" class="lbl">Дата рождения:</label>
                                 <input id="input_birthday" name="input_birthday" type="text" value="@if ($user->birthday) {{ date("d.m.Y", strtotime($user->birthday)) }} @endif" class="it">
                             </div>
+                                @endif
+
+                                @if(!is_null($ps)   &&  ($ps->room  != $user->room))
+                            <div class="field unchecked_field">
+                                <label for="input_room" class="lbl">Комната:</label>
+                                <input id="input_room" name="input_room" type="text" value="{{$ps->room}}" class="it" maxlength="3">
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_room" class="lbl">Комната:</label>
                                 <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="3">
                             </div>
+                                @endif
+
+                                @if(!is_null($ps)   &&  ($ps->dep_id  != $user->dep_id))
+                            <div class="field unchecked_field">
+                                <label for="input_dep" class="lbl">Подразделение:</label>
+                                <select id="input_dep" class="form-control" name="input_dep">
+                                    @foreach ($deps as $dep)
+                                        <option value="{{$dep->id}}" @if ($ps->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
+                                    @endforeach
+                                </select>
+                                <i class="ic-wait"></i>
+                            </div>
+                                @else
                             <div class="field">
                                 <label for="input_dep" class="lbl">Подразделение:</label>
                                 <select id="input_dep" class="form-control" name="input_dep">
@@ -145,41 +201,113 @@
                                     @endforeach
                                 </select>
                             </div>
+                                @endif
                         </div>
                         <div class="profile_form_info_right">
-                            <div class="field">
-                                <label for="input_phone" class="lbl">Местный телефон:</label>
-                                <input id="input_phone" name="input_phone" type="text" value="{{$user->phone}}" class="it" maxlength="3">
-                            </div>
-                            <div class="field">
-                                <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
-                                <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it" maxlength="18">
-                            </div>
-                            <div class="field">
-                                <label for="input_city_phone" class="lbl">Городской телефон:</label>
-                                <input id="input_city_phone" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it" maxlength="15">
-                            </div>
-                            <div class="field">
-                                <label for="input_email" class="lbl">Email:</label>
-                                <input id="input_email" name="input_email" type="text" value="{{$user->email}}" class="it" maxlength="255">
-                            </div>
-                            <div class="field">
-                                <label for="input_email_secondary" class="lbl">Дополнительный email:</label>
-                                <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it" maxlength="255">
-                            </div>
-                            <div class="field">
-                                <label for="input_work_title" class="lbl">Должность:</label>
-                                <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
-                            </div>
+
+                            @if(!is_null($ps)   &&  ($ps->phone  != $user->phone))
+                        <div class="field unchecked_field">
+                            <label for="input_phone" class="lbl">Местный телефон:</label>
+                            <input id="input_phone" name="input_phone" type="text" value="{{$ps->phone}}" class="it" maxlength="3">
+                            <i class="ic-wait"></i>
                         </div>
-                        <div class="field __no-margin">
+                            @else
+                        <div class="field">
+                            <label for="input_phone" class="lbl">Местный телефон:</label>
+                            <input id="input_phone" name="input_phone" type="text" value="{{$user->phone}}" class="it" maxlength="3">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->mobile_phone  != $user->mobile_phone))
+                        <div class="field unchecked_field">
+                            <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
+                            <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$ps->mobile_phone}}" class="it" maxlength="18">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
+                            <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>
+                            <input id="input_mobile_phone" name="input_mobile_phone" type="text" value="{{$user->mobile_phone}}" class="it" maxlength="18">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->city_phone  != $user->city_phone))
+                        <div class="field unchecked_field">
+                            <label for="input_city_phone" class="lbl">Городской телефон:</label>
+                            <input id="input_city_phone" name="input_city_phone" type="text" value="{{$ps->city_phone}}" class="it" maxlength="15">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
+                            <label for="input_city_phone" class="lbl">Городской телефон:</label>
+                            <input id="input_city_phone" name="input_city_phone" type="text" value="{{$user->city_phone}}" class="it" maxlength="15">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->email  != $user->email))
+                        <div class="field unchecked_field">
+                            <label for="input_email" class="lbl">Email:</label>
+                            <input id="input_email" name="input_email" type="text" value="{{$ps->email}}" class="it" maxlength="255">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
+                            <label for="input_email" class="lbl">Email:</label>
+                            <input id="input_email" name="input_email" type="text" value="{{$user->email}}" class="it" maxlength="255">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->email_secondary  != $user->email_secondary))
+                        <div class="field unchecked_field">
+                            <label for="input_email_secondary" class="lbl">Дополнительный email:</label>
+                            <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$ps->email_secondary}}" class="it" maxlength="255">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
+                            <label for="input_email_secondary" class="lbl">Дополнительный email:</label>
+                            <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it" maxlength="255">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->work_title  != $user->work_title))
+                        <div class="field unchecked_field">
+                            <label for="input_work_title" class="lbl">Должность:</label>
+                            <input id="input_work_title" name="input_work_title" type="text" value="{{$ps->work_title}}" class="it" maxlength="255">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
+                            <label for="input_work_title" class="lbl">Должность:</label>
+                            <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
+                        </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->address  != $user->address))
+                        <div class="field __no-margin unchecked_field">
+                            <label for="input_address" class="lbl">Адрес:</label>
+                            <input id="input_address" name="input_address" type="text" value="{{$ps->address}}" class="it" maxlength="255">
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
+                        <div class="field">
                             <label for="input_address" class="lbl">Адрес:</label>
                             <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it" maxlength="255">
                         </div>
+                            @endif
+
+                            @if(!is_null($ps)   &&  ($ps->position_desc  != $user->position_desc))
+                        <div class="field unchecked_field">
+                            <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
+                            <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$ps->position_desc}}</textarea>
+                            <i class="ic-wait"></i>
+                        </div>
+                            @else
                         <div class="field">
                             <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
                             <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$user->position_desc}}</textarea>
                         </div>
+                            @endif
                     </div>
                 </div>
                 <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_profile_form">Сохранить</a></div>

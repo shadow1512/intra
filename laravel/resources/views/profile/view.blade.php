@@ -112,11 +112,6 @@
                         </div>
                       @endif
                         <div class="profile_form_info_left">
-                            <!-- <div class="field unchecked_field">
-                                <label for="input_lname" class="lbl">Фамилия:</label>
-                                <input id="input_lname" name="input_lname" type="text" value="{{$user->lname}}" class="it"  maxlength="255">
-                                <i class="ic-wait"></i>
-                            </div> -->
                                 @if(!is_null($ps)   &&  ($ps->lname  != $user->lname))
                             <div class="field unchecked_field">
                                 <label for="input_lname" class="lbl">Фамилия:</label>
@@ -282,32 +277,32 @@
                             <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
                         </div>
                             @endif
+                        </div>
+                        @if(!is_null($ps)   &&  ($ps->address  != $user->address))
+                    <div class="field __no-margin unchecked_field">
+                        <label for="input_address" class="lbl">Адрес:</label>
+                        <input id="input_address" name="input_address" type="text" value="{{$ps->address}}" class="it" maxlength="255">
+                        <i class="ic-wait"></i>
+                    </div>
+                        @else
+                    <div class="field __no-margin">
+                        <label for="input_address" class="lbl">Адрес:</label>
+                        <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it" maxlength="255">
+                    </div>
+                        @endif
 
-                            @if(!is_null($ps)   &&  ($ps->address  != $user->address))
-                        <div class="field __no-margin unchecked_field">
-                            <label for="input_address" class="lbl">Адрес:</label>
-                            <input id="input_address" name="input_address" type="text" value="{{$ps->address}}" class="it" maxlength="255">
-                            <i class="ic-wait"></i>
-                        </div>
-                            @else
-                        <div class="field __no-margin">
-                            <label for="input_address" class="lbl">Адрес:</label>
-                            <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it" maxlength="255">
-                        </div>
-                            @endif
-
-                            @if(!is_null($ps)   &&  ($ps->position_desc  != $user->position_desc))
-                        <div class="field unchecked_field">
-                            <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                            <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$ps->position_desc}}</textarea>
-                            <i class="ic-wait"></i>
-                        </div>
-                            @else
-                        <div class="field">
-                            <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                            <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$user->position_desc}}</textarea>
-                        </div>
-                            @endif
+                        @if(!is_null($ps)   &&  ($ps->position_desc  != $user->position_desc))
+                    <div class="field unchecked_field">
+                        <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
+                        <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$ps->position_desc}}</textarea>
+                        <i class="ic-wait"></i>
+                    </div>
+                        @else
+                    <div class="field">
+                        <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
+                        <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$user->position_desc}}</textarea>
+                    </div>
+                        @endif
                     </div>
                 </div>
                 <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_profile_form">Сохранить</a></div>

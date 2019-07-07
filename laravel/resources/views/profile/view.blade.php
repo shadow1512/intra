@@ -106,7 +106,9 @@
                     <div class="profile_form_info">
                       @if(!is_null($ps))
                         <div class="field_warning">
-                          Часть данных ожидает подтверждения модератором (<a href="">Орлова Е.И.</a>) перед внесением в&nbsp;корпоративный профиль. После подтверждения эти данные станут видны остальным сотрудникам.
+                          Часть данных ожидает подтверждения модератором
+                            @if(!is_null($moderate)) (<a href="{{route('people.unit',   ["id"   =>  $moderate->id])}}">{{$moderate->lname}} {{mb_substr($moderate->fname, 0, 1, "UTF-8")}}. @if(!empty($moderate->mname)) {{mb_substr($moderate->mname, 0, 1, "UTF-8")}}.@endif</a>) @endif
+                            перед внесением в&nbsp;корпоративный профиль. После подтверждения эти данные станут видны остальным сотрудникам.
                         </div>
                       @endif
                         <div class="profile_form_info_left">

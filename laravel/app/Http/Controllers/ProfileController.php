@@ -43,7 +43,7 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', '=', Auth::user()->id)->first();
 
-        $dep    =   $ps     =   null;
+        $dep    =   $ps     =   $moderate   =   null;
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->where("approved", "=",    0)->orderBy("updated_at",    "desc")->first();
         if($ps_record) {
@@ -52,7 +52,8 @@ class ProfileController extends Controller
         }
 
         if($user->dep_id)   {
-            $dep    =   Dep::findOrFail($user->dep_id);
+            $dep        =   Dep::findOrFail($user->dep_id);
+            $moderate   =   Dep::getModerate();
         }
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
@@ -67,7 +68,8 @@ class ProfileController extends Controller
 
         $tr     =   Technical_Request::where('user_id', '=',    Auth::user()->id)->orderByDesc("created_at")->limit(5)->get();
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr]);
+
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr,    'moderate'  =>  $moderate]);
     }
 
     public function edit()

@@ -290,7 +290,7 @@
                             <i class="ic-wait"></i>
                         </div>
                             @else
-                        <div class="field">
+                        <div class="field __no-margin">
                             <label for="input_address" class="lbl">Адрес:</label>
                             <input id="input_address" name="input_address" type="text" value="{{$user->address}}" class="it" maxlength="255">
                         </div>

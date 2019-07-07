@@ -50,7 +50,7 @@ class ProfileController extends Controller
             $ps=    $ps_record;
         }
 
-        if($user->dep_id)   {
+        if($user->dep_id    ||  (!is_null($ps)  &&  $ps->dep_id))   {
             $dep        =   Dep::findOrFail($user->dep_id);
             $moderate   =   Dep::getModerate($user->dep_id);
         }

@@ -53,7 +53,7 @@ class ProfileController extends Controller
 
         if($user->dep_id)   {
             $dep        =   Dep::findOrFail($user->dep_id);
-            $moderate   =   Dep::getModerate();
+            $moderate   =   Dep::getModerate($user->dep_id);
         }
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();

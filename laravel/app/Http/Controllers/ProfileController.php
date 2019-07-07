@@ -51,8 +51,15 @@ class ProfileController extends Controller
         }
 
         if($user->dep_id    ||  (!is_null($ps)  &&  $ps->dep_id))   {
-            $dep        =   Dep::findOrFail($user->dep_id);
-            $moderate   =   Dep::getModerate($user->dep_id);
+            if($user->dep_id) {
+                $dep        =   Dep::findOrFail($user->dep_id);
+                $moderate   =   Dep::getModerate($user->dep_id);
+            }
+            if(!is_null($ps)  &&  $ps->dep_id   &&  ($ps->dep_id    !=  $user->dep_id)) {
+                $dep        =   Dep::findOrFail($ps->dep_id);
+                $moderate   =   Dep::getModerate($ps->dep_id);
+            }
+
         }
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();

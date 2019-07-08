@@ -136,7 +136,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
             data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
             success: function(msg) {
                 if(msg[0] == "success") {
-                    $(form).fadeOut(300);
+                    $(form).parent().parent().parent().fadeOut(300);
                     $("div.__js-modal-profile-changes").fadeIn(300);
                     var list    =   $("div.__js-modal-profile-changes").find("ul.lst-changes");
                     $(list).html("");
@@ -155,12 +155,15 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                         dep_id:             "Подразделение",
                         work_title:         "Должность",
                         address:            "Адрес",
-                        position_desc:      "Сфера деятельности",
+                        position_desc:      "Сфера деятельности"
                     };
 
                     var newfields   =   msg[1];
                     var oldfields   =   msg[2];
                     for(var key in newfields) {
+                        alert(key);
+                        alert(labels.key);
+                        alert(labels[key]);
                         if(labels.key!==    undefined) {
                             if (newfields.key) {
                                 if (oldfields.key !== undefined) {

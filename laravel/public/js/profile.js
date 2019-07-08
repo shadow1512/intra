@@ -160,24 +160,26 @@ $(document).on("submit", "#profile_update_form", function(ev) {
 
                     var newfields   =   msg[1];
                     var oldfields   =   msg[2];
-                    for(var key in newfieilds) {
-                        if(newfields.key) {
-                            if(oldfields.key!== undefined)  {
-                                if(oldfields.key    &&  (oldfields.key  !=  newfields.key)) {
-                                    $(list).append('<li class="lst-changes_i">'  +   labels.key  +   ': заменить &laquo;'    +   oldfields.key   +   '&raquo; на&nbsp;&laquo;'   +   newfields.key   +   '&raquo;</li>');
+                    for(var key in newfields) {
+                        if(labels.key!==    undefined) {
+                            if (newfields.key) {
+                                if (oldfields.key !== undefined) {
+                                    if (oldfields.key && (oldfields.key != newfields.key)) {
+                                        $(list).append('<li class="lst-changes_i">' + labels.key + ': заменить &laquo;' + oldfields.key + '&raquo; на&nbsp;&laquo;' + newfields.key + '&raquo;</li>');
+                                    }
+                                    else {
+                                        $(list).append('<li class="lst-changes_i">' + labels.key + ': добавить &laquo;' + newfields.key + '&raquo;</li>');
+                                    }
                                 }
                                 else {
-                                    $(list).append('<li class="lst-changes_i">'  +   labels.key  +   ': добавить &laquo;'   +   newfields.key   +   '&raquo;</li>');
+                                    $(list).append('<li class="lst-changes_i">' + labels.key + ': добавить &laquo;' + newfields.key + '&raquo;</li>');
                                 }
                             }
                             else {
-                                $(list).append('<li class="lst-changes_i">'  +   labels.key  +   ': добавить &laquo;'   +   newfields.key   +   '&raquo;</li>');
-                            }
-                        }
-                        else {
-                            if(oldfields.key!== undefined)  {
-                                if(oldfields.key    &&  (oldfields.key  !=  newfields.key)) {
-                                    $(list).append('<li class="lst-changes_i">'  +   labels.key  +   ': удалить &laquo;'   +   oldfields.key   +   '&raquo;</li>');
+                                if (oldfields.key !== undefined) {
+                                    if (oldfields.key && (oldfields.key != newfields.key)) {
+                                        $(list).append('<li class="lst-changes_i">' + labels.key + ': удалить &laquo;' + oldfields.key + '&raquo;</li>');
+                                    }
                                 }
                             }
                         }

@@ -175,7 +175,7 @@ class ProfileController extends Controller
             $ps->creator_id =   Auth::user()->id;
             $ps->save();
 
-            return response()->json(['success']);
+            return response()->json(['success', $ps->toArray()]);
         }
 
     }

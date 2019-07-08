@@ -162,6 +162,8 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     var oldfields   =   msg[2];
                     for(var key in newfields) {
                         if(labels[key]!==    undefined) {
+                            alert(newfields.key);
+                            alert(newfields[key]);
                             if (newfields[key]) {
                                 if (oldfields[key] !== undefined) {
                                     if (oldfields[key] && (oldfields[key] != newfields[key])) {

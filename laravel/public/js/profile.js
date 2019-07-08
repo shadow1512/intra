@@ -137,7 +137,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
             success: function(msg) {
                 if(msg[0] == "success") {
                     $(form).parent().parent().parent().fadeOut(300);
-                    $("div.__js-modal-profile-changes").fadeIn(300);
+                    $("div.__js-modal-profile-changes").show().css("visibility",    "display");
                     var list    =   $("div.__js-modal-profile-changes").find("ul.lst-changes");
                     $(list).html("");
 
@@ -161,15 +161,15 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     var newfields   =   msg[1];
                     var oldfields   =   msg[2];
                     for(var key in labels) {
-                        alert(newfields[key]);
-                        alert(oldfields[key]);
                         if (newfields[key]) {
-                            if (oldfields[key] !== undefined) {
+                            if (key in oldfields) {
                                 if (oldfields[key] && (oldfields[key] != newfields[key])) {
                                     $(list).append('<li class="lst-changes_i">' + labels[key] + ': заменить &laquo;' + oldfields[key] + '&raquo; на&nbsp;&laquo;' + newfields[key] + '&raquo;</li>');
                                 }
                                 else {
-                                    $(list).append('<li class="lst-changes_i">' + labels[key] + ': добавить &laquo;' + newfields[key] + '&raquo;</li>');
+                                    if(!oldfields[key]) {
+                                        $(list).append('<li class="lst-changes_i">' + labels[key] + ': добавить &laquo;' + newfields[key] + '&raquo;</li>');
+                                    }
                                 }
                             }
                             else {
@@ -177,8 +177,8 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                             }
                         }
                         else {
-                            if (oldfields[key] !== undefined) {
-                                if (oldfields[key] && (oldfields[key] != newfields[key])) {
+                            if (key in oldfields) {
+                                if (oldfields[key]) {
                                     $(list).append('<li class="lst-changes_i">' + labels[key] + ': удалить &laquo;' + oldfields[key] + '&raquo;</li>');
                                 }
                             }

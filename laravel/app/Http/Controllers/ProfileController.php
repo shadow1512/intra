@@ -175,7 +175,11 @@ class ProfileController extends Controller
             $ps->creator_id =   Auth::user()->id;
             $ps->save();
 
-            return response()->json(['success', $ps->toArray()]);
+            $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
+                ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->where('users.id', '=', Auth::user()->id)->first();
+
+            return response()->json(['success', $ps->toArray(), $user->toArray()]);
         }
 
     }

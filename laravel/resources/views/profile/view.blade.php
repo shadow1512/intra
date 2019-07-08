@@ -313,7 +313,7 @@
 <!--eo modal-->
 
 <!--modal-->
-<div class="overlay">
+<div class="overlay __js-modal-profile-changes">
   <div class="modal-w">
     <div class="modal-cnt __changes">
       <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>

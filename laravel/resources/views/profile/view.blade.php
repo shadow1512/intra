@@ -138,7 +138,7 @@
                             </div>
                                 @endif
 
-                                @if(!is_null($ps)   &&  ($ps->lname  != $user->mname))
+                                @if(!is_null($ps)   &&  ($ps->mname  != $user->mname))
                             <div class="field unchecked_field">
                                 <label for="input_mname" class="lbl">Отчество:</label>
                                 <input id="input_mname" name="input_mname" type="text" value="{{$user->mname}}" class="it" maxlength="255">
@@ -311,32 +311,6 @@
     </div>
 </div>
 <!--eo modal-->
-
-<!--modal-->
-<div class="overlay __js-modal-profile-changes">
-  <div class="modal-w">
-    <div class="modal-cnt __changes">
-      <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
-      <div class="profile_form_h">
-        <div class="h light_h __h_m">Отправлен запрос на&nbsp;внесение изменений<br />в&nbsp;ваш корпоративный профиль</div>
-      </div>
-      <div class="profile_form">
-        <ul class="lst-changes">
-          <li class="lst-changes_i">Фамилия: заменить &laquo;Иванова&raquo; на&nbsp;&laquo;Пушистик&raquo;</li>
-          <li class="lst-changes_i">E-mail: заменить &laquo;ivanova@kodeks.ru&raquo; на&nbsp;&laquo;xxx@mail.ru&raquo;</li>
-          <li class="lst-changes_i">Добавочный e-mail: добавить &laquo;xxx@mail.ru&raquo;</li>
-          <li class="lst-changes_i">Должность: добавить &laquo;Босс молокососс&raquo;</li>
-          <li class="lst-changes_i">Комната: добавить &laquo;столовая&raquo;</li>
-        </ul>
-      </div>
-      <div class="profile_form_submit">
-        <div class="h light_h __h_s __margin-bottom_l">Ожидайте подтверждения модератором: <a href="">Орлова Е.И.</a><br /> После подтверждения новые данные профиля станут видны остальным сотрудникам.</div>
-        <a href="#" class="btn profile_form_btn">Готово</a>
-      </div>
-    </div>
-  </div>
-</div>
-<!--modal-->
 
 <!--modal-->
 <div class="overlay">

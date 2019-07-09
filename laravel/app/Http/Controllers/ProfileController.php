@@ -179,7 +179,41 @@ class ProfileController extends Controller
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->where('users.id', '=', Auth::user()->id)->first();
 
-            return response()->json(['success', $ps->toArray(), $user->toArray()]);
+            $dep_new    =   $dep_old    =   $moderator  =   null;
+            if($ps->dep_id) {
+                $dep_new    =   Dep::findOrFail($ps->dep_id);
+            }
+            if($user->dep_id) {
+                $dep_old    =   Dep::findOrFail($user->dep_id);
+            }
+
+            if($ps->dep_id) {
+                $moderator  =   Dep::getModerate($ps->dep_id);
+            }
+            if(is_null($moderator)  &&  $user->dep_id) {
+                $moderator  =   Dep::getModerate($user->dep_id);
+            }
+
+            $labels =   array(
+                "fname"             =>  "Имя",
+                "mname"             =>  "Отчество",
+                "lname"             =>  "Фамилия",
+                "phone"             =>  "Местный телефон",
+                "email"             =>  "Рабочий email",
+                "phone_city"        =>  "Городской телефон",
+                "phone_mobile"      =>  "Мобильный телефон",
+                "room"              =>  "Комната",
+                "email_secondary"   =>  "Добавочный email",
+                "birthday"          =>  "Дата рождения",
+                "dep_id"            =>  "Подразделение",
+                "work_title"        =>  "Должность",
+                "address"           =>  "Адрес",
+                "position_desc"     =>  "Сфера деятельности"
+            );
+
+            $html   =   View::make('profile.viewchanges', ['labels' =>  $labels,    'user'   =>  $user->toArray(),   'ps' =>  $ps->toArray(),   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
+
+            return response()->json(['success', $html->render()]);
         }
 
     }

@@ -137,53 +137,8 @@ $(document).on("submit", "#profile_update_form", function(ev) {
             success: function(msg) {
                 if(msg[0] == "success") {
                     $(form).parent().parent().parent().fadeOut(300);
+                    $(form).parent().parent().parent().after(msg[1]);
                     $("div.__js-modal-profile-changes").show().css("visibility",    "display");
-                    var list    =   $("div.__js-modal-profile-changes").find("ul.lst-changes");
-                    $(list).html("");
-
-                    var labels  =   {
-                        fname:              "Имя",
-                        mname:              "Отчество",
-                        lname:              "Фамилия",
-                        phone:              "Местный телефон",
-                        email:              "Рабочий email",
-                        phone_city:         "Городской телефон",
-                        phone_mobile:       "Мобильный телефон",
-                        room:               "Комната",
-                        email_secondary:    "Добавочный email",
-                        birthday:           "Дата рождения",
-                        dep_id:             "Подразделение",
-                        work_title:         "Должность",
-                        address:            "Адрес",
-                        position_desc:      "Сфера деятельности"
-                    };
-
-                    var newfields   =   msg[1];
-                    var oldfields   =   msg[2];
-                    for(var key in labels) {
-                        if (newfields[key]) {
-                            if (key in oldfields) {
-                                if (oldfields[key] && (oldfields[key] != newfields[key])) {
-                                    $(list).append('<li class="lst-changes_i">' + labels[key] + ': заменить &laquo;' + oldfields[key] + '&raquo; на&nbsp;&laquo;' + newfields[key] + '&raquo;</li>');
-                                }
-                                else {
-                                    if(!oldfields[key]) {
-                                        $(list).append('<li class="lst-changes_i">' + labels[key] + ': добавить &laquo;' + newfields[key] + '&raquo;</li>');
-                                    }
-                                }
-                            }
-                            else {
-                                $(list).append('<li class="lst-changes_i">' + labels[key] + ': добавить &laquo;' + newfields[key] + '&raquo;</li>');
-                            }
-                        }
-                        else {
-                            if (key in oldfields) {
-                                if (oldfields[key]) {
-                                    $(list).append('<li class="lst-changes_i">' + labels[key] + ': удалить &laquo;' + oldfields[key] + '&raquo;</li>');
-                                }
-                            }
-                        }
-                    }
                 }
                 if(msg[0] == "error") {
                     var errors  =   msg[1];

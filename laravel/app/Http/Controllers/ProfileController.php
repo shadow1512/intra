@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use DateTime;
+use View;
 
 class ProfileController extends Controller
 {

@@ -138,7 +138,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                 if(msg[0] == "success") {
                     $(form).parent().parent().parent().fadeOut(300);
                     $(form).parent().parent().parent().after(msg[1]);
-                    $("div.__js-modal-profile-changes").show().css("visibility",    "display");
+                    $("div.__js-modal-profile-changes").addClass("__vis");
                 }
                 if(msg[0] == "error") {
                     var errors  =   msg[1];

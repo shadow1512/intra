@@ -37,8 +37,9 @@
                                 <div class="profile_contacts_info">
                                 <!--<div class="profile_contacts_status"></div>--><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</a>
                                     <div class="profile_contacts_position">{{$user->work_title}}</div>
-                                    <div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
-                                    <div class="profile_contacts_position">Телефон: {{$user->phone}}</div>
+                                    @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
+                                    @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
+                                    @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: {{ date("d.m.Y", strtotime($user->birthday)) }}</div>@endif
                                 </div>
                             </li>
                         @endforeach

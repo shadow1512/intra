@@ -39,7 +39,7 @@
                                     <div class="profile_contacts_position">{{$user->work_title}}</div>
                                     @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
                                     @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
-                                    @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: {{ date("d.m.Y", strtotime($user->birthday)) }}</div>@endif
+                                    <div class="profile_contacts_position">Дата рождения: {{ $user->birthday }} - {{ date("d.m.Y", strtotime($user->birthday)) }}</div>
                                 </div>
                             </li>
                         @endforeach

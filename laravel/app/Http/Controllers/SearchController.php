@@ -1027,7 +1027,7 @@ class SearchController extends Controller
         $users  =   array();
 
         $user_ids = array_keys($all_found_records);
-        $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+        $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereIn('users.id', $user_ids)->get();
         $assoc_records = array();

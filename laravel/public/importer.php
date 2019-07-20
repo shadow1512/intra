@@ -239,7 +239,7 @@ if($tok) {
                                     mysqli_query($conn, $query);
 
                                     $query = "INSERT INTO deps_peoples (`dep_id`, `people_id`, `work_title`, `created_at`, `updated_at`, `chef`)
-                                                        VALUES (" . $rowdep["dep_id"] . ", $user_id, '" . $post . "', '" . $date . "', '" . $date . "', $chef)";
+                                                        VALUES (" . $rowdep["dep_id"] . ", "    .   $row["user_id"] .   ", '" . $post . "', '" . $date . "', '" . $date . "', $chef)";
                                     $insres =   mysqli_query($conn, $query);
 
                                     if(!$insres) {

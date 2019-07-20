@@ -16,7 +16,8 @@ class Kernel extends ConsoleKernel
         //
         Commands\buildsearchindex::class,
         Commands\makeXmlToUpdateAD::class,
-        Commands\makeCsvDirectoryInfographics::class
+        Commands\makeCsvDirectoryInfographics::class,
+        Commands\updatedirectoryfromoldts::class,
     ];
 
     /**
@@ -30,6 +31,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('searchindex:create')->hourly();
         $schedule->command('addxml:create')->daily();
         $schedule->command('maindepcsv:create')->daily();
+        $schedule->command('oldtsstaff:import')->daily();
     }
 
     /**

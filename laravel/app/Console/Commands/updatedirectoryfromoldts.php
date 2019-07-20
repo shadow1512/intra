@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 
 use App\User;
 use App\Deps_Peoples;
+use App\Deps_Temporal;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Config;

@@ -51,16 +51,16 @@ class updatedirectoryfromad extends Command
         if(count($users)) {
             foreach($users as $user) {
                 print $user->getConvertedSid()  .   "\r\n";
-                print $user->givenname  .   "\r\n";
-                print $user->middlename .   "\r\n";
-                print $user->sn .   "\r\n";
-                print $user->url    .   "\r\n";
-                print $user->mail   .   "\r\n";
-                print $user->department .   "\r\n";
-                print $user->division   .   "\r\n";
-                print $user->telephonenumber    .   "\r\n";
-                print $user->physicaldeliveryofficename .   "\r\n";
-                print $user->title .   "\r\n";
+                print $user->getFirstName()  .   "\r\n";
+                print $user->getMiddleName() .   "\r\n";
+                print $user->getLastName() .   "\r\n";
+                print $user->getThumbnail()    .   "\r\n"   .   $user->getJpegPhoto();
+                print $user->getEmail()   .   "\r\n";
+                print $user->getDepartment() .   "\r\n";
+                print $user->getInfo()   .   "\r\n" .   $user->getDivision()    .   "\r\n";
+                print $user->getTelephoneNumber()    .   "\r\n";
+                print $user->getPhysicaldDeliveryOfficeName() .   "\r\n"    .   $user->getRoomNumber()  .   "\r\n";
+                print $user->getTitle() .   "\r\n";
 
                 print "\r\n"    .   "\r\n";
             }

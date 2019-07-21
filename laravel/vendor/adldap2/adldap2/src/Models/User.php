@@ -104,6 +104,30 @@ class User extends Entry implements Authenticatable
     }
 
     /**
+     * Returns the users department.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms675490(v=vs.85).aspx
+     *
+     * @return string
+     */
+    public function getDivision()
+    {
+        return $this->getFirstAttribute($this->schema->division());
+    }
+
+    /**
+     * Sets the users department.
+     *
+     * @param string $department
+     *
+     * @return $this
+     */
+    public function setDivision($division)
+    {
+        return $this->setFirstAttribute($this->schema->division(), $division);
+    }
+
+    /**
      * Returns the department number.
      *
      * @return string
@@ -197,6 +221,29 @@ class User extends Entry implements Authenticatable
         return $this->setFirstAttribute($this->schema->lastName(), $lastName);
     }
 
+    /**
+     * Returns the users last name.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms679872(v=vs.85).aspx
+     *
+     * @return mixed
+     */
+    public function getMiddleName()
+    {
+        return $this->getFirstAttribute($this->schema->middleName());
+    }
+
+    /**
+     * Sets the users last name.
+     *
+     * @param string $lastName
+     *
+     * @return $this
+     */
+    public function setMiddleName($middleName)
+    {
+        return $this->setFirstAttribute($this->schema->middleName(), $middleName);
+    }
     /**
      * Returns the users info.
      *

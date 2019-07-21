@@ -50,7 +50,19 @@ class updatedirectoryfromad extends Command
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {
             foreach($users as $user) {
-                var_dump($user);
+                print $user->getConvertedSid()  .   "\r\n";
+                print $user->givenname  .   "\r\n";
+                print $user->middlename .   "\r\n";
+                print $user->sn .   "\r\n";
+                print $user->url    .   "\r\n";
+                print $user->mail   .   "\r\n";
+                print $user->department .   "\r\n";
+                print $user->division   .   "\r\n";
+                print $user->telephonenumber    .   "\r\n";
+                print $user->physicaldeliveryofficename .   "\r\n";
+                print $user->title .   "\r\n";
+
+                print "\r\n"    .   "\r\n";
             }
         }
 

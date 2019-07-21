@@ -837,6 +837,16 @@ class User extends Entry implements Authenticatable
     }
 
     /**
+     * Returns the users jpeg photo.
+     *
+     * @return mixed
+     */
+    public function getUrl()
+    {
+        return $this->getFirstAttribute($this->schema->url());
+    }
+
+    /**
      * Returns the distinguished name of the user who is the user's manager.
      *
      * @return string

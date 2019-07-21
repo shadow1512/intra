@@ -151,6 +151,14 @@ class ActiveDirectory implements SchemaInterface
     /**
      * {@inheritdoc}
      */
+    public function division()
+    {
+        return 'division';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function departmentNumber()
     {
         return 'departmentnumber';
@@ -370,6 +378,14 @@ class ActiveDirectory implements SchemaInterface
     public function lastName()
     {
         return 'sn';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function middleName()
+    {
+        return 'middlename';
     }
 
     /**

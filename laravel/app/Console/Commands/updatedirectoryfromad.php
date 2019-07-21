@@ -54,7 +54,7 @@ class updatedirectoryfromad extends Command
                 print $user->getFirstName()  .   "\r\n";
                 print $user->getMiddleName() .   "\r\n";
                 print $user->getLastName() .   "\r\n";
-                print $user->getThumbnail()    .   "\r\n"   .   $user->getJpegPhoto();
+                print $user->getThumbnail()    .   "\r\n"   .   $user->getJpegPhoto()   .   "\r\n"  .   $user->getUrl() .   "\r\n";
                 print $user->getEmail()   .   "\r\n";
                 print $user->getDepartment() .   "\r\n";
                 print $user->getInfo()   .   "\r\n" .   $user->getDivision()    .   "\r\n";

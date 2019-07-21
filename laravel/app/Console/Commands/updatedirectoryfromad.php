@@ -47,9 +47,7 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        var_dump(Adldap::getProvider('default'));
-        $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->get();
-        var_dump($users);
+        $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {
             foreach($users as $user) {
                 var_dump($user);

@@ -59,7 +59,7 @@ class updatedirectoryfromad extends Command
                 print $user->getDepartment() .   "\r\n";
                 print $user->getInfo()   .   "\r\n" .   $user->getDivision()    .   "\r\n";
                 print $user->getTelephoneNumber()    .   "\r\n";
-                print $user->getPhysicaldDeliveryOfficeName() .   "\r\n"    .   $user->getRoomNumber()  .   "\r\n";
+                print $user->getPhysicalDeliveryOfficeName() .   "\r\n"    .   $user->getRoomNumber()  .   "\r\n";
                 print $user->getTitle() .   "\r\n";
 
                 print "\r\n"    .   "\r\n";

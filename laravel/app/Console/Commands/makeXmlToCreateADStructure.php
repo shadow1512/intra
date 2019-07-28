@@ -83,7 +83,7 @@ class makeXmlToCreateADStructure extends Command
                 $name           =   $dom->createElement("name", $dep->name);
                 $namenode       =   $departmentnode->appendChild($name);
 
-                $users  =   User::select("users.*", "deps_peoples.work_title",  "deps.name as depname",    "deps.parent_id",   "user_keys.sid",    "user_keys.user_login")
+                $users  =   User::select("users.*", "deps_peoples.work_title",  "user_keys.sid",    "user_keys.user_login")
                     ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
                     ->leftJoin("user_keys",  "users.id",  "=",    "user_keys.user_id")
                     ->whereRaw("deps_peoples.dep_id="   .   $dep->id)->get();

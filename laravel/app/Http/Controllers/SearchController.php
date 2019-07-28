@@ -958,11 +958,23 @@ class SearchController extends Controller
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             $year       =   date("Y");
-            $searchDate =   trim($bdates[0])  .   "." .   $year;
-            $dt = date("Y-m-d", strtotime($searchDate));
-            $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
-                ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->get();
+
+            $searchDates    =   explode(".",    trim($bdates[0]));
+            if(count($searchDates) < 3) {
+                $searchDate =   trim($bdates[0])  .   "." .   $year;
+                $dt = date("Y-m-d", strtotime($searchDate));
+                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                    ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->get();
+            }
+            else {
+                $dt = date("Y-m-d", strtotime($searchDate));
+                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                    ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))
+                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->get();
+            }
+
             $users_by_birthday  =   $birthday_records;
         }
 

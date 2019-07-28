@@ -78,7 +78,7 @@ class makeXmlToCreateADStructure extends Command
             foreach($deps as $dep) {
 
                 $department             =   $dom->createElement("department");
-                $employeenode           =   $childrennode->appendChild($department);
+                $departmentnode         =   $childrennode->appendChild($department);
 
                 $name           =   $dom->createElement("name", $dep->name);
                 $namenode       =   $departmentnode->appendChild($name);

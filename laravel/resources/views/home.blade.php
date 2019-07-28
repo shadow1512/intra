@@ -46,6 +46,9 @@
                     $user   =   current($users);
                     $month  =   $months[date("n", strtotime($user->birthday))   -1];
                     $day    =   date("j",   strtotime($user->birthday));
+
+                    $cmonth =   date("n");
+                    $cday   =   date("j");
                   @endphp
               <li class="staff_date"><strong>{{ $day }} {{ $month }}</strong></li>
               @foreach ($users as $user)
@@ -53,7 +56,7 @@
                     <a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img">
                       <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
                       <div class="staff_tx">{{ $user->work_title }}</div>
-                      <div class="birthday_ic" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                      @if(($month    ==  $cmonth) && ($day  ==  $cday))<div class="birthday_ic" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>@endif
                     </a>
                   </li>
               @endforeach

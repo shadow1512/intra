@@ -18,7 +18,7 @@ class makeXmlToCreateADStructure extends Command
      *
      * @var string
      */
-    protected $signature = 'adstrcturexml:create';
+    protected $signature = 'adstructurexml:create';
 
     /**
      * The console command description.

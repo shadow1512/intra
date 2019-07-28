@@ -47,6 +47,7 @@ class makeXmlToCreateADStructure extends Command
     public function handle()
     {
         //
+        $this->getLevel();
     }
 
     private function getLevel($code =   null,   $code_length    =   CODE_LENGTH,    $dom =   null,  $node   =   null) {

@@ -19,6 +19,7 @@ class Kernel extends ConsoleKernel
         Commands\makeCsvDirectoryInfographics::class,
         Commands\updatedirectoryfromoldts::class,
         Commands\updatedirectoryfromad::class,
+        Commands\makeXmlToCreateADStructure::class,
     ];
 
     /**

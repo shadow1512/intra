@@ -35,7 +35,7 @@ class makeXmlToCreateADStructure extends Command
     public function __construct()
     {
         parent::__construct();
-        require_once __DIR__ . '/hiercode.php';
+        require_once public_path() . '/hiercode.php';
 
     }
 

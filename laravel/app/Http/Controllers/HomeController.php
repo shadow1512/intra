@@ -62,7 +62,7 @@ class HomeController extends Controller
         }
 
         //режим работы столовой
-        $items  =   Dinner_slots::get();
+        $items  =   Dinner_slots::orderBy('time_start')->get();
 
         //Меню
         $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');

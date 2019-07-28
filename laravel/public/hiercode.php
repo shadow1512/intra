@@ -27,7 +27,7 @@ class HierCode
 
     var $value;
 
-    function HierCode($length)
+    function __construct($length)
     {
         $this->length = $length;
     }

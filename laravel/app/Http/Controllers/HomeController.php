@@ -12,6 +12,8 @@ use App\Rooms;
 use App\Dinner_slots;
 use DB;
 use Auth;
+use DateTime;
+use DateInterval;
 
 class HomeController extends Controller
 {
@@ -36,13 +38,13 @@ class HomeController extends Controller
         $news = News::orderBy('importancy', 'desc')->limit(15)->get();
 
         //дни рождения
-        $dt = (int)date("z") + 1;
+        $dt = $dt1  =   new DateTime();
+        $dt1    =   $dt1->add(new DateInterval("P2D");
 
-        var_dump($dt);
-        $dt1 = $dt + 2;
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetween(DB::raw("DAYOFYEAR(birthday)"), [$dt, $dt1])
+                ->whereBetween(DB::raw("MONTH(birthday)"), [$dt->format("m"), $dt1->format("m")])
+                ->whereBetween(DB::raw("DAY(birthday)"), [$dt->format("d"), $dt1->format("d")])
                 ->orderByRaw('MONTH(birthday)', 'asc')->orderByRaw('DAY(birthday)', 'asc')->get();
 
         //новые сотрудники

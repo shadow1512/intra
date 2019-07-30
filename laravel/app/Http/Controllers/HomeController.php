@@ -47,6 +47,7 @@ class HomeController extends Controller
         $d1  =   $dt->format("d");
         $m1  =   $dt->format("m");
 
+        var_dump($d);var_dump($d1);var_dump($m);var_dump($m1);
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereBetween(DB::raw("MONTH(birthday)"), [$m, $m1])

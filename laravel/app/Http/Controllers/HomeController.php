@@ -39,7 +39,7 @@ class HomeController extends Controller
 
         //дни рождения
         $dt = $dt1  =   new DateTime();
-        $dt1    =   $dt1->add(new DateInterval("P2D");
+        $dt1    =   $dt1->add(new DateInterval("P2D"));
 
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')

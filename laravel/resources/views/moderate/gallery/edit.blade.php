@@ -11,7 +11,7 @@
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $gallery->id }}"/>
-
+                            <input type="hidden" id="photo_image_url" value="{{  route('moderate.foto.updateimage', ["id" => $gallery->id]) }}">
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label for="name" class="col-md-4 control-label">Название</label>
 
@@ -47,8 +47,8 @@
                                 <small id="imageHelpInline-{{$photo->id}}" class="text-muted"><a href="{{route('moderate.foto.deleteimage', ["id"    =>  $photo->id])}}" id="delete_photo">Удалить</a></small>
                             </div>
                             @endforeach
-                            <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
-                                <input type="file" class="custom-file-input" id="photo_image" name="photo_image[]" aria-describedby="imagesHelpInline">
+                            <div class="custom-file"{{ $errors->has('photo_image') ? ' has-error' : '' }}>
+                                <input type="file" class="custom-file-input" id="photo_image" name="photo_image[]" aria-describedby="imagesHelpInline" multiple>
                                 <label class="custom-file-label" for="photo_image">Выберите изображение</label>
                                 <small id="imagesHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>

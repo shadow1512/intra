@@ -749,6 +749,36 @@ class ModerateController extends Controller
         return redirect(route('moderate.foto.edit', ["id"   =>  $photo->gallery_id]));
     }
 
+    private function fotostoreimage($id, $request)
+    {
+        if(!is_null($request->file('image_file'))) {
+            $fsize = $request->file('cover')->getSize();
+            if ($fsize >= 3000000) {
+                return array('error', 'file too large');
+            }
+
+            $path   =   Storage::disk('public')->putFile(Config::get('image.cover_path'), $request->file('cover'), 'public');
+            $size   =   Storage::disk('public')->getSize($path);
+            $type   =   Storage::disk('public')->getMimetype($path);
+
+            if($size <= 3000000) {
+                if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+                    $manager = new ImageManager(array('driver' => 'imagick'));
+                    $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'), Config::get('image.cover_height'))->save(storage_path('app/public') . '/' . $path);
+                    DB::table('lib_books')->where("id", "=", $id)
+                        ->update(['image' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+                    return array('ok', Storage::disk('public')->url($path));
+                }
+                else {
+                    return array('error', 'file wrong type');
+                }
+            }
+            else {
+                return array('error', 'file too large');
+            }
+        }
+    }
+
     public function users($letter = "А")
     {
         $users  =   User::ByModerator(Auth::user()->id)->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();

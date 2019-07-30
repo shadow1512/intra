@@ -38,6 +38,7 @@ class HomeController extends Controller
         //дни рождения
         $dt = (int)date("z") + 1;
 
+        var_dump($dt);
         $dt1 = $dt + 2;
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')

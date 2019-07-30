@@ -16,7 +16,7 @@
                                 <label for="title" class="col-md-4 control-label">Наименование слота</label>
 
                                 <div class="col-md-6">
-                                    <input id="name" type="text" class="form-control" name="name" value="{{ $item->name }}" required autofocus>
+                                    <input id="name" type="text" class="form-control" name="name" value="{{ $item->name }}" autofocus>
 
                                     @if ($errors->has('name'))
                                         <span class="help-block">
@@ -29,7 +29,7 @@
                                 <label for="time_start" class="col-md-4 control-label">Время начала</label>
 
                                 <div class="col-md-6">
-                                    <input id="time_start" type="text" class="form-control" name="time_start" value="@if ($item->time_start){{ date("H:i", strtotime($item->time_start)) }} @endif"/>
+                                    <input id="time_start" type="text" class="form-control" name="time_start" value="@if ($item->time_start){{ date("H:i", strtotime($item->time_start)) }}@endif"/>
 
                                     @if ($errors->has('time_start'))
                                         <span class="help-block">
@@ -42,7 +42,7 @@
                                 <label for="time_end" class="col-md-4 control-label">Время окончания</label>
 
                                 <div class="col-md-6">
-                                    <input id="time_end" type="text" class="form-control" name="time_end" value="@if ($item->time_end){{ date("H:i", strtotime($item->time_end)) }} @endif"/>
+                                    <input id="time_end" type="text" class="form-control" name="time_end" value="@if ($item->time_end){{ date("H:i", strtotime($item->time_end)) }}@endif"/>
 
                                     @if ($errors->has('time_end'))
                                         <span class="help-block">

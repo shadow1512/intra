@@ -27,7 +27,7 @@
                                 <label for="time_start" class="col-md-4 control-label">Время начала</label>
 
                                 <div class="col-md-6">
-                                    <input id="time_start" type="text" class="form-control" name="time_start" value="@if (old('time_start')){{ date("H:i", strtotime(old('time_start'))) }} @endif"/>
+                                    <input id="time_start" type="text" class="form-control" name="time_start" value="@if (old('time_start')){{ date("H:i", strtotime(old('time_start'))) }}@endif"/>
 
                                     @if ($errors->has('time_start'))
                                         <span class="help-block error">
@@ -40,7 +40,7 @@
                                 <label for="time_end" class="col-md-4 control-label">Время окончания</label>
 
                                 <div class="col-md-6">
-                                    <input id="time_end" type="text" class="form-control" name="time_end" value="@if (old('time_end')){{ date("H:i", strtotime(old('time_end'))) }} @endif"/>
+                                    <input id="time_end" type="text" class="form-control" name="time_end" value="@if (old('time_end')){{ date("H:i", strtotime(old('time_end'))) }}@endif"/>
 
                                     @if ($errors->has('time_end'))
                                         <span class="help-block error">

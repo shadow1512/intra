@@ -38,13 +38,19 @@ class HomeController extends Controller
         $news = News::orderBy('importancy', 'desc')->limit(15)->get();
 
         //дни рождения
-        $dt = $dt1  =   new DateTime();
-        $dt1    =   $dt1->add(new DateInterval("P2D"));
+        $dt = new DateTime();
+
+        $d  =   $dt->format("d");
+        $m  =   $dt->format("m");
+        $dt->add(new DateInterval("P2D"));
+
+        $d1  =   $dt->format("d");
+        $m1  =   $dt->format("m");
 
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetween(DB::raw("MONTH(birthday)"), [$dt->format("m"), $dt1->format("m")])
-                ->whereBetween(DB::raw("DAY(birthday)"), [$dt->format("d"), $dt1->format("d")])
+                ->whereBetween(DB::raw("MONTH(birthday)"), [$m, $m1])
+                ->whereBetween(DB::raw("DAY(birthday)"), [$d, $d1])
                 ->orderByRaw('MONTH(birthday)', 'asc')->orderByRaw('DAY(birthday)', 'asc')->get();
 
         //новые сотрудники

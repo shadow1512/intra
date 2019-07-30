@@ -80,12 +80,12 @@ $(document).ready(function($) {
         format:'H:i',
         step: 5,
         minTime: '09:00',
-        maxTime: '18:00',
+        maxTime: '18:05',
         mask:true,
         validateOnBlur:false,
         onShow:function( ct ){
             this.setOptions({
-                maxTime:$('#time_end').val()=='__:__' || $('#time_end').val()==''?'18:00':$('#time_end').val()
+                maxTime:$('#time_end').val()=='__:__' || $('#time_end').val()==''?'18:05':$('#time_end').val()
             });
         }
     });
@@ -97,7 +97,7 @@ $(document).ready(function($) {
         format:'H:i',
         step: 5,
         minTime: '09:00',
-        maxTime: '18:00',
+        maxTime: '18:05',
         mask:true,
         validateOnBlur:false,
         onShow:function( ct ){

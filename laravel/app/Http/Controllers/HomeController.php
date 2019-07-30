@@ -42,16 +42,18 @@ class HomeController extends Controller
 
         $d  =   $dt->format("d");
         $m  =   $dt->format("m");
-        $dt->add(new DateInterval("P2D"));
 
-        $d1  =   $dt->format("d");
-        $m1  =   $dt->format("m");
-
-        var_dump($d);var_dump($d1);var_dump($m);var_dump($m1);
         $users = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->whereBetween(DB::raw("MONTH(birthday)"), [$m, $m1])
-                ->whereBetween(DB::raw("DAY(birthday)"), [$d, $d1])
+                ->where(function($query) use ($d,  $m) {
+                    $query->where(DB::raw("MONTH(birthday)    =   '$m'"))->where(DB::raw("DAY(birthday)    =   '$d'"));
+                })
+                ->orWhere(function($query) use ($d,  $m) {
+                    $query->where(DB::raw("MONTH(SUBDATE(birthday, INTERVAL 1 DAY))    =   '$m'"))->where(DB::raw("DAY(SUBDATE(birthday, INTERVAL 1 DAY))    =   '$d'"));
+                })
+                ->orWhere(function($query) use ($d,  $m) {
+                    $query->where(DB::raw("MONTH(SUBDATE(birthday, INTERVAL 2 DAY))    =   '$m'"))->where(DB::raw("DAY(SUBDATE(birthday, INTERVAL 2 DAY))    =   '$d'"));
+                })
                 ->orderByRaw('MONTH(birthday)', 'asc')->orderByRaw('DAY(birthday)', 'asc')->get();
 
         //новые сотрудники

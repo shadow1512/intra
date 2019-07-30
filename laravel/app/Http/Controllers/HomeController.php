@@ -49,10 +49,10 @@ class HomeController extends Controller
                     $query->where(DB::raw("MONTH(birthday)    =   '$m'"))->where(DB::raw("DAY(birthday)    =   '$d'"));
                 })
                 ->orWhere(function($query) use ($d,  $m) {
-                    $query->where(DB::raw("MONTH(SUBDATE(birthday, INTERVAL 1 DAY))    =   '$m'"))->where(DB::raw("DAY(SUBDATE(birthday, INTERVAL 1 DAY))    =   '$d'"));
+                    $query->where(DB::raw("MONTH(SUBDATE(birthday, 1))"),   '=',    $m)->where(DB::raw("DAY(SUBDATE(birthday, 1)"), '=',    $d));
                 })
                 ->orWhere(function($query) use ($d,  $m) {
-                    $query->where(DB::raw("MONTH(SUBDATE(birthday, INTERVAL 2 DAY))    =   '$m'"))->where(DB::raw("DAY(SUBDATE(birthday, INTERVAL 2 DAY))    =   '$d'"));
+                    $query->where(DB::raw("MONTH(SUBDATE(birthday, 2))"),   '=',    $m)->where(DB::raw("DAY(SUBDATE(birthday, 2)"), '=',    $d);
                 })
                 ->orderByRaw('MONTH(birthday)', 'asc')->orderByRaw('DAY(birthday)', 'asc')->get();
 

@@ -937,8 +937,8 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->whereRaw("(DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
-                    ->orWhereRaw("(DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->get();
+                    ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
+                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->get();
 
             }
             else {
@@ -947,8 +947,8 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->whereRaw("(DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
-                    ->whereRaw("(DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->get();
+                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
+                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->get();
 
             }
             $users_by_birthday  =   $birthday_records;

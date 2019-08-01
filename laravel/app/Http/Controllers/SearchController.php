@@ -938,7 +938,7 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
-                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->get();
+                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday) ASC, DAY(birthday) ASC")->get();
 
             }
             else {
@@ -948,7 +948,7 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
-                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->get();
+                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday) ASC, DAY(birthday) ASC")->get();
 
             }
             $users_by_birthday  =   $birthday_records;
@@ -962,14 +962,14 @@ class SearchController extends Controller
                 $dt = date("Y-m-d", strtotime($searchDate));
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->get();
+                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday) ASC, DAY(birthday) ASC")->get();
             }
             else {
                 $dt = date("Y-m-d", strtotime(trim($bdates[0])));
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))
-                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->get();
+                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday) ASC, DAY(birthday) ASC")->get();
             }
 
             $users_by_birthday  =   $birthday_records;

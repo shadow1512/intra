@@ -932,26 +932,23 @@ class SearchController extends Controller
             $dm =   date("m", strtotime($searchDate1));
             $dm1 =   date("m", strtotime($searchDate2));
             if($dm1 <   $dm) {
-                $dt     = date("Y-m-d", strtotime($searchDate1));
-                $dt1    =   "2019-12-31";
-
-                $dt2    =   "2020-01-01";
-                $year   = (int)$year    +   1;
-                $searchDate2 =   trim($bdates[1])  .   "." .   $year;
-                $dt3    =   date("Y-m-d", strtotime($searchDate2));
+                $dt     = date("m-d", strtotime($searchDate1));
+                $dt1    =   date("Y-m-d", strtotime($searchDate2));
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->whereRaw("(MONTH(birthday) BETWEEN MONTH('$dt') AND MONTH('$dt1') AND DAY(birthday) BETWEEN DAY('$dt') AND DAY('$dt1')) OR (MONTH(birthday) BETWEEN MONTH('$dt2') AND MONTH('$dt3') AND DAY(birthday) BETWEEN DAY('$dt2') AND DAY('$dt3'))")->get();
+                    ->whereRaw("(DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
+                    ->orWhereRaw("(DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->get();
 
             }
             else {
-                $dt = date("Y-m-d", strtotime($searchDate1));
-                $dt1 = date("Y-m-d", strtotime($searchDate2));
+                $dt = date("m-d", strtotime($searchDate1));
+                $dt1 = date("m-d", strtotime($searchDate2));
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->whereRaw("(MONTH(birthday) BETWEEN MONTH('$dt') AND MONTH('$dt1')) AND (DAY(birthday) BETWEEN DAY('$dt') AND DAY('$dt1'))")->get();
+                    ->whereRaw("(DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
+                    ->whereRaw("(DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->get();
 
             }
             $users_by_birthday  =   $birthday_records;

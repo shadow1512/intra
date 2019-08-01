@@ -933,7 +933,7 @@ class SearchController extends Controller
             $dm1 =   date("m", strtotime($searchDate2));
             if($dm1 <   $dm) {
                 $dt     = date("m-d", strtotime($searchDate1));
-                $dt1    =   date("Y-m-d", strtotime($searchDate2));
+                $dt1    =   date("m-d", strtotime($searchDate2));
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')

@@ -13,13 +13,28 @@
 
     <!-- Styles -->
     <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/css/blueimp-gallery.min.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('styles/css/jquery.fileupload.css') }}" rel="stylesheet" />
+    <link href="{{ asset('styles/css/jquery.fileupload-ui.css') }}" rel="stylesheet" />
     <link href="{{ asset('styles/css/moderate.extend.css') }}" rel="stylesheet">
     <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+
     <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
     <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
+    <script src="{{ asset('js/libs/tmpl.min.js') }}"></script>
+    <script src="{{ asset('js/libs/load-image.all.min.js') }}"></script>
+    <script src="{{ asset('js/libs/canvas-to-blob.min.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.iframe-transport.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-image.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-audio.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-video.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-validate.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-ui.js') }}"></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
     <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </head>

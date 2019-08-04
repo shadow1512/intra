@@ -27,5 +27,6 @@ return array(
     'photo_thumb_width' => 150,
     'cover_width'       =>  200,
     'cover_height'      =>  280,
-
+    'gallery_photo_thumb_width'     =>  150,
+    'gallery_photo_thumb_height'    =>  150,
 );

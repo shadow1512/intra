@@ -280,10 +280,7 @@ $(document).ready(function($) {
         success: function(e, data) {
         },
         done: function (result) {
-            $(this)
-                .fileupload('option', 'done')
-                // eslint-disable-next-line new-cap
-                .call(this, $.Event('done'), { result: result });
+            $(this).call(this, $.Event('done'), { result: result });
         },
         fail: function (e, data) {
 

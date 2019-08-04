@@ -280,7 +280,7 @@ $(document).ready(function($) {
         success: function(e, data) {
         },
         done: function (result) {
-            $(this).call(this, $.Event('done'), { result: result });
+            $(this).fileupload().call(this, $.Event('done'), { result: result });
         },
         fail: function (e, data) {
 

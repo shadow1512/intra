@@ -778,7 +778,7 @@ class ModerateController extends Controller
 
                     $gallery_image->save();
 
-                    return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                    return json_encode(array("files"    =>  array(  "name"          =>  $filename,
                                                                                 "size"          =>  $size,
                                                                                 "url"           =>  Storage::disk('public')->url($path_full),
                                                                                 "thumbnailUrl"  =>  Storage::disk('public')->url($path),
@@ -786,13 +786,13 @@ class ModerateController extends Controller
                                                                                 "deleteType"    =>  "DELETE")));
                 }
                 else {
-                    return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                    return json_encode(array("files"    =>  array(  "name"          =>  $filename,
                         "size"          =>  $size,
                         "error"         =>  "Вы пытаетесь загрузить файл не поддерживаемого типа")));
                 }
             }
             else {
-                return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                return json_encode(array("files"    =>  array(  "name"          =>  $filename,
                     "size"          =>  $size,
                     "error"         =>  "Размер загружаемого файла превышает установленный предел в 3мб")));
             }

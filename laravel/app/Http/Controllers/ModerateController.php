@@ -757,8 +757,16 @@ class ModerateController extends Controller
                 Storage::disk('public')->makeDirectory(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/');
             }
 
-            $files  =   $request->file('photo_files');
-            $filename   =   time();
+            $files      =   $request->file('photo_files');
+            $oldname    =   $request->file('name');
+            $file_parts =   explode(".",    $oldname);
+            if(count($file_parts)    >=  2) {
+                $filename   =   time()  .   "." .   $file_parts[count($file_parts)  -   1];
+            }
+            else {
+                $filename   =   time();
+            }
+
             $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
             $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
             $size   =   Storage::disk('public')->getSize($path);
@@ -767,7 +775,7 @@ class ModerateController extends Controller
             if($size <= 3000000) {
                 if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                     $manager = new ImageManager(array('driver' => 'imagick'));
-                    $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('gallery_photo_thumb_width'), Config::get('gallery_photo_thumb_height'));
+                    $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));
                     $image->save(storage_path('app/public') . '/' . $path);
                     DB::table('lib_books')->where("id", "=", $id)
                         ->update(['image' => Storage::disk('public')->url($path_full), 'image_th'    =>  Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);

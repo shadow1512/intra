@@ -731,12 +731,48 @@ class ModerateController extends Controller
 
     public function fotoupdate($id, Request $request)
     {
+        $messages   =   array(
+            "name.required"             =>  "Поле обязательно для заполнения",
+            "name.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+        );
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:255',
+        ],  $messages);
 
+        if ($validator->fails()) {
+            return redirect()->route('moderate.foto.edit',  ["id"   =>  $id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $gallery    = Gallery::findOrFail($id);
+
+        if($request->input('published_at')) {
+            $gallery->published_at = date("Y-m-d", strtotime($request->input('published_at')));
+        }
+        $gallery->name  =   trim($request->input('name'));
+
+        $gallery->save();
+
+        return redirect(route('moderate.foto.index'));
     }
 
     public function fotodelete($id, Request $request)
     {
         $item = Gallery::findOrFail($id);
+
+        $photos =   GalleryPhoto::where('gallery_id',   '=',    $item->id)->get();
+        foreach($photos as $photo) {
+            if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/')) {
+                Storage::disk('public')->delete([   Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/' .   $photo->desc,
+                    Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/th_' .   $photo->desc]);
+            }
+            $photo->delete();
+        }
+
+        if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/')) {
+            Storage::disk('public')->deleteDirectory(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/');
+        }
         $item->delete();
 
         return redirect(route('moderate.foto.index'));
@@ -745,7 +781,13 @@ class ModerateController extends Controller
     public function fotodeleteimage($photo_id)
     {
         $photo     = GalleryPhoto::findOrFail($photo_id);
+
+        if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/')) {
+            Storage::disk('public')->delete([   Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/' .   $photo->desc,
+                                                Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/th_' .   $photo->desc]);
+        }
         $photo->delete();
+
 
         return redirect(route('moderate.foto.edit', ["id"   =>  $photo->gallery_id]));
     }

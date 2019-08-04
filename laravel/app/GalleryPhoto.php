@@ -15,7 +15,7 @@ class GalleryPhoto extends Model
      * @var array
      */
     protected $fillable = [
-        'image', 'gallery_id'
+        'image', 'gallery_id', 'desc', 'image_th', 'size'
     ];
 
     protected $table = 'gallery_photos';

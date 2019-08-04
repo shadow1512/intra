@@ -695,7 +695,8 @@ class ModerateController extends Controller
     public function fotoedit($id)
     {
         $gallery    = Gallery::findOrFail($id);
-        $photos     = GalleryPhoto::where("gallery_id", "=", $id);
+        $photos     = GalleryPhoto::where("gallery_id", "=", $id)->get();
+
         return view('moderate.gallery.edit', ["gallery" =>  $gallery, 'photos'  =>  $photos]);
     }
 

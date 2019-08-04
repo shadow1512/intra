@@ -759,7 +759,7 @@ class ModerateController extends Controller
 
             $files      =   $request->file('photo_files');
             $filename   =   time()  .   "." .   $files[0]->extension();
-        
+
             $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
             $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
             $size   =   Storage::disk('public')->getSize($path);
@@ -778,7 +778,7 @@ class ModerateController extends Controller
 
                     $gallery_image->save();
 
-                    return array('ok', Storage::disk('public')->url($path_th), Storage::disk('public')->url($path));
+                    return array('ok', Storage::disk('public')->url($path_full), Storage::disk('public')->url($path));
                 }
                 else {
                     return array('error', 'file wrong type');

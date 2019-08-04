@@ -264,7 +264,7 @@ $(document).ready(function($) {
     $('#fileupload').fileupload({
         dataType: 'json',
         url: $("#photo_image_url").val(),
-        singleFileUploads: false,
+        singleFileUploads: true,
         sequentialUploads: true,
         submit: function (e, data) {
             $('#fileupload').addClass('fileupload-processing');

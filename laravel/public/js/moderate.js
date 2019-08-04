@@ -279,7 +279,7 @@ $(document).ready(function($) {
         },
         success: function(e, data) {
         },
-        done: function (e, data) {
+        done: function (result) {
             $(this)
                 .fileupload('option', 'done')
                 // eslint-disable-next-line new-cap

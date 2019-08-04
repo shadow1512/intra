@@ -778,14 +778,23 @@ class ModerateController extends Controller
 
                     $gallery_image->save();
 
-                    return array('ok', Storage::disk('public')->url($path_full), Storage::disk('public')->url($path));
+                    return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                                                                                "size"          =>  $size,
+                                                                                "url"           =>  Storage::disk('public')->url($path_full),
+                                                                                "thumbnailUrl"  =>  Storage::disk('public')->url($path),
+                                                                                "deleteUrl"     =>  Storage::disk('public')->url($path_full),
+                                                                                "deleteType"    =>  "DELETE")));
                 }
                 else {
-                    return array('error', 'file wrong type');
+                    return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                        "size"          =>  $size,
+                        "error"         =>  "Вы пытаетесь загрузить файл не поддерживаемого типа")));
                 }
             }
             else {
-                return array('error', 'file too large');
+                return \GuzzleHttp\json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                    "size"          =>  $size,
+                    "error"         =>  "Размер загружаемого файла превышает установленный предел в 3мб")));
             }
         }
     }

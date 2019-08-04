@@ -1384,6 +1384,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditDepsPeoplesWorktitleNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
         'EditDeptPeopleChef' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',
         'EditGalleryNullablePublishedAt' => __DIR__ . '/../..' . '/database/migrations/2018_06_15_012303_edit_gallery_nullable_published_at.php',
+        'EditGalleryPhotosAddSize' => __DIR__ . '/../..' . '/database/migrations/2019_08_05_022857_edit_gallery_photos_add_size.php',
         'EditGalleryPhotosAddThumbAndDesc' => __DIR__ . '/../..' . '/database/migrations/2019_08_04_201025_edit_gallery_photos_add_thumb_and_desc.php',
         'EditNewsDefaultImportancy' => __DIR__ . '/../..' . '/database/migrations/2019_04_01_014839_edit_news_default_importancy.php',
         'EditNewsNullableTags' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',

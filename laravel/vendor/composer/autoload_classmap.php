@@ -882,6 +882,7 @@ return array(
     'EditDepsPeoplesWorktitleNullable' => $baseDir . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
     'EditDeptPeopleChef' => $baseDir . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',
     'EditGalleryNullablePublishedAt' => $baseDir . '/database/migrations/2018_06_15_012303_edit_gallery_nullable_published_at.php',
+    'EditGalleryPhotosAddSize' => $baseDir . '/database/migrations/2019_08_05_022857_edit_gallery_photos_add_size.php',
     'EditGalleryPhotosAddThumbAndDesc' => $baseDir . '/database/migrations/2019_08_04_201025_edit_gallery_photos_add_thumb_and_desc.php',
     'EditNewsDefaultImportancy' => $baseDir . '/database/migrations/2019_04_01_014839_edit_news_default_importancy.php',
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',

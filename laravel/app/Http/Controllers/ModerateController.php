@@ -758,7 +758,7 @@ class ModerateController extends Controller
             }
 
             $files      =   $request->file('photo_files');
-            $filename   =   time()  .   "." .   $files[0]->extension();
+            $filename   =   microtime()  .   "." .   $files[0]->extension();
 
             $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
             $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
@@ -775,6 +775,8 @@ class ModerateController extends Controller
                     $gallery_image->gallery_id  =   $id;
                     $gallery_image->image       =   Storage::disk('public')->url($path_full);
                     $gallery_image->image_th    =   Storage::disk('public')->url($path);
+                    $gallery_image->desc        =   $filename;
+                    $gallery_image->size        =   (float)round($size/1000, 2);
 
                     $gallery_image->save();
 

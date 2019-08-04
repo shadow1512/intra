@@ -160,6 +160,52 @@
                   <input id="input_time_end" name="input_time_end" type="text" value="" class="it">
                 </div>
               </div>
+
+              <div class="field __margin-top_l">
+                <div class="field_half">
+        					<div class="form-check form-check-inline">
+                    <label class="lbl">Компьютер:</label>
+                    <input type="checkbox" class="form-check-input ich" id="check1" name="check1">
+                    <label class="lbl form-check-label" for="check1">Ноутбук заказчика</label>
+                    <input type="checkbox" class="form-check-input ich" id="check2" name="check2">
+                    <label class="lbl form-check-label" for="check2">Ноутбук ОТО УКОТ</label>
+                  </div>
+                </div>
+                <div class="field_half">
+        					<div class="form-check form-check-inline">
+                    <label class="lbl">Доступ к информационным ресурсам:</label>
+                    <input type="checkbox" class="form-check-input ich" id="check3" name="check3">
+                    <label class="lbl form-check-label" for="check3">Доступ в интернет</label>
+                    <input type="checkbox" class="form-check-input ich" id="check4" name="check4">
+                    <label class="lbl form-check-label" for="check4">Доступ к локальным БД Кодекс</label>
+                  </div>
+                </div>
+      			  </div>
+              <div class="field">
+                <label class="lbl">Используемое ПО:</label>
+                <div class="field_half">
+        					<div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input ich" id="check5" name="check5">
+                    <label class="lbl form-check-label" for="check5">Skype</label>
+                    <input type="checkbox" class="form-check-input ich" id="check6" name="check6">
+                    <label class="lbl form-check-label" for="check6">Skype for Business</label>
+                  </div>
+                </div>
+                <div class="field_half">
+        					<div class="form-check form-check-inline">
+                    <input type="checkbox" class="form-check-input ich" id="check7" name="check7">
+                    <label class="lbl form-check-label" for="check7">Вебинар</label>
+                    <input type="checkbox" class="form-check-input ich" id="check8" name="check8">
+                    <label class="lbl form-check-label" for="check8">Прочее</label>
+                  </div>
+                </div>
+      			  </div>
+
+              <div class="field">
+                <label for="notes" class="lbl">Примечания:</label>
+                <textarea id="notes" value="" class="it"></textarea>
+              </div>
+
                 <div class="error"></div>
             </div>
             <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>

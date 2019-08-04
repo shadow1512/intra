@@ -279,9 +279,9 @@ $(document).ready(function($) {
         },
         success: function(e, data) {
         },
-        done: function (result) {
+        /*done: function (result) {
             $(this).fileupload().call(this, $.Event('done'), { result: result });
-        },
+        },*/
         fail: function (e, data) {
 
         },

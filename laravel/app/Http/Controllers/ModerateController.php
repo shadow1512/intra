@@ -749,7 +749,7 @@ class ModerateController extends Controller
         return redirect(route('moderate.foto.edit', ["id"   =>  $photo->gallery_id]));
     }
 
-    public function fotoupdateimage($id, $request)
+    public function fotoupdateimage($id, Request $request)
     {
         if(!is_null($request->file('photo_files'))) {
             $fsize = $request->file('photo_files')->getSize();

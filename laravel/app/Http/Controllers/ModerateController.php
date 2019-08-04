@@ -758,8 +758,9 @@ class ModerateController extends Controller
             }
 
             $files  =   $request->file('photo_files');
-            $path           =   Storage::disk('public')->putFile(Config::get('image.gallery_path')   .   '/'  .   $id, 'th_'    .   $files[0], 'public');
-            $path_full      =   Storage::disk('public')->putFile(Config::get('image.gallery_path')   .   '/'  .   $id, $request->file('photo_files'), 'public');
+            $filename   =   time();
+            $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
+            $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
             $size   =   Storage::disk('public')->getSize($path);
             $type   =   Storage::disk('public')->getMimetype($path);
 

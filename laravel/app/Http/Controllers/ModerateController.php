@@ -759,6 +759,7 @@ class ModerateController extends Controller
 
             $files      =   $request->file('photo_files');
             $oldname    =   $request->file('name');
+            var_dump($oldname);exit();
             $file_parts =   explode(".",    $oldname);
             if(count($file_parts)    >=  2) {
                 $filename   =   time()  .   "." .   $file_parts[count($file_parts)  -   1];
@@ -777,8 +778,14 @@ class ModerateController extends Controller
                     $manager = new ImageManager(array('driver' => 'imagick'));
                     $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));
                     $image->save(storage_path('app/public') . '/' . $path);
-                    DB::table('lib_books')->where("id", "=", $id)
-                        ->update(['image' => Storage::disk('public')->url($path_full), 'image_th'    =>  Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+
+                    $gallery_image  =   new GalleryPhoto();
+                    $gallery_image->gallery_id  =   $id;
+                    $gallery_image->image       =   Storage::disk('public')->url($path_full);
+                    $gallery_image->image_th    =   Storage::disk('public')->url($path);
+
+                    $gallery_image->save();
+                    
                     return array('ok', Storage::disk('public')->url($path_th), Storage::disk('public')->url($path));
                 }
                 else {

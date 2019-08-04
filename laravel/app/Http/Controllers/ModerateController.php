@@ -752,16 +752,12 @@ class ModerateController extends Controller
     public function fotoupdateimage($id, Request $request)
     {
         if(!is_null($request->file('photo_files'))) {
-            $fsize = $request->file('photo_files')->getSize();
-            if ($fsize >= 3000000) {
-                return array('error', 'file too large');
-            }
 
             if(!Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/')) {
                 Storage::disk('public')->makeDirectory(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/');
             }
 
-            $path           =   Storage::disk('public')->putFile(Config::get('image.gallery_path')   .   '/'  .   $id, 'th_'    .   $request->file('photo_files'), 'public');
+            $path           =   Storage::disk('public')->putFile(Config::get('image.gallery_path')   .   '/'  .   $id, 'th_'    .   $request->file('photo_files[]'), 'public');
             $path_full      =   Storage::disk('public')->putFile(Config::get('image.gallery_path')   .   '/'  .   $id, $request->file('photo_files'), 'public');
             $size   =   Storage::disk('public')->getSize($path);
             $type   =   Storage::disk('public')->getMimetype($path);

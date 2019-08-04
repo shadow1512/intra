@@ -758,16 +758,8 @@ class ModerateController extends Controller
             }
 
             $files      =   $request->file('photo_files');
-            $oldname    =   $request->file('name');
-            var_dump($oldname);exit();
-            $file_parts =   explode(".",    $oldname);
-            if(count($file_parts)    >=  2) {
-                $filename   =   time()  .   "." .   $file_parts[count($file_parts)  -   1];
-            }
-            else {
-                $filename   =   time();
-            }
-
+            $filename   =   time()  .   "." .   $files[0]->extension();
+        
             $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
             $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
             $size   =   Storage::disk('public')->getSize($path);
@@ -785,7 +777,7 @@ class ModerateController extends Controller
                     $gallery_image->image_th    =   Storage::disk('public')->url($path);
 
                     $gallery_image->save();
-                    
+
                     return array('ok', Storage::disk('public')->url($path_th), Storage::disk('public')->url($path));
                 }
                 else {

@@ -778,23 +778,23 @@ class ModerateController extends Controller
 
                     $gallery_image->save();
 
-                    return json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                    return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
                                                                                 "size"          =>  $size,
                                                                                 "url"           =>  Storage::disk('public')->url($path_full),
                                                                                 "thumbnailUrl"  =>  Storage::disk('public')->url($path),
                                                                                 "deleteUrl"     =>  Storage::disk('public')->url($path_full),
-                                                                                "deleteType"    =>  "DELETE")));
+                                                                                "deleteType"    =>  "DELETE"))));
                 }
                 else {
-                    return json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                    return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
                         "size"          =>  $size,
-                        "error"         =>  "Вы пытаетесь загрузить файл не поддерживаемого типа")));
+                        "error"         =>  "Вы пытаетесь загрузить файл не поддерживаемого типа"))));
                 }
             }
             else {
-                return json_encode(array("files"    =>  array(  "name"          =>  $filename,
+                return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
                     "size"          =>  $size,
-                    "error"         =>  "Размер загружаемого файла превышает установленный предел в 3мб")));
+                    "error"         =>  "Размер загружаемого файла превышает установленный предел в 3мб"))));
             }
         }
     }

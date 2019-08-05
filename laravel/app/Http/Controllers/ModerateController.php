@@ -681,6 +681,7 @@ class ModerateController extends Controller
     {
         $gallery = Gallery::selectRaw("gallery.id, name, count(gallery_photos.id) as numphotos")
             ->leftJoin('gallery_photos', 'gallery.id', '=', 'gallery_photos.gallery_id')
+            ->whereNull('gallery_photos.deleted_at')
             ->groupBy(['gallery_photos.gallery_id', 'gallery.id', 'gallery.name'])
             ->orderBy('published_at', 'desc')->get();
 

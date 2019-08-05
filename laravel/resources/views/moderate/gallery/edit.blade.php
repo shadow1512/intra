@@ -86,7 +86,7 @@
                                             <td><span class="preview"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery=""><img src="{{$photo->image_th}}"></a></span></td>
                                             <td><p class="name"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery="">{{$photo->desc}}</a></p></td>
                                             <td><span class="size">{{$photo->size}} KB</span></td>
-                                            <td><button class="btn btn-danger delete" data-type="DELETE" data-url="{{$photo->image}}"><i class="glyphicon glyphicon-trash"></i><span>Удалить</span></button><input type="checkbox" name="delete" value="1" class="toggle"></td>
+                                            <td><button class="btn btn-danger delete" data-type="DELETE" data-url="{{route('moderate.foto.deleterimage',    ["id"   =>  $photo->id])}}"><i class="glyphicon glyphicon-trash"></i><span>Удалить</span></button><input type="checkbox" name="delete" value="1" class="toggle"></td>
                                         </tr>
                                     @endforeach
                                 @endif
@@ -122,19 +122,19 @@
                                               {% if (!o.options.autoUpload && o.options.edit && o.options.loadImageFileTypes.test(file.type)) { %}
                                                 <button class="btn btn-success edit" data-index="{%=i%}" disabled>
                                                     <i class="glyphicon glyphicon-edit"></i>
-                                                    <span>Edit</span>
+                                                    <span>Редактировать</span>
                                                 </button>
                                               {% } %}
                                               {% if (!i && !o.options.autoUpload) { %}
                                                   <button class="btn btn-primary start" disabled>
                                                       <i class="glyphicon glyphicon-upload"></i>
-                                                      <span>Start</span>
+                                                      <span>Старт</span>
                                                   </button>
                                               {% } %}
                                               {% if (!i) { %}
                                                   <button class="btn btn-warning cancel">
                                                       <i class="glyphicon glyphicon-ban-circle"></i>
-                                                      <span>Cancel</span>
+                                                      <span>Отмена</span>
                                                   </button>
                                               {% } %}
                                           </td>
@@ -163,7 +163,7 @@
                                                   </p>
                                               {% } %}
                                               {% if (file.error) { %}
-                                                  <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+                                                  <div><span class="label label-danger">Ошибка</span> {%=file.error%}</div>
                                               {% } %}
                                           </td>
                                           <td>
@@ -173,13 +173,13 @@
                                               {% if (file.deleteUrl) { %}
                                                   <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
                                                       <i class="glyphicon glyphicon-trash"></i>
-                                                      <span>Delete</span>
+                                                      <span>Удалить</span>
                                                   </button>
                                                   <input type="checkbox" name="delete" value="1" class="toggle">
                                               {% } else { %}
                                                   <button class="btn btn-warning cancel">
                                                       <i class="glyphicon glyphicon-ban-circle"></i>
-                                                      <span>Cancel</span>
+                                                      <span>Отмена</span>
                                                   </button>
                                               {% } %}
                                           </td>

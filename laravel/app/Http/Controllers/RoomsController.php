@@ -81,13 +81,56 @@ class RoomsController extends Controller
         $time_start    = trim($request->input('input_time_start'));
         $time_end      = trim($request->input('input_time_end'));
 
+        $notebook_own   =   $request->input('notebook_own');
+        if(is_null($notebook_own)) {
+            $notebook_own   =   0;
+        }
+
+        $notebook_ukot   =   $request->input('notebook_ukot');
+        if(is_null($notebook_ukot)) {
+            $notebook_ukot   =   0;
+        }
+
+        $info_internet   =   $request->input('info_internet');
+        if(is_null($info_internet)) {
+            $info_internet   =   0;
+        }
+
+        $info_kodeks   =   $request->input('info_kodeks');
+        if(is_null($info_kodeks)) {
+            $info_kodeks   =   0;
+        }
+
+        $software_skype   =   $request->input('software_skype');
+        if(is_null($software_skype)) {
+            $software_skype   =   0;
+        }
+
+        $software_skype_for_business   =   $request->input('software_skype_for_business');
+        if(is_null($software_skype_for_business)) {
+            $software_skype_for_business   =   0;
+        }
+
+        $type_meeting_webinar   =   $request->input('type_meeting_webinar');
+        if(is_null($type_meeting_webinar)) {
+            $type_meeting_webinar   =   0;
+        }
+
+        $type_meeting_other   =   $request->input('type_meeting_other');
+        if(is_null($type_meeting_other)) {
+            $type_meeting_other   =   0;
+        }
+
+        $notes          = trim($request->input('notes'));
+
         $messages   =   array(  "input_name.required"           =>  "Поле обязательно для заполнения",
                                 "input_name.max"                =>  "Поле не должно быть длиннее, чем 90 символов",
                                 "input_date_booking.required"   =>  "Поле обязательно для заполнения",
                                 "input_time_start.required"     =>  "Поле обязательно для заполнения",
                                 "input_time_end.required"       =>  "Поле обязательно для заполнения",
                                 "input_time_start.date_format"  =>  "Время должно быть в формате ЧЧ:ММ",
-                                "input_time_end.date_format"    =>  "Время должно быть в формате ЧЧ:ММ"
+                                "input_time_end.date_format"    =>  "Время должно быть в формате ЧЧ:ММ",
+                                "notes.max"                     =>  "Поле не должно быть длиннее, чем 255 символов"
         );
 
         $validator = Validator::make($request->all(), [
@@ -95,6 +138,7 @@ class RoomsController extends Controller
             'input_date_booking'    => 'required',
             'input_time_start'      => 'required|date_format:H:i',
             'input_time_end'        => 'required|date_format:H:i',
+            'notes'                 => 'nullable|max:255',
         ],  $messages);
 
         if ($validator->fails()) {
@@ -135,7 +179,10 @@ class RoomsController extends Controller
                     }
                     DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
                         'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
-                        'created_at' => $date, 'updated_at' => $date,   'approved'  =>  $approved]);
+                        'created_at' => $date, 'updated_at' => $date,   'approved'  =>  $approved,  'notebook_own'  =>  $notebook_own,
+                        'notebook_ukot' =>  $notebook_ukot, 'info_internet' =>  $info_internet, 'info_kodeks'   =>  $info_kodeks,
+                        'software_skype'    =>  $software_skype,    'software_skype_for_business'   =>  $software_skype_for_business,
+                        'type_meeting_webinar'  =>  $type_meeting_webinar,  'type_meeting_other'    =>  $type_meeting_other,    'notes' =>  $notes]);
                     return response()->json(['result' => 'success']);
                 }
             }
@@ -168,6 +215,48 @@ class RoomsController extends Controller
         $time_end       =   trim($request->input('input_time_end_change'));
         $room           =   trim($request->input('input_room'));
 
+        $notebook_own   =   $request->input('notebook_own_change');
+        if(is_null($notebook_own)) {
+            $notebook_own   =   0;
+        }
+
+        $notebook_ukot   =   $request->input('notebook_ukot_change');
+        if(is_null($notebook_ukot)) {
+            $notebook_ukot   =   0;
+        }
+
+        $info_internet   =   $request->input('info_internet_change');
+        if(is_null($info_internet)) {
+            $info_internet   =   0;
+        }
+
+        $info_kodeks   =   $request->input('info_kodeks_change');
+        if(is_null($info_kodeks)) {
+            $info_kodeks   =   0;
+        }
+
+        $software_skype   =   $request->input('software_skype_change');
+        if(is_null($software_skype)) {
+            $software_skype   =   0;
+        }
+
+        $software_skype_for_business   =   $request->input('software_skype_for_business_change');
+        if(is_null($software_skype_for_business)) {
+            $software_skype_for_business   =   0;
+        }
+
+        $type_meeting_webinar   =   $request->input('type_meeting_webinar_change');
+        if(is_null($type_meeting_webinar)) {
+            $type_meeting_webinar   =   0;
+        }
+
+        $type_meeting_other   =   $request->input('type_meeting_other_change');
+        if(is_null($type_meeting_other)) {
+            $type_meeting_other   =   0;
+        }
+
+        $notes          = trim($request->input('notes_change'));
+
         $messages   =   array(  "input_name_change.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
             "input_name_change.max"                 =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
             "input_date_booking_change.required"    =>  "Поле \"дата бронирования\" обязательно для заполнения",
@@ -175,7 +264,8 @@ class RoomsController extends Controller
             "input_time_end_change.required"        =>  "Поле \"время окончания\" обязательно для заполнения",
             "input_time_start_change.date_format"   =>  "Время начала бронирования должно быть в формате ЧЧ:ММ",
             "input_time_end_change.date_format"     =>  "Время окончания бронирования должно быть в формате ЧЧ:ММ",
-            "input_room.required"                   =>  "Поле \"комната\" обязательно для заполнения"
+            "input_room.required"                   =>  "Поле \"комната\" обязательно для заполнения",
+            "notes_change.max"                      =>  "Поле \"примечание\" не должно быть длиннее 255 символов"
         );
 
         $validator = Validator::make($request->all(), [
@@ -224,6 +314,15 @@ class RoomsController extends Controller
                     $booking->time_start    =   $time_start;
                     $booking->time_end      =   $time_end;
                     $booking->updated_at    =   $date;
+                    $booking->notebook_own  =   $notebook_own;
+                    $booking->notebook_ukot =   $notebook_ukot;
+                    $booking->info_internet =   $info_internet;
+                    $booking->info_kodeks   =   $info_kodeks;
+                    $booking->software_skype                =   $software_skype;
+                    $booking->software_skype_for_business   =   $software_skype_for_business;
+                    $booking->type_meeting_webinar  =   $type_meeting_webinar;
+                    $booking->type_meeting_other    =   $type_meeting_other;
+                    $booking->notes =   $notes;
                     $booking->save();
 
                     return response()->json(['result' => 'success']);

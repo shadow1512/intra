@@ -60,6 +60,51 @@
       </select>
       @endif
     </div>
+
+    <div class="field __margin-top_l">
+      <div class="field_half">
+        <div class="form-check form-check-inline">
+          <label class="lbl">Компьютер:</label>
+          <input type="checkbox" class="form-check-input ich" id="check1_notebook" name="notebook_own_change" value="1" @if($room->notebook_own) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check1_notebook">Ноутбук заказчика</label>
+          <input type="checkbox" class="form-check-input ich" id="check2_notebook"  name="notebook_ukot_change" value="1" @if($room->notebook_ukot) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check2_notebook">Ноутбук ОТО УКОТ</label>
+        </div>
+      </div>
+      <div class="field_half">
+        <div class="form-check form-check-inline">
+          <label class="lbl">Доступ к информационным ресурсам:</label>
+          <input type="checkbox" class="form-check-input ich" id="check3_info" name="info_internet_change" value="1" @if($room->info_internet) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check3_info">Доступ в интернет</label>
+          <input type="checkbox" class="form-check-input ich" id="check4_info" name="info_kodeks_change" value="1" @if($room->info_kodeks) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check4_info">Доступ к локальным БД Кодекс</label>
+        </div>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lbl">Используемое ПО:</label>
+      <div class="field_half">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input ich" id="check5_software" name="software_skype_change" value="1" @if($room->software_skype) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check5">Skype</label>
+          <input type="checkbox" class="form-check-input ich" id="check6_software" name="software_skype_for_business_change" value="1" @if($room->software_skype_for_business) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check6">Skype for Business</label>
+        </div>
+      </div>
+      <div class="field_half">
+        <div class="form-check form-check-inline">
+          <input type="checkbox" class="form-check-input ich" id="check7_type_meeting" name="type_meeting_webinar_change" value="1" @if($room->type_meeting_webinar) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check7">Вебинар</label>
+          <input type="checkbox" class="form-check-input ich" id="check8_type_meeting" name="type_meeting_other_change" value="1" @if($room->type_meeting_other) checked="checked" @endif>
+          <label class="lbl form-check-label" for="check8">Прочее</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="notes" class="lbl">Примечания:</label>
+      <textarea id="notes" value="" name="notes_change" class="it">{{$room->notes}}</textarea>
+    </div>
   </div>
   <div class="profile_form_submit">
     <a href="{{route('rooms.book.delete', ["id"  =>  $booking->id])}}" class="btn profile_form_btn __cancel __margin-right_l" id="cancel_room_order_form">

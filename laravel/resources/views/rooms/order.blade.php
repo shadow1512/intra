@@ -165,37 +165,37 @@
                 <div class="field_half">
         					<div class="form-check form-check-inline">
                     <label class="lbl">Компьютер:</label>
-                    <input type="checkbox" class="form-check-input ich" id="check1" name="check1">
-                    <label class="lbl form-check-label" for="check1">Ноутбук заказчика</label>
-                    <input type="checkbox" class="form-check-input ich" id="check2" name="check2">
-                    <label class="lbl form-check-label" for="check2">Ноутбук ОТО УКОТ</label>
+                    <input type="checkbox" class="form-check-input ich" id="check1_notebook" name="notebook_own" value="1">
+                    <label class="lbl form-check-label" for="check1_notebook">Ноутбук заказчика</label>
+                    <input type="checkbox" class="form-check-input ich" id="check2_notebook"  name="notebook_ukot" value="1">
+                    <label class="lbl form-check-label" for="check2_notebook">Ноутбук ОТО УКОТ</label>
                   </div>
                 </div>
                 <div class="field_half">
         					<div class="form-check form-check-inline">
                     <label class="lbl">Доступ к информационным ресурсам:</label>
-                    <input type="checkbox" class="form-check-input ich" id="check3" name="check3">
-                    <label class="lbl form-check-label" for="check3">Доступ в интернет</label>
-                    <input type="checkbox" class="form-check-input ich" id="check4" name="check4">
-                    <label class="lbl form-check-label" for="check4">Доступ к локальным БД Кодекс</label>
+                    <input type="checkbox" class="form-check-input ich" id="check3_info" name="info_internet" value="1">
+                    <label class="lbl form-check-label" for="check3_info">Доступ в интернет</label>
+                    <input type="checkbox" class="form-check-input ich" id="check4_info" name="info_kodeks" value="1">
+                    <label class="lbl form-check-label" for="check4_info">Доступ к локальным БД Кодекс</label>
                   </div>
                 </div>
-      			  </div>
+              </div>
               <div class="field">
                 <label class="lbl">Используемое ПО:</label>
                 <div class="field_half">
         					<div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input ich" id="check5" name="check5">
+                    <input type="checkbox" class="form-check-input ich" id="check5_software" name="software_skype" value="1">
                     <label class="lbl form-check-label" for="check5">Skype</label>
-                    <input type="checkbox" class="form-check-input ich" id="check6" name="check6">
+                    <input type="checkbox" class="form-check-input ich" id="check6_software" name="software_skype_for_business" value="1">
                     <label class="lbl form-check-label" for="check6">Skype for Business</label>
                   </div>
                 </div>
                 <div class="field_half">
         					<div class="form-check form-check-inline">
-                    <input type="checkbox" class="form-check-input ich" id="check7" name="check7">
+                    <input type="checkbox" class="form-check-input ich" id="check7_type_meeting" name="type_meeting_webinar" value="1">
                     <label class="lbl form-check-label" for="check7">Вебинар</label>
-                    <input type="checkbox" class="form-check-input ich" id="check8" name="check8">
+                    <input type="checkbox" class="form-check-input ich" id="check8_type_meeting" name="type_meeting_other" value="1">
                     <label class="lbl form-check-label" for="check8">Прочее</label>
                   </div>
                 </div>
@@ -203,7 +203,7 @@
 
               <div class="field">
                 <label for="notes" class="lbl">Примечания:</label>
-                <textarea id="notes" value="" class="it"></textarea>
+                <textarea id="notes" value="" name="notes" class="it"></textarea>
               </div>
 
                 <div class="error"></div>

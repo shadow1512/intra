@@ -886,6 +886,7 @@ return array(
     'EditGalleryPhotosAddThumbAndDesc' => $baseDir . '/database/migrations/2019_08_04_201025_edit_gallery_photos_add_thumb_and_desc.php',
     'EditNewsDefaultImportancy' => $baseDir . '/database/migrations/2019_04_01_014839_edit_news_default_importancy.php',
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
+    'EditRoomBookingsAddAdditionalFields' => $baseDir . '/database/migrations/2019_08_06_014541_edit_room_bookings_add_additional_fields.php',
     'EditRoomBookingsAddApproved' => $baseDir . '/database/migrations/2019_04_14_160642_edit_room_bookings_add_approved.php',
     'EditRoomsChangeAvailable' => $baseDir . '/database/migrations/2018_06_13_175300_edit_rooms_change_available.php',
     'EditSavedProfilesAddCreatorAndApproved' => $baseDir . '/database/migrations/2019_06_23_184350_edit_saved_profiles_add_creator_and_approved.php',

@@ -29,13 +29,20 @@ class GalleryController extends Controller
     public function index()
     {
         //галереи
-        $items = Gallery::selectRaw("gallery.*, count(gallery_photos.id) as num, gallery_photos.image_th")
+        $items = Gallery::selectRaw("gallery.*, count(gallery_photos.id) as num")
             ->leftJoin('gallery_photos',    'gallery.id',   '=',    'gallery_photos.gallery_id')
             ->whereNull('gallery_photos.deleted_at')
             ->groupBy('gallery.id')
             ->orderBy('published_at', 'desc')->paginate(10);
+
+        $photos_by_gallery  =   array();
+        foreach($items as $item) {
+            $photo =   GalleryPhoto::where('gallery_id',   '=',    $item->id)->limit(1)->first();
+            $photos_by_gallery[$item->id]   =   $photo;
+        }
+
         $items->withPath('/foto/');
 
-        return view('gallery.list', ['items'    =>  $items]);
+        return view('gallery.list', ['items'    =>  $items, 'photos'    =>  $photos_by_gallery]);
     }
 }

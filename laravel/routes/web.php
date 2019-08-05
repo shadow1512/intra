@@ -104,7 +104,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::put('/store', 'ModerateController@fotostore')->name('moderate.foto.store');
         Route::delete('/delete/{id}', 'ModerateController@fotodelete')->name('moderate.foto.delete');
         Route::put('/update/image/{id}', 'ModerateController@fotoupdateimage')->name('moderate.foto.updateimage');
-        Route::delete('/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
+        Route::get('/delete/image/{id}', 'ModerateController@fotodeleteimage')->name('moderate.foto.deleteimage');
     });
 
     Route::group(['prefix'  =>  'rooms', 'middleware'    =>  ['rooms']],   function() {

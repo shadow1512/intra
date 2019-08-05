@@ -38,7 +38,9 @@ class GalleryController extends Controller
         $photos_by_gallery  =   array();
         foreach($items as $item) {
             $photo =   GalleryPhoto::where('gallery_id',   '=',    $item->id)->limit(1)->first();
-            $photos_by_gallery[$item->id]   =   $photo;
+            if($photo) {
+                $photos_by_gallery[$item->id]   =   $photo;
+            }
         }
 
         $items->withPath('/foto/');

@@ -445,6 +445,8 @@ $('#date_range').datepicker({
 
 $('#date_one').datepicker("setDate", null);
 $('#date_one').find(".ui-datepicker-current-day").removeClass("ui-datepicker-current-day");
+
+$('[data-fancybox="images"]').fancybox();
 });
 
 $(document).on("click", "#submit_cartridge_change_form", function(ev) {
@@ -491,3 +493,5 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
         }
     });
 });
+
+

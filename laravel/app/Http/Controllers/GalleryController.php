@@ -29,8 +29,9 @@ class GalleryController extends Controller
     public function index()
     {
         //галереи
-        $items = Gallery::select("gallery.*", "gallery_photos.image_th")
+        $items = Gallery::selectRaw("gallery.*, count(gallery_photos.id) as num, gallery_photos.image_th")
             ->leftJoin('gallery_photos',    'gallery.id',   '=',    'gallery_photos.gallery_id')
+            ->whereNull('gallery_photos.deleted_at')
             ->groupBy('gallery.id')
             ->orderBy('published_at', 'desc')->paginate(10);
         $items->withPath('/foto/');

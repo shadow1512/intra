@@ -30,6 +30,7 @@ Route::get('/services/mail', 'ServicesController@mail')->name('services.mail');
 Route::post('/services/store', 'ServicesController@storeRequest')->name('services.store');
 
 Route::get('/foto', 'GalleryController@index')->name('foto');
+Route::get('/foto/gallery/{id}', 'GalleryController@gallery')->name('foto.gallery');
 Route::get('/library', 'LibraryController@index')->name('library');
 Route::get('/library/razdel/{id}', 'LibraryController@index')->name('library.razdel');
 

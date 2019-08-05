@@ -6,26 +6,13 @@
         @if (count($items))
             <ul class="news_ul">
                 @foreach($items as $item)
-                    <li class="news_li __important"><h3>{{$item->name}}</h3></a>
+                    <li class="news_li __important"><h3><a href="{{ route('foto.gallery', ['id' => $item->id])}}" class="news_li_lk">{{$item->name}}</a></h3>
                         <div class="news_li_date">{{date("d.m.Y", strtotime($item->published_at))}}</div>
-                        <div></div>
+                        <div><a href="{{ route('foto.gallery', ['id' => $item->id])}}" class="news_li_lk"><img src="{{$item->image_th}}"/></a></div>
                     </li>
                 @endforeach
                 @endif
             </ul>
-            <!--<nav class="pagination pagination_news">
-                <ul class="pagination_ul">
-                    <li class="pagination_li __previous __off"><a href="#" class="pagination_lk">назад</a></li>
-                    <li class="pagination_li __active"><a href="#" class="pagination_lk">1</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">2</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">3</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">4</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">5</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">6</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">7</a></li>
-                    <li class="pagination_li"><a href="#" class="pagination_lk">8</a></li>
-                    <li class="pagination_li __next"><a href="#" class="pagination_lk">далее</a></li>
-                </ul>
-            </nav>-->
+            {{$items->links('gallery.pages')}}
     </div>
 @endsection

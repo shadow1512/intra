@@ -47,4 +47,12 @@ class GalleryController extends Controller
 
         return view('gallery.list', ['items'    =>  $items, 'photos'    =>  $photos_by_gallery]);
     }
+
+    public function gallery($id) {
+        $item   =   Gallery::findOrFail($id);
+
+        $photos =   GalleryPhoto::where('gallery_id',   '=',    $id);
+
+        return view('gallery.photolist',    ["gallery"  =>  $item,  "photos"    =>  $photos]);
+    }
 }

@@ -186,17 +186,17 @@
                 <div class="field_half">
         					<div class="form-check form-check-inline">
                     <input type="checkbox" class="form-check-input ich" id="check5_software" name="software_skype" value="1">
-                    <label class="lbl form-check-label" for="check5">Skype</label>
+                    <label class="lbl form-check-label" for="check5_software">Skype</label>
                     <input type="checkbox" class="form-check-input ich" id="check6_software" name="software_skype_for_business" value="1">
-                    <label class="lbl form-check-label" for="check6">Skype for Business</label>
+                    <label class="lbl form-check-label" for="check6_software">Skype for Business</label>
                   </div>
                 </div>
                 <div class="field_half">
         					<div class="form-check form-check-inline">
                     <input type="checkbox" class="form-check-input ich" id="check7_type_meeting" name="type_meeting_webinar" value="1">
-                    <label class="lbl form-check-label" for="check7">Вебинар</label>
+                    <label class="lbl form-check-label" for="check7_type_meeting">Вебинар</label>
                     <input type="checkbox" class="form-check-input ich" id="check8_type_meeting" name="type_meeting_other" value="1">
-                    <label class="lbl form-check-label" for="check8">Прочее</label>
+                    <label class="lbl form-check-label" for="check8_type_meeting">Прочее</label>
                   </div>
                 </div>
       			  </div>

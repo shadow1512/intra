@@ -79,7 +79,7 @@
                             </div>
                             <!-- The table listing the files available for upload/download -->
                             <table role="presentation" class="table table-striped">
-                                <tbody class="files"></tbody>
+                                <tbody class="files">
                                 @if(count($photos))
                                     @foreach($photos as $photo)
                                         <tr class="template-download fade in">
@@ -90,6 +90,7 @@
                                         </tr>
                                     @endforeach
                                 @endif
+                                </tbody>
                             </table>
 
                             <div id="blueimp-gallery" class="blueimp-gallery blueimp-gallery-controls" data-filter=":even">

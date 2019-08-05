@@ -788,8 +788,7 @@ class ModerateController extends Controller
         }
         $photo->delete();
 
-
-        return redirect(route('moderate.foto.edit', ["id"   =>  $photo->gallery_id]));
+        return json_encode(array("files"    =>  array(array(  $photo->desc          =>  true))));
     }
 
     public function fotoupdateimage($id, Request $request)

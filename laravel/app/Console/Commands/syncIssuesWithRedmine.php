@@ -39,8 +39,8 @@ class syncIssuesWithRedmine extends Command
      */
     public function handle()
     {
-        require_once 'vendor/kbsali/redmine-api/lib/autoload.php';
-        $client =   new Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
+        require_once 'vendor/kbsali/redmine-api/lib/Redmine/Client.php';
+        $client =   new Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([
                             'project_id'    =>  Config::get('redmine.project_id_oto'),

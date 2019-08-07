@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Config;
 use App\Technical_Request;
-use Redmine;
+use TUNER88\Redmine\Facades\Redmine;
 
 class syncIssuesWithRedmine extends Command
 {

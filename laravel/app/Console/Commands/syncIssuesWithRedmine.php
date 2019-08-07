@@ -39,7 +39,7 @@ class syncIssuesWithRedmine extends Command
      */
     public function handle()
     {
-        require_once '../../../vendor/autoload.php';
+        require_once '../../vendor/autoload.php';
 
         $client =   new Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 

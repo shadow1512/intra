@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Config;
 use App\Technical_Request;
+use Redmine;
 
 class syncIssuesWithRedmine extends Command
 {
@@ -41,7 +42,7 @@ class syncIssuesWithRedmine extends Command
     {
         require_once '../../vendor/autoload.php';
 
-        $client =   new Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
+        $client =   new Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([
                             'project_id'    =>  Config::get('redmine.project_id_oto'),

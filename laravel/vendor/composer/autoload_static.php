@@ -49,6 +49,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
             'Tests\\' => 6,
+            'TUNER88\\Redmine\\' => 16,
             'TCG\\Voyager\\' => 12,
         ),
         'S' => 
@@ -191,6 +192,10 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Tests\\' => 
         array (
             0 => __DIR__ . '/../..' . '/tests',
+        ),
+        'TUNER88\\Redmine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/tuner88/laravel-redmine-api/src',
         ),
         'TCG\\Voyager\\' => 
         array (
@@ -607,6 +612,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'App\\Console\\Commands\\makeCsvDirectoryInfographics' => __DIR__ . '/../..' . '/app/Console/Commands/makeCsvDirectoryInfographics.php',
         'App\\Console\\Commands\\makeXmlToCreateADStructure' => __DIR__ . '/../..' . '/app/Console/Commands/makeXmlToCreateADStructure.php',
         'App\\Console\\Commands\\makeXmlToUpdateAD' => __DIR__ . '/../..' . '/app/Console/Commands/makeXmlToUpdateAD.php',
+        'App\\Console\\Commands\\syncIssuesWithRedmine' => __DIR__ . '/../..' . '/app/Console/Commands/syncIssuesWithRedmine.php',
         'App\\Console\\Commands\\updatedirectoryfromad' => __DIR__ . '/../..' . '/app/Console/Commands/updatedirectoryfromad.php',
         'App\\Console\\Commands\\updatedirectoryfromoldts' => __DIR__ . '/../..' . '/app/Console/Commands/updatedirectoryfromoldts.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
@@ -5397,6 +5403,8 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'TCG\\Voyager\\Widgets\\PageDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/PageDimmer.php',
         'TCG\\Voyager\\Widgets\\PostDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/PostDimmer.php',
         'TCG\\Voyager\\Widgets\\UserDimmer' => __DIR__ . '/..' . '/tcg/voyager/src/Widgets/UserDimmer.php',
+        'TUNER88\\Redmine\\Facades\\Redmine' => __DIR__ . '/..' . '/tuner88/laravel-redmine-api/src/Facades/Redmine.php',
+        'TUNER88\\Redmine\\RedmineClientServiceProvider' => __DIR__ . '/..' . '/tuner88/laravel-redmine-api/src/RedmineClientServiceProvider.php',
         'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
         'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
         'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',

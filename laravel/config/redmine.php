@@ -3,8 +3,8 @@
 return array(
 
 
-    'host'              =>  'http://redmine.dmz',
-    'login'             =>  'testapi',
+    'url'               =>  'http://redmine.dmz',
+    'username'          =>  'testapi',
     'password'          =>  'apitest',
     'project_id_oto'    =>  103,
     'track_id'          =>  7,

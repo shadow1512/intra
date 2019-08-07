@@ -172,6 +172,7 @@ return [
         //LaravelAuthLdap\AuthLdapServiceProvider::class
         Adldap\Laravel\AdldapServiceProvider::class,
         cijic\phpMorphy\MorphyServiceProvider::class,
+        tuner88\Redmine\RedmineClientServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -233,6 +234,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Adldap'=> Adldap\Laravel\Facades\Adldap::class,
         'Morphy'    => cijic\phpMorphy\Facade\Morphy::class,
+        'Redmine'   => tuner88\Redmine\Facades\Redmine::class,
     ],
 
 ];

@@ -6377,5 +6377,53 @@
             "api",
             "redmine"
         ]
+    },
+    {
+        "name": "tuner88/laravel-redmine-api",
+        "version": "v1.0.1",
+        "version_normalized": "1.0.1.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/TUNER88/laravel-redmine-api.git",
+            "reference": "b79c5357d2639a3ca008d6d22bf7b89cc705a173"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/TUNER88/laravel-redmine-api/zipball/b79c5357d2639a3ca008d6d22bf7b89cc705a173",
+            "reference": "b79c5357d2639a3ca008d6d22bf7b89cc705a173",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/contracts": "~5.0",
+            "illuminate/support": "~5.0",
+            "kbsali/redmine-api": "~1.0",
+            "php": ">=5.4.7"
+        },
+        "time": "2019-07-05T12:42:18+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "TUNER88\\Redmine\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Anton Pauli",
+                "email": "anton.pauli@gmail.com"
+            }
+        ],
+        "description": "Laravel wrapper for the Redmine API.",
+        "keywords": [
+            "api",
+            "client",
+            "laravel",
+            "redmine",
+            "wrapper"
+        ]
     }
 ]

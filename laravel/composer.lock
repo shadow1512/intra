@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "2298f5951e4440ecda483f7760da4f4a",
+    "content-hash": "a84c682b40b4fb249866fec0553d298f",
     "packages": [
         {
             "name": "adldap2/adldap2",
@@ -4574,6 +4574,52 @@
             "description": "CssToInlineStyles is a class that enables you to convert HTML-pages/files into HTML-pages/files with inline styles. This is very useful when you're sending emails.",
             "homepage": "https://github.com/tijsverkoyen/CssToInlineStyles",
             "time": "2017-11-27T11:13:29+00:00"
+        },
+        {
+            "name": "tuner88/laravel-redmine-api",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/TUNER88/laravel-redmine-api.git",
+                "reference": "b79c5357d2639a3ca008d6d22bf7b89cc705a173"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/TUNER88/laravel-redmine-api/zipball/b79c5357d2639a3ca008d6d22bf7b89cc705a173",
+                "reference": "b79c5357d2639a3ca008d6d22bf7b89cc705a173",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "~5.0",
+                "illuminate/support": "~5.0",
+                "kbsali/redmine-api": "~1.0",
+                "php": ">=5.4.7"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "TUNER88\\Redmine\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anton Pauli",
+                    "email": "anton.pauli@gmail.com"
+                }
+            ],
+            "description": "Laravel wrapper for the Redmine API.",
+            "keywords": [
+                "api",
+                "client",
+                "laravel",
+                "redmine",
+                "wrapper"
+            ],
+            "time": "2019-07-05T12:42:18+00:00"
         },
         {
             "name": "unisharp/laravel-ckeditor",

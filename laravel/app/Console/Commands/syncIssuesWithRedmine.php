@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Config;
 use App\Technical_Request;
-use TUNER88\Redmine\Facades\Redmine;
 
 class syncIssuesWithRedmine extends Command
 {
@@ -40,7 +39,7 @@ class syncIssuesWithRedmine extends Command
      */
     public function handle()
     {
-        $client =   new Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
+        $client =   new Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([
                             'project_id'    =>  Config::get('redmine.project_id_oto'),

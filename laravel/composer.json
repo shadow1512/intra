@@ -13,6 +13,7 @@
         "aparticka/laravel-auth-ldap": "^0.1.3",
         "cijic/phpmorphy": "^0.3.0",
         "doctrine/dbal": "2.6.3",
+        "kbsali/redmine-api": "~1.0",
         "laravel/framework": "5.4.*",
         "laravel/tinker": "~1.0",
         "league/csv": "^9.2",

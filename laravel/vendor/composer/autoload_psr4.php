@@ -36,6 +36,7 @@ return array(
     'Sleimanx2\\Plastic\\' => array($vendorDir . '/sleimanx2/plastic/src'),
     'Seld\\PharUtils\\' => array($vendorDir . '/seld/phar-utils/src'),
     'Seld\\JsonLint\\' => array($vendorDir . '/seld/jsonlint/src/Seld/JsonLint'),
+    'Redmine\\' => array($vendorDir . '/kbsali/redmine-api/lib/Redmine'),
     'React\\Promise\\' => array($vendorDir . '/react/promise/src'),
     'Ramsey\\Uuid\\' => array($vendorDir . '/ramsey/uuid/src'),
     'Psy\\' => array($vendorDir . '/psy/psysh/src'),

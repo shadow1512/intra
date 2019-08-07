@@ -78,6 +78,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         ),
         'R' => 
         array (
+            'Redmine\\' => 8,
             'React\\Promise\\' => 14,
             'Ramsey\\Uuid\\' => 12,
         ),
@@ -282,6 +283,10 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Seld\\JsonLint\\' => 
         array (
             0 => __DIR__ . '/..' . '/seld/jsonlint/src/Seld/JsonLint',
+        ),
+        'Redmine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine',
         ),
         'React\\Promise\\' => 
         array (
@@ -1392,6 +1397,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditRoomBookingsAddApproved' => __DIR__ . '/../..' . '/database/migrations/2019_04_14_160642_edit_room_bookings_add_approved.php',
         'EditRoomsChangeAvailable' => __DIR__ . '/../..' . '/database/migrations/2018_06_13_175300_edit_rooms_change_available.php',
         'EditSavedProfilesAddCreatorAndApproved' => __DIR__ . '/../..' . '/database/migrations/2019_06_23_184350_edit_saved_profiles_add_creator_and_approved.php',
+        'EditTechnicalRequestAddAssigned' => __DIR__ . '/../..' . '/database/migrations/2019_08_07_232701_edit_technical_request_add_assigned.php',
         'EditTechnicalRequestsAddUserId' => __DIR__ . '/../..' . '/database/migrations/2019_06_10_003733_edit_technical_requests_add_user_id.php',
         'EditTemporalDepsTable' => __DIR__ . '/../..' . '/database/migrations/2019_03_09_213849_edit_temporal_deps_table.php',
         'EditTemporalDepsTableAddBoss' => __DIR__ . '/../..' . '/database/migrations/2019_03_10_011117_edit_temporal_deps_table_add_boss.php',
@@ -4385,6 +4391,27 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'React\\Promise\\PromisorInterface' => __DIR__ . '/..' . '/react/promise/src/PromisorInterface.php',
         'React\\Promise\\RejectedPromise' => __DIR__ . '/..' . '/react/promise/src/RejectedPromise.php',
         'React\\Promise\\UnhandledRejectionException' => __DIR__ . '/..' . '/react/promise/src/UnhandledRejectionException.php',
+        'Redmine\\Api\\AbstractApi' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/AbstractApi.php',
+        'Redmine\\Api\\Attachment' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Attachment.php',
+        'Redmine\\Api\\CustomField' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/CustomField.php',
+        'Redmine\\Api\\Group' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Group.php',
+        'Redmine\\Api\\Issue' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Issue.php',
+        'Redmine\\Api\\IssueCategory' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/IssueCategory.php',
+        'Redmine\\Api\\IssuePriority' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/IssuePriority.php',
+        'Redmine\\Api\\IssueRelation' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/IssueRelation.php',
+        'Redmine\\Api\\IssueStatus' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/IssueStatus.php',
+        'Redmine\\Api\\Membership' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Membership.php',
+        'Redmine\\Api\\News' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/News.php',
+        'Redmine\\Api\\Project' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Project.php',
+        'Redmine\\Api\\Query' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Query.php',
+        'Redmine\\Api\\Role' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Role.php',
+        'Redmine\\Api\\TimeEntry' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/TimeEntry.php',
+        'Redmine\\Api\\TimeEntryActivity' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/TimeEntryActivity.php',
+        'Redmine\\Api\\Tracker' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Tracker.php',
+        'Redmine\\Api\\User' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/User.php',
+        'Redmine\\Api\\Version' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Version.php',
+        'Redmine\\Api\\Wiki' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Api/Wiki.php',
+        'Redmine\\Client' => __DIR__ . '/..' . '/kbsali/redmine-api/lib/Redmine/Client.php',
         'ReflectionTypeHint' => __DIR__ . '/../..' . '/correction/ReflectionTypeHint.php',
         'RolesTableSeeder' => __DIR__ . '/../..' . '/database/seeds/RolesTableSeeder.php',
         'SebastianBergmann\\CodeCoverage\\CodeCoverage' => __DIR__ . '/..' . '/phpunit/php-code-coverage/src/CodeCoverage.php',

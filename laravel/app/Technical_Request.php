@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use kbsali\redmine-api\lib\Redmine;
 
 class Technical_Request extends Model
 {

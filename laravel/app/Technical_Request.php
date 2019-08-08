@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use kbsali\Redmine\Client;
+use Config;
 
 class Technical_Request extends Model
 {
@@ -11,8 +12,6 @@ class Technical_Request extends Model
     protected $table = 'technical_requests';
 
     public function syncToRedmine() {
-        //require_once 'vendor/kbsali/redmine-api/lib/Redmine/Client.php';
-        require_once 'vendor/autoload.php';
         $client =   new \Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([

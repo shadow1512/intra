@@ -13,7 +13,7 @@ class Technical_Request extends Model
     public function syncToRedmine() {
         //require_once 'vendor/kbsali/redmine-api/lib/Redmine/Client.php';
         require_once 'vendor/autoload.php';
-        $client =   new Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
+        $client =   new \Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([
             'project_id'    =>  Config::get('redmine.project_id_oto'),

@@ -84,7 +84,8 @@ class Technical_Request extends Model
             $query->whereNull('status')->orWhere('status',  '=',    'inprogress');
         })->get();
 
-        $rec    =   $client->issue->show(112993);var_dump($rec);die();
+        //$rec    =   $client->issue->show(112993);var_dump($rec);die();
+        $assigned   =   $client->user->show(37);var_dump($assigned);die();
         foreach($trs as  $tr) {
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {
@@ -105,6 +106,12 @@ class Technical_Request extends Model
                 }
                 else {
                     Log::error('REDMINE ISSUE STATUS ERROR: no status  for record ' .   $tr->redmine_link);
+                }
+                if(isset($rec["issue"]["assigned_to"]["id"])) {
+                    $assigned   =   $client->user->show($rec["issue"]["assigned_to"]["id"]);
+                    if($assigned) {
+
+                    }
                 }
             }
             else {

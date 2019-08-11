@@ -12,7 +12,7 @@ class Technical_Request extends Model
     protected $table = 'technical_requests';
 
     public function syncToRedmine() {
-        $client =   new \Redmine\Client(Config::get('redmine.host'), Config::get('redmine.login'), Config::get('redmine.password'));
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
 
         $rec    =   $client->issue->all([
             'project_id'    =>  Config::get('redmine.project_id_oto'),

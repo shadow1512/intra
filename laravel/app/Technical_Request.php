@@ -32,7 +32,7 @@ class Technical_Request extends Model
             'custom_fields' => [
                 [
                     'id' => 17,
-                    'value' => 'ДПТ',
+                    'value' => '2.9 Департамент программных технологий',
                 ],
                 [
                     'id' => 18,

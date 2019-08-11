@@ -23,7 +23,7 @@ class Technical_Request extends Model
 
         /*$rec    =   $client->issue->show(111890);*/
 
-        var_dump($client->issue->create([
+        $issue  =   $client->issue->create([
             'project_id'    => 103,
             'tracker_id'    =>  7,
             'subject' => 'Test Intra api',
@@ -36,7 +36,14 @@ class Technical_Request extends Model
                 ],
             ],
             'watcher_user_ids' => []
-        ]));
+        ]);
+
+        if(!is_null($issue->error)) {
+
+        }
+        else {
+            var_dump($issue->id);
+        }
         //var_dump($rec);
     }
 }

@@ -84,7 +84,7 @@ class Technical_Request extends Model
             $query->whereNull('status')->orWhere('status',  '=',    'inprogress');
         })->get();
 
-        $rec    =   $client->issue->show(112993);die();
+        $rec    =   $client->issue->show(112993);var_dump($rec);die();
         foreach($trs as  $tr) {
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {

@@ -70,7 +70,7 @@
                             </div>
                             @if(!is_null($request->assigned) || !is_null($request->assigned_text))<div>Ответственный сотрудник УКОТ:<br>
                                 @if(!is_null($request_assigned)){{$request->lname}} {{mb_substr($request->fname, 0, 1, "UTF-8")}}. @if(!empty($request->mname)) {{mb_substr($request->mname, 0, 1, "UTF-8")}}.@endif @if($request_phone), тел.&nbsp;{{$request->phone}}@endif @else
-                            {{$request->assigned_text}}@endif</div>
+                            {{$request->assigned_text}}@endif @endif</div>
                         </div>
                     </div>
                     @endforeach

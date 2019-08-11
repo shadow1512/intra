@@ -39,7 +39,7 @@ class Technical_Request extends Model
         ]);
 
         if(!is_null($issue->error)) {
-
+            var_dump($issue->error);
         }
         else {
             var_dump($issue->id);

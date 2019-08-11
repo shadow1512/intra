@@ -69,7 +69,7 @@
                                 @if($request->status    ==  "rejected")Отклонена@endif
                             </div>
                             @if(!is_null($request->assigned) || !is_null($request->assigned_text))<div>Ответственный сотрудник УКОТ:<br>
-                                @if(!is_null($request->assigned)){{$request->lname}} {{mb_substr($request->fname, 0, 1, "UTF-8")}}. @if(!empty($request->mname)) {{mb_substr($request->mname, 0, 1, "UTF-8")}}.@endif @if($request_phone), тел.&nbsp;{{$request->phone}}@endif @else
+                                @if(!is_null($request->assigned)){{$request->lname}} {{mb_substr($request->fname, 0, 1, "UTF-8")}}. @if(!empty($request->mname)) {{mb_substr($request->mname, 0, 1, "UTF-8")}}.@endif @if($request->phone), тел.&nbsp;{{$request->phone}}@endif @else
                             {{$request->assigned_text}}@endif @endif</div>
                         </div>
                     </div>

@@ -31,10 +31,6 @@ class Technical_Request extends Model
             'due_date'      =>  date("Y-m-d"),
             'custom_fields' => [
                 [
-                    'id' => 17,
-                    'value' => '2.9 Департамент программных технологий',
-                ],
-                [
                     'id' => 18,
                     'value' => '205',
                 ],

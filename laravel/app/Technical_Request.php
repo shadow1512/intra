@@ -21,19 +21,19 @@ class Technical_Request extends Model
 
             $subject    =   'Заявка на обслуживание из каб. №'   .   $tr->room   .   " от "  .   $tr->fio;
             if($tr->phone) {
-                $subject    .=  ", (тел.:"  .   $tr->phone;
+                $subject    .=  ", (тел.:"  .   $tr->phone  .   ")";
             }
 
-            $description    =   $subject    .   "<br/>";
-            if($tr->type    ==  "cartridge") {
-                $description    .=  "Тип заявки: замена картриджа<br/>";
-                $description    .=  "Модель принтера: " .   $tr->printer    .   "<br/>";
+            $description    =   $subject    .   "\r\n";
+            if($tr->type_request    ==  "cartridge") {
+                $description    .=  "Тип заявки: замена картриджа\r\n";
+                $description    .=  "Модель принтера: " .   $tr->printer    .   "\r\n";
             }
-            if($tr->type    ==  "teh") {
-                $description    .=  "Тип заявки: техническое обслуживание<br/>";
+            if($tr->type_request    ==  "teh") {
+                $description    .=  "Тип заявки: техническое обслуживание\r\n";
             }
 
-            $description    .=   $tr->user_comments    .   "<br/>";
+            $description    .=   $tr->user_comment    .   "\r\n";
             $description    .=  "Подразделение: "   .   $tr->dep;
 
             $issue  =   $client->issue->create([

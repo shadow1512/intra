@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use kbsali\Redmine\Client;
 use Config;
+use App\User;
 
 class Technical_Request extends Model
 {
@@ -85,7 +86,7 @@ class Technical_Request extends Model
         })->get();
 
         //$rec    =   $client->issue->show(112993);var_dump($rec);die();
-        $assigned   =   $client->user->show(37);var_dump($assigned);die();
+        //$assigned   =   $client->user->show(37);var_dump($assigned);die();
         foreach($trs as  $tr) {
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {
@@ -109,10 +110,21 @@ class Technical_Request extends Model
                 }
                 if(isset($rec["issue"]["assigned_to"]["id"])) {
                     $assigned   =   $client->user->show($rec["issue"]["assigned_to"]["id"]);
-                    if($assigned) {
-
+                    if($assigned    &&  isset($assigned["user"]["mail"])) {
+                        $user   =   User::where('email',    '=', trim($assigned["user"]["mail"]))->first();
+                        if($user) {
+                            $tr->assigned =   $user->id;
+                        }
+                        else {
+                            $tr->assigned_text =   $rec["issue"]["assigned_to"]["name"];
+                        }
+                    }
+                    else {
+                        $tr->assigned_text =   $rec["issue"]["assigned_to"]["name"];
                     }
                 }
+
+                $tr->save();
             }
             else {
                 Log::error('REDMINE ISSUE SEARCH ERROR: no issue  for record ' .   $tr->redmine_link);

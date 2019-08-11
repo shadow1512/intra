@@ -664,6 +664,7 @@ class Client
      */
     protected function runRequest($path, $method = 'GET', $data = '')
     {
+        var_dump($path);
         $curl = $this->prepareRequest($path, $method, $data);
 
         $response = curl_exec($curl);

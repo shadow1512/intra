@@ -21,6 +21,7 @@ class Kernel extends ConsoleKernel
         Commands\updatedirectoryfromad::class,
         Commands\makeXmlToCreateADStructure::class,
         Commands\syncIssuesWithRedmine::class,
+        Commands\getIssueStatusesFromRedmine::class,
     ];
 
     /**
@@ -36,6 +37,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('maindepcsv:create')->daily();
         $schedule->command('oldtsstaff:import')->daily();
         $schedule->command('syncissues:start')->everyFiveMinutes();
+        $schedule->command('issuestatus:get')->everyFiveMinutes();
     }
 
     /**

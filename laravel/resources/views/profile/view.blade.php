@@ -59,7 +59,7 @@
                             </div>
                             <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created_at))}}</div>
                             @if(!is_null($request->redmine_link))<div>Задача в Redmine: <a href="{{Config::get('redmine.url')}}/issues/{{$request->redmine_link}}">#{{$request->redmine_link}}</a></div>@endif
-                            <div>Примечание сотрудника УКОТ</div> -->
+                            <!--<div>Примечание сотрудника УКОТ</div> -->
                         </div>
                         <div class="profile_info_i_requests_i_right">
                             <div class="profile_info_i_requests_i_status @if($request->status    ==  "rejected") __fail @endif">

@@ -76,13 +76,47 @@ class Technical_Request extends Model
 
             }
         }
-        /*$rec    =   $client->issue->all([
-            'project_id'    =>  Config::get('redmine.project_id_oto'),
-            'tracker_id'    =>  Config::get('redmine.tracker_id_oto'),
-            'status_id'     =>  'closed',
-            //'cf_'   .   Config::get('redmine.cs_room')  =>  '204'
-        ]);*/
+    }
 
-        /*$rec    =   $client->issue->show(111890);*/
+    public function syncFromRedmine() {
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
+        $trs =   Technical_Request::whereNotNull('redmine_link')->whereIn('status', [null,  'inprogress'])->get();
+
+        var_dump($trs);
+        $rec    =   $client->issue->show(112994);
+        var_dump($rec);
+
+        $rec    =   $client->issue->show(112993);
+        var_dump($rec);
+        exit();
+        foreach($trs as  $tr) {
+
+
+
+            if(is_null($issue)) {
+                Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);
+                return;
+            }
+            $els    =   $issue->children();
+
+            $issue_id =   null;
+            foreach($els as $name   =>  $value) {
+                if($name    === "error") {
+                    Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
+                    return;
+                }
+                if($name    === "id") {
+                    $issue_id   =   $value;
+                }
+            }
+
+            if(!is_null($issue_id)) {
+                $tr->redmine_link   =   $issue_id->__toString();
+                $tr->save();
+            }
+            else {
+
+            }
+        }
     }
 }

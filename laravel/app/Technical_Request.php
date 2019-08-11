@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 use kbsali\Redmine\Client;
 use Config;
 
@@ -38,12 +39,24 @@ class Technical_Request extends Model
             'watcher_user_ids' => []
         ]);
 
-        if(!is_null($issue->error)) {
-            var_dump($issue->error);
+        $els    =   $issue->children();
+
+        $issue_id =   null;
+        foreach($els as $name   =>  $value) {
+            if($name    === "error") {
+                Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value);
+            }
+            if($name    === "id") {
+                $issue_id   =   $value;
+            }
+        }
+
+        if(!is_null($issue_id)) {
+            var_dump($issue_id);
         }
         else {
-            var_dump($issue->id);
+
         }
-        //var_dump($rec);
+        
     }
 }

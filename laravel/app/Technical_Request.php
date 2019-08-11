@@ -14,13 +14,14 @@ class Technical_Request extends Model
     public function syncToRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
 
-        $rec    =   $client->issue->all([
+        /*$rec    =   $client->issue->all([
             'project_id'    =>  Config::get('redmine.project_id_oto'),
             'tracker_id'    =>  Config::get('redmine.tracker_id_oto'),
             'status_id'     =>  'closed',
             //'cf_'   .   Config::get('redmine.cs_room')  =>  '204'
-        ]);
+        ]);*/
 
+        $rec    =   $client->issue->show(111890);
         var_dump($rec);
     }
 }

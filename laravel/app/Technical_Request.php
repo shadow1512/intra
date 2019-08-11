@@ -13,7 +13,7 @@ class Technical_Request extends Model
     protected $table = 'technical_requests';
 
     public function syncToRedmine() {
-        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password1'));
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
 
         $trs =   Technical_Request::whereNull('redmine_link')->get();
 
@@ -51,12 +51,17 @@ class Technical_Request extends Model
                 'watcher_user_ids' => []
             ]);
 
+            if(is_null($issue)) {
+                Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);
+                return;
+            }
             $els    =   $issue->children();
 
             $issue_id =   null;
             foreach($els as $name   =>  $value) {
                 if($name    === "error") {
                     Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
+                    return;
                 }
                 if($name    === "id") {
                     $issue_id   =   $value;

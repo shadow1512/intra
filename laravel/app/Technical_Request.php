@@ -84,40 +84,32 @@ class Technical_Request extends Model
             $query->whereNull('status')->orWhere('status',  '=',    'inprogress');
         })->get();
 
-        var_dump($trs);
-        $rec    =   $client->issue->show(112994);
-        var_dump($rec);
-
-        $rec    =   $client->issue->show(112993);
-        var_dump($rec);
-        exit();
+        $rec    =   $client->issue->show(112993);die();
         foreach($trs as  $tr) {
-
-
-
-            if(is_null($issue)) {
-                Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);
-                return;
-            }
-            $els    =   $issue->children();
-
-            $issue_id =   null;
-            foreach($els as $name   =>  $value) {
-                if($name    === "error") {
-                    Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
-                    return;
+            $rec    =   $client->issue->show($tr->redmine_link);
+            if($rec) {
+                if(isset($rec["issue"]["status"]["id"])) {
+                    $status =   $rec["issue"]["status"]["id"];
+                    if($status  ==  1) {
+                        $tr->status =   null;
+                    }
+                    elseif($status  ==  3   ||  $status  ==  5) {
+                        $tr->status =   "complete";
+                    }
+                    elseif($status  ==  6) {
+                        $tr->status =   "rejected";
+                    }
+                    else {
+                        $tr->status =   "inprogress";
+                    }
                 }
-                if($name    === "id") {
-                    $issue_id   =   $value;
+                else {
+                    Log::error('REDMINE ISSUE STATUS ERROR: no status  for record ' .   $tr->redmine_link);
                 }
-            }
-
-            if(!is_null($issue_id)) {
-                $tr->redmine_link   =   $issue_id->__toString();
-                $tr->save();
             }
             else {
-
+                Log::error('REDMINE ISSUE SEARCH ERROR: no issue  for record ' .   $tr->redmine_link);
+                return;
             }
         }
     }

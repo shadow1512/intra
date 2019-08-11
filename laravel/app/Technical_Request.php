@@ -80,7 +80,9 @@ class Technical_Request extends Model
 
     public function syncFromRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
-        $trs =   Technical_Request::whereNotNull('redmine_link')->whereIn('status', [null,  'inprogress'])->get();
+        $trs =   Technical_Request::whereNotNull('redmine_link')->where(function($query) {
+            $query->whereNull('status')->orWhere('status',  '=',    'inprogress');
+        })->get();
 
         var_dump($trs);
         $rec    =   $client->issue->show(112994);

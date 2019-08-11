@@ -14,8 +14,7 @@ class Technical_Request extends Model
 
     public function syncToRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password1'));
-
-        var_dump($client);exit();
+        
         $trs =   Technical_Request::whereNull('redmine_link')->get();
 
         foreach($trs as  $tr) {

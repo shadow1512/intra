@@ -16,12 +16,62 @@ class Technical_Request extends Model
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password1'));
 
         var_dump($client);exit();
-        $tr =   Technical_Request::whereNull('redmine_link')->get();
+        $trs =   Technical_Request::whereNull('redmine_link')->get();
 
-        if((count($tr)   >   0)   &&    !is_null($client)) {
+        foreach($trs as  $tr) {
 
+            $subject    =   'Заявка на обслуживание из каб. №'   .   $tr->room   .   " от "  .   $tr->fio;
+            if($tr->phone) {
+                $subject    .=  ", (тел.:"  .   $tr->phone;
+            }
+
+            $description    =   $subject    .   "<br/>";
+            if($tr->type    ==  "cartridge") {
+                $description    .=  "Тип заявки: замена картриджа<br/>";
+                $description    .=  "Модель принтера: " .   $tr->printer    .   "<br/>";
+            }
+            if($tr->type    ==  "teh") {
+                $description    .=  "Тип заявки: техническое обслуживание<br/>";
+            }
+
+            $description    .=   $ек->user_comments    .   "<br/>";
+            $description    .=  "Подразделение: "   .   $tr->dep;
+
+            $issue  =   $client->issue->create([
+                'project_id'    => 103,
+                'tracker_id'    =>  7,
+                'subject'       => $subject,
+                'description'   => $description,
+                'due_date'      =>  date("Y-m-d"),
+                'custom_fields' => [
+                    [
+                        'id' => 18,
+                        'value' => $tr->room,
+                    ],
+                ],
+                'watcher_user_ids' => []
+            ]);
+
+            $els    =   $issue->children();
+
+            $issue_id =   null;
+            foreach($els as $name   =>  $value) {
+                if($name    === "error") {
+                    Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
+                }
+                if($name    === "id") {
+                    $issue_id   =   $value;
+                }
+            }
+
+            if(!is_null($issue_id)) {
+                $tr->redmine_link   =   $issue_id->__toString();
+                $tr->save();
+            }
+            else {
+
+            }
         }
-        //Заявка на обслуживание из каб.№ 205 от Родионова Елена Григорьевна(тел.:278)
         /*$rec    =   $client->issue->all([
             'project_id'    =>  Config::get('redmine.project_id_oto'),
             'tracker_id'    =>  Config::get('redmine.tracker_id_oto'),
@@ -30,40 +80,5 @@ class Technical_Request extends Model
         ]);*/
 
         /*$rec    =   $client->issue->show(111890);*/
-
-        $issue  =   $client->issue->create([
-            'project_id'    => 103,
-            'tracker_id'    =>  7,
-            'subject' => 'Test Intra api',
-            'description' => 'test api',
-            'due_date'      =>  date("Y-m-d"),
-            'custom_fields' => [
-                [
-                    'id' => 18,
-                    'value' => '205',
-                ],
-            ],
-            'watcher_user_ids' => []
-        ]);
-
-        $els    =   $issue->children();
-
-        $issue_id =   null;
-        foreach($els as $name   =>  $value) {
-            if($name    === "error") {
-                Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value);
-            }
-            if($name    === "id") {
-                $issue_id   =   $value;
-            }
-        }
-
-        if(!is_null($issue_id)) {
-            var_dump($issue_id->__toString());
-        }
-        else {
-
-        }
-
     }
 }

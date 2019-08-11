@@ -14,7 +14,7 @@ class Technical_Request extends Model
 
     public function syncToRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password1'));
-        
+
         $trs =   Technical_Request::whereNull('redmine_link')->get();
 
         foreach($trs as  $tr) {
@@ -33,7 +33,7 @@ class Technical_Request extends Model
                 $description    .=  "Тип заявки: техническое обслуживание<br/>";
             }
 
-            $description    .=   $ек->user_comments    .   "<br/>";
+            $description    .=   $tr->user_comments    .   "<br/>";
             $description    .=  "Подразделение: "   .   $tr->dep;
 
             $issue  =   $client->issue->create([

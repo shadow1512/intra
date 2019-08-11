@@ -52,11 +52,11 @@ class Technical_Request extends Model
         }
 
         if(!is_null($issue_id)) {
-            var_dump($issue_id);
+            var_dump($issue_id->__toString());
         }
         else {
 
         }
-        
+
     }
 }

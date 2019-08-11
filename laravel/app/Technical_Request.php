@@ -21,7 +21,26 @@ class Technical_Request extends Model
             //'cf_'   .   Config::get('redmine.cs_room')  =>  '204'
         ]);*/
 
-        $rec    =   $client->issue->show(111890);
-        var_dump($rec);
+        /*$rec    =   $client->issue->show(111890);*/
+
+        var_dump($client->issue->create([
+            'project_id'    => 'oto',
+            'tracker_id'    =>  7,
+            'subject' => 'Test Intra api',
+            'description' => 'test api',
+            'due_date'      =>  date("Y-m-d"),
+            'custom_fields' => [
+                [
+                    'id' => 17,
+                    'value' => 'ДПТ',
+                ],
+                [
+                    'id' => 18,
+                    'value' => '205',
+                ],
+            ],
+            'watcher_user_ids' => []
+        ]));
+        //var_dump($rec);
     }
 }

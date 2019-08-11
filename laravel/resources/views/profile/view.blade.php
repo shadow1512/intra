@@ -58,7 +58,7 @@
                                 @if ($request->type_request    ==  "cartridge")Заявка на замену картриджа@endif
                             </div>
                             <div class="profile_info_i_requests_i_time">{{date("d.m.Y H:i:s",   strtotime($request->created_at))}}</div>
-                            <!-- <div>Задача в Redmine: <a href="">#1234567</a></div>
+                            @if(!is_null($request->redmine_link))<div>Задача в Redmine: <a href="{{Config::get('redmine.url')}}/issues/{{$request->redmine_link}}">#{{$request->redmine_link}}</a></div>@endif
                             <div>Примечание сотрудника УКОТ</div> -->
                         </div>
                         <div class="profile_info_i_requests_i_right">
@@ -68,7 +68,9 @@
                                 @if($request->status    ==  "complete")Выполнена@endif
                                 @if($request->status    ==  "rejected")Отклонена@endif
                             </div>
-                            <div>Ответственный сотрудник УКОТ:<br>Коробов Р.А., тел.&nbsp;321</div>
+                            @if(!is_null($request->assigned) || !is_null($request->assigned_text))<div>Ответственный сотрудник УКОТ:<br>
+                                @if(!is_null($request_assigned)){{$request->lname}} {{mb_substr($request->fname, 0, 1, "UTF-8")}}. @if(!empty($request->mname)) {{mb_substr($request->mname, 0, 1, "UTF-8")}}.@endif @if($request_phone), тел.&nbsp;{{$request->phone}}@endif @else
+                            {{$request->assigned_text}}@endif</div>
                         </div>
                     </div>
                     @endforeach

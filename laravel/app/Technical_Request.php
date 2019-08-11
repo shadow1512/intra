@@ -13,8 +13,15 @@ class Technical_Request extends Model
     protected $table = 'technical_requests';
 
     public function syncToRedmine() {
-        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password1'));
 
+        var_dump($client);exit();
+        $tr =   Technical_Request::whereNull('redmine_link')->get();
+
+        if((count($tr)   >   0)   &&    !is_null($client)) {
+
+        }
+        //Заявка на обслуживание из каб.№ 205 от Родионова Елена Григорьевна(тел.:278)
         /*$rec    =   $client->issue->all([
             'project_id'    =>  Config::get('redmine.project_id_oto'),
             'tracker_id'    =>  Config::get('redmine.tracker_id_oto'),

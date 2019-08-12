@@ -46,10 +46,11 @@ class Booking extends Model
             $description    =   $subject    .   "\r\n";
             $description    .=  "Организатор: " .   $tr->lname  .   " " .   $tr->fname  .   " " .   $tr->mname;
             if($tr->user_phone) {
-                $description    .=  " (тел.: " .   $tr->user_phone    .   ")\r\n";
+                $description    .=  " (тел.: " .   $tr->user_phone    .   ")";
             }
+            $description    .=  "\r\n";
 
-            $description    .=  "Дата: " .   $tr->date_booking  .   "\r\n";
+            $description    .=  "Дата: " .   $tr->date_book  .   "\r\n";
             $description    .=  "Время: " .   $tr->time_start  .   " - "    .   $tr->time_end   .   "\r\n";
             $description    .=  "Отмеченные потребности:\r\n";
 

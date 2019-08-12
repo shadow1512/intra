@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Config;
 use App\Technical_Request;
 
 class syncIssuesWithRedmine extends Command

@@ -38,6 +38,7 @@ class Kernel extends ConsoleKernel
         //$schedule->command('oldtsstaff:import')->daily();
         $schedule->command('syncissues:start')->everyFiveMinutes();
         $schedule->command('issuestatus:get')->everyFiveMinutes();
+        $schedule->command('syncbookings:start')->everyFiveMinutes();
     }
 
     /**

@@ -20,4 +20,5 @@ class Rooms extends Model
         'name', 'available',
     ];
     protected $table = 'rooms';
+
 }

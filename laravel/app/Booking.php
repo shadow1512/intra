@@ -31,7 +31,7 @@ class Booking extends Model
     public function syncToRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
 
-        $trs =   Booking::select("room_bookings.*", "rooms.name as room_name",  "users.phone as user_phone",    "uses.fname",   "users.mname",  "users.lname")
+        $trs =   Booking::select("room_bookings.*", "rooms.name as room_name",  "users.phone as user_phone",    "users.fname",   "users.mname",  "users.lname")
             ->leftJoin('rooms', 'rooms.id', '=',    'room_bookings.room_id')
             ->leftJoin('users', 'users.id', '=',    'room_bookings.user_id')
             ->whereNull('redmine_link')->where(function($query) {

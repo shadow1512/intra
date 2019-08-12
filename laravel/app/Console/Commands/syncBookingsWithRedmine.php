@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Booking;
+use Config;
 use Illuminate\Console\Command;
 
 class syncBookingsWithRedmine extends Command

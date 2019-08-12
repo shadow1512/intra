@@ -22,6 +22,7 @@ class Kernel extends ConsoleKernel
         Commands\makeXmlToCreateADStructure::class,
         Commands\syncIssuesWithRedmine::class,
         Commands\getIssueStatusesFromRedmine::class,
+        Commands\syncBookingsWithRedmine::class,
     ];
 
     /**

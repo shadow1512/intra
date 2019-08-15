@@ -51,8 +51,12 @@ class updatedirectoryfromad extends Command
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
         print $root->getConvertedGuid()  .   "\r\n";
         print $root->getName()  .   "\r\n";
-        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=Консорциум КОДЕКС,dc=work,dc=kodeks,dc=ru")->get();
-        print count($deps);
+        $deps =   Adldap::getProvider('default')->search()->listing()->ous()->in("ou=Консорциум КОДЕКС,dc=work,dc=kodeks,dc=ru")->get();
+        foreach($deps as $dep) {
+            print "\r\n";
+            print $dep->getConvertedGuid()  .   "\r\n";
+            print $dep->getName()  .   "\r\n";
+        }
         die();
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {

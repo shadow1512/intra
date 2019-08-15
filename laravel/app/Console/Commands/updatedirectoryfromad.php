@@ -44,19 +44,24 @@ class updatedirectoryfromad extends Command
      *
      * @return mixed
      */
+
+    public function serveDepLevel($dep) {
+        print "\r\n";
+        print $dep->getConvertedGuid()  .   "\r\n";
+        print $dep->getName()  .   "\r\n";
+
+        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=" .   $dep->getName() .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
+        foreach($deps as $dep_inner) {
+            $this->serveDepLevel($dep_inner);
+        }
+    }
+
     public function handle()
     {
         //
-
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        print $root->getConvertedGuid()  .   "\r\n";
-        print $root->getName()  .   "\r\n";
-        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=Консорциум КОДЕКС,dc=work,dc=kodeks,dc=ru")->listing()->get();
-        foreach($deps as $dep) {
-            print "\r\n";
-            print $dep->getConvertedGuid()  .   "\r\n";
-            print $dep->getName()  .   "\r\n";
-        }
+        $this->serveDepLevel($root);
+
         die();
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {

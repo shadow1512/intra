@@ -1216,6 +1216,13 @@ class Builder
         return $this;
     }
 
+    public function listing($recursive = false)
+    {
+        $this->recursive = (bool) $recursive;
+
+        return $this;
+    }
+
     /**
      * Sets the recursive property to tell the search
      * whether or not to search on the base scope and

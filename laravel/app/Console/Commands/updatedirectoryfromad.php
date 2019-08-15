@@ -60,8 +60,13 @@ class updatedirectoryfromad extends Command
     {
         //
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        $this->serveDepLevel($root);
-
+        //$this->serveDepLevel($root);
+        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=" .   $dep->getName() .   ",dc=work,dc=kodeks,dc=ru")->get();
+        foreach($deps as $dep_inner) {
+            print "\r\n";
+            print $dep->getConvertedGuid()  .   "\r\n";
+            print $dep->getName()  .   "\r\n";
+        }
         die();
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {

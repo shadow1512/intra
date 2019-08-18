@@ -12,6 +12,7 @@ use Auth;
 use App\User;
 use App\Dep;
 use App\Profiles_Saved;
+use App\Profiles_Saved_Data;
 use App\Technical_Request;
 use DB;
 use PDO;
@@ -88,20 +89,21 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $fname          = trim($request->input('input_fname'));
-        $mname          = trim($request->input('input_mname'));
-        $lname          = trim($request->input('input_lname'));
-        $address        = trim($request->input('input_address'));
-        $room           = trim($request->input('input_room'));
-        $phone          = trim($request->input('input_phone'));
-        $birthday       = trim($request->input('input_birthday'));
-        $mobile_phone   = trim($request->input('input_mobile_phone'));
-        $city_phone     = trim($request->input('input_city_phone'));
-        $email          = trim($request->input('input_email'));
-        $email_secondary= trim($request->input('input_email_secondary'));
-        $work_title     = trim($request->input('input_work_title'));
-        $dep_id         = trim($request->input('input_dep'));
-        $position_desc  = trim($request->input('input_position_desc'));
+        $updates_fields =   array(  'fname'                     =>  trim($request->input('input_fname')),
+                                    'lname'                     =>  trim($request->input('input_lname')),
+                                    'mname'                     =>  trim($request->input('input_mname')),
+                                    'address'                   =>  trim($request->input('input_address')),
+                                    'room'                      =>  trim($request->input('input_room')),
+                                    'phone'                     =>  trim($request->input('input_phone')),
+                                    'birthday'                  =>  trim($request->input('input_birthday')),
+                                    'mobile_phone'              =>  trim($request->input('input_mobile_phone')),
+                                    'city_phone'                =>  trim($request->input('input_city_phone')),
+                                    'email'                     =>  trim($request->input('input_email')),
+                                    'email_secondary'           =>  trim($request->input('input_email_secondary')),
+                                    'work_title'                =>  trim($request->input('input_work_title')),
+                                    'dep_id'                    =>  trim($request->input('input_dep')),
+                                    'position_desc'             =>  trim($request->input('input_position_desc'))
+                                    );
 
         $messages   =   array(  "input_lname.string"    =>  "Фамилия должна быть строкой символов",
                                 "input_lname.max"       =>  "Фамилия не может быть длиннее, чем 255 символов",
@@ -154,29 +156,35 @@ class ProfileController extends Controller
             $ps =   new Profiles_Saved();
 
             $ps->user_id    =   Auth::user()->id;
-            $ps->fname  =   $fname;
-            $ps->mname  =   $mname;
-            $ps->lname  =   $lname;
-            $ps->email  =   $email;
-            $ps->address=   $address;
-            $ps->email_secondary  =   $email_secondary;
-            $ps->phone  =   $phone;
-            $ps->city_phone  =   $city_phone;
-            $ps->mobile_phone  =   $mobile_phone;
-            $ps->room       =   $room;
-            $ps->avatar     =   Auth::user()->avatar;
+            $ps->creator_id    =   Auth::user()->id;
+            $ps->save();
 
-            $birthday_parts =   explode(".",    $birthday);
-            if(count($birthday_parts)   ==  3) {
-                $birthday   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->first();
+            if($psd) {
+                $psd->delete();
             }
 
-            $ps->birthday   =   $birthday;
-            $ps->dep_id     =   $dep_id;
-            $ps->work_title =   $work_title;
-            $ps->position_desc =   $position_desc;
-            $ps->creator_id =   Auth::user()->id;
-            $ps->save();
+            foreach($updates_fields as $key =>  $value) {
+                if($value   !== Auth::user()->$key) {
+                    $psd =   new Profiles_Saved_Data();
+
+                    $psd->ps_id         =   $ps->id;
+                    $psd->creator_id    =   Auth::user()->id;
+
+                    if($key ==  "birthday") {
+                        $birthday_parts =   explode(".",    $value);
+                        if(count($birthday_parts)   ==  3) {
+                            $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+                        }
+                    }
+                    $psd->field_name    =   $key;
+                    $psd->old_value     =   Auth::user()->$key;
+                    $psd->new_value     =   $value;
+
+                    $psd->save();
+                }
+            }
+
 
             $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')

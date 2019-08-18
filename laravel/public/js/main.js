@@ -45,6 +45,11 @@ $("a.directory_search").on("click", function(ev) {
     }
 });
 
+var totalHeight = 0;
+$('.staff_i').each(function(i) {
+  totalHeight = totalHeight+$(this).outerHeight();
+});
+$('.content_i_container').css({'min-height':totalHeight});
 
 $("a.header_search_btn").on("click", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
@@ -493,5 +498,3 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
         }
     });
 });
-
-

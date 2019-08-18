@@ -8,20 +8,17 @@
             </div>
             <div class="profile_form">
                 <ul class="lst-changes">
-                    @foreach($labels    as  $key    =>  $value)
-                        @if($ps[$key])
-                            @if(isset($user[$key]))
-                                @if($user[$key] &&  ($user[$key]   !=  $ps[$key]))
-                                    <li class="lst-changes_i">{{$value}}: заменить &laquo;@if($key  ==  "dep_id"){{$dep_old->name}} @else{{$user[$key]}} @endif&raquo;&raquo; на&nbsp;&laquo;@if($key  ==  "dep_id"){{$dep_new->name}} @else{{$ps[$key]}} @endif&raquo;</li>
+                    @foreach($psd    as  $item)
+                        @if(isset($labels[$item->field_name]))
+                                @if($item->old_value    &&  $item->new_value    &&  ($item->old_value   !=  $item->new_value))
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: заменить &laquo;@if($item->field_name  ==  "dep_id"){{$dep_old->name}} @else{{$item->old_value}} @endif&raquo;&raquo; на&nbsp;&laquo;@if($item->field_name  ==  "dep_id"){{$dep_new->name}} @else{{$item->new_value}} @endif&raquo;</li>
                                 @endif
-                                @if(!$user[$key])
-                                        <li class="lst-changes_i">{{$value}}: добавить&nbsp;&laquo;@if($key  ==  "dep_id"){{$dep_new->name}} @else{{$ps[$key]}} @endif&raquo;</li>
+                                @if(!$item->old_value   &&  $item->new_value)
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: добавить&nbsp;&laquo;@if($$item->field_name  ==  "dep_id"){{$dep_new->name}} @else{{$item->new_value}} @endif&raquo;</li>
                                 @endif
-                            @else
-                                <li class="lst-changes_i">{{$value}}: добавить&nbsp;&laquo;@if($key  ==  "dep_id"){{$dep_new->name}} @else{{$ps[$key]}} @endif&raquo;</li>
-                            @endif
-                        @else
-                            <li class="lst-changes_i">{{$value}}: удалить&nbsp;&laquo;@if($key  ==  "dep_id"){{$dep_old->name}} @else{{$user[$key]}} @endif&raquo;</li>
+                                @if($item->old_value   &&  !$item->new_value)
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: удалить&nbsp;&laquo;@if($item->field_name  ==  "dep_id"){{$dep_old->name}} @else{{$item->old_value}} @endif&raquo;</li>
+                                @endif
                         @endif
                     @endforeach
                 </ul>

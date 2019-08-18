@@ -159,10 +159,7 @@ class ProfileController extends Controller
             $ps->creator_id    =   Auth::user()->id;
             $ps->save();
 
-            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->first();
-            if($psd) {
-                $psd->delete();
-            }
+            Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
 
             foreach($updates_fields as $key =>  $value) {
                 if($value   !== Auth::user()->$key) {
@@ -222,7 +219,9 @@ class ProfileController extends Controller
                 "position_desc"     =>  "Сфера деятельности"
             );
 
-            $html   =   View::make('profile.viewchanges', ['labels' =>  $labels,    'user'   =>  $user->toArray(),   'ps' =>  $ps->toArray(),   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
+            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
+
+            $html   =   View::make('profile.viewchanges', ['labels' =>  $labels,    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
 
             return response()->json(['success', $html->render()]);
         }

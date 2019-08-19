@@ -64,10 +64,12 @@ class updatedirectoryfromad extends Command
         $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=Консорциум КОДЕКС,dc=work,dc=kodeks,dc=ru")->get();
         foreach($deps as $dep) {
             print "\r\n";
+            print "\r\n";
+            var_dump($dep);
             print $dep->getConvertedGuid()  .   "\r\n";
             print $dep->getName()  .   "\r\n";
             //print $dep->isActive()  .   "\r\n";
-            print $dep->isEnabled()  .   "\r\n";
+            //print $dep->isEnabled()  .   "\r\n";
         }
         die();
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();

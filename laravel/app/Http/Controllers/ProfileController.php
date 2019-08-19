@@ -164,27 +164,28 @@ class ProfileController extends Controller
             $dep_new    =   $dep_old    =   $moderator  =   null;
 
             foreach($updates_fields as $key =>  $value) {
-                if($value   !== Auth::user()->$key) {
+                if($key ==  "birthday") {
+                    $birthday_parts =   explode(".",    $value);
+                    if(count($birthday_parts)   ==  3) {
+                        $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+                    }
+                }
+                if($key ==  "dep_id") {
+                    if($value) {
+                        $dep_new    =   Dep::findOrFail($value);
+                        $moderator  =   Dep::getModerate($value);
+                    }
+                    else {
+
+                    }
+                }
+                if($value   != Auth::user()->$key) {
                     $psd =   new Profiles_Saved_Data();
 
                     $psd->ps_id         =   $ps->id;
                     $psd->creator_id    =   Auth::user()->id;
 
-                    if($key ==  "birthday") {
-                        $birthday_parts =   explode(".",    $value);
-                        if(count($birthday_parts)   ==  3) {
-                            $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
-                        }
-                    }
-                    if($key ==  "dep_id") {
-                        if($value) {
-                            $dep_new    =   Dep::findOrFail($value);
-                            $moderator  =   Dep::getModerate($value);
-                        }
-                        else {
 
-                        }
-                    }
                     $psd->field_name    =   $key;
                     $psd->old_value     =   Auth::user()->$key;
                     $psd->new_value     =   $value;

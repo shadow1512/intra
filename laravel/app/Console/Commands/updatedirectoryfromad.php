@@ -66,7 +66,7 @@ class updatedirectoryfromad extends Command
             print "\r\n";
             print $dep->getConvertedGuid()  .   "\r\n";
             print $dep->getName()  .   "\r\n";
-            print $dep->isActive()  .   "\r\n";
+            //print $dep->isActive()  .   "\r\n";
             print $dep->isEnabled()  .   "\r\n";
         }
         die();

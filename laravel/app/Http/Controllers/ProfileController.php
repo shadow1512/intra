@@ -161,6 +161,8 @@ class ProfileController extends Controller
 
             Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
 
+            $dep_new    =   $dep_old    =   $moderator  =   null;
+
             foreach($updates_fields as $key =>  $value) {
                 if($value   !== Auth::user()->$key) {
                     $psd =   new Profiles_Saved_Data();
@@ -172,6 +174,15 @@ class ProfileController extends Controller
                         $birthday_parts =   explode(".",    $value);
                         if(count($birthday_parts)   ==  3) {
                             $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+                        }
+                    }
+                    if($key ==  "dep_id") {
+                        if($value) {
+                            $dep_new    =   Dep::findOrFail($value);
+                            $moderator  =   Dep::getModerate($value);
+                        }
+                        else {
+
                         }
                     }
                     $psd->field_name    =   $key;
@@ -187,17 +198,11 @@ class ProfileController extends Controller
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->where('users.id', '=', Auth::user()->id)->first();
 
-            $dep_new    =   $dep_old    =   $moderator  =   null;
-            if($ps->dep_id) {
-                $dep_new    =   Dep::findOrFail($ps->dep_id);
-            }
+
             if($user->dep_id) {
                 $dep_old    =   Dep::findOrFail($user->dep_id);
             }
 
-            if($ps->dep_id) {
-                $moderator  =   Dep::getModerate($ps->dep_id);
-            }
             if(is_null($moderator)  &&  $user->dep_id) {
                 $moderator  =   Dep::getModerate($user->dep_id);
             }

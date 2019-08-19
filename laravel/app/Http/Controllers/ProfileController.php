@@ -151,6 +151,7 @@ class ProfileController extends Controller
 
             $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
             if($ps) {
+                Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
                 $ps->delete();
             }
             $ps =   new Profiles_Saved();
@@ -159,7 +160,6 @@ class ProfileController extends Controller
             $ps->creator_id    =   Auth::user()->id;
             $ps->save();
 
-            Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
 
             $dep_new    =   $dep_old    =   $moderator  =   null;
 

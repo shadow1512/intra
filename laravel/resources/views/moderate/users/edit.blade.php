@@ -24,14 +24,36 @@
                                 <small id="avatarHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
 
-                            @if(!is_null($ps))
+                            @if(!is_null($ps)   &&  !is_null($psd)  &&  count($psd))
                                 <div class="form-group">
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-4">Старое значение</div>
+                                    <div class="col-md-3">Старое значение</div>
+                                    <div class="col-md-3">Новое значение</div>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-1"></div>
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-4">Новое значение</div>
                                 </div>
-                            @endif
+                                @foreach($psd as $item)
+                                    @if(isset($labels[$item->field_name]))
+                                    <div class="form-group">
+                                        <form method="POST" action="{{ route('moderate.users.fieldupdate', ["id" => $item->id]) }}">
+                                            {{ csrf_field() }}
+                                            {{ method_field('PUT') }}
+                                        <label for="lname" class="col-md-2 control-label">{{$labels[$item->field_name]}}</label>
+                                        <div class="col-md-3">{{$item->old_value}}</div>
+                                        <div class="col-md-3">
+                                            <input id="input_{{$item->id}}" type="text" class="form-control" name="input_{{$item->id}}" value="{{$item->new_value}}">
+                                        </div>
+                                        <div class="col-md-1"><input type="submit" name="submityes_{{$item->id}}" value="Принять"/></div>
+                                        <div class="col-md-1"><input type="submit" name="submitno_{{$item->id}}" value="Отклонить"/></div>
+                                        <div class="col-md-2">
+                                            <input id="input_reason_{{$item->id}}" type="text" class="form-control" name="input_reason_{{$item->id}}" value="">
+                                        </div>
+                                        </form>
+                                    </div>
+                                    @endif
+                                @endforeach
+                            @else
                             <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
                                 <label for="lname" class="col-md-2 control-label">Фамилия</label>
 
@@ -440,6 +462,7 @@
                                     </button>
                                 </div>
                             </div>
+                            @endif
                         </form>
                     </div>
                 </div>

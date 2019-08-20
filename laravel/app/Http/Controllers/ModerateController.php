@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Deps_Peoples;
+use App\Profiles_Saved_Data;
 use Auth;
 use App\User;
 use App\Profiles_Saved;
@@ -26,6 +27,7 @@ use PDO;
 use Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use DateTime;
@@ -854,7 +856,7 @@ class ModerateController extends Controller
         }
 
         foreach($users as $user) {
-            $count  =   Profiles_Saved::where("user_id", "=",    $user->id)->where("approved",   "=",    0)->count();
+            $count  =   Profiles_Saved::where("user_id", "=",    $user->id)->count();
             $user->count_updated    =   $count;
         }
         return view('moderate.users.list', ['users'    =>  $users,  'mode'  =>  $mode]);
@@ -866,9 +868,49 @@ class ModerateController extends Controller
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
         $works      =   Deps_Peoples::where("people_id",    "=",    $id)->get();
 
-        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->where("approved", "=",    0)->orderBy("updated_at",    "desc")->first();
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
+        $psd    =   null;
+        if($ps_record) {
+            $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
+        }
 
-        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,  'ps'    =>  $ps_record]);
+        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,  'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
+    }
+
+    public function makeFieldChangeUser($psd_id, Request $request) {
+        $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
+        $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
+
+        $moderator  =   Dep::getModerate($ps->user_id);
+        if(!($moderator->id   ==   Auth::user()->id)) {
+            return response()->json(['error', 'no access']);
+        }
+
+        $messages   =   array(
+            "input_newstatus.required"        =>  "Изменение нужно утвердить или отклонить",
+            "input_newstatus.in"              =>  "Неверный новый статус изменения",
+            "input_reason.max"                =>  "Поле не должно быть длиннее 255 символов"
+        );
+
+        $validator = Validator::make($request->all(), [
+            'input_newstatus'           =>  [
+                'required',
+                Rule::in([2, 3]),
+            ],
+            'input_reason'            =>  'nullable|string|max:255|',
+        ],  $messages);
+
+        if ($validator->fails()) {
+            return response()->json(['error', $validator->errors()]);
+        }
+
+        $psd->status    =   $request->input('input_newstatus');
+        if($psd->status ==  3) {
+            $psd->reason    =   trim($request->input('input_reason'));
+        }
+        $psd->save();
+
+        return response()->json(['success']);
     }
 
     public function usersupdate($id, Request $request)

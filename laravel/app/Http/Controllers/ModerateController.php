@@ -908,6 +908,9 @@ class ModerateController extends Controller
         if($psd->status ==  3) {
             $psd->reason    =   trim($request->input('input_reason'));
         }
+        if($psd->status ==  2) {
+            $psd->new_value    =   trim($request->input('input_newval'));
+        }
         $psd->save();
 
         return response()->json(['success']);

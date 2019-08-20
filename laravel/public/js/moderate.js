@@ -361,7 +361,7 @@ $(document).ready(function($) {
         var newstatus= id[2];
         var url = $(this).attr("href");
         var newval  =   $("#input_" +   id[1]).val().trim();
-        var reason  =   $("#input_reason" +   id[1]).val().trim();
+        var reason  =   $("#input_reason_" +   id[1]).val().trim();
         $.ajax({
             type: "POST",
             url: url,

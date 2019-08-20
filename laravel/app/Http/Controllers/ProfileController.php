@@ -45,23 +45,27 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', '=', Auth::user()->id)->first();
 
-        $dep    =   $ps     =   $moderate   =   null;
+        $dep    =   $ps     =   $moderate   =   $psd    =   null;
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
         if($ps_record) {
             $ps=    $ps_record;
+            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
         }
 
-        if($user->dep_id    ||  (!is_null($ps)  &&  $ps->dep_id))   {
-            if($user->dep_id) {
-                $dep        =   Dep::findOrFail($user->dep_id);
-                $moderate   =   Dep::getModerate($user->dep_id);
+        foreach($psd as $item) {
+            if($item->field_name    ==  "dep_id") {
+                if($item->new_value) {
+                    $dep        =   Dep::findOrFail($item->new_value);
+                    $moderate   =   Dep::getModerate($item->new_value);
+                }
+                else {
+                    if($item->old_value) {
+                        $dep        =   Dep::findOrFail($item->old_value);
+                        $moderate   =   Dep::getModerate($item->old_value);
+                    }
+                }
             }
-            if(!is_null($ps)  &&  $ps->dep_id   &&  ($ps->dep_id    !=  $user->dep_id)) {
-                $dep        =   Dep::findOrFail($ps->dep_id);
-                $moderate   =   Dep::getModerate($ps->dep_id);
-            }
-
         }
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
@@ -79,7 +83,7 @@ class ProfileController extends Controller
                                 ->where('user_id', '=',    Auth::user()->id)->orderByDesc("created_at")->limit(5)->get();
 
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr,    'moderate'  =>  $moderate]);
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'psd'    =>  $psd,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr,    'moderate'  =>  $moderate]);
     }
 
     public function edit()

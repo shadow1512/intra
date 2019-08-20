@@ -26,7 +26,6 @@
     <script>
         if(location.href.indexOf("foto")    !=  -1) {
             document.write("<script src='{{ asset('js/libs/tmpl.min.js') }}'><\/srcipt>");
-            document.write("<script src='{{ asset('js/libs/load-image.all.min.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'><\/srcipt>");
@@ -36,6 +35,7 @@
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'><\/srcipt>");
         }
     </script>
+    <script src="{{ asset('js/libs/load-image.all.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload-image.js') }}"></script>

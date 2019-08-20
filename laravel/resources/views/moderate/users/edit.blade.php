@@ -39,8 +39,8 @@
                                         <div class="col-md-2">{{$labels[$item->field_name]}}</div>
                                         <div class="col-md-3">{{$item->old_value}}</div>
                                         <div class="col-md-3"><input id="input_{{$item->id}}" type="text" class="form-control" name="input_{{$item->id}}" value="{{$item->new_value}}"/></div>
-                                        <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_2" class="update)fields_links">Да</a></div>
-                                        <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_3" class="update)fields_links">Нет</a></div>
+                                        <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_2" class="update_fields_links">Да</a></div>
+                                        <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_3" class="update_fields_links">Нет</a></div>
                                         <div class="col-md-2"><input id="input_reason_{{$item->id}}" type="text" class="form-control" name="input_reason_{{$item->id}}" value=""></div>
                                     </div>
                                     @endif

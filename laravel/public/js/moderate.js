@@ -354,7 +354,7 @@ $(document).ready(function($) {
         }
     });
 
-    $(document).on("click", ".update)fields_links", function(ev) {
+    $(document).on("click", ".update_fields_links", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var id  =   $(this).attr("id");
         id= id.split("_");

@@ -892,22 +892,20 @@ class ModerateController extends Controller
         $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
         $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
 
-        $moderator  =   null;
-        foreach($psd as $item) {
-            if ($item->field_name == "dep_id") {
-                if ($item->new_value) {
-                    $moderator = Dep::getModerate($item->new_value);
-                }
-                if ($item->old_value) {
-                    if (is_null($moderator)) {
-                        $moderator = Dep::getModerate($item->old_value);
-                    }
+        /*$moderator  =   null;
+        if ($psd->field_name == "dep_id") {
+            if ($psd->new_value) {
+                $moderator = Dep::getModerate($psd->new_value);
+            }
+            if ($psd->old_value) {
+                if (is_null($moderator)) {
+                    $moderator = Dep::getModerate($psd->old_value);
                 }
             }
         }
         if(is_null($moderator)  ||  (!($moderator->id   ==   Auth::user()->id))) {
             return response()->json(['error', 'no access']);
-        }
+        }*/
 
         $messages   =   array(
             "input_newstatus.required"        =>  "Изменение нужно утвердить или отклонить",

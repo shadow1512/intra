@@ -38,7 +38,17 @@
                                     <div class="form-group">
                                         <div class="col-md-2">{{$labels[$item->field_name]}}</div>
                                         <div class="col-md-3">@if($item->field_name ==  "dep_id") @if(!is_null($dep_old)){{$dep_old->name}}@endif @else{{$item->old_value}}@endif</div>
-                                        <div class="col-md-3"><input id="input_{{$item->id}}" type="text" class="form-control" name="input_{{$item->id}}" value="@if($item->field_name ==  "dep_id") @if(!is_null($dep_new)){{$dep_new->name}}@endif @else{{$item->new_value}}@endif"/></div>
+                                        <div class="col-md-3">
+                                            @if($item->field_name ==  "dep_id")
+                                                <select id="input_{{$item->id}}" class="form-control" name="input_{{$item->id}}">
+                                                    @foreach($deps as $dep)
+                                                        <option value="{{$dep->id}}" @if (!is_null($dep_new->id)    &&  $dep_new->id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            @else
+                                                <input id="input_{{$item->id}}" type="text" class="form-control" name="input_{{$item->id}}" value="{{$item->new_value}}"/>
+                                            @endif
+                                        </div>
                                         <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_2" class="update_fields_links">Да</a></div>
                                         <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_3" class="update_fields_links">Нет</a></div>
                                         <div class="col-md-2"><input id="input_reason_{{$item->id}}" type="text" class="form-control" name="input_reason_{{$item->id}}" value=""></div>

@@ -261,34 +261,36 @@ $(document).ready(function($) {
         }
     });
 
-    $('#fileupload').fileupload({
-        dataType: 'json',
-        url: $("#photo_image_url").val(),
-        singleFileUploads: true,
-        sequentialUploads: true,
-        submit: function (e, data) {
-            $('#fileupload').addClass('fileupload-processing');
-            totalSize = 0;
+    if(location.href.indexOf("foto")    !=  -1) {
+        $('#fileupload').fileupload({
+            dataType: 'json',
+            url: $("#photo_image_url").val(),
+            singleFileUploads: true,
+            sequentialUploads: true,
+            submit: function (e, data) {
+                $('#fileupload').addClass('fileupload-processing');
+                totalSize = 0;
 
-            $.each(data.files, function (index, file) {
-                totalSize += file.size;
-            });
-        },
-        always: function(e, data) {
-            $(this).removeClass('fileupload-processing');
-        },
-        success: function(e, data) {
-        },
-        /*done: function (result) {
-            $(this).fileupload().call(this, $.Event('done'), { result: result });
-        },*/
-        fail: function (e, data) {
+                $.each(data.files, function (index, file) {
+                    totalSize += file.size;
+                });
+            },
+            always: function (e, data) {
+                $(this).removeClass('fileupload-processing');
+            },
+            success: function (e, data) {
+            },
+            /*done: function (result) {
+                $(this).fileupload().call(this, $.Event('done'), { result: result });
+            },*/
+            fail: function (e, data) {
 
-        },
-        progressall: function (e, data) {
+            },
+            progressall: function (e, data) {
 
-        }
-    });
+            }
+        });
+    }
 
     $(document).on("click", "#delete_avatar", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

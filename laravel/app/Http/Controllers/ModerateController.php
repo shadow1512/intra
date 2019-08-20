@@ -869,20 +869,43 @@ class ModerateController extends Controller
         $works      =   Deps_Peoples::where("people_id",    "=",    $id)->get();
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
-        $psd    =   null;
+        $psd    =   $dep_old    =   $dep_new    =   null;
         if($ps_record) {
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
+            foreach($psd as $item) {
+                if ($item->field_name == "dep_id") {
+                    if ($item->new_value) {
+                        $dep_new = Dep::findOrFail($item->new_value);
+                    }
+                    if ($item->old_value) {
+                        $dep_old = Dep::findOrFail($item->old_value);
+                    }
+                }
+            }
         }
 
-        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,  'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
+        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,
+                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'dep_old'   =>  $dep_old,   'dep_new'   =>  $dep_new,   'labels'    =>  Config::get("dict.labels")]);
     }
 
     public function makeFieldChangeUser($psd_id, Request $request) {
         $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
         $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
 
-        $moderator  =   Dep::getModerate($ps->user_id);
-        if(!($moderator->id   ==   Auth::user()->id)) {
+        $moderator  =   null;
+        foreach($psd as $item) {
+            if ($item->field_name == "dep_id") {
+                if ($item->new_value) {
+                    $moderator = Dep::getModerate($item->new_value);
+                }
+                if ($item->old_value) {
+                    if (is_null($moderator)) {
+                        $moderator = Dep::getModerate($item->old_value);
+                    }
+                }
+            }
+        }
+        if(is_null($moderator)  ||  (!($moderator->id   ==   Auth::user()->id))) {
             return response()->json(['error', 'no access']);
         }
 

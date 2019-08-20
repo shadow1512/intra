@@ -30,15 +30,15 @@
             document.write("<script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'><\/srcipt>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload.js') }}'><\/srcipt>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-process.js') }}'><\/srcipt>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-image.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-audio.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-video.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-validate.js') }}'><\/srcipt>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'><\/srcipt>");
         }
     </script>
+    <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>
+    <script src="{{ asset('js/libs/jquery.fileupload-image.js') }}"></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
     <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </head>

@@ -625,8 +625,8 @@ class ModerateController extends Controller
                         ->update(['image' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
 
                     $html   =   "<label for=\"img_image\" class=\"col-md-4 control-label\">Обложка</label>";
-                    $html   .=  "<img src=\""   .   $book->image    .   "\" id=\"img_image\" aria-describedby=\"imageimgHelpInline\"/><br/>";
-                    $html   .=  "<small id=\"imageimgHelpInline\" class=\"text-muted\"><a href=\""  .   route('moderate.library.deletebookcover', ["id"    =>  $book->id])  .   "\" id=\"delete_cover\">Удалить</a></small>";
+                    $html   .=  "<img src=\""   .   Storage::disk('public')->url($path)    .   "\" id=\"img_image\" aria-describedby=\"imageimgHelpInline\"/><br/>";
+                    $html   .=  "<small id=\"imageimgHelpInline\" class=\"text-muted\"><a href=\""  .   route('moderate.library.deletebookcover', ["id"    =>  $id])  .   "\" id=\"delete_cover\">Удалить</a></small>";
                     return array('ok', $html,   Storage::disk('public')->url($path));
                 }
                 else {

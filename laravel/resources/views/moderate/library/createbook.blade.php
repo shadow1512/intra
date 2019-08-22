@@ -79,7 +79,7 @@
                                     </div>
                                  @endif
                             </div>
-                            <div class="input-group mb-3">
+                            <!--<div class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">Загрузка обложки</span>
                                 </div>
@@ -99,7 +99,7 @@
                                     <label class="custom-file-label" for="book_file_create">Выберите файл</label>
                                     <small id="fileHelpInline" class="text-muted">Файл не более 10мб</small>
                                 </div>
-                            </div>
+                            </div>-->
 
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">

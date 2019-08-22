@@ -580,7 +580,7 @@ class ModerateController extends Controller
                 );
             }
         }
-        $res_cover  = $this->librarystorebookcover($book->id, $request);
+        /*$res_cover  = $this->librarystorebookcover($book->id, $request);
         $res_book   = $this->librarystorebookfile($book->id, $request);
 
         if($res_cover[0] == "ok") {
@@ -588,9 +588,9 @@ class ModerateController extends Controller
         }
         if($res_book[0] == "ok") {
             $book->file = $res_book[2];
-        }
+        }*/
         $book->save();
-        return redirect(route('moderate.library.index'));
+        return redirect(route('moderate.library.edit',  ["id"   =>  $book->id]));
     }
 
     public function libraryupdatebookcover($id, Request $request)

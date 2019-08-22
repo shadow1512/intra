@@ -158,7 +158,7 @@ $(document).ready(function($) {
         }
     });
 
-    $('#cover, #cover_create').fileupload({
+    $('#cover').fileupload({
         dataType: 'json',
         url: $("#cover_url").val(),
         singleFileUploads: false,
@@ -209,7 +209,7 @@ $(document).ready(function($) {
         }
     });
 
-    $('#book_file, #book_file_create').fileupload({
+    $('#book_file').fileupload({
         dataType: 'json',
         url: $("#book_url").val(),
         singleFileUploads: true,
@@ -345,7 +345,7 @@ $(document).ready(function($) {
         });
     });
 
-    $(document).on("submit", "#createbook_form", function(ev) {
+    /*$(document).on("submit", "#createbook_form", function(ev) {
         if(($("#book_file_create"))[0].files.length >   0) {
             if(($("#book_file_create"))[0].files[0].size >= 10000000) {
                 alert('Нельзя загрузить файл более 10мб');
@@ -359,7 +359,7 @@ $(document).ready(function($) {
                 return false;
             }
         }
-    });
+    });*/
 
     $(document).on("click", ".update_fields_links", function(ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

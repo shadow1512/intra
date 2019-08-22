@@ -590,7 +590,7 @@ class ModerateController extends Controller
             $book->file = $res_book[2];
         }*/
         $book->save();
-        return redirect(route('moderate.library.edit',  ["id"   =>  $book->id]));
+        return redirect(route('moderate.library.editbook',  ["id"   =>  $book->id]));
     }
 
     public function libraryupdatebookcover($id, Request $request)

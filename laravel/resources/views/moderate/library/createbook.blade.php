@@ -79,17 +79,28 @@
                                     </div>
                                  @endif
                             </div>
-                            <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
-                                <input type="file" class="custom-file-input" id="cover_create" name="cover" aria-describedby="coverHelpInline">
-                                <label class="custom-file-label" for="cover_create">Выберите изображение</label>
-                                <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Загрузка обложки</span>
+                                </div>
+                                <div class="custom-file"{{ $errors->has('cover') ? ' has-error' : '' }}>
+                                    <input type="file" class="custom-file-input" id="cover_create" name="cover" aria-describedby="coverHelpInline">
+                                    <label class="custom-file-label" for="cover_create">Выберите изображение</label>
+                                    <small id="coverHelpInline" class="text-muted">Файл не более 5мб</small>
+                                </div>
                             </div>
 
-                            <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
-                                <input type="file" class="custom-file-input" id="book_file_create" name="book_file" aria-describedby="fileHelpInline">
-                                <label class="custom-file-label" for="book_file_create">Выберите файл</label>
-                                <small id="fileHelpInline" class="text-muted">Файл не более 5мб</small>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Загрузка книги</span>
+                                </div>
+                                <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
+                                    <input type="file" class="custom-file-input" id="book_file_create" name="book_file" aria-describedby="fileHelpInline">
+                                    <label class="custom-file-label" for="book_file_create">Выберите файл</label>
+                                    <small id="fileHelpInline" class="text-muted">Файл не более 10мб</small>
+                                </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary" id="createbook_form_button">

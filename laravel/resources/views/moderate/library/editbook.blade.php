@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">{{  $book->title }}</div>
                     <div class="panel-body">
-                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.updatebook', ["id" => $book->id]) }}">
+                        <form class="form-horizontal" method="POST" action="{{ route('moderate.library.updatebook', ["id" => $book->id]) }}" id="editbook_form">
                             {{ csrf_field() }}
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $book->id }}"/>

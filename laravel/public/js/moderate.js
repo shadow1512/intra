@@ -158,7 +158,7 @@ $(document).ready(function($) {
         }
     });
 
-    $('#cover').fileupload({
+    $('#cover, #cover_create').fileupload({
         dataType: 'json',
         url: $("#cover_url").val(),
         singleFileUploads: false,
@@ -170,8 +170,8 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 3000000) {
-                alert("Для фотографии используйте изображение менее 3мб");
+            if(totalSize > 5000000) {
+                alert("Для фотографии используйте изображение менее 5мб");
                 return false;
             }
             progress = document.createElement("div");
@@ -209,7 +209,7 @@ $(document).ready(function($) {
         }
     });
 
-    $('#book_file').fileupload({
+    $('#book_file, #book_file_create').fileupload({
         dataType: 'json',
         url: $("#book_url").val(),
         singleFileUploads: true,
@@ -221,8 +221,8 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 5000000) {
-                alert("Для книги используйте файл менее 5мб");
+            if(totalSize > 10000000) {
+                alert("Для книги используйте файл менее 10мб");
                 return false;
             }
             progress = document.createElement("div");
@@ -347,7 +347,14 @@ $(document).ready(function($) {
 
     $(document).on("submit", "#createbook_form", function(ev) {
         if(($("#book_file_create"))[0].files.length >   0) {
-            if(($("#book_file_create"))[0].files[0].size >= 5000000) {
+            if(($("#book_file_create"))[0].files[0].size >= 10000000) {
+                alert('Нельзя загрузить файл более 10мб');
+                return false;
+            }
+        }
+
+        if(($("#cover_create"))[0].files.length >   0) {
+            if(($("#cover_create"))[0].files[0].size >= 10000000) {
                 alert('Нельзя загрузить файл более 5мб');
                 return false;
             }

@@ -185,7 +185,7 @@ $(document).ready(function($) {
             $("#progress").remove();
 
             if(data.result[0] == "ok") {
-                $("#img_image").attr("src", data.result[1]);
+                $("#source_cover").html(data.result[1]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
@@ -236,7 +236,7 @@ $(document).ready(function($) {
             $("#progress").remove();
 
             if(data.result[0] == "ok") {
-                $("#nofile").replaceWith(data.result[1]);
+                $("#source_file").html(data.result[1]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";

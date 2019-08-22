@@ -82,33 +82,33 @@
                                 @endif
                             </div>
                             <input type="hidden" id="cover_url" value="{{  route('moderate.library.updatebookcover', ["id" => $book->id]) }}">
-                            <div class="form-group">
-                                <label for="img_avatar" class="col-md-4 control-label">Обложка</label>
-                                <img src="{{ $book->image }}" id="img_image" aria-describedby="imageimgHelpInline"/>
+                            <div class="form-group" id="source_cover">
+                                @if ($book->image)
+                                <label for="img_image" class="col-md-4 control-label">Обложка</label>
+                                <img src="{{ $book->image }}" id="img_image" aria-describedby="imageimgHelpInline"/><br/>
                                 <small id="imageimgHelpInline" class="text-muted"><a href="{{route('moderate.library.deletebookcover', ["id"    =>  $book->id])}}" id="delete_cover">Удалить</a></small>
+                                @endif
                             </div>
 
                             <div class="custom-file"{{ $errors->has('image') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="cover" name="cover" aria-describedby="coverHelpInline">
                                 <label class="custom-file-label" for="cover">Выберите изображение</label>
-                                <small id="coverHelpInline" class="text-muted">Файл не более 3мб</small>
+                                <small id="coverHelpInline" class="text-muted">Файл не более 5мб</small>
                             </div>
 
                             <input type="hidden" id="book_url" value="{{  route('moderate.library.updatebookfile', ["id" => $book->id]) }}">
-                            <div class="form-group">
-                                <label for="link_file" class="col-md-4 control-label">Исходный файл</label>
+                            <div class="form-group" id="source_file">
                                 @if ($book->file)
-                                    <a href="{{ $book->file }}" id="link_file" aria-describedby="filelinkHelpInline">{{ $book->file }}</a>
-                                    <small id="filelinkHelpInline" class="text-muted"><a href="{{route('moderate.library.deletebookfile', ["id"    =>  $book->id])}}" id="delete_file">Удалить</a></small>
-                                @else
-                                    <span id="nofile">Нет</span>
+                                <label for="link_file" class="col-md-4 control-label">Исходный файл</label><br/>
+                                <a href="{{ $book->file }}" id="link_file" aria-describedby="filelinkHelpInline">{{ $book->file }}</a><br/><br/>
+                                <small id="filelinkHelpInline" class="text-muted"><a href="{{route('moderate.library.deletebookfile', ["id"    =>  $book->id])}}" id="delete_file">Удалить</a></small>
                                 @endif
                             </div>
 
                             <div class="custom-file"{{ $errors->has('book_file') ? ' has-error' : '' }}>
                                 <input type="file" class="custom-file-input" id="book_file" name="book_file" aria-describedby="fileHelpInline">
                                 <label class="custom-file-label" for="book_file">Выберите файл</label>
-                                <small id="fileHelpInline" class="text-muted">Файл не более 5мб</small>
+                                <small id="fileHelpInline" class="text-muted">Файл не более 10мб</small>
                             </div>
 
                             <div class="form-group">

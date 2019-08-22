@@ -623,7 +623,11 @@ class ModerateController extends Controller
                     $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'), Config::get('image.cover_height'))->save(storage_path('app/public') . '/' . $path);
                     DB::table('lib_books')->where("id", "=", $id)
                         ->update(['image' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
-                    return array('ok', Storage::disk('public')->url($path));
+
+                    $html   =   "<label for=\"img_image\" class=\"col-md-4 control-label\">Обложка</label>";
+                    $html   .=  "<img src=\""   .   $book->image    .   "\" id=\"img_image\" aria-describedby=\"imageimgHelpInline\"/><br/>";
+                    $html   .=  "<small id=\"imageimgHelpInline\" class=\"text-muted\"><a href=\""  .   route('moderate.library.deletebookcover', ["id"    =>  $book->id])  .   "\" id=\"delete_cover\">Удалить</a></small>";
+                    return array('ok', $html,   Storage::disk('public')->url($path));
                 }
                 else {
                     return array('error', 'file wrong type');
@@ -650,7 +654,8 @@ class ModerateController extends Controller
                 DB::table('lib_books')->where("id", "=", $id)
                     ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
 
-                $html = "<a href=\"" . Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
+                $html   =   "<label for=\"link_file\" class=\"col-md-4 control-label\">Исходный файл</label><br/>";
+                $html .= "<a href=\"" . Storage::disk('public')->url($path) . "\" id=\"link_file\" aria-describedby=\"filelinkHelpInline\">" . Storage::disk('public')->url($path) . "</a>";
                 $html .= "<small id=\"filelinkHelpInline\" class=\"text-muted\"><a href=\"" . route('moderate.library.deletebookfile', ["id" => $id]) . "\" id=\"delete_file\">Удалить</a></small>";
                 return array('ok', $html, Storage::disk('public')->url($path));
             } else {

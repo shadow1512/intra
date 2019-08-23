@@ -186,6 +186,7 @@ $(document).ready(function($) {
 
             if(data.result[0] == "ok") {
                 $("#source_cover").html(data.result[1]);
+                $("#cover").val(data.result[2]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
@@ -237,6 +238,7 @@ $(document).ready(function($) {
 
             if(data.result[0] == "ok") {
                 $("#source_file").html(data.result[1]);
+                $("#book_file").val(data.result[2]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";

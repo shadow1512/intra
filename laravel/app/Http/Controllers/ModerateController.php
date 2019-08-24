@@ -959,6 +959,9 @@ class ModerateController extends Controller
                             $work_title =   $wt_record->work_title;
                             $chef       =   $wt_record->chef;
                         }
+                        else {
+                            $chef   =   0;
+                        }
                         Deps_Peoples::where("people_id", "=", $user->id)->delete();
                         $dp = new Deps_Peoples();
                         $dp->dep_id     =   $item->new_value;

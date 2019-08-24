@@ -364,6 +364,8 @@ $(document).ready(function($) {
     });*/
 
     $(document).on("click", ".update_fields_links", function(ev) {
+        var link    =   $(this);
+        $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var id  =   $(this).attr("id");
         id= id.split("_");
@@ -380,7 +382,12 @@ $(document).ready(function($) {
             data: "input_newstatus=" + newstatus + "&input_reason=" +   reason+ "&input_newval="    +   newval+ "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
             success: function(msg) {
                 if(msg[0] == "success") {
-                    alert("Принято");
+                    if(reason== 2) {
+                        $(link).parent().parent().addClass("bg-success");
+                    }
+                    if(reason== 3) {
+                        $(link).parent().parent().addClass("bg-danger");
+                    }
                 }
                 if(msg[0] == "error") {
                     var errors  =   msg[1];

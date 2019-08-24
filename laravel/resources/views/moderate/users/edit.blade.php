@@ -35,7 +35,7 @@
                                 </div>
                                 @foreach($psd as $item)
                                     @if(isset($labels[$item->field_name]))
-                                    <div class="form-group">
+                                    <div class="form-group @if($item->status    ==  2) bg-success @endif @if($item->status    ==  3) bg-danger @endif">
                                         <div class="col-md-2">{{$labels[$item->field_name]}}</div>
                                         <div class="col-md-3">@if($item->field_name ==  "dep_id") @if(!is_null($dep_old)){{$dep_old->name}}@endif @else{{$item->old_value}}@endif</div>
                                         <div class="col-md-3">

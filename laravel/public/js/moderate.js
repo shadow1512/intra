@@ -382,10 +382,10 @@ $(document).ready(function($) {
             data: "input_newstatus=" + newstatus + "&input_reason=" +   reason+ "&input_newval="    +   newval+ "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
             success: function(msg) {
                 if(msg[0] == "success") {
-                    if(reason== 2) {
+                    if(newstatus== 2) {
                         $(link).parent().parent().addClass("bg-success");
                     }
-                    if(reason== 3) {
+                    if(newstatus== 3) {
                         $(link).parent().parent().addClass("bg-danger");
                     }
                 }

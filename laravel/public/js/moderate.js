@@ -3,40 +3,40 @@ $(document).ready(function($) {
     $("#mobile_phone").mask("+7(999) 999-9999");
 
 
-    $("#mobile_phone").on("blur", function() {
-        var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+    $("#mobile_phone").on("blur", function () {
+        var last = $(this).val().substr($(this).val().indexOf("-") + 1);
 
-        if( last.length == 5 ) {
-            var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+        if (last.length == 5) {
+            var move = $(this).val().substr($(this).val().indexOf("-") + 1, 1);
 
-            var lastfour = last.substr(1,4);
+            var lastfour = last.substr(1, 4);
 
-            var first = $(this).val().substr( 0, 9 );
+            var first = $(this).val().substr(0, 9);
 
-            $(this).val( first + move + '-' + lastfour );
+            $(this).val(first + move + '-' + lastfour);
         }
     });
 
     $("#city_phone").mask("8(999) 999-9999");
 
 
-    $("#city_phone").on("blur", function() {
-        var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
+    $("#city_phone").on("blur", function () {
+        var last = $(this).val().substr($(this).val().indexOf("-") + 1);
 
-        if( last.length == 5 ) {
-            var move = $(this).val().substr( $(this).val().indexOf("-") + 1, 1 );
+        if (last.length == 5) {
+            var move = $(this).val().substr($(this).val().indexOf("-") + 1, 1);
 
-            var lastfour = last.substr(1,4);
+            var lastfour = last.substr(1, 4);
 
-            var first = $(this).val().substr( 0, 9 );
+            var first = $(this).val().substr(0, 9);
 
-            $(this).val( first + move + '-' + lastfour );
+            $(this).val(first + move + '-' + lastfour);
         }
     });
 
     $(".deleteRecord").on("click", function (ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-       $(this).parent().submit();
+        $(this).parent().submit();
     });
 
     $("#btn-decline").on("click", function (ev) {
@@ -52,57 +52,57 @@ $(document).ready(function($) {
     });
 
     $("#to_complete_at, #published_at").datetimepicker({
-        lang:'ru',
-        format:'d.m.Y H:i',
+        lang: 'ru',
+        format: 'd.m.Y H:i',
         //formatDate:'Y-m-d H:i',
     });
 
     $("#birthday, #workstart, #published_at_gallery").datetimepicker({
-        lang:'ru',
-        format:'d.m.Y',
-        timepicker:false,
+        lang: 'ru',
+        format: 'd.m.Y',
+        timepicker: false,
         //formatDate:'Y-m-d H:i',
     });
 
-    $("#dinner_slot_create, #dinner_slot_update").on("submit",  function() {
-        if($('#time_end').val()  ==  '__:__') {
+    $("#dinner_slot_create, #dinner_slot_update").on("submit", function () {
+        if ($('#time_end').val() == '__:__') {
             $('#time_end').val("");
         }
-        if($('#time_start').val()  ==  '__:__') {
+        if ($('#time_start').val() == '__:__') {
             $('#time_start').val("");
         }
     });
 
     $("#time_start").datetimepicker({
-        lang:'ru',
-        datepicker:false,
-        timepicker:true,
-        format:'H:i',
+        lang: 'ru',
+        datepicker: false,
+        timepicker: true,
+        format: 'H:i',
         step: 5,
         minTime: '09:00',
         maxTime: '18:05',
-        mask:true,
-        validateOnBlur:false,
-        onShow:function( ct ){
+        mask: true,
+        validateOnBlur: false,
+        onShow: function (ct) {
             this.setOptions({
-                maxTime:$('#time_end').val()=='__:__' || $('#time_end').val()==''?'18:05':$('#time_end').val()
+                maxTime: $('#time_end').val() == '__:__' || $('#time_end').val() == '' ? '18:05' : $('#time_end').val()
             });
         }
     });
 
     $("#time_end").datetimepicker({
-        lang:'ru',
-        datepicker:false,
-        timepicker:true,
-        format:'H:i',
+        lang: 'ru',
+        datepicker: false,
+        timepicker: true,
+        format: 'H:i',
         step: 5,
         minTime: '09:00',
         maxTime: '18:05',
-        mask:true,
-        validateOnBlur:false,
-        onShow:function( ct ){
+        mask: true,
+        validateOnBlur: false,
+        onShow: function (ct) {
             this.setOptions({
-                minTime:$('#time_start').val()=='__:__' || $('#time_start').val()==''?'09:00':$('#time_start').val()
+                minTime: $('#time_start').val() == '__:__' || $('#time_start').val() == '' ? '09:00' : $('#time_start').val()
             });
         }
     });
@@ -119,7 +119,7 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 3000000) {
+            if (totalSize > 3000000) {
                 alert("Для фотографии используйте изображение менее 3мб");
                 return false;
             }
@@ -128,20 +128,20 @@ $(document).ready(function($) {
             $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
             $("div.profile_aside_pic").append(progress);
         },
-        success: function(e, data) {
+        success: function (e, data) {
         },
         done: function (e, data) {
             $("#progress").remove();
 
-            if(data.result[0] == "ok") {
+            if (data.result[0] == "ok") {
                 $("#img_avatar").attr("src", data.result[1]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
-                if(data.result[1] == "file wrong type") {
+                if (data.result[1] == "file wrong type") {
                     errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                 }
-                if(data.result[1] == "file too large") {
+                if (data.result[1] == "file too large") {
                     errMessage += "для загрузки доступны изображения не более 3мб";
                 }
             }
@@ -170,7 +170,7 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 5000000) {
+            if (totalSize > 5000000) {
                 alert("Для фотографии используйте изображение менее 5мб");
                 return false;
             }
@@ -179,21 +179,21 @@ $(document).ready(function($) {
             $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
             $("div.profile_aside_pic").append(progress);
         },
-        success: function(e, data) {
+        success: function (e, data) {
         },
         done: function (e, data) {
             $("#progress").remove();
 
-            if(data.result[0] == "ok") {
+            if (data.result[0] == "ok") {
                 $("#source_cover").html(data.result[1]);
                 $("#cover").val(data.result[2]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
-                if(data.result[1] == "file wrong type") {
+                if (data.result[1] == "file wrong type") {
                     errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                 }
-                if(data.result[1] == "file too large") {
+                if (data.result[1] == "file too large") {
                     errMessage += "для загрузки доступны изображения не более 3мб";
                 }
             }
@@ -222,7 +222,7 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if(totalSize > 10000000) {
+            if (totalSize > 10000000) {
                 alert("Для книги используйте файл менее 10мб");
                 return false;
             }
@@ -231,22 +231,22 @@ $(document).ready(function($) {
             $(progress).append("<div class=\"progressbar\" style=\"width: 0%;\" \>");
             $("div.profile_aside_pic").append(progress);
         },
-        success: function(e, data) {
+        success: function (e, data) {
         },
         done: function (e, data) {
             $("#progress").remove();
 
-            if(data.result[0] == "ok") {
+            if (data.result[0] == "ok") {
                 $("#source_file").html(data.result[1]);
                 $("#book_file").val(data.result[2]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
 
-                if(data.result[1] == "file wrong type") {
+                if (data.result[1] == "file wrong type") {
                     errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                 }
-                if(data.result[1] == "file too large") {
+                if (data.result[1] == "file too large") {
                     errMessage += "для загрузки доступны изображения не более 3мб";
                 }
             }
@@ -263,7 +263,7 @@ $(document).ready(function($) {
         }
     });
 
-    if(location.href.indexOf("foto")    !=  -1) {
+    if (location.href.indexOf("foto") != -1) {
         $('#fileupload').fileupload({
             dataType: 'json',
             url: $("#photo_image_url").val(),
@@ -294,7 +294,7 @@ $(document).ready(function($) {
         });
     }
 
-    $(document).on("click", "#delete_avatar", function(ev) {
+    $(document).on("click", "#delete_avatar", function (ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("href");
         $.ajax({
@@ -303,15 +303,15 @@ $(document).ready(function($) {
             cache: false,
             async: true,
             dataType: "json",
-            success: function(msg) {
-                if(msg[0] == "ok") {
+            success: function (msg) {
+                if (msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
                 }
             }
         });
     });
 
-    $(document).on("click", "#delete_cover", function(ev) {
+    $(document).on("click", "#delete_cover", function (ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("href");
         $.ajax({
@@ -320,15 +320,15 @@ $(document).ready(function($) {
             cache: false,
             async: true,
             dataType: "json",
-            success: function(msg) {
-                if(msg[0] == "ok") {
+            success: function (msg) {
+                if (msg[0] == "ok") {
                     $("#img_image").attr("src", msg[1]);
                 }
             }
         });
     });
 
-    $(document).on("click", "#delete_file", function(ev) {
+    $(document).on("click", "#delete_file", function (ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var url = $(this).attr("href");
         $.ajax({
@@ -337,8 +337,8 @@ $(document).ready(function($) {
             cache: false,
             async: true,
             dataType: "json",
-            success: function(msg) {
-                if(msg[0] == "ok") {
+            success: function (msg) {
+                if (msg[0] == "ok") {
                     $("#link_file").remove();
                     $("#filelinkHelpInline").replaceWith(msg[1]);
 
@@ -363,35 +363,35 @@ $(document).ready(function($) {
         }
     });*/
 
-    $(document).on("click", ".update_fields_links", function(ev) {
-        var link    =   $(this);
+    $(document).on("click", ".update_fields_links", function (ev) {
+        var link = $(this);
         $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-        var id  =   $(this).attr("id");
-        id= id.split("_");
-        var newstatus= id[2];
+        var id = $(this).attr("id");
+        id = id.split("_");
+        var newstatus = id[2];
         var url = $(this).attr("href");
-        var newval  =   $("#input_" +   id[1]).val().trim();
-        var reason  =   $("#input_reason_" +   id[1]).val().trim();
+        var newval = $("#input_" + id[1]).val().trim();
+        var reason = $("#input_reason_" + id[1]).val().trim();
         $.ajax({
             type: "POST",
             url: url,
             cache: false,
             async: true,
             dataType: "json",
-            data: "input_newstatus=" + newstatus + "&input_reason=" +   reason+ "&input_newval="    +   newval+ "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
-            success: function(msg) {
-                if(msg[0] == "success") {
-                    if(newstatus== 2) {
+            data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=put",
+            success: function (msg) {
+                if (msg[0] == "success") {
+                    if (newstatus == 2) {
                         $(link).parent().parent().addClass("bg-success");
                     }
-                    if(newstatus== 3) {
+                    if (newstatus == 3) {
                         $(link).parent().parent().addClass("bg-danger");
                     }
                 }
-                if(msg[0] == "error") {
-                    var errors  =   msg[1];
-                    if(errors== "no access") {
+                if (msg[0] == "error") {
+                    var errors = msg[1];
+                    if (errors == "no access") {
                         alert("Нет прав на изменение этого поля");
                     }
                     else {
@@ -402,23 +402,24 @@ $(document).ready(function($) {
                 }
             }
         });
-
-        $(document).on("click", "#commit_changes", function(ev) {
-            ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-            var url = $(this).attr("data-url");
-            $.ajax({
-                type: "POST",
-                url: url,
-                cache: false,
-                async: true,
-                dataType: "json",
-                data: "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
-                success: function(msg) {
-                    if(msg[0] == "success") {
-                        location.reload();
-                    }
-                }
-            });
     });
 
-}); 
+    $(document).on("click", "#commit_changes", function (ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        var url = $(this).attr("data-url");
+        $.ajax({
+            type: "POST",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            data: "&_token=" + $("input[name='_token']").val() + "&_method=put",
+            success: function (msg) {
+                if (msg[0] == "success") {
+                    location.reload();
+                }
+            }
+        });
+    });
+});
+

@@ -942,6 +942,49 @@ class ModerateController extends Controller
         return response()->json(['success']);
     }
 
+    public function commitChangesForUser($ps_id, Request $request) {
+        $ps     =   Profiles_Saved::findOrFail($ps_id);
+        $user   =   User::findOrFail($ps->user_id);
+        $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps_id)->get();
+        foreach($psd as $item) {
+            if($item->status    ==  2) {
+                if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title") {
+                    $user->{$item->field_name} = $item->new_value;
+                }
+                else {
+                    if($item->field_name == "dep_id") {
+                        $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                        $work_title =   $chef   =   null;
+                        if($wt_record) {
+                            $work_title =   $wt_record->work_title;
+                            $chef       =   $wt_record->chef;
+                        }
+                        Deps_Peoples::where("people_id", "=", $user->id)->delete();
+                        $dp = new Deps_Peoples();
+                        $dp->dep_id     =   $item->new_value;
+                        $dp->people_id  =   $user->id;
+                        $dp->work_title =   $work_title;
+                        $dp->chef       =   $chef;
+                        $dp->save();
+                    }
+                    if($item->field_name    ==  "work_title") {
+                        $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                        if($wt_record) {
+                            $wt_record->work_title  =   $item->new_value;
+                            $wt_record->save();
+                        }
+                    }
+                }
+                $item->delete();
+            }
+        }
+
+        $user->save();
+        $ps->delete();
+
+        return response()->json(['success']);
+    }
+
     public function usersupdate($id, Request $request)
     {
         $messages   =   array(

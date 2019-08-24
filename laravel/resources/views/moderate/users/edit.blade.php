@@ -51,10 +51,18 @@
                                         </div>
                                         <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_2" class="update_fields_links">Да</a></div>
                                         <div class="col-md-1"><a href="{{route('moderate.users.fieldupdate',    ["id"   =>  $item->id])}}" id="field_{{$item->id}}_3" class="update_fields_links">Нет</a></div>
-                                        <div class="col-md-2"><input id="input_reason_{{$item->id}}" type="text" class="form-control" name="input_reason_{{$item->id}}" value=""></div>
+                                        <div class="col-md-2"><input id="input_reason_{{$item->id}}" type="text" class="form-control" name="input_reason_{{$item->id}}" value="{{$item->reason}}"></div>
                                     </div>
                                     @endif
                                 @endforeach
+                                <div class="form-group">
+                                    <input type="hidden" id="commit_changes_url" value="{{  route('moderate.users.updateavatar', ["id" => $user->id]) }}">
+                                    <div class="col-md-6 col-md-offset-4">
+                                        <button type="button" class="btn btn-primary" id="commit_changes">
+                                            Закрыть заявку и уведомить сотрудника об изменениях
+                                        </button>
+                                    </div>
+                                </div>
                             @else
                             <div class="form-group{{ $errors->has('lname') ? ' has-error' : '' }}">
                                 <label for="lname" class="col-md-2 control-label">Фамилия</label>

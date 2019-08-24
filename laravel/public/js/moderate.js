@@ -404,41 +404,18 @@ $(document).ready(function($) {
         });
 
         $(document).on("click", "#commit_changes", function(ev) {
-            var link    =   $(this);
-            $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
             ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-            var id  =   $(this).attr("id");
-            id= id.split("_");
-            var newstatus= id[2];
-            var url = $(this).attr("href");
-            var newval  =   $("#input_" +   id[1]).val().trim();
-            var reason  =   $("#input_reason_" +   id[1]).val().trim();
+            var url = $(this).attr("data-url");
             $.ajax({
                 type: "POST",
                 url: url,
                 cache: false,
                 async: true,
                 dataType: "json",
-                data: "input_newstatus=" + newstatus + "&input_reason=" +   reason+ "&input_newval="    +   newval+ "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
+                data: "&_token=" + $("input[name='_token']").val()    +   "&_method=put",
                 success: function(msg) {
                     if(msg[0] == "success") {
-                        if(newstatus== 2) {
-                            $(link).parent().parent().addClass("bg-success");
-                        }
-                        if(newstatus== 3) {
-                            $(link).parent().parent().addClass("bg-danger");
-                        }
-                    }
-                    if(msg[0] == "error") {
-                        var errors  =   msg[1];
-                        if(errors== "no access") {
-                            alert("Нет прав на изменение этого поля");
-                        }
-                        else {
-                            for (var key in errors) {
-                                alert(errors[key]);
-                            }
-                        }
+                        location.reload();
                     }
                 }
             });

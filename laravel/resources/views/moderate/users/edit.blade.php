@@ -56,9 +56,8 @@
                                     @endif
                                 @endforeach
                                 <div class="form-group">
-                                    <input type="hidden" id="commit_changes_url" value="{{  route('moderate.users.updateavatar', ["id" => $user->id]) }}">
-                                    <div class="col-md-6 col-md-offset-4">
-                                        <button type="button" class="btn btn-primary" id="commit_changes">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        <button type="button" class="btn btn-primary" id="commit_changes" data-url="{{  route('moderate.users.commitchanges', ["id" => $ps->id]) }}">
                                             Закрыть заявку и уведомить сотрудника об изменениях
                                         </button>
                                     </div>

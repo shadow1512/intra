@@ -94,6 +94,8 @@ class ProfileController extends Controller
         $changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
         foreach($changes as $item) {
             $change_records[$item->id]  =   Profiles_Saved_Data::withTrashed()->where('ps_id',  '=',    $item->id)->get();
+            $item->user_informed    =   1;
+            $item->save();
         }
         return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,
             'psd'    =>  $psd,    'summ'  =>  $summ,  'bills' =>  $bills,

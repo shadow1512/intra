@@ -371,7 +371,7 @@
                 </div>
             @endforeach
             <div class="profile_form_submit">
-                <a href="#" class="btn profile_form_btn">Готово</a>
+                <a href="#" class="btn profile_form_btn close_view_changes_window">Готово</a>
             </div>
         </div>
     </div>

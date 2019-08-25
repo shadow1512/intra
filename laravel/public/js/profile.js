@@ -168,5 +168,17 @@ $(document).ready(function() {
         $("div.__js-modal-resultchanges").removeClass('__vis');
         $("div.__js-modal-resultchanges").addClass('__vis');
         $('body').css('overflow', 'hidden');
+        $(document).on('click', '.modal-close, .close_view_changes_window', function(event) {
+            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+            $(this).parents(window).removeClass('__vis');
+            $('body').css('overflow', 'auto');
+        });
+        $(document).on('click', window, function(event) {
+            $(this).removeClass('__vis');
+            $('body').css('overflow', 'auto');
+        });
+        $(document).on('click', '.modal-cnt', function(event) {
+            event.stopPropagation();
+        });
     }
 });

@@ -90,7 +90,15 @@ class ProfileController extends Controller
                                 ->where('user_id', '=',    Auth::user()->id)->orderByDesc("created_at")->limit(5)->get();
 
 
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,    'psd'    =>  $psd,    'summ'  =>  $summ,  'bills' =>  $bills, 'requests'  =>  $tr,    'moderate'  =>  $moderate]);
+        $change_records =   array();
+        $changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
+        foreach($changes as $item) {
+            $change_records[$item->id]  =   Profiles_Saved_Data::withTrashed()->where('ps_id',  '=',    $item->id)->get();
+        }
+        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,
+            'psd'    =>  $psd,    'summ'  =>  $summ,  'bills' =>  $bills,
+            'requests'  =>  $tr,    'moderate'  =>  $moderate,
+            'changes'   =>  $changes,   'change_records'    =>  $change_records,    'labels'    =>  Config::get("dict.labels")]);
     }
 
     public function edit()
@@ -165,6 +173,7 @@ class ProfileController extends Controller
             $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
             if($ps) {
                 Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
+                $ps->user_informed  =   1;
                 $ps->delete();
             }
             $ps =   new Profiles_Saved();
@@ -236,26 +245,9 @@ class ProfileController extends Controller
                 $moderator  =   Dep::getModerate($user->dep_id);
             }
 
-            $labels =   array(
-                "fname"             =>  "Имя",
-                "mname"             =>  "Отчество",
-                "lname"             =>  "Фамилия",
-                "phone"             =>  "Местный телефон",
-                "email"             =>  "Рабочий email",
-                "city_phone"        =>  "Городской телефон",
-                "mobile_phone"      =>  "Мобильный телефон",
-                "room"              =>  "Комната",
-                "email_secondary"   =>  "Добавочный email",
-                "birthday"          =>  "Дата рождения",
-                "dep_id"            =>  "Подразделение",
-                "work_title"        =>  "Должность",
-                "address"           =>  "Адрес",
-                "position_desc"     =>  "Сфера деятельности"
-            );
-
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
 
-            $html   =   View::make('profile.viewchanges', ['labels' =>  $labels,    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
+            $html   =   View::make('profile.viewchanges', ['labels' =>  Congif::get("dict.labels"),    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
 
             return response()->json(['success', $html->render()]);
         }

@@ -318,6 +318,8 @@
 
 @endsection
 
+@include('profile.resultchanges');
+
 @section('dinner_bills')
     @php
         $months =   array(  "1"     =>  "январь",

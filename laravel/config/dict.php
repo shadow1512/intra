@@ -21,8 +21,11 @@ return array(
         "room"              =>  "Комната",
         "email_secondary"   =>  "Добавочный email",
         "birthday"          =>  "Дата рождения",
+        "workstart"         =>  "Дата начала работы в компании",
         "dep_id"            =>  "Подразделение",
         "work_title"        =>  "Должность",
+        "chef"              =>  "Руководитель",
+        "numpark"           =>  "Место на парковке",
         "address"           =>  "Адрес",
         "position_desc"     =>  "Сфера деятельности"
     ),

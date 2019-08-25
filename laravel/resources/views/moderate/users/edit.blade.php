@@ -67,7 +67,7 @@
                                 <label for="lname" class="col-md-2 control-label">Фамилия</label>
 
                                 <div class="col-md-6">
-                                    <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{ $user->lname }}  @endif" autofocus>
+                                    <input id="lname" type="text" class="form-control" name="lname" value="@if ($user->lname) {{$user->lname}}  @endif" autofocus>
 
                                     @if ($errors->has('lname'))
                                         <span class="help-block">
@@ -80,7 +80,7 @@
                                 <label for="fname" class="col-md-2 control-label">Имя</label>
 
                                 <div class="col-md-6">
-                                    <input id="fname" type="text" class="form-control" name="fname" value="@if ($user->fname) {{ $user->fname }}  @endif">
+                                    <input id="fname" type="text" class="form-control" name="fname" value="@if ($user->fname) {{$user->fname}}  @endif">
 
                                     @if ($errors->has('fname'))
                                         <span class="help-block">
@@ -94,7 +94,7 @@
                                 <label for="mname" class="col-md-2 control-label">Отчество</label>
 
                                 <div class="col-md-6">
-                                    <input id="mname" type="text" class="form-control" name="mname" value="@if ($user->mname) {{ $user->mname }}  @endif">
+                                    <input id="mname" type="text" class="form-control" name="mname" value="@if ($user->mname) {{$user->mname}}  @endif">
 
                                     @if ($errors->has('mname'))
                                         <span class="help-block">
@@ -107,7 +107,7 @@
                                 <label for="email" class="col-md-2 control-label">Рабочий email</label>
 
                                 <div class="col-md-6">
-                                    <input id="email" type="text" class="form-control" name="email" value="@if ($user->email) {{ $user->email }}  @endif">
+                                    <input id="email" type="text" class="form-control" name="email" value="@if ($user->email) {{$user->email}}  @endif">
 
                                     @if ($errors->has('email'))
                                         <span class="help-block">
@@ -120,7 +120,7 @@
                                 <label for="email" class="col-md-2 control-label">Дополнительный email</label>
 
                                 <div class="col-md-6">
-                                    <input id="email_secondary" type="text" class="form-control" name="email_secondary" value="@if ($user->email_secondary) {{ $user->email_secondary }}  @endif">
+                                    <input id="email_secondary" type="text" class="form-control" name="email_secondary" value="@if ($user->email_secondary) {{$user->email_secondary}}  @endif">
 
                                     @if ($errors->has('email_secondary'))
                                         <span class="help-block">
@@ -133,7 +133,7 @@
                                     <label for="phone" class="col-md-2 control-label">Номер комнаты</label>
 
                                     <div class="col-md-6">
-                                        <input id="room" type="text" class="form-control" name="room" value="@if ($user->room) {{ $user->room }}  @endif">
+                                        <input id="room" type="text" class="form-control" name="room" value="@if ($user->room) {{$user->room}}  @endif">
 
                                         @if ($errors->has('room'))
                                             <span class="help-block">
@@ -146,7 +146,7 @@
                                 <label for="phone" class="col-md-2 control-label">Местный телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="phone" type="text" class="form-control" name="phone" value="@if ($user->phone) {{ $user->phone }}  @endif" maxlength="3">
+                                    <input id="phone" type="text" class="form-control" name="phone" value="@if ($user->phone) {{$user->phone}}  @endif" maxlength="3">
 
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
@@ -159,7 +159,7 @@
                                 <label for="city_phone" class="col-md-2 control-label">Городской телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="city_phone" type="text" class="form-control" name="city_phone" value="@if ($user->city_phone) {{ $user->city_phone }}  @endif">
+                                    <input id="city_phone" type="text" class="form-control" name="city_phone" value="@if ($user->city_phone) {{$user->city_phone}}  @endif">
 
                                     @if ($errors->has('city_phone'))
                                         <span class="help-block">
@@ -172,7 +172,7 @@
                                 <label for="mobile_phone" class="col-md-2 control-label">Мобильный телефон</label>
 
                                 <div class="col-md-6">
-                                    <input id="mobile_phone" type="text" class="form-control" name="mobile_phone" value="@if ($user->mobile_phone) {{ $user->mobile_phone }}  @endif">
+                                    <input id="mobile_phone" type="text" class="form-control" name="mobile_phone" value="@if ($user->mobile_phone) {{$user->mobile_phone}}  @endif">
 
                                     @if ($errors->has('mobile_phone'))
                                         <span class="help-block">

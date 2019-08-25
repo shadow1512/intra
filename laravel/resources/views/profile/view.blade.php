@@ -109,8 +109,10 @@
                       @endif
                         @php
                             $waiting_fields =   array();
-                            foreach($psd as $item) {
-                                $waiting_fields[$item->field_name]  =   $item->new_value;
+                            if(!is_null($psd)) {
+                                foreach($psd as $item) {
+                                    $waiting_fields[$item->field_name]  =   $item->new_value;
+                                }
                             }
                         @endphp
                         <div class="profile_form_info_left">

@@ -336,10 +336,10 @@
                                     @php
                                         if($record->field_name  ==  "dep_id") {
                                             if($record->old_value) {
-                                                $record->old_value  =   App\Dep::findOrFail($record->old_value)->value('name');
+                                                $record->old_value  =   App\Dep::where('id',    '=',    $record->old_value)->value('name');
                                             }
                                             if($record->new_value) {
-                                                $record->new_value  =   App\Dep::findOrFail($record->new_value)->value('name');
+                                                $record->new_value  =   App\Dep::where('id',    '=',    $record->new_value)->value('name');
                                             }
                                         }
                                         if($record->field_name  ==  "chef") {

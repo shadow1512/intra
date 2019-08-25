@@ -11,6 +11,7 @@
             <div class="content_i_w">
                 @include('profile.contacts')
                 @yield('view')
+                @yield('result_changes')
             </div>
         </div>
     </div>

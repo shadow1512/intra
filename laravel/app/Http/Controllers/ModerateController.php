@@ -1109,7 +1109,7 @@ class ModerateController extends Controller
             }
         }
 
-        $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps_id)->get();
+        $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps->id)->get();
         foreach($psd as $item) {
             if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title"   &&  $item->field_name   !=  "chef") {
                 $user->{$item->field_name} = $item->new_value;

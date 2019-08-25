@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Deps_Peoples;
 use Auth;
 use App\User;
 use App\Dep;
@@ -159,6 +160,8 @@ class ProfileController extends Controller
         }
         else {
 
+            $work   =   Deps_Peoples::where('people_id',    '=',    Auth::user()->id)->first();
+
             $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
             if($ps) {
                 Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
@@ -174,6 +177,8 @@ class ProfileController extends Controller
             $dep_new    =   $dep_old    =   $moderator  =   null;
 
             foreach($updates_fields as $key =>  $value) {
+                $createFlag =   false;
+
                 if($key ==  "birthday") {
                     $birthday_parts =   explode(".",    $value);
                     if(count($birthday_parts)   ==  3) {
@@ -185,11 +190,19 @@ class ProfileController extends Controller
                         $dep_new    =   Dep::findOrFail($value);
                         $moderator  =   Dep::getModerate($value);
                     }
-                    else {
-
+                    if(!is_null($work)  &&  ($work->dep_id   !=  $value)) {
+                        $createFlag =   true;
                     }
                 }
-                if($value   != Auth::user()->$key) {
+                if($key ==  "work_title") {
+                    if(!is_null($work)  &&  ($work->work_title   !=  $value)) {
+                        $createFlag =   true;
+                    }
+                }
+                if($key !=  "dep_id"    &&  $key    !=  "work_title"    &&  ($value   != Auth::user()->$key)) {
+                    $createFlag = true;
+                }
+                if($createFlag) {
                     $psd =   new Profiles_Saved_Data();
 
                     $psd->ps_id         =   $ps->id;
@@ -197,7 +210,12 @@ class ProfileController extends Controller
 
 
                     $psd->field_name    =   $key;
-                    $psd->old_value     =   Auth::user()->$key;
+                    if(($key ==  "dep_id"    ||  $key    ==  "work_title")  &&  !is_null($work)) {
+                        $psd->old_value = $work->$key;
+                    }
+                    if($key !=  "dep_id"    &&  $key    !=  "work_title") {
+                        $psd->old_value = Auth::user()->$key;
+                    }
                     $psd->new_value     =   $value;
 
                     $psd->save();

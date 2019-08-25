@@ -162,3 +162,11 @@ $(document).on("submit", "#profile_update_form", function(ev) {
         });
     }
 });
+
+$(document).ready(function() {
+    if($("div.__js-modal-resultchanges").length>  0) {
+        $("div.__js-modal-resultchanges").removeClass('__vis');
+        $("div.__js-modal-resultchanges").addClass('__vis');
+        $('body').css('overflow', 'hidden');
+    }
+});

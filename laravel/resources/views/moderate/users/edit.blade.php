@@ -129,6 +129,19 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="form-group{{ $errors->has('room') ? ' has-error' : '' }}">
+                                    <label for="phone" class="col-md-2 control-label">Номер комнаты</label>
+
+                                    <div class="col-md-6">
+                                        <input id="room" type="text" class="form-control" name="room" value="@if ($user->room) {{ $user->room }}  @endif">
+
+                                        @if ($errors->has('room'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('room') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label for="phone" class="col-md-2 control-label">Местный телефон</label>
 
@@ -169,13 +182,11 @@
                                 </div>
                             </div>
                             <h2>Должности</h2>
-                            @foreach ($works as $work)
-                                @php $index = 1; @endphp
-                            <div class="form-group{{ $errors->has('dep' .   $index) ? ' has-error' : '' }}">
-                                <label for="dep{{$index}}" class="col-md-2 control-label">Подразделение</label>
+                            <div class="form-group{{ $errors->has('dep_id') ? ' has-error' : '' }}">
+                                <label for="dep_id" class="col-md-2 control-label">Подразделение</label>
 
                                 <div class="col-md-6">
-                                    <select id="dep{{$index}}" class="form-control" name="dep[]">
+                                    <select id="dep_id" class="form-control" name="dep_id">
                                         @foreach ($deps as $dep)
                                             <option value="{{$dep->id}}" @if ($work->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
                                         @endforeach
@@ -186,30 +197,28 @@
                                 <label for="work_title" class="col-md-2 control-label">Должность</label>
 
                                 <div class="col-md-6">
-                                    <input id="work_title{{$index}}" type="text" class="form-control" name="work_title[]" value="@if ($work->work_title) {{ $work->work_title }} @endif">
+                                    <input id="work_title" type="text" class="form-control" name="work_title" value="@if ($work->work_title) {{ $work->work_title }} @endif">
 
-                                    @if ($errors->has('work_title'.$index))
+                                    @if ($errors->has('work_title'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('work_title'.$index) }}</strong>
+                                        <strong>{{ $errors->first('work_title') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
                                 <div class="form-group{{ $errors->has('chefs') ? ' has-error' : '' }}">
-                                    <label for="chef{{$index}}" class="col-md-2 control-label">Руководитель</label>
+                                    <label for="chef" class="col-md-2 control-label">Руководитель</label>
 
                                     <div class="col-md-6">
-                                        <input id="chef{{$index}}" type="checkbox" class="form-control" name="chef[]" value="1" @if ($work->chef) checked="checked" @endif>
+                                        <input id="chef" type="checkbox" class="form-control" name="chef" value="1" @if ($work->chef) checked="checked" @endif>
 
-                                        @if ($errors->has('chef'.$index))
+                                        @if ($errors->has('chef'))
                                         <span class="help-block">
-                                            <strong>{{ $errors->first('chef'.$index) }}</strong>
+                                            <strong>{{ $errors->first('chef') }}</strong>
                                         </span>
                                         @endif
                                     </div>
                                 </div>
-                                @php $index ++; @endphp
-                            @endforeach
                             <h2>Дополнительные данные</h2>
                             <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                 <label for="birthday" class="col-md-2 control-label">День рождения</label>

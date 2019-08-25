@@ -871,7 +871,7 @@ class ModerateController extends Controller
     {
         $user       =   User::findOrFail($id);
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
-        $works      =   Deps_Peoples::where("people_id",    "=",    $id)->get();
+        $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
         $psd    =   $dep_old    =   $dep_new    =   null;
@@ -889,7 +889,7 @@ class ModerateController extends Controller
             }
         }
 
-        return view('moderate.users.edit', ['user'    =>  $user,    'works' =>  $works, 'deps'  =>  $deps,
+        return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'deps'  =>  $deps,
                                             'ps'    =>  $ps_record, 'psd'   =>  $psd,   'dep_old'   =>  $dep_old,   'dep_new'   =>  $dep_new,   'labels'    =>  Config::get("dict.labels")]);
     }
 
@@ -978,8 +978,11 @@ class ModerateController extends Controller
                         }
                     }
                 }
-                $item->delete();
             }
+            else {
+                $item->status   =   3;
+            }
+            $item->delete();
         }
 
         $user->save();
@@ -990,6 +993,27 @@ class ModerateController extends Controller
 
     public function usersupdate($id, Request $request)
     {
+        $user   =   User::leftJoin('deps_peoples',  'users.id', '=',    'deps_peoples.people_id')->whereRaw('users.id=' .   $id)->first();
+
+        $updates_fields =   array(
+            'fname'                     =>  trim($request->input('fname')),
+            'lname'                     =>  trim($request->input('lname')),
+            'mname'                     =>  trim($request->input('mname')),
+            'room'                      =>  trim($request->input('room')),
+            'phone'                     =>  trim($request->input('phone')),
+            'birthday'                  =>  trim($request->input('birthday')),
+            'mobile_phone'              =>  trim($request->input('mobile_phone')),
+            'city_phone'                =>  trim($request->input('city_phone')),
+            'email'                     =>  trim($request->input('email')),
+            'email_secondary'           =>  trim($request->input('email_secondary')),
+            'parknum'                   =>  trim($request->input('parknum')),
+            'workstart'                 =>  trim($request->input('workstart')),
+            'work_title'                =>  trim($request->input('work_title')),
+            'dep_id'                    =>  trim($request->input('dep_id')),
+            'position_desc'             =>  trim($request->input('position_desc')),
+            'chef'                      =>  trim($request->input('chef')),
+        );
+
         $messages   =   array(
             "lname.required"             =>  "Поле обязательно для заполнения",
             "lname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
@@ -997,6 +1021,7 @@ class ModerateController extends Controller
             "fname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
             "mname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
             "phone.max"                  =>  "Поле не должно быть длиннее, чем 3 цифры - это местный номер",
+            "room.max"                   =>  "Поле не должно быть длиннее, чем 4 символа",
             "city_phone.max"             =>  "Поле не должно быть длиннее, чем 18 символов",
             "mobile_phone.max"           =>  "Поле не должно быть длиннее, чем 18 символов",
             "email.email"                =>  "Поле должно быть формата email",
@@ -1014,6 +1039,7 @@ class ModerateController extends Controller
             'fname'             =>  'string|max:255|required',
             'mname'             =>  'nullable|string|max:255',
             'phone'             =>  'nullable|string|max:3',
+            'room'              =>  'nullable|string|max:4',
             'city_phone'        =>  'nullable|string|max:15',
             'mobile_phone'      =>  'nullable|string|max:18',
             'email'             =>  'nullable|string|email',
@@ -1025,72 +1051,109 @@ class ModerateController extends Controller
                 ->withInput();
         }
 
-        $user = User::findOrFail($id);
-        if($request->input('workstart')) {
-            $user->workstart = date("Y-m-d", strtotime($request->input('workstart')));
+        $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
+        if($ps) {
+            Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
+            $ps->delete();
         }
-        if($request->input('birthday')) {
-            $user->birthday = date("Y-m-d", strtotime($request->input('birthday')));
+        $ps =   new Profiles_Saved();
+
+        $ps->user_id        =   Auth::user()->id;
+        $ps->creator_id     =   Auth::user()->id;
+        $ps->notified       =   1;
+        $ps->save();
+
+        foreach($updates_fields as $key =>  $value) {
+            if($key ==  "birthday") {
+                $birthday_parts =   explode(".",    $value);
+                if(count($birthday_parts)   ==  3) {
+                    $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+                }
+            }
+            if($key ==  "workstart") {
+                $workstart_parts =   explode(".",    $value);
+                if(count($workstart_parts)   ==  3) {
+                    $value   =   $workstart_parts[2]  .   '-' .   $workstart_parts[1]  .   '-' .   $workstart_parts[0];
+                }
+            }
+            if($key ==  "chef") {
+                $max        =    2;
+                $deps       =   Dep::selectRaw("MAX(LENGTH(parent_id)) as max")->first();
+                $max        =   $deps["max"];
+
+                $curDep =   null;
+                $psd_dep    =   Profiles_Saved_Data::where('ps_id', '=',    $ps->id)->where('field_name',   '=',    'dep_id')->first();
+                if($psd_dep) {
+                    $curDep =   $psd_dep->new_value;
+                }
+                else {
+                    $curDep =   $user->dep_id;
+                }
+
+                $userDep     =   Dep::findOrFail($curDep);
+                $cur_length =   mb_strlen($userDep["parent_id"], "UTF-8");
+                $value       =  $max - $cur_length;
+            }
+            if($value   != $user->$key) {
+                $psd =   new Profiles_Saved_Data();
+
+                $psd->ps_id         =   $ps->id;
+                $psd->creator_id    =   Auth::user()->id;
+
+
+                $psd->field_name    =   $key;
+                $psd->old_value     =   $user->$key;
+                $psd->new_value     =   $value;
+                $psd->status        =   2;
+                $psd->save();
+            }
         }
 
-        $user->role_id          =   $request->input('role_id');
-
-        $user->lname            =   $request->input('lname');
-        $user->fname            =   $request->input('fname');
-        $user->mname            =   $request->input('mname');
-
-        $user->email            =   $request->input('email');
-        $user->email_secondary  =   $request->input('email_secondary');
-        $user->phone            =   $request->input('phone');
-        $user->city_phone       =   $request->input('city_phone');
-        $user->mobile_phone     =   $request->input('mobile_phone');
-
-        $user->numpark          =   $request->input('numpark');
-        $user->position_desc    =   $request->input('position_desc');
-        $user->updated_at = date("Y-m-d H:i:s");
+        $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps_id)->get();
+        foreach($psd as $item) {
+            if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title"   &&  $item->field_name   !=  "chef") {
+                $user->{$item->field_name} = $item->new_value;
+            }
+            else {
+                if($item->field_name == "dep_id") {
+                    $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                    $work_title =   $chef   =   null;
+                    if($wt_record) {
+                        $work_title =   $wt_record->work_title;
+                        $chef       =   $wt_record->chef;
+                    }
+                    else {
+                        $chef   =   0;
+                    }
+                    Deps_Peoples::where("people_id", "=", $user->id)->delete();
+                    $dp = new Deps_Peoples();
+                    $dp->dep_id     =   $item->new_value;
+                    $dp->people_id  =   $user->id;
+                    $dp->work_title =   $work_title;
+                    $dp->chef       =   $chef;
+                    $dp->save();
+                }
+                if($item->field_name    ==  "work_title") {
+                    $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                    if($wt_record) {
+                        $wt_record->work_title  =   $item->new_value;
+                        $wt_record->save();
+                    }
+                }
+                if($item->field_name    ==  "chef") {
+                    $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                    if($wt_record) {
+                        $wt_record->chef  =   $item->new_value;
+                        $wt_record->save();
+                    }
+                }
+            }
+            $item->delete();
+        }
 
         $user->save();
-
-        Deps_Peoples::where("people_id",   "=",    $id)->delete();
-        $work_titles    =   $request->get('work_title');
-        $chefs          =   $request->get('chef');
-
-        $max        =    2;
-        $deps       =   Dep::selectRaw("MAX(LENGTH(parent_id)) as max")->first();
-        $max        =   $deps["max"];
-
-
-        foreach($request->input('dep') as $key => $value) {
-            $dep_id =   $value;
-            $work   =   $work_titles[$key];
-            $chef   =   0;
-            if(isset($chefs[$key])) {
-                $chef=  $chefs[$key];
-            }
-            $dp =   new Deps_Peoples();
-
-            $dp->people_id      =   $id;
-            $dp->dep_id         =   $value;
-            $dp->work_title     =   $work;
-
-            if($chef) {
-                $curDep     =   Dep::findOrFail($value);
-                $cur_length =   mb_strlen($curDep["parent_id"], "UTF-8");
-                $chef       =  $max - $cur_length;
-            }
-            $dp->chef           =   $chef;
-            $dp->save();
-
-            $user->name =   $user->lname    .   " " .   mb_substr($user->fname, 0,  1)  .   ".";
-            if($user->mname) {
-                $user->name =   $user->name .   mb_substr($user->mname, 0,  1)  .   ".";
-            }
-            if($work)   {
-                $user->name =   $user->name . " - " .   $work;
-            }
-
-            $user->save();
-        }
+        $ps->delete();
+        
         return redirect(route('moderate.users.start'));
     }
 

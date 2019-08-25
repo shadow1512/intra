@@ -1006,7 +1006,7 @@ class ModerateController extends Controller
             'city_phone'                =>  trim($request->input('city_phone')),
             'email'                     =>  trim($request->input('email')),
             'email_secondary'           =>  trim($request->input('email_secondary')),
-            'parknum'                   =>  trim($request->input('parknum')),
+            'numpark'                   =>  trim($request->input('numpark')),
             'workstart'                 =>  trim($request->input('workstart')),
             'work_title'                =>  trim($request->input('work_title')),
             'dep_id'                    =>  trim($request->input('dep_id')),
@@ -1067,13 +1067,13 @@ class ModerateController extends Controller
             if($key ==  "birthday") {
                 $birthday_parts =   explode(".",    $value);
                 if(count($birthday_parts)   ==  3) {
-                    $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
+                    $value   =   date("Y-m-d", strtotime($value));
                 }
             }
             if($key ==  "workstart") {
                 $workstart_parts =   explode(".",    $value);
                 if(count($workstart_parts)   ==  3) {
-                    $value   =   $workstart_parts[2]  .   '-' .   $workstart_parts[1]  .   '-' .   $workstart_parts[0];
+                    $value   =   date("Y-m-d", strtotime($value));
                 }
             }
             if($key ==  "chef") {
@@ -1109,6 +1109,7 @@ class ModerateController extends Controller
             }
         }
 
+        $user   =   User::findOrFail($id);
         $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps->id)->get();
         foreach($psd as $item) {
             if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title"   &&  $item->field_name   !=  "chef") {

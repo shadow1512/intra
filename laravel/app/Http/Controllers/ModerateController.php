@@ -1094,6 +1094,9 @@ class ModerateController extends Controller
                     $cur_length = mb_strlen($userDep["parent_id"], "UTF-8");
                     $value = $max - $cur_length;
                 }
+                else {
+                    $value  =   0;
+                }
             }
             if($value   != $user->$key) {
                 $psd =   new Profiles_Saved_Data();

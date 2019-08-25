@@ -9,7 +9,7 @@
             <div class="profile_form">
                 <ul class="lst-changes">
                     @if(isset($change_records[$item->id]))
-                        @foreach($change_records as $record)
+                        @foreach($change_records[$item->id] as $record)
                     <li class="lst-changes_i">
                         {{$labels[$record->field_name]}}: @if($record->old_value    &&  ($record->old_value !=  $record->new_value))заменить &laquo;{{$record->old_value}}&raquo; на&nbsp;&laquo;{{$record->new_value}}&raquo;@endif
                         @if(!$record->old_value    &&  ($record->old_value !=  $record->new_value))добавить &laquo;{{$record->new_value}}&raquo;@endif

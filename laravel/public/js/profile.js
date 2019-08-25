@@ -139,6 +139,18 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     $(form).parent().parent().parent().fadeOut(300);
                     $(form).parent().parent().parent().after(msg[1]);
                     $("div.__js-modal-profile-changes").addClass("__vis");
+                    $(document).on('click', '.modal-close, .close_changes_form_btn', function(event) {
+                        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+                        $(this).parents(window).removeClass('__vis');
+                        $('body').css('overflow', 'auto');
+                    });
+                    $(document).on('click', window, function(event) {
+                        $(this).removeClass('__vis');
+                        $('body').css('overflow', 'auto');
+                    });
+                    $(document).on('click', '.modal-cnt', function(event) {
+                        event.stopPropagation();
+                    });
                 }
                 if(msg[0] == "error") {
                     var errors  =   msg[1];

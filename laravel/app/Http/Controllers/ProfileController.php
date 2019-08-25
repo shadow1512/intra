@@ -51,22 +51,28 @@ class ProfileController extends Controller
         if($ps_record) {
             $ps=    $ps_record;
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
-        }
 
-        foreach($psd as $item) {
-            if($item->field_name    ==  "dep_id") {
-                if($item->new_value) {
-                    $dep        =   Dep::findOrFail($item->new_value);
-                    $moderate   =   Dep::getModerate($item->new_value);
-                }
-                else {
-                    if($item->old_value) {
-                        $dep        =   Dep::findOrFail($item->old_value);
-                        $moderate   =   Dep::getModerate($item->old_value);
+            foreach($psd as $item) {
+                if($item->field_name    ==  "dep_id") {
+                    if($item->new_value) {
+                        $dep        =   Dep::findOrFail($item->new_value);
+                        $moderate   =   Dep::getModerate($item->new_value);
+                    }
+                    else {
+                        if($item->old_value) {
+                            $dep        =   Dep::findOrFail($item->old_value);
+                            $moderate   =   Dep::getModerate($item->old_value);
+                        }
                     }
                 }
             }
         }
+        else {
+            $dep        =   Dep::findOrFail($user->dep_id);
+            $moderate   =   Dep::getModerate($user->dep_id);
+        }
+
+
 
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
 

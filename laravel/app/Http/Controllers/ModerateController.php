@@ -1153,7 +1153,7 @@ class ModerateController extends Controller
 
         $user->save();
         $ps->delete();
-        
+
         return redirect(route('moderate.users.start'));
     }
 

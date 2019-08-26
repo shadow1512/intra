@@ -62,6 +62,10 @@ class updatedirectoryfromad extends Command
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
         print $ou   .   "\r\n";
+        if(in_array($dep->Name(),   $this->fakeous)) {
+            return;
+        }
+
         $this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
@@ -74,19 +78,22 @@ class updatedirectoryfromad extends Command
         $users = Adldap::getProvider('default')->search()->users()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
         if(count($users)) {
             foreach($users as $user) {
-                print $user->getConvertedSid()  .   "\r\n";
-                print $user->getFirstName()  .   "\r\n";
-                print $user->getMiddleName() .   "\r\n";
-                print $user->getLastName() .   "\r\n";
-                print $user->getThumbnail()    .   "\r\n"   .   $user->getJpegPhoto()   .   "\r\n"  .   $user->getUrl() .   "\r\n";
-                print $user->getEmail()   .   "\r\n";
-                print $user->getDepartment() .   "\r\n";
-                print $user->getInfo()   .   "\r\n" .   $user->getDivision()    .   "\r\n";
-                print $user->getTelephoneNumber()    .   "\r\n";
-                print $user->getPhysicalDeliveryOfficeName() .   "\r\n"    .   $user->getRoomNumber()  .   "\r\n";
-                print $user->getTitle() .   "\r\n";
+                if($user->isActive()    &&  $user->isEnabled()) {
+                    print $user->getConvertedSid() . "\r\n";
+                    print $user->getFirstName() . "\r\n";
+                    print $user->getMiddleName() . "\r\n";
+                    print $user->getLastName() . "\r\n";
+                    print $user->getUrl() . "\r\n";
+                    print $user->getEmail() . "\r\n";
+                    print $user->getDepartment() . "\r\n";
+                    print $user->getDivision() . "\r\n";
+                    print $user->getTelephoneNumber() . "\r\n";
+                    print $user->getPhysicalDeliveryOfficeName() . "\r\n" . $user->getRoomNumber() . "\r\n";
+                    print $user->getTitle() . "\r\n";
+                    print $user->getBusinessCategory() . "\r\n";
 
-                print "\r\n"    .   "\r\n";
+                    print "\r\n" . "\r\n";
+                }
             }
         }
     }

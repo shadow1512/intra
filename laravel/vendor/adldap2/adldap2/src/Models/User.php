@@ -222,7 +222,7 @@ class User extends Entry implements Authenticatable
     }
 
     /**
-     * Returns the users last name.
+     * Returns the users middle name.
      *
      * https://msdn.microsoft.com/en-us/library/ms679872(v=vs.85).aspx
      *
@@ -234,7 +234,7 @@ class User extends Entry implements Authenticatable
     }
 
     /**
-     * Sets the users last name.
+     * Sets the users middle name.
      *
      * @param string $lastName
      *
@@ -243,6 +243,30 @@ class User extends Entry implements Authenticatable
     public function setMiddleName($middleName)
     {
         return $this->setFirstAttribute($this->schema->middleName(), $middleName);
+    }
+
+    /**
+     * Returns the users business category.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms679872(v=vs.85).aspx
+     *
+     * @return mixed
+     */
+    public function getBusinessCategory()
+    {
+        return $this->getFirstAttribute($this->schema->businessCategory());
+    }
+
+    /**
+     * Sets the users business category.
+     *
+     * @param string $businessCategory
+     *
+     * @return $this
+     */
+    public function setBusinessCategory($businessCategory)
+    {
+        return $this->setFirstAttribute($this->schema->businessCategory(), $businessCategory);
     }
     /**
      * Returns the users info.

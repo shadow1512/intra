@@ -53,7 +53,7 @@ class updatedirectoryfromad extends Command
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
             $ou =  "OU="    .   $dep_inner->getName()   .   "," .   $ou;
-            $this->serveDepLevel($dep_inner);
+            $this->serveDepLevel($dep_inner,    $ou);
         }
     }
 

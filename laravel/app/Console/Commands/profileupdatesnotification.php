@@ -57,7 +57,7 @@ class profileupdatesnotification extends Command
                 $moderate   =   Dep::getModerate($user->dep_id);
             }
 
-            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
+            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $item->id)->get();
             foreach($psd    as  $record) {
                 if($record->field_name  ==  "dep_id") {
                     if($record->new_value) {

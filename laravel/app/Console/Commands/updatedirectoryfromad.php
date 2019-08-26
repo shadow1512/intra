@@ -50,10 +50,10 @@ class updatedirectoryfromad extends Command
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
         print $ou   .   "\r\n";
-        $ou =  "OU="    .   $dep->getName()   .   "," .   $ou;
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
-            $this->serveDepLevel($dep_inner,    $ou);
+            $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
+            $this->serveDepLevel($dep_inner,    $new_ou);
         }
     }
 

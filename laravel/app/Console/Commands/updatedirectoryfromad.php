@@ -49,7 +49,7 @@ class updatedirectoryfromad extends Command
         print "\r\n";
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
-
+        print $ou   .   "\r\n";
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
             $ou =  "OU="    .   $dep_inner->getName()   .   "," .   $ou;

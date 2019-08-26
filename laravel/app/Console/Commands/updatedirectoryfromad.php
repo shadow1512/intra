@@ -29,6 +29,18 @@ class updatedirectoryfromad extends Command
      */
     protected $description = 'Import staff from AD';
 
+    protected $fakeous  =   array(  'TestAndServiceUsers',
+                                    'Groups',
+                                    'WorkPskov',
+                                    'SPD',
+                                    'GroupsDTSP',
+                                    'GroupsDRnP',
+                                    'GroupsDPnUS',
+                                    'GroupsDMC',
+                                    'GroupsDCCP',
+                                    'TestForDPT',
+                                    'TestForProgrammers');
+
     /**
      * Create a new command instance.
      *
@@ -50,6 +62,7 @@ class updatedirectoryfromad extends Command
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
         print $ou   .   "\r\n";
+        $this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
@@ -57,13 +70,8 @@ class updatedirectoryfromad extends Command
         }
     }
 
-    public function handle()
-    {
-        //
-        $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
-        die();
-        $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
+    public function serveDepUsers($ou) {
+        $users = Adldap::getProvider('default')->search()->users()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
         if(count($users)) {
             foreach($users as $user) {
                 print $user->getConvertedSid()  .   "\r\n";
@@ -81,6 +89,11 @@ class updatedirectoryfromad extends Command
                 print "\r\n"    .   "\r\n";
             }
         }
-
+    }
+    public function handle()
+    {
+        //
+        $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
     }
 }

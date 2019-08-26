@@ -249,7 +249,7 @@ class ProfileController extends Controller
 
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
 
-            $html   =   View::make('profile.viewchanges', ['labels' =>  Congig::get("dict.labels"),    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
+            $html   =   View::make('profile.viewchanges', ['labels' =>  Config::get("dict.labels"),    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
 
             return response()->json(['success', $html->render()]);
         }

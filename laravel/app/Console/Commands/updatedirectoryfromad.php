@@ -45,13 +45,14 @@ class updatedirectoryfromad extends Command
      * @return mixed
      */
 
-    public function serveDepLevel($dep) {
+    public function serveDepLevel($dep, $ou) {
         print "\r\n";
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
 
-        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=" .   $dep->getName() .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
+        $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         foreach($deps as $dep_inner) {
+            $ou =  "OU="    .   $dep_inner->getName()   .   "," .   $ou;
             $this->serveDepLevel($dep_inner);
         }
     }
@@ -60,17 +61,7 @@ class updatedirectoryfromad extends Command
     {
         //
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        //$this->serveDepLevel($root);
-        $deps =   Adldap::getProvider('default')->search()->ous()->in("ou=Консорциум КОДЕКС,dc=work,dc=kodeks,dc=ru")->listing()->get();
-        foreach($deps as $dep) {
-            print "\r\n";
-            print "\r\n";
-            var_dump($dep);
-            print $dep->getConvertedGuid()  .   "\r\n";
-            print $dep->getName()  .   "\r\n";
-            //print $dep->isActive()  .   "\r\n";
-            //print $dep->isEnabled()  .   "\r\n";
-        }
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
         die();
         $users = Adldap::getProvider('default')->search()->where('objectCategory',  '=',    'person')->sortBy('samaccountname', 'asc')->limit(20)->get();
         if(count($users)) {

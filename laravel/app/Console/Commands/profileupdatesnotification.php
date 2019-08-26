@@ -75,6 +75,9 @@ class profileupdatesnotification extends Command
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to($moderate->email, $moderate->fname)->subject('Сотрудник ' .   $user->fname    .   " " .   $user->lname    .   " обновил свой профиль");
                     });
+
+                    $item->notified =   1;
+                    $item->save();
                 }
                 else {
                     Log::error('NO EMAIL MODERATE ERROR: no email  for moderator ' .   $moderate->id);

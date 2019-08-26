@@ -23,6 +23,7 @@ class Kernel extends ConsoleKernel
         Commands\syncIssuesWithRedmine::class,
         Commands\getIssueStatusesFromRedmine::class,
         Commands\syncBookingsWithRedmine::class,
+        Commands\profileupdatesnotification::class,
     ];
 
     /**
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('syncissues:start')->everyFiveMinutes();
         $schedule->command('issuestatus:get')->everyFiveMinutes();
         $schedule->command('syncbookings:start')->everyFiveMinutes();
+        $schedule->command('profileupdate:inform')->everyFiveMinutes();
     }
 
     /**

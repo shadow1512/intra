@@ -34,7 +34,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('searchindex:create')->hourly();
-        //$schedule->command('addxml:create')->daily();
+        $schedule->command('addxml:create')->daily();
         $schedule->command('maindepcsv:create')->daily();
         //$schedule->command('oldtsstaff:import')->daily();
         $schedule->command('syncissues:start')->everyFiveMinutes();

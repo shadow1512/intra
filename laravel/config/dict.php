@@ -29,4 +29,6 @@ return array(
         "address"           =>  "Адрес",
         "position_desc"     =>  "Сфера деятельности"
     ),
+
+    'main_moderate' =>  349,
 );

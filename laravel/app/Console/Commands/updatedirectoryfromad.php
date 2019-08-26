@@ -62,7 +62,7 @@ class updatedirectoryfromad extends Command
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
         print $ou   .   "\r\n";
-        if(in_array($dep->Name(),   $this->fakeous)) {
+        if(in_array($dep->getName(),   $this->fakeous)) {
             return;
         }
 

@@ -100,11 +100,11 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        $records = Adldap::getProvider('default')->search()->users()->where('cn', 'contains', 'Сергей')->limit(5)->get();
+        /*$records = Adldap::getProvider('default')->search()->users()->where('cn', 'contains', 'Сергей')->limit(5)->get();
         foreach($records as $record) {
             var_dump($record);
-        }
-        //$root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        //$this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
+        }*/
+        $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
     }
 }

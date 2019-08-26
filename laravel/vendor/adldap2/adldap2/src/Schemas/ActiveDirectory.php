@@ -388,6 +388,11 @@ class ActiveDirectory implements SchemaInterface
         return 'middlename';
     }
 
+    public function businessCategory()
+    {
+        return 'businessCategory';
+    }
+
     /**
      * {@inheritdoc}
      */

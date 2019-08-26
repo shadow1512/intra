@@ -58,13 +58,13 @@ class updatedirectoryfromad extends Command
      */
 
     public function serveDepLevel($dep, $ou) {
+        if(in_array($dep->getName(),   $this->fakeous)) {
+            return;
+        }
         print "\r\n";
         print $dep->getConvertedGuid()  .   "\r\n";
         print $dep->getName()  .   "\r\n";
         print $ou   .   "\r\n";
-        if(in_array($dep->getName(),   $this->fakeous)) {
-            return;
-        }
 
         $this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
@@ -88,7 +88,7 @@ class updatedirectoryfromad extends Command
                     print $user->getDepartment() . "\r\n";
                     print $user->getDivision() . "\r\n";
                     print $user->getTelephoneNumber() . "\r\n";
-                    print $user->getPhysicalDeliveryOfficeName() . "\r\n" . $user->getRoomNumber() . "\r\n";
+                    print $user->getPhysicalDeliveryOfficeName() . "\r\n";
                     print $user->getTitle() . "\r\n";
                     print $user->getBusinessCategory() . "\r\n";
 
@@ -100,7 +100,11 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
+        $records = Adldap::getProvider('default')->search()->users()->where('cn', 'contains', 'Сергей')->limit(5)->get();
+        foreach($records as $record) {
+            var_dump($record);
+        }
+        //$root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
+        //$this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
     }
 }

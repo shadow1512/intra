@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\User;
 use App\Dep;
 use App\Profiles_Saved;
+use App\Profiles_Saved_Data;
 use Mail;
 use Illuminate\Support\Facades\Log;
 use Config;

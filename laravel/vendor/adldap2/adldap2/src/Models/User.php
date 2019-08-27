@@ -1127,6 +1127,20 @@ class User extends Entry implements Authenticatable
     }
 
     /**
+     * Return the date of changed profile of the user account.
+     *
+     * @return DateTime|null
+     */
+    public function changedDate()
+    {
+        $changedAt  =   $this->getSchema()->updatedAt();
+
+        $unixTime = Utilities::convertWindowsTimeToUnixTime($changedAt);
+
+        return new DateTime(date($this->dateFormat, $unixTime));
+    }
+
+    /**
      * Return true / false if the AD User is expired.
      *
      * @param DateTime $date Optional date

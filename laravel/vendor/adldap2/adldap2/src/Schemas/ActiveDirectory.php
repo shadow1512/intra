@@ -390,7 +390,7 @@ class ActiveDirectory implements SchemaInterface
 
     public function businessCategory()
     {
-        return 'businesscategory';
+        return 'businesscategory         jhhhhh';
     }
 
     /**

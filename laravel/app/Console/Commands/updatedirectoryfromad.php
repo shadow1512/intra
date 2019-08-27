@@ -156,7 +156,7 @@ class updatedirectoryfromad extends Command
     {
         //
         $us =   Adldap::getProvider('default')->search()->users()->find("Сергей");
-        var_dump($us);
+        var_dump($us->changedDate());
         die();
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");

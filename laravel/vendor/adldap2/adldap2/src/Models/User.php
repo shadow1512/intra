@@ -1133,7 +1133,7 @@ class User extends Entry implements Authenticatable
      */
     public function changedDate()
     {
-        $changedAt  =   $this->getSchema()->updatedAt();
+        $changedAt  =   $this->getFirstAttribute($this->getSchema()->updatedAt());
 
         var_dump($changedAt);
         $unixTime = Utilities::convertWindowsTimeToUnixTime($changedAt);

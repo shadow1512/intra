@@ -78,7 +78,7 @@ class updatedirectoryfromad extends Command
             else {
                 $newdep=   new Dep();
                 $parent_id  =   $parent_code;
-                if(!null($parent_id)) {
+                if(!is_null($parent_id)) {
                     if($index   ==  0) {
                         for ($i = 0; $i < CODE_LENGTH; $i++) {
                             $parent_id .= $hiercode->digit_to_char[0];
@@ -143,14 +143,13 @@ class updatedirectoryfromad extends Command
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
-        $dep = new Dep();
-
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
         if($present) {
             $present->name      =   $root->getName();
             $present->save();
         }
         else {
+            $dep = new Dep();
             $dep->parent_id =   null;
             $dep->name      =   $root->getName();
             $dep->guid      =   $root->getConvertedGuid();

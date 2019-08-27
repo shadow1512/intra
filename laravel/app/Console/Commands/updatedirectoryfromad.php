@@ -69,7 +69,7 @@ class updatedirectoryfromad extends Command
         $index  =   0;
         foreach($deps as $dep_inner) {
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
-                return;
+                continue;
             }
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {

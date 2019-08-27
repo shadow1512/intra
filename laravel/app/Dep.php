@@ -17,7 +17,7 @@ class Dep extends Model
      * @var array
      */
     protected $fillable = [
-        'name', 'parent_id', 'description', 'image'
+        'name', 'parent_id', 'description', 'image', 'guid'
     ];
 
     protected $table = 'deps';

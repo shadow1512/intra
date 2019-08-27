@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Adldap\Laravel\Facades\Adldap;
 use App\User;
+use App\Dep;
 use App\Deps_Peoples;
 use App\Deps_Temporal;
 use Illuminate\Support\Facades\Storage;
@@ -49,6 +50,7 @@ class updatedirectoryfromad extends Command
     public function __construct()
     {
         parent::__construct();
+        require_once public_path() . '/hiercode.php';
     }
 
     /**
@@ -57,20 +59,49 @@ class updatedirectoryfromad extends Command
      * @return mixed
      */
 
-    public function serveDepLevel($dep, $ou) {
+    public function serveDepLevel($dep, $ou,    $parent_code) {
+        $dep=   new Dep();
+        $hiercode   =   new \HierCode(CODE_LENGTH);
         if(in_array($dep->getName(),   $this->fakeous)) {
             return;
         }
-        print "\r\n";
-        print $dep->getConvertedGuid()  .   "\r\n";
-        print $dep->getName()  .   "\r\n";
-        print $ou   .   "\r\n";
 
-        $this->serveDepUsers($ou);
+        //$this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
+        $index  =   0;
         foreach($deps as $dep_inner) {
+            $parent_id  =   $parent_code;
+            if(!null($parent_id)) {
+                if($index   ==  0) {
+                    for ($i = 0; $i < CODE_LENGTH; $i++) {
+                        $parent_id .= $hiercode->digit_to_char[0];
+                    }
+                }
+                else {
+                    $parent_id  =   $hiercode->getNextCode();
+                }
+                $hiercode->setValue($parent_id);
+            }
+            else {
+                $parent_id  =   '';
+                if($index   ==  0) {
+                    for ($i = 0; $i < CODE_LENGTH; $i++) {
+                        $parent_id .= $hiercode->digit_to_char[0];
+                    }
+                }
+                else {
+                    $parent_id  =   $hiercode->getNextCode();
+                }
+                $hiercode->setValue($parent_id);
+
+                $index  ++;
+            }
+            $dep->parent_id =   $parent_id;
+            $dep->name      =   $dep_inner->getName();
+            $dep->guid      =   $dep_inner->getConvertedGuid();
+            $dep->save();
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
-            $this->serveDepLevel($dep_inner,    $new_ou);
+            $this->serveDepLevel($dep_inner,    $new_ou,    $dep->parent_id);
         }
     }
 
@@ -100,11 +131,15 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        /*$records = Adldap::getProvider('default')->search()->users()->where('cn', 'contains', 'Сергей')->limit(5)->get();
-        foreach($records as $record) {
-            var_dump($record);
-        }*/
+
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС");
+
+        $dep = new Dep();
+        $dep->parent_id =   null;
+        $dep->name      =   $root->getName();
+        $dep->guid      =   $root->getConvertedGuid();
+        $dep->save();
+
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", $dep->parent_id);
     }
 }

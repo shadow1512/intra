@@ -881,6 +881,7 @@ return array(
     'Dotenv\\Parser' => $vendorDir . '/vlucas/phpdotenv/src/Parser.php',
     'Dotenv\\Validator' => $vendorDir . '/vlucas/phpdotenv/src/Validator.php',
     'EditDepartmentsKeys' => $baseDir . '/database/migrations/2018_05_31_000251_edit_departments_keys.php',
+    'EditDepsAddGuid' => $baseDir . '/database/migrations/2019_08_28_003239_edit_deps_add_guid.php',
     'EditDepsAddShortnameAndColor' => $baseDir . '/database/migrations/2019_06_10_032336_edit_deps_add_shortname_and_color.php',
     'EditDepsAddSortInDiagram' => $baseDir . '/database/migrations/2019_06_16_200146_edit_deps_add_sort_in_diagram.php',
     'EditDepsPeopleEditChefColumn' => $baseDir . '/database/migrations/2019_02_23_183215_edit_deps_people_edit_chef_column.php',

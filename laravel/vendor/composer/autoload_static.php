@@ -1393,6 +1393,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'Dotenv\\Parser' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Parser.php',
         'Dotenv\\Validator' => __DIR__ . '/..' . '/vlucas/phpdotenv/src/Validator.php',
         'EditDepartmentsKeys' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_000251_edit_departments_keys.php',
+        'EditDepsAddGuid' => __DIR__ . '/../..' . '/database/migrations/2019_08_28_003239_edit_deps_add_guid.php',
         'EditDepsAddShortnameAndColor' => __DIR__ . '/../..' . '/database/migrations/2019_06_10_032336_edit_deps_add_shortname_and_color.php',
         'EditDepsAddSortInDiagram' => __DIR__ . '/../..' . '/database/migrations/2019_06_16_200146_edit_deps_add_sort_in_diagram.php',
         'EditDepsPeopleEditChefColumn' => __DIR__ . '/../..' . '/database/migrations/2019_02_23_183215_edit_deps_people_edit_chef_column.php',

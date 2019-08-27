@@ -155,7 +155,7 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        $us =   Adldap::getProvider('default')->search()->users()->where("cn",  "=",    "Сергей")->limit(2)->get();
+        $us =   Adldap::getProvider('default')->search()->users()->find("Сергей");
         var_dump($us);
         die();
 

@@ -59,11 +59,13 @@ class updatedirectoryfromad extends Command
      * @return mixed
      */
 
-    public function serveDepLevel($dep, $ou,    $parent_code) {
+    public function serveDepLevel($ou,    $parent_code) {
+        print $ou.  "\r\n\r\n";
         $hiercode   =   new \HierCode(CODE_LENGTH);
 
         //$this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
+
         $index  =   0;
         foreach($deps as $dep_inner) {
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
@@ -108,7 +110,7 @@ class updatedirectoryfromad extends Command
             }
 
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
-            $this->serveDepLevel($dep_inner,    $new_ou,    $parent_id);
+            $this->serveDepLevel($new_ou,    $parent_id);
 
             $index  ++;
         }
@@ -157,6 +159,6 @@ class updatedirectoryfromad extends Command
             $dep->save();
         }
 
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
+        $this->serveDepLevel("OU=Консорциум КОДЕКС", null);
     }
 }

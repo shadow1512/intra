@@ -7,7 +7,6 @@ use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use App\Dep;
 use App\Deps_Peoples;
-use App\Deps_Temporal;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use Config;
@@ -60,14 +59,15 @@ class updatedirectoryfromad extends Command
      */
 
     public function serveDepLevel($ou,    $parent_code) {
-        print $ou.  "\r\n\r\n";
+        //print $ou.  "\r\n\r\n";
         $hiercode   =   new \HierCode(CODE_LENGTH);
 
-        //$this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
 
         $index  =   0;
         foreach($deps as $dep_inner) {
+
+            $dep_user_id    =   null;
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 continue;
             }
@@ -76,6 +76,7 @@ class updatedirectoryfromad extends Command
                 $present->name      =   $dep_inner->getName();
                 $present->save();
                 $parent_id  =   $present->parent_id;
+                $dep_user_id    =   $present->id;
             }
             else {
                 $newdep=   new Dep();
@@ -107,8 +108,11 @@ class updatedirectoryfromad extends Command
                 $newdep->name      =   $dep_inner->getName();
                 $newdep->guid      =   $dep_inner->getConvertedGuid();
                 $newdep->save();
+
+                $dep_user_id    =   $newdep->id;
             }
 
+            $this->serveDepUsers($ou,   $dep_user_id);
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
             $this->serveDepLevel($new_ou,    $parent_id);
 
@@ -116,11 +120,21 @@ class updatedirectoryfromad extends Command
         }
     }
 
-    public function serveDepUsers($ou) {
+    public function serveDepUsers($ou,  $dep_id) {
         $users = Adldap::getProvider('default')->search()->users()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
         if(count($users)) {
             foreach($users as $user) {
-                if($user->isActive()    &&  $user->isEnabled()) {
+
+                $present    =   User::where('sid',  '=',    $user->getConvertedSid())->first();
+                if($present) {
+                    if($user->isActive()    &&  $user->isEnabled()) {
+
+                    }
+                    else {
+                        $user->delete();
+                    }
+                }
+
                     print $user->getConvertedSid() . "\r\n";
                     print $user->getFirstName() . "\r\n";
                     print $user->getMiddleName() . "\r\n";
@@ -142,7 +156,9 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-
+        var_dump(Adldap::getProvider('default')->search()->users()->where("cn",  "=",    "Сергей")->limit(2)->get());
+        die();
+        
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();

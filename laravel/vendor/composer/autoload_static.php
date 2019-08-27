@@ -1431,6 +1431,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersAddEmailSecondary' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',
         'EditUsersAddNumpark' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
         'EditUsersAddPosition' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',
+        'EditUsersAddSid' => __DIR__ . '/../..' . '/database/migrations/2019_08_28_015604_edit_users_add_sid.php',
         'EditUsersDatafieldsNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',
         'EditUsersEditRoom' => __DIR__ . '/../..' . '/database/migrations/2018_09_07_035126_edit_users_edit_room.php',
         'EditUsersEmailNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_125907_edit_users_email_nullable.php',

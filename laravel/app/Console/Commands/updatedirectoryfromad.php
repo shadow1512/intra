@@ -61,14 +61,14 @@ class updatedirectoryfromad extends Command
 
     public function serveDepLevel($dep, $ou,    $parent_code) {
         $hiercode   =   new \HierCode(CODE_LENGTH);
-        if(in_array(mb_strtolower($dep->getName(),  "UTF-8"),   $this->fakeous)) {
-            return;
-        }
 
         //$this->serveDepUsers($ou);
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         $index  =   0;
         foreach($deps as $dep_inner) {
+            if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
+                return;
+            }
             $present    =   Dep::where('guid',  '=',    $dep->getConvertedGuid())->first();
             if($present) {
                 $present->name      =   $dep_inner->getName();

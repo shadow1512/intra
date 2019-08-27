@@ -30,17 +30,17 @@ class updatedirectoryfromad extends Command
      */
     protected $description = 'Import staff from AD';
 
-    protected $fakeous  =   array(  'TestAndServiceUsers',
-                                    'Groups',
-                                    'WorkPskov',
-                                    'SPD',
-                                    'GroupsDTSP',
-                                    'GroupsDRnP',
-                                    'GroupsDPnUS',
-                                    'GroupsDMC',
-                                    'GroupsDCCP',
-                                    'TestForDPT',
-                                    'TestForProgrammers');
+    protected $fakeous  =   array(  'testandserviceusers',
+                                    'groups',
+                                    'workpskov',
+                                    'spd',
+                                    'groupsdtsp',
+                                    'groupsdrnp',
+                                    'groupsdpnus',
+                                    'groupsdmc',
+                                    'groupsdccp',
+                                    'testfordpt',
+                                    'testforprogrammers');
 
     /**
      * Create a new command instance.
@@ -61,7 +61,7 @@ class updatedirectoryfromad extends Command
 
     public function serveDepLevel($dep, $ou,    $parent_code) {
         $hiercode   =   new \HierCode(CODE_LENGTH);
-        if(in_array($dep->getName(),   $this->fakeous)) {
+        if(in_array(mb_strtolower($dep->getName(),  "UTF-8"),   $this->fakeous)) {
             return;
         }
 
@@ -100,8 +100,6 @@ class updatedirectoryfromad extends Command
                         $parent_id  =   $hiercode->getNextCode();
                     }
                     $hiercode->setValue($parent_id);
-
-                    $index  ++;
                 }
                 $newdep->parent_id =   $parent_id;
                 $newdep->name      =   $dep_inner->getName();
@@ -111,6 +109,8 @@ class updatedirectoryfromad extends Command
 
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
             $this->serveDepLevel($dep_inner,    $new_ou,    $parent_id);
+
+            $index  ++;
         }
     }
 
@@ -143,13 +143,16 @@ class updatedirectoryfromad extends Command
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
-        var_dump($root);;die();
+        var_dump($root);
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
+        var_dump($present);
         if($present) {
             $present->name      =   $root->getName();
             $present->save();
         }
         else {
+            print $root->getName()  .   "\r\n";
+            print $root->getConvertedGuid()  .   "\r\n";
             $dep = new Dep();
             $dep->parent_id =   null;
             $dep->name      =   $root->getName();
@@ -157,6 +160,6 @@ class updatedirectoryfromad extends Command
             $dep->save();
         }
 
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
+        //$this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
     }
 }

@@ -60,7 +60,6 @@ class updatedirectoryfromad extends Command
      */
 
     public function serveDepLevel($dep, $ou,    $parent_code) {
-        $dep=   new Dep();
         $hiercode   =   new \HierCode(CODE_LENGTH);
         if(in_array($dep->getName(),   $this->fakeous)) {
             return;
@@ -70,38 +69,48 @@ class updatedirectoryfromad extends Command
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
         $index  =   0;
         foreach($deps as $dep_inner) {
-            $parent_id  =   $parent_code;
-            if(!null($parent_id)) {
-                if($index   ==  0) {
-                    for ($i = 0; $i < CODE_LENGTH; $i++) {
-                        $parent_id .= $hiercode->digit_to_char[0];
-                    }
-                }
-                else {
-                    $parent_id  =   $hiercode->getNextCode();
-                }
-                $hiercode->setValue($parent_id);
+            $present    =   Dep::where('guid',  '=',    $dep->getConvertedGuid())->first();
+            if($present) {
+                $present->name      =   $dep_inner->getName();
+                $present->save();
+                $parent_id  =   $present->parent_id;
             }
             else {
-                $parent_id  =   '';
-                if($index   ==  0) {
-                    for ($i = 0; $i < CODE_LENGTH; $i++) {
-                        $parent_id .= $hiercode->digit_to_char[0];
+                $newdep=   new Dep();
+                $parent_id  =   $parent_code;
+                if(!null($parent_id)) {
+                    if($index   ==  0) {
+                        for ($i = 0; $i < CODE_LENGTH; $i++) {
+                            $parent_id .= $hiercode->digit_to_char[0];
+                        }
                     }
+                    else {
+                        $parent_id  =   $hiercode->getNextCode();
+                    }
+                    $hiercode->setValue($parent_id);
                 }
                 else {
-                    $parent_id  =   $hiercode->getNextCode();
-                }
-                $hiercode->setValue($parent_id);
+                    $parent_id  =   '';
+                    if($index   ==  0) {
+                        for ($i = 0; $i < CODE_LENGTH; $i++) {
+                            $parent_id .= $hiercode->digit_to_char[0];
+                        }
+                    }
+                    else {
+                        $parent_id  =   $hiercode->getNextCode();
+                    }
+                    $hiercode->setValue($parent_id);
 
-                $index  ++;
+                    $index  ++;
+                }
+                $newdep->parent_id =   $parent_id;
+                $newdep->name      =   $dep_inner->getName();
+                $newdep->guid      =   $dep_inner->getConvertedGuid();
+                $newdep->save();
             }
-            $dep->parent_id =   $parent_id;
-            $dep->name      =   $dep_inner->getName();
-            $dep->guid      =   $dep_inner->getConvertedGuid();
-            $dep->save();
+
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
-            $this->serveDepLevel($dep_inner,    $new_ou,    $dep->parent_id);
+            $this->serveDepLevel($dep_inner,    $new_ou,    $parent_id);
         }
     }
 
@@ -135,11 +144,19 @@ class updatedirectoryfromad extends Command
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $dep = new Dep();
-        $dep->parent_id =   null;
-        $dep->name      =   $root->getName();
-        $dep->guid      =   $root->getConvertedGuid();
-        $dep->save();
 
-        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", $dep->parent_id);
+        $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
+        if($present) {
+            $present->name      =   $root->getName();
+            $present->save();
+        }
+        else {
+            $dep->parent_id =   null;
+            $dep->name      =   $root->getName();
+            $dep->guid      =   $root->getConvertedGuid();
+            $dep->save();
+        }
+
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
     }
 }

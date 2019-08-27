@@ -149,16 +149,16 @@ class updatedirectoryfromad extends Command
                     print $user->getBusinessCategory() . "\r\n";
 
                     print "\r\n" . "\r\n";
-                }
             }
         }
     }
     public function handle()
     {
         //
-        var_dump(Adldap::getProvider('default')->search()->users()->where("cn",  "=",    "Сергей")->limit(2)->get());
+        $us =   Adldap::getProvider('default')->search()->users()->where("cn",  "=",    "Сергей")->limit(2)->get();
+        var_dump($us);
         die();
-        
+
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();

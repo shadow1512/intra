@@ -69,7 +69,7 @@ class updatedirectoryfromad extends Command
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 return;
             }
-            $present    =   Dep::where('guid',  '=',    $dep->getConvertedGuid())->first();
+            $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {
                 $present->name      =   $dep_inner->getName();
                 $present->save();
@@ -143,16 +143,13 @@ class updatedirectoryfromad extends Command
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
-        var_dump($root);
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
-        var_dump($present);
+
         if($present) {
             $present->name      =   $root->getName();
             $present->save();
         }
         else {
-            print $root->getName()  .   "\r\n";
-            print $root->getConvertedGuid()  .   "\r\n";
             $dep = new Dep();
             $dep->parent_id =   null;
             $dep->name      =   $root->getName();
@@ -160,6 +157,6 @@ class updatedirectoryfromad extends Command
             $dep->save();
         }
 
-        //$this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
+        $this->serveDepLevel($root, "OU=Консорциум КОДЕКС", null);
     }
 }

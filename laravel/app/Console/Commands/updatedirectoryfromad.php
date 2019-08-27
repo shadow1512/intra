@@ -144,6 +144,7 @@ class updatedirectoryfromad extends Command
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
+        var_dump($present);die();
         if($present) {
             $present->name      =   $root->getName();
             $present->save();

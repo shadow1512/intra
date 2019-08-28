@@ -158,7 +158,7 @@ class updatedirectoryfromad extends Command
                     if($user->getBusinessCategory() ==  "boss") {
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }
-                    Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
+                    Deps_Peoples::where("people_id",    "=",    $currentRecord->id)->delete();
                     $dp =   new Deps_Peoples();
                     $dp->dep_id     =   $dep->id;
                     $dp->people_id  =   $currentRecord->id;

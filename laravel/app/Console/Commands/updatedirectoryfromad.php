@@ -112,8 +112,8 @@ class updatedirectoryfromad extends Command
                 $dep_user    =   $newdep;
             }
 
-            $this->serveDepUsers($ou,   $dep_user);
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
+            $this->serveDepUsers($new_ou,   $dep_user);
             $this->serveDepLevel($new_ou,    $parent_id);
 
             $index  ++;

@@ -7,10 +7,8 @@ use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use App\Dep;
 use App\Deps_Peoples;
-use Illuminate\Support\Facades\Storage;
-use Intervention\Image\ImageManager;
+use Illuminate\Support\Facades\Log;
 use Config;
-use Illuminate\Support\Facades\Validator;
 use DB;
 
 class updatedirectoryfromad extends Command

@@ -24,6 +24,7 @@ class Kernel extends ConsoleKernel
         Commands\getIssueStatusesFromRedmine::class,
         Commands\syncBookingsWithRedmine::class,
         Commands\profileupdatesnotification::class,
+        Commands\createmoderator::class,
     ];
 
     /**

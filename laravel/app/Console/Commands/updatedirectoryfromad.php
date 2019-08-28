@@ -156,6 +156,7 @@ class updatedirectoryfromad extends Command
                     $work_title     =   $user->getTitle();
                     $chef   =   0;
                     if($user->getBusinessCategory() ==  "boss") {
+                        echo 'a';
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }
                     Deps_Peoples::where("people_id",    "=",    $currentRecord->id)->delete();
@@ -193,5 +194,7 @@ class updatedirectoryfromad extends Command
         }
 
         $this->serveDepLevel("OU=Консорциум КОДЕКС", null);
+
+        User::whereNull('avatar')->update(['avatar'    =>  '"/images/faces/default.svg"']);
     }
 }

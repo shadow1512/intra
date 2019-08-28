@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use User;
+use App\User;
 
 class createmoderator extends Command
 {
@@ -61,9 +61,12 @@ class createmoderator extends Command
 
             $user->role_id  =   $level;
             $user->save();
+
+            print_r("Права предоставлены\r\n");
         }
         else {
             Log::info('SET ADMIN: No user with email ' .   $this->argument('email'));
+            print_r("Нет такого пользователя\r\n");
         }
     }
 }

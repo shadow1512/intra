@@ -155,7 +155,6 @@ class updatedirectoryfromad extends Command
 
                     $work_title     =   $user->getTitle();
                     $chef   =   0;
-                    var_dump($user->getBusinessCategory());
                     if($user->getBusinessCategory() ==  "boss") {
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }

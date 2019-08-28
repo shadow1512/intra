@@ -1135,10 +1135,7 @@ class User extends Entry implements Authenticatable
     {
         $changedAt  =   $this->getFirstAttribute($this->getSchema()->updatedAt());
 
-        var_dump($changedAt);
-        $unixTime = Utilities::convertWindowsTimeToUnixTime($changedAt);
-
-        return new DateTime(date($this->dateFormat, $unixTime));
+        return Utilities::convertAdTimeToUnixTime($changedAt);
     }
 
     /**

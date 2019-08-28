@@ -289,6 +289,13 @@ class Utilities
         return ($unixTime + 11644473600) * 10000000;
     }
 
+
+    public static function convertAdTimeToUnixTime($adTime)
+    {
+        $timeParts  =   explode(".",    $adTime);
+        return date("Y-m-d H:i:s", strtotime($timeParts[0]));
+    }
+
     /**
      * Validates that the inserted string is an object SID.
      *

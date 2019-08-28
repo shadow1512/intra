@@ -67,7 +67,7 @@ class updatedirectoryfromad extends Command
         $index  =   0;
         foreach($deps as $dep_inner) {
 
-            $dep_user_id    =   null;
+            $dep_user   =   null;
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 continue;
             }
@@ -76,7 +76,7 @@ class updatedirectoryfromad extends Command
                 $present->name      =   $dep_inner->getName();
                 $present->save();
                 $parent_id  =   $present->parent_id;
-                $dep_user_id    =   $present->id;
+                $dep_user   =   $present;
             }
             else {
                 $newdep=   new Dep();
@@ -109,10 +109,10 @@ class updatedirectoryfromad extends Command
                 $newdep->guid      =   $dep_inner->getConvertedGuid();
                 $newdep->save();
 
-                $dep_user_id    =   $newdep->id;
+                $dep_user    =   $newdep;
             }
 
-            $this->serveDepUsers($ou,   $dep_user_id);
+            $this->serveDepUsers($ou,   $dep_user);
             $new_ou =    "OU="    .   $dep_inner->getName()   .   "," .   $ou;
             $this->serveDepLevel($new_ou,    $parent_id);
 
@@ -120,44 +120,61 @@ class updatedirectoryfromad extends Command
         }
     }
 
-    public function serveDepUsers($ou,  $dep_id) {
+    public function serveDepUsers($ou,  $dep) {
         $users = Adldap::getProvider('default')->search()->users()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
         if(count($users)) {
             foreach($users as $user) {
 
+                $currentRecord  =   null;
                 $present    =   User::where('sid',  '=',    $user->getConvertedSid())->first();
                 if($present) {
                     if($user->isActive()    &&  $user->isEnabled()) {
-
+                        if($user->changedDate() >   $present->created_at) {
+                            $currentRecord  =   $present;
+                        }
                     }
                     else {
-                        $user->delete();
+                        $present->delete();
                     }
                 }
+                else {
+                    $currentRecord  =   new User();
+                }
 
-                    print $user->getConvertedSid() . "\r\n";
-                    print $user->getFirstName() . "\r\n";
-                    print $user->getMiddleName() . "\r\n";
-                    print $user->getLastName() . "\r\n";
-                    print $user->getUrl() . "\r\n";
-                    print $user->getEmail() . "\r\n";
-                    print $user->getDepartment() . "\r\n";
-                    print $user->getDivision() . "\r\n";
-                    print $user->getTelephoneNumber() . "\r\n";
-                    print $user->getPhysicalDeliveryOfficeName() . "\r\n";
-                    print $user->getTitle() . "\r\n";
-                    print $user->getBusinessCategory() . "\r\n";
+                if(!is_null($currentRecord)) {
+                    $currentRecord->sid       =   $user->getConvertedSid();
+                    $currentRecord->fname     =   $user->getFirstName();
+                    $currentRecord->mname     =   $user->getMiddleName();
+                    $currentRecord->lname     =   $user->getLastName();
+                    $currentRecord->avatar    =   $user->getUrl();
+                    $currentRecord->email     =   $user->getEmail();
+                    $currentRecord->phone     =   $user->getTelephoneNumber();
+                    $currentRecord->room      =   $user->getPhysicalDeliveryOfficeName();
 
-                    print "\r\n" . "\r\n";
+                    $currentRecord->save();
+
+                    $work_title     =   $user->getTitle();
+                    $chef   =   0;
+                    if($user->getBusinessCategory() ==  "boss") {
+                        $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
+                    }
+                    Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
+                    $dp =   new Deps_Peoples();
+                    $dp->dep_id     =   $dep->id;
+                    $dp->people_id  =   $currentRecord->id;
+                    $dp->work_title =   $work_title;
+                    $dp->chef       =   $chef;
+                    $dp->save();
+                }
             }
         }
     }
     public function handle()
     {
         //
-        $us =   Adldap::getProvider('default')->search()->users()->find("Сергей");
+        /*$us =   Adldap::getProvider('default')->search()->users()->find("Сергей");
         var_dump($us->changedDate());
-        die();
+        die();*/
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 

@@ -50,10 +50,9 @@ class makeXmlToUpdateAD extends Command
         $caldate->sub(new DateInterval("P1D"));
         $start =   $caldate->format("Y-m-d H:i:s");
 
-        $up_users   =   User::select("users.*", "deps_peoples.work_title",  "deps.name as depname",    "deps.parent_id",   "user_keys.sid",    "user_keys.user_login")
+        $up_users   =   User::select("users.*", "deps_peoples.work_title", "deps_peoples.chef", "deps.name as depname",    "deps.parent_id")
             ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
             ->leftJoin("deps",  "deps.id",  "=",    "deps_peoples.dep_id")
-            ->leftJoin("user_keys",  "users.id",  "=",    "user_keys.user_id")
             ->whereBetween("users.updated_at",    [$start, $finish])->get();
         if($up_users->count()) {
 
@@ -71,8 +70,6 @@ class makeXmlToUpdateAD extends Command
                 $datanode   =   $dom->appendChild($data);
                 $userel     =   $dom->createElement("user");
                 $usernode   =   $datanode->appendChild($userel);
-                $login      =   $dom->createElement("login",  $user->user_login);
-                $loginnode  =   $usernode->appendChild($login);
                 $sid        =   $dom->createElement("sid",  $user->sid);
                 $sidnode    =   $usernode->appendChild($sid);
 

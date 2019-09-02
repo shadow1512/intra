@@ -156,3 +156,22 @@
     </div>
     <!--eo modal-->
 @endsection
+
+@section('dinner_cameras')
+    <div class="overlay __js-modal-camera">
+        <div class="modal-w">
+            <div class="modal-cnt">
+                <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+                <div class="modal_cnt __camera">
+                    <div class="dinner">
+                        <div class="h __h_m">Столовая</div>
+                        <div class="dinner_camera">
+                            <div class="dinner_camera_i">@if($cam2  ==  "ok")<img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/>@else<p style="margin-top:50px;">Изображение с камеры устарело более, чем на 10 минут</p>@endif</div>
+                            <div class="dinner_camera_i">@if($cam1  ==  "ok")<img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam1.jpg"/>@else<p style="margin-top:50px;">Изображение с камеры устарело более, чем на 10 минут</p>@endif</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

@@ -45,22 +45,7 @@
 <!--eo modal-->
 @yield('dinner_bills')
 <!--modal-->
-<div class="overlay __js-modal-camera">
-    <div class="modal-w">
-        <div class="modal-cnt">
-            <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
-            <div class="modal_cnt __camera">
-                <div class="dinner">
-                    <div class="h __h_m">Столовая</div>
-                    <div class="dinner_camera">
-                        <div class="dinner_camera_i"><img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/></div>
-                        <div class="dinner_camera_i"><img id="kitchen_cam1" src="http://intra-unix.kodeks.net/img/cam1.jpg"/></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@yield('dinner_cameras')
 <!--eo modal-->
 <script src="/js/libs/jquery-3.1.0.js"></script>
 <script src="/js/libs/chosen.jquery.min.js"></script>

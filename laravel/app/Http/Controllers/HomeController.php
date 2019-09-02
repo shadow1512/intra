@@ -91,6 +91,18 @@ class HomeController extends Controller
             }
         }
 
+        //камеры
+        $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
+        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
+        if($status_code == 200) {
+            var_dump($time);
+            var_dump(time());
+        }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),

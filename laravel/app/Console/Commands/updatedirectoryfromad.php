@@ -124,15 +124,19 @@ class updatedirectoryfromad extends Command
             foreach($users as $user) {
 
                 $currentRecord  =   null;
-                $present    =   User::where('sid',  '=',    $user->getConvertedSid())->first();
+                $present    =   User::withTrashed()->where('sid',  '=',    $user->getConvertedSid())->first();
                 if($present) {
                     if($user->isActive()    &&  $user->isEnabled()) {
+                        if(!is_null($present->deleted_at)) {
+                            $present->restore();
+                        }
                         //if($user->changedDate() >   $present->created_at) {
                             $currentRecord  =   $present;
                         //}
                     }
                     else {
                         $present->delete();
+                        Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
                     }
                 }
                 else {

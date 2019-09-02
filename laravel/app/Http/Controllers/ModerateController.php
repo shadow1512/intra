@@ -609,7 +609,7 @@ class ModerateController extends Controller
     {
         if(!is_null($request->file('cover'))) {
             $fsize = $request->file('cover')->getSize();
-            if ($fsize >= 3000000) {
+            if ($fsize >= 5000000) {
                 return array('error', 'file too large');
             }
 
@@ -617,7 +617,7 @@ class ModerateController extends Controller
             $size   =   Storage::disk('public')->getSize($path);
             $type   =   Storage::disk('public')->getMimetype($path);
 
-            if($size <= 3000000) {
+            if($size <= 5000000) {
                 if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                     $manager = new ImageManager(array('driver' => 'imagick'));
                     $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.cover_width'), Config::get('image.cover_height'))->save(storage_path('app/public') . '/' . $path);
@@ -643,7 +643,7 @@ class ModerateController extends Controller
     {
         if(!is_null($request->file('book_file'))) {
             $fsize = $request->file('book_file')->getSize();
-            if ($fsize >= 5000000) {
+            if ($fsize >= 10000000) {
                 return array('error', 'file too large');
             }
 

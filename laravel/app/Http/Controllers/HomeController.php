@@ -109,7 +109,9 @@ class HomeController extends Controller
                                 'kitchen_menu'  =>  $kitchen_menu,
                                 'summ'          =>  $summ,
                                 'bills'         =>  $bills,
-                                'ditems'        =>  $items]);
+                                'ditems'        =>  $items,
+                                'cam1'          =>  "ok",
+                                'cam2'          =>  "ok"]);
     }
 
     function parking()

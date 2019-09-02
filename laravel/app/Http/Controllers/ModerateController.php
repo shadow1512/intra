@@ -650,7 +650,7 @@ class ModerateController extends Controller
             $path = Storage::disk('public')->putFile(Config::get('image.book_path'), $request->file('book_file'), 'public');
             $size = Storage::disk('public')->getSize($path);
 
-            if ($size <= 5000000) {
+            if ($size <= 10000000) {
                 DB::table('lib_books')->where("id", "=", $id)
                     ->update(['file' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
 

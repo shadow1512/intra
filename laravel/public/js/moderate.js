@@ -196,6 +196,7 @@ $(document).ready(function($) {
                 if (data.result[1] == "file too large") {
                     errMessage += "для загрузки доступны изображения не более 3мб";
                 }
+                alert(errMessage);
             }
         },
         fail: function (e, data) {
@@ -247,8 +248,9 @@ $(document).ready(function($) {
                     errMessage += "для загрузки необходимо выбрать файл jpeg или png";
                 }
                 if (data.result[1] == "file too large") {
-                    errMessage += "для загрузки доступны изображения не более 3мб";
+                    errMessage += "для загрузки доступны файлы не более 10мб";
                 }
+                alert(errMessage);
             }
         },
         fail: function (e, data) {

@@ -94,8 +94,7 @@ class UserController extends Controller
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
-                ->orderByRaw('LENGTH(parent_id)',  'asc')
-                ->orderBy('deps_peoples.chef', 'asc')->orderBy('users.name', 'asc')
+                ->orderBy('deps_peoples.chef', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.name', 'asc')
                 ->limit(200)->get();
         }
         else {

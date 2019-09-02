@@ -92,6 +92,8 @@ class HomeController extends Controller
         }
 
         //камеры
+        $cam1   =   $cam2   =   null;
+
         $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
         curl_setopt($ch, CURLOPT_NOBODY, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -100,8 +102,26 @@ class HomeController extends Controller
         $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
         if($status_code == 200) {
-            var_dump($time);
-            var_dump(time());
+            if($time    >   -1) {
+                if((time()   -   $time) <=   600) {
+                    $cam1   =   "ok";
+                }
+            }
+        }
+
+        $ch = curl_init('http://intra-unix.kodeks.net/img/cam2.jpg');
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FILETIME, true);
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
+        if($status_code == 200) {
+            if($time    >   -1) {
+                if((time()   -   $time) <=   600) {
+                    $cam2   =   "ok";
+                }
+            }
         }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
@@ -110,8 +130,8 @@ class HomeController extends Controller
                                 'summ'          =>  $summ,
                                 'bills'         =>  $bills,
                                 'ditems'        =>  $items,
-                                'cam1'          =>  "ok",
-                                'cam2'          =>  "ok"]);
+                                'cam1'          =>  $cam1,
+                                'cam2'          =>  $cam2]);
     }
 
     function parking()

@@ -1399,6 +1399,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditDepsAddShortnameAndColor' => __DIR__ . '/../..' . '/database/migrations/2019_06_10_032336_edit_deps_add_shortname_and_color.php',
         'EditDepsAddSortInDiagram' => __DIR__ . '/../..' . '/database/migrations/2019_06_16_200146_edit_deps_add_sort_in_diagram.php',
         'EditDepsPeopleEditChefColumn' => __DIR__ . '/../..' . '/database/migrations/2019_02_23_183215_edit_deps_people_edit_chef_column.php',
+        'EditDepsPeoplesChefNullable' => __DIR__ . '/../..' . '/database/migrations/2019_09_03_021453_edit_deps_peoples_chef_nullable.php',
         'EditDepsPeoplesWorktitle' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_120255_edit_deps_peoples_worktitle.php',
         'EditDepsPeoplesWorktitleNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
         'EditDeptPeopleChef' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',

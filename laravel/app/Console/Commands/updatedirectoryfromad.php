@@ -170,7 +170,7 @@ class updatedirectoryfromad extends Command
                     $currentRecord->save();
 
                     $work_title     =   $user->getTitle();
-                    $chef   =   0;
+                    $chef   =   null;
                     if($user->getBusinessCategory() ==  "boss") {
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }

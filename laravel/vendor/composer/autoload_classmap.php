@@ -887,6 +887,7 @@ return array(
     'EditDepsAddShortnameAndColor' => $baseDir . '/database/migrations/2019_06_10_032336_edit_deps_add_shortname_and_color.php',
     'EditDepsAddSortInDiagram' => $baseDir . '/database/migrations/2019_06_16_200146_edit_deps_add_sort_in_diagram.php',
     'EditDepsPeopleEditChefColumn' => $baseDir . '/database/migrations/2019_02_23_183215_edit_deps_people_edit_chef_column.php',
+    'EditDepsPeoplesChefNullable' => $baseDir . '/database/migrations/2019_09_03_021453_edit_deps_peoples_chef_nullable.php',
     'EditDepsPeoplesWorktitle' => $baseDir . '/database/migrations/2018_05_31_120255_edit_deps_peoples_worktitle.php',
     'EditDepsPeoplesWorktitleNullable' => $baseDir . '/database/migrations/2018_05_31_121748_edit_deps_peoples_worktitle_nullable.php',
     'EditDeptPeopleChef' => $baseDir . '/database/migrations/2018_05_31_111705_edit_dept_people_chef.php',

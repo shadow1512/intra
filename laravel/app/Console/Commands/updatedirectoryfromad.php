@@ -127,9 +127,9 @@ class updatedirectoryfromad extends Command
                 $present    =   User::where('sid',  '=',    $user->getConvertedSid())->first();
                 if($present) {
                     if($user->isActive()    &&  $user->isEnabled()) {
-                        if($user->changedDate() >   $present->created_at) {
+                        //if($user->changedDate() >   $present->created_at) {
                             $currentRecord  =   $present;
-                        }
+                        //}
                     }
                     else {
                         $present->delete();
@@ -141,13 +141,27 @@ class updatedirectoryfromad extends Command
 
                 if(!is_null($currentRecord)) {
                     $currentRecord->sid       =   $user->getConvertedSid();
-                    $currentRecord->fname     =   $user->getFirstName();
-                    $currentRecord->mname     =   $user->getMiddleName();
-                    $currentRecord->lname     =   $user->getLastName();
-                    $currentRecord->avatar    =   $user->getUrl();
-                    $currentRecord->email     =   $user->getEmail();
-                    $currentRecord->phone     =   $user->getTelephoneNumber();
-                    $currentRecord->room      =   $user->getPhysicalDeliveryOfficeName();
+                    if($user->getFirstName()) {
+                        $currentRecord->fname = $user->getFirstName();
+                    }
+                    if($user->getMiddleName()) {
+                        $currentRecord->mname = $user->getMiddleName();
+                    }
+                    if($user->getLastName()) {
+                        $currentRecord->lname = $user->getLastName();
+                    }
+                    if($user->getUrl()) {
+                        $currentRecord->avatar = $user->getUrl();
+                    }
+                    if($user->getEmail()) {
+                        $currentRecord->email = $user->getEmail();
+                    }
+                    if($user->getTelephoneNumber()) {
+                        $currentRecord->phone = $user->getTelephoneNumber();
+                    }
+                    if($user->getPhysicalDeliveryOfficeName()) {
+                        $currentRecord->room = $user->getPhysicalDeliveryOfficeName();
+                    }
 
                     $currentRecord->save();
 

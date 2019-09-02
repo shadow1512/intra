@@ -130,9 +130,9 @@ class updatedirectoryfromad extends Command
                         if(!is_null($present->deleted_at)) {
                             $present->restore();
                         }
-                        //if($user->changedDate() >   $present->created_at) {
+                        if($user->changedDate() >   $present->created_at) {
                             $currentRecord  =   $present;
-                        //}
+                        }
                     }
                     else {
                         $present->delete();

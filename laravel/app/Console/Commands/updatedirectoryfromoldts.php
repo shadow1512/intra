@@ -102,6 +102,9 @@ class updatedirectoryfromoldts extends Command
                         if(isset($item->bdate->value) && !empty($item->bdate->value)    &&  empty($record->birthday)) {
                             $record->birthday   =   date("Y-m-d", strtotime($item->bdate->value));
                         }
+                        if($mname    &&  empty($record->mname)) {
+                            $record->mname   =   $mname;
+                        }
                         if(isset($item->startdate->value) && !empty($item->startdate->value)    &&  empty($record->workstart)) {
                             $record->workstart   =   date("Y-m-d", strtotime($item->startdate->value));
                         }

@@ -176,6 +176,7 @@ class ProfileController extends Controller
             if($ps) {
                 Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
                 $ps->user_informed  =   1;
+                $ps->save();
                 $ps->delete();
             }
             $ps =   new Profiles_Saved();

@@ -369,9 +369,9 @@ $(document).ready(function($) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var link = $(this);
         $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
-        $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         var id = $(this).attr("id");
         id = id.split("_");
+        $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         var newstatus = id[2];
         var url = $(this).attr("href");
         var newval = $("#input_" + id[1]).val().trim();

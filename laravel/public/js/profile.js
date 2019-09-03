@@ -29,14 +29,6 @@ $("#input_city_phone").on("blur", function() {
     }
 });
 
-$("#input_birthday").datetimepicker({
-    lang:'ru',
-    format:'d.m.Y',
-    timepicker:false,
-    scrollInput : false,
-    //formatDate:'Y-m-d H:i',
-});
-
 $(document).on("click", "#delete_avatar", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("href");

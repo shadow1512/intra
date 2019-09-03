@@ -155,7 +155,6 @@ function setFocus(window) { setTimeout(function() { $(window).find('input')[0].f
 popUp('.__js-modal-dinner-lk', '.__js-modal-dinner');
 popUp('.__js-modal-bill-lk', '.__js-modal-bill');
 popUp('.__js-modal-camera-lk', '.__js-modal-camera');
-popUp('.__js-modal-profile-lk', '.__js-modal-profile');
 popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
     if ($(but).parent().children("span.source_date").length > 0) {
         var dd = $(but).parent().children("span.source_date").text();
@@ -273,6 +272,37 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
     });
 });
 
+popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
+    var url=    $(but).attr("href");
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        success: function(msg) {
+            if (msg["result"] == "success") {
+                $("div.__js-modal-profile").find("div.__form").html(msg["html"]);
+
+                $("#input_birthday").datetimepicker({
+                    lang:'ru',
+                    format:'d.m.Y',
+                    timepicker:false,
+                    scrollInput : false,
+                    //formatDate:'Y-m-d H:i',
+                });
+
+                $("div.__js-modal-profile").find("#input_birthday").datetimepicker({
+                    lang:'ru',
+                    format:'d.m.Y',
+                    timepicker:false,
+                    scrollInput : false,
+                    //formatDate:'Y-m-d H:i',
+                });
+            }
+        }
+    });
+});
 //eo modal window
 
 function tabs(tab, cnt) {

@@ -105,7 +105,45 @@ class ProfileController extends Controller
 
     public function edit()
     {
+        $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
+            ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->where('users.id', '=', Auth::user()->id)->first();
 
+        $dep    =   $ps     =   $moderate   =   $psd    =   null;
+
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
+        if($ps_record) {
+            $ps=    $ps_record;
+            $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
+
+            foreach($psd as $item) {
+                if($item->field_name    ==  "dep_id") {
+                    if($item->new_value) {
+                        $dep        =   Dep::findOrFail($item->new_value);
+                        $moderate   =   Dep::getModerate($item->new_value);
+                    }
+                    else {
+                        if($item->old_value) {
+                            $dep        =   Dep::findOrFail($item->old_value);
+                            $moderate   =   Dep::getModerate($item->old_value);
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            $dep        =   Dep::findOrFail($user->dep_id);
+            $moderate   =   Dep::getModerate($user->dep_id);
+        }
+
+
+
+        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
+
+        $html   =   View::make('profile.editpopup', ['user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,
+            'psd'    =>  $psd, 'moderate'  =>  $moderate, 'labels'    =>  Config::get("dict.labels")]);
+
+        return response()->json(['success', $html->render()]);
     }
 
     public function update(Request $request)

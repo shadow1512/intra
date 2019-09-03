@@ -377,8 +377,9 @@ $(document).ready(function($) {
         var newval = $("#input_" + id[1]).val().trim();
         var reason = $("#input_reason_" + id[1]).val().trim();
 
-        if(newval==3    &&  !reason) {
+        if(newstatus==3    &&  !reason) {
             $("#input_reason_" + id[1]).css("border-color",   "#FF0000");
+            alert("Необходимо указать причину, по которой отклонено изменение");
         }
         else {
             $.ajax({

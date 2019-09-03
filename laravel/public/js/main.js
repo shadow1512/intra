@@ -284,13 +284,6 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
             if (msg[0] == "success") {
                 $("div.__js-modal-profile").find("div.__form").html(msg[1]);
 
-                $("#input_birthday").datetimepicker({
-                    lang:'ru',
-                    format:'d.m.Y',
-                    timepicker:false,
-                    scrollInput : false,
-                    //formatDate:'Y-m-d H:i',
-                });
 
                 $("div.__js-modal-profile").find("#input_birthday").datetimepicker({
                     lang:'ru',
@@ -298,6 +291,14 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
                     timepicker:false,
                     scrollInput : false,
                     //formatDate:'Y-m-d H:i',
+                });
+                $("#input_dep").chosen({ width: "100%", disable_search: true, no_results_text: 'Ничего не найдено' });
+//Код для пункта "Не выбрано"
+                $("#input_dep").on('change', function(event) {
+                    if ($(this).val() === "0") {
+                        $(this).val([]);
+                        $("#input_dep").trigger('chosen:updated');
+                    }
                 });
             }
         }

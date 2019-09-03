@@ -33,6 +33,7 @@ $("#input_birthday").datetimepicker({
     lang:'ru',
     format:'d.m.Y',
     timepicker:false,
+    scrollInput : false,
     //formatDate:'Y-m-d H:i',
 });
 

@@ -281,8 +281,8 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
         async: true,
         dataType: "json",
         success: function(msg) {
-            if (msg["result"] == "success") {
-                $("div.__js-modal-profile").find("div.__form").html(msg["html"]);
+            if (msg[0] == "success") {
+                $("div.__js-modal-profile").find("div.__form").html(msg[1]);
 
                 $("#input_birthday").datetimepicker({
                     lang:'ru',

@@ -362,7 +362,7 @@
                                     {{$labels[$record->field_name]}}: @if($record->old_value    &&  $record->new_value  &&  ($record->old_value !=  $record->new_value))заменить &laquo;{{$record->old_value}}&raquo; на&nbsp;&laquo;{{$record->new_value}}&raquo;@endif
                                     @if(!$record->old_value    &&  ($record->old_value !=  $record->new_value))добавить &laquo;{{$record->new_value}}&raquo;@endif
                                     @if($record->old_value    &&  !$record->new_value)удалить &laquo;{{$record->old_value}}&raquo;@endif
-                                    @if($record->status==3)<div class="lst-changes_error">{{$record->reason}}</div>@endif
+                                    @if($record->status==3)<div class="lst-changes_error">Отклонено. Причина: @if($record->reason){{$record->reason}}@else без причины. @endif</div>@endif
                                     @if($record->status==2)<div class="lst-changes_approve">Внесено</div>@endif
                                 </li>
                             @endforeach

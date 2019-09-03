@@ -136,7 +136,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
             data: form.serialize() + "&_token=" + $("input[name='_token']").val(),
             success: function(msg) {
                 if(msg[0] == "success") {
-                    $(form).parent().parent().parent().fadeOut(300);
+                    $(form).parent().parent().parent().removeClass("__vis");
                     $(form).parent().parent().parent().after(msg[1]);
                     $("div.__js-modal-profile-changes").addClass("__vis");
                     $(document).on('click', '.modal-close, .close_changes_form_btn', function(event) {

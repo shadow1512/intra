@@ -366,10 +366,10 @@ $(document).ready(function($) {
     });*/
 
     $(document).on("click", ".update_fields_links", function (ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var link = $(this);
         $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
         $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
-        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var id = $(this).attr("id");
         id = id.split("_");
         var newstatus = id[2];
@@ -379,37 +379,38 @@ $(document).ready(function($) {
 
         if(newval==3    &&  !reason) {
             $("#input_reason_" + id[1]).css("border-color",   "#FF0000");
-            return false;
         }
-        $.ajax({
-            type: "POST",
-            url: url,
-            cache: false,
-            async: true,
-            dataType: "json",
-            data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=put",
-            success: function (msg) {
-                if (msg[0] == "success") {
-                    if (newstatus == 2) {
-                        $(link).parent().parent().addClass("bg-success");
+        else {
+            $.ajax({
+                type: "POST",
+                url: url,
+                cache: false,
+                async: true,
+                dataType: "json",
+                data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=put",
+                success: function (msg) {
+                    if (msg[0] == "success") {
+                        if (newstatus == 2) {
+                            $(link).parent().parent().addClass("bg-success");
+                        }
+                        if (newstatus == 3) {
+                            $(link).parent().parent().addClass("bg-danger");
+                        }
                     }
-                    if (newstatus == 3) {
-                        $(link).parent().parent().addClass("bg-danger");
-                    }
-                }
-                if (msg[0] == "error") {
-                    var errors = msg[1];
-                    if (errors == "no access") {
-                        alert("Нет прав на изменение этого поля");
-                    }
-                    else {
-                        for (var key in errors) {
-                            alert(errors[key]);
+                    if (msg[0] == "error") {
+                        var errors = msg[1];
+                        if (errors == "no access") {
+                            alert("Нет прав на изменение этого поля");
+                        }
+                        else {
+                            for (var key in errors) {
+                                alert(errors[key]);
+                            }
                         }
                     }
                 }
-            }
-        });
+            });
+        }
     });
 
     $(document).on("click", "#commit_changes", function (ev) {

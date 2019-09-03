@@ -326,7 +326,7 @@
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             @foreach($changes as $item)
                 <div class="profile_form_h">
-                    <div class="h light_h __h_m">Отправлен запрос {{date("d.m.Y H:i:s", strtotime($item->created_at))}} на&nbsp;внесение изменений<br />в&nbsp;ваш корпоративный профиль</div>
+                    <div class="h light_h __h_m">Запрос на внесение изменений в ваш корпоративный профиль обработан модератором @if(!is_null($moderate))( <a href="{{route('people.unit',   ["id"   =>  $moderate->id])}}">{{$moderate->lname}} {{mb_substr($moderate->fname, 0, 1, "UTF-8")}}. @if(!empty($moderate->mname)) {{mb_substr($moderate->mname, 0, 1, "UTF-8")}}.@endif</a>)@endif</div>
                 </div>
                 <div class="profile_form">
                     <ul class="lst-changes">

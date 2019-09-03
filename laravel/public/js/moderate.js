@@ -368,6 +368,7 @@ $(document).ready(function($) {
     $(document).on("click", ".update_fields_links", function (ev) {
         var link = $(this);
         $(link).parent().parent().removeClass("bg-danger").removeClass("bg-success");
+        $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         var id = $(this).attr("id");
         id = id.split("_");
@@ -375,6 +376,11 @@ $(document).ready(function($) {
         var url = $(this).attr("href");
         var newval = $("#input_" + id[1]).val().trim();
         var reason = $("#input_reason_" + id[1]).val().trim();
+
+        if(newval==3    &&  !reason) {
+            $("#input_reason_" + id[1]).css("border-color",   "#FF0000");
+            return false;
+        }
         $.ajax({
             type: "POST",
             url: url,

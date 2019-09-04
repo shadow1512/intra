@@ -68,7 +68,7 @@ class ProfileController extends Controller
                 }
             }
         }
-        
+
         if(!is_null($user->dep_id)) {
             if(is_null($moderate)) {
                 $moderate   =   Dep::getModerate($user->dep_id);

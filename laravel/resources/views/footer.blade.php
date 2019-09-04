@@ -28,7 +28,7 @@
                 <div class="footer_lst_i_h">Полезное</div>
             </li>
             <!--<li class="footer_lst_i"><a href="http://intra.lan.kodeks.net/surv" class="footer_lst_i_lk">О&nbsp;рабочем времени сотрудников</a></li>-->
-            <li class="footer_lst_i"><a href="{{route('parking')}}" class="footer_lst_i_lk">Номера парковочных мест</a></li>
+             <!--<li class="footer_lst_i"><a href="{{route('parking')}}" class="footer_lst_i_lk">Номера парковочных мест</a></li>-->
             <li class="footer_lst_i"><a href="{{route("services.mail")}}" class="footer_lst_i_lk">Заявка на&nbsp;почтовую доставку</a></li>
             <li class="footer_lst_i"><a href="{{route("services.cartridge")}}" class="footer_lst_i_lk">Заявка на&nbsp;замену картриджа</a></li>
             <li class="footer_lst_i"><a href="{{route("services.teh")}}" class="footer_lst_i_lk">Заявка на&nbsp;техническое обслуживание</a></li>

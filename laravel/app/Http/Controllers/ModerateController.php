@@ -388,7 +388,7 @@ class ModerateController extends Controller
             $booking->approved  =   1;
             $booking->save();
             if($user->email) {
-                Mail::send('emails.bookingapproved', ['booking' => $booking], function ($m) use ($user) {
+                Mail::send('emails.bookingapproved', ['booking' => $booking], function ($m) use ($user, $booking) {
                     $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                     $m->to($user->email, $user->fname)->subject('Ваше бронирование ' .   $booking->name    .   " подтверждено");
                 });

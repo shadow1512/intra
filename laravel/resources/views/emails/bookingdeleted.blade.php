@@ -1,0 +1,1 @@
+<h2>Ваше бронирование &laquo;{{$booking->name}}, {{date("d.m.Y", strtotime($booking->date_book))}}, {{$booking->time_start}}&nbsp;&mdash;&nbsp;{{$booking->time_end}}&raquo; было отклонено и удалено из расписания.</h2>

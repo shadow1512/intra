@@ -31,6 +31,7 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use DateTime;
+use Mail;
 
 class ModerateController extends Controller
 {
@@ -381,9 +382,18 @@ class ModerateController extends Controller
 
         $booking    = Booking::findOrFail($id);
         $room       = Rooms::findOrFail($booking->room_id);
+        $user       = User::findOrFail($booking->user_id);
+
         if(is_null($room->available)) {
             $booking->approved  =   1;
             $booking->save();
+            if($user->email) {
+                Mail::send('emails.bookingapproved', ['booking' => $booking], function ($m) use ($user) {
+                    $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                    $m->to($user->email, $user->fname)->subject('Ваше бронирование ' .   $booking->name    .   " подтверждено");
+                });
+
+            }
         }
 
         return redirect(route('moderate.rooms.index'));

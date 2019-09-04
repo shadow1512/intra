@@ -981,6 +981,7 @@ class ModerateController extends Controller
             }
             else {
                 $item->status   =   3;
+                $item->save();
             }
             $item->delete();
         }

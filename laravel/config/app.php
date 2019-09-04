@@ -173,6 +173,7 @@ return [
         Adldap\Laravel\AdldapServiceProvider::class,
         cijic\phpMorphy\MorphyServiceProvider::class,
         TUNER88\Redmine\RedmineClientServiceProvider::class,
+        GeneaLabs\LaravelCaffeine\Providers\Service::class,
 
         /*
          * Application Service Providers...

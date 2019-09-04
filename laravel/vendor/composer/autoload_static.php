@@ -111,6 +111,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'J' => 
         array (
             'JsonSchema\\' => 11,
+            'Jenssegers\\Model\\' => 17,
             'JakubOnderka\\PhpConsoleHighlighter\\' => 35,
             'JakubOnderka\\PhpConsoleColor\\' => 29,
         ),
@@ -124,6 +125,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
             'GuzzleHttp\\Stream\\' => 18,
             'GuzzleHttp\\Ring\\' => 16,
             'GuzzleHttp\\Psr7\\' => 16,
+            'GeneaLabs\\LaravelCaffeine\\' => 26,
         ),
         'F' => 
         array (
@@ -357,6 +359,10 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         array (
             0 => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema',
         ),
+        'Jenssegers\\Model\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jenssegers/model/src',
+        ),
         'JakubOnderka\\PhpConsoleHighlighter\\' => 
         array (
             0 => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src',
@@ -384,6 +390,10 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'GuzzleHttp\\Psr7\\' => 
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/psr7/src',
+        ),
+        'GeneaLabs\\LaravelCaffeine\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src',
         ),
         'Faker\\' => 
         array (
@@ -2090,6 +2100,11 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'File_Iterator' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Iterator.php',
         'File_Iterator_Facade' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Facade.php',
         'File_Iterator_Factory' => __DIR__ . '/..' . '/phpunit/php-file-iterator/src/Factory.php',
+        'GeneaLabs\\LaravelCaffeine\\Console\\Commands\\Publish' => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src/Console/Commands/Publish.php',
+        'GeneaLabs\\LaravelCaffeine\\Dripper' => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src/Dripper.php',
+        'GeneaLabs\\LaravelCaffeine\\Http\\Controllers\\Drip' => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src/Http/Controllers/Drip.php',
+        'GeneaLabs\\LaravelCaffeine\\Http\\Middleware\\LaravelCaffeineDripMiddleware' => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src/Http/Middleware/LaravelCaffeineDripMiddleware.php',
+        'GeneaLabs\\LaravelCaffeine\\Providers\\Service' => __DIR__ . '/..' . '/genealabs/laravel-caffeine/src/Providers/Service.php',
         'GuzzleHttp\\Psr7\\AppendStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/AppendStream.php',
         'GuzzleHttp\\Psr7\\BufferStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/BufferStream.php',
         'GuzzleHttp\\Psr7\\CachingStream' => __DIR__ . '/..' . '/guzzlehttp/psr7/src/CachingStream.php',
@@ -3056,6 +3071,8 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'JakubOnderka\\PhpConsoleColor\\ConsoleColor' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/ConsoleColor.php',
         'JakubOnderka\\PhpConsoleColor\\InvalidStyleException' => __DIR__ . '/..' . '/jakub-onderka/php-console-color/src/InvalidStyleException.php',
         'JakubOnderka\\PhpConsoleHighlighter\\Highlighter' => __DIR__ . '/..' . '/jakub-onderka/php-console-highlighter/src/Highlighter.php',
+        'Jenssegers\\Model\\MassAssignmentException' => __DIR__ . '/..' . '/jenssegers/model/src/MassAssignmentException.php',
+        'Jenssegers\\Model\\Model' => __DIR__ . '/..' . '/jenssegers/model/src/Model.php',
         'JsonSchema\\Constraints\\BaseConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/BaseConstraint.php',
         'JsonSchema\\Constraints\\CollectionConstraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/CollectionConstraint.php',
         'JsonSchema\\Constraints\\Constraint' => __DIR__ . '/..' . '/justinrainbow/json-schema/src/JsonSchema/Constraints/Constraint.php',

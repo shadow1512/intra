@@ -84,7 +84,7 @@
 <div class="overlay __js-modal-profile">
     <div class="modal-w">
         <div class="modal-cnt __form">
-            <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+
         </div>
     </div>
 </div>

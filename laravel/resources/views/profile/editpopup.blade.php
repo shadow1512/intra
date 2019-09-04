@@ -1,3 +1,4 @@
+<div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
 <div class="profile_form_h">
     <div class="h light_h __h_m">Настройки профиля</div>
 </div>

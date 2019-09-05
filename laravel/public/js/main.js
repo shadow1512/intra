@@ -290,7 +290,7 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
                     format:'d.m.Y',
                     timepicker:false,
                     scrollInput : false,
-                    useCurrent: false,
+                    validateOnBlur: false,
                     //formatDate:'Y-m-d H:i',
                 });
                 $("#input_dep").chosen({ width: "100%", disable_search: true, no_results_text: 'Ничего не найдено' });

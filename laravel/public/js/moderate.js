@@ -62,7 +62,7 @@ $(document).ready(function($) {
         format: 'd.m.Y',
         timepicker: false,
         scrollInput : false,
-        useCurrent: false,
+        validateOnBlur: false,
         //formatDate:'Y-m-d H:i',
     });
 

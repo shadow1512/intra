@@ -454,7 +454,7 @@ function toggleDropdown(link, cnt) {
 toggleDropdown('.__js_header_login', '.header_login_nav');
 
 if ($('.menu_ul').height() > $('.content_i_container').height()) {
-  $('.staff_ul').css({'max-height':$('.menu_ul').height()/2-76});
+  $('.staff_ul').css({'max-height':$('.menu_ul').height()/2-96});
 } else {
   $('.staff_ul').css({'max-height':'400px'});
   $('.staff_ul.__birthday').css({'max-height':'510px'});

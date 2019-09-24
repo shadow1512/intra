@@ -80,6 +80,7 @@
         @endforeach
         <!--<li class="staff_li"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники</a></li>-->
     </ul>
+    <div class="staff_li __padding-top_l __padding-bottom_s"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники</a></div>
     @endif
 </div>
 @endsection

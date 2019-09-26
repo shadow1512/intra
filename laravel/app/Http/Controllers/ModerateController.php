@@ -1069,7 +1069,7 @@ class ModerateController extends Controller
         }
         $ps =   new Profiles_Saved();
 
-        $ps->user_id        =   Auth::user()->id;
+        $ps->user_id        =   $id;
         $ps->creator_id     =   Auth::user()->id;
         $ps->notified       =   1;
         $ps->save();

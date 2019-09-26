@@ -45,12 +45,6 @@ $("a.directory_search").on("click", function(ev) {
     }
 });
 
-var totalHeight = 0;
-$('.staff_i').each(function(i) {
-  totalHeight = totalHeight+$(this).outerHeight();
-});
-$('.content_i_container').css({'min-height':totalHeight});
-
 $("a.header_search_btn").on("click", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     $(this).parent().parent().submit();
@@ -459,6 +453,13 @@ function toggleDropdown(link, cnt) {
 
 toggleDropdown('.__js_header_login', '.header_login_nav');
 
+if ($('.menu_ul').height() > $('.content_i_container').height()) {
+  $('.staff_ul').css({'max-height':$('.menu_ul').height()/2-96});
+} else {
+  $('.staff_ul').css({'max-height':'400px'});
+  $('.staff_ul.__birthday').css({'max-height':'510px'});
+}
+
 function toggleMenu(el, siblings) {
     $(el).click(function() {
         var date = new Date(new Date().getTime() + 60 * 10000000);
@@ -466,15 +467,26 @@ function toggleMenu(el, siblings) {
 
         if ($(this).hasClass('__close')) {
             $(this).removeClass('__close');
+            if ($('.menu_ul').height() > $('.content_i_container').height()) {
+              var height = $('.menu_ul').height()+$(this).siblings(siblings).height();
+              $('.staff_ul').css({'max-height':height/2-76});
+            } else {
+              $('.staff_ul').css({'max-height':'400px'});
+              $('.staff_ul.__birthday').css({'max-height':'510px'});
+            }
             document.cookie = "hide_menu_" + index + "=0; path=/; expires=" + date.toUTCString();
         } else {
             $(this).addClass('__close');
+            if ($('.menu_ul').height() > $('.content_i_container').height()) {
+              var height = $('.menu_ul').height()-$(this).siblings(siblings).height();
+              $('.staff_ul').css({'max-height':height/2-76});
+            } else {
+              $('.staff_ul').css({'max-height':'400px'});
+              $('.staff_ul.__birthday').css({'max-height':'510px'});
+            }
             document.cookie = "hide_menu_" + index + "=1; path=/; expires=" + date.toUTCString();
         }
         $(this).siblings(siblings).toggle(250);
-
-
-
     })
 }
 

@@ -27,12 +27,13 @@ svg.append("g")
 
 svg.attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
 
-d3.csv('/storage/directory/public_data.csv', function(error, data) {
+d3.csv('/js/personal_data.csv', function(error, data) {
 
   data.forEach(function(d) {
     d.color  =  d.color;
     d.score  = +d.score;
     d.label  =  d.label;
+    d.title  =  d.title;
     d.url  =  d.url;
     d.icon  =  "/images/person.svg";
   });
@@ -45,7 +46,13 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
     .enter().append("path")
       .attr("fill", function(d) { return d.data.color; })
       .attr("class", "department_slice")
-      .attr("d", arc);
+      .attr("d", arc)
+      .append("title")
+        .text(d => `${d.data.title}: ${d.data.score} чел.`);
+
+  svg.selectAll(".department_slice").on("click", function(d) {
+    window.open(d.data.url, "_self");
+  });
 
   // label
   function wrap(text, width) {
@@ -58,7 +65,7 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         lineHeight = 1.5,
         x = text.attr("x"),
         y = text.attr("y"),
-        dy = 0,
+        dy = 0.5,
         tspan = text.text(null)
           .append("tspan")
           .attr("x", x)
@@ -126,7 +133,18 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         	.innerRadius(radius * 0.2)
         	.outerRadius(radius * 0.2);
         var pos = outerLabelArc.centroid(d2);
-        return "translate("+ pos +")";
+        var posX = pos[0], posY = pos[1];
+        if (posX > -4 & posX < 0) {
+          posX = posX+100;
+        } else if (posX > -10 & posX < -4) {
+          posX = posX-20;
+        }
+        if (posY > 20 & posY < 25) {
+          posY = posY-30;
+        } else if (posY > 26 & posY < 30) {
+          posY = posY-10;
+        }
+        return "translate(" + posX + "," + posY + ")";
       };
     })
     .styleTween("text-anchor", function(d){
@@ -135,13 +153,15 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
       this._current = interpolate(0);
       return function(t) {
         var d2 = interpolate(t);
-        return midAngle(d2) < Math.PI ? "middle":"end";
+        return midAngle(d2) < Math.PI ? "start":"end";
       };
     });
 
   score.append("circle")
     .attr("class", "department_circle")
-    .attr("r", "30");
+    .attr("r", "30")
+    .append("title")
+      .text(d => `${d.data.title}: ${d.data.score} чел.`);
 
   score.append('clipPath')
   	.append('use')

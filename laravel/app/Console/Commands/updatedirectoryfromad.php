@@ -131,10 +131,10 @@ class updatedirectoryfromad extends Command
                             $present->restore();
                         }
                         if($user->changedDate() >   $present->updated_at) {
-                            print $user->getConvertedSid()  .   "\r\n";
+                            /*print $user->getConvertedSid()  .   "\r\n";
                             print "AD Changed\r\n";
                             print $user->changedDate()  .   "\r\n";
-                            print $present->updated_at  .   "\r\n";
+                            print $present->updated_at  .   "\r\n";*/
                             $currentRecord  =   $present;
                         }
                     }
@@ -148,7 +148,7 @@ class updatedirectoryfromad extends Command
                 }
 
                 if(!is_null($currentRecord)) {
-                    print "new atributes\r\n";
+                    //print "new atributes\r\n";
                     $currentRecord->sid       =   $user->getConvertedSid();
                     if($user->getFirstName()) {
                         $currentRecord->fname = $user->getFirstName();
@@ -172,20 +172,21 @@ class updatedirectoryfromad extends Command
                         $currentRecord->room = $user->getPhysicalDeliveryOfficeName();
                     }
 
-                    //$currentRecord->save();
+                    $currentRecord->updated_at  =   user->changedDate();
+                    $currentRecord->save();
 
                     $work_title     =   $user->getTitle();
                     $chef   =   null;
                     if($user->getBusinessCategory() ==  "boss") {
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }
-                    /*Deps_Peoples::where("people_id",    "=",    $currentRecord->id)->delete();
+                    Deps_Peoples::where("people_id",    "=",    $currentRecord->id)->delete();
                     $dp =   new Deps_Peoples();
                     $dp->dep_id     =   $dep->id;
                     $dp->people_id  =   $currentRecord->id;
                     $dp->work_title =   $work_title;
                     $dp->chef       =   $chef;
-                    $dp->save();*/
+                    $dp->save();
                 }
             }
         }

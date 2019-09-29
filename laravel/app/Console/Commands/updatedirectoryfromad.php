@@ -172,7 +172,7 @@ class updatedirectoryfromad extends Command
                         $currentRecord->room = $user->getPhysicalDeliveryOfficeName();
                     }
 
-                    $currentRecord->updated_at  =   user->changedDate();
+                    $currentRecord->updated_at  =   $user->changedDate();
                     $currentRecord->save();
 
                     $work_title     =   $user->getTitle();

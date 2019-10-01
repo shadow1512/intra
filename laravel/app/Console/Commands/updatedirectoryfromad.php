@@ -130,13 +130,6 @@ class updatedirectoryfromad extends Command
                         if(!is_null($present->deleted_at)) {
                             $present->restore();
                         }
-                        if($user->changedDate() >   $present->updated_at) {
-                            /*print $user->getConvertedSid()  .   "\r\n";
-                            print "AD Changed\r\n";
-                            print $user->changedDate()  .   "\r\n";
-                            print $present->updated_at  .   "\r\n";*/
-                            $currentRecord  =   $present;
-                        }
                     }
                     else {
                         $present->delete();

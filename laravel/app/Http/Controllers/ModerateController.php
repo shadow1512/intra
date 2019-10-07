@@ -788,8 +788,8 @@ class ModerateController extends Controller
             $photo->delete();
         }
 
-        if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/')) {
-            Storage::disk('public')->deleteDirectory(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/');
+        if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/')) {
+            Storage::disk('public')->deleteDirectory(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/');
         }
         $item->delete();
 

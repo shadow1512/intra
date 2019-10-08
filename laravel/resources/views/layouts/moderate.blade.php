@@ -25,9 +25,9 @@
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
     <script>
         if(location.href.indexOf("foto")    !=  -1) {
+            document.write("<script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'><\/script>");
             document.write("<script src='{{ asset('js/libs/tmpl.min.js') }}'><\/script>");
             document.write("<script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'><\/script>");
             document.write("<script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'><\/script>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-audio.js') }}'><\/script>");
             document.write("<script src='{{ asset('js/libs/jquery.fileupload-video.js') }}'><\/script>");

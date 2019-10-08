@@ -86,7 +86,7 @@
                                             <td><span class="preview"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery=""><img src="{{$photo->image_th}}"></a></span></td>
                                             <td><p class="name"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery="">{{$photo->desc}}</a></p></td>
                                             <td><span class="size">{{$photo->size}} KB</span></td>
-                                            <td><button class="btn btn-danger delete" data-type="GET" data-url="{{route('moderate.foto.deleteimage',    ["id"   =>  $photo->id])}}?"><i class="glyphicon glyphicon-trash"></i><span>Удалить</span></button><input type="checkbox" name="delete" value="1" class="toggle"></td>
+                                            <td><button class="btn btn-danger delete" data-type="GET" data-url="{{route('moderate.foto.deleteimage',    ["id"   =>  $photo->id])}}"><i class="glyphicon glyphicon-trash"></i><span>Удалить</span></button><input type="checkbox" name="delete" value="1" class="toggle"></td>
                                         </tr>
                                     @endforeach
                                 @endif

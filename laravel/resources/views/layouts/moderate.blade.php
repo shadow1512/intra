@@ -23,18 +23,14 @@
     <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
-    <script>
-        if(location.href.indexOf("foto")    !=  -1) {
-            document.write("<script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/tmpl.min.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-audio.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-video.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-validate.js') }}'><\/script>");
-            document.write("<script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'><\/script>");
-        }
-    </script>
+    <script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'></script>
+    <script src='{{ asset('js/libs/tmpl.min.js') }}'></script>
+    <script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'></script>
+    <script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'></script>
+    <script src='{{ asset('js/libs/jquery.fileupload-audio.js') }}'></script>
+    <script src='{{ asset('js/libs/jquery.fileupload-video.js') }}'></script>
+    <script src='{{ asset('js/libs/jquery.fileupload-validate.js') }}'></script>
+    <script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'></script>
     <script src="{{ asset('js/libs/load-image.all.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>

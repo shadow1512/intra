@@ -996,6 +996,7 @@ class ModerateController extends Controller
             $item->delete();
         }
 
+        $user->updated_at   =   date("Y-m-d H:i:s");
         $user->save();
         $ps->delete();
 

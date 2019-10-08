@@ -98,7 +98,7 @@
                     <div class="search-res_cnt_i_b">
                         <div class="h __h_m search-res_cnt_i_b_h">{{count($razdels)}} разделов библиотек</div>
                         <ul class="docs_lst">
-                            @foreach ($razdes as $razdel)
+                            @foreach ($razdels as $razdel)
                                 <li class="docs_lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$razdel->name}}</span></a></li>
                             @endforeach
                         </ul>

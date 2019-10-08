@@ -964,28 +964,23 @@ class ModerateController extends Controller
                 else {
                     if($item->field_name == "dep_id") {
                         $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
-                        $work_title =   $chef   =   null;
-                        if($wt_record) {
-                            $work_title =   $wt_record->work_title;
-                            $chef       =   $wt_record->chef;
+                        if(!$wt_record) {
+                            $wt_record = new Deps_Peoples();
+                            $wt_record->chef    =   0;
+                            $wt_record->people_id  =   $user->id;
                         }
-                        else {
-                            $chef   =   0;
-                        }
-                        Deps_Peoples::where("people_id", "=", $user->id)->delete();
-                        $dp = new Deps_Peoples();
-                        $dp->dep_id     =   $item->new_value;
-                        $dp->people_id  =   $user->id;
-                        $dp->work_title =   $work_title;
-                        $dp->chef       =   $chef;
-                        $dp->save();
+                        $wt_record->dep_id     =   $item->new_value;
+                        $wt_record->save();
                     }
                     if($item->field_name    ==  "work_title") {
                         $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
-                        if($wt_record) {
-                            $wt_record->work_title  =   $item->new_value;
-                            $wt_record->save();
+                        if(!$wt_record) {
+                            $wt_record = new Deps_Peoples();
+                            $wt_record->chef    =   0;
+                            $wt_record->people_id  =   $user->id;
                         }
+                        $wt_record->work_title  =   $item->new_value;
+                        $wt_record->save();
                     }
                 }
             }
@@ -996,7 +991,7 @@ class ModerateController extends Controller
             $item->delete();
         }
 
-        $user->updated_at   =   date("Y-m-d H:i:s");
+        $user->numupdates   =   $user->numupdates   +   1;
         $user->save();
         $ps->delete();
 

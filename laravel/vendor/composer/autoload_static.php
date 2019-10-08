@@ -1443,6 +1443,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersAddCityPhone' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
         'EditUsersAddEmailSecondary' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',
         'EditUsersAddNumpark' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
+        'EditUsersAddNumupdates' => __DIR__ . '/../..' . '/database/migrations/2019_10_08_234757_edit_users_add_numupdates.php',
         'EditUsersAddPosition' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',
         'EditUsersAddSid' => __DIR__ . '/../..' . '/database/migrations/2019_08_28_015604_edit_users_add_sid.php',
         'EditUsersDatafieldsNullable' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',

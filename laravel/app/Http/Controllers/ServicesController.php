@@ -185,7 +185,7 @@ class ServicesController extends Controller
         if (Auth::check()) {
             $user = User::findOrFail(Auth::user()->id);
         }
-        
+
         //счет в столовой
         $summ   =   0;
         $bills  =   array();

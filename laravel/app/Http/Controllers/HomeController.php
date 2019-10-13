@@ -76,7 +76,7 @@ class HomeController extends Controller
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
                                 'ditems'        =>  $items,
-                                'sum'           =>  $summ]);
+                                'summ'          =>  $summ]);
     }
 
     function parking()

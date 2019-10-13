@@ -65,10 +65,18 @@ class HomeController extends Controller
         //режим работы столовой
         $items  =   Dinner_slots::orderBy('time_start')->get();
 
+        $summ   =   0;
+        if (Auth::check()) {
+            $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
+            if($bill) {
+                $summ   =   $bill->summ;
+            }
+        }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
-                                'ditems'        =>  $items]);
+                                'ditems'        =>  $items,
+                                'sum'           =>  $summ]);
     }
 
     function parking()

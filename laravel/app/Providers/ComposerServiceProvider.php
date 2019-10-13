@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use DB;
 use App\Rooms;
 use App\User;
 use Auth;

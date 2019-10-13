@@ -62,76 +62,13 @@ class HomeController extends Controller
             ->whereRaw("ADDDATE(workstart, INTERVAL 1 MONTH) >= '" . date("Y-m-d") . "'")
             ->orderBy('workstart', 'desc')->get();
 
-        //счет в столовой
-        $summ   =   0;
-        $bills  =   array();
-        if (Auth::check()) {
-            $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
-            if($bill) {
-                $summ   =   $bill->summ;
-            }
-            $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
-        }
-
         //режим работы столовой
         $items  =   Dinner_slots::orderBy('time_start')->get();
 
-        //Меню
-        $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');
-        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $res = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $kitchen_menu   =   "";
-        $res=   iconv("windows-1251",    "utf-8",   $res);
-        if($status_code == 200) {
-            preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
-            if(count($matches)) {
-                $kitchen_menu   =   $matches[1];
-            }
-        }
-
-        //камеры
-        $cam1   =   $cam2   =   null;
-
-        $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FILETIME, true);
-        $res = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
-        if($status_code == 200) {
-            if($time    >   -1) {
-                if((time()   -   $time) <=   600) {
-                    $cam1   =   "ok";
-                }
-            }
-        }
-
-        $ch = curl_init('http://intra-unix.kodeks.net/img/cam2.jpg');
-        curl_setopt($ch, CURLOPT_NOBODY, true);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_FILETIME, true);
-        $res = curl_exec($ch);
-        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
-        if($status_code == 200) {
-            if($time    >   -1) {
-                if((time()   -   $time) <=   600) {
-                    $cam2   =   "ok";
-                }
-            }
-        }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
-                                'kitchen_menu'  =>  $kitchen_menu,
-                                'summ'          =>  $summ,
-                                'bills'         =>  $bills,
-                                'ditems'        =>  $items,
-                                'cam1'          =>  $cam1,
-                                'cam2'          =>  $cam2]);
+                                'ditems'        =>  $items]);
     }
 
     function parking()

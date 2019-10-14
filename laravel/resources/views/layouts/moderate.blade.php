@@ -13,7 +13,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('styles/css/moderate.css') }}" rel="stylesheet">
-    @if(Route::currentRouteName()   ==  'moderate.foto.edit ')
+    @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <link href="{{ asset('styles/css/blueimp-gallery.min.css') }}" rel="stylesheet"/>
     @endif
     <link href="{{ asset('styles/css/jquery.fileupload.css') }}" rel="stylesheet" />
@@ -24,7 +24,7 @@
     <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
-    @if(Route::currentRouteName()   ==  'moderate.foto.edit ')
+    @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <script src='{{ asset('js/libs/tmpl.min.js') }}'></script>
         <script src="{{ asset('js/libs/load-image.all.min.js') }}"></script>
         <script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'></script>
@@ -32,7 +32,7 @@
         <script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'></script>
     @endif
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
-    @if(Route::currentRouteName()   ==  'moderate.foto.edit ')
+    @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>
         <script src="{{ asset('js/libs/jquery.fileupload-image.js') }}"></script>
         <script src='{{ asset('js/libs/jquery.fileupload-audio.js') }}'></script>

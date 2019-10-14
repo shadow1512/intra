@@ -26,11 +26,13 @@
     <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
     @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <script src='{{ asset('js/libs/tmpl.min.js') }}'></script>
+    @endif
         <script src="{{ asset('js/libs/load-image.all.min.js') }}"></script>
+    @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <script src='{{ asset('js/libs/canvas-to-blob.min.js') }}'></script>
         <script src='{{ asset('js/libs/jquery.blueimp-gallery.min.js') }}'></script>
-        <script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'></script>
     @endif
+    <script src='{{ asset('js/libs/jquery.iframe-transport.js') }}'></script>
     <script src="{{ asset('js/libs/jquery.fileupload.js') }}"></script>
     @if(Route::currentRouteName()   ==  'moderate.foto.edit')
         <script src="{{ asset('js/libs/jquery.fileupload-process.js') }}"></script>

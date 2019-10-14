@@ -115,7 +115,6 @@ $(document).ready(function($) {
         singleFileUploads: false,
         sequentialUploads: true,
         submit: function (e, data) {
-            alert('a');
             totalSize = 0;
 
             $.each(data.files, function (index, file) {

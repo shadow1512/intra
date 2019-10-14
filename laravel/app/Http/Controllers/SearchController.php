@@ -92,9 +92,9 @@ class SearchController extends Controller
                             //слово есть в словаре
                             $total_found_by_word    =   0;
 
-                            var_dump($word);
+                            //var_dump($word);
                             if(pspell_check($dict,  $word)) {
-                                echo 'a';
+                                //echo 'a';
                                 $res= $this->getSearchResultsByWord($word);
                                 $words_records[]    =   $res;
                                 $total_found_by_word    =   count($res);
@@ -102,10 +102,10 @@ class SearchController extends Controller
                             }
                             //Слово не нашлось в словаре
                             else {
-                                echo 'b';
+                                //echo 'b';
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest    =   pspell_suggest($dict,   $word);
-                                var_dump($suggest);
+                                //var_dump($suggest);
                                 //берем только первый вариант, остальные уже не то
                                 if(count($suggest)) {
                                     $word=  $suggest[0];

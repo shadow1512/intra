@@ -69,9 +69,9 @@
 @endsection
 
 @section('newusers')
+    @if (count($newusers))
 <div class="staff_i">
     <div class="h __h_m">Новые сотрудники</div>
-    @if (count($newusers))
     <ul class="staff_ul">
         @foreach ($newusers as $user)
             <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk" title="Работает с {{ date("d.m.Y", strtotime($user->workstart)) }}"><img src="{{ $user->avatar }}" alt="" class="staff_img">
@@ -80,8 +80,12 @@
         @endforeach
     </ul>
     <!--<div class="staff_li __padding-top_l __padding-bottom_s"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники за месяц</a></div>-->
-    @endif
 </div>
+    @else
+        <div class="staff_i">
+            <p>Новых сотрудников за последний месяц нет.</p>
+        </div>
+    @endif
 @endsection
 
 @section('dinner')

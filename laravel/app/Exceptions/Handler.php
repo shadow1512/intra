@@ -50,6 +50,14 @@ class Handler extends ExceptionHandler
             {
                 return response()->view('errors.404', [], 404);
             }
+            if($exception   instanceof NotAuthorizedException)
+            {
+                return response()->view('errors.401', [], 401);
+            }
+            if($exception   instanceof AuthenticationException)
+            {
+                return response()->view('errors.401', [], 401);
+            }
             return $this->renderHttpException($exception);
         }
         return parent::render($request, $exception);

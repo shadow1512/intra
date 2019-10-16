@@ -18,7 +18,8 @@ class ModerateMiddleware
     {
         if (!Auth::check()  ||  !in_array(Auth::user()->role_id, array(1,3,4,5,6)))
         {
-            return redirect('/');
+            abort(403);
+            //return redirect('/');
         }
 
         return $next($request);

@@ -78,9 +78,8 @@
                     <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
                     <div class="staff_tx">{{ $user->work_title }}</div></a></li>
         @endforeach
-        <!--<li class="staff_li"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники</a></li>-->
     </ul>
-    <div class="staff_li __padding-top_l __padding-bottom_s"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники</a></div>
+    <!--<div class="staff_li __padding-top_l __padding-bottom_s"><a href="{{route('people.new')}}" class="staff_li_more">Все новые сотрудники за месяц</a></div>-->
     @endif
 </div>
 @endsection

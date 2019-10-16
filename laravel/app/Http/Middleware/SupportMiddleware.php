@@ -18,7 +18,8 @@ class SupportMiddleware
     {
         if (!(Auth::user()->role_id   ==  3 ||  Auth::user()->role_id   ==  1))
         {
-            return redirect('/moderate');
+            abort(403);
+            //return redirect('/moderate');
         }
 
         return $next($request);

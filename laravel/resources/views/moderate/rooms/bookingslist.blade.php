@@ -16,8 +16,8 @@
                 <div class="col-md-1">{{ $booking->time_start}}</div>
                 <div class="col-md-1">{{ $booking->time_end}}</div>
                 <div class="col-md-2">{{ $booking->lname }} {{mb_substr($booking->fname,    0,  1,  "UTF-8")}}.@if ($booking->mname) {{mb_substr($booking->mname,    0,  1,  "UTF-8")}}. @endif <br/>@if ($booking->phone) {{$booking->phone}},<br/>@endif @if ($booking->email) {{$booking->email}} @endif</div>
-                <div class="col-md-2"><a href="{{ route('moderate.rooms.bookingconfirm', ["id" => $booking->id, "approved"    =>  1]) }}">Подтвердить</a></div>
-                <div class="col-md-1"><a href="{{ route('moderate.rooms.bookingconfirm', ["id" => $booking->id, "approved"    =>  2]) }}">Отклонить</a></div>
+                <div class="col-md-2"><a href="{{ route('moderate.rooms.bookingconfirm', ["id" => $booking->id]) }}">Подтвердить</a></div>
+                <div class="col-md-1"><a href="{{ route('moderate.rooms.bookingdecline', ["id" => $booking->id]) }}">Отклонить</a></div>
             </div>
             @endforeach
             @endif

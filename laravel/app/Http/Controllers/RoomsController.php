@@ -343,7 +343,7 @@ class RoomsController extends Controller
                     else {
                         $booking->approved   =   0;
                     }
-                    $booking->room_id       =   $room;
+                    $booking->room_id       =   $room->id;
                     $booking->name          =   $name;
                     $booking->date_book     =   $date_booking;
                     $booking->time_start    =   $time_start;
@@ -361,7 +361,7 @@ class RoomsController extends Controller
                     $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        Mail::send('emails.editbooking', ['booking' => $booking, 'user'  =>  $user,  'room'  =>  $room], function ($m) use ($room) {
+                        Mail::send('emails.editbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             $m->to($room->notify_email)->subject('Изменено бронирование в переговорной '    .   $room->name);
                         });

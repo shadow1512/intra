@@ -336,7 +336,7 @@ class RoomsController extends Controller
                 $date = date("Y-m-d H:i:s");
                 if (Auth::check()) {
                     $booking    =   Booking::findOrFail($id);
-                    $room       =   Room:findOrFail($room);
+                    $room       =   Room::findOrFail($room);
                     if($room->available) {
                         $booking->approved   =   1;
                     }

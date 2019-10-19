@@ -178,12 +178,6 @@ class RoomsController extends Controller
                     if($room->available) {
                         $approved   =   1;
                     }
-                    DB::table('room_bookings')->insert(['room_id' => $id, 'name' => $name, 'date_book' => $date_booking,
-                        'user_id' => Auth::user()->id, 'time_start' => $time_start, 'time_end' => $time_end,
-                        'created_at' => $date, 'updated_at' => $date,   'approved'  =>  $approved,  'notebook_own'  =>  $notebook_own,
-                        'notebook_ukot' =>  $notebook_ukot, 'info_internet' =>  $info_internet, 'info_kodeks'   =>  $info_kodeks,
-                        'software_skype'    =>  $software_skype,    'software_skype_for_business'   =>  $software_skype_for_business,
-                        'type_meeting_webinar'  =>  $type_meeting_webinar,  'type_meeting_other'    =>  $type_meeting_other,    'notes' =>  $notes]);
 
                     $booking    =   new Booking();
                     $booking->room_id   =   $id;

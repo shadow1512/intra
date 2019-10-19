@@ -1,0 +1,3 @@
+<h2>Бронирование &laquo;{{$booking->name}}, {{date("d.m.Y", strtotime($booking->date_book))}}, {{$booking->time_start}}&nbsp;&mdash;&nbsp;{{$booking->time_end}}&raquo; было изменено для переговорной {{$room->name}}</h2>
+<p><strong>Необходимо подтверждение</strong></p>
+<p><strong>Сотрудник:</strong>&nbsp;{{$user->fname}} {{$user->lname}}@if($user->phone), телефон: {{$user->phone}}@endif @if($user->email), email: {{$user->email}}@endif</p>

@@ -12,6 +12,7 @@ use DB;
 use Config;
 use Auth;
 use View;
+use Mail;
 
 class RoomsController extends Controller
 {
@@ -183,6 +184,33 @@ class RoomsController extends Controller
                         'notebook_ukot' =>  $notebook_ukot, 'info_internet' =>  $info_internet, 'info_kodeks'   =>  $info_kodeks,
                         'software_skype'    =>  $software_skype,    'software_skype_for_business'   =>  $software_skype_for_business,
                         'type_meeting_webinar'  =>  $type_meeting_webinar,  'type_meeting_other'    =>  $type_meeting_other,    'notes' =>  $notes]);
+
+                    $booking    =   new Booking();
+                    $booking->room_id   =   $id;
+                    $booking->name      =   $name;
+                    $booking->date_book =   $date_booking;
+                    $booking->user_id   =   Auth::user()->id;
+                    $booking->time_start    =   $time_start;
+                    $booking->time_end      =   $time_end;
+                    $booking->approved  =   $approved;
+                    $booking->notebook_own      =   $notebook_own;
+                    $booking->notebook_ukot     =   $notebook_ukot;
+                    $booking->info_internet     =   $info_internet;
+                    $booking->info_kodeks       =   $info_kodeks;
+                    $booking->software_skype    =   $software_skype;
+                    $booking->software_skype_for_business    =   $software_skype_for_business;
+                    $booking->type_meeting_webinar           =   $type_meeting_webinar;
+                    $booking->type_meeting_other             =   $type_meeting_other;
+                    $booking->notes             =   $notes;
+
+                    $booking->create();
+
+                    if(!$booking->approved  &&  $room->notify_email) {
+                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  $user,  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                        });
+                    }
                     return response()->json(['result' => 'success']);
                 }
             }
@@ -308,6 +336,13 @@ class RoomsController extends Controller
                 $date = date("Y-m-d H:i:s");
                 if (Auth::check()) {
                     $booking    =   Booking::findOrFail($id);
+                    $room       =   Room:findOrFail($room);
+                    if($room->available) {
+                        $booking->approved   =   1;
+                    }
+                    else {
+                        $booking->approved   =   0;
+                    }
                     $booking->room_id       =   $room;
                     $booking->name          =   $name;
                     $booking->date_book     =   $date_booking;
@@ -324,6 +359,13 @@ class RoomsController extends Controller
                     $booking->type_meeting_other    =   $type_meeting_other;
                     $booking->notes =   $notes;
                     $booking->save();
+
+                    if(!$booking->approved  &&  $room->notify_email) {
+                        Mail::send('emails.editbooking', ['booking' => $booking, 'user'  =>  $user,  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            $m->to($room->notify_email)->subject('Изменено бронирование в переговорной '    .   $room->name);
+                        });
+                    }
 
                     return response()->json(['result' => 'success']);
                 }

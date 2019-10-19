@@ -31,6 +31,19 @@
                                     <label class="form-check-label" for="available">Требуется подтверждение</label>
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('notify_email') ? ' has-error' : '' }}">
+                                <label for="notify_email" class="col-md-4 control-label">Email для уведомлений</label>
+
+                                <div class="col-md-6">
+                                    <input id="notify_email" type="text" class="form-control" name="notify_email" value="{{ $room->notify_email }}">
+
+                                    @if ($errors->has('notify_email'))
+                                        <span class="help-block error">
+                                        <strong>{{ $errors->first('notify_email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

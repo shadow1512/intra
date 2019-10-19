@@ -306,9 +306,12 @@ class ModerateController extends Controller
         $messages   =   array(
             "name.required"             =>  "Поле обязательно для заполнения",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
+            "notify_email.email"        =>  "Поле должно быть формата email",
+            "notify_email.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
         );
         $validator = Validator::make($request->all(), [
             'name'  => 'required|string|max:50',
+            'notify_email'  =>  'nullable|string|max:255|email',
         ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.rooms.create')
@@ -337,11 +340,14 @@ class ModerateController extends Controller
         //
         $messages   =   array(
             "name.required"             =>  "Поле обязательно для заполнения",
+            "notify_email.email"        =>  "Поле должно быть формата email",
+            "notify_email.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
         );
 
         $validator = Validator::make($request->all(), [
-            'name'  => 'required|string|max:50',
+            'name'          => 'required|string|max:50',
+            'notify_email'  =>  'nullable|string|max:255|email'
         ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.rooms.edit', ["id"   =>  $id])
@@ -350,14 +356,14 @@ class ModerateController extends Controller
         }
 
         $room = Rooms::findOrFail($id);
-        $room->name  = $request->input('name');
+        $room->name             = $request->input('name');
+        $room->notify_email     = $request->input('notify_email');
         if($request->input('available')) {
             $room->available = 0;
         }
         else {
             $room->available = 1;
         }
-        $room->updated_at = date("Y-m-d H:i:s");
         $room->save();
 
         return redirect(route('moderate.rooms.index'));
@@ -400,6 +406,55 @@ class ModerateController extends Controller
         return redirect(route('moderate.rooms.index'));
     }
 
+    public function bookingdecline($id){
+        $booking    = Booking::findOrFail($id);
+        $room       = Rooms::findOrFail($booking->room_id);
+        $user       = User::findOrFail($booking->user_id);
+
+        if(empty($room->available)) {
+            return view('moderate.rooms.bookingdeclinewithreason', ['booking'    =>  $booking,    'room'  =>  $room,    'user'  =>  $user]);
+        }
+        else {
+            return redirect(route('moderate.rooms.index'));
+        }
+    }
+
+
+    public function bookingdeclinewithreason($id, Request $request) {
+        $booking    = Booking::findOrFail($id);
+        $room       = Rooms::findOrFail($booking->room_id);
+        $user       = User::findOrFail($booking->user_id);
+
+        if(empty($room->available)) {
+            $messages   =   array(
+                "reason.required"             =>  "Поле обязательно для заполнения",
+                "reason.max"                  =>  "Поле не должно быть длиннее, чем 250 символов",
+            );
+
+            $validator = Validator::make($request->all(), [
+                'reason'  => 'required|string|max:250',
+            ],  $messages);
+            if ($validator->fails()) {
+                return redirect()->route('moderate.rooms.bookingdeclinewithreason', ['booking'    =>  $booking,    'room'  =>  $room,    'user'  =>  $user])
+                    ->withErrors($validator)
+                    ->withInput();
+            }
+
+            $booking->reason    =   $request->input('reason');
+            $booking->save();
+            $booking->delete();
+            if($user->email) {
+                Mail::send('emails.bookingdeleted', ['booking' => $booking, 'room'  =>  $room], function ($m) use ($user, $booking) {
+                    $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                    $m->to($user->email, $user->fname)->subject('Ваше бронирование ' .   $booking->name    .   " отклонено");
+                });
+
+            }
+
+            return redirect(route('moderate.rooms.index'));
+        }
+
+    }
 
     public function library()
     {

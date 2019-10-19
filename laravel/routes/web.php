@@ -113,6 +113,8 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::get('/', 'ModerateController@rooms')->name('moderate.rooms.index');
         Route::get('/bookingslist/{id}', 'ModerateController@bookingslist')->name('moderate.rooms.bookingslist');
         Route::get('/bookingconfirm/{id}', 'ModerateController@bookingconfirm')->name('moderate.rooms.bookingconfirm');
+        Route::get('/bookingdecline/{id}', 'ModerateController@bookingdecline')->name('moderate.rooms.bookingdecline');
+        Route::put('/bookingdeclinewithreason/{id}', 'ModerateController@bookingdeclinewithreason')->name('moderate.rooms.bookingdeclinewithreason');
         Route::get('/create', 'ModerateController@roomscreate')->name('moderate.rooms.create');
         Route::get('/edit/{id}', 'ModerateController@roomsedit')->name('moderate.rooms.edit');
         Route::put('/update/{id}', 'ModerateController@roomsupdate')->name('moderate.rooms.update');

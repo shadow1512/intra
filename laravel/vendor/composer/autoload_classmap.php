@@ -935,6 +935,8 @@ return array(
     'EditUsersNullableFields' => $baseDir . '/database/migrations/2018_09_20_154201_edit_users_nullable_fields.php',
     'EditUsersPhoneLength' => $baseDir . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',
     'EditeUsersAddattributes' => $baseDir . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
+    'Editroombookingsadddeclinereason' => $baseDir . '/database/migrations/2019_10_19_135148_editroombookingsadddeclinereason.php',
+    'Editroomsaddnotifyemail' => $baseDir . '/database/migrations/2019_10_19_140407_editroomsaddnotifyemail.php',
     'Elasticsearch\\Client' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',
     'Elasticsearch\\ClientBuilder' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/ClientBuilder.php',
     'Elasticsearch\\Common\\EmptyLogger' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/Common/EmptyLogger.php',

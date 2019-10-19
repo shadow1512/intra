@@ -1457,6 +1457,8 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersNullableFields' => __DIR__ . '/../..' . '/database/migrations/2018_09_20_154201_edit_users_nullable_fields.php',
         'EditUsersPhoneLength' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',
         'EditeUsersAddattributes' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
+        'Editroombookingsadddeclinereason' => __DIR__ . '/../..' . '/database/migrations/2019_10_19_135148_editroombookingsadddeclinereason.php',
+        'Editroomsaddnotifyemail' => __DIR__ . '/../..' . '/database/migrations/2019_10_19_140407_editroomsaddnotifyemail.php',
         'Elasticsearch\\Client' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',
         'Elasticsearch\\ClientBuilder' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/ClientBuilder.php',
         'Elasticsearch\\Common\\EmptyLogger' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/Common/EmptyLogger.php',

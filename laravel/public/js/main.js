@@ -262,6 +262,11 @@ popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
             if (msg["result"] == "error") {
                 $("div.__js-modal-change-order").find("div.__form").html("<div class=\"modal_h\"><a href=\"#\" title=\"Закрыть\" class=\"modal-close\"></a></div><div class=\"profile_form_h\"><div class=\"h light_h __h_m\">Вы не можете забронировать переговорную</div><div class=\"h light_h __h_m\">" +   msg["text"] +   "</div>");
             }
+        },
+        error:function (xhr, ajaxOptions, thrownError){
+            if(xhr.status==404) {
+                $("div.__js-modal-change-order").find("div.__form").html("<h3>Бронирование не было найдено.</h3><p>Возможно, оно было отклонено и удалено ответственным за бронирование переговорной.</p><p>Обновите страницу, чтобы убедиться в этом. На вашу почту должно поступить сообщение с причиной удаления.</p>");
+            }
         }
     });
 });

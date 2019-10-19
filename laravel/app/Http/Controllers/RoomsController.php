@@ -203,10 +203,10 @@ class RoomsController extends Controller
                     $booking->type_meeting_other             =   $type_meeting_other;
                     $booking->notes             =   $notes;
 
-                    $booking->create();
+                    $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  $user,  'room'  =>  $room], function ($m) use ($room) {
+                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
                         });

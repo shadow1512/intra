@@ -444,7 +444,7 @@ class ModerateController extends Controller
             $booking->save();
             $booking->delete();
             if($user->email) {
-                Mail::send('emails.bookingdeleted', ['booking' => $booking, 'room'  =>  $room], function ($m) use ($user, $booking) {
+                Mail::send('emails.bookingdeclined', ['booking' => $booking, 'room'  =>  $room], function ($m) use ($user, $booking) {
                     $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                     $m->to($user->email, $user->fname)->subject('Ваше бронирование ' .   $booking->name    .   " отклонено");
                 });

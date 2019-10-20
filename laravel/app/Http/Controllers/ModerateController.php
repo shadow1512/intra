@@ -960,9 +960,6 @@ class ModerateController extends Controller
     }
 
     public function makeFieldChangeUser($psd_id, Request $request) {
-        var_dump($_REQUEST);
-        var_dump(rawurldecode($_REQUEST['input_newval']));
-        exit();
         $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
         $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
 
@@ -1001,10 +998,10 @@ class ModerateController extends Controller
 
         $psd->status    =   $request->input('input_newstatus');
         if($psd->status ==  3) {
-            $psd->reason    =   trim($request->input('input_reason'));
+            $psd->reason    =   trim(rawurldecode($request->input('input_reason')));
         }
         if($psd->status ==  2) {
-            $psd->new_value    =   trim($request->input('input_newval'));
+            $psd->new_value    =   trim(rawurldecode($request->input('input_newval')));
         }
         $psd->save();
 

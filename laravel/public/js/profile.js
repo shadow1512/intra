@@ -41,20 +41,22 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     $(form).parent().parent().parent().removeClass("__vis");
                     //Если, вдруг, это не первое изменение профиля без перезагрузки страницы, надо удалить прежние окна
                     $("div.__js-modal-profile-changes").remove();
-                    $(form).parent().parent().parent().after(msg[1]);
-                    $("div.__js-modal-profile-changes").addClass("__vis");
-                    $(document).on('click', '.modal-close, .close_changes_form_btn', function(event) {
-                        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-                        $(this).parents(window).removeClass('__vis');
-                        $('body').css('overflow', 'auto');
-                    });
-                    $(document).on('click', window, function(event) {
-                        $(this).removeClass('__vis');
-                        $('body').css('overflow', 'auto');
-                    });
-                    $(document).on('click', '.modal-cnt', function(event) {
-                        event.stopPropagation();
-                    });
+                    if($msg[2]  >   0) {
+                        $(form).parent().parent().parent().after(msg[1]);
+                        $("div.__js-modal-profile-changes").addClass("__vis");
+                        $(document).on('click', '.modal-close, .close_changes_form_btn', function (event) {
+                            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+                            $(this).parents(window).removeClass('__vis');
+                            $('body').css('overflow', 'auto');
+                        });
+                        $(document).on('click', window, function (event) {
+                            $(this).removeClass('__vis');
+                            $('body').css('overflow', 'auto');
+                        });
+                        $(document).on('click', '.modal-cnt', function (event) {
+                            event.stopPropagation();
+                        });
+                    }
                 }
                 if(msg[0] == "error") {
                     var errors  =   msg[1];

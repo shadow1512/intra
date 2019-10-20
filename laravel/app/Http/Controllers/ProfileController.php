@@ -88,7 +88,7 @@ class ProfileController extends Controller
         if($bill) {
             $summ   =   $bill->summ;
         }
-        $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
+        //$bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
 
         $tr     =   Technical_Request::select("technical_requests.*", "users.fname", "users.mname", "users.lname", "users.phone as sotr_phone")
                                 ->leftJoin('users',    'users.id', '=',    'technical_requests.assigned')
@@ -102,10 +102,10 @@ class ProfileController extends Controller
             $item->user_informed    =   1;
             $item->save();
         }
-        return view('profile.view', ['contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,
-            'psd'    =>  $psd,    'summ'  =>  $summ,  'bills' =>  $bills,
-            'requests'  =>  $tr,    'moderate'  =>  $moderate,
-            'changes'   =>  $changes,   'change_records'    =>  $change_records,    'labels'    =>  Config::get("dict.labels")]);
+        return view('profile.view', [   'contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,
+                                        'ps'    =>  $ps, 'psd'    =>  $psd,    'summ'  =>  $summ,
+                                        'requests'  =>  $tr,    'moderate'  =>  $moderate,
+                                        'changes'   =>  $changes,   'change_records'    =>  $change_records,    'labels'    =>  Config::get("dict.labels")]);
     }
 
     public function edit()
@@ -233,6 +233,7 @@ class ProfileController extends Controller
 
 
             $dep_new    =   $dep_old    =   $moderator  =   null;
+            $updated_counter    =   0; //Чтобы не создавать запись об изменениях, когда нет реальных изменений
 
             foreach($updates_fields as $key =>  $value) {
                 $createFlag =   false;
@@ -277,9 +278,15 @@ class ProfileController extends Controller
                     $psd->new_value     =   $value;
 
                     $psd->save();
+                    $updated_counter ++;
                 }
             }
 
+            if(!$updated_counter) {
+                $ps->user_informed  =   1;
+                $ps->save();
+                $ps->delete();
+            }
 
             $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -296,9 +303,11 @@ class ProfileController extends Controller
 
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
 
-            $html   =   View::make('profile.viewchanges', ['labels' =>  Config::get("dict.labels"),    'psd' =>  $psd,   'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,   'moderator'  =>  $moderator]);
+            $html   =   View::make('profile.viewchanges', [ 'labels' =>  Config::get("dict.labels"),    'psd' =>  $psd,
+                                                            'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,
+                                                            'moderator'  =>  $moderator]);
 
-            return response()->json(['success', $html->render()]);
+            return response()->json(['success', $html->render(), $updated_counter]);
         }
 
     }

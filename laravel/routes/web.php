@@ -127,7 +127,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::get('/{letter}', 'ModerateController@users')->name('moderate.users.index');
         Route::get('/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
         Route::put('/update/{id}', 'ModerateController@usersupdate')->name('moderate.users.update');
-        Route::post('/update/fieldupdate/{id}', 'ModerateController@makefieldchangeuser')->name('moderate.users.fieldupdate');
+        Route::put('/update/fieldupdate/{id}', 'ModerateController@makefieldchangeuser')->name('moderate.users.fieldupdate');
         Route::put('/update/commitchanges/{id}', 'ModerateController@commitchangesforuser')->name('moderate.users.commitchanges');
         Route::put('/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
         Route::get('/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');

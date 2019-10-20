@@ -376,8 +376,8 @@ $(document).ready(function($) {
         $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         var newstatus = id[2];
         var url = $(this).attr("href");
-        var newval = $("#input_" + id[1]).val().trim();
-        var reason = $("#input_reason_" + id[1]).val().trim();
+        var newval = encodeURI($("#input_" + id[1]).val().trim());
+        var reason = encodeURI($("#input_reason_" + id[1]).val().trim());
 
         if(newstatus==3    &&  !reason) {
             $("#input_reason_" + id[1]).css("border-color",   "#FF0000");
@@ -390,7 +390,7 @@ $(document).ready(function($) {
                 cache: false,
                 async: true,
                 dataType: "json",
-                data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=post",
+                data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=put",
                 success: function (msg) {
                     if (msg[0] == "success") {
                         if (newstatus == 2) {

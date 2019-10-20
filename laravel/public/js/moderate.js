@@ -430,7 +430,7 @@ $(document).ready(function($) {
             data: "&_token=" + $("input[name='_token']").val() + "&_method=put",
             success: function (msg) {
                 if (msg[0] == "success") {
-                    location.href('/moderate/users');
+                    location.href   =   '/moderate/users';
                 }
             }
         });

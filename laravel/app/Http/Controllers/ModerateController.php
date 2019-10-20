@@ -1001,7 +1001,9 @@ class ModerateController extends Controller
             $psd->reason    =   trim($request->input('input_reason'));
         }
         if($psd->status ==  2) {
+            var_dump($request->input('input_newval'));
             $psd->new_value    =   trim($request->input('input_newval'));
+            var_dump($psd->new_value);
         }
         $psd->save();
 

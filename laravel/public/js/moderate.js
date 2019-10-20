@@ -376,9 +376,7 @@ $(document).ready(function($) {
         $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         var newstatus = id[2];
         var url = $(this).attr("href");
-        alert($("#input_" + id[1]).val());
         var newval = $("#input_" + id[1]).val().trim();
-        alert(newval);
         var reason = $("#input_reason_" + id[1]).val().trim();
 
         if(newstatus==3    &&  !reason) {

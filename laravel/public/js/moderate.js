@@ -390,7 +390,7 @@ $(document).ready(function($) {
                 cache: false,
                 async: true,
                 dataType: "json",
-                data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=put",
+                data: "input_newstatus=" + newstatus + "&input_reason=" + reason + "&input_newval=" + newval + "&_token=" + $("input[name='_token']").val() + "&_method=post",
                 success: function (msg) {
                     if (msg[0] == "success") {
                         if (newstatus == 2) {

@@ -41,7 +41,7 @@ $(document).on("submit", "#profile_update_form", function(ev) {
                     $(form).parent().parent().parent().removeClass("__vis");
                     //Если, вдруг, это не первое изменение профиля без перезагрузки страницы, надо удалить прежние окна
                     $("div.__js-modal-profile-changes").remove();
-                    if($msg[2]  >   0) {
+                    if(msg[2]  >   0) {
                         $(form).parent().parent().parent().after(msg[1]);
                         $("div.__js-modal-profile-changes").addClass("__vis");
                         $(document).on('click', '.modal-close, .close_changes_form_btn', function (event) {

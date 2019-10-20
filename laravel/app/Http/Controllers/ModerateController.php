@@ -961,9 +961,8 @@ class ModerateController extends Controller
 
     public function makeFieldChangeUser($psd_id, Request $request) {
         var_dump($_REQUEST);
-        var_dump(urldecode($_REQUEST['input_newval']));
+        var_dump(rawurldecode($_REQUEST['input_newval']));
         exit();
-        var_dump($request);
         $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
         $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
 

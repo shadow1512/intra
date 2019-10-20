@@ -376,8 +376,8 @@ $(document).ready(function($) {
         $("#input_reason_" + id[1]).css("border-color",   "#CCD0D2");
         var newstatus = id[2];
         var url = $(this).attr("href");
-        var newval = encodeURI($("#input_" + id[1]).val().trim());
-        var reason = encodeURI($("#input_reason_" + id[1]).val().trim());
+        var newval = encodeURIComponent($("#input_" + id[1]).val().trim());
+        var reason = encodeURIComponent($("#input_reason_" + id[1]).val().trim());
 
         if(newstatus==3    &&  !reason) {
             $("#input_reason_" + id[1]).css("border-color",   "#FF0000");

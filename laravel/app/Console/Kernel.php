@@ -26,6 +26,7 @@ class Kernel extends ConsoleKernel
         Commands\profileupdatesnotification::class,
         Commands\createmoderator::class,
         Commands\getdinnerbills::class,
+        Commands\fixchefs::class,
     ];
 
     /**

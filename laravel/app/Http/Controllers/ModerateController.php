@@ -1022,7 +1022,7 @@ class ModerateController extends Controller
                         $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                         if(!$wt_record) {
                             $wt_record = new Deps_Peoples();
-                            $wt_record->chef    =   0;
+                            $wt_record->chef    =   null;
                             $wt_record->people_id  =   $user->id;
                         }
                         $wt_record->dep_id     =   $item->new_value;
@@ -1032,7 +1032,7 @@ class ModerateController extends Controller
                         $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                         if(!$wt_record) {
                             $wt_record = new Deps_Peoples();
-                            $wt_record->chef    =   0;
+                            $wt_record->chef    =   null;
                             $wt_record->people_id  =   $user->id;
                         }
                         $wt_record->work_title  =   $item->new_value;
@@ -1158,7 +1158,7 @@ class ModerateController extends Controller
                     $value = $max - $cur_length;
                 }
                 else {
-                    $value  =   0;
+                    $value  =   null;
                 }
             }
             if($value   != $user->$key) {
@@ -1187,7 +1187,7 @@ class ModerateController extends Controller
                     $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                     if(!$wt_record) {
                         $wt_record = new Deps_Peoples();
-                        $wt_record->chef    =   0;
+                        $wt_record->chef    =   null;
                         $wt_record->people_id  =   $user->id;
                     }
                     $wt_record->dep_id     =   $item->new_value;
@@ -1197,7 +1197,7 @@ class ModerateController extends Controller
                     $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                     if(!$wt_record) {
                         $wt_record = new Deps_Peoples();
-                        $wt_record->chef    =   0;
+                        $wt_record->chef    =   null;
                         $wt_record->people_id  =   $user->id;
                     }
                     $wt_record->work_title  =   $item->new_value;
@@ -1207,7 +1207,7 @@ class ModerateController extends Controller
                     $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                     if(!$wt_record) {
                         $wt_record = new Deps_Peoples();
-                        $wt_record->chef    =   0;
+                        $wt_record->chef    =   null;
                         $wt_record->people_id  =   $user->id;
                     }
                     $wt_record->chef  =   $item->new_value;

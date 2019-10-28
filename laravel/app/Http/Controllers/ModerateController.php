@@ -1141,9 +1141,9 @@ class ModerateController extends Controller
             }
             if($key ==  "chef") {
                 if($value) {
-                    $max = 2;
+                    /*$max = 2;
                     $deps = Dep::selectRaw("MAX(LENGTH(parent_id)) as max")->first();
-                    $max = $deps["max"];
+                    $max = $deps["max"];*/
 
                     $curDep = null;
                     $psd_dep = Profiles_Saved_Data::where('ps_id', '=', $ps->id)->where('field_name', '=', 'dep_id')->first();
@@ -1154,8 +1154,8 @@ class ModerateController extends Controller
                     }
 
                     $userDep = Dep::findOrFail($curDep);
-                    $cur_length = mb_strlen($userDep["parent_id"], "UTF-8");
-                    $value = $max - $cur_length;
+                    $value = mb_strlen($userDep["parent_id"], "UTF-8");
+                    //$value = $max - $cur_length;
                 }
                 else {
                     $value  =   null;

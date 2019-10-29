@@ -51,7 +51,7 @@ class buildsearchindex extends Command
         //создаем файлик, в который потом добавим в словарь
         // Setup the personal dictionary
 
-        $pspell_config = pspell_config_create('ru', null, null, 'utf-8');
+        $pspell_config = pspell_config_create('ru_RU', null, null, 'utf-8');
         pspell_config_personal($pspell_config, "/var/www/intra/laravel/storage/app/public/dict/ru.custom.rws");
         $pspell_link = pspell_new_config($pspell_config);
 
@@ -76,7 +76,6 @@ class buildsearchindex extends Command
             $term->partial  =   'fname';
             $term->save();
 
-            var_dump(mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             //Фамилия
 

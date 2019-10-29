@@ -76,6 +76,7 @@ class buildsearchindex extends Command
             $term->partial  =   'fname';
             $term->save();
 
+            var_dump(mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             //Фамилия
 

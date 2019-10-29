@@ -76,7 +76,7 @@ class buildsearchindex extends Command
             $term->partial  =   'fname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->fname, "UTF-8")));
+            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             //Фамилия
 
             $term = new Terms();
@@ -90,7 +90,7 @@ class buildsearchindex extends Command
             $term->partial  =   'lname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->lname, "UTF-8")));
+            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
             //Отчество
 
             $term = new Terms();
@@ -104,7 +104,7 @@ class buildsearchindex extends Command
             $term->partial  =   'mname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->mname, "UTF-8")));
+            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
             //Номер комнаты
 
             if(trim($user->room)) {

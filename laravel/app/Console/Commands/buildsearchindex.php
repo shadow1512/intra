@@ -78,7 +78,10 @@ class buildsearchindex extends Command
             $term->save();
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
-            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8")   .   PHP_EOL);
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
             //Фамилия
 
             $term = new Terms();
@@ -93,7 +96,10 @@ class buildsearchindex extends Command
             $term->save();
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
-            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8")   .   PHP_EOL);
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
             //Отчество
 
             $term = new Terms();
@@ -108,7 +114,11 @@ class buildsearchindex extends Command
             $term->save();
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
-            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8")   .   PHP_EOL);
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
+
             //Номер комнаты
 
             if(trim($user->room)) {

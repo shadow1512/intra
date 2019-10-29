@@ -51,6 +51,10 @@ class buildsearchindex extends Command
         //создаем файлик, в который потом добавим в словарь
         // Setup the personal dictionary
 
+        $pspell_config = pspell_config_create("ru");
+        pspell_config_personal($pspell_config, "/var/www/intra/laravel/storage/app/public/dict");
+        $pspell_link = pspell_new_config($pspell_config);
+
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -72,6 +76,7 @@ class buildsearchindex extends Command
             $term->partial  =   'fname';
             $term->save();
 
+            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->fname, "UTF-8")));
             //Фамилия
 
             $term = new Terms();
@@ -85,6 +90,7 @@ class buildsearchindex extends Command
             $term->partial  =   'lname';
             $term->save();
 
+            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->lname, "UTF-8")));
             //Отчество
 
             $term = new Terms();
@@ -98,6 +104,7 @@ class buildsearchindex extends Command
             $term->partial  =   'mname';
             $term->save();
 
+            pspell_add_to_personal($pspell_link, trim(mb_strtoupper($user->mname, "UTF-8")));
             //Номер комнаты
 
             if(trim($user->room)) {
@@ -374,6 +381,7 @@ class buildsearchindex extends Command
             $bar->advance();
         }
 
+        pspell_save_wordlist($pspell_link);
         $bar->finish();
 
     }

@@ -51,9 +51,10 @@ class buildsearchindex extends Command
         //создаем файлик, в который потом добавим в словарь
         // Setup the personal dictionary
 
-        $pspell_config = pspell_config_create('ru_RU', null, null, 'utf-8');
+        /*$pspell_config = pspell_config_create('ru_RU', null, null, 'utf-8');
         pspell_config_personal($pspell_config, "/var/www/intra/laravel/storage/app/public/dict/ru.custom.rws");
-        $pspell_link = pspell_new_config($pspell_config);
+        $pspell_link = pspell_new_config($pspell_config);*/
+        $fp =   fopen("/var/www/intra/laravel/storage/app/public/dict/ru.custom.rws",   "w+");
 
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
@@ -76,7 +77,8 @@ class buildsearchindex extends Command
             $term->partial  =   'fname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
+            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
             //Фамилия
 
             $term = new Terms();
@@ -90,7 +92,8 @@ class buildsearchindex extends Command
             $term->partial  =   'lname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
+            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
             //Отчество
 
             $term = new Terms();
@@ -104,7 +107,8 @@ class buildsearchindex extends Command
             $term->partial  =   'mname';
             $term->save();
 
-            pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
+            fwrite($fp, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
             //Номер комнаты
 
             if(trim($user->room)) {
@@ -381,7 +385,8 @@ class buildsearchindex extends Command
             $bar->advance();
         }
 
-        pspell_save_wordlist($pspell_link);
+        //pspell_save_wordlist($pspell_link);
+        fclose($fp);
         $bar->finish();
 
     }

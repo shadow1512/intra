@@ -54,7 +54,7 @@ class buildsearchindex extends Command
         /*$pspell_config = pspell_config_create('ru_RU', null, null, 'utf-8');
         pspell_config_personal($pspell_config, "/var/www/intra/laravel/storage/app/public/dict/ru.custom.rws");
         $pspell_link = pspell_new_config($pspell_config);*/
-        $fp =   fopen("/var/www/intra/laravel/storage/app/public/dict/ru.custom.rws",   "w+");
+        $fp =   fopen("/var/www/intra/laravel/storage/app/public/dict/ru.custom.txt",   "w+");
 
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')

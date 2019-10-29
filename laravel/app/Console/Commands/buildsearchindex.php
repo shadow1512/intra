@@ -397,6 +397,7 @@ class buildsearchindex extends Command
 
         //pspell_save_wordlist($pspell_link);
         fclose($fp);
+        exec('aspell --lang=ru create master /var/www/intra/laravel/storage/app/public/dict/ru.custom.rws <  /var/www/intra/laravel/storage/app/public/dict/ru.custom.txt');
         $bar->finish();
 
     }

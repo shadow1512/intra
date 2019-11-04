@@ -175,7 +175,6 @@ class SearchController extends Controller
                     }
                 }
             }
-            var_dump($words_records);exit();
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
@@ -206,9 +205,23 @@ class SearchController extends Controller
                     switch ($section) {
                         case 'users':
                             $user_ids = array_keys($search_result['users']);
+                            //Убираем лишние результаты поиска по более, чем одному слову
+                            $max_weight =   0;
+                            foreach($user_ids as $user_id) {
+                                if($search_result['users'][$user_id]    >   $max_weight) {
+                                    $max_weight =   $search_result['users'][$user_id];
+                                }
+                            }
+                            $max_user_ids   =   array();
+                            foreach($user_ids as $user_id) {
+                                if($search_result['users'][$user_id]   ==   $max_weight) {
+                                    $max_user_ids[] =   $user_id;
+                                }
+                            }
+                            //
                             $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
                                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                                ->whereIn('users.id', $user_ids)->get();
+                                ->whereIn('users.id', $max_user_ids)->get();
                             $assoc_records = array();
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;
@@ -224,7 +237,23 @@ class SearchController extends Controller
 
                         case 'deps':
                             $dep_ids = array_keys($search_result['deps']);
-                            $found_records = Dep::find($dep_ids);
+
+                            //Убираем лишние результаты поиска по более, чем одному слову
+                            $max_weight =   0;
+                            foreach($dep_ids as $dep_id) {
+                                if($search_result['deps'][$dep_id]    >   $max_weight) {
+                                    $max_weight =   $search_result['deps'][$dep_id];
+                                }
+                            }
+                            $max_dep_ids   =   array();
+                            foreach($dep_ids as $dep_id) {
+                                if($search_result['deps'][$dep_id]   ==   $max_weight) {
+                                    $max_dep_ids[] =   $dep_id;
+                                }
+                            }
+                            //
+
+                            $found_records = Dep::find($max_dep_ids);
                             $assoc_records = array();
                             foreach ($found_records as $record) {
                                 $assoc_records[$record->id] = $record;

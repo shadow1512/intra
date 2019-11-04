@@ -228,7 +228,9 @@ class SearchController extends Controller
                             }
                             if(count($assoc_records)) {
                                 foreach ($user_ids as $user_id) {
-                                    $users[] = $assoc_records[$user_id];
+                                    if(isset($assoc_records[$user_id])) {
+                                        $users[] = $assoc_records[$user_id];
+                                    }
                                 }
                             }
                             unset($found_records);
@@ -260,7 +262,9 @@ class SearchController extends Controller
                             }
                             if(count($assoc_records)) {
                                 foreach ($dep_ids as $dep_id) {
-                                    $deps[] = $assoc_records[$dep_id];
+                                    if(isset($assoc_records[$dep_id])) {
+                                        $deps[] = $assoc_records[$dep_id];
+                                    }
                                 }
                             }
                             unset($found_records);

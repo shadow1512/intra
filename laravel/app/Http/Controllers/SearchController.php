@@ -695,8 +695,8 @@ class SearchController extends Controller
         $users_by_room  =   array();
         $user_ids   =   array();
         if($room) {
-            $room_records   =   User::where('room', '=',    $room)->get();
-            foreach($room_records   as $record) {
+            $room_records   =   User::where('room', '=',    $room)->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
+            /*foreach($room_records   as $record) {
                 $user_ids[] =   $record->id;
             }
             $room_sim_records   =   User::where('room', 'LIKE',    '%'  .   $room   .   '%')->get();
@@ -705,7 +705,7 @@ class SearchController extends Controller
                     $user_ids[] =   $record->id;
                     $room_records->push($record);
                 }
-            }
+            }*/
 
             $users_by_room  =   $room_records;
             unset($room_records);
@@ -717,7 +717,7 @@ class SearchController extends Controller
         $email = mb_substr($email, 0, 100);
         $users_by_email  =   array();
         if($email) {
-            $email_records   =   User::where('email', 'LIKE',    '%'  .   $email   .   '%')->orWhere('email_secondary', 'LIKE',    '%'  .   $email   .   '%')->get();
+            $email_records   =   User::where('email', 'LIKE',    '%'  .   $email   .   '%')->orWhere('email_secondary', 'LIKE',    '%'  .   $email   .   '%')->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
             $users_by_email  =   $email_records;
             unset($email_records);
         }
@@ -731,8 +731,8 @@ class SearchController extends Controller
         if($phone) {
             $phone_records   =   User::where('phone', '=',    $phone)
                     ->orWhere("city_phone",    'LIKE', '%' .   $phone. '%')
-                    ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')->get();
-            foreach($phone_records   as $record) {
+                    ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
+            /*foreach($phone_records   as $record) {
                 $user_ids[] =   $record->id;
             }
             $phone_sim_records   =   User::where('phone', 'LIKE',    '%'  .   $phone   .   '%')
@@ -744,7 +744,7 @@ class SearchController extends Controller
                     $user_ids[] =   $record->id;
                     $phone_records->push($record);
                 }
-            }
+            }*/
 
             $users_by_phone  =   $phone_records;
             unset($phone_records);
@@ -1054,14 +1054,16 @@ class SearchController extends Controller
                 $dt = date("Y-m-d", strtotime($searchDate));
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
+                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
+                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
             }
             else {
                 $dt = date("Y-m-d", strtotime(trim($bdates[0])));
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))
-                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
+                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
+                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
             }
 
             $users_by_birthday  =   $birthday_records;

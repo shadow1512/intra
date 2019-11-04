@@ -201,7 +201,6 @@ class SearchController extends Controller
                     }
                     arsort($search_result[$section]);
 
-                    var_dump($search_result);
                     //начинаем теперь пляски с базой
                     switch ($section) {
                         case 'users':

@@ -597,32 +597,26 @@ class SearchController extends Controller
                             unset($res);
                         } //Слово не нашлось в словаре
                         else {
-                            //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest = pspell_suggest($dict, $word);
-                            //var_dump($suggest);
-                            //берем только первый вариант, остальные уже не то
-                            if (count($suggest)) {
-                                $word = $suggest[0];
-                                //var_dump($word);
-                                $res = $this->getSearchResultsByWord($word, array("users"));
-                                $words_records[] = $res;
-                                $total_found_by_word = count($res);
-                                unset($res);
-                            }
-                        }
-                        if (!$total_found_by_word) {
-                            //ищем как есть
-                            /*$res = $this->getSearchResultsByWord($word);
+                            $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
+                            $res = $this->getSearchResultsByWord($oldword, array("users"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-                            if (!$total_found_by_word) {*/
-                                $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
-                                $res = $this->getSearchResultsByWord($oldword, array("users"));
-                                $words_records[] = $res;
-                                $total_found_by_word = count($res);
-                                unset($res);
-                            //}
+
+                            if(!$total_found_by_word) {
+                                //пробуем в начале советы (опечатки, если было на русском)
+                                $suggest = pspell_suggest($dict, $word);
+                                //var_dump($suggest);
+                                //берем только первый вариант, остальные уже не то
+                                if (count($suggest)) {
+                                    $word = $suggest[0];
+                                    //var_dump($word);
+                                    $res = $this->getSearchResultsByWord($word, array("users"));
+                                    $words_records[] = $res;
+                                    $total_found_by_word = count($res);
+                                    unset($res);
+                                }
+                            }
                         }
                     }
                 }
@@ -658,13 +652,35 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
-                $found_records = User::find($user_ids);
+                //Убираем лишние результаты поиска по более, чем одному слову
+                $max_weight =   0;
+                foreach($user_ids as $user_id) {
+                    if($search_result['users'][$user_id]    >   $max_weight) {
+                        $max_weight =   $search_result['users'][$user_id];
+                    }
+                }
+                $max_user_ids   =   array();
+                //там мы разбиваем, когда одно слово встречается в разных секциях целого и когда два слово входят в одну секцию
+                if($max_weight  <  1000000)  {
+                    $max_user_ids   =   $user_ids;
+                }
+                else {
+                    foreach($user_ids as $user_id) {
+                        if($search_result['users'][$user_id]   ==   $max_weight) {
+                            $max_user_ids[] =   $user_id;
+                        }
+                    }
+                }
+
+                $found_records = User::find($max_user_ids);
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
                 foreach ($user_ids as $user_id) {
-                    $users[] = $assoc_records[$user_id];
+                    if(isset($assoc_records[$user_id])) {
+                        $users[] = $assoc_records[$user_id];
+                    }
                 }
                 unset($found_records);
                 unset($assoc_records);
@@ -772,31 +788,25 @@ class SearchController extends Controller
                             unset($res);
                         } //Слово не нашлось в словаре
                         else {
-                            //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest = pspell_suggest($dict, $word);
-                            //берем только первый вариант, остальные уже не то
-                            if (count($suggest)) {
-                                $word = $suggest[0];
-                                //var_dump($word);
-                                $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
-                                $words_records[] = $res;
-                                $total_found_by_word = count($res);
-                                unset($res);
-                            }
-                        }
-                        if (!$total_found_by_word) {
-                            //ищем как есть
-                            /*$res = $this->getSearchResultsByWord($word);
-                            $words_records[] = $res;
-                            $total_found_by_word = count($res);
-                            unset($res);
-                            if (!$total_found_by_word) {*/
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"), array("work"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-                            //}
+
+                            if(!$total_found_by_word) {
+                                //пробуем в начале советы (опечатки, если было на русском)
+                                $suggest = pspell_suggest($dict, $word);
+                                //берем только первый вариант, остальные уже не то
+                                if (count($suggest)) {
+                                    $word = $suggest[0];
+                                    //var_dump($word);
+                                    $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
+                                    $words_records[] = $res;
+                                    $total_found_by_word = count($res);
+                                    unset($res);
+                                }
+                            }
                         }
                     }
                 }
@@ -832,13 +842,35 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
-                $found_records = User::find($user_ids);
+                //Убираем лишние результаты поиска по более, чем одному слову
+                $max_weight =   0;
+                foreach($user_ids as $user_id) {
+                    if($search_result['users'][$user_id]    >   $max_weight) {
+                        $max_weight =   $search_result['users'][$user_id];
+                    }
+                }
+                $max_user_ids   =   array();
+                //там мы разбиваем, когда одно слово встречается в разных секциях целого и когда два слово входят в одну секцию
+                if($max_weight  <  1000000)  {
+                    $max_user_ids   =   $user_ids;
+                }
+                else {
+                    foreach($user_ids as $user_id) {
+                        if($search_result['users'][$user_id]   ==   $max_weight) {
+                            $max_user_ids[] =   $user_id;
+                        }
+                    }
+                }
+
+                $found_records = User::find($max_user_ids);
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
                 foreach ($user_ids as $user_id) {
-                    $users_by_worktitle[] = $assoc_records[$user_id];
+                    if(isset($assoc_records[$user_id])) {
+                        $users_by_worktitle[] = $assoc_records[$user_id];
+                    }
                 }
                 unset($found_records);
                 unset($assoc_records);
@@ -882,31 +914,25 @@ class SearchController extends Controller
                             unset($res);
                         } //Слово не нашлось в словаре
                         else {
-                            //пробуем в начале советы (опечатки, если было на русском)
-                            $suggest = pspell_suggest($dict, $word);
-                            //берем только первый вариант, остальные уже не то
-                            if (count($suggest)) {
-                                $word = $suggest[0];
-                                //var_dump($word);
-                                $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
-                                $words_records[] = $res;
-                                $total_found_by_word = count($res);
-                                unset($res);
-                            }
-                        }
-                        if (!$total_found_by_word) {
-                            //ищем как есть
-                            /*$res = $this->getSearchResultsByWord($word);
-                            $words_records[] = $res;
-                            $total_found_by_word = count($res);
-                            unset($res);
-                            if (!$total_found_by_word) {*/
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"), array("work"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-                            //}
+
+                            if(!$total_found_by_word) {
+                                //пробуем в начале советы (опечатки, если было на русском)
+                                $suggest = pspell_suggest($dict, $word);
+                                //берем только первый вариант, остальные уже не то
+                                if (count($suggest)) {
+                                    $word = $suggest[0];
+                                    //var_dump($word);
+                                    $res = $this->getSearchResultsByWord($word, array("users"), array("work"));
+                                    $words_records[] = $res;
+                                    $total_found_by_word = count($res);
+                                    unset($res);
+                                }
+                            }
                         }
                     }
                 }
@@ -942,14 +968,36 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
-                $found_records = User::find($user_ids);
+                //Убираем лишние результаты поиска по более, чем одному слову
+                $max_weight =   0;
+                foreach($user_ids as $user_id) {
+                    if($search_result['users'][$user_id]    >   $max_weight) {
+                        $max_weight =   $search_result['users'][$user_id];
+                    }
+                }
+                $max_user_ids   =   array();
+                //там мы разбиваем, когда одно слово встречается в разных секциях целого и когда два слово входят в одну секцию
+                if($max_weight  <  1000000)  {
+                    $max_user_ids   =   $user_ids;
+                }
+                else {
+                    foreach($user_ids as $user_id) {
+                        if($search_result['users'][$user_id]   ==   $max_weight) {
+                            $max_user_ids[] =   $user_id;
+                        }
+                    }
+                }
+
+                $found_records = User::find($max_user_ids);
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
                 if(count($assoc_records)) {
                     foreach ($user_ids as $user_id) {
-                        $users_by_worktitle[] = $assoc_records[$user_id];
+                        if(isset($assoc_records[$user_id])) {
+                            $users_by_worktitle[] = $assoc_records[$user_id];
+                        }
                     }
                 }
                 unset($found_records);

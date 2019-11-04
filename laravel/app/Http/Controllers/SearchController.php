@@ -213,9 +213,15 @@ class SearchController extends Controller
                                 }
                             }
                             $max_user_ids   =   array();
-                            foreach($user_ids as $user_id) {
-                                if($search_result['users'][$user_id]   ==   $max_weight) {
-                                    $max_user_ids[] =   $user_id;
+                            //там мы разбиваем, когда одно слово встречается в разных секциях целого и когда два слово входят в одну секцию
+                            if($max_weight  <  1000000)  {
+                                $max_user_ids   =   $user_ids;
+                            }
+                            else {
+                                foreach($user_ids as $user_id) {
+                                    if($search_result['users'][$user_id]   ==   $max_weight) {
+                                        $max_user_ids[] =   $user_id;
+                                    }
                                 }
                             }
                             //
@@ -248,9 +254,14 @@ class SearchController extends Controller
                                 }
                             }
                             $max_dep_ids   =   array();
-                            foreach($dep_ids as $dep_id) {
-                                if($search_result['deps'][$dep_id]   ==   $max_weight) {
-                                    $max_dep_ids[] =   $dep_id;
+                            if($max_weight  <  1000000)  {
+                                $max_dep_ids   =   $dep_ids;
+                            }
+                            else {
+                                foreach($dep_ids as $dep_id) {
+                                    if($search_result['deps'][$dep_id]   ==   $max_weight) {
+                                        $max_dep_ids[] =   $dep_id;
+                                    }
                                 }
                             }
                             //

@@ -1069,7 +1069,6 @@ class SearchController extends Controller
             $users_by_birthday  =   $birthday_records;
         }
 
-        var_dump($users_by_birthday);
         $all_found_records  =   array();
         foreach($users as $user) {
             $record=    $user["record"];
@@ -1101,40 +1100,51 @@ class SearchController extends Controller
                 $all_found_records[$record->id]   =   $weight;
             }
         }
+        $index  =   count($users_by_room);
         foreach($users_by_room as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$user->id]   =   $index;
             }
+            $index  --;
         }
+
+        $index  =   count($users_by_birthday);
         foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$user->id]   =   $index;
             }
+            $index  --;
         }
+
+        $index  =   count($users_by_phone);
         foreach($users_by_phone as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$user->id]   =   $index;
             }
+
+            $index  --;
         }
+
+        $index  =   count($users_by_email);
         foreach($users_by_email as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$user->id]   =   $index;
             }
         }
 
-        arsort($all_found_records);var_dump($all_found_records);
+        arsort($all_found_records);
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);

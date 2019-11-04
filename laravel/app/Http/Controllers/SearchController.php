@@ -651,7 +651,6 @@ class SearchController extends Controller
                     arsort($search_result[$section]);
                 }
 
-                var_dump($search_result);
                 $user_ids = array_keys($search_result['users']);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;
@@ -680,7 +679,7 @@ class SearchController extends Controller
                 }
                 foreach ($user_ids as $user_id) {
                     if(isset($assoc_records[$user_id])) {
-                        $users[] = $assoc_records[$user_id];
+                        $users[] = array("record"   =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);
                     }
                 }
                 unset($found_records);
@@ -870,7 +869,7 @@ class SearchController extends Controller
                 }
                 foreach ($user_ids as $user_id) {
                     if(isset($assoc_records[$user_id])) {
-                        $users_by_worktitle[] = $assoc_records[$user_id];
+                        $users_by_worktitle[] = array("record"  =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);
                     }
                 }
                 unset($found_records);
@@ -997,7 +996,7 @@ class SearchController extends Controller
                 if(count($assoc_records)) {
                     foreach ($user_ids as $user_id) {
                         if(isset($assoc_records[$user_id])) {
-                            $users_by_worktitle[] = $assoc_records[$user_id];
+                            $users_by_dep[] = array("record"  =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);
                         }
                     }
                 }
@@ -1070,19 +1069,33 @@ class SearchController extends Controller
 
         $all_found_records  =   array();
         foreach($users as $user) {
-            if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            $record=    $user["record"];
+            $weight=    $user["weight"];
+            if(array_key_exists($record->id,  $all_found_records)) {
+                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$record->id]   =   $weight;
             }
         }
         foreach($users_by_worktitle as $user) {
-            if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   1;
+            $record=    $user["record"];
+            $weight=    $user["weight"];
+            if(array_key_exists($record->id,  $all_found_records)) {
+                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
             }
             else {
-                $all_found_records[$user->id]   =   1;
+                $all_found_records[$record->id]   =   $weight;
+            }
+        }
+        foreach($users_by_dep as $user) {
+            $record=    $user["record"];
+            $weight=    $user["weight"];
+            if(array_key_exists($record->id,  $all_found_records)) {
+                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+            }
+            else {
+                $all_found_records[$record->id]   =   $weight;
             }
         }
         foreach($users_by_room as $user) {

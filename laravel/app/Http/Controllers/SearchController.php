@@ -1138,7 +1138,9 @@ class SearchController extends Controller
         unset($users_by_birthday);
         unset($users);
         unset($users_by_worktitle);
+        unset($users_by_dep);
 
+        var_dump($all_found_records);
         $users  =   array();
 
         $user_ids = array_keys($all_found_records);

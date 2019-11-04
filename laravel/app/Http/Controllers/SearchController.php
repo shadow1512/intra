@@ -1131,7 +1131,7 @@ class SearchController extends Controller
             }
         }
 
-        krsort($all_found_records);
+        arsort($all_found_records);
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);
@@ -1140,7 +1140,7 @@ class SearchController extends Controller
         unset($users_by_worktitle);
         unset($users_by_dep);
 
-        var_dump($all_found_records);
+        //var_dump($all_found_records);
         $users  =   array();
 
         $user_ids = array_keys($all_found_records);

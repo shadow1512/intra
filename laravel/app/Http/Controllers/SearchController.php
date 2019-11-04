@@ -651,6 +651,7 @@ class SearchController extends Controller
                     arsort($search_result[$section]);
                 }
 
+                var_dump($search_result);
                 $user_ids = array_keys($search_result['users']);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;

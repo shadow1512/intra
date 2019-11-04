@@ -102,33 +102,28 @@ class SearchController extends Controller
                             }
                             //Слово не нашлось в словаре
                             else {
-                                //echo 'b';
-                                //пробуем в начале советы (опечатки, если было на русском)
-                                $suggest    =   pspell_suggest($dict,   $word);
-                                //var_dump($suggest);
-                                //берем только первый вариант, остальные уже не то
-                                if(count($suggest)) {
-                                    $word=  $suggest[0];
-                                    //var_dump($word);
-                                    $res= $this->getSearchResultsByWord($word);
-                                    $words_records[]    =   $res;
-                                    $total_found_by_word    =   count($res);
-                                    unset($res);
-                                }
-                            }
-                            if(!$total_found_by_word) {
-                                //ищем как есть
-                                /*$res= $this->getSearchResultsByWord($word);
+                                //сначала ищем как есть, вдруг, это правильно?
+                                $oldword = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $oldword);
+                                $res= $this->getSearchResultsByWord($oldword);
                                 $words_records[]    =   $res;
                                 $total_found_by_word    =   count($res);
                                 unset($res);
-                                if(!$total_found_by_word) {*/
-                                    $oldword = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $oldword);
-                                    $res= $this->getSearchResultsByWord($oldword);
-                                    $words_records[]    =   $res;
-                                    $total_found_by_word    =   count($res);
-                                    unset($res);
-                                //}
+                                //Ну, а если уж не нашлось, то можно пробовать другое
+                                if(!$total_found_by_word) {
+                                    //пробуем в начале советы (опечатки, если было на русском)
+                                    $suggest    =   pspell_suggest($dict,   $word);
+                                    //var_dump($suggest);
+                                    //берем только первый вариант, остальные уже не то
+                                    if(count($suggest)) {
+                                        $word=  $suggest[0];
+                                        //var_dump($word);
+                                        $res= $this->getSearchResultsByWord($word);
+                                        $words_records[]    =   $res;
+                                        $total_found_by_word    =   count($res);
+                                        unset($res);
+                                    }
+                                }
+
                             }
                             //здесь может быть часть email
                             if(!$total_found_by_word) {
@@ -180,6 +175,7 @@ class SearchController extends Controller
                     }
                 }
             }
+            var_dump($words_records);exit();
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов

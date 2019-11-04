@@ -1069,6 +1069,7 @@ class SearchController extends Controller
             $users_by_birthday  =   $birthday_records;
         }
 
+        var_dump($users_by_birthday);
         $all_found_records  =   array();
         foreach($users as $user) {
             $record=    $user["record"];
@@ -1133,7 +1134,7 @@ class SearchController extends Controller
             }
         }
 
-        arsort($all_found_records);
+        arsort($all_found_records);var_dump($all_found_records);
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);

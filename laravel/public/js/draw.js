@@ -49,7 +49,7 @@ d3.csv('/js/personal_data.csv', function(error, data) {
       .attr("d", arc)
       .append("title")
         .text(function(d){
-              return '${d.data.title}: ${d.data.score} чел.'
+              return d.data.title+': '+d.data.score+' чел.'
           });
 
   svg.selectAll(".department_slice").on("click", function(d) {
@@ -164,7 +164,7 @@ d3.csv('/js/personal_data.csv', function(error, data) {
     .attr("r", "30")
     .append("title")
       .text(function(d){
-          return '${d.data.title}: ${d.data.score} чел.'
+          return d.data.title+': '+d.data.score+' чел.'
       });
 
   score.append('clipPath')

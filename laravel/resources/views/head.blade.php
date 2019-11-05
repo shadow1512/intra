@@ -1,5 +1,6 @@
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="/styles/css/datepicker/jquery-ui-1.9.2.custom.css">
     <link rel="stylesheet" href="/styles/css/jquery.datetimepicker.css">

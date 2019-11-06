@@ -48,7 +48,9 @@ d3.csv('/js/personal_data.csv', function(error, data) {
       .attr("class", "department_slice")
       .attr("d", arc)
       .append("title")
-        .text(d => `${d.data.title}: ${d.data.score} чел.`);
+        .text(function(d){
+              return d.data.title+': '+d.data.score+' чел.'
+          });
 
   svg.selectAll(".department_slice").on("click", function(d) {
     window.open(d.data.url, "_self");
@@ -161,14 +163,18 @@ d3.csv('/js/personal_data.csv', function(error, data) {
     .attr("class", "department_circle")
     .attr("r", "30")
     .append("title")
-      .text(d => `${d.data.title}: ${d.data.score} чел.`);
+      .text(function(d){
+          return d.data.title+': '+d.data.score+' чел.'
+      });
 
   score.append('clipPath')
   	.append('use')
 
   score.append('image')
   	.classed('node-icon', true)
-  	.attr('xlink:href', d => d.data.icon)
+    .attr('xlink:href', function(d){
+        return d.data.icon
+    })
     .attr("x", "0.5em")
     .attr("y", "-0.6em")
     .attr("class", "department_score_ic");

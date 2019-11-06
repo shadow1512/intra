@@ -145,6 +145,7 @@ class updatedirectoryfromad extends Command
                 }
 
                 if(!is_null($currentRecord)) {
+                    var_dump($user);
                     //print "new atributes\r\n";
                     $currentRecord->sid       =   $user->getConvertedSid();
                     if($user->getFirstName()) {

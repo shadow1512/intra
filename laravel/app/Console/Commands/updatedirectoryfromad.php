@@ -57,7 +57,7 @@ class updatedirectoryfromad extends Command
      */
 
     public function serveDepLevel($ou,    $parent_code) {
-        //print $ou.  "\r\n\r\n";
+        print $ou.  "\r\n\r\n";
         $hiercode   =   new \HierCode(CODE_LENGTH);
 
         $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
@@ -68,6 +68,7 @@ class updatedirectoryfromad extends Command
             $dep_user   =   null;
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 continue;
+                print "continue\r\n";
             }
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {
@@ -123,15 +124,18 @@ class updatedirectoryfromad extends Command
         if(count($users)) {
             foreach($users as $user) {
 
+                print $user->getLastName()  .   "\r\n";
                 $currentRecord  =   null;
                 $present    =   User::withTrashed()->where('sid',  '=',    $user->getConvertedSid())->first();
                 if($present) {
+                    print "present\r\n";
                     if($user->isActive()    &&  $user->isEnabled()) {
                         if(!is_null($present->deleted_at)) {
                             $present->restore();
                         }
                     }
                     else {
+                        print "trashed\r\n";
                         $present->delete();
                         Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
                     }

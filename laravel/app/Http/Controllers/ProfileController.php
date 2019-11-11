@@ -48,7 +48,7 @@ class ProfileController extends Controller
 
         $dep    =   $ps     =   $moderate   =   $psd    =   null;
 
-        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id",    "desc")->first();
         if($ps_record) {
             $ps=    $ps_record;
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
@@ -218,7 +218,7 @@ class ProfileController extends Controller
 
             $work   =   Deps_Peoples::where('people_id',    '=',    Auth::user()->id)->first();
 
-            $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->first();
+            $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id")->first();
             if($ps) {
                 Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
                 $ps->user_informed  =   1;

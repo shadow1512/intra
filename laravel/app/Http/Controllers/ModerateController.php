@@ -939,7 +939,7 @@ class ModerateController extends Controller
         $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
         $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
 
-        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("updated_at",    "desc")->first();
+        $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id",    "desc")->first();
         $psd    =   $dep_old    =   $dep_new    =   null;
         if($ps_record) {
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();

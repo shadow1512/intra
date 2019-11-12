@@ -1060,6 +1060,14 @@ class ActiveDirectory implements SchemaInterface
     /**
      * {@inheritdoc}
      */
+    public function comment()
+    {
+        return 'comment';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function user()
     {
         return 'user';

@@ -871,6 +871,16 @@ class User extends Entry implements Authenticatable
     }
 
     /**
+     * Returns the users birthday.
+     *
+     * @return mixed
+     */
+    public function getComment()
+    {
+        return $this->getFirstAttribute($this->schema->comment());
+    }
+
+    /**
      * Returns the distinguished name of the user who is the user's manager.
      *
      * @return string

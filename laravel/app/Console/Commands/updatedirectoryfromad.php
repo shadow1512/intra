@@ -169,6 +169,12 @@ class updatedirectoryfromad extends Command
                     if($user->getPhysicalDeliveryOfficeName()) {
                         $currentRecord->room = $user->getPhysicalDeliveryOfficeName();
                     }
+                    if($user->getComment()) {
+                        $birthday   =   explode("-",    $user->getComment());
+                        if((count($birthday) ==  3)   &&    (mb_strlen($birthday[0])  ==  4)    &&  (mb_strlen($birthday[1])  ==  2)    &&  (mb_strlen($birthday[2])  ==  2)) {
+                            $currentRecord->birthday = $user->getComment();
+                        }
+                    }
 
                     $currentRecord->updated_at  =   $user->changedDate();
                     $currentRecord->save();

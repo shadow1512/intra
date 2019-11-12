@@ -218,7 +218,7 @@ class ProfileController extends Controller
 
             $work   =   Deps_Peoples::where('people_id',    '=',    Auth::user()->id)->first();
 
-            $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id")->first();
+            $ps =   Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id", "desc")->first();
             if($ps) {
                 Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
                 $ps->user_informed  =   1;

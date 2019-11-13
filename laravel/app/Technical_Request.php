@@ -88,10 +88,10 @@ class Technical_Request extends Model
         //$rec    =   $client->issue->show(112993);var_dump($rec);die();
         //$assigned   =   $client->user->show(37);var_dump($assigned);die();
         foreach($trs as  $tr) {
-            echo $tr->redmine_link . "\r\n";
+            //echo $tr->redmine_link . "\r\n";
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {
-                var_dump($rec);
+                //var_dump($rec);
                 if(isset($rec["issue"]["status"]["id"])) {
                     $status =   $rec["issue"]["status"]["id"];
                     if($status  ==  1) {
@@ -130,7 +130,7 @@ class Technical_Request extends Model
             }
             else {
                 Log::error('REDMINE ISSUE SEARCH ERROR: no issue  for record ' .   $tr->redmine_link);
-                return;
+                //return;
             }
         }
     }

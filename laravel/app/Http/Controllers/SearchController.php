@@ -536,7 +536,7 @@ class SearchController extends Controller
                         $syns_records[$section] =   array_count_values($syns_records[$section]);
                         //теперь учтем более важное количество вхождения записи в результат по слову + количество вхождений записи в рамках одного слова
                         foreach($syns_records[$section] as $record_id   =>  $numcounts) {
-                            $syns_records[$section][$record_id] =   $numcounts * 1000;
+                            $syns_records[$section][$record_id] =   $numcounts + 1000000;
                             for($i = 0; $i < $parsed_syn_words; $i++) {
                                 if(array_key_exists($record_id, $by_razdels[$section][$i])) {
                                     $syns_records[$section][$record_id] =   $syns_records[$section][$record_id] +$by_razdels[$section][$i][$record_id];

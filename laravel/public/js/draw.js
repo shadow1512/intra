@@ -35,7 +35,7 @@ d3.csv('/js/personal_data.csv', function(error, data) {
     d.label  =  d.label;
     d.title  =  d.title;
     d.url  =  d.url;
-    d.icon  =  "/images/person.svg";
+    d.icon  =  "/images/person.png";
   });
 
   var key = function(d){ return d.data.label; };

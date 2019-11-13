@@ -201,6 +201,7 @@ class SearchController extends Controller
                     }
                     arsort($search_result[$section]);
 
+                    var_dump($search_result);
                     //начинаем теперь пляски с базой
                     switch ($section) {
                         case 'users':
@@ -474,7 +475,7 @@ class SearchController extends Controller
                     в итоговую выборку. Цель - вычислить максимальное соответствие заданной фразе*/
                 $parsed_syn_words = 0;
                 foreach($syn_words as $syn_word) {
-                    $syn_word = preg_replace("/[^0-9A-zА-я]/iu", "", $syn_word);
+                    $syn_word = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $syn_word);
                     //с цифрами ничего делать не надо
                     if(mb_strlen($syn_word, "UTF-8") >= 3) {
                         $forms = Morphy::getBaseForm(mb_strtoupper($syn_word, "UTF-8"));

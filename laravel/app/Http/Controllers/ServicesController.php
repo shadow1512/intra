@@ -125,7 +125,7 @@ class ServicesController extends Controller
                 $tr->type_request   =   $trequest;
                 $tr->room           =   $room;
                 $tr->user_id        =   Auth::user()->id;
-                $tr->fio            =   $user->name;
+                $tr->fio            =   $user->lname    .   " " .   $user->fname    .   " " .   $user->mname;
                 $tr->dep            =   $dpname;
                 if($trequest  ==  "cartridge") {
                     $tr->printer    =   $printer;

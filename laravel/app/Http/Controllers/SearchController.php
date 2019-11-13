@@ -1075,39 +1075,47 @@ class SearchController extends Controller
             $record=    $user["record"];
             $weight=    $user["weight"];
             if(array_key_exists($record->id,  $all_found_records)) {
-                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                //$all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$record->id]   =   $weight;
+                //$all_found_records[$record->id]   =   $weight;
+                $all_found_records[$record->id] =   1;
             }
         }
         foreach($users_by_worktitle as $user) {
             $record=    $user["record"];
             $weight=    $user["weight"];
             if(array_key_exists($record->id,  $all_found_records)) {
-                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                //$all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$record->id]   =   $weight;
+                //$all_found_records[$record->id]   =   $weight;
+                $all_found_records[$record->id] =   1;
             }
         }
         foreach($users_by_dep as $user) {
             $record=    $user["record"];
             $weight=    $user["weight"];
             if(array_key_exists($record->id,  $all_found_records)) {
-                $all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                //$all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$record->id]   =   $weight;
+                //$all_found_records[$record->id]   =   $weight;
+                $all_found_records[$record->id] =   1;
             }
         }
         $index  =   count($users_by_room);
         foreach($users_by_room as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$user->id]   =   $index;
+                //$all_found_records[$user->id]   =   $index;
+                $all_found_records[$record->id] =   1;
             }
             $index  --;
         }
@@ -1115,10 +1123,12 @@ class SearchController extends Controller
         $index  =   count($users_by_birthday);
         foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$user->id]   =   $index;
+                //$all_found_records[$user->id]   =   $index;
+                $all_found_records[$record->id] =   1;
             }
             $index  --;
         }
@@ -1126,10 +1136,12 @@ class SearchController extends Controller
         $index  =   count($users_by_phone);
         foreach($users_by_phone as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$user->id]   =   $index;
+                //$all_found_records[$user->id]   =   $index;
+                $all_found_records[$record->id] =   1;
             }
 
             $index  --;
@@ -1138,16 +1150,35 @@ class SearchController extends Controller
         $index  =   count($users_by_email);
         foreach($users_by_email as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
-                $all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                $all_found_records[$user->id]   =   $index;
+                //$all_found_records[$user->id]   =   $index;
+                $all_found_records[$record->id] =   1;
             }
 
             $index --;
         }
 
-        arsort($all_found_records);
+        //arsort($all_found_records);
+
+        $user_ids = array_keys($all_found_records);
+        //Убираем лишние результаты поиска по более, чем одному слову
+        $max_weight =   0;
+        foreach($user_ids as $user_id) {
+            if($all_found_records[$user_id]    >   $max_weight) {
+                $max_weight =   $all_found_records[$user_id];
+            }
+        }
+        $max_user_ids   =   array();
+
+        foreach($user_ids as $user_id) {
+            if($all_found_records[$user_id]   ==   $max_weight) {
+                $max_user_ids[] =   $user_id;
+            }
+        }
+
         unset($users_by_email);
         unset($users_by_phone);
         unset($users_by_room);
@@ -1159,16 +1190,16 @@ class SearchController extends Controller
         //var_dump($all_found_records);
         $users  =   array();
 
-        $user_ids = array_keys($all_found_records);
+        //$user_ids = array_keys($all_found_records);
         $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-            ->whereIn('users.id', $user_ids)->get();
+            ->whereIn('users.id', $max_user_ids)->get();
         $assoc_records = array();
         foreach ($found_records as $record) {
             $assoc_records[$record->id] = $record;
         }
         if(count($assoc_records)) {
-            foreach ($user_ids as $user_id) {
+            foreach ($max_user_ids as $user_id) {
                 $users[] = $assoc_records[$user_id];
             }
         }

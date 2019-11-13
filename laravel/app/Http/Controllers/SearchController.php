@@ -1238,40 +1238,40 @@ class SearchController extends Controller
             $phrase =   "ФИО: " .   $allname;
         }
         if($phone)    {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "телефон: " .   $phone;
+            $phrase .=   "телефон: " .   $phone;
         }
         if($room)    {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "комната: " .   $room;
+            $phrase .=   "комната: " .   $room;
         }
         if($email)    {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "email: " .   $email;
+            $phrase .=   "email: " .   $email;
         }
         if($worktitle)    {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "должность: " .   $worktitle;
+            $phrase .=   "должность: " .   $worktitle;
         }
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "день рождения, период с: " .   trim($bdates[0])  .   " по "  .   trim($bdates[1]);
+            $phrase .=   "день рождения, период с: " .   trim($bdates[0])  .   " по "  .   trim($bdates[1]);
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
-            if($allname) {
-                $allname    .=  ", ";
+            if($phrase) {
+                $phrase    .=  ", ";
             }
-            $phrase =   "день рождения: " .   trim($bdates[0]);
+            $phrase .=   "день рождения: " .   trim($bdates[0]);
         }
 
         return view('search.all', [ "users"  =>  $users,

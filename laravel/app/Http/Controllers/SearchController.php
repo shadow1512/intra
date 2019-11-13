@@ -1143,6 +1143,8 @@ class SearchController extends Controller
             else {
                 $all_found_records[$user->id]   =   $index;
             }
+
+            $index --;
         }
 
         arsort($all_found_records);

@@ -90,6 +90,7 @@ class Technical_Request extends Model
         foreach($trs as  $tr) {
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {
+                var_dump($rec);
                 if(isset($rec["issue"]["status"]["id"])) {
                     $status =   $rec["issue"]["status"]["id"];
                     if($status  ==  1) {

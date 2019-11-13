@@ -25,6 +25,7 @@
          </div>
     @endif
 <div class="search-res_cnt">
+    @php $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"); @endphp
 @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))
     @if (count($users)  &&  !count($deps) && !count($news) && !count($books) && !count($razdels))
             <div class="search-res_cnt_i">
@@ -39,7 +40,13 @@
                                     <div class="profile_contacts_position">{{$user->work_title}}</div>
                                     @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
                                     @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
-                                    @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: {{ date("d.m.Y", strtotime($user->birthday)) }}</div>@endif
+                                    @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения:
+                                        @php
+                                            $month  =   $months[date("n", strtotime($user->birthday))   -1];
+                                            $day    =   date("j",   strtotime($user->birthday));
+                                        @endphp
+                                        {{ $day }}&nbsp;{{ $month }}
+                                    </div>@endif
                                 </div>
                             </li>
                         @endforeach
@@ -60,7 +67,11 @@
                                         <div class="profile_contacts_position">{{$user->work_title}}</div>
                                         @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
                                         @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
-                                        @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: {{ date("d.m.Y", strtotime($user->birthday)) }}</div>@endif
+                                        @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: @php
+                                                $month  =   $months[date("n", strtotime($user->birthday))   -1];
+                                                $day    =   date("j",   strtotime($user->birthday));
+                                            @endphp
+                                            {{ $day }}&nbsp;{{ $month }}</div>@endif
                                     </div>
                                 </li>
                             @endforeach
@@ -159,7 +170,6 @@
             @foreach ($news as $new)
                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
                     <div class="news_li_date">@php
-                            $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
                             $month  =   $months[date("n", strtotime($new->published_at))   -1];
                             $day    =   date("j",   strtotime($new->published_at));
                             $year   =   date("Y",   strtotime($new->published_at));

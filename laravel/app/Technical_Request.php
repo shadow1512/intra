@@ -88,6 +88,7 @@ class Technical_Request extends Model
         //$rec    =   $client->issue->show(112993);var_dump($rec);die();
         //$assigned   =   $client->user->show(37);var_dump($assigned);die();
         foreach($trs as  $tr) {
+            echo $tr->redmine_link . "\r\n";
             $rec    =   $client->issue->show($tr->redmine_link);
             if($rec) {
                 var_dump($rec);

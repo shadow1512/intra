@@ -1111,11 +1111,11 @@ class SearchController extends Controller
         foreach($users_by_room as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
-                $all_found_records[$record->id] =   1;
+                $all_found_records[$user->id] =   1;
             }
             $index  --;
         }
@@ -1124,11 +1124,11 @@ class SearchController extends Controller
         foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
-                $all_found_records[$record->id] =   1;
+                $all_found_records[$user->id] =   1;
             }
             $index  --;
         }
@@ -1137,11 +1137,11 @@ class SearchController extends Controller
         foreach($users_by_phone as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
-                $all_found_records[$record->id] =   1;
+                $all_found_records[$user->id] =   1;
             }
 
             $index  --;
@@ -1151,11 +1151,11 @@ class SearchController extends Controller
         foreach($users_by_email as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
-                $all_found_records[$record->id] =   1;
+                $all_found_records[$user->id] =   1;
             }
 
             $index --;

@@ -22,7 +22,7 @@
                             $month  =   $months[date("n", strtotime($user->birthday))   -1];
                             $day    =   date("j",   strtotime($user->birthday));
                         @endphp
-                        {{ $day }}{{ $month }}</span></div>@endif
+                        {{ $day }}&nbsp;{{ $month }}</span></div>@endif
                 @if(!empty($user->address))<div class="profile_info_address"><strong>Адрес:&nbsp;</strong><span>{{ $user->address }}</span></div>@endif
                 @if(!empty($user->room))<div class="profile_info_room"><strong>Комната:&nbsp;</strong><span>{{ $user->room }}</span></div>@endif
                 @if(!empty($user->phone))<div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{ $user->phone }}</span></div>@endif

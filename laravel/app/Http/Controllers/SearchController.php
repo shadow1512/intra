@@ -712,7 +712,7 @@ class SearchController extends Controller
             unset($room_records);
             unset($user_ids);
         }
-
+        var_dump($users_by_room);
         //кусок поиска по email
         $email = trim($request->input('email'));
         $email = mb_substr($email, 0, 100);

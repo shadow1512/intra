@@ -1070,7 +1070,31 @@ class SearchController extends Controller
             $users_by_birthday  =   $birthday_records;
         }
 
+        $total_attrs_in_search  =   0;
         $all_found_records  =   array();
+
+        if(count($users)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_dep)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_worktitle)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_room)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_phone)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_email)) {
+            $total_attrs_in_search  ++;
+        }
+        if(count($users_by_birthday)) {
+            $total_attrs_in_search  ++;
+        }
+
         foreach($users as $user) {
             $record=    $user["record"];
             $weight=    $user["weight"];
@@ -1164,7 +1188,6 @@ class SearchController extends Controller
         //arsort($all_found_records);
 
         $user_ids = array_keys($all_found_records);
-        var_dump($user_ids);
         //Убираем лишние результаты поиска по более, чем одному слову
         $max_weight =   0;
         foreach($user_ids as $user_id) {
@@ -1173,14 +1196,15 @@ class SearchController extends Controller
             }
         }
 
-        var_dump($max_weight);
         $max_user_ids   =   array();
-
-        foreach($user_ids as $user_id) {
-            if($all_found_records[$user_id]   ==   $max_weight) {
-                $max_user_ids[] =   $user_id;
+        if($max_weight  ==   $total_attrs_in_search) {
+            foreach($user_ids as $user_id) {
+                if($all_found_records[$user_id]   ==   $max_weight) {
+                    $max_user_ids[] =   $user_id;
+                }
             }
         }
+
 
         unset($users_by_email);
         unset($users_by_phone);

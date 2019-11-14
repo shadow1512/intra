@@ -571,6 +571,7 @@ class SearchController extends Controller
         $corrector = new Text_LangCorrect();
 
         if(mb_strlen($allname) >= 3) {
+            $allname = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $allname);
             $words = explode(" ", $allname);
             //итоговый массив со взвешенным списком
             $words_records = array();
@@ -761,6 +762,7 @@ class SearchController extends Controller
         $corrector = new Text_LangCorrect();
 
         if(mb_strlen($worktitle) >= 3) {
+            $worktitle = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $worktitle);
             $words = explode(" ", $worktitle);
             //итоговый массив со взвешенным списком
             $words_records = array();
@@ -887,6 +889,7 @@ class SearchController extends Controller
         $corrector = new Text_LangCorrect();
 
         if(mb_strlen($dep) >= 3) {
+            $dep = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $dep);
             $words = explode(" ", $dep);
             //итоговый массив со взвешенным списком
             $words_records = array();

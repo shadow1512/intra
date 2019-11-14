@@ -68,9 +68,10 @@ class buildsearchindex extends Command
 
             $term = new Terms();
 
+            $fname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->fname);
             $fname_res  =   array();
-            if(mb_strripos($user->fname,  "-",    0,  "UTF-8")    !== false) {
-                $fnames =   explode("-",    $user->fname);
+            if(mb_strripos($fname,  "-",    0,  "UTF-8")    !== false) {
+                $fnames =   explode("-",    $fname);
                 foreach($fnames as  $part) {
                     if(trim($part)) {
                         $fname_res[]    =   trim($part);
@@ -105,9 +106,10 @@ class buildsearchindex extends Command
 
             $term = new Terms();
 
+            $lname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->lname);
             $lname_res  =   array();
-            if(mb_strripos($user->lname,  "-",    0,  "UTF-8")    !== false) {
-                $lnames =   explode("-",    $user->lname);
+            if(mb_strripos($lname,  "-",    0,  "UTF-8")    !== false) {
+                $lnames =   explode("-",    $lname);
                 foreach($lnames as  $part) {
                     if(trim($part)) {
                         $lname_res[]    =   trim($part);
@@ -143,9 +145,10 @@ class buildsearchindex extends Command
 
             $term = new Terms();
 
+            $mname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->mname);
             $mname_res  =   array();
-            if(mb_strripos($user->mname,  "-",    0,  "UTF-8")    !== false) {
-                $mnames =   explode("-",    $user->mname);
+            if(mb_strripos($mname,  "-",    0,  "UTF-8")    !== false) {
+                $mnames =   explode("-",    $mname);
                 foreach($mnames as  $part) {
                     if(trim($part)) {
                         $mname_res[]    =   trim($part);

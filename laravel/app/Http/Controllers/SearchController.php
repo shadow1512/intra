@@ -201,7 +201,7 @@ class SearchController extends Controller
                     }
                     arsort($search_result[$section]);
 
-                    var_dump($search_result);
+                    //var_dump($search_result);
                     //начинаем теперь пляски с базой
                     switch ($section) {
                         case 'users':
@@ -599,7 +599,7 @@ class SearchController extends Controller
                         } //Слово не нашлось в словаре
                         else {
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
-                            $res = $this->getSearchResultsByWord($oldword, array("users"));
+                            $res = $this->getSearchResultsByWord($oldword, array("users"),  array("fname",  "lname",    "mname"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
@@ -612,7 +612,7 @@ class SearchController extends Controller
                                 if (count($suggest)) {
                                     $word = $suggest[0];
                                     //var_dump($word);
-                                    $res = $this->getSearchResultsByWord($word, array("users"));
+                                    $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));
                                     $words_records[] = $res;
                                     $total_found_by_word = count($res);
                                     unset($res);

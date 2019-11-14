@@ -66,8 +66,6 @@ class buildsearchindex extends Command
         foreach($users as $user) {
             //Имя
 
-            $term = new Terms();
-
             $fname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->fname);
             $fname_res  =   array();
             if(mb_strripos($fname,  "-",    0,  "UTF-8")    !== false) {
@@ -84,6 +82,7 @@ class buildsearchindex extends Command
 
             foreach($fname_res as $part) {
                 if($part) {
+                    $term = new Terms();
                     $part  =   mb_strtoupper($part, "UTF-8");
                     $baseform = Morphy::getBaseForm($part);
                     if($baseform && count($baseform)) {
@@ -106,8 +105,6 @@ class buildsearchindex extends Command
 
             //Фамилия
 
-            $term = new Terms();
-
             $lname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->lname);
             $lname_res  =   array();
             if(mb_strripos($lname,  "-",    0,  "UTF-8")    !== false) {
@@ -124,6 +121,7 @@ class buildsearchindex extends Command
 
             foreach($lname_res as $part) {
                 if($part) {
+                    $term = new Terms();
                     $part  =   mb_strtoupper($part, "UTF-8");
                     $baseform = Morphy::getBaseForm($part);
                     if($baseform && count($baseform)) {
@@ -147,8 +145,6 @@ class buildsearchindex extends Command
 
             //Фамилия
 
-            $term = new Terms();
-
             $mname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->mname);
             $mname_res  =   array();
             if(mb_strripos($mname,  "-",    0,  "UTF-8")    !== false) {
@@ -165,6 +161,7 @@ class buildsearchindex extends Command
 
             foreach($mname_res as $part) {
                 if($part) {
+                    $term = new Terms();
                     $part  =   mb_strtoupper($part, "UTF-8");
                     $baseform = Morphy::getBaseForm($part);
                     if($baseform && count($baseform)) {
@@ -258,8 +255,6 @@ class buildsearchindex extends Command
                     foreach($words as $word) {
                         $word   =   preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $word);
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
-                            $term = new Terms();
-
                             $word_res  =   array();
                             if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
                                 $words =   explode("-",    $word);
@@ -274,10 +269,8 @@ class buildsearchindex extends Command
                             }
 
                             foreach($word_res as $part) {
+                                $term = new Terms();
                                 $part  =   mb_strtoupper($part, "UTF-8");
-                                if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
-                                    echo $part  .   "\r\n";
-                                }
                                 $baseform = Morphy::getBaseForm($part);
                                 if($baseform && count($baseform)) {
                                     $term->baseterm = $baseform[0];
@@ -311,7 +304,6 @@ class buildsearchindex extends Command
                     foreach($words as $word) {
                         $word   =   preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $word);
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
-                            $term = new Terms();
 
                             $word_res  =   array();
                             if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
@@ -323,11 +315,12 @@ class buildsearchindex extends Command
                                 }
                             }
                             else {
-                                $word_res[]  =   $word;
+                                $word_res[]  =   trim($word);
                             }
 
                             foreach($word_res as $part) {
-                                $part  =   trim(mb_strtoupper($part, "UTF-8"));
+                                $term = new Terms();
+                                $part  =   mb_strtoupper($part, "UTF-8");
                                 $baseform = Morphy::getBaseForm($part);
                                 if($baseform && count($baseform)) {
                                     $term->baseterm = $baseform[0];

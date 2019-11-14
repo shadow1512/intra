@@ -256,8 +256,8 @@ class buildsearchindex extends Command
 
                             $word_res  =   array();
                             if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
-                                echo $user->id  .   "\r\n";
                                 $words =   explode("-",    $word);
+                                var_dump($words);exit();
                                 foreach($words as  $part) {
                                     if(trim($part)) {
                                         $word_res[]    =   trim($part);

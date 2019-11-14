@@ -67,54 +67,110 @@ class buildsearchindex extends Command
             //Имя
 
             $term = new Terms();
-            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->fname, "UTF-8")));
-            if($baseform && count($baseform)) {
-                $term->baseterm = $baseform[0];
+
+            $fname  =   trim(mb_strtoupper($user->fname, "UTF-8"));
+            $fname_res  =   array();
+            if(mb_strripos($fname,  "-",    0,  "UTF-8")    !== false) {
+                $fnames =   explode("-",    $fname);
+                foreach($fnames as  $part) {
+                    if(trim($part)) {
+                        $fname_res[]    =   trim($part);
+                    }
+                }
             }
-            $term->term = trim($user->fname);
-            $term->section = 'users';
-            $term->record = $user->id;
-            $term->partial  =   'fname';
-            $term->save();
+            else {
+                $fname_res[]  =   $fname;
+            }
+
+            foreach($fname_res as $part) {
+                $baseform = Morphy::getBaseForm($part);
+                if($baseform && count($baseform)) {
+                    $term->baseterm = $baseform[0];
+                }
+                $term->term = $part;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'fname';
+                $term->save();
+            }
+
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
-            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8");
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->fname), "UTF-8");
             if($str) {
                 fwrite($fp, $str    .   PHP_EOL);
             }
+
             //Фамилия
 
             $term = new Terms();
-            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->lname, "UTF-8")));
-            if($baseform && count($baseform)) {
-                $term->baseterm = $baseform[0];
-            }
-            $term->term = trim($user->lname);
-            $term->section = 'users';
-            $term->record = $user->id;
-            $term->partial  =   'lname';
-            $term->save();
 
-            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8"));
-            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8");
+            $lname  =   trim(mb_strtoupper($user->lname, "UTF-8"));
+            $lname_res  =   array();
+            if(mb_strripos($lname,  "-",    0,  "UTF-8")    !== false) {
+                $lnames =   explode("-",    $lname);
+                foreach($lnames as  $part) {
+                    if(trim($part)) {
+                        $lname_res[]    =   trim($part);
+                    }
+                }
+            }
+            else {
+                $lname_res[]  =   $lname;
+            }
+
+            foreach($lname_res as $part) {
+                $baseform = Morphy::getBaseForm($part);
+                if($baseform && count($baseform)) {
+                    $term->baseterm = $baseform[0];
+                }
+                $term->term = $part;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'lname';
+                $term->save();
+            }
+
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->lname), "UTF-8");
             if($str) {
                 fwrite($fp, $str    .   PHP_EOL);
             }
+
             //Отчество
 
+            //Фамилия
+
             $term = new Terms();
-            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($user->mname, "UTF-8")));
-            if($baseform && count($baseform)) {
-                $term->baseterm = $baseform[0];
+
+            $mname  =   trim(mb_strtoupper($user->mname, "UTF-8"));
+            $mname_res  =   array();
+            if(mb_strripos($mname,  "-",    0,  "UTF-8")    !== false) {
+                $mnames =   explode("-",    $mname);
+                foreach($mnames as  $part) {
+                    if(trim($part)) {
+                        $mname_res[]    =   trim($part);
+                    }
+                }
             }
-            $term->term = trim($user->mname);
-            $term->section = 'users';
-            $term->record = $user->id;
-            $term->partial  =   'mname';
-            $term->save();
+            else {
+                $mname_res[]  =   $mname;
+            }
+
+            foreach($mname_res as $part) {
+                $baseform = Morphy::getBaseForm($part);
+                if($baseform && count($baseform)) {
+                    $term->baseterm = $baseform[0];
+                }
+                $term->term = $part;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'mname';
+                $term->save();
+            }
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
-            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8");
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->mname), "UTF-8");
             if($str) {
                 fwrite($fp, $str    .   PHP_EOL);
             }
@@ -193,15 +249,32 @@ class buildsearchindex extends Command
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
-                            if($baseform && count($baseform)) {
-                                $term->baseterm = $baseform[0];
+
+                            $word  =   trim(mb_strtoupper($word, "UTF-8"));
+                            $word_res  =   array();
+                            if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
+                                $words =   explode("-",    $word);
+                                foreach($words as  $part) {
+                                    if(trim($part)) {
+                                        $word_res[]    =   trim($part);
+                                    }
+                                }
                             }
-                            $term->term = trim($word);
-                            $term->section = 'users';
-                            $term->record = $user->id;
-                            $term->partial  =   'work';
-                            $term->save();
+                            else {
+                                $word_res[]  =   $word;
+                            }
+
+                            foreach($word_res as $part) {
+                                $baseform = Morphy::getBaseForm($part);
+                                if($baseform && count($baseform)) {
+                                    $term->baseterm = $baseform[0];
+                                }
+                                $term->term = $part;
+                                $term->section = 'users';
+                                $term->record = $user->id;
+                                $term->partial  =   'work';
+                                $term->save();
+                            }
                         }
                     }
                 }
@@ -225,15 +298,32 @@ class buildsearchindex extends Command
                     foreach($words as $word) {
                         if(mb_strlen(trim($word), "UTF-8") >= 3) {
                             $term = new Terms();
-                            $baseform = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
-                            if($baseform && count($baseform)) {
-                                $term->baseterm = $baseform[0];
+
+                            $word  =   trim(mb_strtoupper($word, "UTF-8"));
+                            $word_res  =   array();
+                            if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
+                                $words =   explode("-",    $word);
+                                foreach($words as  $part) {
+                                    if(trim($part)) {
+                                        $word_res[]    =   trim($part);
+                                    }
+                                }
                             }
-                            $term->term = trim($word);
-                            $term->section = 'deps';
-                            $term->record = $dep->id;
-                            $term->partial  =   'dep';
-                            $term->save();
+                            else {
+                                $word_res[]  =   $word;
+                            }
+
+                            foreach($word_res as $part) {
+                                $baseform = Morphy::getBaseForm($part);
+                                if($baseform && count($baseform)) {
+                                    $term->baseterm = $baseform[0];
+                                }
+                                $term->term = $part;
+                                $term->section = 'deps';
+                                $term->record = $user->id;
+                                $term->partial  =   'dep';
+                                $term->save();
+                            }
                         }
                     }
                 }

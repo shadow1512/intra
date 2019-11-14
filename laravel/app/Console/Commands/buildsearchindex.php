@@ -268,14 +268,16 @@ class buildsearchindex extends Command
                                         $word_res[]    =   trim($part);
                                     }
                                 }
-                                var_dump($word_res);exit();
                             }
                             else {
-                                $word_res[]  =   $word;
+                                $word_res[]  =   trim($word);
                             }
 
                             foreach($word_res as $part) {
-                                $part  =   trim(mb_strtoupper($part, "UTF-8"));
+                                $part  =   mb_strtoupper($part, "UTF-8");
+                                if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
+                                    echo $part  .   "\r\n";
+                                }
                                 $baseform = Morphy::getBaseForm($part);
                                 if($baseform && count($baseform)) {
                                     $term->baseterm = $baseform[0];

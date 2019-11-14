@@ -1132,11 +1132,9 @@ class SearchController extends Controller
         }
         $index  =   count($users_by_room);
         foreach($users_by_room as $user) {
-            echo $user->id . "\r\n";
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
-                echo $user->id. "\r\n";
+                $all_found_records[$user->id] =   $all_found_records[$user->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
@@ -1149,7 +1147,7 @@ class SearchController extends Controller
         foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$user->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
@@ -1162,7 +1160,7 @@ class SearchController extends Controller
         foreach($users_by_phone as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$user->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;
@@ -1176,7 +1174,7 @@ class SearchController extends Controller
         foreach($users_by_email as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {
                 //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$user->id] =   $all_found_records[$record->id]   + 1;
+                $all_found_records[$user->id] =   $all_found_records[$user->id]   + 1;
             }
             else {
                 //$all_found_records[$user->id]   =   $index;

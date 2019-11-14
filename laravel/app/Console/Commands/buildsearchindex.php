@@ -79,20 +79,22 @@ class buildsearchindex extends Command
                 }
             }
             else {
-                $fname_res[]  =   $fname;
+                $fname_res[]  =   trim($fname);
             }
 
             foreach($fname_res as $part) {
-                $part  =   trim(mb_strtoupper($part, "UTF-8"));
-                $baseform = Morphy::getBaseForm($part);
-                if($baseform && count($baseform)) {
-                    $term->baseterm = $baseform[0];
+                if($part) {
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
+                    }
+                    $term->term = $part;
+                    $term->section = 'users';
+                    $term->record = $user->id;
+                    $term->partial  =   'fname';
+                    $term->save();
                 }
-                $term->term = $part;
-                $term->section = 'users';
-                $term->record = $user->id;
-                $term->partial  =   'fname';
-                $term->save();
             }
 
 
@@ -117,20 +119,22 @@ class buildsearchindex extends Command
                 }
             }
             else {
-                $lname_res[]  =   $lname;
+                $lname_res[]  =   trim($lname);
             }
 
             foreach($lname_res as $part) {
-                $part  =   trim(mb_strtoupper($part, "UTF-8"));
-                $baseform = Morphy::getBaseForm($part);
-                if($baseform && count($baseform)) {
-                    $term->baseterm = $baseform[0];
+                if($part) {
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
+                    }
+                    $term->term = $part;
+                    $term->section = 'users';
+                    $term->record = $user->id;
+                    $term->partial  =   'lname';
+                    $term->save();
                 }
-                $term->term = $part;
-                $term->section = 'users';
-                $term->record = $user->id;
-                $term->partial  =   'lname';
-                $term->save();
             }
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
@@ -156,20 +160,22 @@ class buildsearchindex extends Command
                 }
             }
             else {
-                $mname_res[]  =   $mname;
+                $mname_res[]  =   trim($mname);
             }
 
             foreach($mname_res as $part) {
-                $part  =   trim(mb_strtoupper($part, "UTF-8"));
-                $baseform = Morphy::getBaseForm($part);
-                if($baseform && count($baseform)) {
-                    $term->baseterm = $baseform[0];
+                if($part) {
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
+                    }
+                    $term->term = $part;
+                    $term->section = 'users';
+                    $term->record = $user->id;
+                    $term->partial  =   'mname';
+                    $term->save();
                 }
-                $term->term = $part;
-                $term->section = 'users';
-                $term->record = $user->id;
-                $term->partial  =   'mname';
-                $term->save();
             }
 
             //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
@@ -257,12 +263,12 @@ class buildsearchindex extends Command
                             $word_res  =   array();
                             if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
                                 $words =   explode("-",    $word);
-                                var_dump($words);exit();
                                 foreach($words as  $part) {
                                     if(trim($part)) {
                                         $word_res[]    =   trim($part);
                                     }
                                 }
+                                var_dump($word_res);exit();
                             }
                             else {
                                 $word_res[]  =   $word;

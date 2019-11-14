@@ -592,7 +592,7 @@ class SearchController extends Controller
                         $total_found_by_word = 0;
 
                         if (pspell_check($dict, $word)) {
-                            $res = $this->getSearchResultsByWord($word, array("users"));
+                            $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);

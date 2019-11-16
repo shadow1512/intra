@@ -6,6 +6,7 @@ use Cookie;
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
 use Adldap\Laravel\Facades\Adldap;
+use Illuminate\Support\Facades\Validator;
 use App\News;
 use App\User;
 use App\Rooms;

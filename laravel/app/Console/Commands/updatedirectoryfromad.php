@@ -205,10 +205,6 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        $us =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
-        var_dump($us);
-        die();
-
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();

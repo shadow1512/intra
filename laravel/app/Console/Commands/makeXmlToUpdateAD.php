@@ -107,11 +107,11 @@ class makeXmlToUpdateAD extends Command
                 else if($user->chef  ==   1) {
                     $user->chef =   "superboss";
                 }
-                else if($user->chef  ==   0) {
-                    $user->chef =   "president";
+                else if(is_null($user->chef)) {
+                    $user->chef =   "";
                 }
                 else {
-                    $user->chef =   "";
+                    $user->chef =   "president";
                 }
                 $businesscat    =   $dom->createElement("businessCategory", $user->chef);
                 $businesscatnode=   $worknode->appendChild($businesscat);

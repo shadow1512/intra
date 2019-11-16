@@ -39,6 +39,14 @@ class updatedirectoryfromad extends Command
                                     'testfordpt',
                                     'testforprogrammers');
 
+    //Массивы для поддержания удаления подразделений или пользователей, которые могли быть удалены или перенесены
+    // в служебные группы, что означает де-факто удаление, нужно хранить текущее состояние Intra-базы и сравнивать с тем,
+    //что получается во время импорта (а также поддержка переноса пользователей из подразделения в подразделение
+
+    protected $i_links;
+    protected $i_uids;
+    protected $i_dids;
+
     /**
      * Create a new command instance.
      *
@@ -48,6 +56,22 @@ class updatedirectoryfromad extends Command
     {
         parent::__construct();
         require_once public_path() . '/hiercode.php';
+
+        $i_uids       =   User::pluck("id");
+        foreach($i_uids as $uid) {
+            $this->i_uids[] =   $uid;
+        }
+
+        $i_dids       =   Dep::pluck("id");
+        foreach($i_dids as $did) {
+            $this->i_dids[] =   $did;
+        }
+        $this->i_links      =   array();
+
+        $deps_peoples   =   Deps_Peoples::get();
+        foreach($deps_peoples as $dep_people) {
+            $this->i_links[$dep_people->people_id][]  =   $dep_people->dep_id;
+        }
     }
 
     /**
@@ -133,6 +157,8 @@ class updatedirectoryfromad extends Command
                         if(!is_null($present->deleted_at)) {
                             $present->restore();
                         }
+
+
                     }
                     else {
                         //print "trashed\r\n";
@@ -204,7 +230,10 @@ class updatedirectoryfromad extends Command
     }
     public function handle()
     {
-        //
+        var_dump($this->i_dids);
+        var_dump($this->i_dids);
+        var_dump($this->i_links);
+        exit();
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();

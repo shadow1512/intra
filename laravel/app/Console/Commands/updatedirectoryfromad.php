@@ -97,6 +97,33 @@ class updatedirectoryfromad extends Command
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {
                 $present->name      =   $dep_inner->getName();
+                //Могли переместить по структуре
+                $parent_id  =   $parent_code;
+                if(!is_null($parent_id)) {
+                    if($index   ==  0) {
+                        for ($i = 0; $i < CODE_LENGTH; $i++) {
+                            $parent_id .= $hiercode->digit_to_char[0];
+                        }
+                    }
+                    else {
+                        $parent_id  =   $hiercode->getNextCode();
+                    }
+                    $hiercode->setValue($parent_id);
+                }
+                else {
+                    $parent_id  =   '';
+                    if($index   ==  0) {
+                        for ($i = 0; $i < CODE_LENGTH; $i++) {
+                            $parent_id .= $hiercode->digit_to_char[0];
+                        }
+                    }
+                    else {
+                        $parent_id  =   $hiercode->getNextCode();
+                    }
+                    $hiercode->setValue($parent_id);
+                }
+
+                $present->parent_id =   $parent_id;
                 $present->save();
 
                 //Раз департамент есть, значит, его можно удалить из перечня проверки
@@ -104,8 +131,6 @@ class updatedirectoryfromad extends Command
                 if($key !== false) {
                     unset($this->i_dids[$key]);
                 }
-
-                $parent_id  =   $present->parent_id;
                 $dep_user   =   $present;
             }
             else {
@@ -299,6 +324,12 @@ class updatedirectoryfromad extends Command
         if($present) {
             $present->name      =   $root->getName();
             $present->save();
+
+            //Раз департамент есть, значит, его можно удалить из перечня проверки
+            $key    =   array_search($present->id,  $this->i_dids);
+            if($key !== false) {
+                unset($this->i_dids[$key]);
+            }
         }
         else {
             $dep = new Dep();

@@ -11,8 +11,11 @@
 |
 */
 
-Route::get('/',         'HomeController@index')->name('home');
-Route::get('/parking',  'HomeController@parking')->name('parking');
+Route::get('/',          'HomeController@index')->name('home');
+Route::get('/parking',   'HomeController@parking')->name('parking');
+Route::get('/feedback',  'HomeController@feedback')->name('feedback');
+Route::get('/feedback/success',  'HomeController@feedbacksuccess')->name('feedback.success');
+Route::post('/feedback', 'HomeController@storefeedback')->name('feedback.store');
 
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');

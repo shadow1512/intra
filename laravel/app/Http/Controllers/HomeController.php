@@ -91,4 +91,50 @@ class HomeController extends Controller
         //Полезные документы
         return view('staff');
     }
+
+    public function feedback()
+    {
+        //Полезные документы
+        return view('feedback.form');
+    }
+
+    public function feedbacksuccess()
+    {
+        //Полезные документы
+        return view('feedback.success');
+    }
+
+    public function storefeedback(Request $request)
+    {
+        $feedback   =   trim($request->input('feedback'));
+
+
+        $messages   =   array(  "feedback.required"     =>  "Поле обязательно для заполнения",
+                                "feedback.max"          =>  "Поле не должно превышать 16000 символов",
+        );
+
+        $validator = Validator::make($request->all(), [
+            'feedback'               => 'required|max:16000',
+        ],  $messages);
+
+
+        if ($validator->fails()) {
+            return redirect()->route('feedback')
+                ->withErrors($validator)
+                ->withInput();
+        }
+        else {
+            if (Auth::check()) {
+
+                $fb =   new Feedback();
+                $fb->feedback   =   $feedback;
+                $fb->user_id    =   Auth::user()->id;
+                $fb->save();
+                return redirect()->route('feedback.success');
+            }
+            else {
+                return redirect()->route('feedback');
+            }
+        }
+    }
 }

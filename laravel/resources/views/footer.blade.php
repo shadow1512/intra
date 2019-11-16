@@ -32,6 +32,7 @@
             <li class="footer_lst_i"><a href="{{route("services.mail")}}" class="footer_lst_i_lk">Заявка на&nbsp;почтовую доставку</a></li>
             <li class="footer_lst_i"><a href="{{route("services.cartridge")}}" class="footer_lst_i_lk">Заявка на&nbsp;замену картриджа</a></li>
             <li class="footer_lst_i"><a href="{{route("services.teh")}}" class="footer_lst_i_lk">Заявка на&nbsp;техническое обслуживание</a></li>
+            <li class="footer_lst_i"><a href="{{route("feedback")}}" class="footer_lst_i_lk">Обратная связь о работе портала</a></li>
         </ul>
     </div>
     <div class="footer_bottom">

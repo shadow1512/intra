@@ -610,6 +610,12 @@ $(document).on("click", "#submit_tech_service_form", function(ev) {
     return false;
 });
 
+$(document).on("click", "#submit_feedback_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    $("#feedback_form").submit();
+    return false;
+});
+
 $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");

@@ -184,6 +184,13 @@ class updatedirectoryfromad extends Command
                     if($user->getBusinessCategory() ==  "boss") {
                         $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
                     }
+                    //Заплатка для Тимофеевой, Крупцова
+                    if($user->getBusinessCategory() ==  "superboss") {
+                        $chef   =   1;
+                    }
+                    if($user->getBusinessCategory() ==  "president") {
+                        $chef   =   0;
+                    }
                     Deps_Peoples::where("people_id",    "=",    $currentRecord->id)->delete();
                     $dp =   new Deps_Peoples();
                     $dp->dep_id     =   $dep->id;
@@ -198,9 +205,9 @@ class updatedirectoryfromad extends Command
     public function handle()
     {
         //
-        /*$us =   Adldap::getProvider('default')->search()->users()->find("Сергей");
-        var_dump($us->changedDate());
-        die();*/
+        $us =   Adldap::getProvider('default')->search()->ous()->find("TestQ");
+        var_dump($us);
+        die();
 
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 

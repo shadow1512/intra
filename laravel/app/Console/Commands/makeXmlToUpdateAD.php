@@ -101,8 +101,14 @@ class makeXmlToUpdateAD extends Command
                 $worknode       =   $usernode->appendChild($work);
                 $worktitle      =   $dom->createElement("worktitle", $user->work_title);
                 $worktitlenode  =   $worknode->appendChild($worktitle);
-                if($user->chef  >   0) {
+                if($user->chef  >=   2) {
                     $user->chef =   "boss";
+                }
+                else if($user->chef  ==   1) {
+                    $user->chef =   "superboss";
+                }
+                else if($user->chef  ==   0) {
+                    $user->chef =   "president";
                 }
                 else {
                     $user->chef =   "";

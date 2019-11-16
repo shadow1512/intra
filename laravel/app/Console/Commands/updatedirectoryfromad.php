@@ -230,7 +230,7 @@ class updatedirectoryfromad extends Command
     }
     public function handle()
     {
-        var_dump($this->i_dids);
+        var_dump($this->i_uids);
         var_dump($this->i_dids);
         var_dump($this->i_links);
         exit();

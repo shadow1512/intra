@@ -94,13 +94,13 @@ class HomeController extends Controller
 
     public function feedback()
     {
-        //Полезные документы
+        //Форма обратной связи
         return view('feedback.form');
     }
 
     public function feedbacksuccess()
     {
-        //Полезные документы
+        //Успех отправки формы
         return view('feedback.success');
     }
 

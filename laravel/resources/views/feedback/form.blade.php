@@ -1,6 +1,6 @@
 @extends('layouts.appmenu')
 
-@section('news')
+@section('content')
     <div class="main_news">
         <div class="h __h_m">Обратная связь о работе портала</div>
         @if (Auth::check())

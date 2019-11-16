@@ -1,6 +1,6 @@
 @extends('layouts.appmenu')
 
-@section('news')
+@section('content')
     <div class="main_news">
         <div class="h __h_m">Полезные документы</div>
         <ul class="news_ul">

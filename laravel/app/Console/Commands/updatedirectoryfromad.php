@@ -98,6 +98,13 @@ class updatedirectoryfromad extends Command
             if($present) {
                 $present->name      =   $dep_inner->getName();
                 $present->save();
+
+                //Раз департамент есть, значит, его можно удалить из перечня проверки
+                $key    =   array_search($present->id,  $this->i_dids);
+                if($key !== false) {
+                    unset($this->i_dids[$key]);
+                }
+
                 $parent_id  =   $present->parent_id;
                 $dep_user   =   $present;
             }
@@ -158,7 +165,62 @@ class updatedirectoryfromad extends Command
                             $present->restore();
                         }
 
+                        //Раз сотрудник есть, значит, его можно удалить из перечня проверки
+                        $key    =   array_search($present->id,  $this->i_uids);
+                        if($key !== false) {
+                            unset($this->i_uids[$key]);
+                        }
 
+                        //Можно его удалить и из проверки связей
+                        if(isset($this->i_links[$present->id])) {
+                            $key    =   array_search($dep->id,  $this->i_links[$present->id]);
+                            if($key !== false) {
+                                unset($this->i_links[$present->id][$key]);
+                            }
+                            //Для этого сотрудника нет текущего отдела, надо создать, вероятно, он перенесен
+                            else {
+                                $work_title     =   $user->getTitle();
+                                $chef   =   null;
+                                if($user->getBusinessCategory() ==  "boss") {
+                                    $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
+                                }
+                                //Заплатка для Тимофеевой, Крупцова
+                                if($user->getBusinessCategory() ==  "superboss") {
+                                    $chef   =   1;
+                                }
+                                if($user->getBusinessCategory() ==  "president") {
+                                    $chef   =   0;
+                                }
+
+                                $dp =   new Deps_Peoples();
+                                $dp->dep_id     =   $dep->id;
+                                $dp->people_id  =   $present->id;
+                                $dp->work_title =   $work_title;
+                                $dp->chef       =   $chef;
+                                $dp->save();
+                            }
+                        }
+                        //Для этого сотрудника не было отдела, надо создать
+                        else {
+                            $work_title     =   $user->getTitle();
+                            $chef   =   null;
+                            if($user->getBusinessCategory() ==  "boss") {
+                                $chef   =   mb_strlen($dep->parent_id,  "UTF-8");
+                            }
+                            //Заплатка для Тимофеевой, Крупцова
+                            if($user->getBusinessCategory() ==  "superboss") {
+                                $chef   =   1;
+                            }
+                            if($user->getBusinessCategory() ==  "president") {
+                                $chef   =   0;
+                            }
+                            $dp =   new Deps_Peoples();
+                            $dp->dep_id     =   $dep->id;
+                            $dp->people_id  =   $present->id;
+                            $dp->work_title =   $work_title;
+                            $dp->chef       =   $chef;
+                            $dp->save();
+                        }
                     }
                     else {
                         //print "trashed\r\n";
@@ -230,10 +292,6 @@ class updatedirectoryfromad extends Command
     }
     public function handle()
     {
-        var_dump($this->i_uids);
-        var_dump($this->i_dids);
-        var_dump($this->i_links);
-        exit();
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
@@ -252,6 +310,10 @@ class updatedirectoryfromad extends Command
 
         $this->serveDepLevel("OU=Консорциум КОДЕКС", null);
 
+        var_dump($this->i_uids);
+        var_dump($this->i_dids);
+        var_dump($this->i_links);
+        exit();
         User::whereNull('avatar')->update(['avatar'    =>  '/images/faces/default.svg']);
     }
 }

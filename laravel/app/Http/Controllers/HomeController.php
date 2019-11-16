@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Validator;
 use App\News;
 use App\User;
 use App\Rooms;
+use App\Feedback;
 use App\Dinner_slots;
 use DB;
 use Auth;

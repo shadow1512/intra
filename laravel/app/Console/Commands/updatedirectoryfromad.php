@@ -341,10 +341,27 @@ class updatedirectoryfromad extends Command
 
         $this->serveDepLevel("OU=Консорциум КОДЕКС", null);
 
-        var_dump($this->i_uids);
-        var_dump($this->i_dids);
-        var_dump($this->i_links);
-        exit();
+        //Те люди, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
+        //Вердикт - убить
+        foreach($this->i_uids as $uid) {
+            User::delete($uid);
+            Deps_Peoples::where("people_id",    '=',    $uid)->delete();
+        }
+
+        //Те департаменты, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
+        //Вердикт - убить
+        foreach($this->i_dids as $did) {
+            Dep::delete($did);
+            Deps_Peoples::where("dep_id",    '=',    $did)->delete();
+        }
+
+        //Самое сложное - повисшие связи. Люди, которые, видимо, были перемещены между департаментами. Старую связь надо удалить
+        foreach($this->i_links as $uid  =>  $deps) {
+            foreach($deps as $dep) {
+                Deps_Peoples::where("dep_id",    '=',    $dep)->where("people_id",  "=",    $uid)->delete();
+            }
+        }
+
         User::whereNull('avatar')->update(['avatar'    =>  '/images/faces/default.svg']);
     }
 }

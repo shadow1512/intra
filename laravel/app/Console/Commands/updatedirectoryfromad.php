@@ -344,14 +344,14 @@ class updatedirectoryfromad extends Command
         //Те люди, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_uids as $uid) {
-            User::delete($uid);
+            User::where("id",    "=",    $uid)->delete();
             Deps_Peoples::where("people_id",    '=',    $uid)->delete();
         }
 
         //Те департаменты, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_dids as $did) {
-            Dep::delete($did);
+            Dep::where("id",    "=",    $did)->delete();
             Deps_Peoples::where("dep_id",    '=',    $did)->delete();
         }
 

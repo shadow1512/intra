@@ -55,8 +55,14 @@
                             </li>
                         @endif
                         @foreach($bills as $bill)
+                            @php
+                                $prev_month =   $bill->mdc  -   1;
+                                if($prev_month  ==  0) {
+                                    $prev_month =   12;
+                                }
+                            @endphp
                             <li class="bill_lst_i">
-                                <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">{{$months[$bill->mdc]}}</span></div>
+                                <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">с 17 {{$months[$prev_month]}} по 16 {{$months[$bill->mdc]}}</span></div>
                                 <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$bill->ms}} ₽</span></div>
                             </li>
                         @endforeach

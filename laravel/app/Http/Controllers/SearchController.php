@@ -1018,7 +1018,7 @@ class SearchController extends Controller
         $startDay   =   $startMonth =   $startYear  =   $endDay =   $endMonth   =   null;
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
             //Ситуация, когда вводят руками
-            if(!mb_strrpos(".",  trim($bdates[0]))) {
+            if(mb_strrpos(trim($bdates[0]), ".",  0, "UTF-8") === false) {
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;
                 if(is_null($startDay)) {
@@ -1032,7 +1032,7 @@ class SearchController extends Controller
             echo "start\r\n";
             var_dump($startDay);
             var_dump($startMonth);
-            if(!mb_strrpos(".",  trim($bdates[1]))) {
+            if(mb_strrpos(trim($bdates[1]), ".",  0, "UTF-8") === false) {
                 $endDate  =   $this->getDatePartsFromString($bdates[1]);
                 list($endDay, $endMonth)    =   $endDate;
                 if(is_null($endDay)) {
@@ -1080,7 +1080,7 @@ class SearchController extends Controller
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             //Ситуация, когда вводят руками
             var_dump(mb_strrpos(".",  trim($bdates[0])));
-            if(mb_strrpos(".",  trim($bdates[0]),   0,  "UTF-8")===false) {
+            if(mb_strrpos(trim($bdates[0]), ".",   0,  "UTF-8")===false) {
                 echo "unformatted\r\n";
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;

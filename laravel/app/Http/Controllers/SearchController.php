@@ -1030,7 +1030,9 @@ class SearchController extends Controller
                 $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;
             }
-
+            echo "start\r\n";
+            var_dump($startDay);
+            var_dump($startMonth);
             if(!mb_strrpos(".",  trim($bdates[1]))) {
                 $endDate  =   $this->getDatePartsFromString($bdates[1]);
                 list($endDay, $endMonth)    =   $endDate;
@@ -1043,6 +1045,9 @@ class SearchController extends Controller
                 list($endDay, $endMonth)    =   $endDate;
             }
 
+            echo "end\r\n";
+            var_dump($endDay);
+            var_dump($endMonth);
             $year   =   date("Y");
 
             $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
@@ -1071,7 +1076,6 @@ class SearchController extends Controller
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
 
             }
-            $users_by_birthday  =   $birthday_records;
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             //Ситуация, когда вводят руками
@@ -1088,6 +1092,12 @@ class SearchController extends Controller
                 list($startDay, $startMonth,    $startYear)    =   $startDate;
             }
 
+            echo "start\r\n";
+            var_dump($startDay);
+            var_dump($startMonth);
+            var_dump($startYear);
+            echo "end\r\n";
+            var_dump($endDay);
             $year       =   date("Y");
 
             //особая история поиска строго по месяцу одним словом
@@ -1103,9 +1113,6 @@ class SearchController extends Controller
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
-
-
-                $users_by_birthday  =   $birthday_records;
             }
             else {
                 if(!is_null($startYear)) {
@@ -1354,7 +1361,8 @@ class SearchController extends Controller
                             "09"    =>  "СЕНТЯБРЬ",
                             "10"    =>  "ОКТЯБРЬ",
                             "11"    =>  "НОЯБРЬ",
-                            "12"    =>  "ДЕКАБРЬ");
+                            "12"    =>  "ДЕКАБРЬ",
+                            "15"    =>  "МАЙЯ"//жесткий хак, для работы по вводу "МАЙ");
 
         $day    =  null;
         $month  =   null;
@@ -1385,6 +1393,9 @@ class SearchController extends Controller
                         $key    =   array_search($month_name,   $months);
                         if($key !== false) {
                             $month= $key;
+                            if($month== "15") {
+                                $month= "05";
+                            }
                         }
                         else {
                             $month= "01";

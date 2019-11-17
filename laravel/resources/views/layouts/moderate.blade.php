@@ -76,7 +76,7 @@
                         @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  6)
                         <li><a href="{{ route('moderate.dinner.list') }}">Столовая</a></li>
                         @endif
-                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  5)
+                        @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  5   ||  Auth::user()->role_id  ==  6)
                         <li><a href="{{ route('moderate.rooms.index') }}">Комнаты</a></li>
                         @endif
                         @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  3)

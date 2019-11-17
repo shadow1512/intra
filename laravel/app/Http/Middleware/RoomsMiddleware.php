@@ -16,7 +16,7 @@ class RoomsMiddleware
      */
     public function handle($request, Closure $next)
     {
-        if (!(Auth::user()->role_id   ==  5 ||  Auth::user()->role_id   ==  1))
+        if (!(Auth::user()->role_id   ==  5 ||  Auth::user()->role_id   ==  1   ||  Auth::user()->role_id   ==  6))
         {
             abort(403);
             //return redirect('/moderate');

@@ -1136,6 +1136,7 @@ class SearchController extends Controller
             $users_by_birthday  =   $birthday_records;
         }
 
+        var_dump(count($users_by_birthday));
         $total_attrs_in_search  =   0;
         $all_found_records  =   array();
 

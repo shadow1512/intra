@@ -1125,7 +1125,7 @@ class SearchController extends Controller
                 }
                 else {
                     $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $year;
-                    $dt = date("Y-m-d", strtotime(trim($bdates[0])));
+                    $dt = date("Y-m-d", strtotime($searchDate));
                     $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                         ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                         ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)", "ASC")->orderByRaw("DAY(birthday)", "ASC")

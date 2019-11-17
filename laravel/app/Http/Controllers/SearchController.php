@@ -1011,6 +1011,7 @@ class SearchController extends Controller
         //кусок поиска по дню рождения
         $bdates = trim($request->input('birthdate'));
         $users_by_birthday  =   array();
+        $birthday_records   =   array();
         $user_ids   =   array();
 
         //надо посмотреть, период это или точная дата

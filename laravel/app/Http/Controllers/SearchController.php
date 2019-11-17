@@ -1366,8 +1366,6 @@ class SearchController extends Controller
         $day    =  null;
         $month  =   null;
         $date_parts =   explode(" ",    trim($str));
-        echo "date parsing\r\n";
-        var_dump($date_parts);
         if(count($date_parts)   >=  2) {
             for($i= 0; $i < count($date_parts); $i++) {
                 if(trim($date_parts[$i])) {
@@ -1419,7 +1417,11 @@ class SearchController extends Controller
                 $month_name=  trim(mb_strtoupper($date_parts[0], "UTF-8"));
             }
 
+            echo "months\r\n";
+            var_dump($month_name);
+
             $key    =   array_search($month_name,   $months);
+            var_dump($key);
             if($key !== false) {
                 $month= $key;
             }

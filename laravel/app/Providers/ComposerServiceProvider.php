@@ -50,7 +50,7 @@ class ComposerServiceProvider extends ServiceProvider
                 $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')
                     ->where("user_id", "=",   Auth::user()->id)
                     ->whereRaw("DAY(date_created)=16")
-                    ->groupBy('mdc')->limit(8)->get();
+                    ->groupBy('mdc')->orderBy('mdc',    'desc')->limit(8)->get();
             }
 
             //Меню
@@ -103,6 +103,7 @@ class ComposerServiceProvider extends ServiceProvider
 
             $view->with([   'kitchen_menu'  =>  $kitchen_menu,
                             'summ'          =>  $summ,
+                            'curbill'       =>  $bill,
                             'bills'         =>  $bills,
                             'cam1'          =>  $cam1,
                             'cam2'          =>  $cam2]);

@@ -13,18 +13,18 @@
 </div>
 
 @php
-    $months =   array(  "1"     =>  "январь",
-                        "2"     =>  "февраль",
-                        "3"     =>  "март",
-                        "4"     =>  "апрель",
-                        "5"     =>  "май",
-                        "6"     =>  "июнь",
-                        "7"     =>  "июль",
-                        "8"     =>  "август",
-                        "9"     =>  "сентябрь",
-                        "10"    =>  "октябрь",
-                        "11"    =>  "ноябрь",
-                        "12"    =>  "декабрь");
+    $months =   array(  "1"     =>  "января",
+                        "2"     =>  "февраля",
+                        "3"     =>  "марта",
+                        "4"     =>  "апреля",
+                        "5"     =>  "мая",
+                        "6"     =>  "июня",
+                        "7"     =>  "июля",
+                        "8"     =>  "августа",
+                        "9"     =>  "сентября",
+                        "10"    =>  "октября",
+                        "11"    =>  "ноября",
+                        "12"    =>  "декабря");
     $index  =   0;
 @endphp
 <!--modal-->
@@ -36,8 +36,26 @@
                 <div class="dinner">
                     <div class="dinner_top h __h_m">Мой счет</div>
                     <ul class="bill_lst">
+                        @if($bill)
+                            @php
+                                $day    =   date("d",   strtotime($bill->date_created));
+                                if($day <=   16) {
+                                    $month  =   date("n", strtotime($bill->date_created)) - 1;
+                                    if($month   ==  0) {
+                                        $month  =   12;
+                                    }
+                                }
+                                else {
+                                    $month  =   date("n", strtotime($bill->date_created));
+                                }
+                            @endphp
+                            <li class="bill_lst_i __current">
+                                <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">c 17 {{$months[$month]}} по вчера</span></div>
+                                <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$bill->ms}} ₽</span></div>
+                            </li>
+                        @endif
                         @foreach($bills as $bill)
-                            <li class="bill_lst_i @if ($index    ==  0)__current @endif">
+                            <li class="bill_lst_i">
                                 <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">{{$months[$bill->mdc]}}</span></div>
                                 <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$bill->ms}} ₽</span></div>
                             </li>

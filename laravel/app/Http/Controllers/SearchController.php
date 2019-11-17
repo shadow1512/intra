@@ -1079,8 +1079,8 @@ class SearchController extends Controller
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             //Ситуация, когда вводят руками
-            var_dump(trim($bdates[0]));
-            if(!mb_strrpos(".",  trim($bdates[0]))) {
+            var_dump(mb_strrpos(".",  trim($bdates[0])));
+            if(mb_strrpos(".",  trim($bdates[0]),   0,  "UTF-8")===false) {
                 echo "unformatted\r\n";
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;

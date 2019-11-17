@@ -1111,7 +1111,7 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
-                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
+                    ->WhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
             }
             else {
                 if(!is_null($startYear)) {
@@ -1416,12 +1416,7 @@ class SearchController extends Controller
             else {
                 $month_name=  trim(mb_strtoupper($date_parts[0], "UTF-8"));
             }
-
-            echo "months\r\n";
-            var_dump($month_name);
-
             $key    =   array_search($month_name,   $months);
-            var_dump($key);
             if($key !== false) {
                 $month= $key;
             }

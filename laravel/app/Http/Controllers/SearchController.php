@@ -365,7 +365,6 @@ class SearchController extends Controller
         else {
             $word=  trim(mb_strtoupper($word, "UTF-8"));
         }
-        var_dump($word);exit();
 
         //Продолжаем со словом
         if(count($sections_to_find) &&  count($partials_to_find)) {
@@ -1348,7 +1347,7 @@ class SearchController extends Controller
                             "02"    =>  "ФЕВРАЛЬ",
                             "03"    =>  "МАРТ",
                             "04"    =>  "АПРЕЛЬ",
-                            "05"    =>  "МАЙ",
+                            "05"    =>  "МАЯ",//единственный месяц, который не приводится к нормальной форме
                             "06"    =>  "ИЮНЬ",
                             "07"    =>  "ИЮЛЬ",
                             "08"    =>  "АВГУСТ",

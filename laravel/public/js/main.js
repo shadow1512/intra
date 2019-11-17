@@ -537,7 +537,7 @@ $('#date_one').datepicker({
     currentText: 'Сегодня',
     setDate: null,
     changeYear: false,
-    mask:true,
+    mask: true,
     dateFormat: 'dd.mm',
     altField: '#datetabs',
     monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',
@@ -552,14 +552,13 @@ $('#date_one').datepicker({
     showOtherMonths: true,
     selectOtherMonths: true,
     defaultDate: null
-
 });
 
 $("#tabs").tabs();
 
 toggleDropdown("#datetabs", "#tabs");
 
-$("#date_one").datepicker();
+//$("#date_one").datepicker();
 
 $('#date_range').datepicker({
     defaultDate: null,
@@ -570,7 +569,7 @@ $('#date_range').datepicker({
     setDate: null,
     changeYear: false,
     dateFormat: 'dd.mm',
-    mask:true,
+    mask: true,
     nextText: 'Следующий',
     currentText: 'Сегодня',
     monthNames: ['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь',

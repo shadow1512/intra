@@ -1017,6 +1017,7 @@ class SearchController extends Controller
         $bdates =   explode("-",    $bdates);
         $startDay   =   $startMonth =   $startYear  =   $endDay =   $endMonth   =   null;
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
+            $year   =   date("Y");
             //Ситуация, когда вводят руками
             if(mb_strrpos(trim($bdates[0]), ".",  0, "UTF-8") === false) {
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
@@ -1033,15 +1034,18 @@ class SearchController extends Controller
                 $endDate  =   $this->getDatePartsFromString($bdates[1]);
                 list($endDay, $endMonth)    =   $endDate;
                 if(is_null($endDay)) {
-                    $endDay   =   "31";
+                    if(is_null($endMonth)) {
+                        $endDay     =   "31";
+                    }
+                    else {
+                        $endDay =   date("t",   strtotime("01." .   $endMonth .   "." .   $year));
+                    }
                 }
             }
             else {
                 $endDate  =  $this->getDatePartsFromFormattedString($bdates[1]);
                 list($endDay, $endMonth)    =   $endDate;
             }
-
-            $year   =   date("Y");
 
             $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
             $searchDate2 =   $endDay  .   "." .   $endMonth  .   "." .   $year;
@@ -1070,20 +1074,25 @@ class SearchController extends Controller
             }
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
+            $year       =   date("Y");
             //Ситуация, когда вводят руками
             if(mb_strrpos(trim($bdates[0]), ".",   0,  "UTF-8")===false) {
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;
                 if(is_null($startDay)) {
                     $startDay   =   "01";
-                    $endDay     =   "31";
+                    if(is_null($startMonth)) {
+                        $endDay     =   "31";
+                    }
+                    else {
+                        $endDay =   date("t",   strtotime("01." .   $startMonth .   "." .   $year));
+                    }
                 }
             }
             else {
                 $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
                 list($startDay, $startMonth,    $startYear)    =   $startDate;
             }
-            $year       =   date("Y");
 
             //особая история поиска строго по месяцу одним словом
             if(!is_null($endDay)) {

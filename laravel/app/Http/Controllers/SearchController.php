@@ -1029,9 +1029,6 @@ class SearchController extends Controller
                 $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;
             }
-            echo "start\r\n";
-            var_dump($startDay);
-            var_dump($startMonth);
             if(mb_strrpos(trim($bdates[1]), ".",  0, "UTF-8") === false) {
                 $endDate  =   $this->getDatePartsFromString($bdates[1]);
                 list($endDay, $endMonth)    =   $endDate;
@@ -1044,9 +1041,6 @@ class SearchController extends Controller
                 list($endDay, $endMonth)    =   $endDate;
             }
 
-            echo "end\r\n";
-            var_dump($endDay);
-            var_dump($endMonth);
             $year   =   date("Y");
 
             $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
@@ -1056,7 +1050,6 @@ class SearchController extends Controller
             $dm =   date("m", strtotime($searchDate1));
             $dm1 =   date("m", strtotime($searchDate2));
             if($dm1 <   $dm) {
-                echo 'period - new year';
                 $dt     = date("m-d", strtotime($searchDate1));
                 $dt1    =   date("m-d", strtotime($searchDate2));
 
@@ -1067,7 +1060,6 @@ class SearchController extends Controller
 
             }
             else {
-                echo 'period';
                 $dt = date("m-d", strtotime($searchDate1));
                 $dt1 = date("m-d", strtotime($searchDate2));
 
@@ -1079,9 +1071,7 @@ class SearchController extends Controller
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
             //Ситуация, когда вводят руками
-            var_dump(mb_strrpos(".",  trim($bdates[0])));
             if(mb_strrpos(trim($bdates[0]), ".",   0,  "UTF-8")===false) {
-                echo "unformatted\r\n";
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);
                 list($startDay, $startMonth)    =   $startDate;
                 if(is_null($startDay)) {
@@ -1090,22 +1080,13 @@ class SearchController extends Controller
                 }
             }
             else {
-                echo "formatted\r\n";
                 $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
                 list($startDay, $startMonth,    $startYear)    =   $startDate;
             }
-
-            echo "start\r\n";
-            var_dump($startDay);
-            var_dump($startMonth);
-            var_dump($startYear);
-            echo "end\r\n";
-            var_dump($endDay);
             $year       =   date("Y");
 
             //особая история поиска строго по месяцу одним словом
             if(!is_null($endDay)) {
-                echo 'period - intra month';
                 $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
                 $searchDate2 =   $endDay  .   "." .   $startMonth  .   "." .   $year;
 
@@ -1120,7 +1101,6 @@ class SearchController extends Controller
             }
             else {
                 if(!is_null($startYear)) {
-                    echo 'exact with year';
                     $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $startYear;
                     $dt = date("Y-m-d", strtotime($searchDate));
                     $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
@@ -1130,7 +1110,6 @@ class SearchController extends Controller
                         ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
                 }
                 else {
-                    echo 'exact date';
                     $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $year;
                     $dt = date("Y-m-d", strtotime($searchDate));
                     $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")

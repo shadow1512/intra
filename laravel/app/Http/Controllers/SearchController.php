@@ -863,7 +863,7 @@ class SearchController extends Controller
                     }
                 }
 
-                $found_records = User::find($max_user_ids);
+                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname');
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
@@ -990,7 +990,7 @@ class SearchController extends Controller
                     }
                 }
 
-                $found_records = User::find($max_user_ids);
+                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname');
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;

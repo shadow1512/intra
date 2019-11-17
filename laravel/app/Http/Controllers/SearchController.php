@@ -1075,7 +1075,6 @@ class SearchController extends Controller
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
-
             }
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
@@ -1137,9 +1136,9 @@ class SearchController extends Controller
                         ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
                 }
             }
-
-            $users_by_birthday  =   $birthday_records;
         }
+
+        $users_by_birthday  =   $birthday_records;
 
         //var_dump(count($users_by_birthday));
         $total_attrs_in_search  =   0;

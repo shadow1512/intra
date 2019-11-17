@@ -42,6 +42,7 @@ class ComposerServiceProvider extends ServiceProvider
             //счет в столовой
             $summ   =   0;
             $bills  =   array();
+            $bill=  null;
             if (Auth::check()) {
                 $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
                 if($bill) {

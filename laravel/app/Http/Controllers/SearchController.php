@@ -365,7 +365,7 @@ class SearchController extends Controller
         else {
             $word=  trim(mb_strtoupper($word, "UTF-8"));
         }
-        //var_dump($word);
+        var_dump($word);exit();
 
         //Продолжаем со словом
         if(count($sections_to_find) &&  count($partials_to_find)) {
@@ -1018,10 +1018,36 @@ class SearchController extends Controller
         $bdates =   explode("-",    $bdates);
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
 
+            $startDay   =   $startMonth =   $startYear  =   $endDay =   $endMonth   =   null;
+            //Ситуация, когда вводят руками
+            if(!mb_strrpos(".",  trim($bdates[0]))) {
+                $startDate  =   $this->getDatePartsFromString($bdates[0]);
+                list($startDay, $startMonth)    =   $startDate;
+                if(is_null($startDay)) {
+                    $startDay   =   "01";
+                }
+            }
+            else {
+                $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
+                list($startDay, $startMonth)    =   $startDate;
+            }
+
+            if(!mb_strrpos(".",  trim($bdates[1]))) {
+                $endDate  =   $this->getDatePartsFromString($bdates[1]);
+                list($endDay, $endMonth)    =   $endDate;
+                if(is_null($endDay)) {
+                    $endDay   =   "31";
+                }
+            }
+            else {
+                $endDate  =  $this->getDatePartsFromFormattedString($bdates[1]);
+                list($endDay, $endMonth)    =   $endDate;
+            }
+
             $year   =   date("Y");
 
-            $searchDate1 =   trim($bdates[0])  .   "." .   $year;
-            $searchDate2 =   trim($bdates[1])  .   "." .   $year;
+            $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
+            $searchDate2 =   $endDay  .   "." .   $endMonth  .   "." .   $year;
 
             //При переходе через "Новый год работает неверно, нужно условие
             $dm =   date("m", strtotime($searchDate1));
@@ -1049,24 +1075,57 @@ class SearchController extends Controller
             $users_by_birthday  =   $birthday_records;
         }
         elseif (isset($bdates[0])    &&  trim($bdates[0])) {
-            $year       =   date("Y");
-
-            $searchDates    =   explode(".",    trim($bdates[0]));
-            if(count($searchDates) < 3) {
-                $searchDate =   trim($bdates[0])  .   "." .   $year;
-                $dt = date("Y-m-d", strtotime($searchDate));
-                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
-                    ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
-                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
+            //Ситуация, когда вводят руками
+            if(!mb_strrpos(".",  trim($bdates[0]))) {
+                $startDate  =   $this->getDatePartsFromString($bdates[0]);
+                list($startDay, $startMonth)    =   $startDate;
+                if(is_null($startDay)) {
+                    $startDay   =   "01";
+                    $endDay     =   "31";
+                }
             }
             else {
-                $dt = date("Y-m-d", strtotime(trim($bdates[0])));
+                $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
+                list($startDay, $startMonth,    $startYear)    =   $startDate;
+            }
+
+            $year       =   date("Y");
+
+            //особая история поиска строго по месяцу одним словом
+            if(!is_null($endDay)) {
+                $searchDate1 =   $startDay  .   "." .   $startMonth  .   "." .   $year;
+                $searchDate2 =   $endDay  .   "." .   $startMonth  .   "." .   $year;
+
+                $dt     = date("m-d", strtotime($searchDate1));
+                $dt1    =   date("m-d", strtotime($searchDate2));
+
+
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                    ->where(DB::raw("MONTH(birthday)"), '=',    DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=',    DB::raw("DAY('$dt')"))
-                    ->where(DB::raw("YEAR(birthday)"), '=',    DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
-                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
+                    ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
+                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
+
+
+                $users_by_birthday  =   $birthday_records;
+            }
+            else {
+                if(!is_null($startYear)) {
+                    $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $startYear;
+                    $dt = date("Y-m-d", strtotime($searchDate));
+                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                        ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))
+                        ->where(DB::raw("YEAR(birthday)"), '=', DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday)", "ASC")->orderByRaw("DAY(birthday)", "ASC")
+                        ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
+                }
+                else {
+                    $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $year;
+                    $dt = date("Y-m-d", strtotime(trim($bdates[0])));
+                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                        ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)", "ASC")->orderByRaw("DAY(birthday)", "ASC")
+                        ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
+                }
             }
 
             $users_by_birthday  =   $birthday_records;
@@ -1282,5 +1341,127 @@ class SearchController extends Controller
             "books"  => array(),   "razdels"   =>  array(),
             "sections"  =>  $found_sections,
             "phrase"    =>  $phrase]);
+    }
+
+    private function getDatePartsFromString($str) {
+        $months =   array(  "01"    =>  "ЯНВАРЬ",
+                            "02"    =>  "ФЕВРАЛЬ",
+                            "03"    =>  "МАРТ",
+                            "04"    =>  "АПРЕЛЬ",
+                            "05"    =>  "МАЙ",
+                            "06"    =>  "ИЮНЬ",
+                            "07"    =>  "ИЮЛЬ",
+                            "08"    =>  "АВГУСТ",
+                            "09"    =>  "СЕНТЯБРЬ",
+                            "10"    =>  "ОКТЯБРЬ",
+                            "11"    =>  "НОЯБРЬ",
+                            "12"    =>  "ДЕКАБРЬ");
+
+        $day    =  null;
+        $month  =   null;
+        $date_parts =   explode(" ",    trim($str));
+        if(count($date_parts)   >=  2) {
+            for($i= 0; $i < count($date_parts); $i++) {
+                if(trim($date_parts[$i])) {
+                    if(is_null($day)) {
+                        $day=   (int)trim($date_parts[$i]);
+                        if($day <   10) {
+                            $day    =   "0" .   $day;
+                        }
+                    }
+                    else {
+                        $month_name =   null;
+                        $forms = Morphy::getBaseForm(trim(mb_strtoupper($date_parts[$i], "UTF-8")));
+                        if($forms   !== false) {
+                            if (count($forms)) {
+                                $month_name = $forms[0];
+                            } else {
+                                $month_name = trim(mb_strtoupper($date_parts[$i], "UTF-8"));
+                            }
+                        }
+                        else {
+                            $month_name=  trim(mb_strtoupper($date_parts[$i], "UTF-8"));
+                        }
+
+                        $key    =   array_search($month_name,   $months);
+                        if($key !== false) {
+                            $month= $key;
+                        }
+                        else {
+                            $month= "01";
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            $month_name =   null;
+            $forms = Morphy::getBaseForm(trim(mb_strtoupper($date_parts[0], "UTF-8")));
+            if($forms   !== false) {
+                if (count($forms)) {
+                    $month_name = $forms[0];
+                } else {
+                    $month_name = trim(mb_strtoupper($date_parts[0], "UTF-8"));
+                }
+            }
+            else {
+                $month_name=  trim(mb_strtoupper($date_parts[0], "UTF-8"));
+            }
+
+            $key    =   array_search($month_name,   $months);
+            if($key !== false) {
+                $month= $key;
+            }
+            else {
+                $month= "01";
+            }
+        }
+
+        return array($day,  $month);
+    }
+
+    private function getDatePartsFromFormattedString($str) {
+        $day    =  null;
+        $month  =   null;
+        $year   =   null;
+        $date_parts =   explode(".",    trim($str));
+        if(count($date_parts)   >=  2) {
+            for($i= 0; $i < count($date_parts); $i++) {
+                if(trim($date_parts[$i])) {
+                    if(is_null($day)) {
+                        $day=   (int)trim($date_parts[$i]);
+                        if($day <   10) {
+                            $day    =   "0" .   $day;
+                        }
+                    }
+                    else {
+                        if(is_null($month)) {
+                            $month=   (int)trim($date_parts[$i]);
+                            if($month <   10) {
+                                $month    =   "0" .   $month;
+                            }
+                        }
+                        else {
+                            $year=   (int)trim($date_parts[$i]);
+                            if($year <   10) {
+                                $year    =   "200" .   $month;
+                            }
+                            if(($year >=   10)    &&    ($year  <=  99)) {
+                                $year    =   "19" .   $month;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            $day=   (int)trim($date_parts[0]);
+            if($day <   10) {
+                $day    =   "0" .   $day;
+            }
+            $month  =   "01";
+        }
+
+        return array($day,  $month, $year);
     }
 }

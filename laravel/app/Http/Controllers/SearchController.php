@@ -1088,6 +1088,7 @@ class SearchController extends Controller
                 }
             }
             else {
+                echo "formatted\r\n";
                 $startDate  =  $this->getDatePartsFromFormattedString($bdates[0]);
                 list($startDay, $startMonth,    $startYear)    =   $startDate;
             }

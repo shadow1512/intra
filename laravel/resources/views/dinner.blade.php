@@ -36,22 +36,22 @@
                 <div class="dinner">
                     <div class="dinner_top h __h_m">Мой счет</div>
                     <ul class="bill_lst">
-                        @if($bill)
+                        @if($curbill)
                             @php
-                                $day    =   date("d",   strtotime($bill->date_created));
+                                $day    =   date("d",   strtotime($curbill->date_created));
                                 if($day <=   16) {
-                                    $month  =   date("n", strtotime($bill->date_created)) - 1;
+                                    $month  =   date("n", strtotime($curbill->date_created)) - 1;
                                     if($month   ==  0) {
                                         $month  =   12;
                                     }
                                 }
                                 else {
-                                    $month  =   date("n", strtotime($bill->date_created));
+                                    $month  =   date("n", strtotime($curbill->date_created));
                                 }
                             @endphp
                             <li class="bill_lst_i __current">
                                 <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">c 17 {{$months[$month]}} по вчера</span></div>
-                                <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$bill->ms}} ₽</span></div>
+                                <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$curbill->summ}} ₽</span></div>
                             </li>
                         @endif
                         @foreach($bills as $bill)

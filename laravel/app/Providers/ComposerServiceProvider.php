@@ -47,7 +47,10 @@ class ComposerServiceProvider extends ServiceProvider
                 if($bill) {
                     $summ   =   $bill->summ;
                 }
-                $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')->where("user_id", "=",   Auth::user()->id)->groupBy('mdc')->limit(8)->get();
+                $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')
+                    ->where("user_id", "=",   Auth::user()->id)
+                    ->whereRaw("DAY(date_created)=16")
+                    ->groupBy('mdc')->limit(8)->get();
             }
 
             //Меню

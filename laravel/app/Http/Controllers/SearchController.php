@@ -1015,9 +1015,8 @@ class SearchController extends Controller
 
         //надо посмотреть, период это или точная дата
         $bdates =   explode("-",    $bdates);
+        $startDay   =   $startMonth =   $startYear  =   $endDay =   $endMonth   =   null;
         if(isset($bdates[0])    &&  isset($bdates[1])   &&  trim($bdates[0])  &&  trim($bdates[1])) {
-
-            $startDay   =   $startMonth =   $startYear  =   $endDay =   $endMonth   =   null;
             //Ситуация, когда вводят руками
             if(!mb_strrpos(".",  trim($bdates[0]))) {
                 $startDate  =   $this->getDatePartsFromString($bdates[0]);

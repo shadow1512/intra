@@ -844,7 +844,6 @@ class SearchController extends Controller
 
                 $user_ids = array_keys($search_result['users']);
 
-                var_dump($user_ids);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;
                 foreach($user_ids as $user_id) {
@@ -865,7 +864,7 @@ class SearchController extends Controller
                     }
                 }
 
-                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname');
+                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname')->get();
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
@@ -992,7 +991,7 @@ class SearchController extends Controller
                     }
                 }
 
-                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname');
+                $found_records = User::whereIn('id',    $max_user_ids)->orderBy('lname')->orderBy('fname')->orderBy('mname')->get();
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;

@@ -20,13 +20,13 @@ class AppServiceProvider extends ServiceProvider
         //array('января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря');
         Schema::defaultStringLength(191);//
 
-        DB::listen(function($query) {
+        /*DB::listen(function($query) {
             Log::info(
                 $query->sql,
                 $query->bindings,
                 $query->time
             );
-        });
+        });*/
 
         Blade::directive('convertdate', function ($expression, $months = "") {
             return "<?php echo date('j', strtotime($expression)) . ' ' . date('n', strtotime($expression)); ?>";

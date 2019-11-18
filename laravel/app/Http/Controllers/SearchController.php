@@ -1371,9 +1371,7 @@ class SearchController extends Controller
                             $month_name=  trim(mb_strtoupper($date_parts[$i], "UTF-8"));
                         }
 
-                        var_dump($month_name);
                         $key    =   array_search($month_name,   $months);
-                        var_dump($key);
                         if($key !== false) {
                             $month= $key;
                             if($month== "15") {
@@ -1403,6 +1401,9 @@ class SearchController extends Controller
             $key    =   array_search($month_name,   $months);
             if($key !== false) {
                 $month= $key;
+                if($month== "15") {
+                    $month= "05";
+                }
             }
             else {
                 $month= "01";

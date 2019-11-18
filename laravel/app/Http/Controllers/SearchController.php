@@ -1335,7 +1335,7 @@ class SearchController extends Controller
                             "02"    =>  "ФЕВРАЛЬ",
                             "03"    =>  "МАРТ",
                             "04"    =>  "АПРЕЛЬ",
-                            "05"    =>  "МАЯ",//единственный месяц, который не приводится к нормальной форме
+                            "05"    =>  "МАЙЯ",//единственный месяц, который не приводится к нормальной форме
                             "06"    =>  "ИЮНЬ",
                             "07"    =>  "ИЮЛЬ",
                             "08"    =>  "АВГУСТ",
@@ -1343,7 +1343,7 @@ class SearchController extends Controller
                             "10"    =>  "ОКТЯБРЬ",
                             "11"    =>  "НОЯБРЬ",
                             "12"    =>  "ДЕКАБРЬ",
-                            "15"    =>  "МАЙЯ");//жесткий хак, для работы по вводу "МАЙ");
+                            "15"    =>  "МАЯ");//жесткий хак, для работы по вводу "МАЙ");
 
         $day    =  null;
         $month  =   null;
@@ -1371,7 +1371,9 @@ class SearchController extends Controller
                             $month_name=  trim(mb_strtoupper($date_parts[$i], "UTF-8"));
                         }
 
+                        var_dump($month_name);
                         $key    =   array_search($month_name,   $months);
+                        var_dump($key);
                         if($key !== false) {
                             $month= $key;
                             if($month== "15") {

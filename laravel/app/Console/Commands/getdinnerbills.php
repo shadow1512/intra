@@ -44,7 +44,7 @@ class getdinnerbills extends Command
         //
         $total_inserted =   0;
 
-        $ch = curl_init('http://oldintra.lan.kodeks.net/cooking/');
+        $ch = curl_init('http://oldintra.kodeks.ru/cooking/');
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $res = curl_exec($ch);
@@ -63,7 +63,7 @@ class getdinnerbills extends Command
                     $deps  =   $doc->getElementsByTagName("a");
                     if($deps   &&  ($deps->count() >   0)) {
                         foreach($deps   as $dep) {
-                            $ch = curl_init('http://oldintra.lan.kodeks.net/cooking/' . $dep->getAttribute('href'));
+                            $ch = curl_init('http://oldintra.kodeks.ru/cooking/' . $dep->getAttribute('href'));
                             curl_setopt($ch, CURLINFO_HEADER_OUT, true);
                             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
                             $res_users = curl_exec($ch);

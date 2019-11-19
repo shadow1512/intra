@@ -55,7 +55,7 @@ class ComposerServiceProvider extends ServiceProvider
             }
 
             //Меню
-            $ch = curl_init('http://intra.lan.kodeks.net/cooking/menu1.html');
+            $ch = curl_init('http://oldintra.lan.kodeks.net/cooking/menu1.html');
             curl_setopt($ch, CURLINFO_HEADER_OUT, true);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $res = curl_exec($ch);

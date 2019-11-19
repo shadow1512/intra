@@ -120,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -168,7 +168,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        TCG\Voyager\VoyagerServiceProvider::class,
+        //TCG\Voyager\VoyagerServiceProvider::class,
         //LaravelAuthLdap\AuthLdapServiceProvider::class
         Adldap\Laravel\AdldapServiceProvider::class,
         cijic\phpMorphy\MorphyServiceProvider::class,

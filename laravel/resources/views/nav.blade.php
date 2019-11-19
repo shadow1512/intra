@@ -44,7 +44,7 @@
             <ul class="menu_li_lst" @if ($hide_menues[0]) style="display:none" @endif>
                 <li class="menu_li_lst_i"><a href="http://www.kodeks.ru/about.html" class="menu_li_lk">Информация о&nbsp;Консорциуме</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816800315" class="menu_li_lk">Регламент административной деятельности</a></li>
-                <li class="menu_li_lst_i"><a href="http://intra.lan.kodeks.net/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
+                <li class="menu_li_lst_i"><a href="http://oldintra.kodeks.ru/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816803322" class="menu_li_lk">Реквизиты предприятий Консорциума</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=816819640" class="menu_li_lk">Реестр корпоративных проектов Консорциума &laquo;Кодекс&raquo;</a></li>
             </ul>

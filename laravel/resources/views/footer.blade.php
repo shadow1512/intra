@@ -20,7 +20,7 @@
             <li class="footer_lst_i"><a href="http://172.16.2.4:8000/kodeks/" class="footer_lst_i_lk">Продукты &laquo;Кодекс&raquo;</a></li>
             <li class="footer_lst_i"><a href="http://www.kodeks.ru/about.html" class="footer_lst_i_lk">Информация о&nbsp;Консорциуме</a></li>
             <li class="footer_lst_i"><a href="http://www.kodeks.ru/contacts.html" class="footer_lst_i_lk">Контактная информация</a></li>
-            <li class="footer_lst_i"><a href="http://intra.lan.kodeks.net/img/stuff" class="footer_lst_i_lk">Корпоративный стиль</a></li>
+            <li class="footer_lst_i"><a href="http://oldintra.kodeks.ru/img/stuff" class="footer_lst_i_lk">Корпоративный стиль</a></li>
         </ul>
 
         <ul class="footer_lst">

@@ -10,13 +10,13 @@
             <div class="profile_aside_pic @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif"><img src="{{ $user->avatar }}" alt="{{ $user->name }}"></div>
         </div>
         <div class="profile_info">
-            <div class="profile_info_i">
+            <div class="profile_info_i  __padding-top_m">
                 <div class="profile_info_name">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</div>
                 <!--<div class="profile_info_place __in">В офисе</div>-->
                 <div class="profile_info_position">{{ $user->work_title }}</div>
             </div>
             <div class="profile_info_i">
-                @if(!empty($user->birthday))<div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>
+                @if(!empty($user->birthday))<div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span title="{{ date('d.m.Y', strtotime($user->birthday)) }}">
                         @php
                             $months =   array("января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря");
                             $month  =   $months[date("n", strtotime($user->birthday))   -1];
@@ -39,11 +39,13 @@
                 @endif
             </div>
             @if (Auth::check())
+              <div class="profile_info_i">
                 @if(!in_array($user->id,    $contact_ids))
                     <a href="{{route('profile.addcontact', ['id' => $user->id])}}" class="btn profile_info_i_btn">Добавить в Мои контакты</a>
                 @else
                     <a href="{{route('profile.deletecontact', ['id' => $user->id])}}" class="btn profile_info_i_btn __ghost">Удалить из Моих контактов</a>
                 @endif
+              </div>
             @endif
         </div>
     </div>

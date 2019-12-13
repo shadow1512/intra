@@ -92,7 +92,7 @@
 
 @endsection
 
-@section('result_changes');
+@section('result_changes')
 @if(count($changes))
 <div class="overlay __js-modal-resultchanges">
     <div class="modal-w">

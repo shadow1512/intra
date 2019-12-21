@@ -936,47 +936,23 @@ class ModerateController extends Controller
     public function usersedit($id)
     {
         $user       =   User::findOrFail($id);
-        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
         $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
 
+        $dep =  Dep::leftJoin("deps_peoples",   "dep.id",   "=",    "deps_peoples.dep_id")->where("deps_peoples.people_id", "=", $id)->first();
         $ps_record=    Profiles_Saved::where("user_id",    "=",    $id)->orderBy("id",    "desc")->first();
         $psd    =   $dep_old    =   $dep_new    =   null;
         if($ps_record) {
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
-            foreach($psd as $item) {
-                if ($item->field_name == "dep_id") {
-                    if ($item->new_value) {
-                        $dep_new = Dep::findOrFail($item->new_value);
-                    }
-                    if ($item->old_value) {
-                        $dep_old = Dep::findOrFail($item->old_value);
-                    }
-                }
-            }
         }
 
-        return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'deps'  =>  $deps,
-                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'dep_old'   =>  $dep_old,   'dep_new'   =>  $dep_new,   'labels'    =>  Config::get("dict.labels")]);
+        return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
+                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
     }
 
     public function makeFieldChangeUser($psd_id, Request $request) {
         $psd    =   Profiles_Saved_Data::findOrFail($psd_id);
         $ps     =   Profiles_Saved::findOrFail($psd->ps_id);
 
-        /*$moderator  =   null;
-        if ($psd->field_name == "dep_id") {
-            if ($psd->new_value) {
-                $moderator = Dep::getModerate($psd->new_value);
-            }
-            if ($psd->old_value) {
-                if (is_null($moderator)) {
-                    $moderator = Dep::getModerate($psd->old_value);
-                }
-            }
-        }
-        if(is_null($moderator)  ||  (!($moderator->id   ==   Auth::user()->id))) {
-            return response()->json(['error', 'no access']);
-        }*/
 
         $messages   =   array(
             "input_newstatus.required"        =>  "Изменение нужно утвердить или отклонить",
@@ -1014,30 +990,18 @@ class ModerateController extends Controller
         $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps_id)->get();
         foreach($psd as $item) {
             if($item->status    ==  2) {
-                if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title") {
+                if ($item->field_name != "work_title") {
                     $user->{$item->field_name} = $item->new_value;
                 }
                 else {
-                    if($item->field_name == "dep_id") {
-                        $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
-                        if(!$wt_record) {
-                            $wt_record = new Deps_Peoples();
-                            $wt_record->chef    =   null;
-                            $wt_record->people_id  =   $user->id;
-                        }
-                        $wt_record->dep_id     =   $item->new_value;
-                        $wt_record->save();
+                    $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                    if(!$wt_record) {
+                        $wt_record = new Deps_Peoples();
+                        $wt_record->chef    =   null;
+                        $wt_record->people_id  =   $user->id;
                     }
-                    if($item->field_name    ==  "work_title") {
-                        $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
-                        if(!$wt_record) {
-                            $wt_record = new Deps_Peoples();
-                            $wt_record->chef    =   null;
-                            $wt_record->people_id  =   $user->id;
-                        }
-                        $wt_record->work_title  =   $item->new_value;
-                        $wt_record->save();
-                    }
+                    $wt_record->work_title  =   $item->new_value;
+                    $wt_record->save();
                 }
             }
             else {
@@ -1072,7 +1036,6 @@ class ModerateController extends Controller
             'numpark'                   =>  trim($request->input('numpark')),
             'workstart'                 =>  trim($request->input('workstart')),
             'work_title'                =>  trim($request->input('work_title')),
-            'dep_id'                    =>  trim($request->input('dep_id')),
             'position_desc'             =>  trim($request->input('position_desc')),
             'chef'                      =>  trim($request->input('chef')),
         );
@@ -1144,15 +1107,7 @@ class ModerateController extends Controller
                     /*$max = 2;
                     $deps = Dep::selectRaw("MAX(LENGTH(parent_id)) as max")->first();
                     $max = $deps["max"];*/
-
-                    $curDep = null;
-                    $psd_dep = Profiles_Saved_Data::where('ps_id', '=', $ps->id)->where('field_name', '=', 'dep_id')->first();
-                    if ($psd_dep) {
-                        $curDep = $psd_dep->new_value;
-                    } else {
-                        $curDep = $user->dep_id;
-                    }
-
+                    $curDep = $user->dep_id;
                     $userDep = Dep::findOrFail($curDep);
                     $value = mb_strlen($userDep["parent_id"], "UTF-8");
                     //$value = $max - $cur_length;
@@ -1179,20 +1134,10 @@ class ModerateController extends Controller
         $user   =   User::findOrFail($id);
         $psd    =   Profiles_Saved_Data::where("ps_id", "=",    $ps->id)->get();
         foreach($psd as $item) {
-            if ($item->field_name != "dep_id"   &&  $item->field_name != "work_title"   &&  $item->field_name   !=  "chef") {
+            if ($item->field_name != "work_title"   &&  $item->field_name   !=  "chef") {
                 $user->{$item->field_name} = $item->new_value;
             }
             else {
-                if($item->field_name == "dep_id") {
-                    $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
-                    if(!$wt_record) {
-                        $wt_record = new Deps_Peoples();
-                        $wt_record->chef    =   null;
-                        $wt_record->people_id  =   $user->id;
-                    }
-                    $wt_record->dep_id     =   $item->new_value;
-                    $wt_record->save();
-                }
                 if($item->field_name    ==  "work_title") {
                     $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
                     if(!$wt_record) {

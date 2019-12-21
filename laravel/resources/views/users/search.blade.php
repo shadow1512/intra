@@ -80,7 +80,7 @@
                 <ul class="directory_lst">
                     @foreach($contacts as $contact)
                         <li class="directory_lst_i @if (mb_substr($contact->birthday,  5) ==  date("m-d")) __birthday @endif">
-                            <div class="directory_lst_i_pic"><img src="{{$contact->avatar}}" class="directory_lst_i_img"></div>
+                            <div class="directory_lst_i_pic"><img src="{{$contact->avatar}}" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($contact->birthday)) }}"></div>
                             <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $contact->id])}}" class="directory_lst_i_name_fio">{{ $contact->lname }} {{ $contact->fname }} {{ $contact->mname }}</a>
                                 <div class="directory_lst_i_name_spec">{{$contact->work_title}}</div>
                             <!--<div class="directory_lst_i_name_status"></div>-->
@@ -108,7 +108,7 @@
             <ul class="directory_lst">
                 @foreach($search_contacts as $contact)
                     <li class="directory_lst_i @if (mb_substr($contact->birthday,  5) ==  date("m-d")) __birthday @endif">
-                        <div class="directory_lst_i_pic"><img src="{{$contact->avatar}}" class="directory_lst_i_img"></div>
+                        <div class="directory_lst_i_pic"><img src="{{$contact->avatar}}" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($contact->birthday)) }}"></div>
                         <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $contact->id])}}" class="directory_lst_i_name_fio">{{ $contact->lname }} {{ $contact->fname }} {{ $contact->mname }}</a>
                             <div class="directory_lst_i_name_spec">{{$contact->work_title}}</div>
                         <!--<div class="directory_lst_i_name_status"></div>-->
@@ -142,7 +142,7 @@
                 <ul class="directory_lst">
                     @foreach($users as $user)
                         <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
-                            <div class="directory_lst_i_pic"><img src="{{$user->avatar}}" class="directory_lst_i_img"></div>
+                            <div class="directory_lst_i_pic"><img src="{{$user->avatar}}" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
                             <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
                                 <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
                             <!--<div class="directory_lst_i_name_status"></div>-->

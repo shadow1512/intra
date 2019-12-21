@@ -52,35 +52,13 @@ class ProfileController extends Controller
         if($ps_record) {
             $ps=    $ps_record;
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
-
-            foreach($psd as $item) {
-                if($item->field_name    ==  "dep_id") {
-                    if($item->new_value) {
-                        $dep        =   Dep::findOrFail($item->new_value);
-                        $moderate   =   Dep::getModerate($item->new_value);
-                    }
-                    else {
-                        if($item->old_value) {
-                            $dep        =   Dep::findOrFail($item->old_value);
-                            $moderate   =   Dep::getModerate($item->old_value);
-                        }
-                    }
-                }
-            }
         }
 
         if(!is_null($user->dep_id)) {
-            if(is_null($moderate)) {
-                $moderate   =   Dep::getModerate($user->dep_id);
-            }
-            if(is_null($dep)) {
-                $dep        =   Dep::findOrFail($user->dep_id);
-            }
+            $moderate   =   Dep::getModerate($user->dep_id);
+            $dep        =   Dep::findOrFail($user->dep_id);
         }
 
-
-
-        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
 
         //счет в столовой
         $summ   =   0;
@@ -102,7 +80,7 @@ class ProfileController extends Controller
             $item->user_informed    =   1;
             $item->save();
         }
-        return view('profile.view', [   'contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,
+        return view('profile.view', [   'contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,
                                         'ps'    =>  $ps, 'psd'    =>  $psd,    'summ'  =>  $summ,
                                         'requests'  =>  $tr,    'moderate'  =>  $moderate,
                                         'changes'   =>  $changes,   'change_records'    =>  $change_records,    'labels'    =>  Config::get("dict.labels")]);
@@ -120,35 +98,14 @@ class ProfileController extends Controller
         if($ps_record) {
             $ps=    $ps_record;
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
-
-            foreach($psd as $item) {
-                if($item->field_name    ==  "dep_id") {
-                    if($item->new_value) {
-                        $dep        =   Dep::findOrFail($item->new_value);
-                        $moderate   =   Dep::getModerate($item->new_value);
-                    }
-                    else {
-                        if($item->old_value) {
-                            $dep        =   Dep::findOrFail($item->old_value);
-                            $moderate   =   Dep::getModerate($item->old_value);
-                        }
-                    }
-                }
-            }
         }
 
         if(!is_null($user->dep_id)) {
-            if(is_null($moderate)) {
-                $moderate   =   Dep::getModerate($user->dep_id);
-            }
-            if(is_null($dep)) {
-                $dep        =   Dep::findOrFail($user->dep_id);
-            }
+            $moderate   =   Dep::getModerate($user->dep_id);
+            $dep        =   Dep::findOrFail($user->dep_id);
         }
 
-        $deps       =   Dep::whereNotNull("parent_id")->orderBy("parent_id")->orderByRaw("LENGTH(parent_id)")->get();
-
-        $html   =   View::make('profile.editpopup', ['user'  =>  $user,  'dep'   =>  $dep,   'deps'  =>  $deps,  'ps'    =>  $ps,
+        $html   =   View::make('profile.editpopup', ['user'  =>  $user,  'dep'   =>  $dep,  'ps'    =>  $ps,
             'psd'    =>  $psd, 'moderate'  =>  $moderate, 'labels'    =>  Config::get("dict.labels")]);
 
         return response()->json(['success', $html->render()]);
@@ -168,7 +125,6 @@ class ProfileController extends Controller
                                     'email'                     =>  trim($request->input('input_email')),
                                     'email_secondary'           =>  trim($request->input('input_email_secondary')),
                                     'work_title'                =>  trim($request->input('input_work_title')),
-                                    'dep_id'                    =>  trim($request->input('input_dep')),
                                     'position_desc'             =>  trim($request->input('input_position_desc'))
                                     );
 
@@ -244,21 +200,12 @@ class ProfileController extends Controller
                         $value   =   $birthday_parts[2]  .   '-' .   $birthday_parts[1]  .   '-' .   $birthday_parts[0];
                     }
                 }
-                if($key ==  "dep_id") {
-                    if($value) {
-                        $dep_new    =   Dep::findOrFail($value);
-                        $moderator  =   Dep::getModerate($value);
-                    }
-                    if(!is_null($work)  &&  ($work->dep_id   !=  $value)) {
-                        $createFlag =   true;
-                    }
-                }
                 if($key ==  "work_title") {
                     if(!is_null($work)  &&  ($work->work_title   !=  $value)) {
                         $createFlag =   true;
                     }
                 }
-                if($key !=  "dep_id"    &&  $key    !=  "work_title"    &&  ($value   != Auth::user()->$key)) {
+                if($key    !=  "work_title"    &&  ($value   != Auth::user()->$key)) {
                     $createFlag = true;
                 }
                 if($createFlag) {
@@ -269,10 +216,10 @@ class ProfileController extends Controller
 
 
                     $psd->field_name    =   $key;
-                    if(($key ==  "dep_id"    ||  $key    ==  "work_title")  &&  !is_null($work)) {
+                    if(($key    ==  "work_title")  &&  !is_null($work)) {
                         $psd->old_value = $work->$key;
                     }
-                    if($key !=  "dep_id"    &&  $key    !=  "work_title") {
+                    if($key    !=  "work_title") {
                         $psd->old_value = Auth::user()->$key;
                     }
                     $psd->new_value     =   $value;
@@ -293,10 +240,6 @@ class ProfileController extends Controller
                 ->where('users.id', '=', Auth::user()->id)->first();
 
 
-            if($user->dep_id) {
-                $dep_old    =   Dep::findOrFail($user->dep_id);
-            }
-
             if(is_null($moderator)  &&  $user->dep_id) {
                 $moderator  =   Dep::getModerate($user->dep_id);
             }
@@ -304,7 +247,6 @@ class ProfileController extends Controller
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
 
             $html   =   View::make('profile.viewchanges', [ 'labels' =>  Config::get("dict.labels"),    'psd' =>  $psd,
-                                                            'dep_new'   =>  $dep_new,   'dep_old'   =>  $dep_old,
                                                             'moderator'  =>  $moderator]);
 
             return response()->json(['success', $html->render(), $updated_counter]);

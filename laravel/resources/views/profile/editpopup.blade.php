@@ -94,27 +94,6 @@
                         <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="3">
                     </div>
                 @endif
-
-                @if(isset($waiting_fields["dep_id"]))
-                    <div class="field unchecked_field">
-                        <label for="input_dep" class="lbl">Подразделение:</label>
-                        <select id="input_dep" class="form-control" name="input_dep">
-                            @foreach ($deps as $dep)
-                                <option value="{{$dep->id}}" @if ($waiting_fields["dep_id"] ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
-                            @endforeach
-                        </select>
-                        <i class="ic-wait"></i>
-                    </div>
-                @else
-                    <div class="field">
-                        <label for="input_dep" class="lbl">Подразделение:</label>
-                        <select id="input_dep" class="form-control" name="input_dep">
-                            @foreach ($deps as $dep)
-                                <option value="{{$dep->id}}" @if ($user->dep_id ==  $dep->id) selected="selected" @endif>@for ($i=0;$i<(mb_strlen($dep->parent_id,  "UTF-8")/2 - 1); $i++)--@endfor{{$dep->name}}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                @endif
             </div>
             <div class="profile_form_info_right">
 

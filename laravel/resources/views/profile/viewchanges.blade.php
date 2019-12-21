@@ -11,13 +11,13 @@
                     @foreach($psd    as  $item)
                         @if(isset($labels[$item->field_name]))
                                 @if($item->old_value    &&  $item->new_value    &&  ($item->old_value   !=  $item->new_value))
-                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: заменить&nbsp;&laquo;@if($item->field_name=="dep_id") {{$dep_old->name}} @else{{$item->old_value}} @endif&raquo; на&nbsp;&laquo;@if($item->field_name  ==  "dep_id") {{$dep_new->name}} @else {{$item->new_value}} @endif&raquo;</li>
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: заменить&nbsp;&laquo;{{$item->old_value}}&raquo; на&nbsp;&laquo;{{$item->new_value}}&raquo;</li>
                                 @endif
                                 @if(!$item->old_value   &&  $item->new_value)
-                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: добавить&nbsp;&laquo;@if($item->field_name=="dep_id") {{$dep_new->name}} @else{{$item->new_value}} @endif&raquo;</li>
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: добавить&nbsp;&laquo;{{$item->new_value}}&raquo;</li>
                                 @endif
                                 @if($item->old_value   &&  !$item->new_value)
-                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: удалить&nbsp;&laquo;@if($item->field_name=="dep_id") {{$dep_old->name}} @else{{$item->old_value}} @endif&raquo;</li>
+                                    <li class="lst-changes_i">{{$labels[$item->field_name]}}: удалить&nbsp;&laquo;{{$item->old_value}}&raquo;</li>
                                 @endif
                         @endif
                     @endforeach

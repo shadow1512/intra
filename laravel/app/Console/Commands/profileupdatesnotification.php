@@ -63,7 +63,6 @@ class profileupdatesnotification extends Command
 
             if(!is_null($moderate)) {
                 if($moderate->email) {
-                    echo $moderate->email;
                     Mail::send('emails.profileupdate', ['user' => $user], function ($m) use ($moderate, $user) {
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to($moderate->email, $moderate->fname)->subject('Сотрудник ' .   $user->fname    .   " " .   $user->lname    .   " обновил свой профиль");

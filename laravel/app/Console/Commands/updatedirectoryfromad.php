@@ -37,7 +37,10 @@ class updatedirectoryfromad extends Command
                                     'groupsdmc',
                                     'groupsdccp',
                                     'testfordpt',
-                                    'testforprogrammers');
+                                    'testforprogrammers',
+                                    'workstations',
+                                    'отключенные',
+                                    'печать');
 
     //Массивы для поддержания удаления подразделений или пользователей, которые могли быть удалены или перенесены
     // в служебные группы, что означает де-факто удаление, нужно хранить текущее состояние Intra-базы и сравнивать с тем,
@@ -317,14 +320,6 @@ class updatedirectoryfromad extends Command
     }
     public function handle()
     {
-        $root2      =   Adldap::getProvider('default')->search()->ous()->find("Кодекс-МСК");
-        $deps2      =   Adldap::getProvider('default')->search()->ous()->in("OU=Кодекс-МСК,dc=work,dc=kodeks,dc=ru")->listing()->get();
-        $users2     = Adldap::getProvider('default')->search()->users()->in("OU=Кодекс-МСК,dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
-        var_dump($root2);
-        var_dump($deps2);
-        var_dump($users2);
-        exit();
-
         $root =   Adldap::getProvider('default')->search()->ous()->find("Консорциум КОДЕКС");
 
         $present    =   Dep::where('guid',  '=',    $root->getConvertedGuid())->first();
@@ -349,6 +344,38 @@ class updatedirectoryfromad extends Command
 
         $this->serveDepLevel("OU=Консорциум КОДЕКС", null);
 
+        $root2      =   Adldap::getProvider('default')->search()->ous()->find("Кодекс-МСК");
+        $present    =   Dep::where('guid',  '=',    $root2->getConvertedGuid())->first();
+
+        if($present) {
+            $present->name      =   $root2->getName();
+            $present->save();
+
+            //Раз департамент есть, значит, его можно удалить из перечня проверки
+            $key    =   array_search($present->id,  $this->i_dids);
+            if($key !== false) {
+                unset($this->i_dids[$key]);
+            }
+        }
+        else {
+            $hiercode   =   new \HierCode(CODE_LENGTH);
+            $max    =   Dep::whereNotNull('parent_id')->whereRaw('LENGTH(parent_id)=2')->orderBy('parent_id',   'desc')->first();
+            $parent_id  =   'AA';
+            if($max) {
+                $parent_id  =   $max->parent_id;
+            }
+            $hiercode->setValue($parent_id);
+
+            $dep = new Dep();
+            $dep->parent_id =   $hiercode->getNextCode();
+            $dep->name      =   $root2->getName();
+            $dep->guid      =   $root2->getConvertedGuid();
+            $dep->save();
+
+            $present    =   $dep;
+        }
+
+        $this->serveDepLevel("OU=Кодекс-МСК", $present->parent_id);
         //Те люди, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_uids as $uid) {

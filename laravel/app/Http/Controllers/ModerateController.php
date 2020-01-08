@@ -938,7 +938,7 @@ class ModerateController extends Controller
         $user       =   User::findOrFail($id);
         $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
 
-        $dep =  Dep::leftJoin("deps_peoples",   "dep.id",   "=",    "deps_peoples.dep_id")->where("deps_peoples.people_id", "=", $id)->first();
+        $dep =  Dep::leftJoin("deps_peoples",   "deps.id",   "=",    "deps_peoples.dep_id")->where("deps_peoples.people_id", "=", $id)->first();
         $ps_record=    Profiles_Saved::where("user_id",    "=",    $id)->orderBy("id",    "desc")->first();
         $psd    =   $dep_old    =   $dep_new    =   null;
         if($ps_record) {

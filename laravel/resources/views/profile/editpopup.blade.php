@@ -161,20 +161,19 @@
                         <input id="input_email_secondary" name="input_email_secondary" type="text" value="{{$user->email_secondary}}" class="it" maxlength="255">
                     </div>
                 @endif
-
-                @if(isset($waiting_fields["work_title"]))
-                    <div class="field __no-margin unchecked_field">
-                        <label for="input_work_title" class="lbl">Должность:</label>
-                        <input id="input_work_title" name="input_work_title" type="text" value="{{$waiting_fields["work_title"]}}" class="it" maxlength="255">
-                        <i class="ic-wait"></i>
-                    </div>
-                @else
-                    <div class="field __no-margin">
-                        <label for="input_work_title" class="lbl">Должность:</label>
-                        <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
-                    </div>
-                @endif
             </div>
+            @if(isset($waiting_fields["work_title"]))
+                <div class="field __no-margin unchecked_field">
+                    <label for="input_work_title" class="lbl">Должность:</label>
+                    <input id="input_work_title" name="input_work_title" type="text" value="{{$waiting_fields["work_title"]}}" class="it" maxlength="255">
+                    <i class="ic-wait"></i>
+                </div>
+            @else
+                <div class="field __no-margin">
+                    <label for="input_work_title" class="lbl">Должность:</label>
+                    <input id="input_work_title" name="input_work_title" type="text" value="{{$user->work_title}}" class="it" maxlength="255">
+                </div>
+            @endif
             @if(isset($waiting_fields["address"]))
                 <div class="field __no-margin unchecked_field">
                     <label for="input_address" class="lbl">Адрес:</label>

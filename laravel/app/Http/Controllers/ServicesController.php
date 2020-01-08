@@ -85,6 +85,7 @@ class ServicesController extends Controller
         if($trequest  ==  "cartridge") {
             $validator = Validator::make($request->all(), [
                 'roomnum'               => 'required|max:10',
+                'user_comment'          =>  'required|max:4096',
             ],  $messages);
         }
         if($trequest  ==  "teh") {

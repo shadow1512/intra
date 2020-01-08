@@ -92,7 +92,7 @@ class ServicesController extends Controller
                 'roomnum'               =>  'required|max:10',
                 'phone'                 =>  'required|max:18',
                 'email'                 =>  'required|email|max:255',
-                'user_comment'          =>  'required|max:255',
+                'user_comment'          =>  'required|max:4096',
             ],  $messages);
         }
 

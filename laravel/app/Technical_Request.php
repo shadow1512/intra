@@ -37,20 +37,40 @@ class Technical_Request extends Model
             $description    .=   $tr->user_comment    .   "\r\n";
             $description    .=  "Подразделение: "   .   $tr->dep;
 
-            $issue  =   $client->issue->create([
-                'project_id'    => 103,
-                'tracker_id'    =>  7,
-                'subject'       => $subject,
-                'description'   => $description,
-                'due_date'      =>  date("Y-m-d"),
-                'custom_fields' => [
-                    [
-                        'id' => 18,
-                        'value' => $tr->room,
+            $issue= null;
+            if($tr->type_request    ==  "cartridge") {
+                $issue = $client->issue->create([
+                    'project_id'        =>  110,
+                    'tracker_id'        =>  6,
+                    'assigned_to_id'    =>  375,
+                    'subject' => $subject,
+                    'description' => $description,
+                    'due_date' => date("Y-m-d"),
+                    'custom_fields' => [
+                        [
+                            'id' => 18,
+                            'value' => $tr->room,
+                        ],
                     ],
-                ],
-                'watcher_user_ids' => []
-            ]);
+                    'watcher_user_ids' => []
+                ]);
+            }
+            else {
+                $issue = $client->issue->create([
+                    'project_id' => 103,
+                    'tracker_id' => 7,
+                    'subject' => $subject,
+                    'description' => $description,
+                    'due_date' => date("Y-m-d"),
+                    'custom_fields' => [
+                        [
+                            'id' => 18,
+                            'value' => $tr->room,
+                        ],
+                    ],
+                    'watcher_user_ids' => []
+                ]);
+            }
 
             if(is_null($issue)) {
                 Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);

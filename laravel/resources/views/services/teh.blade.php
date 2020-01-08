@@ -21,7 +21,7 @@
         </div>
         <div class="field">
             <label for="user_comment" class="lbl">Опишите, что требуется сделать:</label>
-            <textarea id="user_comment" name="user_comment" class="it" maxlength="255"></textarea>
+            <textarea id="user_comment" name="user_comment" class="it" maxlength="4096"></textarea>
         </div>
         <div class="field"><a href="#" class="btn profile_form_btn" id="submit_tech_service_form">Отправить</a></div>
     </form>

@@ -45,7 +45,7 @@
                                             $month  =   $months[date("n", strtotime($user->birthday))   -1];
                                             $day    =   date("j",   strtotime($user->birthday));
                                         @endphp
-                                        {{ $day }}&nbsp;{{ $month }}
+                                        <span title="{{ date("d.m.Y", strtotime($user->birthday)) }}">{{ $day }}&nbsp;{{ $month }}</span>
                                     </div>@endif
                                 </div>
                             </li>
@@ -71,7 +71,7 @@
                                                 $month  =   $months[date("n", strtotime($user->birthday))   -1];
                                                 $day    =   date("j",   strtotime($user->birthday));
                                             @endphp
-                                            {{ $day }}&nbsp;{{ $month }}</div>@endif
+                                            <span title="{{ date("d.m.Y", strtotime($user->birthday)) }}">{{ $day }}&nbsp;{{ $month }}</span></div>@endif
                                     </div>
                                 </li>
                             @endforeach

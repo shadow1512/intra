@@ -90,5 +90,3 @@
         </div>
     </div>
 </div>
-
-@if($cam2  ==  "ok")<img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/>@else<p id="kitchen_cam2" style="margin-top:50px;">Изображение с камеры 2 устарело более, чем на 10 минут</p>@endif

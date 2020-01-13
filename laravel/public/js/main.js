@@ -519,11 +519,23 @@ hideDinner('.main_top_dinner_hide', '.main_top_dinner', '#open-dinner');
 showDinner('#open-dinner', '.main_top_dinner');
 
 
+var camupdate   =   0;
 setInterval(function() {
-    if ($("div.__js-modal-camera").hasClass("__vis")) {
-        $("#kitchen_cam2").attr("src", "http://intra-unix.kodeks.net/img/cam2.jpg?uid=" + new Date().getTime());
-        $("#kitchen_cam1").attr("src", "http://intra-unix.kodeks.net/img/cam1.jpg?uid=" + new Date().getTime());
+    if ($("div.__js-modal-camera").hasClass("__vis")    ||  (camupdate==    0)) {
+        $.ajax({
+            type: "GET",
+            url: '/getcams',
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function (msg) {
+                $("#kitchen_cam1").html("<h3>Камера 1</h3>" + msg[0]);
+                $("#kitchen_cam2").html("<h3>Камера 2</h3>" + msg[1]);
+            }
+        });
     }
+
+    camupdate++;
 }, 2000);
 
 

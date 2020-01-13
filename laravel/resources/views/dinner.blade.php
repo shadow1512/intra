@@ -82,11 +82,13 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i"><h3>Камера 2</h3>@if($cam2  ==  "ok")<img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/>@else<p style="margin-top:50px;">Изображение с камеры 2 устарело более, чем на 10 минут</p>@endif</div>
-                        <div class="dinner_camera_i"><h3>Камера 1</h3>@if($cam1  ==  "ok")<img id="kitchen_cam1" src="http://intra-unix.kodeks.net/img/cam1.jpg"/>@else<p style="margin-top:50px;">Изображение с камеры 1 устарело более, чем на 10 минут</p>@endif</div>
+                        <div class="dinner_camera_i" id="kitchen_cam2"><h3>Камера 2</h3></div>
+                        <div class="dinner_camera_i" id="kitchen_cam1"></div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@if($cam2  ==  "ok")<img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg"/>@else<p id="kitchen_cam2" style="margin-top:50px;">Изображение с камеры 2 устарело более, чем на 10 минут</p>@endif

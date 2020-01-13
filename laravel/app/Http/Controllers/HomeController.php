@@ -139,4 +139,42 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function getcams() {
+        //камеры
+        $ret2    =   "<p style=\"margin-top:50px;\">Изображение с камеры 2 устарело более, чем на 10 минут</p>";
+        $ret1    =   "<p style=\"margin-top:50px;\">Изображение с камеры 1 устарело более, чем на 10 минут</p>";
+
+        $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FILETIME, true);
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
+        if($status_code == 200) {
+            if($time    >   -1) {
+                if((time()   -   $time) <=   600) {
+                    $ret1   =   "<img src=\"http://intra-unix.kodeks.net/img/cam1.jpg\"/>";
+                }
+            }
+        }
+
+        $ch = curl_init('http://intra-unix.kodeks.net/img/cam2.jpg');
+        curl_setopt($ch, CURLOPT_NOBODY, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FILETIME, true);
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $time   =   curl_getinfo($ch,   CURLINFO_FILETIME);
+        if($status_code == 200) {
+            if($time    >   -1) {
+                if((time()   -   $time) <=   600) {
+                    $ret2   =   "<img src=\"http://intra-unix.kodeks.net/img/cam2.jpg\"/>";
+                }
+            }
+        }
+
+        return json_encode(array($ret1, $ret2));
+    }
 }

@@ -185,7 +185,9 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Sleimanx2\Plastic\PlasticServiceProvider::class,
-        Unisharp\Ckeditor\ServiceProvider::class
+        Unisharp\Ckeditor\ServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ),
 
     /*
@@ -236,6 +238,7 @@ return [
         'Adldap'=> Adldap\Laravel\Facades\Adldap::class,
         'Morphy'    => cijic\phpMorphy\Facade\Morphy::class,
         'Redmine'   => TUNER88\Redmine\Facades\Redmine::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

@@ -22,7 +22,8 @@
         "sleimanx2/plastic": "^0.5.3",
         "tcg/voyager": "^1.0",
         "tuner88/laravel-redmine-api": "^1.0",
-        "unisharp/laravel-ckeditor": "^4.7"
+        "unisharp/laravel-ckeditor": "^4.7",
+        "unisharp/laravel-filemanager": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

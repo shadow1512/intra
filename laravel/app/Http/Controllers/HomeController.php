@@ -155,7 +155,7 @@ class HomeController extends Controller
         if($status_code == 200) {
             if($time    >   -1) {
                 if((time()   -   $time) <=   600) {
-                    $ret1   =   "<img src=\"http://intra-unix.kodeks.net/img/cam1.jpg\"/>";
+                    $ret1   =   "<img src=\"http://intra-unix.kodeks.net/img/cam1.jpg?" .   time()  .   "\"/>";
                 }
             }
         }
@@ -170,7 +170,7 @@ class HomeController extends Controller
         if($status_code == 200) {
             if($time    >   -1) {
                 if((time()   -   $time) <=   600) {
-                    $ret2   =   "<img src=\"http://intra-unix.kodeks.net/img/cam2.jpg\"/>";
+                    $ret2   =   "<img src=\"http://intra-unix.kodeks.net/img/cam2.jpg?" .   time()  .   "\"/>";
                 }
             }
         }

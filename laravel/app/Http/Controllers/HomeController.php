@@ -145,7 +145,7 @@ class HomeController extends Controller
         $ret2    =   "/images/dinner/default.png";
         $ret1    =   "/images/dinner/default.png";
 
-        /*$ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
+        $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
         curl_setopt($ch, CURLOPT_NOBODY, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FILETIME, true);
@@ -158,7 +158,7 @@ class HomeController extends Controller
                     $ret1   =   "http://intra-unix.kodeks.net/img/cam1.jpg?" .   time();
                 }
             }
-        }*/
+        }
 
         $ch = curl_init('http://intra-unix.kodeks.net/img/cam2.jpg');
         curl_setopt($ch, CURLOPT_NOBODY, true);

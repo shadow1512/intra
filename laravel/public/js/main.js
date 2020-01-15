@@ -529,8 +529,8 @@ setInterval(function() {
             async: true,
             dataType: "json",
             success: function (msg) {
-                $("#kitchen_cam1").html("<h3>Камера 1</h3>" + msg[0]);
-                $("#kitchen_cam2").html("<h3>Камера 2</h3>" + msg[1]);
+                $("#kitchen_cam1").attr("src", msg[0]);
+                $("#kitchen_cam2").attr("src", msg[1]);
             }
         });
     }

@@ -142,7 +142,7 @@ class HomeController extends Controller
 
     public function getcams() {
         //камеры
-        $ret2    =   "<p style=\"margin-top:50px;\">Изображение с камеры 2 устарело более, чем на 10 минут</p>";
+        $ret2    =   "/images/dinner/default.png";
         $ret1    =   "<p style=\"margin-top:50px;\">Изображение с камеры 1 устарело более, чем на 10 минут</p>";
 
         $ch = curl_init('http://intra-unix.kodeks.net/img/cam1.jpg');
@@ -155,7 +155,7 @@ class HomeController extends Controller
         if($status_code == 200) {
             if($time    >   -1) {
                 if((time()   -   $time) <=   600) {
-                    $ret1   =   "<img src=\"http://intra-unix.kodeks.net/img/cam1.jpg?" .   time()  .   "\"/>";
+                    $ret1   =   "http://intra-unix.kodeks.net/img/cam1.jpg?" .   time();
                 }
             }
         }

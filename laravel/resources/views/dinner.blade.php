@@ -82,8 +82,8 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i" id="kitchen_cam2"><h3>Камера 2</h3></div>
-                        <div class="dinner_camera_i" id="kitchen_cam1"></div>
+                        <div class="dinner_camera_i"><h3>Камера 2</h3><img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg?"/></div>
+                        <div class="dinner_camera_i"><h3>Камера 1</h3><img id="kitchen_cam1" src="http://intra-unix.kodeks.net/img/cam1.jpg?"/></div>
                     </div>
                 </div>
             </div>

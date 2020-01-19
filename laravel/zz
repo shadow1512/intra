@@ -1,0 +1,96 @@
+drwxr-xr-x  2 www-data root 4096 ноя 17  2017 cache
+drwxr-xr-x 2 www-data root      4096 ноя 17  2017 .
+-rw-r--r-- 1 www-data root        14 ноя 13  2017 .gitignore
+-rw-r--r-- 1 www-data www-data 12417 ноя 19 22:33 services.php
+-rw-r--r-- 1 www-data root 14 ноя 13  2017 ./bootstrap/cache/.gitignore
+-rw-r--r-- 1 www-data www-data 12417 ноя 19 22:33 ./bootstrap/cache/services.php
+drwxr-xr-x  2 www-data root 4096 янв 14 00:01 logs
+drwxr-xr-x 2 www-data root   4096 ноя 13  2017 cache
+drwxr-xr-x 2 www-data root 544768 янв 14 14:42 sessions
+drwxr-xr-x 2 www-data root   4096 ноя 16 18:21 views
+drwxr-xr-x 2 www-data root 4096 ноя 13  2017 .
+-rw-r--r-- 1 www-data root   14 ноя 13  2017 .gitignore
+-rw-r--r-- 1 www-data root 14 ноя 13  2017 ./storage/framework/cache/.gitignore
+drwxr-xr-x 2 www-data root      4096 ноя 16 18:21 .
+-rw-r--r-- 1 www-data www-data   681 окт 19 15:21 0b4b6274fda316daa8e73f25214eed138ec2632e.php
+-rw-r--r-- 1 www-data www-data  3074 июн 21  2019 3f452724d5d78bff4172e65fe0fd9e7fb8b1848b.php
+
+-rw-r--r-- 1 www-data www-data 1087 окт 14 01:52 ./storage/framework/views/b2afb2df072798cc0dfaaec8520aa2e92daa58c0.php
+
+drwxr-xr-x 2 www-data root     544768 янв 14 14:42 .
+-rw-r--r-- 1 www-data www-data    174 янв 14 14:24 04u5cO7zWpxabUE2trV4OYMqUkxoYv1mwLWlqbRD
+-rw-r--r-- 1 www-data www-data    249 янв 14 14:42 zsqlrEI5oUxmyEiEeUIyWZwXE6MZ2BuR7qVTj8uL
+
+-rw-r--r-- 1 www-data www-data 248 янв 14 14:40 ./storage/framework/sessions/6aJr4pkNyx8ENJ9SIkva4hoMkhXqpHEPpoPudvJF
+-rw-r--r-- 1 www-data www-data 249 янв 14 13:47 ./storage/framework/sessions/vbjK7cenNo5Pu2v4jOWSQf9elvZNGmSdxAjtafCp
+drwxr-xr-x  2 www-data www-data  12288 окт 16  2018 20181015
+drwxr-xr-x  2 www-data www-data  20480 мар 14  2019 20190313
+drwxr-xr-x  2 www-data www-data 12288 окт 16  2018 .
+-rw-r--r--  1 www-data www-data   699 окт 16  2018 1000.xml
+-rw-r--r--  1 www-data www-data   784 окт 16  2018 999.xml
+
+-rw-r--r-- 1 www-data www-data 636 окт 16  2018 ./storage/app/public/xml/export/20181015/1275.xml
+
+drwxr-xr-x  2 www-data www-data 20480 мар 14  2019 .
+-rw-r--r--  1 www-data www-data   769 мар 14  2019 100.xml
+-rw-r--r--  1 www-data www-data   799 мар 14  2019 99.xml
+-rw-r--r--  1 www-data www-data   713 мар 14  2019 9.xml
+
+-rw-r--r-- 1 www-data www-data 632 мар 14  2019 ./storage/app/public/xml/export/20190313/441.xml
+-rw-r--r-- 1 www-data www-data 644 мар 14  2019 ./storage/app/public/xml/export/20190313/267.xml
+
+-rw-r--r-- 1 www-data www-data  7157 авг 27  2018 pspell_custom.aspell.ru.pws
+-rw-r--r-- 1 www-data www-data 7157 авг 27  2018 ./storage/app/public/dict/pspell_custom.aspell.ru.pws
+drwxr-xr-x 2 www-data www-data 4096 окт 11 12:05 13
+drwxr-xr-x 2 www-data www-data 4096 окт 15 00:50 5
+drwxr-xr-x 2 www-data www-data    4096 окт 15 00:50 .
+-rw-r--r-- 1 www-data www-data 2801219 авг  5 04:08 0.43769300 1564967287.jpeg
+-rw-r--r-- 1 www-data www-data 1357253 авг  5 03:53 0.57899600 1564966403.jpeg
+-rw-r--r-- 1 www-data www-data 2297625 авг  5 04:08 0.67197600 1564967289.jpeg
+-rw-r--r-- 1 www-data www-data 2140524 авг  5 04:08 0.69907100 1564967291.jpeg
+-rw-r--r-- 1 www-data www-data 1816474 авг  5 03:53 0.90939700 1564966411.jpeg
+-rw-r--r-- 1 www-data www-data   11740 авг  5 04:08 th_0.43769300 1564967287.jpeg
+-rw-r--r-- 1 www-data www-data   11197 авг  5 03:53 th_0.57899600 1564966403.jpeg
+-rw-r--r-- 1 www-data www-data   11510 авг  5 04:08 th_0.67197600 1564967289.jpeg
+-rw-r--r-- 1 www-data www-data   39183 авг  5 04:08 th_0.69907100 1564967291.jpeg
+-rw-r--r-- 1 www-data www-data   26285 авг  5 03:53 th_0.90939700 1564966411.jpeg
+
+-rw-r--r-- 1 www-data www-data 2140524 авг  5 04:08 ./storage/app/public/gallery/5/0.69907100 1564967291.jpeg
+-rw-r--r-- 1 www-data www-data 2297625 авг  5 04:08 ./storage/app/public/gallery/5/0.67197600 1564967289.jpeg
+
+-rw-r--r-- 1 www-data www-data 5383910 окт 11 12:04 0.49910200 1570784667.jpeg
+-rw-r--r-- 1 www-data www-data 6352432 окт 11 12:04 0.71436500 1570784688.jpeg
+-rw-r--r-- 1 www-data www-data 5383910 окт 11 12:04 th_0.49910200 1570784667.jpeg
+-rw-r--r-- 1 www-data www-data 6352432 окт 11 12:04 th_0.71436500 1570784688.jpeg
+-rw-r--r-- 1 www-data www-data 6352432 окт 11 12:04 ./storage/app/public/gallery/13/0.71436500 1570784688.jpeg
+-rw-r--r-- 1 www-data www-data  23976 ноя 21 19:57 0bczuxOf1B9AeSHa3QZAv8I6q4LYoxBpWoFOEjqZ.jpeg
+-rw-r--r-- 1 www-data www-data  24225 ноя 22 18:34 0tkHKtiDjZjXtDJulKEsAeybJxa3oKlVO085nTqA.jpeg
+-rw-r--r-- 1 www-data www-data   4510 сен  3 00:36 1302520210.jpg
+-rw-r--r-- 1 www-data www-data   6167 июл 20 21:04 1302520238.jpg
+-rw-r--r-- 1 www-data www-data   5331 июл 20 21:04 1302520264.jpg
+-rw-r--r-- 1 www-data www-data  18203 дек 24 17:26 1fKsvpUpfncP48zgKvLq7Nwl6U7bUx7wtjwq72jT.jpeg
+-rw-r--r-- 1 www-data www-data   5959 ноя 12 23:01 1gtoJeDIUZu2JP7xK8ZiggDLIZIWZMCaf4DySlaR.jpeg
+-rw-r--r-- 1 www-data www-data  17214 мар 26  2019 1Jf9IVZn8KAyGTUQUZXrtjZongDEX8nnzyiRwf2o.jpeg
+-rw-r--r-- 1 www-data www-data  31707 июл 20 21:04 536000039.jpg
+-rw-r--r-- 1 www-data www-data   5220 июл 20 21:04 536000061.jpg
+-rw-r--r-- 1 www-data www-data   6253 июл 20 21:04 536000066.jpg
+-rw-r--r-- 1 www-data www-data   8110 ноя 20 10:25 5WHIEsz6pZQ4dSC70gJs60DMolDFNIuAHqHQUzUS.jpeg
+-rw-r--r-- 1 www-data www-data  41709 ноя 20 11:21 5ZbwWcEzjiuzqP0KyPCZNovmPxDXCWTcYPFx8DOV.jpeg
+
+-rw-r--r-- 1 www-data www-data 4950 июл 20 21:04 ./storage/app/public/users/faces/1302527328.jpg
+-rw-r--r-- 1 www-data www-data 6654 ноя 22 16:34 ./storage/app/public/users/faces/oOUynL7SNk6CyJpFBWlJXQCs602nMGyjha3FfEcc.jpeg
+-rw-r--r-- 1 www-data www-data  7055 авг 23 02:09 0L5HTnrUGtmbFWmwnAC4uaXIGTBWMSSg1NRylt8v.jpeg
+-rw-r--r-- 1 www-data www-data 58469 авг 27 08:13 0ZWnX9iqQBHLBYyG8F9o2LJydtMfm9IR0cH4Mgij.jpeg
+
+-rw-r--r-- 1 www-data www-data 19903 авг 27 08:22 ./storage/app/public/library/covers/NP6XvBJTms1NNOwt5DN4XxaVDotmQ2tIGMwR38ZZ.jpeg
+-rw-r--r-- 1 www-data www-data 9840 апр  4  2019 ./storage/app/public/library/covers/FRyeLtQYePRJvW8IpAJQ7JztnmKsrhcADjYSoA34.jpeg
+
+-rw-r--r-- 1 www-data www-data   14797 июн 21  2019 5UvYByhyfVKentMLlDT6dovxgAGoR6nXYBSrouHN.docx
+-rw-r--r-- 1 www-data www-data 1531392 сен  4 12:14 7tGozR7eEJdW1eDusX19o6beLUBNkaLoHsumYRur.doc
+-rw-r--r-- 1 www-data www-data  560232 июн 14  2018 85GvUApuH8NUxuErM3sG22bG0U8As85ihaUVBZtZ.pdf
+
+-rw-r--r-- 1 www-data www-data 50042 июн 18  2019 ./storage/app/public/library/books/evL8QC6VAIYeNROCxg3rpGkkwTm1YwXAv7iyMWqV.docx
+-rw-r--r-- 1 www-data www-data 896079 апр  4  2019 ./storage/app/public/library/books/GzIMIFxX4WNJBar2Mkvby04j5oVjMm9RVPhoO2B9.pdf
+drwxr-xr-x 2 www-data root   4096 янв 14 00:01 .
+-rw-r--r-- 1 www-data root     14 ноя 13  2017 .gitignore
+-rw-r--r-- 1 www-data root 14 ноя 13  2017 ./storage/logs/.gitignore

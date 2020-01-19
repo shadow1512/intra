@@ -1,0 +1,5533 @@
+object(Illuminate\Support\Collection)#483 (1) {
+  ["items":protected]=>
+  array(20) {
+    [0]=>
+    object(Adldap\Models\OrganizationalUnit)#502 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(45) "OU=Domain Controllers,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(35) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(18) "Domain Controllers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["description"]=>
+        array(1) {
+          [0]=>
+          string(40) "Default container for domain controllers"
+        }
+        [2]=>
+        string(11) "description"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(45) "OU=Domain Controllers,DC=work,DC=kodeks,DC=ru"
+        }
+        [3]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [4]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20100525122852.0Z"
+        }
+        [5]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180921152236.0Z"
+        }
+        [6]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "6914"
+        }
+        [7]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "1058137"
+        }
+        [8]=>
+        string(10) "usnchanged"
+        ["showinadvancedviewonly"]=>
+        array(1) {
+          [0]=>
+          string(5) "FALSE"
+        }
+        [9]=>
+        string(22) "showinadvancedviewonly"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(18) "Domain Controllers"
+        }
+        [10]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�*�����F����e=�"
+        }
+        [11]=>
+        string(10) "objectguid"
+        ["systemflags"]=>
+        array(1) {
+          [0]=>
+          string(11) "-1946157056"
+        }
+        [12]=>
+        string(11) "systemflags"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [13]=>
+        string(14) "objectcategory"
+        ["iscriticalsystemobject"]=>
+        array(1) {
+          [0]=>
+          string(4) "TRUE"
+        }
+        [14]=>
+        string(22) "iscriticalsystemobject"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(490) "[LDAP://cn={7936288F-A0AC-4580-822D-A4790DCA16F0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={5510187A-6A5B-4742-BF2D-9942953B9A5F},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={7B299DDE-097B-440A-9973-22D756608E4E},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={8293483C-A3DB-423D-B705-2EA53FF61811},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://CN={6AC1786C-016F-11D2-945F-00C04fB984F9},CN=Policies,CN=System,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [15]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [16]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(45) "OU=Domain Controllers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(35) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(18) "Domain Controllers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["description"]=>
+        array(1) {
+          [0]=>
+          string(40) "Default container for domain controllers"
+        }
+        [2]=>
+        string(11) "description"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(45) "OU=Domain Controllers,DC=work,DC=kodeks,DC=ru"
+        }
+        [3]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [4]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20100525122852.0Z"
+        }
+        [5]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180921152236.0Z"
+        }
+        [6]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "6914"
+        }
+        [7]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "1058137"
+        }
+        [8]=>
+        string(10) "usnchanged"
+        ["showinadvancedviewonly"]=>
+        array(1) {
+          [0]=>
+          string(5) "FALSE"
+        }
+        [9]=>
+        string(22) "showinadvancedviewonly"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(18) "Domain Controllers"
+        }
+        [10]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�*�����F����e=�"
+        }
+        [11]=>
+        string(10) "objectguid"
+        ["systemflags"]=>
+        array(1) {
+          [0]=>
+          string(11) "-1946157056"
+        }
+        [12]=>
+        string(11) "systemflags"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [13]=>
+        string(14) "objectcategory"
+        ["iscriticalsystemobject"]=>
+        array(1) {
+          [0]=>
+          string(4) "TRUE"
+        }
+        [14]=>
+        string(22) "iscriticalsystemobject"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(490) "[LDAP://cn={7936288F-A0AC-4580-822D-A4790DCA16F0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={5510187A-6A5B-4742-BF2D-9942953B9A5F},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={7B299DDE-097B-440A-9973-22D756608E4E},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={8293483C-A3DB-423D-B705-2EA53FF61811},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://CN={6AC1786C-016F-11D2-945F-00C04fB984F9},CN=Policies,CN=System,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [15]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [16]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(45) "OU=Domain Controllers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [11]=>
+    object(Adldap\Models\OrganizationalUnit)#487 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(30) "OU=SPD,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "SPD"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(30) "OU=SPD,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20100928120651.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8286"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8286"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "SPD"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "a(|���J����^�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(98) "[LDAP://CN={42B15E5F-B6C2-41BE-9598-9B3F2967CAB9},CN=Policies,CN=System,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [11]=>
+        string(6) "gplink"
+        ["gpoptions"]=>
+        array(1) {
+          [0]=>
+          string(1) "0"
+        }
+        [12]=>
+        string(9) "gpoptions"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(30) "OU=SPD,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "SPD"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(30) "OU=SPD,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20100928120651.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8286"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8286"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "SPD"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "a(|���J����^�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(98) "[LDAP://CN={42B15E5F-B6C2-41BE-9598-9B3F2967CAB9},CN=Policies,CN=System,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [11]=>
+        string(6) "gplink"
+        ["gpoptions"]=>
+        array(1) {
+          [0]=>
+          string(1) "0"
+        }
+        [12]=>
+        string(9) "gpoptions"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(30) "OU=SPD,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [18]=>
+    object(Adldap\Models\OrganizationalUnit)#478 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(178) "OU=Отдел по работе с Госорганами1,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(55) "Отдел по работе с Госорганами1"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(178) "OU=Отдел по работе с Госорганами1,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083157.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113155.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8929"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953884"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(55) "Отдел по работе с Госорганами1"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "Zi��y9�B�XT�{YV"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113155.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(178) "OU=Отдел по работе с Госорганами1,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(55) "Отдел по работе с Госорганами1"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(178) "OU=Отдел по работе с Госорганами1,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083157.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113155.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8929"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953884"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(55) "Отдел по работе с Госорганами1"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "Zi��y9�B�XT�{YV"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113155.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(178) "OU=Отдел по работе с Госорганами1,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [17]=>
+    object(Adldap\Models\OrganizationalUnit)#488 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(155) "OU=СЦ Отдел Развития,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(32) "СЦ Отдел Развития"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(155) "OU=СЦ Отдел Развития,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085636.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113108.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(5) "11014"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953836"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(32) "СЦ Отдел Развития"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "_ߕc�\�A��͘E��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113108.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(155) "OU=СЦ Отдел Развития,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(32) "СЦ Отдел Развития"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(155) "OU=СЦ Отдел Развития,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085636.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113108.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(5) "11014"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953836"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(32) "СЦ Отдел Развития"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "_ߕc�\�A��͘E��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113108.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(155) "OU=СЦ Отдел Развития,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [16]=>
+    object(Adldap\Models\OrganizationalUnit)#489 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(148) "OU=Горячая линия,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(25) "Горячая линия"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(148) "OU=Горячая линия,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083138.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113230.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8928"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953920"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(25) "Горячая линия"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "ŭ��r�N�6�ϜSb�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113230.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(148) "OU=Горячая линия,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(25) "Горячая линия"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(148) "OU=Горячая линия,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083138.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113230.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8928"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953920"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(25) "Горячая линия"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "ŭ��r�N�6�ϜSb�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113230.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(148) "OU=Горячая линия,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [15]=>
+    object(Adldap\Models\OrganizationalUnit)#490 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(178) "OU=СЦ Отдел корпоративных продаж,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(55) "СЦ Отдел корпоративных продаж"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(178) "OU=СЦ Отдел корпоративных продаж,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083329.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113123.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(5) "11015"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953855"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(55) "СЦ Отдел корпоративных продаж"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "���뷅qI����G;�O"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113123.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(178) "OU=СЦ Отдел корпоративных продаж,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(55) "СЦ Отдел корпоративных продаж"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(178) "OU=СЦ Отдел корпоративных продаж,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083329.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113123.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(5) "11015"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953855"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(55) "СЦ Отдел корпоративных продаж"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "���뷅qI����G;�O"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113123.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(178) "OU=СЦ Отдел корпоративных продаж,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [14]=>
+    object(Adldap\Models\OrganizationalUnit)#491 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(144) "OU=Регион.сбыт,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(21) "Регион.сбыт"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(144) "OU=Регион.сбыт,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083236.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113139.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8944"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953871"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(21) "Регион.сбыт"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) ":3��0��@�����ߺ"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113139.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(144) "OU=Регион.сбыт,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(21) "Регион.сбыт"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(144) "OU=Регион.сбыт,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113083236.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113139.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8944"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953871"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(21) "Регион.сбыт"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) ":3��0��@�����ߺ"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113139.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(144) "OU=Регион.сбыт,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [13]=>
+    object(Adldap\Models\OrganizationalUnit)#492 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(54) "OU=Service Accounts,OU=Servers,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(16) "Service Accounts"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(54) "OU=Service Accounts,OU=Servers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20151202163432.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8712"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8712"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(16) "Service Accounts"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "5hy��R�N���Di=\;"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(54) "OU=Service Accounts,OU=Servers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(16) "Service Accounts"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(54) "OU=Service Accounts,OU=Servers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20151202163432.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8712"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8712"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(16) "Service Accounts"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "5hy��R�N���Di=\;"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(54) "OU=Service Accounts,OU=Servers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [12]=>
+    object(Adldap\Models\OrganizationalUnit)#493 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(34) "OU=Servers,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(27) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(7) "Servers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(34) "OU=Servers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20151117141617.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190204074833.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8425"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "10140833"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(7) "Servers"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "𭅌���@�nho���"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(588) "[LDAP://cn={7936288F-A0AC-4580-822D-A4790DCA16F0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={C1D52387-C9B7-4DD9-8EE5-F6AF54081B52},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={5510187A-6A5B-4742-BF2D-9942953B9A5F},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={7B299DDE-097B-440A-9973-22D756608E4E},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={6525B927-17DC-4307-AB99-8D5FCAC1F9A0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={8293483C-A3DB-423D-B705-2EA53FF61811},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [11]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [12]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(34) "OU=Servers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(27) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(7) "Servers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(34) "OU=Servers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20151117141617.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190204074833.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8425"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "10140833"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(7) "Servers"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "𭅌���@�nho���"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(588) "[LDAP://cn={7936288F-A0AC-4580-822D-A4790DCA16F0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={C1D52387-C9B7-4DD9-8EE5-F6AF54081B52},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={5510187A-6A5B-4742-BF2D-9942953B9A5F},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={7B299DDE-097B-440A-9973-22D756608E4E},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={6525B927-17DC-4307-AB99-8D5FCAC1F9A0},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0][LDAP://cn={8293483C-A3DB-423D-B705-2EA53FF61811},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [11]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [12]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(34) "OU=Servers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [10]=>
+    object(Adldap\Models\OrganizationalUnit)#495 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(180) "OU=Отдел телекоммуникаций,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(43) "Отдел телекоммуникаций"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(180) "OU=Отдел телекоммуникаций,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131640.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20181018113330.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8447"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "2602870"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(43) "Отдел телекоммуникаций"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "��)ϛ�L��u�μ="
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(2) {
+          [0]=>
+          string(17) "20181018113330.0Z"
+          [1]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(180) "OU=Отдел телекоммуникаций,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(43) "Отдел телекоммуникаций"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(180) "OU=Отдел телекоммуникаций,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131640.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20181018113330.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8447"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "2602870"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(43) "Отдел телекоммуникаций"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "��)ϛ�L��u�μ="
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(2) {
+          [0]=>
+          string(17) "20181018113330.0Z"
+          [1]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(180) "OU=Отдел телекоммуникаций,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [1]=>
+    object(Adldap\Models\OrganizationalUnit)#504 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(133) "OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(106) "Управление компьютерного обеспечения и телекоммуникаций"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(133) "OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20121224062902.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190801131256.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8431"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22392262"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(106) "Управление компьютерного обеспечения и телекоммуникаций"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "P��T�}F���>s` "
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(1) " "
+        }
+        [11]=>
+        string(6) "gplink"
+        ["gpoptions"]=>
+        array(1) {
+          [0]=>
+          string(1) "0"
+        }
+        [12]=>
+        string(9) "gpoptions"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(133) "OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(106) "Управление компьютерного обеспечения и телекоммуникаций"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(133) "OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20121224062902.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190801131256.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8431"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22392262"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(106) "Управление компьютерного обеспечения и телекоммуникаций"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "P��T�}F���>s` "
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(1) " "
+        }
+        [11]=>
+        string(6) "gplink"
+        ["gpoptions"]=>
+        array(1) {
+          [0]=>
+          string(1) "0"
+        }
+        [12]=>
+        string(9) "gpoptions"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(133) "OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [9]=>
+    object(Adldap\Models\OrganizationalUnit)#496 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(197) "OU=Управление по сбыту и обслуживанию в СПб,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(74) "Управление по сбыту и обслуживанию в СПб"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(197) "OU=Управление по сбыту и обслуживанию в СПб,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085713.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113048.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8932"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953817"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(74) "Управление по сбыту и обслуживанию в СПб"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�Rd�#�$O�������("
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113048.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(197) "OU=Управление по сбыту и обслуживанию в СПб,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(74) "Управление по сбыту и обслуживанию в СПб"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(197) "OU=Управление по сбыту и обслуживанию в СПб,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085713.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113048.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8932"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953817"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(74) "Управление по сбыту и обслуживанию в СПб"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�Rd�#�$O�������("
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113048.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(197) "OU=Управление по сбыту и обслуживанию в СПб,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [8]=>
+    object(Adldap\Models\OrganizationalUnit)#497 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(119) "OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "USO"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(119) "OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113082710.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8926"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953950"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "USO"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "����f�M���2x�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["managedby"]=>
+        array(1) {
+          [0]=>
+          string(132) "CN=UsoAdmins,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(9) "managedby"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [11]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(98) "[LDAP://cn={A2368731-9BA3-454D-AB32-9A4AFB03347A},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [12]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(3) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809110906.0Z"
+          [2]=>
+          string(17) "16010101000001.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(119) "OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(29) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "USO"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(119) "OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170113082710.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8926"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953950"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "USO"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "����f�M���2x�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["managedby"]=>
+        array(1) {
+          [0]=>
+          string(132) "CN=UsoAdmins,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(9) "managedby"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [11]=>
+        string(14) "objectcategory"
+        ["gplink"]=>
+        array(1) {
+          [0]=>
+          string(98) "[LDAP://cn={A2368731-9BA3-454D-AB32-9A4AFB03347A},cn=policies,cn=system,DC=work,DC=kodeks,DC=ru;0]"
+        }
+        [12]=>
+        string(6) "gplink"
+        ["dscorepropagationdata"]=>
+        array(3) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809110906.0Z"
+          [2]=>
+          string(17) "16010101000001.0Z"
+        }
+        [13]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(119) "OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [7]=>
+    object(Adldap\Models\OrganizationalUnit)#498 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(29) "OU=DM,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(2) "DM"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(29) "OU=DM,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20141015061004.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8450"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8450"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(2) "DM"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�=�!{��@�$�f��%�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(29) "OU=DM,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(2) "DM"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(29) "OU=DM,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20141015061004.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8450"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8450"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(2) "DM"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�=�!{��@�$�f��%�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(29) "OU=DM,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [6]=>
+    object(Adldap\Models\OrganizationalUnit)#499 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(30) "OU=VDI,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "VDI"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(30) "OU=VDI,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20140403080155.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8392"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8392"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "VDI"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "���xȥqK����4��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(30) "OU=VDI,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(3) "VDI"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(30) "OU=VDI,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20140403080155.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8392"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8392"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(3) "VDI"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "���xȥqK����4��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(30) "OU=VDI,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [5]=>
+    object(Adldap\Models\OrganizationalUnit)#500 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(197) "OU=Отдел технического обслуживания,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(60) "Отдел технического обслуживания"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(197) "OU=Отдел технического обслуживания,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131613.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8446"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8446"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(60) "Отдел технического обслуживания"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�@*{�a�E��r����"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(197) "OU=Отдел технического обслуживания,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(60) "Отдел технического обслуживания"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(197) "OU=Отдел технического обслуживания,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131613.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8446"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8446"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(60) "Отдел технического обслуживания"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "�@*{�a�E��r����"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(197) "OU=Отдел технического обслуживания,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [4]=>
+    object(Adldap\Models\OrganizationalUnit)#501 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(145) "OU=Disabled,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(8) "Disabled"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(145) "OU=Disabled,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150331142900.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8432"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8432"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(8) "Disabled"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "��^!��I�U��;e�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(145) "OU=Disabled,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(8) "Disabled"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(145) "OU=Disabled,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150331142900.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8432"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8432"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(8) "Disabled"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "��^!��I�U��;e�"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(145) "OU=Disabled,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [3]=>
+    object(Adldap\Models\OrganizationalUnit)#494 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(39) "OU=BlockedUsers,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(12) "BlockedUsers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(39) "OU=BlockedUsers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170802082129.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20181224132823.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "6920"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "7097589"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(12) "BlockedUsers"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "ZO4M�NK��+[��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(2) {
+          [0]=>
+          string(17) "20181224132823.0Z"
+          [1]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(39) "OU=BlockedUsers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(12) "BlockedUsers"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(39) "OU=BlockedUsers,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170802082129.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20181224132823.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "6920"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(7) "7097589"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(12) "BlockedUsers"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "ZO4M�NK��+[��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(2) {
+          [0]=>
+          string(17) "20181224132823.0Z"
+          [1]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(39) "OU=BlockedUsers,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [2]=>
+    object(Adldap\Models\OrganizationalUnit)#503 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(205) "OU=Сектор системного администрирования,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(68) "Сектор системного администрирования"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(205) "OU=Сектор системного администрирования,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131703.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8448"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8448"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(68) "Сектор системного администрирования"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "!#�k�zE��=��c"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(205) "OU=Сектор системного администрирования,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(68) "Сектор системного администрирования"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(205) "OU=Сектор системного администрирования,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20150402131703.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20180904120618.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8448"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(4) "8448"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(68) "Сектор системного администрирования"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "!#�k�zE��=��c"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(1) {
+          [0]=>
+          string(17) "16010101000000.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(205) "OU=Сектор системного администрирования,OU=Управление компьютерного обеспечения и телекоммуникаций,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+    [19]=>
+    object(Adldap\Models\OrganizationalUnit)#486 (9) {
+      ["exists"]=>
+      bool(true)
+      ["dateFormat"]=>
+      string(11) "Y-m-d H:i:s"
+      ["dn":protected]=>
+      string(143) "OU=Фин. группа,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      ["query":protected]=>
+      object(Adldap\Query\Builder)#505 (15) {
+        ["columns"]=>
+        array(0) {
+        }
+        ["filters"]=>
+        array(3) {
+          ["and"]=>
+          array(1) {
+            [0]=>
+            array(3) {
+              ["field"]=>
+              string(11) "objectclass"
+              ["operator"]=>
+              string(1) "="
+              ["value"]=>
+              string(54) "\6f\72\67\61\6e\69\7a\61\74\69\6f\6e\61\6c\75\6e\69\74"
+            }
+          }
+          ["or"]=>
+          array(0) {
+          }
+          ["raw"]=>
+          array(0) {
+          }
+        }
+        ["limit"]=>
+        int(20)
+        ["paginated"]=>
+        bool(false)
+        ["sortByField":protected]=>
+        string(0) ""
+        ["sortByDirection":protected]=>
+        string(0) ""
+        ["sortByFlags":protected]=>
+        NULL
+        ["dn":protected]=>
+        string(23) "dc=work,dc=kodeks,dc=ru"
+        ["recursive":protected]=>
+        bool(true)
+        ["read":protected]=>
+        bool(false)
+        ["raw":protected]=>
+        bool(false)
+        ["nested":protected]=>
+        bool(false)
+        ["connection":protected]=>
+        object(Adldap\Connections\Ldap)#511 (4) {
+          ["connection":protected]=>
+          resource(583) of type (ldap link)
+          ["bound":protected]=>
+          bool(true)
+          ["useSSL":protected]=>
+          bool(false)
+          ["useTLS":protected]=>
+          bool(false)
+        }
+        ["grammar":protected]=>
+        object(Adldap\Query\Grammar)#506 (0) {
+        }
+        ["schema":protected]=>
+        object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+        }
+      }
+      ["schema":protected]=>
+      object(Adldap\Schemas\ActiveDirectory)#510 (0) {
+      }
+      ["attributes":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(20) "Фин. группа"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(143) "OU=Фин. группа,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085737.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113016.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8933"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953791"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(20) "Фин. группа"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "n �X�AN�$��W��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113016.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(143) "OU=Фин. группа,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["original":protected]=>
+      array(25) {
+        ["objectclass"]=>
+        array(2) {
+          [0]=>
+          string(3) "top"
+          [1]=>
+          string(18) "organizationalUnit"
+        }
+        [0]=>
+        string(11) "objectclass"
+        ["ou"]=>
+        array(1) {
+          [0]=>
+          string(20) "Фин. группа"
+        }
+        [1]=>
+        string(2) "ou"
+        ["distinguishedname"]=>
+        array(1) {
+          [0]=>
+          string(143) "OU=Фин. группа,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+        }
+        [2]=>
+        string(17) "distinguishedname"
+        ["instancetype"]=>
+        array(1) {
+          [0]=>
+          string(1) "4"
+        }
+        [3]=>
+        string(12) "instancetype"
+        ["whencreated"]=>
+        array(1) {
+          [0]=>
+          string(17) "20170116085737.0Z"
+        }
+        [4]=>
+        string(11) "whencreated"
+        ["whenchanged"]=>
+        array(1) {
+          [0]=>
+          string(17) "20190809113016.0Z"
+        }
+        [5]=>
+        string(11) "whenchanged"
+        ["usncreated"]=>
+        array(1) {
+          [0]=>
+          string(4) "8933"
+        }
+        [6]=>
+        string(10) "usncreated"
+        ["usnchanged"]=>
+        array(1) {
+          [0]=>
+          string(8) "22953791"
+        }
+        [7]=>
+        string(10) "usnchanged"
+        ["name"]=>
+        array(1) {
+          [0]=>
+          string(20) "Фин. группа"
+        }
+        [8]=>
+        string(4) "name"
+        ["objectguid"]=>
+        array(1) {
+          [0]=>
+          string(16) "n �X�AN�$��W��"
+        }
+        [9]=>
+        string(10) "objectguid"
+        ["objectcategory"]=>
+        array(1) {
+          [0]=>
+          string(73) "CN=Organizational-Unit,CN=Schema,CN=Configuration,DC=work,DC=kodeks,DC=ru"
+        }
+        [10]=>
+        string(14) "objectcategory"
+        ["dscorepropagationdata"]=>
+        array(4) {
+          [0]=>
+          string(17) "20190809113308.0Z"
+          [1]=>
+          string(17) "20190809113016.0Z"
+          [2]=>
+          string(17) "20190809110906.0Z"
+          [3]=>
+          string(17) "16010101000002.0Z"
+        }
+        [11]=>
+        string(21) "dscorepropagationdata"
+        ["dn"]=>
+        string(143) "OU=Фин. группа,OU=USO,OU=Департамент прямого сбыта,OU=Консорциум КОДЕКС,DC=work,DC=kodeks,DC=ru"
+      }
+      ["modifications":protected]=>
+      array(0) {
+      }
+      ["timestampFormat":protected]=>
+      string(9) "YmdHis.0Z"
+    }
+  }
+}

@@ -1,0 +1,97 @@
+Laravel development server started: <http://10.0.0.115:8000>
+[Tue Nov 19 16:37:28 2019] Failed to listen on 10.0.0.115:8000 (reason: Address already in use)
+
+                                                                
+  There are no commands defined in the "10.0.0.115" namespace.  
+                                                                
+
+
+                                                                
+  There are no commands defined in the "10.0.0.115" namespace.  
+                                                                
+
+
+                                       
+  The "--host" option does not exist.  
+                                       
+
+Laravel development server started: <http://10.0.0.115:8000:8000>
+Laravel development server started: <http://10.0.0.115:8000>
+Laravel development server started: <http://10.0.0.115:80>
+[Tue Nov 19 17:14:38 2019] 172.16.0.15:62276 [200]: /images/favicon.ico
+Laravel development server started: <http://10.0.0.115:80>
+[Tue Nov 19 17:14:47 2019] 172.16.0.15:62281 [200]: /images/favicon.ico
+[Tue Nov 19 17:14:51 2019] 172.16.0.144:55040 [200]: /images/favicon.ico
+[Tue Nov 19 17:15:46 2019] 172.16.0.15:62290 [200]: /images/favicon.ico
+[Tue Nov 19 17:15:55 2019] 172.16.0.15:62293 [200]: /js/libs/jquery.datetimepicker.js
+[Tue Nov 19 17:15:55 2019] 172.16.0.15:62295 [200]: /js/room.js
+[Tue Nov 19 17:15:55 2019] 172.16.0.15:62296 [200]: /js/libs/jquery.fancybox.js
+[Tue Nov 19 17:16:00 2019] 172.16.0.233:52922 [200]: /images/favicon.ico
+[Tue Nov 19 17:16:06 2019] 172.16.0.15:62300 [200]: /js/libs/jquery.datetimepicker.js
+[Tue Nov 19 17:16:06 2019] 172.16.0.15:62302 [200]: /js/room.js
+[Tue Nov 19 17:16:06 2019] 172.16.0.15:62303 [200]: /js/libs/jquery.fancybox.js
+[Tue Nov 19 17:16:08 2019] 172.16.0.15:62305 [200]: /storage/users/faces/1302527730.jpg
+[Tue Nov 19 17:16:08 2019] 172.16.0.15:62306 [200]: /storage/users/faces/nIP6OBuQ125R9VO6QZuAHo39GbTf7YtB2gyraX3F.jpeg
+[Tue Nov 19 17:16:08 2019] 172.16.0.15:62307 [200]: /storage/users/faces/5jzn53eijEuRA5whz4NmOLAfdp4IHNr7M4cqW0SR.jpeg
+[Tue Nov 19 17:16:08 2019] 172.16.0.15:62308 [200]: /storage/users/faces/GcdoxKafWWlWL4Up2gkixgDbypObRF1FYcwy1zVN.jpeg
+[Tue Nov 19 17:16:10 2019] 172.16.0.15:62311 [200]: /js/libs/jquery.datetimepicker.js
+[Tue Nov 19 17:16:10 2019] 172.16.0.15:62312 [200]: /js/room.js
+[Tue Nov 19 17:16:10 2019] 172.16.0.15:62313 [200]: /js/libs/jquery.fancybox.js
+[Tue Nov 19 17:16:16 2019] 172.16.0.15:62318 [200]: /js/d3.v3.min.js
+[Tue Nov 19 17:16:16 2019] 172.16.0.15:62319 [200]: /js/draw.js
+[Tue Nov 19 17:16:17 2019] 172.16.0.15:62320 [200]: /storage/directory/public_data.csv
+[Tue Nov 19 17:16:17 2019] 172.16.0.15:62321 [200]: /images/person.png
+[Tue Nov 19 17:16:20 2019] 172.16.0.15:62323 [200]: /storage/users/faces/loQ6CJqm2VyUuzYZaZwHmOjOn0QdLgRM5SBZlMf8.jpeg
+[Tue Nov 19 17:16:28 2019] 172.16.0.121:53296 [200]: /storage/users/faces/536001317.jpg
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62327 [200]: /styles/css/datepicker/jquery-ui-1.9.2.custom.css
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62328 [200]: /styles/css/jquery.datetimepicker.css
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62329 [200]: /styles/css/jquery.fancybox.css
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62330 [200]: /styles/css/styles.css
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62331 [200]: /js/libs/jquery-3.1.0.js
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62332 [200]: /js/libs/chosen.jquery.min.js
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62334 [200]: /js/libs/owl.carousel.js
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62335 [200]: /js/main.js
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62336 [200]: /js/libs/jquery-ui-1.9.2.custom.min.js
+[Tue Nov 19 17:16:29 2019] 172.16.0.15:62337 [200]: /js/libs/jquery.datepicker.extension.range.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62339 [200]: /styles/css/datepicker/jquery-ui-1.9.2.custom.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62340 [200]: /styles/css/jquery.datetimepicker.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62341 [200]: /styles/css/jquery.fancybox.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62342 [200]: /styles/css/styles.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62343 [200]: /js/libs/jquery-3.1.0.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62344 [200]: /js/libs/chosen.jquery.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62345 [200]: /js/libs/owl.carousel.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62346 [200]: /js/main.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62347 [200]: /js/libs/jquery-ui-1.9.2.custom.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62348 [200]: /js/libs/jquery.datepicker.extension.range.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62349 [200]: /styles/css/datepicker/jquery-ui-1.9.2.custom.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62350 [200]: /styles/css/jquery.datetimepicker.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62351 [200]: /styles/css/jquery.fancybox.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62352 [200]: /styles/css/styles.css
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62353 [200]: /js/libs/jquery-3.1.0.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62354 [200]: /js/libs/chosen.jquery.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62355 [200]: /js/libs/owl.carousel.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62356 [200]: /js/main.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62357 [200]: /js/libs/jquery-ui-1.9.2.custom.min.js
+[Tue Nov 19 17:16:31 2019] 172.16.0.15:62358 [200]: /js/libs/jquery.datepicker.extension.range.min.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55048 [200]: /styles/css/datepicker/jquery-ui-1.9.2.custom.css
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55050 [200]: /styles/css/jquery.datetimepicker.css
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55052 [200]: /styles/css/jquery.fancybox.css
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55054 [200]: /styles/css/styles.css
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55058 [200]: /js/libs/jquery-3.1.0.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55060 [200]: /js/libs/chosen.jquery.min.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55062 [200]: /js/libs/owl.carousel.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55064 [200]: /js/main.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55066 [200]: /js/libs/jquery-ui-1.9.2.custom.min.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55068 [200]: /js/libs/jquery.datepicker.extension.range.min.js
+[Tue Nov 19 17:16:34 2019] 172.16.0.144:55070 [200]: /images/favicon.ico
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55074 [200]: /styles/css/datepicker/jquery-ui-1.9.2.custom.css
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55076 [200]: /styles/css/jquery.datetimepicker.css
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55078 [200]: /styles/css/jquery.fancybox.css
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55080 [200]: /styles/css/styles.css
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55082 [200]: /js/libs/jquery-3.1.0.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55084 [200]: /js/libs/chosen.jquery.min.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55086 [200]: /js/libs/owl.carousel.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55088 [200]: /js/main.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55090 [200]: /js/libs/jquery-ui-1.9.2.custom.min.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55094 [200]: /js/libs/jquery.datepicker.extension.range.min.js
+[Tue Nov 19 17:16:41 2019] 172.16.0.144:55096 [200]: /images/favicon.ico

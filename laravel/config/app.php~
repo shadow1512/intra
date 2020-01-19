@@ -51,8 +51,7 @@ return [
     |
     */
 
-/* !!!!!   'url' => env('APP_URL', 'http://intra-new.dmz'), */
-    'url' => env('APP_URL', 'http://127.0.0.1'),
+    'url' => env('APP_URL', 'http://intra.lan.kodeks.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -121,7 +120,7 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'daily'),
+    'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
@@ -169,7 +168,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-        //TCG\Voyager\VoyagerServiceProvider::class,
+        TCG\Voyager\VoyagerServiceProvider::class,
         //LaravelAuthLdap\AuthLdapServiceProvider::class
         Adldap\Laravel\AdldapServiceProvider::class,
         cijic\phpMorphy\MorphyServiceProvider::class,
@@ -186,9 +185,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ComposerServiceProvider::class,
         Sleimanx2\Plastic\PlasticServiceProvider::class,
-        Unisharp\Ckeditor\ServiceProvider::class,
-        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class
     ),
 
     /*
@@ -239,7 +236,6 @@ return [
         'Adldap'=> Adldap\Laravel\Facades\Adldap::class,
         'Morphy'    => cijic\phpMorphy\Facade\Morphy::class,
         'Redmine'   => TUNER88\Redmine\Facades\Redmine::class,
-        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

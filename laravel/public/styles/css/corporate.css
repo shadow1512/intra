@@ -1,0 +1,518 @@
+a {
+    opacity: 0.9;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+a:hover {
+    opacity: 1;
+}
+.cnt-wrapper {
+    margin: 0 auto;
+    max-width: 1040px;
+    width: 100%;
+    position: relative;
+}
+.corporate section {
+    width: 100%;
+    padding: 40px 80px;
+    position: relative;
+    height: 500px;
+}
+
+.corporate .corporate_id {
+    background: rgb(33,100,176);
+    background: linear-gradient(0deg, rgba(33,100,176,1) 0%, rgba(17,145,215,1) 100%);
+    height: 583px;
+    padding-top: 90px;
+    vertical-align: top;
+}
+.wrapper-main-txt {
+    display: inline-block;
+    width: 310px;
+    padding-right: 25px;
+    vertical-align: top;
+}
+.wrapper-main-blocks {
+    display: inline-block;
+    width: 697px;
+    position: relative;
+    height: 396px;
+    vertical-align: top;
+}
+.wrapper-main-blocks a[href="#1"] {
+    background: url("../../images/corporate/logo.jpg") no-repeat 50% 50%;
+    width: 193px;
+    background-size: cover;
+    top: 0;
+    left: 0;
+}
+.wrapper-main-blocks a[href="#2"] {
+    background: url("../../images/corporate/bb.jpg") no-repeat 50% 50%;
+    width: 293px;
+    background-size: cover;
+    top: 0;
+    left: 202px;
+}
+.wrapper-main-blocks a[href="#3"] {
+    background: url("../../images/corporate/bg.jpg") no-repeat 50% 50%;
+    width: 192px;
+    background-size: cover;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+}
+.wrapper-main-blocks a[href="#4"] {
+    background: url("../../images/corporate/blank.jpg") no-repeat 50% 50%;
+    width: 293px;
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+}
+.wrapper-main-blocks a[href="#5"] {
+    background: url("../../images/corporate/ppt.jpg") no-repeat 50% 50%;
+    width: 193px;
+    background-size: cover;
+    bottom: 0;
+    left: 303px;
+}
+.wrapper-main-blocks a {
+    display: inline-block;
+    height: 193px;
+    position: absolute;
+}
+.wrapper-main-blocks a:hover {
+    cursor: pointer;
+}
+.wrapper-main-blocks a span {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    padding: 15px 21px;
+    color: #fff;
+    font-size: 16px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+}
+.wrapper-main-blocks a:hover span {
+    padding: 21px 34px;
+}
+.corporate_id h2 {
+    font-size: 52px;
+    font-weight: normal;
+    margin-bottom: 21px;
+    margin-top: 52px;
+    letter-spacing: -2px;
+}
+.corporate_id p {
+    font-size: 16px;
+    line-height: 19px;
+    width: 255px;
+}
+.corporate_id h2,
+.corporate_id p {
+    color: #fff;
+}
+.corporate section.corporate_logo {
+    background-color: #fff;
+    height: 497px;
+}
+.corporate_bb {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.corporate_bg {
+    background-color: #fff;
+}
+.corporate_blanks {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+.corporate_presentation {
+    background-color: #fff;
+}
+h2{
+    color: #2164b0;
+    font-size: 52px;
+    font-weight: normal;
+    letter-spacing: -2px;
+    margin-top: 48px;
+    margin-bottom: 24px;
+}
+.white {
+    color: #fff;
+}
+.blue {
+    color: #2164b0;
+}
+.orange {
+    color: #ff8100;
+}
+.white:hover,
+.white:focus,
+.white:active,
+.white:visited {
+    color: #fff;
+}
+.blue:hover,
+.blue:focus,
+.blue:active,
+.blue:visited {
+    color: #2164b0;
+}
+.orange:hover,
+.orange:focus,
+.orange:active,
+.orange:visited {
+    color: #ff8100;
+}
+.k {
+    background-color: #2164b0;
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    max-width: 486px;
+    margin-right: 15px;
+    position: relative;
+    height: 228px;
+    padding: 30px 35px;
+}
+.te {
+    display: inline-block;
+    width: 100%;
+    vertical-align: top;
+    max-width: 495px;
+    height: 228px;
+    background: url("../../images/corporate/video.jpg") no-repeat 56% 50% #ff8100;
+    -webkit-background-size: cover;
+    background-size: cover;
+    padding: 30px 35px;
+}
+.k .ppt {
+    position: absolute;
+    right: 29px;
+    top: 23px;
+    width: 44px;
+    height: 49px;
+}
+
+.k a.white{
+    display: inline-block;
+    font-size: 18px;
+    line-height: 40px;
+}
+.te .white {
+    margin-top: 10px;
+    line-height: 23px;
+    font-size: 18px;
+    margin-bottom: 14px;
+}
+.white_btn{
+    background-color: #fff;
+    color: #000;
+    padding: 9px 17px 9px 36px;
+    text-decoration: none;
+    font-size: 14px;
+    display: inline-block;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    position: relative;
+}
+.white_btn:before {
+    content: '';
+    background: url("../../images/corporate/play.svg") no-repeat 50% 50%;
+    height: 11px;
+    width: 11px;
+    display: block;
+    position: absolute;
+    left: 16px;
+    top: 11px;
+}
+.te a.white {
+    font-size: 14px;
+    margin-left: 19px;
+}
+.wrapper-logo {
+    width: 100%;
+}
+.wrapper-logo div {
+    width: 24.5%;
+    display: inline-block;
+    padding-right: 60px;
+    vertical-align: top;
+}
+.wrapper-logo div p {
+    font-size: 14px;
+    padding: 5px 0 0px 0;
+    margin-bottom: 8px;
+    line-height: 17px;
+}
+.wrapper-logo div a {
+    font-size: 14px;
+    text-decoration: none;
+}
+.wrapper-logo div a:hover {
+    text-decoration: underline;
+}
+.wrapper-logo div div {
+    width: unset;
+    display: block;
+    padding-right: 0;
+}
+.wrapper-logo div div:last-child {
+    margin-top: 12px;
+}
+a.orange {
+    background: url("../../images/corporate/orange.svg") no-repeat 0 50%;
+    padding-left: 16px;
+    display: inline-block;
+    background-size: 10px;
+    text-decoration: none;
+}
+a.blue {
+    background: url("../../images/corporate/blue.svg") no-repeat 0 50%;
+    padding-left: 16px;
+    display: inline-block;
+    background-size: 10px;
+    text-decoration: none;
+}
+a.white {
+    background: url("../../images/corporate/white.svg") no-repeat 0 50%;
+    padding-left: 16px;
+    display: inline-block;
+    background-size: 10px;
+    text-decoration: none;
+}
+.logo_regulations {
+    position: absolute;
+    right: 81px;
+    top: 21px;
+    font-size: 12px;
+    text-decoration: none;
+    display: block;
+    width: 177px;
+    padding-left: 33px;
+    background: url("../../images/corporate/doc_download.svg") no-repeat 0 50%;
+    color: #2164b0;
+}
+.logo_regulations:hover {
+    cursor: pointer;
+}
+.corporate_bb {
+    background: url("../../images/corporate/bb_big.jpg") no-repeat 56% 50%;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.corporate_bb p {
+    width: 100%;
+    max-width: 330px;
+    font-size: 18px;
+    margin-top: -4px;
+    line-height: 23px;
+}
+.corporate_bb .cnt-wrapper div:last-child {
+    padding-top: 23px;
+}
+.corporate_bb .cnt-wrapper div:last-child a.blue {
+    margin-top: 0;
+}
+.corporate_bb .cnt-wrapper div a.blue {
+    margin-left: 5px;
+    font-size: 16px;
+    margin-top: 4px;
+}
+.wrapper-corporate_bg {
+    width: 100%;
+    position: relative;
+    margin-top: 32px;
+}
+.corporate section.corporate_bg{
+    height: 580px;
+}
+.wrapper-corporate_bg div:hover a {
+    display: block;
+}
+.wrapper-corporate_bg div i{
+    background-color: rgba(0, 0, 0, 0.46);
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    -webkit-transition: all .15s ease-in;
+    transition: all .15s ease-in;
+}
+.wrapper-corporate_bg div:hover i{
+    opacity: 1;
+}
+.wrapper-corporate_bg div {
+    opacity: 1;
+    overflow: hidden;
+}
+.square {
+    width: 190px;
+    height: 143px;
+    position: absolute;
+}
+.square.__one{
+    left: 203px;
+    top: 0;
+}
+.square.__two{
+    left: 405px;
+    top: 0;
+}
+.square.__three{
+    left: 607px;
+    top: 0;
+}
+.square.__four{
+    right: 41px;
+    top: 0;
+}
+.square.__five{
+    left: 203px;
+    top: 154px;
+}
+.square.__six{
+    left: 405px;
+    top: 154px;
+}
+.long-vertical {
+    width: 192px;
+    height: 297px;
+}
+.long-vertical.__one{
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.long-horizon {
+    height: 143px;
+    width: 393px;
+    position: absolute;
+}
+.long-horizon.__one {
+    right: 41px;
+    top: 154px;
+}
+.long-vertical.__one a.download{
+    background-position: 50% 65%;
+}
+.long-vertical.__one a.open{
+    background-position: 50% 35%;
+}
+.long-horizon.__one a.download{
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    right: unset;
+}
+.long-horizon.__one a.open{
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 50%;
+    left: unset;
+    height: 100%;
+}
+.wrapper-corporate_bg .bg_img{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+}
+.wrapper-corporate_bg a.download {
+    background: url('../../images/corporate/white.svg') no-repeat 50% 50%;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-size: 25px;
+}
+.wrapper-corporate_bg a{
+    text-decoration: none;
+    display: none;
+}
+.wrapper-corporate_bg a:hover {
+    cursor: pointer;
+    text-decoration: none;
+}
+.wrapper-corporate_bg a.open{
+    background: url('../../images/corporate/zoom.svg') no-repeat 50% 50%;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background-size: 28px;
+
+}
+.corporate_blanks {
+    background: url("../../images/corporate/blank_big.jpg") no-repeat 56% 50%;
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+.corporate_blanks .cnt-wrapper div {
+    float: right;
+    width: 436px;
+}
+.corporate_blanks div h2 {
+    margin-bottom: 20px;
+}
+.corporate_blanks div p{
+    font-size: 18px;
+    margin-top: 0;
+    line-height: 23px;
+    margin-bottom: 14px;
+}
+.corporate_blanks div .blue {
+    font-size: 18px;
+    padding-left: 23px;
+    line-height: 36px;
+    background-size: 14px;
+}
+
+@media screen and (max-width: 1200px) {
+    .wrapper-main-txt {
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    .wrapper-main-txt p {
+        width: auto;
+    }
+    .corporate .corporate_id {
+        height: auto;
+    }
+    .wrapper-corporate_bg div.long-horizon,
+    .wrapper-corporate_bg div.long-vertical,
+    .wrapper-corporate_bg div.square {
+        position: relative;
+        display: inline-block;
+        width: 190px;
+        height: 143px;
+        top: unset;
+        bottom: unset;
+        left: unset;
+        right: unset;
+        margin: 10px;
+    }
+    .corporate section.corporate_bg {
+        height: auto;
+    }
+    .corporate_presentation .k,
+    .corporate_presentation .te {
+        width: 48%;
+    }
+}

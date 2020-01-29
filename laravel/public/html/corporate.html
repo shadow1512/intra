@@ -30,12 +30,12 @@
                     запоминаемости среди пользователей.</p>
             </div>
 
-            <div class="wrapper-main-blocks">
+            <div class="wrapper-main-blocks" id="menu-corporate">
                 <a href="#1">
                     <span>Логотипы</span>
                 </a>
                 <a href="#2">
-                    <span>Брендбук</span>
+                    <span>Брендбуки</span>
                 </a>
                 <a href="#3">
                     <span>Фоны</span>
@@ -83,7 +83,7 @@
                 </div>
                 <div>
                     <img src="/images/corporate/kodeks_teh.svg" alt="Кодекс Техэксперт">
-                    <p>Используется для представления одновременно всех линеек продуктов, выпускаемых компанией</p>
+                    <p>Используется для&nbsp;представления одновременно всех линеек продуктов, выпускаемых компанией</p>
                     <div><a href="" class="orange">eps</a></div>
                     <div><a href="" class="blue">jpg</a><span class="blue">, </span><a href="" class="blue">png</a><span
                             class="blue">, </span><a href="" class="blue">tif</a></div>
@@ -94,7 +94,7 @@
     <section id="2" class="corporate_bb">
         <div class="cnt-wrapper">
             <h2>Брендбуки</h2>
-            <p>Помогут вам правильно использовать фирменный фирменную стилистику и&nbsp;логотипы компании
+            <p>Помогут вам правильно использовать фирменную стилистику и&nbsp;логотипы компании
             </p>
             <div>
                 <a href="" class="blue">Кодекс</a>
@@ -192,13 +192,23 @@
             </div>
             <div class="te">
                 <p class="white">Видео-презентация <br> о&nbsp;том, как мы&nbsp;создаем системы</p>
-                <a href="" class="white_btn">Смотреть</a>
-                <a href="" class="white">Скачать</a>
+                <a href="http://oldintra.kodeks.ru/img/stuff/Prezentacii/Kak+mi+sozdaem+sisitemi.mov" data-fancybox class="white_btn">Смотреть</a>
+                <a href="http://oldintra.kodeks.ru/img/stuff/Prezentacii/Kak+mi+sozdaem+sisitemi.mov" class="white">Скачать</a>
             </div>
         </div>
     </section>
 </div>
 <script src="/js/libs/jquery-3.1.0.js"></script>
 <script src="/js/libs/jquery.fancybox.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#menu-corporate").on("click","a", function (event) {
+            event.preventDefault();
+            var id  = $(this).attr('href'),
+                top = $(id).offset().top;
+            $('body,html').animate({scrollTop: top}, 1500);
+        });
+    });
+</script>
 </body>
 </html>

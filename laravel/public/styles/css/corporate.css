@@ -127,9 +127,6 @@ a:hover {
 .corporate_bg {
     background-color: #fff;
 }
-.corporate_blanks {
-    background-color: rgba(0, 0, 0, 0.3);
-}
 .corporate_presentation {
     background-color: #fff;
 }
@@ -300,9 +297,10 @@ a.white {
 }
 .logo_regulations:hover {
     cursor: pointer;
+    text-decoration: underline;
 }
 .corporate_bb {
-    background: url("../../images/corporate/bb_big.jpg") no-repeat 56% 50%;
+    background: url("../../images/corporate/bb_big.jpg") no-repeat 50% 50%;
     -webkit-background-size: cover;
     background-size: cover;
 }
@@ -323,6 +321,12 @@ a.white {
     margin-left: 5px;
     font-size: 16px;
     margin-top: 4px;
+}
+.corporate_bb .cnt-wrapper div a.blue:hover,
+.corporate_blanks div .blue:hover,
+.k a.white:hover,
+.te a.white:hover {
+    text-decoration: underline;
 }
 .wrapper-corporate_bg {
     width: 100%;
@@ -460,7 +464,7 @@ a.white {
 
 }
 .corporate_blanks {
-    background: url("../../images/corporate/blank_big.jpg") no-repeat 56% 50%;
+    background: url("../../images/corporate/blank_big.jpg") no-repeat 50% 50% rgba(0, 0, 0, 0.3);
     -webkit-background-size: cover;
     background-size: cover;
 }
@@ -515,4 +519,44 @@ a.white {
     .corporate_presentation .te {
         width: 48%;
     }
+}
+@media screen and (max-width: 880px) {
+    .corporate section {
+        padding: 40px;
+    }
+    .wrapper-main-blocks {
+        width: 100%;
+        height: auto;
+    }
+    .corporate_id .wrapper-main-blocks a[href="#3"]{
+        width: 499px;
+        margin-right: 0;
+    }
+    .corporate_id .wrapper-main-blocks a {
+        display: inline-block;
+        height: 193px;
+        position: relative;
+        top: unset;
+        bottom: unset;
+        left: unset;
+        right: unset;
+        margin: 5px;
+    }
+    .wrapper-logo div {
+        width: 49.5%;
+    }
+    .corporate section.corporate_logo{
+        height: auto;
+    }
+    .wrapper-logo div div:last-child{
+        margin-bottom: 50px;
+    }
+    .corporate_blanks .cnt-wrapper div{
+        width: 362px;
+    }
+    .corporate_presentation .k, .corporate_presentation .te{
+        display: block;
+        margin-bottom: 30px;
+    }
+
 }

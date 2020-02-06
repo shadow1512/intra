@@ -375,7 +375,8 @@ class updatedirectoryfromad extends Command
             $present    =   $dep;
         }
 
-        $this->serveDepLevel("OU=Кодекс-МСК", $present->parent_id);
+        //$this->serveDepLevel("OU=Кодекс-МСК", $present->parent_id);
+        
         //Те люди, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_uids as $uid) {

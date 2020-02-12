@@ -950,7 +950,7 @@ class ModerateController extends Controller
             $moderate   =   Dep::getModerate($user->dep_id);
         }
         if(is_null($moderate)) {
-            return redirect()->route('moderate.users.start');
+            return redirect(route('moderate.users.start'));
         }
         return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
                                             'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);

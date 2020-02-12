@@ -145,6 +145,19 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="form-group{{ $errors->has('ip_phone') ? ' has-error' : '' }}">
+                                    <label for="ip_phone" class="col-md-2 control-label">IP телефон</label>
+
+                                    <div class="col-md-6">
+                                        <input id="ip_phone" type="text" class="form-control" name="ip_phone" value="@if ($user->ip_phone){{$user->ip_phone}} @endif" maxlength="4">
+
+                                        @if ($errors->has('ip_phone'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('ip_phone') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="form-group{{ $errors->has('city_phone') ? ' has-error' : '' }}">
                                 <label for="city_phone" class="col-md-2 control-label">Городской телефон</label>
 

@@ -1451,6 +1451,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersAddAddressDescription' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
         'EditUsersAddCityPhone' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
         'EditUsersAddEmailSecondary' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',
+        'EditUsersAddIpPhone' => __DIR__ . '/../..' . '/database/migrations/2020_02_13_014037_edit_users_add_ip_phone.php',
         'EditUsersAddNumpark' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
         'EditUsersAddNumupdates' => __DIR__ . '/../..' . '/database/migrations/2019_10_08_234757_edit_users_add_numupdates.php',
         'EditUsersAddPosition' => __DIR__ . '/../..' . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',

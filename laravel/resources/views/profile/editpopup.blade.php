@@ -110,6 +110,19 @@
                     </div>
                 @endif
 
+                    @if(isset($waiting_fields["ip_phone"]))
+                        <div class="field unchecked_field">
+                            <label for="input_ip_phone" class="lbl">IP телефон:</label>
+                            <input id="input_ip_phone" name="input_ip_phone" type="text" value="{{$waiting_fields["ip_phone"]}}" class="it" maxlength="4">
+                            <i class="ic-wait"></i>
+                        </div>
+                    @else
+                        <div class="field">
+                            <label for="input_ip_phone" class="lbl">IP телефон:</label>
+                            <input id="input_ip_phone" name="input_ip_phone" type="text" value="{{$user->ip_phone}}" class="it" maxlength="3">
+                        </div>
+                    @endif
+
                 @if(isset($waiting_fields["mobile_phone"]))
                     <div class="field unchecked_field">
                         <label for="input_mobile_phone" class="lbl">Мобильный телефон:</label>

@@ -31,6 +31,10 @@
                 <div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{$user->phone}}</span></div>
                 <!-- <div class="profile_info_phone unchecked_tx">Телефон:&nbsp;</strong><span>{{$user->phone}}</span> <i class="ic-wait"></i></div> -->
             @endif
+            @if($user->ip_phone)
+                <div class="profile_info_phone"><strong>IP Телефон:&nbsp;</strong><span>{{$user->ip_phone}}</span></div>
+            <!-- <div class="profile_info_phone unchecked_tx">Телефон:&nbsp;</strong><span>{{$user->ip_phone}}</span> <i class="ic-wait"></i></div> -->
+            @endif
             @if($user->city_phone)
                 <div class="profile_info_phone"><strong>Городской телефон:&nbsp;</strong><span>{{$user->city_phone}}</span></div>
             @endif

@@ -924,6 +924,7 @@ return array(
     'EditUsersAddAddressDescription' => $baseDir . '/database/migrations/2018_06_11_230613_edit_users_add_address_description.php',
     'EditUsersAddCityPhone' => $baseDir . '/database/migrations/2018_10_17_015302_edit_users_add_city_phone.php',
     'EditUsersAddEmailSecondary' => $baseDir . '/database/migrations/2018_10_17_035411_edit_users_add_email_secondary.php',
+    'EditUsersAddIpPhone' => $baseDir . '/database/migrations/2020_02_13_014037_edit_users_add_ip_phone.php',
     'EditUsersAddNumpark' => $baseDir . '/database/migrations/2018_06_14_145722_edit_users_add_numpark.php',
     'EditUsersAddNumupdates' => $baseDir . '/database/migrations/2019_10_08_234757_edit_users_add_numupdates.php',
     'EditUsersAddPosition' => $baseDir . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',

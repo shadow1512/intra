@@ -15,6 +15,7 @@ return array(
         "mname"             =>  "Отчество",
         "lname"             =>  "Фамилия",
         "phone"             =>  "Местный телефон",
+        "ip_phone"          =>  "IP телефон",
         "email"             =>  "Рабочий email",
         "city_phone"        =>  "Городской телефон",
         "mobile_phone"      =>  "Мобильный телефон",

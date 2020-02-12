@@ -119,7 +119,7 @@
                     @else
                         <div class="field">
                             <label for="input_ip_phone" class="lbl">IP телефон:</label>
-                            <input id="input_ip_phone" name="input_ip_phone" type="text" value="{{$user->ip_phone}}" class="it" maxlength="3">
+                            <input id="input_ip_phone" name="input_ip_phone" type="text" value="{{$user->ip_phone}}" class="it" maxlength="4">
                         </div>
                     @endif
 

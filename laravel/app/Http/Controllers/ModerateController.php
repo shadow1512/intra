@@ -947,7 +947,7 @@ class ModerateController extends Controller
 
         $moderate   =   null;
         if($dep->id) {
-            $moderate   =   Dep::getModerate($user->dep_id);
+            $moderate   =   Dep::getModerate($dep->id);
         }
         if(is_null($moderate)) {
             return redirect(route('moderate.users.start'));

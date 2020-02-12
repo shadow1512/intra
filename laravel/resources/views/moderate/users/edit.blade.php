@@ -175,7 +175,7 @@
                             <div class="form-group{{ $errors->has('dep_id') ? ' has-error' : '' }}">
                                 <label for="dep_id" class="col-md-2 control-label">Подразделение</label>
 
-                                <div class="col-md-6">
+                                <div class="col-md-10">
                                     @if (count($crumbs))
                                         <ul class="breadcrumbs_unit">
                                             @foreach ($crumbs as $crumb)

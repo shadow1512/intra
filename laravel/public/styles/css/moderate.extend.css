@@ -28,3 +28,7 @@
 .breadcrumbs_i:after {
     content: ' → ';
 }
+
+.breadcrumbs_i:last-child:after {
+    content: '';
+}

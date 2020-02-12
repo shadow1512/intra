@@ -952,6 +952,9 @@ class ModerateController extends Controller
         if(is_null($moderate)) {
             return redirect(route('moderate.users.start'));
         }
+        if($moderate->id != Auth::user()->id) {
+            return redirect(route('moderate.users.start'));
+        }
         return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
                                             'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
     }

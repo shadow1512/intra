@@ -176,7 +176,13 @@
                                 <label for="dep_id" class="col-md-2 control-label">Подразделение</label>
 
                                 <div class="col-md-6">
-                                    {{$dep->name}}
+                                    @if (count($crumbs))
+                                        <ul class="breadcrumbs_unit">
+                                            @foreach ($crumbs as $crumb)
+                                                <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('work_title') ? ' has-error' : '' }}">

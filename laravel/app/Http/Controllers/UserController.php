@@ -46,7 +46,7 @@ class UserController extends Controller
 
         $crumbs =   array();
         if(!is_null($user->dep_id)) {
-            $crumbs    =    $this->getCrumbs($user->dep_id);
+            $crumbs    =    Dep::getCrumbs($user->dep_id);
             $crumbs[]  =    Dep::find($user->dep_id);
         }
         $contacts       =   array();
@@ -62,22 +62,6 @@ class UserController extends Controller
 
 
         return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
-    }
-
-    protected function getCrumbs($id) {
-        $crumbs = array();
-        $currentDep     = Dep::find($id);
-        if($currentDep) {
-            $parent = $currentDep->parent_id;
-            $length = mb_strlen($parent, "UTF-8");
-            while ($length > 2) {
-                $parent = mb_substr($parent, 0, $length - 2);
-                $dep = Dep::where('parent_id', '=', $parent)->firstOrFail();
-                $crumbs[] = $dep;
-                $length = $length - 2;
-            }
-        }
-        return array_reverse($crumbs);
     }
 
     public function search($id = null)
@@ -115,7 +99,7 @@ class UserController extends Controller
         }
 
         if(!is_null($id)) {
-            $crumbs = $this->getCrumbs($id);
+            $crumbs = Dep::getCrumbs($id);
             $length         = mb_strlen($currentDep->parent_id, "UTF-8") + 2;
             $directory_name = $currentDep->name;
             $rootdeps = Dep::where('parent_id', 'LIKE', $currentDep->parent_id . "%")

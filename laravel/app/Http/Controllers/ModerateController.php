@@ -955,8 +955,16 @@ class ModerateController extends Controller
         if($moderate->id != Auth::user()->id) {
             return redirect(route('moderate.users.start'));
         }
+
+        $crumbs =   array();
+        if(!is_null($dep->dep_id)) {
+            $crumbs    =    Dep::getCrumbs($dep->dep_id);
+            $crumbs[]  =    Dep::find($dep->dep_id);
+        }
+
         return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
-                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
+                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels"),
+                                            'crumbs'    =>  $crumbs]);
     }
 
     public function makeFieldChangeUser($psd_id, Request $request) {

@@ -45,7 +45,7 @@ class Dep extends Model
         return null;
     }
 
-    public function getCrumbs($id) {
+    public static function getCrumbs($id) {
         $crumbs = array();
         $currentDep     = parent::find($id);
         if($currentDep) {

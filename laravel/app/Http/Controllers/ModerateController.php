@@ -945,6 +945,13 @@ class ModerateController extends Controller
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
         }
 
+        $moderate   =   null;
+        if($dep->id) {
+            $moderate   =   Dep::getModerate($user->dep_id);
+        }
+        if(is_null($moderate)) {
+            return redirect()->route('moderate.users.start');
+        }
         return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
                                             'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
     }

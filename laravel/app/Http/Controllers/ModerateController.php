@@ -952,7 +952,7 @@ class ModerateController extends Controller
         if(is_null($moderate)) {
             return redirect(route('moderate.users.start'));
         }
-        if($moderate->id != Auth::user()->id) {
+        if(($moderate->id != Auth::user()->id)    &&    (Auth::user()->role_id  !=  1)) {
             return redirect(route('moderate.users.start'));
         }
 

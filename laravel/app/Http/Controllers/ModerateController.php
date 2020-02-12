@@ -1095,11 +1095,17 @@ class ModerateController extends Controller
                 if(count($birthday_parts)   ==  3) {
                     $value   =   date("Y-m-d", strtotime($value));
                 }
+                else {
+                    $value  =   null;
+                }
             }
             if($key ==  "workstart") {
                 $workstart_parts =   explode(".",    $value);
                 if(count($workstart_parts)   ==  3) {
                     $value   =   date("Y-m-d", strtotime($value));
+                }
+                else {
+                    $value  =   null;
                 }
             }
             if($key ==  "chef") {

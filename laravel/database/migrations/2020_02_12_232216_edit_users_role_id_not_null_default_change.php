@@ -15,6 +15,7 @@ class EditUsersRoleIdNotNullDefaultChange extends Migration
     {
         //
         Schema::table('users', function (Blueprint $table) {
+            DB::table('users')->whereNull('role_id')->update(['role_id' => '']);
             $table->integer('role_id')->nullable(false)->default(2)->change();
         });
     }

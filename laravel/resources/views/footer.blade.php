@@ -37,7 +37,7 @@
     </div>
     <div class="footer_bottom">
         <div class="footer_copyright">
-            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2020, version=2.0.1, rev=
+            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2020, version=2.0.2, rev=
                 @php
                     echo exec('git log --pretty=format:"%h" --max-count=1');
                 @endphp

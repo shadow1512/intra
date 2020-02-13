@@ -42,7 +42,7 @@
         <script src='{{ asset('js/libs/jquery.fileupload-validate.js') }}'></script>
         <script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'></script>
     @endif
-    <script src={{ asset('js/croppie.js') }}></script>
+    <script src={{ asset('js/libs/croppie.js') }}></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
     <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </head>

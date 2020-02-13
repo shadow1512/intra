@@ -160,7 +160,18 @@ $(document).ready(function($) {
         }
     });
 
-    $("#img_avatar").croppie();
+    $("#img_avatar").croppie({
+        enableExif: true,
+        viewport: {
+            width: 250,
+            height: 250,
+            type: 'circle'
+        },
+        boundary: {
+            width: 400,
+            height: 400
+        }
+    });
 
     $('#cover').fileupload({
         dataType: 'json',

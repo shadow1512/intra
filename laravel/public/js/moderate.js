@@ -160,6 +160,8 @@ $(document).ready(function($) {
         }
     });
 
+    $("#img_avatar").croppie();
+
     $('#cover').fileupload({
         dataType: 'json',
         url: $("#cover_url").val(),

@@ -163,12 +163,12 @@ $(document).ready(function($) {
     $("#img_avatar").croppie({
         enableExif: true,
         viewport: {
-            width: 250,
-            height: 250,
+            width: 200,
+            height: 200,
             type: 'circle'
         },
         boundary: {
-            width: 400,
+            width: 300,
             height: 400
         }
     });

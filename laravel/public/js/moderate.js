@@ -187,13 +187,29 @@ $(document).ready(function($) {
         }
     });
 
-    $("#save_avatar").on("click", function() {
+    $("#save_avatar").on("click", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
         $("#img_avatar").croppie('result', {
             type: 'blob',
             circle: true,
             size: { width: 128, height: 128 },
             format: 'jpeg'
         }).then(function (blob) {
+            var url =    $("#avatar_url").val();
+            var fd = new FormData();
+            fd.append('data', blob);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: fd,
+                async: false,
+                processData: false,
+                contentType: false,
+                success: function (msg) {
+                    alert(msg);
+                }
+            });
+
             alert(window.URL.createObjectURL(blob));
         });
     });

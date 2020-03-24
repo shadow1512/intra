@@ -193,7 +193,7 @@ $(document).ready(function($) {
             type: 'blob',
             circle: true,
             //size: { width: 128, height: 128 },
-            format: 'jpeg'
+            format: 'png'
         }).then(function (blob) {
             var url =    $("#avatar_crop_url").val();
             var fd = new FormData();

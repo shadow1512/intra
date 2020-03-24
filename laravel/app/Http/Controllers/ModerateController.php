@@ -1207,7 +1207,7 @@ class ModerateController extends Controller
                 $manager = new ImageManager(array('driver' => 'imagick'));
                 $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'), Config::get('image.avatar_height'))->save(storage_path('app/public') . '/' . $path);
                 DB::table('users')->where("id", "=", $id)
-                    ->update(['avatar_round' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+                    ->update(['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
                 return response()->json(['ok', Storage::disk('public')->url($path)]);
             }
             else {
@@ -1222,14 +1222,14 @@ class ModerateController extends Controller
 
     public function userscropavatar($id, Request $request)
     {
-        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('blob'), 'public');
+        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('data'), 'public');
         $type   =   Storage::disk('public')->getMimetype($path);
 
         if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
             $manager = new ImageManager(array('driver' => 'imagick'));
             $image  = $manager->make(storage_path('app/public') . '/' . $path)->save(storage_path('app/public') . '/' . $path);
             DB::table('users')->where("id", "=", $id)
-                ->update(['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+                ->update(['avatar_round' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
             return response()->json(['ok', Storage::disk('public')->url($path)]);
         }
         else {

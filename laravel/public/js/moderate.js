@@ -202,13 +202,14 @@ $(document).ready(function($) {
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
-                    'Content-Type': 'multipart/form-data'
+                    //'Content-Type': 'multipart/form-data'
                 },
                 method: "PUT",
                 url: url,
                 data: fd,
                 async: false,
                 processData: false,
+                contentType: false,
                 success: function (msg) {
                     alert(msg);
                 }

@@ -198,6 +198,7 @@ $(document).ready(function($) {
             var url =    $("#avatar_crop_url").val();
             var fd = new FormData();
             fd.append('data', blob);
+            fd.append('_token', $('input[name="_token"]').val());
             $.ajax({
                 method: "PUT",
                 url: url,

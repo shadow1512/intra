@@ -138,6 +138,20 @@ $(document).ready(function($) {
             if (data.result[0] == "ok") {
                 $("#img_avatar").attr("src", data.result[1]);
                 $("#img_avatar").parent().find("img").attr("src",   data.result[1]);
+                $("#img_avatar").croppie('destroy');
+                $("#img_avatar").croppie({
+                    enableExif: true,
+                    enableResize: true,
+                    viewport: {
+                        width: 128,
+                        height: 128,
+                        type: 'circle'
+                    },
+                    boundary: {
+                        width: 400,
+                        height: 600
+                    }
+                });
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
@@ -163,6 +177,7 @@ $(document).ready(function($) {
 
     $("#img_avatar").croppie({
         enableExif: true,
+        enableResize: true,
         viewport: {
             width: 128,
             height: 128,
@@ -325,6 +340,20 @@ $(document).ready(function($) {
                 if (msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
                     $("#img_avatar").parent().find("img").attr("src",   msg[1]);
+                    $("#img_avatar").croppie('destroy');
+                    $("#img_avatar").croppie({
+                        enableExif: true,
+                        enableResize: true,
+                        viewport: {
+                            width: 128,
+                            height: 128,
+                            type: 'circle'
+                        },
+                        boundary: {
+                            width: 400,
+                            height: 600
+                        }
+                    });
                 }
             }
         });

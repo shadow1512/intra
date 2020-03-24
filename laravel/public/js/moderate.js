@@ -137,6 +137,7 @@ $(document).ready(function($) {
 
             if (data.result[0] == "ok") {
                 $("#img_avatar").attr("src", data.result[1]);
+                $("#img_avatar").parent().find("img").attr("src",   data.result[1]);
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
@@ -168,8 +169,8 @@ $(document).ready(function($) {
             type: 'circle'
         },
         boundary: {
-            width: 300,
-            height: 400
+            width: 400,
+            height: 600
         }
     });
 
@@ -323,6 +324,7 @@ $(document).ready(function($) {
             success: function (msg) {
                 if (msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
+                    $("#img_avatar").parent().find("img").attr("src",   msg[1]);
                 }
             }
         });

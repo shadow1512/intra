@@ -200,6 +200,9 @@ $(document).ready(function($) {
             fd.append('data', blob);
             fd.append('_token', $('input[name="_token"]').val());
             $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
                 method: "PUT",
                 url: url,
                 data: fd,

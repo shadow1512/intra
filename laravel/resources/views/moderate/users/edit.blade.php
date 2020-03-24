@@ -24,6 +24,13 @@
                                 <small id="avatarHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button id="save_avatar" class="btn btn-primary">
+                                        Сохранить изменения в аватаре
+                                    </button>
+                                </div>
+                            </div>
                             @if(!is_null($ps)   &&  !is_null($psd)  &&  count($psd))
                                 <div class="form-group">
                                     <div class="col-md-2"></div>

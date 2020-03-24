@@ -141,7 +141,6 @@ $(document).ready(function($) {
                 $("#img_avatar").croppie('destroy');
                 $("#img_avatar").croppie({
                     enableExif: true,
-                    enableResize: true,
                     viewport: {
                         width: 128,
                         height: 128,
@@ -187,6 +186,17 @@ $(document).ready(function($) {
             width: 400,
             height: 600
         }
+    });
+
+    $("#save_avatar").on("click", function() {
+        $("#img_avatar").croppie('result', {
+            type: 'blob',
+            circle: true,
+            size: { width: 128, height: 128 },
+            format: 'jpeg'
+        }).then(function (blob) {
+            alert(window.URL.createObjectURL(blob));
+        });
     });
 
     $('#cover').fileupload({
@@ -343,7 +353,6 @@ $(document).ready(function($) {
                     $("#img_avatar").croppie('destroy');
                     $("#img_avatar").croppie({
                         enableExif: true,
-                        enableResize: true,
                         viewport: {
                             width: 128,
                             height: 128,

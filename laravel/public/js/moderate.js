@@ -198,13 +198,14 @@ $(document).ready(function($) {
             var url =    $("#avatar_crop_url").val();
             var fd = new FormData();
             fd.append('data', blob);
+            fd.append('_method', "PUT");
             fd.append('_token', $('input[name="_token"]').val());
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
                     //'Content-Type': 'multipart/form-data'
                 },
-                method: "PUT",
+                method: "POST",
                 url: url,
                 data: fd,
                 async: false,

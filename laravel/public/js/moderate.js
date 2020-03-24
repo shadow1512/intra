@@ -192,7 +192,7 @@ $(document).ready(function($) {
         $("#img_avatar").croppie('result', {
             type: 'blob',
             circle: true,
-            size: { width: 128, height: 128 },
+            //size: { width: 128, height: 128 },
             format: 'jpeg'
         }).then(function (blob) {
             var url =    $("#avatar_crop_url").val();

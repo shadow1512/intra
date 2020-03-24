@@ -176,7 +176,6 @@ $(document).ready(function($) {
 
     $("#img_avatar").croppie({
         enableExif: true,
-        enableResize: true,
         viewport: {
             width: 128,
             height: 128,

@@ -1222,6 +1222,7 @@ class ModerateController extends Controller
 
     public function userscropavatar($id, Request $request)
     {
+        var_dump($request->all());exit();
         $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('data'), 'public');
         $type   =   Storage::disk('public')->getMimetype($path);
 

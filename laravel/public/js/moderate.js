@@ -199,7 +199,6 @@ $(document).ready(function($) {
             var fd = new FormData();
             fd.append('data', blob);
             $.ajax({
-                type: 'POST',
                 url: url,
                 data: fd,
                 async: false,
@@ -209,8 +208,6 @@ $(document).ready(function($) {
                     alert(msg);
                 }
             });
-
-            alert(window.URL.createObjectURL(blob));
         });
     });
 

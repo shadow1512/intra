@@ -12,6 +12,7 @@
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $user->id }}"/>
                             <input type="hidden" id="avatar_url" value="{{  route('moderate.users.updateavatar', ["id" => $user->id]) }}">
+                            <input type="hidden" id="avatar_crop_url" value="{{  route('moderate.users.cropavatar', ["id" => $user->id]) }}">
                             <div class="form-group">
                                     <label for="img_avatar" class="col-md-4 control-label">Аватар</label>
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline"/>

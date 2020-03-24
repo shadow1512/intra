@@ -134,6 +134,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::put('/update/fieldupdate/{id}', 'ModerateController@makefieldchangeuser')->name('moderate.users.fieldupdate');
         Route::put('/update/commitchanges/{id}', 'ModerateController@commitchangesforuser')->name('moderate.users.commitchanges');
         Route::put('/update/avatar/{id}', 'ModerateController@usersupdateavatar')->name('moderate.users.updateavatar');
+        Route::put('/update/avatar/crop/{id}', 'ModerateController@userscropavatar')->name('moderate.users.cropavatar');
         Route::get('/delete/avatar/{id}', 'ModerateController@usersdeleteavatar')->name('moderate.users.deleteavatar');
     });
 

@@ -944,6 +944,7 @@ return array(
     'EditeUsersAddattributes' => $baseDir . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
     'Editroombookingsadddeclinereason' => $baseDir . '/database/migrations/2019_10_19_135148_editroombookingsadddeclinereason.php',
     'Editroomsaddnotifyemail' => $baseDir . '/database/migrations/2019_10_19_140407_editroomsaddnotifyemail.php',
+    'Editusersaddroundavatar' => $baseDir . '/database/migrations/2020_03_25_021115_editusersaddroundavatar.php',
     'Elasticsearch\\Client' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',
     'Elasticsearch\\ClientBuilder' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/ClientBuilder.php',
     'Elasticsearch\\Common\\EmptyLogger' => $vendorDir . '/elasticsearch/elasticsearch/src/Elasticsearch/Common/EmptyLogger.php',

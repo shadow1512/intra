@@ -1471,6 +1471,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditeUsersAddattributes' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_090823_edite_users_addattributes.php',
         'Editroombookingsadddeclinereason' => __DIR__ . '/../..' . '/database/migrations/2019_10_19_135148_editroombookingsadddeclinereason.php',
         'Editroomsaddnotifyemail' => __DIR__ . '/../..' . '/database/migrations/2019_10_19_140407_editroomsaddnotifyemail.php',
+        'Editusersaddroundavatar' => __DIR__ . '/../..' . '/database/migrations/2020_03_25_021115_editusersaddroundavatar.php',
         'Elasticsearch\\Client' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/Client.php',
         'Elasticsearch\\ClientBuilder' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/ClientBuilder.php',
         'Elasticsearch\\Common\\EmptyLogger' => __DIR__ . '/..' . '/elasticsearch/elasticsearch/src/Elasticsearch/Common/EmptyLogger.php',

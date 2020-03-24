@@ -195,10 +195,11 @@ $(document).ready(function($) {
             size: { width: 128, height: 128 },
             format: 'jpeg'
         }).then(function (blob) {
-            var url =    $("#avatar_url").val();
+            var url =    $("#avatar_crop_url").val();
             var fd = new FormData();
             fd.append('data', blob);
             $.ajax({
+                method: "PUT",
                 url: url,
                 data: fd,
                 async: false,

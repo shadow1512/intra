@@ -54,7 +54,7 @@
               <li class="staff_date"><strong>{{ $day }} {{ $month }}</strong></li>
               @foreach ($users as $user)
                   <li class="staff_li">
-                    <a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="{{ $user->avatar }}" alt="" class="staff_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}">
+                    <a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="" class="staff_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}">
                       <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
                       <div class="staff_tx">{{ $user->work_title }}</div>
                       @if(($umonth    ==  $cmonth) && ($day  ==  $cday))<div class="birthday_ic" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>@endif
@@ -74,7 +74,7 @@
     <div class="h __h_m">Новые сотрудники</div>
     <ul class="staff_ul">
         @foreach ($newusers as $user)
-            <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk" title="Работает с {{ date("d.m.Y", strtotime($user->workstart)) }}"><img src="{{ $user->avatar }}" alt="" class="staff_img">
+            <li class="staff_li"><a href="{{route('people.unit', ['id' => $user->id])}}" class="staff_lk" title="Работает с {{ date("d.m.Y", strtotime($user->workstart)) }}"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="" class="staff_img">
                     <div class="staff_name">{{$user->lname}} {{mb_substr($user->fname, 0, 1, "UTF-8")}}. @if(!empty($user->mname)) {{mb_substr($user->mname, 0, 1, "UTF-8")}}.@endif</div>
                     <div class="staff_tx">{{ $user->work_title }}</div></a></li>
         @endforeach

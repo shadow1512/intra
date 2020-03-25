@@ -226,7 +226,7 @@ class SearchController extends Controller
                                 }
                             }
                             //
-                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
+                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
                                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                                 ->whereIn('users.id', $max_user_ids)->get();
                             $assoc_records = array();
@@ -1043,7 +1043,7 @@ class SearchController extends Controller
                 $dt     = date("m-d", strtotime($searchDate1));
                 $dt1    =   date("m-d", strtotime($searchDate2));
 
-                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
@@ -1053,7 +1053,7 @@ class SearchController extends Controller
                 $dt = date("m-d", strtotime($searchDate1));
                 $dt1 = date("m-d", strtotime($searchDate2));
 
-                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
@@ -1089,7 +1089,7 @@ class SearchController extends Controller
                 $dt1    =   date("m-d", strtotime($searchDate2));
 
 
-                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->WhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->get();
@@ -1098,7 +1098,7 @@ class SearchController extends Controller
                 if(!is_null($startYear)) {
                     $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $startYear;
                     $dt = date("Y-m-d", strtotime($searchDate));
-                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                         ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                         ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))
                         ->where(DB::raw("YEAR(birthday)"), '=', DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday)", "ASC")->orderByRaw("DAY(birthday)", "ASC")
@@ -1107,7 +1107,7 @@ class SearchController extends Controller
                 else {
                     $searchDate = $startDay  .   "." .   $startMonth  .   "." .   $year;
                     $dt = date("Y-m-d", strtotime($searchDate));
-                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
+                    $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                         ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                         ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday)", "ASC")->orderByRaw("DAY(birthday)", "ASC")
                         ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
@@ -1266,7 +1266,7 @@ class SearchController extends Controller
         $users  =   array();
 
         //$user_ids = array_keys($all_found_records);
-        $found_records = User::select("users.id", "users.name", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
+        $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.birthday", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereIn('users.id', $max_user_ids)->get();
         $assoc_records = array();

@@ -3,7 +3,7 @@
 @section('view')
 <div class="profile_i">
     <div class="profile_aside">
-        <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}"></div><a href="{{route('profile.edit')}}" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a>
+        <div class="profile_aside_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{$user->name}}" title="{{$user->name}}"></div><a href="{{route('profile.edit')}}" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a>
         @if($summ   >   0)
         <a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>

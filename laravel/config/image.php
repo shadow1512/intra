@@ -19,7 +19,7 @@ return array(
     'default_avatar'    =>  '/images/faces/default.png',
     'default_cover'     =>  '/images/books/book_default.png',
     'avatar_path'       =>  '/users/faces',
-    'avatar_width'      =>  500,
+    'avatar_width'      =>  400,
     'avatar_height'     =>  700,
     'cover_path'        =>  '/library/covers',
     'book_path'         =>  '/library/books',

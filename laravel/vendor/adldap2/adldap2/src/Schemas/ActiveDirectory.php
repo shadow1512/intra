@@ -996,9 +996,24 @@ class ActiveDirectory implements SchemaInterface
     /**
      * {@inheritdoc}
      */
-    public function telephone()
+    public function citytelephone()
     {
         return 'telephonenumber';
+    }
+
+    public function mobiletelephone()
+    {
+        return 'mobile';
+    }
+
+    public function iptelephone()
+    {
+        return 'iphone';
+    }
+
+    public function localtelephone()
+    {
+        return 'pager';
     }
 
     /**

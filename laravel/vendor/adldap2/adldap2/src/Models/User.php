@@ -401,29 +401,100 @@ class User extends Entry implements Authenticatable
     }
 
     /**
-     * Returns the users telephone number.
+     * Returns the users local telephone number.
      *
      * https://msdn.microsoft.com/en-us/library/ms680027(v=vs.85).aspx
      *
      * @return string
      */
-    public function getTelephoneNumber()
+    public function getLocalTelephoneNumber()
     {
-        return $this->getFirstAttribute($this->schema->telephone());
+        return $this->getFirstAttribute($this->schema->localtelephone());
     }
 
     /**
-     * Sets the users telephone number.
+     * Sets the users local telephone number.
      *
      * @param string $number
      *
      * @return $this
      */
-    public function setTelephoneNumber($number)
+    public function setLocalTelephoneNumber($number)
     {
-        return $this->setFirstAttribute($this->schema->telephone(), $number);
+        return $this->setFirstAttribute($this->schema->localtelephone(), $number);
     }
 
+    /**
+     * Returns the users mobile telephone number.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms680027(v=vs.85).aspx
+     *
+     * @return string
+     */
+    public function getMobileTelephoneNumber()
+    {
+        return $this->getFirstAttribute($this->schema->mobiletelephone());
+    }
+
+    /**
+     * Sets the users mobile telephone number.
+     *
+     * @param string $number
+     *
+     * @return $this
+     */
+    public function setMobileTelephoneNumber($number)
+    {
+        return $this->setFirstAttribute($this->schema->mobiletelephone(), $number);
+    }
+
+    /**
+     * Returns the users city telephone number.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms680027(v=vs.85).aspx
+     *
+     * @return string
+     */
+    public function getCityTelephoneNumber()
+    {
+        return $this->getFirstAttribute($this->schema->citytelephone());
+    }
+
+    /**
+     * Sets the users city telephone number.
+     *
+     * @param string $number
+     *
+     * @return $this
+     */
+    public function setCityTelephoneNumber($number)
+    {
+        return $this->setFirstAttribute($this->schema->citytelephone(), $number);
+    }
+
+    /**
+     * Returns the users ip telephone number.
+     *
+     * https://msdn.microsoft.com/en-us/library/ms680027(v=vs.85).aspx
+     *
+     * @return string
+     */
+    public function getIPTelephoneNumber()
+    {
+        return $this->getFirstAttribute($this->schema->iptelephone());
+    }
+
+    /**
+     * Sets the users ip telephone number.
+     *
+     * @param string $number
+     *
+     * @return $this
+     */
+    public function setIPTelephoneNumber($number)
+    {
+        return $this->setFirstAttribute($this->schema->iptelephone(), $number);
+    }
     /**
      * Returns the users locale.
      *

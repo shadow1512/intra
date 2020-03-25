@@ -279,8 +279,17 @@ class updatedirectoryfromad extends Command
                     if($user->getEmail()) {
                         $currentRecord->email = $user->getEmail();
                     }
-                    if($user->getTelephoneNumber()) {
-                        $currentRecord->phone = $user->getTelephoneNumber();
+                    if($user->getCityTelephoneNumber()) {
+                        $currentRecord->city_phone = $user->getCityTelephoneNumber();
+                    }
+                    if($user->getMobileTelephoneNumber()) {
+                        $currentRecord->mobile_phone = $user->getMobileTelephoneNumber();
+                    }
+                    if($user->getIPTelephoneNumber()) {
+                        $currentRecord->ip_phone = $user->getIPTelephoneNumber();
+                    }
+                    if($user->getLocalTelephoneNumber()) {
+                        $currentRecord->phone = $user->getLocalTelephoneNumber();
                     }
                     if($user->getPhysicalDeliveryOfficeName()) {
                         $currentRecord->room = $user->getPhysicalDeliveryOfficeName();

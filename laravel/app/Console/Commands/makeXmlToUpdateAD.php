@@ -86,11 +86,11 @@ class makeXmlToUpdateAD extends Command
                 $phonesnode     =   $usernode->appendChild($phones);
                 $localphone     =   $dom->createElement("localphone", preg_replace("/[^0-9]/ius",   "", $user->phone));
                 $localphonenode =   $phonesnode->appendChild($localphone);
-                $mobilephone     =   $dom->createElement("mobilephone", preg_replace("/[^0-9]/ius",   "", $user->mobile_phone));
+                $mobilephone     =   $dom->createElement("mobilephone", $user->mobile_phone);
                 $mobilephonenode =   $phonesnode->appendChild($mobilephone);
-                $cityphone       =   $dom->createElement("cityphone", preg_replace("/[^0-9]/ius",   "", $user->city_phone));
+                $cityphone       =   $dom->createElement("cityphone",$user->city_phone);
                 $cityphonenode   =   $phonesnode->appendChild($cityphone);
-                $ipphone       =   $dom->createElement("ipphone", preg_replace("/[^0-9]/ius",   "", $user->ip_phone));
+                $ipphone       =   $dom->createElement("ipphone", $user->ip_phone);
                 $ipphonenode   =   $phonesnode->appendChild($ipphone);
 
                 $address        =   $dom->createElement("address");

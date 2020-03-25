@@ -17,6 +17,7 @@
                                     <label for="img_avatar" class="col-md-4 control-label">Аватар</label>
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline"/>
                                     <small id="avatarimgHelpInline" class="text-muted"><a href="{{route('moderate.users.deleteavatar', ["id"    =>  $user->id])}}" id="delete_avatar">Удалить</a></small>
+                                <div style="position:absolute;top:100px;left:50px;width:150px;height:150px;display:inline"><img id="round_avatar" src="@if($user->avatar_round){{$user->avatar_round}} @else /images/faces/default.png @endif"></div>
                             </div>
 
                             <div class="custom-file{{ $errors->has('avatar') ? ' has-error' : '' }}">

@@ -148,7 +148,7 @@ $(document).ready(function($) {
                     },
                     boundary: {
                         width: 400,
-                        height: 600
+                        height: 700
                     }
                 });
             }
@@ -183,7 +183,7 @@ $(document).ready(function($) {
         },
         boundary: {
             width: 400,
-            height: 600
+            height: 700
         }
     });
 
@@ -212,7 +212,12 @@ $(document).ready(function($) {
                 processData: false,
                 contentType: false,
                 success: function (msg) {
-                    alert(msg);
+                    if(msg[0]   ==  "ok") {
+                        $("#round_avatar").attr("src", msg[1]);
+                    }
+                    else {
+                        $("#round_avatar").attr("src", "/images/faces/default.png");
+                    }
                 }
             });
         });
@@ -369,6 +374,7 @@ $(document).ready(function($) {
                 if (msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
                     $("#img_avatar").parent().find("img").attr("src",   msg[1]);
+                    $("#round_avatar").attr("src", msg[1]);
                     $("#img_avatar").croppie('destroy');
                     $("#img_avatar").croppie({
                         enableExif: true,

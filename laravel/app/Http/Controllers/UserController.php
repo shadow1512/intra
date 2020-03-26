@@ -44,6 +44,9 @@ class UserController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', $id)->first();
 
+        if(!$user) {
+            abort(404);
+        }
         $crumbs =   array();
         if(!is_null($user->dep_id)) {
             $crumbs    =    Dep::getCrumbs($user->dep_id);

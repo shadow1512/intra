@@ -37,7 +37,7 @@ class HomeController extends Controller
     public function index()
     {
         //новости
-        $news = News::orderBy('importancy', 'desc')->limit(15)->get();
+        $news = News::orderBy('importancy', 'desc')->orderBy('published_at',    'DESC')->limit(15)->get();
 
         //дни рождения
         $dt = new DateTime();

@@ -22,7 +22,7 @@ class NewsController extends Controller
     public function index()
     {
         //новости
-        $news = News::orderBy('importancy', 'desc')->paginate(25);
+        $news = News::orderBy('importancy', 'desc')->orderBy('published_at',    'DESC')->paginate(25);
         $news->withPath('/news/');
 
         return view('news.fulllist', ['news'    =>  $news]);

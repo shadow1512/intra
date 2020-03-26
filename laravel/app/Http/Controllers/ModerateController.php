@@ -95,6 +95,7 @@ class ModerateController extends Controller
             "title.required"                =>  "Поле обязательно для заполнения",
             "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
             "annotation.required"           =>  "Поле обязательно для заполнения",
+            "fulltext.required"           =>  "Поле обязательно для заполнения",
             "annotation.max"                =>  "Поле не должно быть длиннее, чем 1000 символов",
             "fulltext.max"                  =>  "Поле не должно быть длиннее, чем 10000 символов",
             "importancy.integer"            =>  "Поле должно содержать целое число"
@@ -104,7 +105,7 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
-            'fulltext'      =>  'nullable|string|max:10000',
+            'fulltext'      =>  'required|string|max:10000',
             'importancy'    =>  'nullable|integer',
         ],  $messages);
 
@@ -140,6 +141,7 @@ class ModerateController extends Controller
             "title.required"                =>  "Поле обязательно для заполнения",
             "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
             "annotation.required"           =>  "Поле обязательно для заполнения",
+            "fulltext.required"             =>  "Поле обязательно для заполнения",
             "annotation.max"                =>  "Поле не должно быть длиннее, чем 1000 символов",
             "fulltext.max"                  =>  "Поле не должно быть длиннее, чем 10000 символов",
             "importancy.integer"            =>  "Поле должно содержать целое число"
@@ -149,7 +151,7 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
-            'fulltext'      =>  'string|max:10000',
+            'fulltext'      =>  'required|string|max:10000',
             'importancy'    =>  'integer',
         ],  $messages);
 

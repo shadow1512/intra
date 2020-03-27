@@ -1243,7 +1243,7 @@ class ModerateController extends Controller
     {
         $default = Config::get('image.default_avatar');
         DB::table('users')->where("id", "=", $id)
-            ->update(['avatar' => $default, 'avatar_round' => '', 'updated_at' => date("Y-m-d H:i:s")]);
+            ->update(['avatar' => $default, 'avatar_round' => null, 'updated_at' => date("Y-m-d H:i:s")]);
 
         return response()->json(['ok', $default]);
     }

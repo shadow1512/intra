@@ -929,6 +929,7 @@ return array(
     'EditUsersAddNumupdates' => $baseDir . '/database/migrations/2019_10_08_234757_edit_users_add_numupdates.php',
     'EditUsersAddPosition' => $baseDir . '/database/migrations/2018_06_11_231807_edit_users_add_position.php',
     'EditUsersAddSid' => $baseDir . '/database/migrations/2019_08_28_015604_edit_users_add_sid.php',
+    'EditUsersAvatarRoundNullable' => $baseDir . '/database/migrations/2020_03_27_222425_edit_users_avatar_round_nullable.php',
     'EditUsersDatafieldsNullable' => $baseDir . '/database/migrations/2018_05_31_122412_edit_users_datafields_nullable.php',
     'EditUsersDinnerBillsAddTimestamps' => $baseDir . '/database/migrations/2019_08_29_003352_edit_users_dinner_bills_add_timestamps.php',
     'EditUsersEditRoom' => $baseDir . '/database/migrations/2018_09_07_035126_edit_users_edit_room.php',

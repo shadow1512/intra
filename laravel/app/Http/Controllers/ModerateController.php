@@ -95,6 +95,7 @@ class ModerateController extends Controller
             "title.required"                =>  "Поле обязательно для заполнения",
             "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
             "annotation.required"           =>  "Поле обязательно для заполнения",
+            "fulltext.required"           =>  "Поле обязательно для заполнения",
             "annotation.max"                =>  "Поле не должно быть длиннее, чем 1000 символов",
             "fulltext.max"                  =>  "Поле не должно быть длиннее, чем 10000 символов",
             "importancy.integer"            =>  "Поле должно содержать целое число"
@@ -104,7 +105,7 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
-            'fulltext'      =>  'nullable|string|max:10000',
+            'fulltext'      =>  'required|string|max:10000',
             'importancy'    =>  'nullable|integer',
         ],  $messages);
 
@@ -140,6 +141,7 @@ class ModerateController extends Controller
             "title.required"                =>  "Поле обязательно для заполнения",
             "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
             "annotation.required"           =>  "Поле обязательно для заполнения",
+            "fulltext.required"             =>  "Поле обязательно для заполнения",
             "annotation.max"                =>  "Поле не должно быть длиннее, чем 1000 символов",
             "fulltext.max"                  =>  "Поле не должно быть длиннее, чем 10000 символов",
             "importancy.integer"            =>  "Поле должно содержать целое число"
@@ -149,7 +151,7 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'title'         => 'required|string|max:191',
             'annotation'    =>  'required|string|max:1000',
-            'fulltext'      =>  'string|max:10000',
+            'fulltext'      =>  'required|string|max:10000',
             'importancy'    =>  'integer',
         ],  $messages);
 
@@ -945,8 +947,26 @@ class ModerateController extends Controller
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
         }
 
+        $moderate   =   null;
+        if($dep->dep_id) {
+            $moderate   =   Dep::getModerate($dep->dep_id);
+        }
+        if(is_null($moderate)   &&    (Auth::user()->role_id  !=  1)) {
+            return redirect(route('moderate.users.start'));
+        }
+        if(!is_null($moderate)  &&  ($moderate->id != Auth::user()->id)    &&    (Auth::user()->role_id  !=  1)) {
+            return redirect(route('moderate.users.start'));
+        }
+
+        $crumbs =   array();
+        if(!is_null($dep->dep_id)) {
+            $crumbs    =    Dep::getCrumbs($dep->dep_id);
+            $crumbs[]  =    Dep::find($dep->dep_id);
+        }
+
         return view('moderate.users.edit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
-                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels")]);
+                                            'ps'    =>  $ps_record, 'psd'   =>  $psd,   'labels'    =>  Config::get("dict.labels"),
+                                            'crumbs'    =>  $crumbs]);
     }
 
     public function makeFieldChangeUser($psd_id, Request $request) {
@@ -1028,6 +1048,7 @@ class ModerateController extends Controller
             'mname'                     =>  trim($request->input('mname')),
             'room'                      =>  trim($request->input('room')),
             'phone'                     =>  trim($request->input('phone')),
+            'ip_phone'                  =>  trim($request->input('ip_phone')),
             'birthday'                  =>  trim($request->input('birthday')),
             'mobile_phone'              =>  trim($request->input('mobile_phone')),
             'city_phone'                =>  trim($request->input('city_phone')),
@@ -1047,6 +1068,7 @@ class ModerateController extends Controller
             "fname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
             "mname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
             "phone.max"                  =>  "Поле не должно быть длиннее, чем 3 цифры - это местный номер",
+            "ip_phone.max"               =>  "Поле не должно быть длиннее, чем 4 цифры - это местный ip-номер",
             "room.max"                   =>  "Поле не должно быть длиннее, чем 4 символа",
             "city_phone.max"             =>  "Поле не должно быть длиннее, чем 18 символов",
             "mobile_phone.max"           =>  "Поле не должно быть длиннее, чем 18 символов",
@@ -1065,6 +1087,7 @@ class ModerateController extends Controller
             'fname'             =>  'string|max:255|required',
             'mname'             =>  'nullable|string|max:255',
             'phone'             =>  'nullable|string|max:3',
+            'ip_phone'          =>  'nullable|string|max:4',
             'room'              =>  'nullable|string|max:4',
             'city_phone'        =>  'nullable|string|max:15',
             'mobile_phone'      =>  'nullable|string|max:18',
@@ -1095,11 +1118,17 @@ class ModerateController extends Controller
                 if(count($birthday_parts)   ==  3) {
                     $value   =   date("Y-m-d", strtotime($value));
                 }
+                else {
+                    $value  =   null;
+                }
             }
             if($key ==  "workstart") {
                 $workstart_parts =   explode(".",    $value);
                 if(count($workstart_parts)   ==  3) {
                     $value   =   date("Y-m-d", strtotime($value));
+                }
+                else {
+                    $value  =   null;
                 }
             }
             if($key ==  "chef") {
@@ -1178,7 +1207,7 @@ class ModerateController extends Controller
         if($size <= 3000000) {
             if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                 $manager = new ImageManager(array('driver' => 'imagick'));
-                $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'))->save(storage_path('app/public') . '/' . $path);
+                $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.avatar_width'), Config::get('image.avatar_height'))->save(storage_path('app/public') . '/' . $path);
                 DB::table('users')->where("id", "=", $id)
                     ->update(['avatar' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
                 return response()->json(['ok', Storage::disk('public')->url($path)]);
@@ -1193,11 +1222,28 @@ class ModerateController extends Controller
 
     }
 
+    public function userscropavatar($id, Request $request)
+    {
+        $path   =   Storage::disk('public')->putFile(Config::get('image.avatar_path'), $request->file('data'), 'public');
+        $type   =   Storage::disk('public')->getMimetype($path);
+
+        if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
+            $manager = new ImageManager(array('driver' => 'imagick'));
+            $image  = $manager->make(storage_path('app/public') . '/' . $path)->save(storage_path('app/public') . '/' . $path);
+            DB::table('users')->where("id", "=", $id)
+                ->update(['avatar_round' => Storage::disk('public')->url($path), 'updated_at' => date("Y-m-d H:i:s")]);
+            return response()->json(['ok', Storage::disk('public')->url($path)]);
+        }
+        else {
+            return response()->json(['error', 'file wrong type']);
+        }
+    }
+
     public function usersdeleteavatar($id)
     {
         $default = Config::get('image.default_avatar');
         DB::table('users')->where("id", "=", $id)
-            ->update(['avatar' => $default, 'updated_at' => date("Y-m-d H:i:s")]);
+            ->update(['avatar' => $default, 'avatar_round' => null, 'updated_at' => date("Y-m-d H:i:s")]);
 
         return response()->json(['ok', $default]);
     }

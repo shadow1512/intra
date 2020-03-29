@@ -20,6 +20,7 @@
     <link href="{{ asset('styles/css/jquery.fileupload-ui.css') }}" rel="stylesheet" />
     <link href="{{ asset('styles/css/moderate.extend.css') }}" rel="stylesheet">
     <link href="{{ asset('styles/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+    <link href="{{ asset('styles/css/croppie.css') }}" rel="stylesheet">
     <script src="{{ asset('js/libs/jquery-3.1.0.js') }}"></script>
     <script src="{{ asset('js/libs/jquery-ui.min.js') }}"></script>
     <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
@@ -41,6 +42,7 @@
         <script src='{{ asset('js/libs/jquery.fileupload-validate.js') }}'></script>
         <script src='{{ asset('js/libs/jquery.fileupload-ui.js') }}'></script>
     @endif
+    <script src={{ asset('js/libs/croppie.js') }}></script>
     <script src="{{ asset('js/moderate.js') }}"></script>
     <script src="{{ asset('js/libs/moderate-core.js') }}"></script>
 </head>

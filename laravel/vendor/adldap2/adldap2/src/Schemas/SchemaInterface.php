@@ -1102,7 +1102,10 @@ interface SchemaInterface
      *
      * @return string
      */
-    public function telephone();
+    public function localtelephone();
+    public function citytelephone();
+    public function mobiletelephone();
+    public function iptelephone();
 
     /**
      * The users thumbnail photo path.

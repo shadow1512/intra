@@ -17,7 +17,7 @@
             <div class="header_intra-logo_tx">Корпоративный информационный портал</div></a>
         @if (Auth::check())
         <div class="header_login"><a href="" class="header_login_name ic-down __js_header_login">
-                <div class="header_login_name_pic"><img src="{{Auth::user()->avatar}}" alt="{{Auth::user()->fname}} {{Auth::user()->lname}}" class="header_login_name_img"></div>
+                <div class="header_login_name_pic"><img src="@if(Auth::user()->avatar_round){{Auth::user()->avatar_round}} @else {{Auth::user()->avatar}} @endif" alt="{{Auth::user()->fname}} {{Auth::user()->lname}}" class="header_login_name_img"></div>
                 <div class="header_login_name_tx" title="{{Auth::user()->fname}} {{Auth::user()->lname}}">{{Auth::user()->fname}} {{Auth::user()->lname}}</div></a>
             <div class="header_login_nav __hidden">
                 <ul class="header_login_nav_ul">

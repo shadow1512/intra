@@ -44,15 +44,18 @@ class UserController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->where('users.id', $id)->first();
 
+        if(!$user) {
+            abort(404);
+        }
         $crumbs =   array();
         if(!is_null($user->dep_id)) {
-            $crumbs    =    $this->getCrumbs($user->dep_id);
+            $crumbs    =    Dep::getCrumbs($user->dep_id);
             $crumbs[]  =    Dep::find($user->dep_id);
         }
         $contacts       =   array();
         $contact_ids    =   array();
         if(Auth::check()) {
-            $contacts = User::select("users.id", "users.avatar", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone","users.birthday")
+            $contacts = User::select("users.id", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone","users.birthday")
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
             foreach($contacts as $contact) {
@@ -62,22 +65,6 @@ class UserController extends Controller
 
 
         return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
-    }
-
-    protected function getCrumbs($id) {
-        $crumbs = array();
-        $currentDep     = Dep::find($id);
-        if($currentDep) {
-            $parent = $currentDep->parent_id;
-            $length = mb_strlen($parent, "UTF-8");
-            while ($length > 2) {
-                $parent = mb_substr($parent, 0, $length - 2);
-                $dep = Dep::where('parent_id', '=', $parent)->firstOrFail();
-                $crumbs[] = $dep;
-                $length = $length - 2;
-            }
-        }
-        return array_reverse($crumbs);
     }
 
     public function search($id = null)
@@ -115,7 +102,7 @@ class UserController extends Controller
         }
 
         if(!is_null($id)) {
-            $crumbs = $this->getCrumbs($id);
+            $crumbs = Dep::getCrumbs($id);
             $length         = mb_strlen($currentDep->parent_id, "UTF-8") + 2;
             $directory_name = $currentDep->name;
             $rootdeps = Dep::where('parent_id', 'LIKE', $currentDep->parent_id . "%")

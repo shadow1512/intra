@@ -12,10 +12,12 @@
                             {{ method_field('PUT') }}
                             <input type="hidden" name="id" id="id" value="{{ $user->id }}"/>
                             <input type="hidden" id="avatar_url" value="{{  route('moderate.users.updateavatar', ["id" => $user->id]) }}">
+                            <input type="hidden" id="avatar_crop_url" value="{{  route('moderate.users.cropavatar', ["id" => $user->id]) }}">
                             <div class="form-group">
                                     <label for="img_avatar" class="col-md-4 control-label">Аватар</label>
                                     <img src="{{ $user->avatar }}" id="img_avatar" aria-describedby="avatarimgHelpInline"/>
                                     <small id="avatarimgHelpInline" class="text-muted"><a href="{{route('moderate.users.deleteavatar', ["id"    =>  $user->id])}}" id="delete_avatar">Удалить</a></small>
+                                <div style="position:absolute;top:100px;left:50px;width:150px;height:150px;display:inline"><img id="round_avatar" src="@if($user->avatar_round){{$user->avatar_round}} @else /images/faces/default.png @endif"></div>
                             </div>
 
                             <div class="custom-file{{ $errors->has('avatar') ? ' has-error' : '' }}">
@@ -24,6 +26,13 @@
                                 <small id="avatarHelpInline" class="text-muted">Файл не более 3мб</small>
                             </div>
 
+                            <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    <button id="save_avatar" class="btn btn-primary">
+                                        Сохранить изменения в аватаре
+                                    </button>
+                                </div>
+                            </div>
                             @if(!is_null($ps)   &&  !is_null($psd)  &&  count($psd))
                                 <div class="form-group">
                                     <div class="col-md-2"></div>
@@ -145,6 +154,19 @@
                                     @endif
                                 </div>
                             </div>
+                                <div class="form-group{{ $errors->has('ip_phone') ? ' has-error' : '' }}">
+                                    <label for="ip_phone" class="col-md-2 control-label">IP телефон</label>
+
+                                    <div class="col-md-6">
+                                        <input id="ip_phone" type="text" class="form-control" name="ip_phone" value="@if ($user->ip_phone){{$user->ip_phone}} @endif" maxlength="4">
+
+                                        @if ($errors->has('ip_phone'))
+                                            <span class="help-block">
+                                        <strong>{{ $errors->first('ip_phone') }}</strong>
+                                    </span>
+                                        @endif
+                                    </div>
+                                </div>
                             <div class="form-group{{ $errors->has('city_phone') ? ' has-error' : '' }}">
                                 <label for="city_phone" class="col-md-2 control-label">Городской телефон</label>
 
@@ -175,8 +197,14 @@
                             <div class="form-group{{ $errors->has('dep_id') ? ' has-error' : '' }}">
                                 <label for="dep_id" class="col-md-2 control-label">Подразделение</label>
 
-                                <div class="col-md-6">
-                                    {{$dep->name}}
+                                <div class="col-md-10">
+                                    @if (count($crumbs))
+                                        <ul class="breadcrumbs_unit">
+                                            @foreach ($crumbs as $crumb)
+                                                <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="form-group{{ $errors->has('work_title') ? ' has-error' : '' }}">

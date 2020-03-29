@@ -137,6 +137,20 @@ $(document).ready(function($) {
 
             if (data.result[0] == "ok") {
                 $("#img_avatar").attr("src", data.result[1]);
+                $("#img_avatar").parent().find("img").attr("src",   data.result[1]);
+                $("#img_avatar").croppie('destroy');
+                $("#img_avatar").croppie({
+                    enableExif: true,
+                    viewport: {
+                        width: 128,
+                        height: 128,
+                        type: 'circle'
+                    },
+                    boundary: {
+                        width: 400,
+                        height: 700
+                    }
+                });
             }
             else {
                 var errMessage = "Файл загружен не был. Причина - ";
@@ -158,6 +172,55 @@ $(document).ready(function($) {
                 progress + '%'
             );
         }
+    });
+
+    $("#img_avatar").croppie({
+        enableExif: true,
+        viewport: {
+            width: 128,
+            height: 128,
+            type: 'circle'
+        },
+        boundary: {
+            width: 400,
+            height: 700
+        }
+    });
+
+    $("#save_avatar").on("click", function(ev) {
+        ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+        $("#img_avatar").croppie('result', {
+            type: 'blob',
+            circle: true,
+            //size: { width: 128, height: 128 },
+            format: 'png'
+        }).then(function (blob) {
+            var url =    $("#avatar_crop_url").val();
+            var fd = new FormData();
+            fd.append('data', blob);
+            fd.append('_method', "PUT");
+            fd.append('_token', $('input[name="_token"]').val());
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+                    //'Content-Type': 'multipart/form-data'
+                },
+                method: "POST",
+                url: url,
+                data: fd,
+                async: false,
+                processData: false,
+                contentType: false,
+                success: function (msg) {
+                    if(msg[0]   ==  "ok") {
+                        $("#round_avatar").attr("src", msg[1]);
+                    }
+                    else {
+                        $("#round_avatar").attr("src", "/images/faces/default.png");
+                    }
+                }
+            });
+        });
     });
 
     $('#cover').fileupload({
@@ -310,6 +373,21 @@ $(document).ready(function($) {
             success: function (msg) {
                 if (msg[0] == "ok") {
                     $("#img_avatar").attr("src", msg[1]);
+                    $("#img_avatar").parent().find("img").attr("src",   msg[1]);
+                    $("#round_avatar").attr("src", msg[1]);
+                    $("#img_avatar").croppie('destroy');
+                    $("#img_avatar").croppie({
+                        enableExif: true,
+                        viewport: {
+                            width: 128,
+                            height: 128,
+                            type: 'circle'
+                        },
+                        boundary: {
+                            width: 400,
+                            height: 600
+                        }
+                    });
                 }
             }
         });

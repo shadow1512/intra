@@ -27,8 +27,8 @@
                 @if(!empty($user->room))<div class="profile_info_room"><strong>Комната:&nbsp;</strong><span>{{ $user->room }}</span></div>@endif
                 @if(!empty($user->phone))<div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{ $user->phone }}</span></div>@endif
                 @if(!empty($user->ip_phone))<div class="profile_info_phone"><strong>IP Телефон:&nbsp;</strong><span>{{ $user->ip_phone }}</span></div>@endif
-                @if(!empty($user->mobile_phone))<div class="profile_info_phone"><strong>Городской телефон:&nbsp;</strong><span>{{ $user->city_phone }}</span></div>@endif
-                @if(!empty($user->city_phone))<div class="profile_info_phone"><strong>Мобильный телефон:&nbsp;</strong><span>{{ $user->mobile_phone }}</span></div>@endif
+                @if(!empty($user->city_phone))<div class="profile_info_phone"><strong>Городской телефон:&nbsp;</strong><span>{{ $user->city_phone }}</span></div>@endif
+                @if(!empty($user->mobile_phone))<div class="profile_info_phone"><strong>Мобильный телефон:&nbsp;</strong><span>{{ $user->mobile_phone }}</span></div>@endif
                 @if(!empty($user->email))<div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>@endif
             </div>
             <div class="profile_info_i">

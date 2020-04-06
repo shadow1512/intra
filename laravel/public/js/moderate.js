@@ -121,7 +121,7 @@ $(document).ready(function($) {
                 totalSize += file.size;
             });
 
-            if (totalSize > 3000000) {
+            if (totalSize > 5000000) {
                 alert("Для фотографии используйте изображение менее 3мб");
                 return false;
             }

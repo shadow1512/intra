@@ -883,7 +883,7 @@ class ModerateController extends Controller
             $size   =   Storage::disk('public')->getSize($path);
             $type   =   Storage::disk('public')->getMimetype($path);
 
-            if($size <= 3000000) {
+            if($size <= 5000000) {
                 if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
                     $manager = new ImageManager(array('driver' => 'imagick'));
                     $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));

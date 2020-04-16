@@ -60,7 +60,7 @@ return [
                 'text/plain',
                 'application/vnd.oasis.opendocument.text',
                 'application/vnd.oasis.opendocument.spreadsheet',
-                
+
             ],
         ],
         'image' => [

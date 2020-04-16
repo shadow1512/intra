@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Log;
 use Config;
 use DB;
 
-class updatedirectoryfromad extends Command
+class updatedirectoryfromadgroups extends Command
 {
     /**
      * The name and signature of the console command.

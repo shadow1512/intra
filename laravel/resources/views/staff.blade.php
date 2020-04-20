@@ -4,7 +4,6 @@
     <div class="main_news">
         <div class="h __h_m">Полезные документы</div>
         <ul class="news_ul">
-            Структура Консорциума "Кодекс"
             <li class="news_li __important"><a href="http://htgi.dmz:9999/docs/?nd=816826082" class="news_li_lk">Структура Консорциума &laquo;Кодекс&raquo;</a>
                 <div class="news_li_date">Обновлен 02.03.2020</div>
             </li>

@@ -56,6 +56,11 @@ return [
                 'image/png',
                 'image/gif',
                 'image/svg+xml',
+                'application/pdf',
+                'text/plain',
+                'application/vnd.oasis.opendocument.text',
+                'application/vnd.oasis.opendocument.spreadsheet',
+
             ],
         ],
         'image' => [

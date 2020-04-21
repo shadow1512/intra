@@ -7,7 +7,7 @@
     <div class="profile_form_cnt">
         <div class="profile_form_photo">
             <div class="profile_form_photo_h">Фотография:</div>
-            <div class="profile_aside_pic"><img src="{{$user->avatar}}" alt="{{$user->name}}" title="{{$user->name}}" id="img_avatar"></div>
+            <div class="profile_aside_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{$user->lname}} {{$user->fname}}" title="{{$user->lname}} {{$user->fname}}" id="img_avatar"></div>
             <input type="file" id="input_avatar" name="input_avatar" class="profile_form_photo_it">
             <input type="hidden" name="avatar_url" id="avatar_url" value="{{route('profile.updateavatar')}}">
             <label for="input_avatar" class="profile_form_photo_label">Загрузить новую фотографию</label>
@@ -85,13 +85,13 @@
                 @if(isset($waiting_fields["room"]))
                     <div class="field unchecked_field">
                         <label for="input_room" class="lbl">Комната:</label>
-                        <input id="input_room" name="input_room" type="text" value="{{$waiting_fields["room"]}}" class="it" maxlength="3">
+                        <input id="input_room" name="input_room" type="text" value="{{$waiting_fields["room"]}}" class="it" maxlength="4">
                         <i class="ic-wait"></i>
                     </div>
                 @else
                     <div class="field">
                         <label for="input_room" class="lbl">Комната:</label>
-                        <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="3">
+                        <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="4">
                     </div>
                 @endif
             </div>

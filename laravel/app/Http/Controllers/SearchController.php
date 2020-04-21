@@ -692,7 +692,8 @@ class SearchController extends Controller
         //кусок поиска по комнате
         $room = trim($request->input('room'));
         $room = mb_substr($room, 0, 100);
-        $room   =   (int)$room;
+        //$room   =   (int)$room;
+        // есть комнаты с буквами в наименовании
         $users_by_room  =   array();
         $user_ids   =   array();
         if($room) {

@@ -887,10 +887,10 @@ class ModerateController extends Controller
             $type = Storage::disk('public')->getMimetype($path_full);
 
             //video and image handling
-            if (in_array($type, Config::get('image_types'))) {
+            if (in_array($type, Config::get('image.image_types'))) {
                 $path = Storage::disk('public')->putFileAs(Config::get('image.gallery_path') . '/' . $id, $files[0], 'th_' . $filename, 'public');
                 return $this->galleryimagehandle($filename, $id, $path_full, $path);
-            } elseif (in_array($type, Config::get('video_types'))) {
+            } elseif (in_array($type, Config::get('image.video_types'))) {
                 return $this->galleryvideohandle($filename, $id, $path_full);
             } else {
                 $size   =   Storage::disk('public')->getSize($path_full);

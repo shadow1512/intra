@@ -6,7 +6,7 @@
         @if (count($photos))
                 @foreach($photos as $photo)
                     @if($photo->filetype    ==  "image")<a href="{{ $photo->image }}" data-fancybox="images" class="news_li_lk"><img src="{{$photo->image_th}}"/></a>@endif
-                    @if($photo->filetype    ==  "video")<video src="{{$photo->image}}" controls=""></video>@endif
+                    @if($photo->filetype    ==  "video")<video src="{{$photo->image}}" controls="" width="150" height="150"></video>@endif
                 @endforeach
         @endif
     </div>

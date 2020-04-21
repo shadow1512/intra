@@ -1049,6 +1049,7 @@ class SearchController extends Controller
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "DESC")->orderByRaw("DAY(birthday)", "ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
+                echo 'tt';
 
             }
             else {

@@ -5,7 +5,8 @@
         <h1 class="h __h_m">{{$gallery->name}}</h1>
         @if (count($photos))
                 @foreach($photos as $photo)
-                    <a href="{{ $photo->image }}" data-fancybox="images" class="news_li_lk"><img src="{{$photo->image_th}}"/></a>
+                    @if($photo->filetype    ==  "image")<a href="{{ $photo->image }}" data-fancybox="images" class="news_li_lk"><img src="{{$photo->image_th}}"/></a>@endif
+                    @if($photo->filetype    ==  "video")<video src="{{$photo->image}}" controls=""></video>@endif
                 @endforeach
         @endif
     </div>

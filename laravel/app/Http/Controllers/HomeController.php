@@ -68,6 +68,7 @@ class HomeController extends Controller
         $items  =   Dinner_slots::orderBy('time_start')->get();
 
         $summ   =   0;
+        $bill   =   null;
         if (Auth::check()) {
             $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
             if($bill) {
@@ -78,7 +79,8 @@ class HomeController extends Controller
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'   =>Cookie::get('hide_dinner'),
                                 'ditems'        =>  $items,
-                                'summ'          =>  $summ]);
+                                'summ'          =>  $summ,
+                                'curbill'       =>  $bill]);
     }
 
     function parking()

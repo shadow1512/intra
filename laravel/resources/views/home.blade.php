@@ -116,6 +116,12 @@
             <li class="main_top_dinner_lst_i"><a href="" class="main_top_dinner_lst_lk __js-modal-bill-lk">
                     <div class="main_top_dinner_lst_price">{{$summ}} руб.</div>
                     <div class="main_top_dinner_lst_tx">Счет за&nbsp;столовую</div></a></li>
+            @else
+                @if(!is_null($curbill))
+                    <li class="main_top_dinner_lst_i"><a href="" class="main_top_dinner_lst_lk __js-modal-bill-lk">
+                            <div class="main_top_dinner_lst_price">Нет задолженности</div>
+                            <div class="main_top_dinner_lst_tx"></div></a></li>
+                @endif
             @endif
         </ul>
     </div>

@@ -30,4 +30,6 @@ return array(
     'cover_height'      =>  280,
     'gallery_photo_thumb_width'     =>  150,
     'gallery_photo_thumb_height'    =>  150,
+    'image_types'       =>  array('image/jpeg', 'image/pjpeg', 'image/png'),
+    'video_types'       =>  array('video/x-flv', 'video/mp4', 'application/x-mpegURL', 'video/MP2T', 'video/3gpp', 'video/quicktime', 'video/x-msvideo', 'video/x-ms-wmv'),
 );

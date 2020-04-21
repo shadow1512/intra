@@ -859,8 +859,13 @@ class ModerateController extends Controller
         $photo     = GalleryPhoto::findOrFail($photo_id);
 
         if(Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id   .   '/')) {
-            Storage::disk('public')->delete([   Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/' .   $photo->desc,
-                                                Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/th_' .   $photo->desc]);
+            if($photo->filetype ==  "image") {
+                Storage::disk('public')->delete([   Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/' .   $photo->desc,
+                    Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/th_' .   $photo->desc]);
+            }
+            else {
+                Storage::disk('public')->delete([   Config::get('image.gallery_path')   .   '/'  .   $photo->gallery_id    .   '/' .   $photo->desc]);
+            }
         }
         $photo->delete();
 
@@ -869,55 +874,100 @@ class ModerateController extends Controller
 
     public function fotoupdateimage($id, Request $request)
     {
-        if(!is_null($request->file('photo_files'))) {
 
-            if(!Storage::disk('public')->exists(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/')) {
-                Storage::disk('public')->makeDirectory(Config::get('image.gallery_path')   .   '/'  .   $id   .   '/');
+        if (!is_null($request->file('photo_files'))) {
+
+            if (!Storage::disk('public')->exists(Config::get('image.gallery_path') . '/' . $id . '/')) {
+                Storage::disk('public')->makeDirectory(Config::get('image.gallery_path') . '/' . $id . '/');
             }
 
-            $files      =   $request->file('photo_files');
-            $filename   =   microtime()  .   "." .   $files[0]->extension();
+            $files = $request->file('photo_files');
+            $filename = microtime() . "." . $files[0]->extension();
+            $path_full = Storage::disk('public')->putFileAs(Config::get('image.gallery_path') . '/' . $id, $files[0], $filename, 'public');
+            $type = Storage::disk('public')->getMimetype($path_full);
 
-            $path           =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id,  $files[0], 'th_'  .   $filename, 'public');
-            $path_full      =   Storage::disk('public')->putFileAs(Config::get('image.gallery_path')   .   '/'  .   $id, $files[0], $filename, 'public');
-            $size   =   Storage::disk('public')->getSize($path);
-            $type   =   Storage::disk('public')->getMimetype($path);
-
-            if($size <= 5000000) {
-                if($type == "image/jpeg" || $type == "image/pjpeg" || $type == "image/png") {
-                    $manager = new ImageManager(array('driver' => 'imagick'));
-                    $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));
-                    $image->save(storage_path('app/public') . '/' . $path);
-
-                    $gallery_image  =   new GalleryPhoto();
-                    $gallery_image->gallery_id  =   $id;
-                    $gallery_image->image       =   Storage::disk('public')->url($path_full);
-                    $gallery_image->image_th    =   Storage::disk('public')->url($path);
-                    $gallery_image->desc        =   $filename;
-                    $gallery_image->size        =   (float)round($size/1000, 2);
-
-                    $gallery_image->save();
-
-                    return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
-                                                                                "size"          =>  $size,
-                                                                                "url"           =>  Storage::disk('public')->url($path_full),
-                                                                                "thumbnailUrl"  =>  Storage::disk('public')->url($path),
-                                                                                "deleteUrl"     =>  route('moderate.foto.deleteimage',  ["id"   =>  $gallery_image->id]),
-                                                                                "deleteType"    =>  "GET"))));
-                }
-                else {
-                    return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
-                        "size"          =>  $size,
-                        "error"         =>  "Вы пытаетесь загрузить файл не поддерживаемого типа"))));
-                }
+            //video and image handling
+            if (in_array($type, Config::get('image_types'))) {
+                $path = Storage::disk('public')->putFileAs(Config::get('image.gallery_path') . '/' . $id, $files[0], 'th_' . $filename, 'public');
+                return $this->galleryimagehandle($filename, $id, $path_full, $path);
+            } elseif (in_array($type, Config::get('video_types'))) {
+                return $this->galleryvideohandle($filename, $id, $path_full);
+            } else {
+                $size   =   Storage::disk('public')->getSize($path_full);
+                return json_encode(array("files" => array(array("name" => $filename,
+                    "size"  =>  $size,
+                    "error" => "Вы пытаетесь загрузить файл не поддерживаемого типа"))));
             }
-            else {
-                return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
-                    "size"          =>  $size,
-                    "error"         =>  "Размер загружаемого файла превышает установленный предел в 3мб"))));
-            }
+        } else {
+            return json_encode(array("files" => array(array(
+                "error" => "Файл для загрузки не найден"))));
         }
     }
+
+    private function galleryimagehandle($filename, $id, $path_full, $path)
+    {
+        $size   =   Storage::disk('public')->getSize($path_full);
+        if($size <= 5000000) {
+
+            $manager = new ImageManager(array('driver' => 'imagick'));
+            $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));
+            $image->save(storage_path('app/public') . '/' . $path);
+
+            $gallery_image  =   new GalleryPhoto();
+            $gallery_image->gallery_id  =   $id;
+            $gallery_image->filetype    =   'image';
+            $gallery_image->image       =   Storage::disk('public')->url($path_full);
+            $gallery_image->image_th    =   Storage::disk('public')->url($path);
+            $gallery_image->desc        =   $filename;
+            $gallery_image->size        =   (float)round($size/1000, 2);
+
+            $gallery_image->save();
+
+            return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
+                "size"          =>  $size,
+                "type"          =>  $gallery_image->filetype,
+                "url"           =>  Storage::disk('public')->url($path_full),
+                "thumbnailUrl"  =>  Storage::disk('public')->url($path),
+                "deleteUrl"     =>  route('moderate.foto.deleteimage',  ["id"   =>  $gallery_image->id]),
+                "deleteType"    =>  "GET"))));
+
+        }
+        else {
+            return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
+                "size"          =>  $size,
+                "error"         =>  "Размер загружаемого файла превышает установленный предел в 5мб"))));
+        }
+    }
+
+    private function galleryvideohandle($filename, $id, $path_full)
+    {
+        $size   =   Storage::disk('public')->getSize($path_full);
+
+        if($size <= 1100000000) {
+            $gallery_image  =   new GalleryPhoto();
+            $gallery_image->gallery_id  =   $id;
+            $gallery_image->filetype    =   'video';
+            $gallery_image->image       =   Storage::disk('public')->url($path_full);
+            $gallery_image->desc        =   $filename;
+            $gallery_image->size        =   (float)round($size/1000, 2);
+
+            $gallery_image->save();
+
+            return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
+                "size"          =>  $size,
+                "type"          =>  $gallery_image->filetype,
+                "url"           =>  Storage::disk('public')->url($path_full),
+                "deleteUrl"     =>  route('moderate.foto.deleteimage',  ["id"   =>  $gallery_image->id]),
+                "deleteType"    =>  "GET"))));
+
+        }
+        else {
+            return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
+                "size"          =>  $size,
+                "error"         =>  "Размер загружаемого файла превышает установленный предел в 2гб"))));
+        }
+    }
+
 
     public function users($letter = "А")
     {

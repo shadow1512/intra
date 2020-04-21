@@ -1047,8 +1047,8 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
-                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "DESC")->orderByRaw("DAY(birthday)", "ASC")->
-                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")get();
+                    ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "DESC")->orderByRaw("DAY(birthday)", "ASC")
+                    ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
 
             }
             else {
@@ -1058,7 +1058,7 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
-                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->
+                    ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
             }
         }
@@ -1095,7 +1095,7 @@ class SearchController extends Controller
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
-                    ->WhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")->
+                    ->WhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday)",    "ASC")->orderByRaw("DAY(birthday)", "ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
             }
             else {

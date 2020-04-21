@@ -47,6 +47,7 @@
                 <li class="menu_li_lst_i"><a href="http://oldintra.kodeks.ru/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816803322" class="menu_li_lk">Реквизиты предприятий Консорциума</a></li>
                 <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=816819640" class="menu_li_lk">Реестр корпоративных проектов Консорциума &laquo;Кодекс&raquo;</a></li>
+                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=816826082" class="menu_li_lk">Приказ о структуре Консорциума &laquo;Кодекс&raquo;</a></li>
             </ul>
         </li>
         <li class="menu_li">

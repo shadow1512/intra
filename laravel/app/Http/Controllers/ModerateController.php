@@ -882,7 +882,6 @@ class ModerateController extends Controller
             }
 
             $files = $request->file('photo_files');
-            var_dump($files);
             $filename = microtime() . "." . $files[0]->extension();
             $path_full = Storage::disk('public')->putFileAs(Config::get('image.gallery_path') . '/' . $id, $files[0], $filename, 'public');
             $type = Storage::disk('public')->getMimetype($path_full);

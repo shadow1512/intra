@@ -352,10 +352,12 @@ $(document).ready(function($) {
 
                 if (totalVideoSize > 1100000000) {
                     alert("Для файла галереи предельный размер видео файла составляет 1гб");
+                    $(this).removeClass('fileupload-processing');
                     return false;
                 }
                 if (totalImageSize > 5000000) {
                     alert("Для файла галереи предельный размер файла изображения составляет 5мб");
+                    $(this).removeClass('fileupload-processing');
                     return false;
                 }
             },

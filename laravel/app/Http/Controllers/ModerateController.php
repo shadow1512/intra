@@ -956,6 +956,7 @@ class ModerateController extends Controller
             return json_encode(array("files"    =>  array(array(  "name"          =>  $filename,
                 "size"          =>  $size,
                 "type"          =>  $gallery_image->filetype,
+                "thumbnailUrl"  =>  Storage::disk('public')->url($path_full),
                 "url"           =>  Storage::disk('public')->url($path_full),
                 "deleteUrl"     =>  route('moderate.foto.deleteimage',  ["id"   =>  $gallery_image->id]),
                 "deleteType"    =>  "GET"))));

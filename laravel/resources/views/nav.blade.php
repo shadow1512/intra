@@ -46,9 +46,9 @@
         @endphp
         @foreach($root as $item)
         <li class="menu_li">
-            <div class="menu_li_h @if(isset($hide_menues[$item->id    -   1])   &&  $hide_menues[$item->id    -   1]) __close @endif"   id="container_{{$item->id}}">{{$item->name}}</div>
+            <div class="menu_li_h @if(isset($hide_menues[$item->id])   &&  $hide_menues[$item->id]) __close @endif"   id="container_{{$item->id}}">{{$item->name}}</div>
             @if(isset($menu_items[$item->id]))
-            <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
+            <ul class="menu_li_lst" @if(isset($hide_menues[$item->id])  &&  $hide_menues[$item->id]) style="display:none" @endif>
                 @foreach($menu_items[$item->id] as $children_item)
                 <li class="menu_li_lst_i"><a href="{{$children_item->link}}" class="menu_li_lk">{{$children_item->name}}</a>
                     @if(isset($menu_items[$children_item->id]))
@@ -64,7 +64,7 @@
             @else
                 @if($item->hanfler  ==  "rooms")
                     @if (count($rooms))
-                        <ul class="menu_li_lst" @if(isset($hide_menues[$item->id    -   1])   &&  $hide_menues[$item->id    -   1]) style="display:none" @endif>
+                        <ul class="menu_li_lst" @if(isset($hide_menues[$item->id])   &&  $hide_menues[$item->id]) style="display:none" @endif>
                             @foreach($rooms as $room)
                                 <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
                             @endforeach

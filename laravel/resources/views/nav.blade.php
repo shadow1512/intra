@@ -62,7 +62,7 @@
                 @endforeach
             </ul>
             @else
-                @if($item->handler  ==  "rooms")
+                @if($item->hanfler  ==  "rooms")
                     @if (count($rooms))
                         <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
                             @foreach($rooms as $room)

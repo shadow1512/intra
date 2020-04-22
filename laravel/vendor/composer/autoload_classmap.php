@@ -457,6 +457,7 @@ return array(
     'CreateFeedbackTable' => $baseDir . '/database/migrations/2019_11_16_175912_create_feedback_table.php',
     'CreateGallery' => $baseDir . '/database/migrations/2018_06_14_235050_create_gallery.php',
     'CreateGalleryPhotos' => $baseDir . '/database/migrations/2018_06_14_235558_create_gallery_photos.php',
+    'CreateMenuConfig' => $baseDir . '/database/migrations/2020_04_22_151403_create_menu_config.php',
     'CreateMenuTable' => $baseDir . '/database/migrations/2016_05_19_173453_create_menu_table.php',
     'CreatePagesTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_pages_table.php',
     'CreatePeoplesDepartments' => $baseDir . '/database/migrations/2017_12_11_085344_create_peoples_departments.php',

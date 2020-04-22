@@ -984,6 +984,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'CreateFeedbackTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_16_175912_create_feedback_table.php',
         'CreateGallery' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_235050_create_gallery.php',
         'CreateGalleryPhotos' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_235558_create_gallery_photos.php',
+        'CreateMenuConfig' => __DIR__ . '/../..' . '/database/migrations/2020_04_22_151403_create_menu_config.php',
         'CreateMenuTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_19_173453_create_menu_table.php',
         'CreatePagesTable' => __DIR__ . '/../..' . '/database/migrations/2016_01_01_000000_create_pages_table.php',
         'CreatePeoplesDepartments' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_085344_create_peoples_departments.php',

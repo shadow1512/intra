@@ -40,6 +40,7 @@ class ComposerServiceProvider extends ServiceProvider
                 return Menu_Config::getLevel(null, array());
             });
 
+            var_dump($menu_items);
             foreach($menu_items["root"] as $root_item) {
                 $hide_menues[$root_item->id]  =   Cookie::get('hide_menu_'    .   ($root_item->id));
             }

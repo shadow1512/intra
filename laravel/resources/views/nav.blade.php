@@ -43,11 +43,10 @@
             if(isset($menu_items["root"])) {
                 $root = $menu_items["root"];
             }
-        var_dump($hide_menues);
         @endphp
         @foreach($root as $item)
         <li class="menu_li">
-            <div class="menu_li_h @if(isset($hide_menues[$item->id    -   1])   &&  $hide_menues[$item->id    -   1]) __close @endif">{{$item->name}}</div>
+            <div class="menu_li_h @if(isset($hide_menues[$item->id    -   1])   &&  $hide_menues[$item->id    -   1]) __close @endif"   id="container_{{$item->id}}">{{$item->name}}</div>
             @if(isset($menu_items[$item->id]))
             <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
                 @foreach($menu_items[$item->id] as $children_item)

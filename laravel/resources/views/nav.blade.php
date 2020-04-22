@@ -64,7 +64,7 @@
             @else
                 @if($item->hanfler  ==  "rooms")
                     @if (count($rooms))
-                        <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
+                        <ul class="menu_li_lst" @if(isset($hide_menues[$item->id    -   1])   &&  $hide_menues[$item->id    -   1]) style="display:none" @endif>
                             @foreach($rooms as $room)
                                 <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
                             @endforeach

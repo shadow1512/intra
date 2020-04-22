@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cookie;
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Support\Facades\Validator;
 use App\News;
@@ -34,8 +35,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //
+        if($request->input('nocache')) {
+            Cache::flush();
+        }
         //новости
         $news = News::orderBy('importancy', 'desc')->orderBy('published_at',    'DESC')->limit(15)->get();
 

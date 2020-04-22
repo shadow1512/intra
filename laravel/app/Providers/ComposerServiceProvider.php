@@ -42,7 +42,7 @@ class ComposerServiceProvider extends ServiceProvider
 
             foreach($menu_items as $key =>  $value) {
                 if($key !=  "root") {
-                    $hide_menues[]  =   Cookie::get('hide_menu_'    .   ($key   -   1));
+                    $hide_menues[$key   -   1]  =   Cookie::get('hide_menu_'    .   ($key   -   1));
                 }
             }
 

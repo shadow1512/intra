@@ -39,96 +39,40 @@
         </div>
     </div>
     <ul class="menu_ul">
+        @php $root  =   array();
+            if(isset($menu_items["root"])) {
+                $root = $menu_items["root"];
+            }
+        @endphp
+        @foreach($root as $item)
         <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[0]) __close @endif">Полезная информация</div>
-            <ul class="menu_li_lst" @if ($hide_menues[0]) style="display:none" @endif>
-                <li class="menu_li_lst_i"><a href="http://www.kodeks.ru/about.html" class="menu_li_lk">Информация о&nbsp;Консорциуме</a></li>
-                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816800315" class="menu_li_lk">Регламент административной деятельности</a></li>
-                <li class="menu_li_lst_i"><a href="http://oldintra.kodeks.ru/img/stuff" class="menu_li_lk">Корпоративный стиль</a></li>
-                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/d?nd=816803322" class="menu_li_lk">Реквизиты предприятий Консорциума</a></li>
-                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=816819640" class="menu_li_lk">Реестр корпоративных проектов Консорциума &laquo;Кодекс&raquo;</a></li>
-                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=816826082" class="menu_li_lk">Приказ о структуре Консорциума &laquo;Кодекс&raquo;</a></li>
-            </ul>
-        </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[1]) __close @endif">Программный комплекс</div>
-            <ul class="menu_li_lst" @if($hide_menues[1]) style="display:none" @endif>
-                <li class="menu_li_lst_i __inner"><a href="http://172.16.2.4:8000/kodeks/" class="menu_li_lk">Кодекс</a>
-                    <div class="menu_li_inner">
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714396" class="menu_li_inner_lk">Помощник бухгалтера</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714399" class="menu_li_inner_lk">Помощник кадровика: Эксперт </a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777717011" class="menu_li_inner_lk">Законодательство Москвы</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714405" class="menu_li_inner_lk">Законодательство Санкт-Петербурга</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714409" class="menu_li_inner_lk">Законодательство Ленинградской области</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714413" class="menu_li_inner_lk">Техэксперт: Нормы, правила, стандарты и законодательство России</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777715300" class="menu_li_inner_lk">Техэксперт: Промышленная безопасность</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777717034" class="menu_li_inner_lk">Техэксперт: Помощник проектировщика</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714415" class="menu_li_inner_lk">Стройэксперт. Профессиональный вариант</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714430" class="menu_li_inner_lk">Техэксперт: Охрана труда</a>
-                        <a href="http://172.16.2.4:8000/kodeks/?nd=777714434" class="menu_li_inner_lk">Техэксперт: Пожарная безопасность</a>
-                    </div>
+            <div class="menu_li_h @if($hide_menues[$item->id    -   1]) __close @endif">{{$item->name}}</div>
+            @if(isset($menu_items[$item->id]))
+            <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
+                @foreach($menu_items[$item->id] as $children_item)
+                <li class="menu_li_lst_i"><a href="{{$children_item->link}}" class="menu_li_lk">{{$children_item->name}}</a>
+                    @if(isset($menu_items[$children_item->id]))
+                        <div class="menu_li_inner">
+                            @foreach($menu_items[$children_item->id] as $bottom_level_item)
+                                <a href="{{$bottom_level_item->link}}" class="menu_li_inner_lk">{{$bottom_level_item->name}}</a>
+                            @endforeach
+                        </div>
+                    @endif
                 </li>
-                <li class="menu_li_lst_i __inner"><a href="http://172.16.2.4:8000/teh/" class="menu_li_lk">Техэксперт</a>
-                    <div class="menu_li_inner">
-                        <a href="http://172.16.2.4:8000/teh/?nd=777717444" class="menu_li_inner_lk">Техэксперт: Нефтегазовый комплекс</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777714427" class="menu_li_inner_lk">Техэксперт: Электроэнергетика</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777714430" class="menu_li_inner_lk">Техэксперт: Охрана труда</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777714415" class="menu_li_inner_lk">Стройэксперт. Профессиональный вариант</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777717097" class="menu_li_inner_lk">Техэксперт: Теплоэнергетика</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777714425" class="menu_li_inner_lk">Стройтехнолог</a>
-                        <a href="http://172.16.2.4:8000/teh/?nd=777715237" class="menu_li_inner_lk">Техэксперт: Экология. Проф</a>
-                    </div>
-                </li>
-                <li class="menu_li_lst_i"><a href="http://intra.lan.kodeks.net/newprice/Pricelist/Pricelist.html" class="menu_li_lk">Прейскурант</a></li>
-            </ul>
-        </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[2]) __close @endif">Административно-управленческая деятельность</div>
-            <ul class="menu_li_lst" @if($hide_menues[2]) style="display:none" @endif>
-                <li class="menu_li_lst_i"><a href="http://172.16.0.223/SedKodeks/news/index.html" class="menu_li_lk">СЭД</a></li>
-                <li class="menu_li_lst_i"><a href="http://htgi.dmz:9999/docs/?nd=777717302" class="menu_li_lk">БУД</a></li>
-            </ul>
-        </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[3]) __close @endif">Автоматические системы</div>
-            <ul class="menu_li_lst" @if($hide_menues[3]) style="display:none" @endif>
-                <li class="menu_li_lst_i"><a href="http://ask.kodeks.ru/" class="menu_li_lk">АСВО</a></li>
-                <li class="menu_li_lst_i"><a href="http://hotline2.kodeks.ru/" class="menu_li_lk">АСГЛ</a></li>
-                <li class="menu_li_lst_i"><a href="http://spp.kodeks.ru" class="menu_li_lk">СПП</a></li>
-                <li class="menu_li_lst_i __inner"><a href="" class="menu_li_lk">Redmine</a>
-                    <div class="menu_li_inner">
-                        <a href="http://task.qd.kodeks.ru" class="menu_li_inner_lk">task.qd.kodeks.ru</a>
-                        <a href="http://redmine.dmz" class="menu_li_inner_lk">redmine.dmz</a>
-                        <a href="http://corp.kodeks.ru" class="menu_li_inner_lk">corp.kodeks.ru</a>
-                        <a href="http://redmine.upt.kodeks.ru" class="menu_li_inner_lk">redmine.upt.kodeks.ru</a>
-                    </div>
-                </li>
-            </ul>
-        </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[4]) __close @endif">Резерв переговорных</div>
-            @if (count($rooms))
-            <ul class="menu_li_lst" @if($hide_menues[4]) style="display:none" @endif>
-                @foreach($rooms as $room)
-                <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
                 @endforeach
             </ul>
+            @else
+                @if($item->handler  ==  "rooms")
+                    @if (count($rooms))
+                        <ul class="menu_li_lst" @if($hide_menues[$item->id    -   1]) style="display:none" @endif>
+                            @foreach($rooms as $room)
+                                <li class="menu_li_lst_i"><a href="{{route("rooms.book", ["id"  =>  $room->id])}}" class="menu_li_lk">{{$room->name}}</a></li>
+                            @endforeach
+                        </ul>
+                    @endif
+                @endif
             @endif
         </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[5]) __close @endif">Заказы и&nbsp;заявки</div>
-            <ul class="menu_li_lst" @if($hide_menues[5]) style="display:none" @endif>
-                <li class="menu_li_lst_i"><a href="{{route("services.teh")}}" class="menu_li_lk">Техобслуживание</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("services.cartridge")}}" class="menu_li_lk">Картриджи</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("services.mail")}}" class="menu_li_lk">Почтовая доставка</a></li>
-            </ul>
-        </li>
-        <li class="menu_li">
-            <div class="menu_li_h @if($hide_menues[6]) __close @endif">Неформальный Кодекс</div>
-            <ul class="menu_li_lst" @if($hide_menues[6]) style="display:none" @endif>
-                <li class="menu_li_lst_i"><a href="{{route("foto")}}" class="menu_li_lk">Фото и&nbsp;видео с&nbsp;праздников</a></li>
-                <li class="menu_li_lst_i"><a href="{{route("library")}}" class="menu_li_lk">Библиотека</a></li>
-            </ul>
-        </li>
+        @endforeach
     </ul>
 </nav>

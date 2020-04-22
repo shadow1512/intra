@@ -16,7 +16,9 @@ class Menu_Config extends Model
         }
         else {
             $level_items    =   Menu_Config::where('visible',   '=',    1)->where('parent_id',  '=',    $id)->orderBy('sort',   'desc')->get();
-            $items[$id]  =   $level_items;
+            if(count($level_items)) {
+                $items[$id]  =   $level_items;
+            }
         }
 
         foreach($level_items as $item) {

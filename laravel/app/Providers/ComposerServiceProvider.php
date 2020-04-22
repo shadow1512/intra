@@ -46,7 +46,6 @@ class ComposerServiceProvider extends ServiceProvider
                 }
             }
 
-            var_dump($menu_items);var_dump($hide_menues);
             $view->with(["rooms" =>  $rooms, "contacts"  =>  $contacts, "menu_items" => $menu_items,    "hide_menues"   =>  $hide_menues]);
         });
 

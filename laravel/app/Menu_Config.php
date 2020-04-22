@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Menu_Config extends Model
 {
     //
-    protected $table = 'menu_cofig';
+    protected $table = 'menu_config';
 
     public static function getLevel($id, $items) {
         if(is_null($id)) {

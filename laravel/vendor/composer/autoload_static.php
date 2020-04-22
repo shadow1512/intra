@@ -1427,6 +1427,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditGalleryPhotosAddFiletype' => __DIR__ . '/../..' . '/database/migrations/2020_04_21_184405_edit_gallery_photos_add_filetype.php',
         'EditGalleryPhotosAddSize' => __DIR__ . '/../..' . '/database/migrations/2019_08_05_022857_edit_gallery_photos_add_size.php',
         'EditGalleryPhotosAddThumbAndDesc' => __DIR__ . '/../..' . '/database/migrations/2019_08_04_201025_edit_gallery_photos_add_thumb_and_desc.php',
+        'EditMenuConfigAddHidden' => __DIR__ . '/../..' . '/database/migrations/2020_04_22_174408_edit_menu_config_add_hidden.php',
         'EditNewsDefaultImportancy' => __DIR__ . '/../..' . '/database/migrations/2019_04_01_014839_edit_news_default_importancy.php',
         'EditNewsNullableTags' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
         'EditProfilesSavedAddNotify' => __DIR__ . '/../..' . '/database/migrations/2019_08_18_224555_edit_profiles_saved_add_notify.php',

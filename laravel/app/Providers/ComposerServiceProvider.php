@@ -6,9 +6,11 @@ use Illuminate\Support\ServiceProvider;
 use DB;
 use App\Rooms;
 use App\User;
+use App\Menu_Config;
 use Auth;
 use Cookie;
 use Illuminate\Cookie\CookieJar;
+use Illuminate\Support\Facades\Cache;
 
 use View;
 
@@ -32,9 +34,20 @@ class ComposerServiceProvider extends ServiceProvider
                     ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
             }
 
-            $hide_menues    =   array(Cookie::get('hide_menu_0'),   Cookie::get('hide_menu_1'), Cookie::get('hide_menu_2'), Cookie::get('hide_menu_3'), Cookie::get('hide_menu_4'), Cookie::get('hide_menu_5'), Cookie::get('hide_menu_6'));
+            //$menu
+            $hide_menues    =   array();
+            $menu_items =   Cache::remember('menu_items', 60, function () {
+                return Menu_Config::getLevel(null, array());
+            });
 
-            $view->with(["rooms" =>  $rooms, "contacts"  =>  $contacts, "hide_menues"   =>  $hide_menues]);
+            foreach($menu_items as $key =>  $value) {
+                if($key !=  "root") {
+                    $hide_menues[]  =   Cookie::get('hide_menu_'    .   ($key   -   1));
+                }
+            }
+
+            var_dump($menu_items);var_dump($hide_menues);
+            $view->with(["rooms" =>  $rooms, "contacts"  =>  $contacts, "menu_items" => $menu_items,    "hide_menues"   =>  $hide_menues]);
         });
 
         View::composer('dinner',    function($view)

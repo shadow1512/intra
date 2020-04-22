@@ -43,6 +43,7 @@
             if(isset($menu_items["root"])) {
                 $root = $menu_items["root"];
             }
+        var_dump($hide_menues);
         @endphp
         @foreach($root as $item)
         <li class="menu_li">

@@ -50,7 +50,7 @@
             @if(isset($menu_items[$item->id]))
             <ul class="menu_li_lst" @if(isset($hide_menues[$item->id])  &&  $hide_menues[$item->id]) style="display:none" @endif>
                 @foreach($menu_items[$item->id] as $children_item)
-                <li class="menu_li_lst_i"><a href="{{$children_item->link}}" class="menu_li_lk">{{$children_item->name}}</a>
+                <li class="menu_li_lst_i @if(isset($menu_items[$children_item->id]))__inner @endif"><a href="{{$children_item->link}}" class="menu_li_lk">{{$children_item->name}}</a>
                     @if(isset($menu_items[$children_item->id]))
                         <div class="menu_li_inner">
                             @foreach($menu_items[$children_item->id] as $bottom_level_item)

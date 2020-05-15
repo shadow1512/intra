@@ -20,7 +20,14 @@
 
 @section('books')
     <div class="content_header">
-        <h1 class="h __h_m">Библиотека</h1>
+        @if (!is_null($curRazdel))
+          <ul class="breadcrumbs">
+              <li class="breadcrumbs_i"><a href="{{route('library')}}" class="breadcrumbs_i_lk">Библиотека</a></li>
+              <li class="breadcrumbs_i __color_base __uppercase">{{$curRazdel->name}}</li>
+          </ul>
+        @else
+          <h1 class="h __h_m">Библиотека</h1>
+        @endif
     </div>
     <div class="content_i inside-page">
         <div class="content_i_w">

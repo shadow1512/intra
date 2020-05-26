@@ -112,7 +112,7 @@
 .reserve_dinner_time {
     border-top: 1px solid #e3e9ed;
     height: 55px;
-    font-size: 0.85em;	
+    font-size: 0.85em;
     line-height: 55px;
     border-radius: 3px 3px 0 0;
 }
@@ -169,7 +169,7 @@
 }
 .reserve_dinner_order {
 	font-size: 0.85em;
-	text-decoration: none;	
+	text-decoration: none;
 	color: #0089cf;
 	white-space: nowrap;
 	margin: 25px 0 0 -7px;
@@ -178,7 +178,7 @@
 .reserve_dinner_cancel {
 	display: none;
 	font-size: 0.85em;
-	text-decoration: none;	
+	text-decoration: none;
 	color: #d51f40;
 	white-space: nowrap;
 	margin: 5px 0 0 0;
@@ -257,4 +257,7 @@
 }
 .reserve-lst_name_i strong {
 	color: #000;
+}
+..main_top_dinner_lst_i {
+  width: 25%;
 }

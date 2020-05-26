@@ -443,6 +443,7 @@ function toggleDropdown(link, cnt) {
         $('.header_login_nav').fadeIn(200);
         $("#input_login").focus();
 
+        return false;
     });
 
     $('html').click(function(e) {

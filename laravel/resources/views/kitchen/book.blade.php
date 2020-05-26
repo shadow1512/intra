@@ -19,14 +19,14 @@
         </div>
         @foreach($book_periods as   $time   =>  $num_records)
         <div class="reserve_dinner">
-            <div class="reserve_dinner_column @if($index    ==  0)__first@endif @if($index    ==  $total_periods - 1)__last@endif @if($total_accepted==$num_records)__red@endif">
+            <div class="reserve_dinner_column @if($index    ==  0)__first @endif @if($index    ==  $total_periods - 1)__last @endif @if($total_accepted==$num_records)__red @endif">
                 <div class="reserve_dinner_time">{{$time}}</div>
                 <div class="reserve_dinner_line">
                     <div class="reserve_dinner_line_bar">
                         <div class="reserve_dinner_line_fill" style="height: {{$num_records/$total_accepted*100}}%;"></div>
                     </div>
                 </div>
-                <div class="reserve_dinner_seat">@if($total_accepted==$num_records)Нет @else{{$total_accepted-$num_records}}@endif мест</div>
+                <div class="reserve_dinner_seat">@if($total_accepted==$num_records)Нет @else{{$total_accepted-$num_records}} @endif мест</div>
                 <a href="#" class="reserve_dinner_btn">Записаться</a>
                 <a href="#" class="reserve_dinner_order">Забронировать столик</a>
                 <a href="#" class="reserve_dinner_cancel">Отменить запись</a>

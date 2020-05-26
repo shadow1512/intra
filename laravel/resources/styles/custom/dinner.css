@@ -213,6 +213,8 @@
 .reserve-lst_i {
 	border-top: 1px solid #e3e9ed;
 	padding: 30px;
+  font-size: 1.2em;
+  line-height: 1.2em;
 }
 .reserve-lst_i.__current {
 	border-top: 0;
@@ -228,7 +230,7 @@
 	padding: 0 30px;
 }
 .reserve-lst_i.__current .reserve-lst_name_i {
-	font-size: 1.2em;
+	font-size: 1.3em;
 	width: 50%;
 }
 .reserve-lst_time {
@@ -254,10 +256,14 @@
 	width: 33.33333%;
 	color: #838383;
 	margin: 15px 0 0 0;
+  line-height: 1.2em;
 }
 .reserve-lst_name_i strong {
 	color: #000;
 }
 .main_top_dinner_lst_i {
   width: 25%;
+}
+.main_top_dinner_lst_i.__logout {
+  width: 33%;
 }

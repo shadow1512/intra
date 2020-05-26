@@ -17,7 +17,7 @@
             <div class="reserve_slide">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}}, {{$day_names[$caldate->format("N")-1]}}</div>
             <div class="reserve_time">До конца записи: <strong>2</strong> часа <strong>32</strong> минуты</div>
         </div>
-        @foreach($book_periods as   $time   =>  $num_records)
+        @foreach($bookings as   $time   =>  $num_records)
         <div class="reserve_dinner">
             <div class="reserve_dinner_column @if($index    ==  0)__first @endif @if($index    ==  $total_periods - 1)__last @endif @if($total_accepted==$num_records)__red @endif">
                 <div class="reserve_dinner_time">{{$time}}</div>

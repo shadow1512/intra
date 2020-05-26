@@ -981,6 +981,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'CreateDataTypesTable' => __DIR__ . '/../..' . '/database/migrations/2016_01_01_000000_create_data_types_table.php',
         'CreateDepartments' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_084240_create_departments.php',
         'CreateDepartmentsKeys' => __DIR__ . '/../..' . '/database/migrations/2018_05_30_195719_create_departments_keys.php',
+        'CreateDinnerBooking' => __DIR__ . '/../..' . '/database/migrations/2020_05_27_005428_create_dinner_booking.php',
         'CreateDinnerSlots' => __DIR__ . '/../..' . '/database/migrations/2019_04_07_215610_create_dinner_slots.php',
         'CreateFeedbackTable' => __DIR__ . '/../..' . '/database/migrations/2019_11_16_175912_create_feedback_table.php',
         'CreateGallery' => __DIR__ . '/../..' . '/database/migrations/2018_06_14_235050_create_gallery.php',

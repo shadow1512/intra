@@ -454,6 +454,7 @@ return array(
     'CreateDataTypesTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_data_types_table.php',
     'CreateDepartments' => $baseDir . '/database/migrations/2017_12_11_084240_create_departments.php',
     'CreateDepartmentsKeys' => $baseDir . '/database/migrations/2018_05_30_195719_create_departments_keys.php',
+    'CreateDinnerBooking' => $baseDir . '/database/migrations/2020_05_27_005428_create_dinner_booking.php',
     'CreateDinnerSlots' => $baseDir . '/database/migrations/2019_04_07_215610_create_dinner_slots.php',
     'CreateFeedbackTable' => $baseDir . '/database/migrations/2019_11_16_175912_create_feedback_table.php',
     'CreateGallery' => $baseDir . '/database/migrations/2018_06_14_235050_create_gallery.php',

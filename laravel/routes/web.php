@@ -54,9 +54,10 @@ Route::get('/profile/delete/{id}', 'ProfileController@deletecontact')->name('pro
 Route::get('/profile/deleteavatar', 'ProfileController@deleteavatar')->name('profile.deleteavatar');
 Route::post('/profile/updateavatar', 'ProfileController@updateavatar')->name('profile.updateavatar');
 
-Route::get('/kitchen/camera', 'RoomsController@index')->name('kitchen.camera');
-Route::get('/kitchen/menu', 'RoomsController@index')->name('kitchen.menu');
-Route::get('/kitchen/bills', 'RoomsController@index')->name('kitchen.bills');
+Route::get('/kitchen/camera', 'DinnerController@index')->name('kitchen.camera');
+Route::get('/kitchen/menu', 'DinnerController@index')->name('kitchen.menu');
+Route::get('/kitchen/bills', 'DinnerController@index')->name('kitchen.bills');
+Route::get('/kitchen/booking', 'DinnerController@book')->name('kitchen.book');
 
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');

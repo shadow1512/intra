@@ -94,7 +94,7 @@ class DinnerController extends Controller
             $booking->time_start        =   $time_start;
 
             $caldate->addMinutes(15);
-            $booking->time_end          =   $caldate->format("h:i");
+            $booking->time_end          =   $caldate->format("H:i");
             $booking->save();
 
             return response()->json(['result' => 'success']);

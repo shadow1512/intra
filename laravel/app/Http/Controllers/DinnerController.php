@@ -105,7 +105,7 @@ class DinnerController extends Controller
         $caldate = Carbon::now();
 
         $bookings = Dinner_booking::leftJoin('users',   'dinner_bookings.user_id',  '=',    'users.id')
-            ->whereDate('dinner_bookings.date_created', '=',    $caldate->toDateString())
+            ->whereDate('dinner_booking.date_created', '=',    $caldate->toDateString())
             ->orderBy('time_start')
             ->get();
 

@@ -51,143 +51,54 @@ class DinnerController extends Controller
 
         return view('kitchen.book', ['periods'  =>  Config::get('dinner.dinner_slots'),   'bookings'   =>  $bookings_by_times,   'total_accepted'    =>  Config::get('dinner.total_accepted')]);
     }
-/*
-    public function createbooking($id, Request $request) {
-        $name          = trim($request->input('input_name'));
-        $date_booking  = trim($request->input('input_date_booking'));
-        $time_start    = trim($request->input('input_time_start'));
-        $time_end      = trim($request->input('input_time_end'));
 
-        $notebook_own   =   $request->input('notebook_own');
-        if(is_null($notebook_own)) {
-            $notebook_own   =   0;
-        }
+    public function createbooking(Request $request) {
+        $time_start          = trim($request->input('time_start'));
 
-        $notebook_ukot   =   $request->input('notebook_ukot');
-        if(is_null($notebook_ukot)) {
-            $notebook_ukot   =   0;
-        }
-
-        $info_internet   =   $request->input('info_internet');
-        if(is_null($info_internet)) {
-            $info_internet   =   0;
-        }
-
-        $info_kodeks   =   $request->input('info_kodeks');
-        if(is_null($info_kodeks)) {
-            $info_kodeks   =   0;
-        }
-
-        $software_skype   =   $request->input('software_skype');
-        if(is_null($software_skype)) {
-            $software_skype   =   0;
-        }
-
-        $software_skype_for_business   =   $request->input('software_skype_for_business');
-        if(is_null($software_skype_for_business)) {
-            $software_skype_for_business   =   0;
-        }
-
-        $type_meeting_webinar   =   $request->input('type_meeting_webinar');
-        if(is_null($type_meeting_webinar)) {
-            $type_meeting_webinar   =   0;
-        }
-
-        $type_meeting_other   =   $request->input('type_meeting_other');
-        if(is_null($type_meeting_other)) {
-            $type_meeting_other   =   0;
-        }
-
-        $notes          = trim($request->input('notes'));
-
-        $messages   =   array(  "input_name.required"           =>  "Поле обязательно для заполнения",
-            "input_name.max"                =>  "Поле не должно быть длиннее, чем 90 символов",
-            "input_date_booking.required"   =>  "Поле обязательно для заполнения",
-            "input_time_start.required"     =>  "Поле обязательно для заполнения",
-            "input_time_end.required"       =>  "Поле обязательно для заполнения",
-            "input_time_start.date_format"  =>  "Время должно быть в формате ЧЧ:ММ",
-            "input_time_end.date_format"    =>  "Время должно быть в формате ЧЧ:ММ",
-            "notes.max"                     =>  "Поле не должно быть длиннее, чем 255 символов"
+        $messages   =   array(      "time_start.required"       =>  "Поле обязательно для заполнения",
+                                    "time_start.date_format"    =>  "Время должно быть в формате ЧЧ:ММ",
         );
 
         $validator = Validator::make($request->all(), [
-            'input_name'            => 'required|max:90',
-            'input_date_booking'    => 'required',
-            'input_time_start'      => 'required|date_format:H:i',
-            'input_time_end'        => 'required|date_format:H:i',
-            'notes'                 => 'nullable|max:255',
+            'time_start'      => 'required|date_format:H:i',
         ],  $messages);
 
         if ($validator->fails()) {
             return response()->json(['error', $validator->errors()]);
         }
         else {
-            if($time_start  <   Config::get('rooms.time_start_default')) {
-                return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start']);
+            if(!in_array($time_start,   Config::get('dinner.dinner_slots'))) {
+                return response()->json(['error',  'message' =>  'wrong time']);
             }
-            if($time_end  >   Config::get('rooms.time_end_default')) {
-                return response()->json(['error',  'message' =>  'time end too late',    'field' =>  'input_time_end']);
+
+            $caldate = new DateTime();
+
+            //Нужно проверить, что не переполнилась запись
+            $num_bookings =   Dinner_booking::whereDate('date_created',    $caldate->format("Y-m-d"))->whereTime("time_start",  "=",    $time_start)->count();
+            if($num_bookings    >   Config::get('dinner.total_accepted')) {
+                return response()->json(['error',  'message' =>  'no places']);
             }
-            //Нужно проверить, что не перекрывается по датам
-            //DB::enableQueryLog();
-            $exists =   Booking::whereDate('date_book',    $date_booking)
-                ->where("room_id",  "=",    $id)
-                ->where(function($query) use ($time_start,  $time_end) {
-                    $query->whereBetween('time_start',  [$time_start,   $time_end])->orWhereBetween('time_end', [$time_start,   $time_end])
-                        ->orWhere(function($query) use ($time_start,  $time_end) {
-                            $query->whereTime('time_start', '<',    $time_start)->whereTime('time_end', '>',    $time_end);
-                        })
-                        ->orWhere(function($query) use ($time_start,  $time_end) {
-                            $query->whereTime('time_start', '>', $time_start)->whereTime('time_end', '<', $time_end);
-                        });
-                })->exists();
-            //print_r(DB::getQueryLog());exit();
+            //Не записались ли мы случаем уже
 
-            if($exists) {
-                return response()->json(['error',  'message' =>  'crossing detected']);
+            $exist = Dinner_booking::whereDate('date_created', $date_booking)->where("user_id", "=", Auth::user()->id)->get();
+            if ($exist) {
+                return response()->json(['error', 'message' => 'already booked']);
             }
-            else {
-                $date = date("Y-m-d H:i:s");
-                if (Auth::check()) {
-                    $approved   =   0;
-                    $room = Rooms::findOrFail($id);
-                    if($room->available) {
-                        $approved   =   1;
-                    }
 
-                    $booking    =   new Booking();
-                    $booking->room_id   =   $id;
-                    $booking->name      =   $name;
-                    $booking->date_book =   $date_booking;
-                    $booking->user_id   =   Auth::user()->id;
-                    $booking->time_start    =   $time_start;
-                    $booking->time_end      =   $time_end;
-                    $booking->approved  =   $approved;
-                    $booking->notebook_own      =   $notebook_own;
-                    $booking->notebook_ukot     =   $notebook_ukot;
-                    $booking->info_internet     =   $info_internet;
-                    $booking->info_kodeks       =   $info_kodeks;
-                    $booking->software_skype    =   $software_skype;
-                    $booking->software_skype_for_business    =   $software_skype_for_business;
-                    $booking->type_meeting_webinar           =   $type_meeting_webinar;
-                    $booking->type_meeting_other             =   $type_meeting_other;
-                    $booking->notes             =   $notes;
+            $booking    =   new Dinner_booking();
+            $booking->user_id           =   Auth->user()->id;
+            $booking->date_created      =   $caldate->format("Y-m-d");
+            $booking->time_start        =   $time_start;
 
-                    $booking->save();
+            $caldate->add(new DateInterval("P"  .   Config::get('dinner.time_period')    .   "i"));
+            $booking->time_end          =   $caldate->format("H:i");
+            $booking->save();
 
-                    if(!$booking->approved  &&  $room->notify_email) {
-                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                            $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                        });
-                    }
-                    return response()->json(['result' => 'success']);
-                }
-            }
+            return response()->json(['result' => 'success']);
         }
     }
 
-    public function viewbooking($id) {
+    /*public function viewbooking($id) {
         $booking =  Booking::findOrFail($id);
         $rooms  =   Rooms::orderBy('name')->get();
 

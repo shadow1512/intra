@@ -20,6 +20,6 @@ return array (
         '14:30',
         '14:45'
     ),
-    'time_period'       =>  '15m',
+    'time_period'       =>  '15',
     'total_accepted'    =>  30
 );

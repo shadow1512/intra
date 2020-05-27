@@ -59,6 +59,7 @@ Route::get('/kitchen/menu', 'DinnerController@index')->name('kitchen.menu');
 Route::get('/kitchen/bills', 'DinnerController@index')->name('kitchen.bills');
 Route::get('/kitchen/booking', 'DinnerController@book')->name('kitchen.book');
 Route::put('/kitchen/booking/book', 'DinnerController@createbooking')->name('kitchen.book.create');
+Route::get('/kitchen/booking/list', 'DinnerController@listbookings')->name('kitchen.book.list');
 
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');

@@ -80,13 +80,13 @@ class DinnerController extends Controller
             }
             //Не записались ли мы случаем уже
 
-            $exist = Dinner_booking::whereDate('date_created', $date_booking)->where("user_id", "=", Auth::user()->id)->get();
+            $exist = Dinner_booking::whereDate('date_created', '=', $caldate->format("Y-m-d"))->where("user_id", "=", Auth::user()->id)->get();
             if ($exist) {
                 return response()->json(['error', 'message' => 'already booked']);
             }
 
             $booking    =   new Dinner_booking();
-            $booking->user_id           =   Auth->user()->id;
+            $booking->user_id           =   Auth::user()->id;
             $booking->date_created      =   $caldate->format("Y-m-d");
             $booking->time_start        =   $time_start;
 

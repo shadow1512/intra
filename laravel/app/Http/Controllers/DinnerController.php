@@ -45,10 +45,9 @@ class DinnerController extends Controller
 
         $bookings_by_times = array();
         foreach($bookings as $booking) {
-            $bookings_by_times[$booking->time_start] = $booking['num_records'];
+            $bookings_by_times[\Carbon\Carbon::parse($booking->time_start)->format("H:i")] = $booking['num_records'];
         }
 
-        var_dump($bookings_by_times);
         return view('kitchen.book', [   'periods'           =>  Config::get('dinner.dinner_slots'),
                                         'bookings'          =>  $bookings_by_times,
                                         'total_accepted'    =>  Config::get('dinner.total_accepted'),

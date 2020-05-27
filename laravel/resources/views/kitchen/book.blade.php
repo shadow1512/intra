@@ -36,7 +36,7 @@
                         <div class="reserve_dinner_line_fill" style="height: {{$num_records/$total_accepted*100}}%;"></div>
                     </div>
                 </div>
-                <div class="reserve_dinner_seat">@if($kitchen_booking) Вы записаны <span>на&nbsp;{{$kitchen_booking->time_start}}</span> @else @if($total_accepted==$num_records)Нет @else{{$total_accepted-$num_records}} @endif мест @endif</div>
+                <div class="reserve_dinner_seat">@if($kitchen_booking) Вы записаны <span>на&nbsp;{{\Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")}}</span> @else @if($total_accepted==$num_records)Нет @else{{$total_accepted-$num_records}} @endif мест @endif</div>
                 <a href="#" class="reserve_dinner_btn">Записаться</a>
                 <a href="#" class="reserve_dinner_order">Забронировать столик</a>
                 <a href="#" class="reserve_dinner_cancel">Отменить запись</a>

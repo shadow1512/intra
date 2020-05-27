@@ -49,7 +49,10 @@ class DinnerController extends Controller
             $bookings_by_times[$booking->time_start] = $booking['num_records'];
         }
 
-        return view('kitchen.book', ['periods'  =>  Config::get('dinner.dinner_slots'),   'bookings'   =>  $bookings_by_times,   'total_accepted'    =>  Config::get('dinner.total_accepted')]);
+        return view('kitchen.book', [   'periods'  =>  Config::get('dinner.dinner_slots'),
+                                        'bookings'   =>  $bookings_by_times,
+                                        'total_accepted'    =>  Config::get('dinner.total_accepted'),
+                                        'kitchen_booking'   =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->format("Y-m-d"))]);
     }
 
     public function createbooking(Request $request) {

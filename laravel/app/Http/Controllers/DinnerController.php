@@ -115,6 +115,6 @@ class DinnerController extends Controller
         }
 
         return view('kitchen.list', [   'periods'           =>  Config::get('dinner.dinner_slots'),
-                                        'bookings_by_times' =>  $bookings_by_times]);
+                                        'bookings_by_time'  =>  $bookings_by_times]);
     }
 }

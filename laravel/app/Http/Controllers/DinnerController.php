@@ -11,8 +11,7 @@ namespace App\Http\Controllers;
 use App\Dinner_booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use DateTime;
-use DateInterval;
+use Carbon\Carbon;
 use Config;
 use Auth;
 use View;
@@ -36,10 +35,10 @@ class DinnerController extends Controller
 
     public function book()
     {
-        $caldate = new DateTime();
+        $caldate = Carbon::now();
 
         $bookings = Dinner_booking::selectRaw('COUNT(id) as num_records, time_start')
-            ->whereDate('date_created', '=',    $caldate->format("Y-m-d"))
+            ->whereDate('date_created', '=',    $caldate->toDateString())
             ->groupBy('time_start')
             ->orderBy('time_start')
             ->get();
@@ -52,7 +51,7 @@ class DinnerController extends Controller
         return view('kitchen.book', [   'periods'  =>  Config::get('dinner.dinner_slots'),
                                         'bookings'   =>  $bookings_by_times,
                                         'total_accepted'    =>  Config::get('dinner.total_accepted'),
-                                        'kitchen_booking'   =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->format("Y-m-d"))]);
+                                        'kitchen_booking'   =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->toDateString())]);
     }
 
     public function createbooking(Request $request) {
@@ -74,27 +73,27 @@ class DinnerController extends Controller
                 return response()->json(['error',  'message' =>  'wrong time']);
             }
 
-            $caldate = new DateTime();
+            $caldate = Carbon::now();
 
             //Нужно проверить, что не переполнилась запись
-            $num_bookings =   Dinner_booking::whereDate('date_created',    $caldate->format("Y-m-d"))->whereTime("time_start",  "=",    $time_start)->count();
+            $num_bookings =   Dinner_booking::whereDate('date_created',    $caldate->toDateString())->whereTime("time_start",  "=",    $time_start)->count();
             if($num_bookings    >   Config::get('dinner.total_accepted')) {
                 return response()->json(['error',  'message' =>  'no places']);
             }
             //Не записались ли мы случаем уже
 
-            $exist = Dinner_booking::whereDate('date_created', '=', $caldate->format("Y-m-d"))->where("user_id", "=", Auth::user()->id)->exists();
+            $exist = Dinner_booking::whereDate('date_created', '=', $caldate->toDateString())->where("user_id", "=", Auth::user()->id)->exists();
             if ($exist) {
                 return response()->json(['error', 'message' => 'already booked']);
             }
 
             $booking    =   new Dinner_booking();
             $booking->user_id           =   Auth::user()->id;
-            $booking->date_created      =   $caldate->format("Y-m-d");
+            $booking->date_created      =   $caldate->toDateString();
             $booking->time_start        =   $time_start;
 
-            $caldate->add(new DateInterval("P"  .   Config::get('dinner.time_period')    .   "i"));
-            $booking->time_end          =   $caldate->format("H:i");
+            $caldate->addMinutes(15);
+            $booking->time_end          =   $caldate->format("h:i");
             $booking->save();
 
             return response()->json(['result' => 'success']);

@@ -83,8 +83,7 @@ class DinnerController extends Controller
             }
             //Не записались ли мы случаем уже
 
-            $exist = Dinner_booking::whereDate('date_created', '=', $caldate->format("Y-m-d"))->where("user_id", "=", Auth::user()->id)->get();
-            var_dump($exist);
+            $exist = Dinner_booking::whereDate('date_created', '=', $caldate->format("Y-m-d"))->where("user_id", "=", Auth::user()->id)->exists();
             if ($exist) {
                 return response()->json(['error', 'message' => 'already booked']);
             }

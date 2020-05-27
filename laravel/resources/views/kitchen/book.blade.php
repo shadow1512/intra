@@ -10,7 +10,7 @@
     $caldate      = new DateTime();
 
     $currtime   =   \Carbon\Carbon::now();
-    $lasttime   =   \Carbon\Carbon::parse(date("Y-m-d") .   " " .   $periods[$total_periods -   1]  .   ":00");
+    $lasttime   =   \Carbon\Carbon::parse(date("Y-m-d") .   " 12:00:00");
     //номер дня недели
     $curweekday = $caldate->format("N");
 @endphp
@@ -21,7 +21,7 @@
             </form>
             <h1 class="h __h_m reserve_h_t">Бронирование столовой</h1>
             <div class="reserve_slide">{{$caldate->format("j")}} {{$month_names[$caldate->format("n") - 1]}}, {{$day_names[$caldate->format("N")-1]}}</div>
-            <div class="reserve_time @if($kitchen_booking)__grey @endif">@if($kitchen_booking   ||  (\Carbon\Carbon::now()->format("H:i")   >   $periods[$total_periods -   1])) Запись на сегодня завершена @else До конца записи: <strong>{{floor($lasttime->diffInMinutes($currtime)/60)}}</strong> часа <strong>{{$lasttime->diffInMinutes($currtime)%60}}</strong> минуты @endif</div>
+            <div class="reserve_time @if($kitchen_booking)__grey @endif">@if($kitchen_booking   ||  (\Carbon\Carbon::now()->format("H:i")   >   "12:00")) Запись на сегодня завершена @else До конца записи: <strong>{{floor($lasttime->diffInMinutes($currtime)/60)}}</strong> часа <strong>{{$lasttime->diffInMinutes($currtime)%60}}</strong> минуты @endif</div>
         </div>
         <div class="reserve_dinner @if($kitchen_booking)__booked @endif">
         @foreach($periods as $period)

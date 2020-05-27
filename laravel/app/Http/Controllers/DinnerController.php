@@ -69,11 +69,17 @@ class DinnerController extends Controller
             return response()->json(['error', $validator->errors()]);
         }
         else {
+
+            $caldate = Carbon::now();
+
+            if($caldate->format("H:i")  >   Config::get('dinner.last_time')) {
+                return response()->json(['error',  'message' =>  'missed time']);
+            }
+
             if(!in_array($time_start,   Config::get('dinner.dinner_slots'))) {
                 return response()->json(['error',  'message' =>  'wrong time']);
             }
 
-            $caldate = Carbon::now();
 
             //Нужно проверить, что не переполнилась запись
             $num_bookings =   Dinner_booking::whereDate('date_created',    $caldate->toDateString())->whereTime("time_start",  "=",    $time_start)->count();

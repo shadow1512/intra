@@ -21,5 +21,6 @@ return array (
         '14:45'
     ),
     'time_period'       =>  '15',
-    'total_accepted'    =>  3
+    'total_accepted'    =>  3,
+    'last_time'         =>  '12:00'
 );

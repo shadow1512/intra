@@ -48,8 +48,9 @@ class DinnerController extends Controller
             $bookings_by_times[$booking->time_start] = $booking['num_records'];
         }
 
-        return view('kitchen.book', [   'periods'  =>  Config::get('dinner.dinner_slots'),
-                                        'bookings'   =>  $bookings_by_times,
+        var_dump($bookings_by_times);
+        return view('kitchen.book', [   'periods'           =>  Config::get('dinner.dinner_slots'),
+                                        'bookings'          =>  $bookings_by_times,
                                         'total_accepted'    =>  Config::get('dinner.total_accepted'),
                                         'kitchen_booking'   =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->toDateString())]);
     }
@@ -87,6 +88,7 @@ class DinnerController extends Controller
                 return response()->json(['error', 'message' => 'already booked']);
             }
 
+            $caldate = Carbon::createFromFormat("Y-m-d H:i",    $caldate->toDateString()    .   " " .   $time_start);
             $booking    =   new Dinner_booking();
             $booking->user_id           =   Auth::user()->id;
             $booking->date_created      =   $caldate->toDateString();

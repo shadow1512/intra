@@ -29,7 +29,7 @@
                     $num_records    =   $bookings[$period];
                 }
             @endphp
-            <div class="reserve_dinner_column @if($index    ==  0)__first @endif @if($index    ==  $total_periods - 1)__last @endif @if($kitchen_booking)__booked @else @if($total_accepted==$num_records)__red @endif @endif">
+            <div class="reserve_dinner_column @if($index    ==  0)__first @endif @if($index    ==  $total_periods - 1)__last @endif @if($kitchen_booking    &&  $kitchen_booking->time_start    ==  $period)__green @else @if($total_accepted==$num_records)__red @endif @endif">
                 <div class="reserve_dinner_time">{{$period}}</div>
                 <div class="reserve_dinner_line">
                     <div class="reserve_dinner_line_bar">

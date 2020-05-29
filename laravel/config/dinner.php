@@ -21,6 +21,6 @@ return array (
         '14:45'
     ),
     'time_period'       =>  '15',
-    'total_accepted'    =>  15,
-    'last_time'         =>  '12:02'
+    'total_accepted'    =>  6,
+    'last_time'         =>  '12:00'
 );

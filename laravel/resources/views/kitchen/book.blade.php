@@ -24,8 +24,6 @@
             <div class="reserve_time @if($kitchen_booking)__grey @endif">@if($kitchen_booking   ||  (\Carbon\Carbon::now()->format("H:i")   >   Config::get('dinner.last_time'))) Запись на сегодня завершена @else До конца записи: <strong>@if(floor($lasttime->diffInMinutes($currtime)/60)){{floor($lasttime->diffInMinutes($currtime)/60)}}</strong> {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm(floor($lasttime->diffInMinutes($currtime)/60),  "час"))}} @endif <strong>{{$lasttime->diffInMinutes($currtime)%60}}</strong> {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm($lasttime->diffInMinutes($currtime)%60,  "минута"))}} @endif</div>
         </div>
         <div class="reserve_dinner @if($kitchen_booking)__booked @endif">
-            {{mb_strtolower(\App\Dinner_booking::allForms("место"))}}
-            {{mb_strtolower(\App\Dinner_booking::allForms("час"))}}
         @foreach($periods as $period)
             @php
                 $num_records    =   0;

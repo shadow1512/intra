@@ -32,16 +32,32 @@ class Dinner_booking extends Model
                 return $forms[1];
             }
             if(in_array($number,    array("5",  "6",    "7",    "8",    "9"))) {
-                return $forms[6];
+                if(mb_substr($word,   mb_strlen($word,  "UTF-8")   -   1,  1)   ==  "О") {
+                    return $forms[5];
+                }
+                else {
+                    return $forms[6];
+                }
+
             }
         }
         else {
             if(mb_substr($number,   $length -   2,  1)  ==  1) {
-                return $forms[6];
+                if(mb_substr($word,   mb_strlen($word,  "UTF-8")   -   1,  1)   ==  "О") {
+                    return $forms[5];
+                }
+                else {
+                    return $forms[6];
+                }
             }
             else {
                 if(in_array((mb_substr($number,   $length   -   1,  1)),    array("5",  "6",    "7",    "8",    "9",   "0"))) {
-                    return $forms[6];
+                    if(mb_substr($word,   mb_strlen($word,  "UTF-8")   -   1,  1)   ==  "О") {
+                        return $forms[5];
+                    }
+                    else {
+                        return $forms[6];
+                    }
                 }
                 if(in_array((mb_substr($number,   $length   -   1,  1)),    array("1"))) {
                     return $forms[0];

@@ -24,6 +24,8 @@
             <div class="reserve_time @if($kitchen_booking)__grey @endif">@if($kitchen_booking   ||  (\Carbon\Carbon::now()->format("H:i")   >   Config::get('dinner.last_time'))) Запись на сегодня завершена @else До конца записи: <strong>@if(floor($lasttime->diffInMinutes($currtime)/60)){{floor($lasttime->diffInMinutes($currtime)/60)}}</strong> {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm(floor($lasttime->diffInMinutes($currtime)/60),  "час"))}} @endif <strong>{{$lasttime->diffInMinutes($currtime)%60}}</strong> {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm($lasttime->diffInMinutes($currtime)%60,  "минута"))}} @endif</div>
         </div>
         <div class="reserve_dinner @if($kitchen_booking)__booked @endif">
+            {{mb_strtolower(\App\Dinner_booking::allForms("место"))}}
+            {{mb_strtolower(\App\Dinner_booking::allForms("час"))}}
         @foreach($periods as $period)
             @php
                 $num_records    =   0;
@@ -40,7 +42,6 @@
                         <div class="reserve_dinner_line_fill" style="height: {{$num_records/$total_accepted*100}}%;"></div>
                     </div>
                 </div>
-                {{mb_strtolower(\App\Dinner_booking::allForms("место"))}}
                 <div class="reserve_dinner_seat">@if($kitchen_booking    &&  \Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")    ==  $period) Вы записаны <span>на&nbsp;{{\Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")}}</span> @else @if($total_accepted==$num_records)Нет мест @else{{$total_accepted-$num_records}} {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm($total_accepted-$num_records,  "место"))}} @endif @endif</div>
                 <a href="#" class="reserve_dinner_btn">Записаться</a>
                 @if(Auth::user()->role_id   ==  5)

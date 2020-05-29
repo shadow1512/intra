@@ -30,12 +30,7 @@
         @endif
     </div>
     <div class="content_i inside-page">
-        <div class="content_i_w @if (!is_null($curRazdel)) __border_top @endif">
-            @if (is_null($curRazdel))
-            <div class="content_i_header">
-                <div class="h __h_m">Вся библиотека</div>
-            </div>
-            @endif
+        <div class="content_i_w __border_top">
             <div class="content_tx __no-pad">
                 @if (count($books))
                 <ul class="library_lst">

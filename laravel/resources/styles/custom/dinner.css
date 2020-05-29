@@ -40,10 +40,10 @@
 .reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_line {
 	border: 0;
 }
-.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_btn,
-.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_order {
+.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_btn {
 	display: none;
 }
+
 .reserve_dinner.__booked .reserve_dinner_column.__red:hover .reserve_dinner_seat {
 	background: none;
 	color: #ea8fa0;
@@ -182,7 +182,7 @@
 	color: #d51f40;
 	white-space: nowrap;
 	margin: 5px 0 0 0;
-	line-height: 45px;
+	line-height: 70px;
 }
 @media screen and (max-width: 1180px) {
 	.reserve_dinner_order {

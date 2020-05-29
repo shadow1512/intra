@@ -52,4 +52,9 @@ class Dinner_booking extends Model
             }
         }
     }
+
+    public static function allForms($word) {
+        $word   =   mb_strtoupper($word,    "UTF-8");
+        var_dump(Morphy::getAllForms($word));
+    }
 }

@@ -40,6 +40,7 @@
                         <div class="reserve_dinner_line_fill" style="height: {{$num_records/$total_accepted*100}}%;"></div>
                     </div>
                 </div>
+                {{mb_strtolower(\App\Dinner_booking::allForms("место"))}}
                 <div class="reserve_dinner_seat">@if($kitchen_booking    &&  \Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")    ==  $period) Вы записаны <span>на&nbsp;{{\Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")}}</span> @else @if($total_accepted==$num_records)Нет мест @else{{$total_accepted-$num_records}} {{mb_strtolower(\App\Dinner_booking::getWordInCorrectForm($total_accepted-$num_records,  "место"))}} @endif @endif</div>
                 <a href="#" class="reserve_dinner_btn">Записаться</a>
                 @if(Auth::user()->role_id   ==  5)

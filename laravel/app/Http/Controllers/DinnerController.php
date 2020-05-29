@@ -37,10 +37,7 @@ class DinnerController extends Controller
     {
         $caldate = Carbon::now();
 
-        $bookings = Dinner_booking::whereDate('date_created', '=',    $caldate->toDateString())
-            ->groupBy('time_start')
-            ->orderBy('time_start')
-            ->get();
+        $bookings = Dinner_booking::whereDate('date_created', '=',    $caldate->toDateString())->orderBy('time_start')->get();
 
         $bookings_by_times = array();
         foreach($bookings as $booking) {

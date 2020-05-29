@@ -44,7 +44,6 @@ class DinnerController extends Controller
             $bookings_by_times[\Carbon\Carbon::parse($booking->time_start)->format("H:i")][] = $booking;
         }
 
-        var_dump(Morphy::getAllForms("ЧАС"));
         return view('kitchen.book', [   'periods'                   =>  Config::get('dinner.dinner_slots'),
                                         'bookings'                  =>  $bookings_by_times,
                                         'total_accepted'            =>  Config::get('dinner.total_accepted'),

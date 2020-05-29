@@ -15,7 +15,6 @@ use Carbon\Carbon;
 use Config;
 use Auth;
 use View;
-use cijic\phpMorphy\Facade\Morphy;
 
 class DinnerController extends Controller
 {

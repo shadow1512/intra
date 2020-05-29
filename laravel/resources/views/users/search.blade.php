@@ -150,8 +150,8 @@
                             <!--<div class="directory_lst_i_name_status"></div>-->
                             </div>
                             <div class="directory_lst_i_info">
-                                <div class="directory_lst_i_info_i">Местный телефон: {{$contact->phone}}</div>
-                                @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный телефон: {{$contact->mobile_phone}}</div>@endif
+                                <div class="directory_lst_i_info_i">Местный телефон: {{$user->phone}}</div>
+                                @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный телефон: {{$user->mobile_phone}}</div>@endif
                                 <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                             </div>

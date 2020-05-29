@@ -31,7 +31,7 @@ class Dinner_booking extends Model
             if(in_array($number,    array("2",  "3",    "4"))) {
                 return $forms[1];
             }
-            if(in_array($number,    array("5",  "6",    "7",    "8",    "9"))) {
+            if(in_array($number,    array("5",  "6",    "7",    "8",    "9",    "0"))) {
                 if(mb_substr($word,   mb_strlen($word,  "UTF-8")   -   1,  1)   ==  "О") {
                     return $forms[5];
                 }

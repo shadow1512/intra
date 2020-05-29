@@ -37,21 +37,21 @@ class DinnerController extends Controller
     {
         $caldate = Carbon::now();
 
-        $bookings = Dinner_booking::selectRaw('COUNT(id) as num_records, time_start')
-            ->whereDate('date_created', '=',    $caldate->toDateString())
+        $bookings = Dinner_booking::whereDate('date_created', '=',    $caldate->toDateString())
             ->groupBy('time_start')
             ->orderBy('time_start')
             ->get();
 
         $bookings_by_times = array();
         foreach($bookings as $booking) {
-            $bookings_by_times[\Carbon\Carbon::parse($booking->time_start)->format("H:i")] = $booking['num_records'];
+            $bookings_by_times[\Carbon\Carbon::parse($booking->time_start)->format("H:i")][] = $booking;
         }
 
-        return view('kitchen.book', [   'periods'           =>  Config::get('dinner.dinner_slots'),
-                                        'bookings'          =>  $bookings_by_times,
-                                        'total_accepted'    =>  Config::get('dinner.total_accepted'),
-                                        'kitchen_booking'   =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->toDateString())]);
+        return view('kitchen.book', [   'periods'                   =>  Config::get('dinner.dinner_slots'),
+                                        'bookings'                  =>  $bookings_by_times,
+                                        'total_accepted'            =>  Config::get('dinner.total_accepted'),
+                                        'kitchen_booking'           =>  Dinner_booking::getRecordByUserAndDate(Auth::user()->id, $caldate->toDateString()),
+                                        'kitchen_booking_banket'    =>  Dinner_booking::getRecordBanketByUserAndDate(Auth::user()->id, $caldate->toDateString())]);
     }
 
     public function createbooking(Request $request) {

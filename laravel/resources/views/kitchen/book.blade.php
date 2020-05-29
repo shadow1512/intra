@@ -28,7 +28,9 @@
             @php
                 $num_records    =   0;
                 if(isset($bookings[$period])) {
-                    $num_records    =   $bookings[$period];
+                    foreach($bookings[$period]  as $booking) {
+                        $num_records    ++;
+                    }
                 }
             @endphp
             <div class="reserve_dinner_column @if($index    ==  0)__first @endif @if($index    ==  $total_periods - 1)__last @endif @if($kitchen_booking    &&  \Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")    ==  $period)__green @else @if($total_accepted==$num_records)__red @endif @endif">
@@ -40,8 +42,12 @@
                 </div>
                 <div class="reserve_dinner_seat">@if($kitchen_booking    &&  \Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")    ==  $period) Вы записаны <span>на&nbsp;{{\Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")}}</span> @else @if($total_accepted==$num_records)Нет @else{{$total_accepted-$num_records}} @endif мест @endif</div>
                 <a href="#" class="reserve_dinner_btn">Записаться</a>
+                @if(Auth::user()->role_id   ==  5)
                 <a href="#" class="reserve_dinner_order">Забронировать столик</a>
+                @if($kitchen_banket_booking)
                 <a href="#" class="reserve_dinner_cancel">Отменить запись</a>
+                @endif
+                @endif
             </div>
             @php
                 $index++;

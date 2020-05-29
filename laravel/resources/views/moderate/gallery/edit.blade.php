@@ -83,7 +83,8 @@
                                 @if(count($photos))
                                     @foreach($photos as $photo)
                                         <tr class="template-download fade in">
-                                            <td><span class="preview"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery=""><img src="{{$photo->image_th}}"></a></span></td>
+                                            @if($photo->filetype    ==  "image")<td><span class="preview"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery=""><img src="{{$photo->image_th}}"></a></span></td>@endif
+                                            @if($photo->filetype    ==  "video")<td><span class="preview"><video src="{{$photo->image}}" controls=""></video></span></td>@endif
                                             <td><p class="name"><a href="{{$photo->image}}" title="{{$photo->desc}}" download="{{$photo->desc}}" data-gallery="">{{$photo->desc}}</a></p></td>
                                             <td><span class="size">{{$photo->size}} KB</span></td>
                                             <td><button class="btn btn-danger delete" data-type="GET" data-url="{{route('moderate.foto.deleteimage',    ["id"   =>  $photo->id])}}"><i class="glyphicon glyphicon-trash"></i><span>Удалить</span></button><input type="checkbox" name="delete" value="1" class="toggle"></td>
@@ -148,8 +149,11 @@
                                       <tr class="template-download fade">
                                           <td>
                                               <span class="preview">
-                                                  {% if (file.thumbnailUrl) { %}
+                                                  {% if (file.thumbnailUrl && file.type == 'image') { %}
                                                       <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                                                  {% } %}
+                                                  {% if (file.thumbnailUrl && file.type == 'video') { %}
+                                                       <video src="{%=file.thumbnailUrl%}" controls=""></video>
                                                   {% } %}
                                               </span>
                                           </td>

@@ -1,0 +1,269 @@
+.reserve_h:after {
+    content: "";
+	display: table;
+	clear: both;
+}
+.reserve_time {
+	position: absolute;
+    right: 30px;
+    top: 50%;
+    margin-top: -18px;
+    height: 36px;
+    background: #eef9f5;
+    color: #3bb98e;
+    font-size: 0.8em;
+    line-height: 36px;
+    padding: 0 17px;
+    border-radius: 3px;
+}
+.reserve_time.__grey {
+	background: #f1f1f1;
+	color: #6a6d6f;
+}
+.reserve_dinner {
+	padding: 0 30px;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAFsCAIAAAH1bXR4AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMDE0IDc5LjE1Njc5NywgMjAxNC8wOC8yMC0wOTo1MzowMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTQgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkY5NUUwNkEyOUUzNDExRUFBOTI5QjRDNUYwM0U0RTEzIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkY5NUUwNkEzOUUzNDExRUFBOTI5QjRDNUYwM0U0RTEzIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6Rjk1RTA2QTA5RTM0MTFFQUE5MjlCNEM1RjAzRTRFMTMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6Rjk1RTA2QTE5RTM0MTFFQUE5MjlCNEM1RjAzRTRFMTMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6Pv9xwAAAASklEQVR42mJ4/PIt4////7Hib99/DFYMEEA43TyI3Q0QQHjdjAMzgOJnMMfDIMSgMAMIMHLCmmxMK3+8+fBpSIX7qHtpiz9++QYAfC0jZJvOs44AAAAASUVORK5CYII=') 0 0 repeat-x;
+}
+.reserve_dinner:after {
+    content: "";
+	display: table;
+	clear: both;
+}
+.reserve_dinner.__booked .reserve_dinner_line_fill,
+.reserve_dinner.__booked .reserve_dinner_column.__red .reserve_dinner_line_fill {
+	background: #c4c8cb;
+}
+.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_time {
+	border: 0;
+	border-top: 1px solid #e3e9ed;
+}
+.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_line {
+	border: 0;
+}
+.reserve_dinner.__booked .reserve_dinner_column:hover .reserve_dinner_btn {
+	display: none;
+}
+
+.reserve_dinner.__booked .reserve_dinner_column.__red:hover .reserve_dinner_seat {
+	background: none;
+	color: #ea8fa0;
+}
+.reserve_dinner_column.__green {
+	color: #21b07f;
+}
+.reserve_dinner_column.__green .reserve_dinner_line_fill {
+	background: #21b07f;
+}
+.reserve_dinner_column.__green .reserve_dinner_seat {
+	color: #21b07f;
+}
+.reserve_dinner_column {
+    float: left;
+    width: 10%;
+    position: relative;
+    -webkit-transition: all .01s ease-in;
+    transition: all .01s ease-in;
+    position: relative;
+    text-align: center;
+    min-height: 455px;
+}
+.reserve_dinner_column.__red {
+	color: #d51f40;
+}
+.reserve_dinner_column.__red .reserve_dinner_line_fill {
+	background: #d51f40;
+}
+.reserve_dinner_column.__red .reserve_dinner_seat {
+	color: #ea8fa0;
+}
+.reserve_dinner_column.__red .reserve_dinner_btn {
+	background: #c4c4c4;
+	color: #fff;
+}
+.reserve_dinner_column:hover .reserve_dinner_time {
+	border: 1px solid #7bc0e3;
+	border-bottom: 0;
+}
+.reserve_dinner_column:hover .reserve_dinner_line {
+	border-left: 1px solid #7bc0e3;
+	border-right: 1px solid #7bc0e3;
+}
+.reserve_dinner_column:hover .reserve_dinner_btn,
+.reserve_dinner_column:hover .reserve_dinner_order {
+	display: block;
+}
+.reserve_dinner_column.__red:hover .reserve_dinner_time {
+	border: 1px solid #c4c4c4;
+	border-bottom: 0;
+}
+.reserve_dinner_column.__red:hover .reserve_dinner_line {
+	border-left: 1px solid #c4c4c4;
+	border-right: 1px solid #c4c4c4;
+}
+.reserve_dinner_column.__red:hover .reserve_dinner_seat {
+	background: #c4c4c4;
+	color: #fff;
+	border-radius: 0 0 3px 3px;
+}
+.reserve_dinner_column.__red:hover .reserve_dinner_btn,
+.reserve_dinner_column.__red:hover .reserve_dinner_order {
+	display: none;
+}
+.reserve_dinner_time {
+    border-top: 1px solid #e3e9ed;
+    height: 55px;
+    font-size: 0.85em;
+    line-height: 55px;
+    border-radius: 3px 3px 0 0;
+}
+.reserve_dinner_line {
+	padding-top: 44px;
+}
+.reserve_dinner_line_bar {
+	background: #e2e5e7;
+	height: 263px;
+	width: 60px;
+	margin: 0 auto;
+	border-radius: 3px 3px 0 0;
+	position: relative;
+}
+.reserve_dinner_line_fill {
+	width: 100%;
+	background: #1f97d5;
+	border-radius: 3px 3px 0 0;
+	position: absolute;
+	bottom: 0;
+}
+.reserve_dinner_seat {
+	font-size: 0.85em;
+	color: #97a7b7;
+	height: 45px;
+	line-height: 45px;
+	-webkit-transition: all .01s ease-in;
+    transition: all .01s ease-in;
+    white-space: nowrap;
+}
+.reserve_dinner_seat span {
+	display: block;
+	line-height: 1em;
+	margin-top: -10px;
+}
+.reserve_dinner_btn {
+	background: #0089cf;
+	font-size: 0.85em;
+	color: #fff;
+	height: 45px;
+	width: 100%;
+	line-height: 45px;
+	border-radius: 0 0 3px 3px;
+	text-decoration: none;
+	position: absolute;
+	top: 362px;
+	display: none;
+	-webkit-transition: all .01s ease-in;
+    transition: all .01s ease-in;
+}
+.reserve_dinner_btn:hover {
+	color: #fff;
+	text-decoration: none;
+}
+.reserve_dinner_order {
+	font-size: 0.85em;
+	text-decoration: none;
+	color: #0089cf;
+	white-space: nowrap;
+	margin: 25px 0 0 -7px;
+	display: none;
+}
+.reserve_dinner_cancel {
+	display: none;
+	font-size: 0.85em;
+	text-decoration: none;
+	color: #d51f40;
+	white-space: nowrap;
+	margin: 5px 0 0 0;
+	line-height: 70px;
+}
+@media screen and (max-width: 1180px) {
+	.reserve_dinner_order {
+		margin-left: -15px;
+	}
+}
+
+.reserve_h_current {
+	color: #1f97d5;
+	font-size: 0.85em;
+	text-align: left;
+}
+.reserve_h_current_time {
+	display: block;
+	font-size: 3.5em;
+	font-weight: bold;
+	line-height: 1em;
+}
+.reserve_h_date {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+	text-align: right;
+	font-size: 0.85em;
+}
+/* lst */
+.reserve.__list .reserve_h { padding-bottom: 0; }
+.reserve-lst_i {
+	border-top: 1px solid #e3e9ed;
+	padding: 30px;
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+.reserve-lst_i.__current {
+	border-top: 0;
+	padding: 0 0 30px;
+}
+.reserve-lst_i.__current .reserve-lst_time {
+	color: #1f97d5;
+	font-size: 3.5em;
+	padding: 0 30px 15px;
+	border-bottom: 1px solid #e3e9ed;
+}
+.reserve-lst_i.__current .reserve-lst_name {
+	padding: 0 30px;
+}
+.reserve-lst_i.__current .reserve-lst_name_i {
+	font-size: 1.3em;
+	width: 50%;
+}
+.reserve-lst_time {
+	color: #c4c8cb;
+	font-size: 2.5em;
+	font-weight: bold;
+	line-height: 1em;
+	margin-bottom: 15px;
+}
+.reserve-lst_name {
+	display: block;
+	margin: 0;
+	padding: 0;
+}
+.reserve-lst_name:after {
+    content: "";
+	display: table;
+	clear: both;
+}
+.reserve-lst_name_i {
+	display: block;
+	float: left;
+	width: 33.33333%;
+	color: #838383;
+	margin: 15px 0 0 0;
+  line-height: 1.2em;
+}
+.reserve-lst_name_i strong {
+	color: #000;
+}
+.main_top_dinner_lst_i {
+  width: 25%;
+}
+.main_top_dinner_lst_i.__logout {
+  width: 33%;
+}

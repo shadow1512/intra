@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Cookie;
 use Illuminate\Cookie\CookieJar;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Adldap\Laravel\Facades\Adldap;
 use Illuminate\Support\Facades\Validator;
 use App\News;
@@ -12,6 +13,7 @@ use App\User;
 use App\Rooms;
 use App\Feedback;
 use App\Dinner_slots;
+use App\Dinner_booking;
 use DB;
 use Auth;
 use DateTime;
@@ -34,8 +36,12 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        //
+        if($request->input('nocache')) {
+            Cache::flush();
+        }
         //новости
         $news = News::orderBy('importancy', 'desc')->orderBy('published_at',    'DESC')->limit(15)->get();
 
@@ -67,7 +73,13 @@ class HomeController extends Controller
         //режим работы столовой
         $items  =   Dinner_slots::orderBy('time_start')->get();
 
+        //Бронирование
+        $kitchen_booking    =   null;
+        if(Auth::check()) {
+            $kitchen_booking    =   Dinner_booking::getRecordByUserAndDate(Auth::user()->id,    date("Y-m-d"));
+        }
         $summ   =   0;
+        $bill   =   null;
         if (Auth::check()) {
             $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
             if($bill) {
@@ -76,9 +88,11 @@ class HomeController extends Controller
         }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
-                                'hide_dinner'   =>Cookie::get('hide_dinner'),
-                                'ditems'        =>  $items,
-                                'summ'          =>  $summ]);
+                                'hide_dinner'       =>Cookie::get('hide_dinner'),
+                                'ditems'            =>  $items,
+                                'kitchen_booking'   =>  $kitchen_booking,
+                                'summ'              =>  $summ,
+                                'curbill'           =>  $bill]);
     }
 
     function parking()

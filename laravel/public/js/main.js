@@ -4,7 +4,6 @@
 $(document).ready(function() {
 
 // chosen select
-
 var chosenConfig = {
     'select': { width: "100%", disable_search: true, no_results_text: 'Ничего не найдено' }
 }
@@ -444,6 +443,7 @@ function toggleDropdown(link, cnt) {
         $('.header_login_nav').fadeIn(200);
         $("#input_login").focus();
 
+        return false;
     });
 
     $('html').click(function(e) {
@@ -468,7 +468,8 @@ if ($('.menu_ul').height() > $('.content_i_container').height()) {
 function toggleMenu(el, siblings) {
     $(el).click(function() {
         var date = new Date(new Date().getTime() + 60 * 10000000);
-        var index = $('.menu_li_h').index(this);
+        var index = $(this).attr("id").split("_");
+        index=  index[1];
 
         if ($(this).hasClass('__close')) {
             $(this).removeClass('__close');

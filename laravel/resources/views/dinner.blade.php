@@ -53,6 +53,10 @@
                                 <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">c 17 {{$months[$month]}} по вчера</span></div>
                                 <div class="bill_lst_i_price"><span class="dinner_lst_i_bg">{{$curbill->summ}} ₽</span></div>
                             </li>
+                        @else
+                            <li class="bill_lst_i __current">
+                                <div class="bill_lst_i_name"><span class="dinner_lst_i_bg">Задолженности нет</span></div>
+                            </li>
                         @endif
                         @foreach($bills as $bill)
                             @php

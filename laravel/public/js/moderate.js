@@ -338,11 +338,28 @@ $(document).ready(function($) {
             sequentialUploads: true,
             submit: function (e, data) {
                 $('#fileupload').addClass('fileupload-processing');
-                totalSize = 0;
+                totalImageSize = 0;
+                totalVideoSize = 0;
 
                 $.each(data.files, function (index, file) {
-                    totalSize += file.size;
+                    if(file.type.match('image.*')) {
+                        totalImageSize += file.size;
+                    }
+                    if(file.type.match('video.*')) {
+                        totalVideoSize += file.size;
+                    }
                 });
+
+                if (totalVideoSize > 1100000000) {
+                    alert("Для файла галереи предельный размер видео файла составляет 1гб");
+                    $(this).removeClass('fileupload-processing');
+                    return false;
+                }
+                if (totalImageSize > 5000000) {
+                    alert("Для файла галереи предельный размер файла изображения составляет 5мб");
+                    $(this).removeClass('fileupload-processing');
+                    return false;
+                }
             },
             always: function (e, data) {
                 $(this).removeClass('fileupload-processing');

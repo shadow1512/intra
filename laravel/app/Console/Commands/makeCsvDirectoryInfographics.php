@@ -48,7 +48,7 @@ class makeCsvDirectoryInfographics extends Command
             $bar = $this->output->createProgressBar(count($deps));
 
             $writer = Writer::createFromPath(Config::get('image.directory_path')    .   '/public_data.csv', 'w+');
-            $writer->insertOne(["label","score","color","url"]);
+            $writer->insertOne(["label","title","score","color","url"]);
             foreach($deps as $dep) {
 
                 //Собираем вместе всю численность сотрудников по текущему и дочерним департаментам
@@ -63,7 +63,7 @@ class makeCsvDirectoryInfographics extends Command
 
 
 
-                $writer->insertOne([$dep->short_name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);
+                $writer->insertOne([$dep->short_name,$dep->name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);
 
                 $bar->advance();
             }

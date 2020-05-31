@@ -41,7 +41,7 @@
                     </div>
                 </div>
                 <div class="reserve_dinner_seat">@if($kitchen_booking    &&  \Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")    ==  $period) Вы записаны <span>на&nbsp;{{\Carbon\Carbon::parse($kitchen_booking->time_start)->format("H:i")}}</span> @else @if($total_accepted==$num_records)Нет мест @else{{$total_accepted-$num_records}} {{mb_strtolower(Helper::getWordInCorrectForm($total_accepted-$num_records,  "место"))}} @endif @endif</div>
-                <a href="#" class="reserve_dinner_btn">Записаться</a>
+                @if(!($kitchen_booking   ||  (\Carbon\Carbon::now()->format("H:i")   >   Config::get('dinner.last_time'))))<a href="#" class="reserve_dinner_btn">Записаться</a>@endif
                 @if(Auth::user()->role_id   ==  5)
                 <a href="#" class="reserve_dinner_order">Забронировать столик</a>
                 @if($kitchen_banket_booking)

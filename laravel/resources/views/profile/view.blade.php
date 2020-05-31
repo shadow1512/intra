@@ -28,7 +28,7 @@
                 <!-- <div class="profile_info_room unchecked_tx">Комната:&nbsp;</strong><span>{{$user->room}}</span> <i class="ic-wait"></i></div> -->
             @endif
             @if($user->phone)
-                <div class="profile_info_phone"><strong>Телефон:&nbsp;</strong><span>{{$user->phone}}</span></div>
+                <div class="profile_info_phone"><strong>Местный телефон:&nbsp;</strong><span>{{$user->phone}}</span></div>
                 <!-- <div class="profile_info_phone unchecked_tx">Телефон:&nbsp;</strong><span>{{$user->phone}}</span> <i class="ic-wait"></i></div> -->
             @endif
             @if($user->ip_phone)

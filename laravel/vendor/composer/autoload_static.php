@@ -646,6 +646,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'App\\Feedback' => __DIR__ . '/../..' . '/app/Feedback.php',
         'App\\Gallery' => __DIR__ . '/../..' . '/app/Gallery.php',
         'App\\GalleryPhoto' => __DIR__ . '/../..' . '/app/GalleryPhoto.php',
+        'App\\Helper\\Helper' => __DIR__ . '/../..' . '/app/Helper/Helper.php',
         'App\\Http\\Controllers\\AdLoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/AdLoginController.php',
         'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
         'App\\Http\\Controllers\\Auth\\LoginController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/LoginController.php',

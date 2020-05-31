@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use cijic\phpMorphy\Facade\Morphy;
 
 class Dinner_booking extends Model
 {

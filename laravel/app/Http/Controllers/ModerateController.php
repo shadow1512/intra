@@ -485,7 +485,7 @@ class ModerateController extends Controller
     {
         $razdel = LibRazdel::findOrFail($id);
         $razdel->delete();
-        DB:table('lib_books_razdels')->where("razdel_id", "=", $id)->delete();
+        DB::table('lib_books_razdels')->where("razdel_id", "=", $id)->delete();
 
         return redirect(route('moderate.library.index'));
     }

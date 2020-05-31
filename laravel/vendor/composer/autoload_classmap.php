@@ -119,6 +119,7 @@ return array(
     'App\\Feedback' => $baseDir . '/app/Feedback.php',
     'App\\Gallery' => $baseDir . '/app/Gallery.php',
     'App\\GalleryPhoto' => $baseDir . '/app/GalleryPhoto.php',
+    'App\\Helper\\Helper' => $baseDir . '/app/Helper/Helper.php',
     'App\\Http\\Controllers\\AdLoginController' => $baseDir . '/app/Http/Controllers/AdLoginController.php',
     'App\\Http\\Controllers\\Auth\\ForgotPasswordController' => $baseDir . '/app/Http/Controllers/Auth/ForgotPasswordController.php',
     'App\\Http\\Controllers\\Auth\\LoginController' => $baseDir . '/app/Http/Controllers/Auth/LoginController.php',

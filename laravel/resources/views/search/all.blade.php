@@ -29,7 +29,7 @@
 @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))
     @if (count($users)  &&  !count($deps) && !count($news) && !count($books) && !count($razdels))
             <div class="search-res_cnt_i">
-                <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} сотрудников</div>
+                <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($users),  "сотрудник"))}}</div>
                 @if (count($users))
                     <ul class="profile_contacts_ul">
                         @foreach ($users as $user)
@@ -39,7 +39,8 @@
                                 <!--<div class="profile_contacts_status"></div>--><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</a>
                                     <div class="profile_contacts_position">{{$user->work_title}}</div>
                                     @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
-                                    @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
+                                    @if(!empty($user->phone))<div class="profile_contacts_position">Местный телефон: {{$user->phone}}</div>@endif
+                                    @if(!empty($user->mobile_phone))<div class="profile_contacts_position">Мобильный телефон: {{$user->mobile_phone}}</div>@endif
                                     @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения:
                                         @php
                                             $month  =   $months[date("n", strtotime($user->birthday))   -1];
@@ -57,7 +58,7 @@
             <div class="search-res_cnt_i __no-pad">
                 @if (count($users))
                     <div class="search-res_cnt_i_b-right">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} сотрудников</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($users),  "сотрудник"))}}</div>
                         <ul class="profile_contacts_ul">
                             @foreach ($users as $user)
                                 <li class="profile_contacts_li @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
@@ -80,7 +81,7 @@
                 @endif
                 @if (count($deps))
                     <div class="search-res_cnt_i_b">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} отделов</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($deps),  "отдел"))}}</div>
                         <ul class="docs_lst">
                             @foreach ($deps as $dep)
                                 <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep->name}}</span></a></li>
@@ -90,7 +91,7 @@
                 @endif
                 @if (count($news))
                     <div class="search-res_cnt_i_b">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} новостей</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($news),  "новость"))}}</div>
                         <ul class="news_ul">
                             @foreach ($news as $new)
                                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>
@@ -107,7 +108,7 @@
                 @endif
                 @if (count($razdels))
                     <div class="search-res_cnt_i_b">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($razdels)}} разделов библиотек</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($razdels)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($razdels),  "раздел"))}} библиотеки</div>
                         <ul class="docs_lst">
                             @foreach ($razdels as $razdel)
                                 <li class="docs_lst_i"><a href="{{route('library.razdel', ["id"    =>  $razdel->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$razdel->name}}</span></a></li>
@@ -117,7 +118,7 @@
                 @endif
                 @if (count($books))
                     <div class="search-res_cnt_i_b">
-                        <div class="h __h_m search-res_cnt_i_b_h">{{count($books)}} книг из библиотеки</div>
+                        <div class="h __h_m search-res_cnt_i_b_h">{{count($books)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($books),  "книга"))}} из библиотеки</div>
                         <ul class="library_lst">
                             @foreach($books as $book)
                                 <li class="library_lst_i"><img src="{{$book->image}}" class="library_lst_i_img">
@@ -138,7 +139,7 @@
 @if (count($users) || count($deps))
     <div class="search-res_cnt_i">
     @if (count($users))
-            <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} сотрудников</div>
+            <div class="h __h_m search-res_cnt_i_b_h">{{count($users)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($users),  "сотрудник"))}}</div>
             <ul class="profile_contacts_ul">
                 @foreach ($users as $user)
                     <li class="profile_contacts_li @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
@@ -154,7 +155,7 @@
             </ul>
     @endif
     @if (count($deps))
-        <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} отделов</div>
+        <div class="h __h_m search-res_cnt_i_b_h">{{count($deps)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($deps),  "отдел"))}}</div>
         <ul class="docs_lst">
             @foreach ($deps as $dep)
                 <li class="docs_lst_i"><a href="{{route('people.dept', ["id"    =>  $dep->id])}}" title="Открыть" class="docs_lst_i_lk"><span class="docs_lst_i_name">{{$dep->name}}</span></a></li>
@@ -165,7 +166,7 @@
 @endif
 @if (count($news))
     <div class="search-res_cnt_i">
-        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} новостей</div>
+        <div class="h __h_m search-res_cnt_i_b_h">{{count($news)}} {{mb_strtolower(Helper::getWordInCorrectForm(count($news),  "новость"))}}</div>
         <ul class="news_ul">
             @foreach ($news as $new)
                 <li class="news_li __important"><a href="{{route('news.item', ["id" =>   $new->id])}}" class="news_li_lk">{{$new->title}}</a>

@@ -240,6 +240,7 @@ return [
         'Morphy'    => cijic\phpMorphy\Facade\Morphy::class,
         'Redmine'   => TUNER88\Redmine\Facades\Redmine::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'Helper' => App\Helper\Helper::class,
     ],
 
 ];

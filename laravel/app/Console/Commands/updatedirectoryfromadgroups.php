@@ -87,8 +87,8 @@ class updatedirectoryfromadgroups extends Command
 
         $hiercode   =   new \HierCode(CODE_LENGTH);
         foreach ($parent->getMembers() as $dep_inner) {
-            echo get_class($member) .   "\r\n"; // Instance of `Adldap\Models\Model`
-            echo $member->getName() .   "\r\n";
+            echo get_class($dep_inner) .   "\r\n"; // Instance of `Adldap\Models\Model`
+            echo $dep_inner->getName() .   "\r\n";
             $dep_user   =   null;
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {

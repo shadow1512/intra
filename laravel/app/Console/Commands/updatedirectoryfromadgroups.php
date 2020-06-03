@@ -89,6 +89,8 @@ class updatedirectoryfromadgroups extends Command
         foreach ($parent->getMembers() as $dep_inner) {
             echo get_class($dep_inner) .   "\r\n"; // Instance of `Adldap\Models\Model`
             echo $dep_inner->getName() .   "\r\n";
+            echo $dep_inner->getDisplayName() .   "\r\n";
+            echo $dep_inner->getDescription() .   "\r\n";
             $dep_user   =   null;
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {

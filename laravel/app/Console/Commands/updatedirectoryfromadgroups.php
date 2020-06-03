@@ -94,7 +94,8 @@ class updatedirectoryfromadgroups extends Command
             if($present) {
                 echo "present\r\n";
             }
-            if($dep_inner   instanceof  Adldap\Models\Group) {
+            if(get_class($dep_inner)    ==  'Adldap\Models\Group') {
+                echo "go deep\r\n";
                 $this->serveDepLevel($dep_inner,    null);
             }
         }

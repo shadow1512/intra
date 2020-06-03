@@ -87,8 +87,7 @@ class updatedirectoryfromadgroups extends Command
 
         $hiercode   =   new \HierCode(CODE_LENGTH);
         foreach ($parent->getMembers() as $dep_inner) {
-            echo get_class($dep_inner) .   "\r\n"; // Instance of `Adldap\Models\Model`
-            echo $dep_inner->getDescription() .   "\r\n";
+            echo $parent_code   .   "-" .   $dep_inner->getDescription() .   "\r\n";
             $dep_user   =   null;
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {
@@ -96,7 +95,7 @@ class updatedirectoryfromadgroups extends Command
             }
             if(get_class($dep_inner)    ==  'Adldap\Models\Group') {
                 echo "go deep\r\n";
-                $this->serveDepLevel($dep_inner,    null);
+                $this->serveDepLevel($dep_inner,    $parent_code);
             }
         }
 
@@ -335,6 +334,6 @@ class updatedirectoryfromadgroups extends Command
     public function handle()
     {
         $root = Adldap::getProvider('default')->search()->groups()->find("Консорциум КОДЕКС");
-        $this->serveDepLevel($root, null);
+        $this->serveDepLevel($root, $root->getDescription());
     }
 }

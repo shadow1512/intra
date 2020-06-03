@@ -331,5 +331,6 @@ class updatedirectoryfromadgroups extends Command
     public function handle()
     {
         $root = Adldap::getProvider('default')->search()->groups()->find("Консорциум КОДЕКС");
+        $this->serveDepLevel($root, null);
     }
 }

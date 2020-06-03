@@ -94,7 +94,7 @@ class updatedirectoryfromadgroups extends Command
             if($present) {
                 echo "present\r\n";
             }
-            if($dep_inner   instanceof  Adldap\Models\Model) {
+            if($dep_inner   instanceof  Adldap\Models\Group) {
                 $this->serveDepLevel($dep_inner,    null);
             }
         }

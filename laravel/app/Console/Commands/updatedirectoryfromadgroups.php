@@ -334,6 +334,10 @@ class updatedirectoryfromadgroups extends Command
         var_dump($root);
         $root = Adldap::getProvider('default')->search()->containers()->find("Кодекс-D");
         var_dump($root);
+        $root = Adldap::getProvider('default')->search()->groups()->find("Консорциум");
+        var_dump($root);
+        $root = Adldap::getProvider('default')->search()->containers()->find("Консорциум");
+        var_dump($root);
         print("/r/n/r/n/r/n/r/n");
         //var_dump(Adldap::getProvider('default')->search()->groups()->get());
     }

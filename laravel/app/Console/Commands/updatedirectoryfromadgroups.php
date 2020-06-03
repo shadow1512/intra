@@ -100,11 +100,11 @@ class updatedirectoryfromadgroups extends Command
             }
         }
 
-        die();
+        //die();
         $index  =   0;
 
 
-            if($present) {
+            /*if($present) {
                 $present->name      =   $dep_inner->getName();
                 //Могли переместить по структуре
                 $parent_id  =   $parent_code;
@@ -180,7 +180,7 @@ class updatedirectoryfromadgroups extends Command
             $this->serveDepUsers($new_ou,   $dep_user);
             $this->serveDepLevel($new_ou,    $parent_id);
 
-            $index  ++;
+            $index  ++;*/
     }
 
     public function serveDepUsers($ou,  $dep) {

@@ -33,8 +33,7 @@ class Dep extends Model
         if(mb_strlen($dep->parent_id,   "UTF-8")    >=   2) {
             $code   =   $dep->parent_id;
             while(mb_strlen($code,   "UTF-8")   >=  2) {
-                $dep    =   parent::where('parent_id',  '=',    $code)->first();
-                $rule   =   Users_Moderators_Rules::where('section',    '=',    'deps')->where('record',    '=',    $dep->id)->first();
+                $rule   =   Users_Moderators_Rules::where('section',    '=',    'deps')->where('record',    'LIKE',    "$code")->first();
                 if($rule) {
                     return User::findOrFail($rule->user_id);
                 }

@@ -44,7 +44,7 @@ class User extends \TCG\Voyager\Models\User
                 }
 
                 $deps   =   Dep::where(function($query) use($record_ids) {
-                    foreach($recrd_ids as $key   =>  $code) {
+                    foreach($record_ids as $key   =>  $code) {
                         if($key ==  0) {
                             $query->where('parent_id',  'LIKE', $code.  '%');
                         }

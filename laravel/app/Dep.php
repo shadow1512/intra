@@ -44,7 +44,6 @@ class Dep extends Model
             }
         }
         dd(DB::getQueryLog());
-        exit();
         return null;
     }
 

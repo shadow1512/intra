@@ -1007,6 +1007,7 @@ class ModerateController extends Controller
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
+        exit();
         if(is_null($moderate)   &&    (Auth::user()->role_id  !=  1)) {
             return redirect(route('moderate.users.start'));
         }

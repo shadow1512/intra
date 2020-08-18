@@ -2,7 +2,6 @@
 
 namespace App;
 
-use DB;
 use App\Users_Moderators_Rules;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
@@ -31,7 +30,6 @@ class Dep extends Model
 
     public static function getModerate($id) {
 
-        DB::enableQueryLog(); // Enable query log
         $dep    =   parent::findOrFail($id);
         if(mb_strlen($dep->parent_id,   "UTF-8")    >=   2) {
             $code   =   $dep->parent_id;
@@ -43,7 +41,6 @@ class Dep extends Model
                 $code   =   mb_substr($code,  0,  mb_strlen($code,   "UTF-8")   -   2);
             }
         }
-        dd(DB::getQueryLog());
         return null;
     }
 

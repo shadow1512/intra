@@ -993,6 +993,7 @@ class ModerateController extends Controller
 
     public function usersedit($id)
     {
+        DB::enableQueryLog(); // Enable query log
         $user       =   User::findOrFail($id);
         $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
 
@@ -1007,6 +1008,7 @@ class ModerateController extends Controller
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
+        dd(DB::getQueryLog());
         exit();
         if(is_null($moderate)   &&    (Auth::user()->role_id  !=  1)) {
             return redirect(route('moderate.users.start'));

@@ -1475,6 +1475,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'EditUsersEmailNullableTwice' => __DIR__ . '/../..' . '/database/migrations/2018_10_17_010130_edit_users_email_nullable_twice.php',
         'EditUsersFullnames' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_112135_edit_users_fullnames.php',
         'EditUsersKeysAddAdAttributes' => __DIR__ . '/../..' . '/database/migrations/2018_10_11_175348_edit_users_keys_add_ad_attributes.php',
+        'EditUsersModeratorsRulesChangeRecord' => __DIR__ . '/../..' . '/database/migrations/2020_08_19_003635_edit_users_moderators_rules_change_record.php',
         'EditUsersName' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_115935_edit_users_name.php',
         'EditUsersNullableFields' => __DIR__ . '/../..' . '/database/migrations/2018_09_20_154201_edit_users_nullable_fields.php',
         'EditUsersPhoneLength' => __DIR__ . '/../..' . '/database/migrations/2018_05_31_124602_edit_users_phone_length.php',

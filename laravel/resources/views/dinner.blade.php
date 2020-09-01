@@ -86,8 +86,8 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i"><h3>Камера 2</h3><img id="kitchen_cam2" src="http://intra-unix.kodeks.net/img/cam2.jpg?"/></div>
-                        <div class="dinner_camera_i"><h3>Камера 1</h3><img id="kitchen_cam1" src="http://intra-unix.kodeks.net/img/cam1.jpg?"/></div>
+                        <div class="dinner_camera_i"><h3>Камера 2</h3><iframe width="100%" height="400px" src="http://stol:stol@recorder.work.kodeks.ru/live/media/RECORDER/DeviceIpint.53/SourceEndpoint.video:0:0?w=530&h=400"></iframe></div>
+                        <div class="dinner_camera_i"><h3>Камера 1</h3><iframe width="100%" height="400px" src="http://stol:stol@recorder.work.kodeks.ru/live/media/RECORDER/DeviceIpint.52/SourceEndpoint.video:0:0?w=530&h=400"></iframe></div>
                     </div>
                 </div>
             </div>

@@ -647,3 +647,6 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
         }
     });
 });
+
+var player1 = new Playerjs({id:"rtmp_cam1", file:"rtmp://10.0.0.115/cam1/stream"});
+var player2 = new Playerjs({id:"rtmp_cam2", file:"rtmp://10.0.0.115/cam2/stream"});

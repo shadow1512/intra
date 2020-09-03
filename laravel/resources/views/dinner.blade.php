@@ -86,9 +86,13 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i"><h3>Камера 2</h3><img id="kitchen_cam2" src="http://stol:stol@recorder.work.kodeks.ru/live/media/RECORDER/DeviceIpint.53/SourceEndpoint.video:0:0?w=530&h=400"/></div>
-                        <div class="dinner_camera_i"><h3>Камера 1</h3><img id="kitchen_cam1" src="http://stol:stol@recorder.work.kodeks.ru/live/media/RECORDER/DeviceIpint.52/SourceEndpoint.video:0:0?w=530&h=400"/></div>
+                        <div class="dinner_camera_i"><h3>Камера 2</h3><div id="rtmp_cam1"></div>
+                        <div class="dinner_camera_i"><h3>Камера 1</h3><div id="rtmp_cam2"></div></div>
                     </div>
+                        <script>
+                            var player1 = new Playerjs({id:"rtmp_cam1", file:"rtmp://10.0.0.115/cam1/stream"});
+                            var player2 = new Playerjs({id:"rtmp_cam2", file:"rtmp://10.0.0.115/cam2/stream"});
+                        </script>
                 </div>
             </div>
         </div>

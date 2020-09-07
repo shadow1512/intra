@@ -86,8 +86,8 @@
                 <div class="dinner">
                     <div class="h __h_m">Столовая</div>
                     <div class="dinner_camera">
-                        <div class="dinner_camera_i"><h3>Камера 2</h3><img id="kitchen_cam2" src="http://cam-intra.kodeks.ru:8081/hls1/stream.m3u8"/></div>
-                        <div class="dinner_camera_i"><h3>Камера 1</h3><img id="kitchen_cam1" src="http://cam-intra.kodeks.ru:8081/hls2/stream.m3u8"/></div>
+                        <div class="dinner_camera_i"><h3>Камера 2</h3><div id="rtmp_cam1"></div></div>
+                        <div class="dinner_camera_i"><h3>Камера 1</h3><div id="rtmp_cam2"></div></div>
                     </div>
                 </div>
             </div>

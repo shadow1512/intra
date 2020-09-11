@@ -109,6 +109,7 @@
 #rtmp_cam1{
   width: 335px;
   height: 250px;
+  margin: 0 auto;
 }
 
 .dinner_aside {

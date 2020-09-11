@@ -520,26 +520,6 @@ hideDinner('.main_top_dinner_hide', '.main_top_dinner', '#open-dinner');
 showDinner('#open-dinner', '.main_top_dinner');
 
 
-var camupdate   =   0;
-setInterval(function() {
-    if ($("div.__js-modal-camera").hasClass("__vis")    ||  (camupdate==    0)) {
-        $.ajax({
-            type: "GET",
-            url: '/getcams',
-            cache: false,
-            async: true,
-            dataType: "json",
-            success: function (msg) {
-                $("#kitchen_cam1").attr("src", msg[0]);
-                $("#kitchen_cam2").attr("src", msg[1]);
-            }
-        });
-    }
-
-    camupdate++;
-}, 2000);
-
-
 //datepicker
 $('#date_one').datepicker({
     firstDay: 1,
@@ -667,3 +647,6 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
         }
     });
 });
+
+var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
+var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});

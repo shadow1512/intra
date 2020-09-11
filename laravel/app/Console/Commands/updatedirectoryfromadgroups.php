@@ -83,22 +83,27 @@ class updatedirectoryfromadgroups extends Command
      * @return mixed
      */
 
-    public function serveDepLevel($ou,    $parent_code) {
-        //print $ou.  "\r\n\r\n";
+    public function serveDepLevel($parent,    $parent_code) {
+
         $hiercode   =   new \HierCode(CODE_LENGTH);
-
-        $deps =   Adldap::getProvider('default')->search()->ous()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->listing()->get();
-
-        $index  =   0;
-        foreach($deps as $dep_inner) {
-
+        foreach ($parent->getMembers() as $dep_inner) {
+            echo $parent_code   .   "-" .   $dep_inner->getDescription() .   "\r\n";
             $dep_user   =   null;
-            if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
-                continue;
-                //print "continue\r\n";
-            }
             $present    =   Dep::where('guid',  '=',    $dep_inner->getConvertedGuid())->first();
             if($present) {
+                echo "present\r\n";
+            }
+            if(get_class($dep_inner)    ==  'Adldap\Models\Group') {
+                echo "go deep\r\n";
+                $this->serveDepLevel($dep_inner,    $dep_inner->getDescription());
+            }
+        }
+
+        //die();
+        $index  =   0;
+
+
+            /*if($present) {
                 $present->name      =   $dep_inner->getName();
                 //Могли переместить по структуре
                 $parent_id  =   $parent_code;
@@ -174,8 +179,7 @@ class updatedirectoryfromadgroups extends Command
             $this->serveDepUsers($new_ou,   $dep_user);
             $this->serveDepLevel($new_ou,    $parent_id);
 
-            $index  ++;
-        }
+            $index  ++;*/
     }
 
     public function serveDepUsers($ou,  $dep) {
@@ -329,10 +333,7 @@ class updatedirectoryfromadgroups extends Command
     }
     public function handle()
     {
-        //var_dump(Adldap::getProvider('default')->search()->containers()->get());
         $root = Adldap::getProvider('default')->search()->groups()->find("Консорциум КОДЕКС");
-        var_dump($root);
-        print("/r/n/r/n/r/n/r/n");
-        //var_dump(Adldap::getProvider('default')->search()->groups()->get());
+        $this->serveDepLevel($root, $root->getDescription());
     }
 }

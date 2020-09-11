@@ -972,6 +972,10 @@ class ModerateController extends Controller
 
     public function users($letter = "А")
     {
+        //DB::enableQueryLog(); // Enable query log
+
+// Your Eloquent query executed by using get()
+
         $users  =   User::ByModerator(Auth::user()->id)->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
         $mode   =   'list';
         if(count($users)    >   50) {
@@ -979,6 +983,7 @@ class ModerateController extends Controller
             $users = User::ByModerator(Auth::user()->id)->where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
         }
 
+        //dd(DB::getQueryLog()); // Show results of log
         foreach($users as $user) {
             $count  =   Profiles_Saved::where("user_id", "=",    $user->id)->count();
             $user->count_updated    =   $count;

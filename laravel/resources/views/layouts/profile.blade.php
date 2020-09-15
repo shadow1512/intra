@@ -28,6 +28,7 @@
 <script src="{{ asset('js/libs/maskedinput.min.js') }}"></script>
 <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
 <script src="{{ asset('/js/libs/jquery.fileupload.js') }}"></script>
+<script src="{{ asset('/js/libs/playerjs.js') }}"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
 <script src="{{ asset('/js/profile.js') }}"></script>
 <script src="{{ asset('/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>

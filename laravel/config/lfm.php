@@ -50,13 +50,13 @@ return [
             'folder_name'  => 'files',
             'startup_view' => 'grid',
             'max_size'     => 50000, // size in KB
-            'valid_mime'   => [
+            /*'valid_mime'   => [
                 'image/jpeg',
                 'image/pjpeg',
                 'image/png',
                 'image/gif',
                 'image/svg+xml',
-            ],
+            ],*/
         ],
         'image' => [
             'folder_name'  => 'photos',
@@ -82,11 +82,11 @@ return [
 
     'disk'                     => 'public',
 
-    'rename_file'              => false,
+    'rename_file'              => true,
 
-    'alphanumeric_filename'    => false,
+    'alphanumeric_filename'    => true,
 
-    'alphanumeric_directory'   => false,
+    'alphanumeric_directory'   => true,
 
     'should_validate_size'     => false,
 

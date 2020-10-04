@@ -1,9 +1,9 @@
 $(document).ready(function($) {
 
-    $("#mobile_phone").mask("+7(999) 999-9999");
+    $("#mobile_phone").mask("+7 (999) 999-99-99");
 
 
-    $("#mobile_phone").on("blur", function () {
+    /*$("#mobile_phone").on("blur", function () {
         var last = $(this).val().substr($(this).val().indexOf("-") + 1);
 
         if (last.length == 5) {
@@ -15,12 +15,12 @@ $(document).ready(function($) {
 
             $(this).val(first + move + '-' + lastfour);
         }
-    });
+    });*/
 
-    $("#city_phone").mask("8(999) 999-9999");
+    $("#city_phone").mask("+7 (999) 999-99-99");
 
 
-    $("#city_phone").on("blur", function () {
+    /*$("#city_phone").on("blur", function () {
         var last = $(this).val().substr($(this).val().indexOf("-") + 1);
 
         if (last.length == 5) {
@@ -32,7 +32,7 @@ $(document).ready(function($) {
 
             $(this).val(first + move + '-' + lastfour);
         }
-    });
+    });*/
 
     $(".deleteRecord").on("click", function (ev) {
         ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

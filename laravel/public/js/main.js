@@ -300,10 +300,10 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
                     }
                 });
 
-                $("#input_mobile_phone").mask("+7(999) 999-9999");
-                $("#input_city_phone").mask("8(999) 999-9999");
+                $("#input_mobile_phone").mask("+7 (999) 999-99-99");
+                $("#input_city_phone").mask("+7 (999) 999-99-99");
 
-                $("#input_mobile_phone").on("blur", function() {
+                /*$("#input_mobile_phone").on("blur", function() {
                     var last = $(this).val().substr( $(this).val().indexOf("-") + 1 );
 
                     if( last.length == 5 ) {
@@ -329,7 +329,7 @@ popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
 
                         $(this).val( first + move + '-' + lastfour );
                     }
-                });
+                });*/
 
                 $('#input_avatar').fileupload({
                     dataType: 'json',
@@ -650,3 +650,4 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
 
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
+var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});

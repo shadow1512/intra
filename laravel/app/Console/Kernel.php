@@ -28,6 +28,7 @@ class Kernel extends ConsoleKernel
         Commands\createmoderator::class,
         Commands\getdinnerbills::class,
         Commands\fixchefs::class,
+        Commands\ makeCsvWithPeopleList::class,
     ];
 
     /**

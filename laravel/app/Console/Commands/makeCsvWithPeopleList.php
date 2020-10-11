@@ -54,6 +54,8 @@ class makeCsvWithPeopleList extends Command
 
             $dep_ids   =   Dep::where('parent_id', 'LIKE', $rootdep->code)->pluck('id')->toArray();
 
+            echo count($dep_ids)    .   "\r\n";
+
             $users  =   User::select("users.*")
                 ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
                 ->whereIn("deps_peoples.dep_id", $dep_ids)->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();

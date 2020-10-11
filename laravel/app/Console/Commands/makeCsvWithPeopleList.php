@@ -59,7 +59,9 @@ class makeCsvWithPeopleList extends Command
                 ->whereIn("deps_peoples.dep_id", $dep_ids)->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
 
             if(count($users)) {
-                $writer->insertOne([$users->lname   .   " " .   $users->fname   .   " " .   $users->mname]);
+                foreach($users  as $user) {
+                    $writer->insertOne([$user->lname   .   " " .   $user->fname   .   " " .   $user->mname]);
+                }
             }
 
             $bar->advance();

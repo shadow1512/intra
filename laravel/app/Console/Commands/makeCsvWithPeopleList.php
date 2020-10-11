@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\User;
 use App\Dep;
+use DB;
 use Illuminate\Support\Facades\Storage;
 use League\Csv\Writer;
 use Config;

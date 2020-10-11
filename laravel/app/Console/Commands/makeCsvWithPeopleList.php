@@ -56,7 +56,6 @@ class makeCsvWithPeopleList extends Command
 
             $users  =   User::select("users.*")
                 ->leftJoin("deps_peoples",  "users.id", "=",    "deps_peoples.people_id")
-                ->leftJoin("user_keys",  "users.id",  "=",    "user_keys.user_id")
                 ->whereIn("deps_peoples.dep_id", $dep_ids)->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
 
             if(count($users)) {

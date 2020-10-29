@@ -160,7 +160,7 @@
                     @endforeach
                 </ul>
             @else
-                <div class="content_i_header __with-ic">
+                <div class="content_i_header __with-ic _intra-2">
                     <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
                 </div>
             @endif

@@ -177,7 +177,13 @@
   position: relative; }
   .content_i_header.__with-ic {
     padding-left: 60px; }
-
+.content_i_header.__with-ic._intra-2 {
+  border-bottom: 0;}
+.content_i_header.__with-ic._intra-2 .h.__h_m {
+  color: #999;
+  font-weight: normal;
+  text-align: center;
+}
 .content_i_header_ic {
   fill: #444;
   width: 18px;

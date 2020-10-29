@@ -30,6 +30,7 @@ Route::get('/rooms/book/delete/{id}', 'RoomsController@deletebooking')->name('ro
 
 Route::get('/services/teh', 'ServicesController@teh')->name('services.teh');
 Route::get('/services/cartridge', 'ServicesController@cartridge')->name('services.cartridge');
+Route::get('/services/conference', 'ServicesController@conference')->name('services.conference');
 Route::get('/services/mail', 'ServicesController@mail')->name('services.mail');
 Route::post('/services/store', 'ServicesController@storeRequest')->name('services.store');
 

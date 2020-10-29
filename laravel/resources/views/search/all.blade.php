@@ -39,8 +39,8 @@
                                 <!--<div class="profile_contacts_status"></div>--><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</a>
                                     <div class="profile_contacts_position">{{$user->work_title}}</div>
                                     @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
-                                    @if(!empty($user->phone))<div class="profile_contacts_position">Местный телефон: {{$user->phone}}</div>@endif
-                                    @if(!empty($user->mobile_phone))<div class="profile_contacts_position">Мобильный телефон: {{$user->mobile_phone}}</div>@endif
+                                    @if(!empty($user->phone))<div class="profile_contacts_position">Местный тел.: {{$user->phone}}</div>@endif
+                                    @if(!empty($user->mobile_phone))<div class="profile_contacts_position">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                     @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения:
                                         @php
                                             $month  =   $months[date("n", strtotime($user->birthday))   -1];
@@ -67,7 +67,8 @@
                                     <!--<div class="profile_contacts_status"></div>--><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</a>
                                         <div class="profile_contacts_position">{{$user->work_title}}</div>
                                         @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
-                                        @if(!empty($user->phone))<div class="profile_contacts_position">Телефон: {{$user->phone}}</div>@endif
+                                        @if(!empty($user->phone))<div class="profile_contacts_position">Местный тел.: {{$user->phone}}</div>@endif
+                                        @if(!empty($user->mobile_phone))<div class="profile_contacts_position">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                         @if(!empty($user->birthday))<div class="profile_contacts_position">Дата рождения: @php
                                                 $month  =   $months[date("n", strtotime($user->birthday))   -1];
                                                 $day    =   date("j",   strtotime($user->birthday));
@@ -148,7 +149,8 @@
                         <!--<div class="profile_contacts_status"></div>--><a href="{{route('people.unit', ["id"    =>  $user->id])}}" class="profile_contacts_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</a>
                             <div class="profile_contacts_position">{{$user->work_title}}</div>
                             <div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
-                            <div class="profile_contacts_position">Телефон: {{$user->phone}}</div>
+                            @if(!empty($user->phone))<div class="profile_contacts_position">Местный тел.: {{$user->phone}}</div>@endif
+                            @if(!empty($user->mobile_phone))<div class="profile_contacts_position">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                         </div>
                     </li>
                 @endforeach

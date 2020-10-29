@@ -1145,7 +1145,7 @@ class ModerateController extends Controller
             'phone'             =>  'nullable|string|max:3',
             'ip_phone'          =>  'nullable|string|max:4',
             'room'              =>  'nullable|string|max:4',
-            'city_phone'        =>  'nullable|string|max:15',
+            'city_phone'        =>  'nullable|string|max:18',
             'mobile_phone'      =>  'nullable|string|max:18',
             'email'             =>  'nullable|string|email',
             'email_secondary'   =>  'nullable|string|email',

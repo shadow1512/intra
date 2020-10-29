@@ -184,6 +184,9 @@
   font-weight: normal;
   text-align: center;
 }
+.content_i_header.__with-ic._intra-2 .h.__h_m h3{
+  font-weight: normal;
+}
 .content_i_header_ic {
   fill: #444;
   width: 18px;

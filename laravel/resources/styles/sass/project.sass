@@ -97,8 +97,54 @@
       border-top: none
 .content_i_container
   position: relative
+.radio_input:checked, .radio_input:not(:checked)
+  position: absolute
+  left: -9999px
+.radio_input:checked+label, .radio_input:not(:checked)+label
+  position: relative
+  padding-left: 29px
+  cursor: pointer
+.radio_input:checked+label:before, .radio_input:not(:checked)+label:before
+  content: ""
+  position: absolute
+  top: 0
+  left: 0
+  width: 18px
+  height: 18px
+  border: 1px solid #d9d9d9
+  background-color: #fff
+  background-position: 50% 50%
+  background-size: 0
+  border-radius: 50%
+  box-sizing: border-box
+.radio_input:checked+label:after
+  content: ""
+  position: absolute
+  top: 0
+  left: 0
+  border-radius: 50%
+  width: 18px
+  height: 18px
+  background-size: 18px
+  background: #3451a0 url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAAEhyb7BAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWBJREFUeNpi/P//PwMMMEHp/8gcRhABEECMMGVg0e/fv7+AiwAEECOyCegmQZQyMhqB2AABhKGSCZc2kLL/QG3cLCDeiRMngvn5+VOAzF8YZgAEEFbrcToHBP79+3cOZgfQ6CCgPYwYipiYmAxhbKjd/CA2C4rdjIwgTVxAzArEX4H4N0gcIIBIdxN1FP3588cR5rNv375dAbqPE64K5CYQBnr/4X8kAJTShMkhR9s+NFswTQJ5+9GjR2u/fv36sr+/vwjIl4DJIZIHJHBB4cMNDZ9vUGsZiAongAAjShExgGoGYY0UkD9B4f/379/ZQIseAoP5ETAO5j958sQDKMfKCAGommChhYyBhsz+jwOAQhsUyqAARdaD1SCgSx7hMggUZUBDQNlSAFkPVq89e/YsDeiVq+ji79+/vzNr1qxOUHqBJX28gQ0NAA5oZhJESlUgA94D8Ucg/vEfSfPgi34AA4MlmS4nU7QAAAAASUVORK5CYII=) 50% no-repeat
+  transition: all .2s
 .content_i
   float: left
+  &_w_h
+    font-weight: bold
+    font-size: 20px
+    border-top: 1px solid #d1dce2
+    padding: 60px 20px 30px 30px
+    line-height: 25px
+  &_radio
+    border-top: 1px solid #d1dce2
+    display: block
+    position: relative
+    height: 70px
+  &_radio_w
+    position: absolute
+    right: 0
+    padding: 20px 20px
   &.menu
     margin-left: -100%
     width: 311px

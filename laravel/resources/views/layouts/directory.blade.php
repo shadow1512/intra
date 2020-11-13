@@ -12,9 +12,9 @@
          <!-- Сортировка сотрудников по двум типам -->
             <div class="content_i_radio">
              <div class="content_i_radio_w">
-                    <input id="alphabet" name="alphabet" type="radio" value="alphabet" class="radio_input" checked>
+                    <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input" checked>
                     <label for="alphabet" class="radio_label">по алфавиту</label>
-                    <input id="structure" name="structure" type="radio" class="radio_input" value="structure">
+                    <input id="structure" name="sortType" type="radio" class="radio_input" value="structure">
                     <label for="structure" class="radio_label">по орг. структуре</label>
                 </div>
             </div>

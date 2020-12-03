@@ -19,7 +19,7 @@
       @else
            @if ($directory_name != "Консорциум Кодекс")
                   <ul class="breadcrumbs">
-                      <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
+                      <li class="breadcrumbs_i"><a href="{{route('people.dept')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
                       <li class="breadcrumbs_i __color_base __uppercase">{{$directory_name}}</li>
                   </ul>
            @endif

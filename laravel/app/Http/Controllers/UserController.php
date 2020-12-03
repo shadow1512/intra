@@ -69,11 +69,12 @@ class UserController extends Controller
 
     public function search($id = null, $sorttype="alphabet")
     {
-        $rootdeps           = array();
-        $counts             = array();
-        $directory_name     = "Консорциум Кодекс";
-        $currentDep         = null;
-        $crumbs             = array();
+        $rootdeps           =   array();
+        $counts             =   array();
+        $directory_name     =   "Консорциум Кодекс";
+        $currentDep         =   null;
+        $crumbs             =   array();
+        $struct_deps        =   array();
 
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);

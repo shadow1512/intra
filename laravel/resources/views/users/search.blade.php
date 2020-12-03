@@ -146,9 +146,6 @@
             </div>-->
         @endif
     @else
-        <!-- Подзаголовки отделов -->
-        <div class="content_i_w_h">Test h2</div>
-
 
         @if(empty($currentDep->parent_id))
             <div class="content_tx __no-pad">
@@ -193,6 +190,9 @@
                 @endif
                 </div>
             @else
+                <!-- Подзаголовки отделов -->
+                <div class="content_i_w_h">Test h2</div>
             @endif
+        @endif
     @endif
 @endsection

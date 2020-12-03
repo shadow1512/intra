@@ -74,7 +74,7 @@ class UserController extends Controller
         $directory_name     = "Консорциум Кодекс";
         $currentDep         = null;
         $crumbs             = array();
-var_dump($sorttype);
+
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
             if($sorttype    ==  "alphabet") {
@@ -117,6 +117,7 @@ var_dump($sorttype);
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
                 ->limit(120)->get();*/
+            $users  =   array();
         }
 
         if(!is_null($id)) {

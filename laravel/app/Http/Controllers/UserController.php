@@ -74,7 +74,7 @@ class UserController extends Controller
         $directory_name     = "Консорциум Кодекс";
         $currentDep         = null;
         $crumbs             = array();
-
+var_dump($sorttype);
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
             if($sorttype    ==  "alphabet") {
@@ -209,7 +209,7 @@ class UserController extends Controller
                                         "contacts"              =>  $contacts,
                                         "search_contacts"       =>  $search_contacts,
                                         "contact_ids"           =>  $contact_ids,
-                                        "sorttype"              =>  $sortType,
+                                        "sorttype"              =>  $sorttype,
                                         "struct_deps"           =>  $struct_deps]);
     }
     /**

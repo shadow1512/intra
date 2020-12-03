@@ -41,9 +41,8 @@ Route::get('/library/razdel/{id}', 'LibraryController@index')->name('library.raz
 
 Route::get('/people', 'UserController@index')->name('people');
 Route::get('/people/search', 'UserController@search')->name('people.search');
-Route::get('/people/dept/{id}', 'UserController@search')->name('people.dept');
-Route::get('/people/dept/{id}/sortType/{sorttype}', 'UserController@search')->name('people.dept');
-Route::get('/people/dept', 'UserController@search')->name('people.root');
+Route::get('/people/dept/{id?}', 'UserController@search')->name('people.dept');
+Route::get('/people/dept/{id?}/{sorttype?}', 'UserController@search')->name('people.dept');
 Route::get('/people/unit/{id}', 'UserController@unit')->name('people.unit');
 Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
 Route::get('/people/new', 'UserController@index')->name('people.new');

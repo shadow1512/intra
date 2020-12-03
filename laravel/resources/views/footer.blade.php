@@ -6,7 +6,7 @@
             <li class="footer_lst_i">
                 <div class="footer_lst_i_h">Сотрудникам</div>
             </li>
-            <li class="footer_lst_i"><a href="{{route("people.root")}}" class="footer_lst_i_lk">Телефонный справочник</a></li>
+            <li class="footer_lst_i"><a href="{{route("people.dept")}}" class="footer_lst_i_lk">Телефонный справочник</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.camera")}}" class="footer_lst_i_lk __js-modal-camera-lk">Веб-камеры в&nbsp;столовой</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.menu")}}" class="footer_lst_i_lk __js-modal-dinner-lk">Меню на&nbsp;сегодня</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.bills")}}" class="footer_lst_i_lk __js-modal-bill-lk">Cчёт за&nbsp;столовую</a></li>

@@ -29,7 +29,7 @@
         </div>
         <div class="main_top_phones_search">
             @if (Auth::check())
-                <a href="{{route("people.root")}}" class="main_top_phones_search_lk">
+                <a href="{{route("people.dept")}}" class="main_top_phones_search_lk">
                     <svg class="main_top_phones_logout_ic" xmlns="http://www.w3.org/2000/svg" width="17.313" height="17.125"><path d="M8.626.051l2.21 4.726.387.829.885.136 5.021.77-3.662 3.768-.615.633.143.883.855 5.265-4.425-2.455-.8-.444-.799.444L3.4 17.061l.856-5.266.143-.883-.615-.633-3.66-3.768 5.021-.77.884-.136.388-.829L8.626.051" fill="#fff"/></svg>
                     Мои контакты
                 </a>

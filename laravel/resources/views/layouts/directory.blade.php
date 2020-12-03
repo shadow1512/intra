@@ -10,17 +10,8 @@
             @yield('pathform')
          <div class="content_i inside-page">
          <!-- Сортировка сотрудников по двум типам -->
-            <div class="content_i_radio">
-             <div class="content_i_radio_w">
-                    <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input" checked>
-                    <label for="alphabet" class="radio_label">по алфавиту</label>
-                    <input id="structure" name="sortType" type="radio" class="radio_input" value="structure">
-                    <label for="structure" class="radio_label">по орг. структуре</label>
-                </div>
-            </div>
+            @yield("sortradios")
             <div class="content_i_w">
-                <!-- Подзаголовки отделов -->
-                <div class="content_i_w_h">Test h2</div>
                 @yield("peoplelist")
             </div>
         </div>

@@ -67,7 +67,7 @@ class UserController extends Controller
         return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
     }
 
-    public function search($id = null)
+    public function search($id = null, $sorttype="alphabet")
     {
         $rootdeps           = array();
         $counts             = array();
@@ -77,28 +77,46 @@ class UserController extends Controller
 
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
-            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
-                ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-                ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
-                ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(200)->get();*/
+            if($sorttype    ==  "alphabet") {
+                $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
+                    ->orderBy('users.lname', 'asc')->orderBy('users.fname',  'asc')->orderBy('users.mname', 'asc')->get();
+            }
+            else {
+                //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса
+                $users[$currentDep->parent_id]  =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id = $currentDep->id")
+                    ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
+
+                $struct_deps=  Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->orderBy("parent_id");
+                foreach($struct_deps as $struct_dep) {
+                    $users[$struct_dep->id] =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                        ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                        ->whereRaw("deps_peoples.dep_id = $struct_dep->id")
+                        ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
+                }
+            }
 
             //Пока вернемся к старой структуре, когда пользователей видим только тех, что привязаны непосредственно к подразделению
-            $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->whereRaw("deps_peoples.dep_id = $id")
                 ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(200)->get();
+                ->limit(200)->get();*/
         }
         else {
             $currentDep     = Dep::wherenull("parent_id")->first();
-            $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(120)->get();
+                ->limit(120)->get();*/
         }
 
         if(!is_null($id)) {
@@ -190,7 +208,9 @@ class UserController extends Controller
                                         "currentDep"            =>  $currentDep,
                                         "contacts"              =>  $contacts,
                                         "search_contacts"       =>  $search_contacts,
-                                        "contact_ids"           =>  $contact_ids]);
+                                        "contact_ids"           =>  $contact_ids,
+                                        "sorttype"              =>  $sortType,
+                                        "struct_deps"           =>  $struct_deps]);
     }
     /**
      * Show the form for creating a new resource.

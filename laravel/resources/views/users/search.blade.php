@@ -190,6 +190,31 @@
                 @endif
                 </div>
             @else
+                @if(count($users[$currentDep->id]))
+                    <div class="content_tx __no-pad">
+                        <ul class="directory_lst">
+                            @foreach($users[$currentDep->id] as $user)
+                                <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
+                                    <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                                    <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
+                                        <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
+                                        <!--<div class="directory_lst_i_name_status"></div>-->
+                                    </div>
+                                    <div class="directory_lst_i_info">
+                                        <div class="directory_lst_i_info_i">Местный тел.: {{$user->phone}}</div>
+                                        @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
+                                        <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                        <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
+                                    </div>
+                                    <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                @foreach($struct_deps as $struct_dep)
+                    dd
+                @endforeach
                 <!-- Подзаголовки отделов -->
                 <div class="content_i_w_h">Test h2</div>
             @endif

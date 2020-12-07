@@ -93,7 +93,7 @@ class UserController extends Controller
                     ->whereRaw("deps_peoples.dep_id = $currentDep->id")
                     ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
 
-                $struct_deps=  Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->orderBy("parent_id");
+                $struct_deps=  Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->orderBy("parent_id")->get();
                 foreach($struct_deps as $struct_dep) {
                     $users[$struct_dep->id] =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                         ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')

@@ -87,7 +87,7 @@ class UserController extends Controller
             }
             else {
                 //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса
-                $users[$currentDep->parent_id]  =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                $users[$currentDep->id]  =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                     ->whereRaw("deps_peoples.dep_id = $currentDep->id")

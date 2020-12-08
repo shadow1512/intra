@@ -214,7 +214,7 @@
                 @endif
                 @foreach($struct_deps as $struct_dep)
                     <!-- Подзаголовки отделов -->
-                    <div class="content_i_w_h @if(mb_strlen($struct_dep->parent_id > 4)) h{{mb_strlen($struct_dep->parent_id)}} @endif">{{$struct_dep->name}}</div>
+                    <div class="content_i_w_h @if(mb_strlen($struct_dep->parent_id, "UTF-8") > 4) h{{mb_strlen($struct_dep->parent_id, "UTF-8")}} @endif">{{$struct_dep->name}}</div>
                     @if(count($users[$struct_dep->id]))
                         <div class="content_tx __no-pad">
                             <ul class="directory_lst">

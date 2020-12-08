@@ -214,7 +214,7 @@
                 @endif
                 @foreach($struct_deps as $struct_dep)
                     <!-- Подзаголовки отделов -->
-                    <div class="content_i_w_h">{{$struct_dep->name}}</div>
+                    <div class="content_i_w_h @if(mb_strlen($struct_dep->parent_id > 4)) h{{mb_strlen($struct_dep->parent_id)}} @endif">{{$struct_dep->name}}</div>
                     @if(count($users[$struct_dep->id]))
                         <div class="content_tx __no-pad">
                             <ul class="directory_lst">
@@ -235,14 +235,6 @@
                                     </li>
                                 @endforeach
                             </ul>
-                        </div>
-                    @else
-                        <div class="content_tx __no-pad">
-                            <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
-                            <div class="content_i_header __with-ic _intra-2">
-                                <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
-                            </div>
-                            <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
                         </div>
                     @endif
                 @endforeach

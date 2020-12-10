@@ -177,9 +177,9 @@
                         @endforeach
                     </ul>
                 @else
-                    @if($has_children)
+                    @if($has_children && $count_children)
                             <div class="__num-intra-2">
-                                <div class="num-cnt">{{count($count_children)}}</div>
+                                <div class="num-cnt">{{$count_children}}</div>
                                 <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
                                 <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
                             </div>
@@ -216,13 +216,7 @@
                     </div>
                 @else
                     <!--количество struct_deps -->
-                    @if($has_children)
-                        <div class="__num-intra-2">
-                            <div class="num-cnt">{{count($count_children)}}</div>
-                            <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
-                            <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
-                        </div>
-                    @else
+                    @if(!$has_children)
                         <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
                         <div class="content_i_header __with-ic _intra-2">
                             <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>

@@ -75,15 +75,22 @@ class UserController extends Controller
         $currentDep         =   null;
         $crumbs             =   array();
         $struct_deps        =   array();
+        $has_children       =   0;
+        $count_children     =   0;
 
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
+            $has_children   =   Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->where("id", "<>", $currentDep->id)->count();
             if($sorttype    ==  "alphabet") {
                 $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                     ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
                     ->orderBy('users.lname', 'asc')->orderBy('users.fname',  'asc')->orderBy('users.mname', 'asc')->get();
+                $count_children =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%') AND id<>"   .   $currentDep->id)->count();
             }
             else {
                 //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса
@@ -212,7 +219,9 @@ class UserController extends Controller
                                         "search_contacts"       =>  $search_contacts,
                                         "contact_ids"           =>  $contact_ids,
                                         "sorttype"              =>  $sorttype,
-                                        "struct_deps"           =>  $struct_deps]);
+                                        "struct_deps"           =>  $struct_deps,
+                                        "has_children"          =>  $has_children,
+                                        "count_children"        =>  $count_children]);
     }
     /**
      * Show the form for creating a new resource.

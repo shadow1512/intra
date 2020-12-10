@@ -77,7 +77,7 @@ class UserController extends Controller
         $struct_deps        =   array();
         $has_children       =   0;
         $count_children     =   0;
-
+        $count_to_display   =   0;
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
             $has_children   =   Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->where("id", "<>", $currentDep->id)->count();
@@ -91,6 +91,7 @@ class UserController extends Controller
                     ->select('users.id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                     ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%' AND id<>"   .   $currentDep->id  .   ")")->count();
+                $count_to_display   =   count($users);
             }
             else {
                 //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса
@@ -100,6 +101,7 @@ class UserController extends Controller
                     ->whereRaw("deps_peoples.dep_id = $currentDep->id")
                     ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
 
+                $count_to_display   =   count($users[$currentDep->id]);
                 $struct_deps=  Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->where("id", "<>", $currentDep->id)->orderBy("parent_id")->get();
                 foreach($struct_deps as $struct_dep) {
                     $users[$struct_dep->id] =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
@@ -107,6 +109,7 @@ class UserController extends Controller
                         ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                         ->whereRaw("deps_peoples.dep_id = $struct_dep->id")
                         ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
+                    $count_to_display   +=  count($users[$struct_dep->id]);
                 }
             }
 
@@ -221,7 +224,8 @@ class UserController extends Controller
                                         "sorttype"              =>  $sorttype,
                                         "struct_deps"           =>  $struct_deps,
                                         "has_children"          =>  $has_children,
-                                        "count_children"        =>  $count_children]);
+                                        "count_children"        =>  $count_children,
+                                        "count_to_display"      =>  $count_to_display]);
     }
     /**
      * Show the form for creating a new resource.

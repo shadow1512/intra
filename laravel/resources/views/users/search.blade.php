@@ -71,7 +71,7 @@
 @endsection
 
 @section("sortradios")
-    @if(!empty($currentDep->parent_id)  &&  ( (($sorttype=="alphabet")    &&  (count($users))) || (($sorttype!="alphabet")   &&  count($users[$currentDep->id]))))
+    @if(!empty($currentDep->parent_id)  &&  $count_to_display)
     <div class="content_i_radio">
         <div class="content_i_radio_w">
             <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input">

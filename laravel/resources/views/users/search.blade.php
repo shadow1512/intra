@@ -73,6 +73,7 @@
 @section("sortradios")
     @if(!empty($currentDep->parent_id)  &&  count(array_values($users)))
     <div class="content_i_radio">
+        {{count(array_values($users))}}
         <div class="content_i_radio_w">
             <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input">
             <label for="alphabet" class="radio_label">по алфавиту</label>

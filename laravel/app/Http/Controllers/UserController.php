@@ -90,7 +90,7 @@ class UserController extends Controller
                 $count_children =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->select('users.id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%') AND id<>"   .   $currentDep->id)->count();
+                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%' AND id<>"   .   $currentDep->id  .   ")")->count();
             }
             else {
                 //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса

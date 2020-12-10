@@ -10,7 +10,7 @@
         </a>
       @if (count($crumbs))
       <ul class="breadcrumbs">
-          <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
+          <li class="breadcrumbs_i"><a href="{{route('people.dept')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
           @foreach ($crumbs as $crumb)
           <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
           @endforeach
@@ -176,17 +176,20 @@
                             </li>
                         @endforeach
                     </ul>
-                    <div class="__num-intra-2">
-                        <div class="num-cnt">{{count($users)}}</div>
-                        <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
-                        <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
-                    </div>
                 @else
-                <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
-                    <div class="content_i_header __with-ic _intra-2">
-                        <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
-                    </div>
-                <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                    @if($has_children)
+                            <div class="__num-intra-2">
+                                <div class="num-cnt">{{count($count_children)}}</div>
+                                <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
+                                <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
+                            </div>
+                    @else
+                        <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                            <div class="content_i_header __with-ic _intra-2">
+                                <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
+                            </div>
+                        <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                    @endif
                 @endif
                 </div>
             @else
@@ -211,6 +214,21 @@
                             @endforeach
                         </ul>
                     </div>
+                @else
+                    <!--количество struct_deps -->
+                    @if($has_children)
+                        <div class="__num-intra-2">
+                            <div class="num-cnt">{{count($count_children)}}</div>
+                            <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
+                            <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
+                        </div>
+                    @else
+                        <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                        <div class="content_i_header __with-ic _intra-2">
+                            <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
+                        </div>
+                        <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                    @endif
                 @endif
                 @foreach($struct_deps as $struct_dep)
                     <!-- Подзаголовки отделов -->

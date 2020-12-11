@@ -55,7 +55,7 @@ class UserController extends Controller
         $contacts       =   array();
         $contact_ids    =   array();
         if(Auth::check()) {
-            $contacts = User::select("users.id", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.birthday")
+            $contacts = User::select("users.id", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday")
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
             foreach($contacts as $contact) {

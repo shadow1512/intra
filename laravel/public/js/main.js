@@ -649,9 +649,7 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
 });
 
 $("input[name='sortType']").on("change", function() {
-    alert('a');
-    alert($(this).prop("checked"));
-   if($(this).prop("checked")   ==  "checked") {
+   if($(this).prop("checked")   ||  ($(this).attr("checked")    ==  "checked")) {
        location.href    =   $(this).attr("data-attr");
    }
 });

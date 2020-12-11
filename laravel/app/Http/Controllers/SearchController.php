@@ -226,7 +226,7 @@ class SearchController extends Controller
                                 }
                             }
                             //
-                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
+                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
                                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                                 ->whereIn('users.id', $max_user_ids)->get();
                             $assoc_records = array();

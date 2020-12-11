@@ -67,7 +67,7 @@ class UserController extends Controller
         return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
     }
 
-    public function search($id = null, $sorttype="structure")
+    public function search($id = null, $sorttype="structure", Request $request)
     {
         $rootdeps           =   array();
         $counts             =   array();
@@ -225,7 +225,8 @@ class UserController extends Controller
                                         "struct_deps"           =>  $struct_deps,
                                         "has_children"          =>  $has_children,
                                         "count_children"        =>  $count_children,
-                                        "count_to_display"      =>  $count_to_display]);
+                                        "count_to_display"      =>  $count_to_display,
+                                        "request"               =>  $request]);
     }
     /**
      * Show the form for creating a new resource.

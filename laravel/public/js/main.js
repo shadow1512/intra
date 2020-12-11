@@ -648,8 +648,10 @@ $(document).on("submit", "#cartridge_change_form, #tech_service_form", function(
     });
 });
 
-$("input[name='sortType']").on("change", function() {
-   if($(this).val() ==  "")
+$("input[name='sortType']").on("click", function() {
+   if($(this).prop("checked")   ==  "checked") {
+       location.href    =   $(this).attr("data-attr");
+   }
 });
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});

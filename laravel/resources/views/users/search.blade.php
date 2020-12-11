@@ -74,9 +74,9 @@
     @if(!empty($currentDep->parent_id)  &&  $count_to_display)
     <div class="content_i_radio">
         <div class="content_i_radio_w">
-            <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input" data-attr="{{Route::current()}}" @if($sorttype   ==  "alphabet")checked="checked" @endif>
+            <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input" data-attr="{{str_replace_last("/alphabet", "", $request->url()) .   "/alphabet"}}" @if($sorttype   ==  "alphabet")checked="checked" @endif>
             <label for="alphabet" class="radio_label">по алфавиту</label>
-            <input id="structure" name="sortType" type="radio" class="radio_input" value="structure" data-attr="{{Route::current()}}" @if($sorttype   !=  "alphabet")checked="checked" @endif>
+            <input id="structure" name="sortType" type="radio" class="radio_input" value="structure" data-attr="{{str_replace_last("/alphabet", "", $request->url())}}" @if($sorttype   !=  "alphabet")checked="checked" @endif>
             <label for="structure" class="radio_label">по орг. структуре</label>
         </div>
     </div>

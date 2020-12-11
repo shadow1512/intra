@@ -99,7 +99,7 @@
                             <!--<div class="directory_lst_i_name_status"></div>-->
                             </div>
                             <div class="directory_lst_i_info">
-                                <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact-phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
+                                <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
                                 @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                                 <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -128,7 +128,7 @@
                         <!--<div class="directory_lst_i_name_status"></div>-->
                         </div>
                         <div class="directory_lst_i_info">
-                            <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact-phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
+                            <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
                             @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                             <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                             <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -167,7 +167,7 @@
                                 <!--<div class="directory_lst_i_name_status"></div>-->
                                 </div>
                                 <div class="directory_lst_i_info">
-                                    <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user-phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                    <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
                                     @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                     <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
                                     <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
@@ -204,7 +204,7 @@
                                         <!--<div class="directory_lst_i_name_status"></div>-->
                                     </div>
                                     <div class="directory_lst_i_info">
-                                        <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user-phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                        <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
                                         @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                         <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
                                         <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
@@ -238,7 +238,7 @@
                                             <!--<div class="directory_lst_i_name_status"></div>-->
                                         </div>
                                         <div class="directory_lst_i_info">
-                                            <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user-phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                            <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
                                             @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                             <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
                                             <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>

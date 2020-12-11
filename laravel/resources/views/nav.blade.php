@@ -13,7 +13,7 @@
                 @if (count($contacts))
             <ul class="main_top_phones_lst">
                     @foreach($contacts as $item)
-                <li class="main_top_phones_lst_i"><a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_lst_i_lk" title="{{$item->lname}} {{$item->fname}} {{$item->mname}}">{{$item->lname}} {{mb_substr($item->fname,   0,  1)  .   "."}} {{mb_substr($item->mname, 0,  1)  .   "."}} ( @if($item->ip_phone) {{$item->ip_phone}} @if($item-phone) или {{$item->phone}} @endif @else {{$item->phone}} @endif )</a></li>
+                <li class="main_top_phones_lst_i"><a href="{{route('people.unit', ["id" =>  $item->id])}}" class="main_top_phones_lst_i_lk" title="{{$item->lname}} {{$item->fname}} {{$item->mname}}">{{$item->lname}} {{mb_substr($item->fname,   0,  1)  .   "."}} {{mb_substr($item->mname, 0,  1)  .   "."}} ( @if($item->ip_phone) {{$item->ip_phone}} @if($item->phone) или {{$item->phone}} @endif @else {{$item->phone}} @endif )</a></li>
                     @endforeach
             </ul>
                 @else

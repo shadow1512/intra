@@ -730,7 +730,8 @@ class SearchController extends Controller
         $users_by_phone  =   array();
         $user_ids   =   array();
         if($phone) {
-            $phone_records   =   User::where('phone', '=',    $phone)
+            //ищем по всем телефонам
+            $phone_records   =   User::where('phone', '=',    $phone)->orWhere('ip_phone',  '=',    $phone)
                     ->orWhere("city_phone",    'LIKE', '%' .   $phone. '%')
                     ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
             /*foreach($phone_records   as $record) {

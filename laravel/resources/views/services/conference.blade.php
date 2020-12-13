@@ -44,7 +44,7 @@
                         <strong>Закрытый вебинар</strong>: участнику необходимо пройти регистрацию, все заявки после этого подтверждаются организатором. Подходит для&nbsp;вебинаров, где круг участников строго ограничен в&nbsp;целях соблюдения конфиденциальности.<br/><br/>
                     </span>
                 </div>
-                <div class="field" style="margin-top:20px;">
+                <div class="field">
                     <label class="lbl">Способ презентации материала:</label>
                     <div class="form-radio form-radio-inline">
                         <input type="radio" class="form-radio-input ir" id="check1_presentation" name="presentation" value="powerpoint" checked="checked">
@@ -54,9 +54,8 @@
                         <input type="radio" class="form-radio-input ir" id="check3_presentation" name="presentation" value="screencast">
                         <label class="lbl form-radio-label" for="check3_presentation">Демонстрация экрана</label>
                     </div>
-                    <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
                 </div>
-                <div class="field">
+                <div class="field" style="margin-top:40px;">
                     <label for="responsible" class="lbl">ФИО ответственного:</label>
                     <input type="text" id="responsible" name="responsible" class="it" value="{{$user->lname}} {{$user->fname}} {{$user->mname}}"/>
                 </div>

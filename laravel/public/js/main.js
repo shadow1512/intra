@@ -653,6 +653,40 @@ $("input[name='sortType']").on("change", function() {
        location.href    =   $(this).attr("data-attr");
    }
 });
+
+//заявка на проведение мероприятий
+$("#conference_service_form input[name='desired_time']").datetimepicker({
+    lang:'ru',
+    datepicker:false,
+    timepicker:true,
+    format:'H:i',
+    validateOnBlur:false,
+    step: 30,
+    mask:true
+});
+
+$("#conference_service_form input[name='desired_date']").datetimepicker({
+    lang: 'ru',
+    format: 'd.m.Y',
+    timepicker: false,
+    scrollInput : false,
+    validateOnBlur: false,
+    //formatDate:'Y-m-d H:i',
+});
+
+$("#conference_service_form select[name='provider']").on("change", function() {
+   if($(this).val() ==  "Etutorium") {
+       $("#conference_service_form input[name='typeevent']").parent().parent().show();
+       $("#conference_service_form input[name='moderate']").removeAttr("checked").removeProp("checked");
+       $("#conference_service_form input[id='check1_moderate']").attr("checked", "checked").prop("checked", "checked");
+       $("#conference_service_form input[name='moderate']").attr("disabled", "disabled");
+   }
+   else {
+       $("#conference_service_form input[name='typeevent']").parent().parent().hide();
+       $("#conference_service_form input[name='moderate']").removeAttr("disabled", "disabled");
+   }
+});
+
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
 var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});

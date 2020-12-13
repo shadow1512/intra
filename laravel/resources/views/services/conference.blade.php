@@ -26,21 +26,25 @@
                             <input type="radio" class="form-radio-input ir" id="check2_moderate" name="moderate" value="no">
                             <label class="lbl form-radio-label" for="check2_moderate">Нет</label>
                         </div>
-                    <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
+                    <span>для&nbsp;площадки Etutorium модерация по&nbsp;умолчанию осуществляется А.&nbsp;Цикулиной</span>
                 </div>
-                <div class="field">
+                <div class="field" style="display:none;">
                     <label class="lbl">Тип вебинара:</label>
                     <div class="form-radio form-radio-inline">
                         <input type="radio" class="form-radio-input ir" id="check1_typeevent" name="typeevent" value="open" checked="checked">
-                        <label class="lbl form-radio-label" for="check1_moderate">Открытый: вход по общей ссылке</label>
+                        <label class="lbl form-radio-label" for="check1_typeevent">Открытый: вход по общей ссылке</label>
                         <input type="radio" class="form-radio-input ir" id="check2_typeevent" name="typeevent" value="registered">
-                        <label class="lbl form-radio-label" for="check2_moderate">Открытый: вход по индивидуальной ссылке</label>
+                        <label class="lbl form-radio-label" for="check2_typeevent">Открытый: вход по индивидуальной ссылке</label>
                         <input type="radio" class="form-radio-input ir" id="check3_typeevent" name="typeevent" value="restricted">
-                        <label class="lbl form-radio-label" for="check3_moderate">Закрытый</label>
+                        <label class="lbl form-radio-label" for="check3_typeevent">Закрытый</label>
                     </div>
-                    <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
+                    <span>указывается только для&nbsp;площадки Etutorium.<br/>
+                        <strong>Вход по&nbsp;общей ссылке</strong>: регистрация не&nbsp;нужна. Подходит если информация на мероприятии не&nbsp;носит конфиденциальный характер. ВНИМАНИЕ: данную ссылку запрещено направлять через региональную рассылку<br/><br/>
+                        <strong>Вход по&nbsp;индивидуальной ссылке</strong>: участнику необходимо пройти регистрацию, заявки не&nbsp;подтверждаются. Подходит для вебинаров,  когда мы хотим видеть кто придет на&nbsp;мероприятие и&nbsp;нам необходима более полная  информация об&nbsp;участниках<br/><br/>
+                        <strong>Закрытый вебинар</strong>: участнику необходимо пройти регистрацию, все заявки после этого подтверждаются организатором. Подходит для&nbsp;вебинаров, где круг участников строго ограничен в&nbsp;целях соблюдения конфиденциальности.<br/><br/>
+                    </span>
                 </div>
-                <div class="field">
+                <div class="field" style="margin-top:20px;">
                     <label class="lbl">Способ презентации материала:</label>
                     <div class="form-radio form-radio-inline">
                         <input type="radio" class="form-radio-input ir" id="check1_presentation" name="presentation" value="powerpoint" checked="checked">

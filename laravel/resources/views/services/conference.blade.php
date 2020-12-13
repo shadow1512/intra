@@ -21,9 +21,9 @@
                 <div class="field">
                     <label class="lbl">Помощь в модерации всего мероприятия:</label>
                         <div class="form-radio form-radio-inline">
-                            <input type="radio" class="form-radio-input ich" id="check1_moderate" name="moderate" value="yes" checked="checked">
+                            <input type="radio" class="form-radio-input ir" id="check1_moderate" name="moderate" value="yes" checked="checked">
                             <label class="lbl form-radio-label" for="check1_moderate">Да</label>
-                            <input type="checkbox" class="form-radio-input ich" id="check2_moderate" name="moderate" value="no">
+                            <input type="radio" class="form-radio-input ir" id="check2_moderate" name="moderate" value="no">
                             <label class="lbl form-radio-label" for="check2_moderate">Нет</label>
                         </div>
                     <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
@@ -31,24 +31,24 @@
                 <div class="field">
                     <label class="lbl">Тип вебинара:</label>
                     <div class="form-radio form-radio-inline">
-                        <input type="radio" class="form-radio-input ich" id="check1_typeevent" name="typeevent" value="open" checked="checked">
+                        <input type="radio" class="form-radio-input ir" id="check1_typeevent" name="typeevent" value="open" checked="checked">
                         <label class="lbl form-radio-label" for="check1_moderate">Открытый: вход по общей ссылке</label>
-                        <input type="checkbox" class="form-radio-input ich" id="check2_typeevent" name="typeevent" value="registered">
+                        <input type="radio" class="form-radio-input ir" id="check2_typeevent" name="typeevent" value="registered">
                         <label class="lbl form-radio-label" for="check2_moderate">Открытый: вход по индивидуальной ссылке</label>
-                        <input type="checkbox" class="form-radio-input ich" id="check3_typeevent" name="typeevent" value="restricted">
-                        <label class="lbl form-radio-label" for="check2_moderate">Закрытый</label>
+                        <input type="radio" class="form-radio-input ir" id="check3_typeevent" name="typeevent" value="restricted">
+                        <label class="lbl form-radio-label" for="check3_moderate">Закрытый</label>
                     </div>
                     <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
                 </div>
                 <div class="field">
                     <label class="lbl">Способ презентации материала:</label>
                     <div class="form-radio form-radio-inline">
-                        <input type="radio" class="form-radio-input ich" id="check1_presentation" name="presentation" value="powerpoint" checked="checked">
+                        <input type="radio" class="form-radio-input ir" id="check1_presentation" name="presentation" value="powerpoint" checked="checked">
                         <label class="lbl form-radio-label" for="check1_presentation">Презентация Power Point</label>
-                        <input type="checkbox" class="form-radio-input ich" id="check2_presentation" name="presentation" value="pdf">
+                        <input type="radio" class="form-radio-input ir" id="check2_presentation" name="presentation" value="pdf">
                         <label class="lbl form-radio-label" for="check2_presentation">Файл PDF</label>
-                        <input type="checkbox" class="form-radio-input ich" id="check3_presentation" name="presentation" value="screencast">
-                        <label class="lbl form-radio-label" for="check2_presentation">Демонстрация экрана</label>
+                        <input type="radio" class="form-radio-input ir" id="check3_presentation" name="presentation" value="screencast">
+                        <label class="lbl form-radio-label" for="check3_presentation">Демонстрация экрана</label>
                     </div>
                     <span>для площадки Etutorium модерация по умолчанию осуществляется А. Цикулиной</span>
                 </div>

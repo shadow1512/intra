@@ -98,7 +98,7 @@
                     <label for="facility" class="lbl">Ведущие (ФИО, email, телефон для связи (рабочий, мобильный):</label>
                     <textarea id="facility" name="facility" class="it" maxlength="4096"></textarea>
                 </div>
-                <div class="field"><a href="#" class="btn profile_form_btn" id="submit_tech_service_form">Отправить</a></div>
+                <div class="field"><a href="#" class="btn profile_form_btn" id="submit_conference_form">Отправить</a></div>
             </form>
             <div class="news_li_date">После отправки заявка будет доставлена на почту к <a href="{{route("people.unit", ["id"   =>  665])}}">Цикулиной Анастасии</a>.<br/><br/>Анастасия свяжется с вами для дальнейшей работы по организации мероприятия.</div>
         @else

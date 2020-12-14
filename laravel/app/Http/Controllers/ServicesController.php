@@ -74,6 +74,11 @@ class ServicesController extends Controller
         return view('services.conference', [ 'user' =>  $user]);
     }
 
+    public function sendConferenceRequest(Request $request)
+    {
+        return view('services.conference', [ 'success_sent' =>  true]);
+    }
+
     public function storeRequest(Request $request) {
         $room           =   trim($request->input('roomnum'));
         $printer        =   trim($request->input('printer'));

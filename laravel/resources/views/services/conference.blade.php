@@ -4,7 +4,7 @@
     <div class="main_news">
         <div class="h __h_m">Заявка на проведение обучений и  вебинаров на площадке ZOOM/ETUTORIUM</div>
         @if(!is_null($user))
-            <form class="profile_form" id="conference_service_form" action="{{route('services.store')}}" method="POST">
+            <form class="profile_form" id="conference_service_form" action="{{route('services.send.conference')}}" method="POST">
                 <input type="hidden" name="type_request" id="type_request" value="conference"/>
                 {{ csrf_field() }}
                 <div class="field">
@@ -26,7 +26,7 @@
                             <input type="radio" class="form-radio-input ir" id="check2_moderate" name="moderate" value="no">
                             <label class="lbl form-radio-label" for="check2_moderate">Нет</label>
                         </div>
-                    <span>для&nbsp;площадки Etutorium модерация по&nbsp;умолчанию осуществляется А.&nbsp;Цикулиной</span>
+                    <span>для&nbsp;площадки Etutorium модерация по&nbsp;умолчанию осуществляется <a href="{{route("people.unit", ["id"   =>  665])}}">А.&nbsp;Цикулиной</a></span>
                 </div>
                 <div class="field" style="display:none;">
                     <label class="lbl">Тип вебинара:</label>
@@ -100,9 +100,17 @@
                 </div>
                 <div class="field"><a href="#" class="btn profile_form_btn" id="submit_tech_service_form">Отправить</a></div>
             </form>
-            <div class="news_li_date">После отправки заявка будет доставлена на почту к Цикулиной Анастасии.<br/><br/>Анастасия свяжется с вами для дальнейшей работы по организации мероприятия.</div>
+            <div class="news_li_date">После отправки заявка будет доставлена на почту к <a href="{{route("people.unit", ["id"   =>  665])}}">Цикулиной Анастасии</a>.<br/><br/>Анастасия свяжется с вами для дальнейшей работы по организации мероприятия.</div>
         @else
             <div class="news_li_date">Для отправки заявки на техническое обслуживание на портале, необходимо <a href="#" id="teh_auth" class="__js_auth">авторизоваться</a></div>
         @endif
     </div>
+@endsection
+
+@section('result')
+    @if($form_sent)
+    <div class="main_news">
+        <div class="h __h_m">Ваша заявка успешно отправлена. Ожидайте, пока с вами свяжется <a href="{{route("people.unit", ["id"   =>  665])}}">Анастасия Цикулина</a>.</div>
+    </div>
+    @endif
 @endsection

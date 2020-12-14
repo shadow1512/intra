@@ -33,6 +33,7 @@ Route::get('/services/cartridge', 'ServicesController@cartridge')->name('service
 Route::get('/services/conference', 'ServicesController@conference')->name('services.conference');
 Route::get('/services/mail', 'ServicesController@mail')->name('services.mail');
 Route::post('/services/store', 'ServicesController@storeRequest')->name('services.store');
+Route::post('/services/send/conference', 'ServicesController@sendConferenceRequest')->name('services.send.conference');
 
 Route::get('/foto', 'GalleryController@index')->name('foto');
 Route::get('/foto/gallery/{id}', 'GalleryController@gallery')->name('foto.gallery');

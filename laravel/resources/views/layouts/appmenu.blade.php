@@ -10,6 +10,7 @@
         <div class="content_i main-page">
             <div class="content_i_w">
                 @yield('content')
+                @yield('result')
             </div>
         </div>
         @include('nav')

@@ -108,7 +108,7 @@
 @endsection
 
 @section('result')
-    @if(isset($form_sent))
+    @if(isset($success_sent))
     <div class="main_news">
         <div class="h __h_m">Ваша заявка успешно отправлена. Ожидайте, пока с вами свяжется <a href="{{route("people.unit", ["id"   =>  665])}}">Анастасия Цикулина</a>.</div>
     </div>

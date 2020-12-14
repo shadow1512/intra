@@ -692,6 +692,35 @@ $("#conference_service_form a[id='submit_conference_form']").on("click", functio
     $("#conference_service_form").submit();
 });
 
+$(document).on("submit", "#conference_service_form", function(ev) {
+    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
+    var url = $(this).attr("action");
+    var form    =   $(this);
+    $(form).find("div").removeClass("__e");
+    $(form).find(".field_e").remove();
+    var token   =   $(this).find("input[name='_token']").val();
+
+    $.ajax({
+        type: "POST",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        data: form.serialize() + "&_token=" + token,
+        success: function(msg) {
+            if(msg.result == "success") {
+                location.href   =   '/profile/';
+            }
+            if(msg[0] == "error") {
+                var errors  =   msg[1];
+                for(var key in errors) {
+                    $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                }
+            }
+        }
+    });
+});
+
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
 var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});

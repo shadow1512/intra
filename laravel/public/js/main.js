@@ -667,7 +667,8 @@ $("#conference_service_form input[name='desired_time']").datetimepicker({
 
 $("#conference_service_form input[name='desired_date']").datetimepicker({
     lang: 'ru',
-    format: 'd.m.Y',
+    format: 'd:m:Y',
+    minDate: 'tomorrow',
     timepicker: false,
     scrollInput : false,
     validateOnBlur: false,

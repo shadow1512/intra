@@ -76,6 +76,42 @@ class ServicesController extends Controller
 
     public function sendConferenceRequest(Request $request)
     {
+        $provider           =   trim($request->input('provider'));
+        $moderate           =   trim($request->input('moderate'));
+        $typeevent          =   trim($request->input('typeevent'));
+        $presentation       =   trim($request->input('presentation'));
+        $responsible        =   trim($request->input('responsible'));
+        $desired_date       =   trim($request->input('desired_date'));
+        $desired_time       =   trim($request->input('desired_time'));
+        $desired_length     =   trim($request->input('desired_length'));
+        $audience           =   $request->input('audience');
+        $facility           =   trim($request->input('facility'));
+
+        var_dump($_POST);
+        $messages   =   array(  "responsible.required"          =>  "Поле обязательно для заполнения",
+                                "responsible.max"               =>  "Поле не должно превышать 255 символов",
+                                "desired_date.required"         =>  "Поле обязательно для заполнения",
+                                "desired_date.date"             =>  "Дата должна быть в формате dd.mm.YYYY",
+                                "desired_date.after"            =>  "Дата не должна быть раньше сегодняшней",
+                                "facility.required"             =>  "Поле обязательно для заполнения",
+                                "facility.max"                  =>  "Поле не должно превышать 4000 символов",
+                                "audience.required"             =>  "Должно быть выбрано хотя бы одно значение",
+                                "audience.between"              =>  "Должно быть выбрано хотя бы одно значение",
+
+        );
+
+        //regex:pattern
+        $validator = Validator::make($request->all(), [
+            'responsible'           =>  'required|max:255',
+            'desired_date'          =>  'required|date|after:today',
+            'facility'              =>  'required|max:4000',
+            'audience'              =>  'required|array|between:1,4',
+        ],  $messages);
+
+
+        if ($validator->fails()) {
+            //return response()->json(['error', $validator->errors()]);
+        }
         return view('services.conference', [ 'success_sent' =>  true]);
     }
 

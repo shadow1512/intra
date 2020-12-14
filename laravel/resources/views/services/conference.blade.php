@@ -77,18 +77,18 @@
                     <label class="lbl">Аудитория/участники мероприятия:</label>
                     <div class="field_half">
                         <div class="form-check form-check-inline">
-                            <input type="checkbox" class="form-check-input ich" id="check1_audience" name="audience_staff" value="1">
+                            <input type="checkbox" class="form-check-input ich" id="check1_audience" name="audience[]" value="staff">
                             <label class="lbl form-check-label" for="check1_audience">Сотрудники Кодекс</label>
-                            <input type="checkbox" class="form-check-input ich" id="check2_audience" name="audience_customers" value="1">
+                            <input type="checkbox" class="form-check-input ich" id="check2_audience" name="audience[]" value="customers">
                             <label class="lbl form-check-label" for="check2_audience">Пользователи</label>
                         </div>
                     </div>
                     <div class="field_half">
                         <div class="form-check form-check-inline">
                             <div class="form-check form-check-inline">
-                                <input type="checkbox" class="form-check-input ich" id="check3_audience" name="audience_rep" value="1">
+                                <input type="checkbox" class="form-check-input ich" id="check3_audience" name="audience[]" value="representative">
                                 <label class="lbl form-check-label" for="check3_audience">Представители</label>
-                                <input type="checkbox" class="form-check-input ich" id="check4_audience" name="audience_other" value="1">
+                                <input type="checkbox" class="form-check-input ich" id="check4_audience" name="audience[]" value="other">
                                 <label class="lbl form-check-label" for="check4_audience">Другое</label>
                             </div>
                         </div>

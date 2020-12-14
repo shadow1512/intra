@@ -3,7 +3,7 @@
 @section('content')
     <div class="main_news">
         <div class="h __h_m">Заявка на проведение обучений и  вебинаров на площадке ZOOM/ETUTORIUM</div>
-        @if(!is_null($user))
+        @if(isset($user)    &&  !is_null($user))
             <form class="profile_form" id="conference_service_form" action="{{route('services.send.conference')}}" method="POST">
                 <input type="hidden" name="type_request" id="type_request" value="conference"/>
                 {{ csrf_field() }}
@@ -102,7 +102,7 @@
             </form>
             <div class="news_li_date">После отправки заявка будет доставлена на почту к <a href="{{route("people.unit", ["id"   =>  665])}}">Цикулиной Анастасии</a>.<br/><br/>Анастасия свяжется с вами для дальнейшей работы по организации мероприятия.</div>
         @else
-            <div class="news_li_date">Для отправки заявки на техническое обслуживание на портале, необходимо <a href="#" id="teh_auth" class="__js_auth">авторизоваться</a></div>
+            @if(isset($user))<div class="news_li_date">Для отправки заявки на техническое обслуживание на портале, необходимо <a href="#" id="teh_auth" class="__js_auth">авторизоваться</a></div>@endif
         @endif
     </div>
 @endsection

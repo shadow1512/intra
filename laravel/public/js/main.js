@@ -709,7 +709,7 @@ $(document).on("submit", "#conference_service_form", function(ev) {
         data: form.serialize() + "&_token=" + token,
         success: function(msg) {
             if(msg.result == "success") {
-                $("div.main_news").html(msg[1].content);
+                $("div.main_news").html(msg.content);
             }
             if(msg.result == "error") {
                 var errors  =   msg.errors;

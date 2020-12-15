@@ -714,7 +714,12 @@ $(document).on("submit", "#conference_service_form", function(ev) {
             if(msg[0] == "error") {
                 var errors  =   msg[1];
                 for(var key in errors) {
-                    $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                    if(key == "audience") {
+                        $(form).find("input[name='audience[]']").parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                    }
+                    else {
+                        $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                    }
                 }
             }
         }

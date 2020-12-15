@@ -88,7 +88,6 @@ class ServicesController extends Controller
         $audience           =   $request->input('audience');
         $facility           =   trim($request->input('facility'));
 
-        var_dump($_POST);
         $messages   =   array(  "event_name.required"           =>  "Поле обязательно для заполнения",
                                 "event_name.max"                =>  "Поле не должно превышать 255 символов",
                                 "responsible.required"          =>  "Поле обязательно для заполнения",

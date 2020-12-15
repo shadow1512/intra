@@ -9,6 +9,9 @@ use App\Dep;
 use DB;
 use Auth;
 use App\Technical_Request;
+use Config;
+use View;
+use Mail;
 
 class ServicesController extends Controller
 {

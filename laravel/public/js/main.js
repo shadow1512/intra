@@ -709,13 +709,13 @@ $(document).on("submit", "#conference_service_form", function(ev) {
         data: form.serialize() + "&_token=" + token,
         success: function(msg) {
             if(msg.result == "success") {
-                location.href   =   '/profile/';
+                $("div.main_news").html(msg[1].content);
             }
-            if(msg[0] == "error") {
-                var errors  =   msg[1];
+            if(msg.result == "error") {
+                var errors  =   msg.errors;
                 for(var key in errors) {
                     if(key == "audience") {
-                        $(form).find("input[name='audience[]']").parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
+                        $(form).find("input[name='audience[]']:first").parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
                     }
                     else {
                         $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");

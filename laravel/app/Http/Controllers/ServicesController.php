@@ -115,9 +115,11 @@ class ServicesController extends Controller
 
 
         if ($validator->fails()) {
-            return response()->json(['error', $validator->errors()]);
+            return response()->json(["result"   =>  "error", "errors"   =>  $validator->errors()]);
         }
-        return view('services.conference', [ 'success_sent' =>  true]);
+
+        $html   =   View::make('services.conference', [ 'success_sent' =>  true]);
+        return response()->json(["result"   =>  "success", "content"    =>  $html->render()]);
     }
 
     public function storeRequest(Request $request) {

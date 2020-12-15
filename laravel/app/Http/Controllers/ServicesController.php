@@ -111,7 +111,7 @@ class ServicesController extends Controller
             'desired_date'          =>  'required|date|after:today',
             'facility'              =>  'required|max:4000',
             'audience'              =>  'required|array|between:1,4',
-            'desired_time'          =>  'regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/',
+            'desired_time'          =>  array('regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'),
         ],  $messages);
 
 

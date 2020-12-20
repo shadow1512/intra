@@ -15,6 +15,8 @@ Route::get('/',          'HomeController@index')->name('home');
 Route::get('/parking',   'HomeController@parking')->name('parking');
 Route::get('/getcams',   'HomeController@getcams')->name('getcams');
 Route::get('/feedback',  'HomeController@feedback')->name('feedback');
+Route::get('/greenoffice',  'HomeController@greenoffice')->name('greenoffice');
+
 Route::get('/feedback/success',  'HomeController@feedbacksuccess')->name('feedback.success');
 Route::post('/feedback', 'HomeController@storefeedback')->name('feedback.store');
 

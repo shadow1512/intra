@@ -191,4 +191,8 @@ class HomeController extends Controller
 
         return json_encode(array($ret1, $ret2));
     }
+
+    public function greenoffice() {
+        return view('static.greenoffice');
+    }
 }

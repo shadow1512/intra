@@ -1,3 +1,6 @@
+@extends('layouts.appmenu')
+
+@section('content')
 Добрый день, коллеги!
 
 Знакомим вас с планом мероприятий "Зелёного офиса" на ближайшие 3 месяца.
@@ -13,3 +16,4 @@
 почта: bushmanova@kodeks.ru
 
 телеграм: nadezhda_bush
+@endsection

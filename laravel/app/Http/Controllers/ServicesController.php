@@ -122,26 +122,28 @@ class ServicesController extends Controller
         }
 
         $audience   =   implode(",",    $audience);
-
+        if($provider    ==  "Etutorium") {
+            $moderate   =   "yes";
+        }
         Mail::send('services.conference-letter',
                     [
                         'event_name'    =>  $event_name,
                         'provider'      =>  $provider,
-                        'moderate'      =>  str_replace(array("Да", "Нет"),
-                                                        array("yes", "no"),
+                        'moderate'      =>  str_replace(array("yes", "no"),
+                                                        array("Да", "Нет"),
                                                         $moderate),
-                        'typeevent'     =>  str_replace(array("Открытый: вход по общей ссылке", "Открытый: вход по индивидуальной ссылке", "Закрытый"),
-                                                        array("open", "registered", "restricted"),
+                        'typeevent'     =>  str_replace(array("open", "registered", "restricted"),
+                                                        array("Открытый: вход по общей ссылке", "Открытый: вход по индивидуальной ссылке", "Закрытый"),
                                                         $typeevent),
-                        'presentation'  =>  str_replace(array("Презентация Power Point", "Файл PDF", "Демонстрация экрана"),
-                                                        array("powerpoint", "pdf", "screencast"),
+                        'presentation'  =>  str_replace(array("powerpoint", "pdf", "screencast"),
+                                                        array("Презентация Power Point", "Файл PDF", "Демонстрация экрана"),
                                                         $presentation),
                         'responsible'   =>  $responsible,
                         'desired_date'  =>  $desired_date,
                         'desired_time'  =>  $desired_time,
                         'desired_length'=>  $desired_length,
-                        'audience'      =>  str_replace(array("Сотрудники Кодекс", "Пользователи", "Представители", "Другое"),
-                                                        array("staff", "customers", "representative", "other"),
+                        'audience'      =>  str_replace(array("staff", "customers", "representative", "other"),
+                                                        array("Сотрудники Кодекс", "Пользователи", "Представители", "Другое"),
                                                         $audience),
                         'facility'      =>  $facility
                     ], function ($m) {

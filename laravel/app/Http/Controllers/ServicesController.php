@@ -121,6 +121,26 @@ class ServicesController extends Controller
             return response()->json(["result"   =>  "error", "errors"   =>  $validator->errors()]);
         }
 
+        $audience   =   implode(",",    $audience);
+
+        Mail::send('services.conference-letter',
+                    [
+                        'event_name'    =>  $event_name,
+                        'provider'      =>  $provider,
+                        'moderate'      =>  str_replace_last(str_replace_last($moderate, "Да", "yes"), "Нет", "no"),
+                        'typeevent'     =>  str_replace_last(str_replace_last(str_replace_last($typeevent, "Открытый: вход по общей ссылке", "open"), "Открытый: вход по индивидуальной ссылке", "registered"), "Закрытый", "restricted"),
+                        'presentation'  =>  $presentation,
+                        'responsible'   =>  $responsible,
+                        'desired_date'  =>  $desired_date,
+                        'desired_time'  =>  $desired_time,
+                        'desired_length'=>  $desired_length,
+                        'audience'      =>  str_replace_last(str_replace_last(str_replace_last(str_replace_last($audience, "Сотрудники Кодекс", "staff"), "Пользователи", "customers"), "Представители", "representative"), "Другое", "other"),
+                        'facility'      =>  $facility
+                    ], function ($m) {
+            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+            $m->to(Config::get('services.conference_owner'))->subject('Заявка на проведение мероприятий');
+        });
+
         $html   =   View::make('services.conference-result', [ 'success_sent' =>  true]);
         return response()->json(["result"   =>  "success", "content"    =>  $html->render()]);
     }

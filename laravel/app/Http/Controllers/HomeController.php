@@ -195,4 +195,8 @@ class HomeController extends Controller
     public function greenoffice() {
         return view('static.greenoffice');
     }
+
+    public function stylecorporate() {
+        return view('static.stylecorporate');
+    }
 }

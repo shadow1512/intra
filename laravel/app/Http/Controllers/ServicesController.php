@@ -127,14 +127,14 @@ class ServicesController extends Controller
                     [
                         'event_name'    =>  $event_name,
                         'provider'      =>  $provider,
-                        'moderate'      =>  str_replace_last(str_replace_last($moderate, "Да", "yes"), "Нет", "no"),
-                        'typeevent'     =>  str_replace_last(str_replace_last(str_replace_last($typeevent, "Открытый: вход по общей ссылке", "open"), "Открытый: вход по индивидуальной ссылке", "registered"), "Закрытый", "restricted"),
-                        'presentation'  =>  $presentation,
+                        'moderate'      =>  str_replace_last(str_replace_last($moderate, "yes", "Да"), "no", "Нет"),
+                        'typeevent'     =>  str_replace_last(str_replace_last(str_replace_last($typeevent, "open", "Открытый: вход по общей ссылке"), "registered", "Открытый: вход по индивидуальной ссылке"), "restricted", "Закрытый"),
+                        'presentation'  =>  str_replace_last(str_replace_last(str_replace_last($presentation, "powerpoint", "Презентация Power Point"), "pdf", "Файл PDF"), "screencast", "Демонстрация экрана"),
                         'responsible'   =>  $responsible,
                         'desired_date'  =>  $desired_date,
                         'desired_time'  =>  $desired_time,
                         'desired_length'=>  $desired_length,
-                        'audience'      =>  str_replace_last(str_replace_last(str_replace_last(str_replace_last($audience, "Сотрудники Кодекс", "staff"), "Пользователи", "customers"), "Представители", "representative"), "Другое", "other"),
+                        'audience'      =>  str_replace_last(str_replace_last(str_replace_last(str_replace_last($audience, "staff", "Сотрудники Кодекс"), "customers", "Пользователи"), "representative", "Представители"), "other", "Другое"),
                         'facility'      =>  $facility
                     ], function ($m) {
             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');

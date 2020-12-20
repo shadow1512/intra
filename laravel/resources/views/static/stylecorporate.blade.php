@@ -36,7 +36,7 @@
             <a href="https://ncloud.kodeks.ru/index.php/s/6qe5yoAp7FarCF9" target="_blank" class="logo_regulations">Правила использования логотипов</a>
             <div class="wrapper-logo">
                 <div>
-                    <img src="//images/corporate/kodeks.svg" alt="Кодекс">
+                    <img src="/images/corporate/kodeks.svg" alt="Кодекс">
                     <p>Бренд справочных систем и&nbsp;информационных продуктов для бухгалтеров и&nbsp;юристов</p>
                     <div><a href="https://ncloud.kodeks.ru/index.php/s/jskYwEjQpnGDdnw" target="_blank" class="orange">cdr</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/LasDbsoiizGDsyS"
                                                                                                                                                                target="_blank" class="orange">eps</a>
@@ -45,14 +45,14 @@
                                 class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/cJSRtwbibAYTAqi" target="_blank" class="blue">tif</a></div>
                 </div>
                 <div>
-                    <img src="//images/corporate/teh.svg" alt="Техэксперт">
+                    <img src="/images/corporate/teh.svg" alt="Техэксперт">
                     <p>Бренд справочных систем и&nbsp;информационных продуктов для технических специалистов</p>
                     <div><a href="https://ncloud.kodeks.ru/index.php/s/T8nKmxyC3cNtq99" target="_blank" class="orange">eps</a></div>
                     <div><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/CmqHkrCeBcGYFC6" target="_blank" class="blue">png</a><span
                                 class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">tif</a></div>
                 </div>
                 <div>
-                    <img src="//images/corporate/kodeks_kons.svg" alt="Кодекс">
+                    <img src="/images/corporate/kodeks_kons.svg" alt="Кодекс">
                     <p>Представление компании в&nbsp;целом как работодателя, партнера и&nbsp;разработчика
                         информационных и&nbsp;программных продуктов &laquo;Кодекс&raquo;
                         и&nbsp;&laquo;Техэксперт&raquo;</p>
@@ -96,7 +96,7 @@
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+K_1.jpg');"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать"
                        class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper K_1.jpg" data-fancybox="images" title="Открыть"
+                    <a href="/images/corporate/wallpapers/Wallpaper+K_1.jpg" data-fancybox="images" title="Открыть"
                        class="open"></a>
                 </div>
                 <div class="square __one">
@@ -104,47 +104,47 @@
                     <div class="bg_img"
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+K_3.jpg');"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download __b"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper K_3.jpg" data-fancybox="images" title="Открыть" class="open __b"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+K_3.jpg" data-fancybox="images" title="Открыть" class="open __b"></a>
                 </div>
                 <div class="square __two">
                     <i></i>
                     <div class="bg_img"
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+K%2BTE.jpg');"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper K+TE.jpg" data-fancybox="images" title="Открыть" class="open"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+K+TE.jpg" data-fancybox="images" title="Открыть" class="open"></a>
                 </div>
                 <div class="square __three">
                     <i></i>
                     <div class="bg_img"
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+SU+NTD_1.jpg');"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper SU NTD_1.jpg" data-fancybox="images" title="Открыть" class="open"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+SU+NTD_1.jpg" data-fancybox="images" title="Открыть" class="open"></a>
                 </div>
                 <div class="square __four">
                     <i></i>
                     <div class="bg_img"
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+SU+NTD_2.jpg')"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper SU NTD_2.jpg" data-fancybox="images" title="Открыть" class="open"></a></div>
+                    <a href="/images/corporate/wallpapers/Wallpaper+SU+NTD_2.jpg" data-fancybox="images" title="Открыть" class="open"></a></div>
                 <div class="square __six">
                     <i></i>
                     <div class="bg_img"
                          style="background-image: url('/images/corporate/wallpapers/Wallpaper+TE_3.jpg')"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper TE_3.jpg" data-fancybox="images" title="Открыть" class="open"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+TE_3.jpg" data-fancybox="images" title="Открыть" class="open"></a>
                 </div>
 
                 <div class="square __five">
                     <i></i>
                     <div class="bg_img" style="background-image: url('/images/corporate/wallpapers/Wallpaper+TE_2.jpg')"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper TE_2.jpg" data-fancybox="images" title="Открыть" class="open"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+TE_2.jpg" data-fancybox="images" title="Открыть" class="open"></a>
                 </div>
                 <div class="long-horizon __one">
                     <i></i>
                     <div class="bg_img" style="background-image: url('/images/corporate/wallpapers/Wallpaper+TE_1.jpg');"></div>
                     <a href="https://ncloud.kodeks.ru/index.php/s/wzRkkFfEW2RT7MG" target="_blank" title="Скачать" class="download"></a>
-                    <a href="/images/corporate/wallpapers/Wallpaper TE_1.jpg" data-fancybox="images"  title="Открыть" class="open"></a>
+                    <a href="/images/corporate/wallpapers/Wallpaper+TE_1.jpg" data-fancybox="images"  title="Открыть" class="open"></a>
                 </div>
             </div>
         </div>

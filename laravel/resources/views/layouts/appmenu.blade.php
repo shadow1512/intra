@@ -27,6 +27,7 @@
 <script src="{{ asset('/js/libs/playerjs.js') }}"></script>
 <script src="{{ asset('js/libs/jquery.datetimepicker.js') }}"></script>
 <script src="{{ asset('/js/main.js') }}"></script>
+<script src="{{ asset('/js/services.js') }}"></script>
 <script src="{{ asset('/js/libs/jquery-ui-1.9.2.custom.min.js') }}"></script>
 <script src="{{ asset('/js/libs/jquery.datepicker.extension.range.min.js') }}"></script>
 </body>

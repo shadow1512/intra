@@ -127,14 +127,22 @@ class ServicesController extends Controller
                     [
                         'event_name'    =>  $event_name,
                         'provider'      =>  $provider,
-                        'moderate'      =>  str_replace_last(str_replace_last($moderate, "yes", "Да"), "no", "Нет"),
-                        'typeevent'     =>  str_replace_last(str_replace_last(str_replace_last($typeevent, "open", "Открытый: вход по общей ссылке"), "registered", "Открытый: вход по индивидуальной ссылке"), "restricted", "Закрытый"),
-                        'presentation'  =>  str_replace_last(str_replace_last(str_replace_last($presentation, "powerpoint", "Презентация Power Point"), "pdf", "Файл PDF"), "screencast", "Демонстрация экрана"),
+                        'moderate'      =>  str_replace($moderate,
+                                                                    array("Да", "Нет"),
+                                                                    array("yes", "no")),
+                        'typeevent'     =>  str_replace($typeevent,
+                                                                    array("Открытый: вход по общей ссылке", "Открытый: вход по индивидуальной ссылке", "Закрытый"),
+                                                                    array("open", "registered", "restricted")),
+                        'presentation'  =>  str_replace($presentation,
+                                                                    array("Презентация Power Point", "Файл PDF", "Демонстрация экрана"),
+                                                                    array("powerpoint", "pdf", "screencast")),
                         'responsible'   =>  $responsible,
                         'desired_date'  =>  $desired_date,
                         'desired_time'  =>  $desired_time,
                         'desired_length'=>  $desired_length,
-                        'audience'      =>  str_replace_last(str_replace_last(str_replace_last(str_replace_last($audience, "staff", "Сотрудники Кодекс"), "customers", "Пользователи"), "representative", "Представители"), "other", "Другое"),
+                        'audience'      =>  str_replace($audience,
+                                                                    array("Сотрудники Кодекс", "Пользователи", "Представители", "Другое"),
+                                                                    array("staff", "customers", "representative", "other")),
                         'facility'      =>  $facility
                     ], function ($m) {
             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');

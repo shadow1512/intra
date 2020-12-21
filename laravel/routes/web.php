@@ -96,7 +96,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::get('/', 'ModerateController@pageslist')->name('moderate.pages.list');
         //Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');
         Route::get('/edit/{id}', 'ModerateController@pagesedit')->name('moderate.pages.edit');
-        Route::put('/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
+        Route::put('/update/{id}', 'ModerateController@pagesupdate')->name('moderate.pages.update');
         //Route::put('/store', 'ModerateController@newsstore')->name('moderate.news.store');
         //Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     });

@@ -92,6 +92,15 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     });
 
+    Route::group(['prefix'  =>  'pages', 'middleware'    =>  ['content']],   function() {
+        Route::get('/', 'ModerateController@pageslist')->name('moderate.pages.list');
+        //Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');
+        Route::get('/edit/{id}', 'ModerateController@pagesedit')->name('moderate.pages.edit');
+        Route::put('/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
+        //Route::put('/store', 'ModerateController@newsstore')->name('moderate.news.store');
+        //Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
+    });
+
     Route::group(['prefix'  =>  'library', 'middleware'    =>  ['content']],   function() {
         Route::get('/', 'ModerateController@library')->name('moderate.library.index');
         Route::get('/razdel/create', 'ModerateController@librarycreate')->name('moderate.library.create');

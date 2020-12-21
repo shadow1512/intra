@@ -72,6 +72,7 @@
                     <ul class="nav navbar-nav">
                         @if (Auth::user()->role_id  ==  1   ||  Auth::user()->role_id  ==  4)
                         <li><a href="{{ route('moderate.news.list') }}">Новости</a></li>
+                        <li><a href="{{ route('moderate.pages.list') }}">Статические страницы</a></li>
                         <li><a href="{{ route('moderate.library.index') }}">Библиотека</a></li>
                         <li><a href="{{ route('moderate.foto.index') }}">Фото/видео с праздников</a></li>
                         @endif

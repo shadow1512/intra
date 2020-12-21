@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Deps_Peoples;
 use App\Profiles_Saved_Data;
+use App\Static_Pages;
 use Auth;
 use App\User;
 use App\Profiles_Saved;
@@ -180,6 +181,49 @@ class ModerateController extends Controller
         $news->save();
 
         return redirect(route('moderate.news.list'));
+    }
+
+    public function pageslist()
+    {
+        //новости
+        $pages = Static_Pages::orderBy('created_at', 'desc')->limit(50)->get();
+        return view('moderate.pages.list', ['pages'    =>  $pages]);
+    }
+
+    public function pagesedit($id)
+    {
+        $page = Static_Pages::findOrFail($id);
+        return view('moderate.pages.edit', ['page'    =>  $page]);
+    }
+
+    public function pagesupdate(Request $request, $id)
+    {
+        $messages   =   array(
+            "title.required"                =>  "Поле обязательно для заполнения",
+            "title.max"                     =>  "Поле не должно быть длиннее, чем 191 символ",
+            "body.required"                 =>  "Поле обязательно для заполнения",
+            "body.max"                      =>  "Поле не должно быть длиннее, чем 10000 символов",
+        );
+
+        $validator = Validator::make($request->all(), [
+            'title'         => 'required|string|max:191',
+            'body'          =>  'required|string|max:10000',
+        ],  $messages);
+
+        if ($validator->fails()) {
+            return redirect()->route('moderate.pages.edit')
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $page = Static_Pages::findOrFail($id);
+        $page->title        = $request->input('title');
+        $page->body         = $request->input('body');
+
+        $page->updated_at = date("Y-m-d H:i:s");
+        $page->save();
+
+        return redirect(route('moderate.pages.list'));
     }
 
     public function dinnerlist()

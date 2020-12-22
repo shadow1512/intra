@@ -14,6 +14,7 @@ use App\Rooms;
 use App\Feedback;
 use App\Dinner_slots;
 use App\Dinner_booking;
+use App\Static_Pages;
 use DB;
 use Auth;
 use DateTime;
@@ -193,7 +194,8 @@ class HomeController extends Controller
     }
 
     public function greenoffice() {
-        return view('static.greenoffice');
+        $page   =   Static_Pages::findOrFail(1);
+        return view('static.greenoffice', ["page"   =>  $page]);
     }
 
     public function stylecorporate() {

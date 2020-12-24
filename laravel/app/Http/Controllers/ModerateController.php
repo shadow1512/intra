@@ -157,7 +157,7 @@ class ModerateController extends Controller
         ],  $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('moderate.news.edit')
+            return redirect()->route('moderate.news.edit', ["id"    =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }
@@ -211,7 +211,7 @@ class ModerateController extends Controller
         ],  $messages);
 
         if ($validator->fails()) {
-            return redirect()->route('moderate.pages.edit')
+            return redirect()->route('moderate.pages.edit', ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }

@@ -7,17 +7,7 @@
 @include('header')
 <!-- eo header-->
     <div class="content layout_main">
-            @yield('pathform')
-         <div class="content_i inside-page">
-         <!-- Сортировка сотрудников по двум типам -->
-            @yield("sortradios")
-            <div class="content_i_w">
-                @yield("peoplelist")
-            </div>
-        </div>
-        <div class="content_i menu">
-            @yield("tree")
-        </div>
+            @yield('news')
     </div>
     <div class="push"></div>
 </div>
@@ -30,7 +20,11 @@
 <script src="/js/libs/owl.carousel.js"></script>
 <script src="/js/libs/playerjs.js"></script>
 <script src="/js/main.js"></script>
+<script src="/js/libs/jquery.datetimepicker.js"></script>
+<script src="/js/room.js"></script>
+<script src="/js/dinner.js"></script>
 <script src="/js/libs/jquery-ui-1.9.2.custom.min.js"></script>
 <script src="/js/libs/jquery.datepicker.extension.range.min.js"></script>
+<script src="/js/libs/jquery.fancybox.js"></script>
 </body>
 </html>

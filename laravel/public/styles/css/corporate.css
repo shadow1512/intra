@@ -107,6 +107,7 @@ a:hover {
     margin-bottom: 21px;
     margin-top: 52px;
     letter-spacing: -2px;
+    line-height: 1em;
 }
 .corporate_id p {
     font-size: 16px;
@@ -137,6 +138,7 @@ h2{
     letter-spacing: -2px;
     margin-top: 48px;
     margin-bottom: 24px;
+    line-height: 1.2em;
 }
 .white {
     color: #fff;
@@ -226,7 +228,7 @@ h2{
     display: block;
     position: absolute;
     left: 16px;
-    top: 11px;
+    top: 14px;
 }
 .te a.white {
     font-size: 14px;
@@ -294,6 +296,10 @@ a.white {
     padding-left: 33px;
     background: url("../../images/corporate/doc_download.svg") no-repeat 0 50%;
     color: #2164b0;
+    background-size: 29px;
+    line-height: 1em;
+    height: 42px;
+    padding-top: 10px;
 }
 .logo_regulations:hover {
     cursor: pointer;

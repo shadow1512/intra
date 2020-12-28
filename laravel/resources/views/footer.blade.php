@@ -6,7 +6,7 @@
             <li class="footer_lst_i">
                 <div class="footer_lst_i_h">Сотрудникам</div>
             </li>
-            <li class="footer_lst_i"><a href="{{route("people.root")}}" class="footer_lst_i_lk">Телефонный справочник</a></li>
+            <li class="footer_lst_i"><a href="{{route("people.dept")}}" class="footer_lst_i_lk">Телефонный справочник</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.camera")}}" class="footer_lst_i_lk __js-modal-camera-lk">Веб-камеры в&nbsp;столовой</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.menu")}}" class="footer_lst_i_lk __js-modal-dinner-lk">Меню на&nbsp;сегодня</a></li>
             <li class="footer_lst_i"><a href="{{route("kitchen.bills")}}" class="footer_lst_i_lk __js-modal-bill-lk">Cчёт за&nbsp;столовую</a></li>
@@ -37,7 +37,7 @@
     </div>
     <div class="footer_bottom">
         <div class="footer_copyright">
-            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2020, version=2.0.4, rev=
+            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2020, version=2.1.0, rev=
                 @php
                     echo exec('git log --pretty=format:"%h" --max-count=1');
                 @endphp

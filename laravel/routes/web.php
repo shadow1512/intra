@@ -15,6 +15,9 @@ Route::get('/',          'HomeController@index')->name('home');
 Route::get('/parking',   'HomeController@parking')->name('parking');
 Route::get('/getcams',   'HomeController@getcams')->name('getcams');
 Route::get('/feedback',  'HomeController@feedback')->name('feedback');
+Route::get('/greenoffice',  'HomeController@greenoffice')->name('greenoffice');
+Route::get('/corporate',  'HomeController@stylecorporate')->name('stylecorporate');
+
 Route::get('/feedback/success',  'HomeController@feedbacksuccess')->name('feedback.success');
 Route::post('/feedback', 'HomeController@storefeedback')->name('feedback.store');
 
@@ -33,6 +36,7 @@ Route::get('/services/cartridge', 'ServicesController@cartridge')->name('service
 Route::get('/services/conference', 'ServicesController@conference')->name('services.conference');
 Route::get('/services/mail', 'ServicesController@mail')->name('services.mail');
 Route::post('/services/store', 'ServicesController@storeRequest')->name('services.store');
+Route::post('/services/send/conference', 'ServicesController@sendConferenceRequest')->name('services.send.conference');
 
 Route::get('/foto', 'GalleryController@index')->name('foto');
 Route::get('/foto/gallery/{id}', 'GalleryController@gallery')->name('foto.gallery');
@@ -41,8 +45,8 @@ Route::get('/library/razdel/{id}', 'LibraryController@index')->name('library.raz
 
 Route::get('/people', 'UserController@index')->name('people');
 Route::get('/people/search', 'UserController@search')->name('people.search');
-Route::get('/people/dept/{id}', 'UserController@search')->name('people.dept');
-Route::get('/people/dept', 'UserController@search')->name('people.root');
+Route::get('/people/dept/{id?}', 'UserController@search')->name('people.dept');
+Route::get('/people/dept/{id?}/{sorttype?}', 'UserController@search')->name('people.dept');
 Route::get('/people/unit/{id}', 'UserController@unit')->name('people.unit');
 Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
 Route::get('/people/new', 'UserController@index')->name('people.new');
@@ -86,6 +90,15 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::put('/update/{id}', 'ModerateController@newsupdate')->name('moderate.news.update');
         Route::put('/store', 'ModerateController@newsstore')->name('moderate.news.store');
         Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
+    });
+
+    Route::group(['prefix'  =>  'pages', 'middleware'    =>  ['content']],   function() {
+        Route::get('/', 'ModerateController@pageslist')->name('moderate.pages.list');
+        //Route::get('/create', 'ModerateController@newscreate')->name('moderate.news.create');
+        Route::get('/edit/{id}', 'ModerateController@pagesedit')->name('moderate.pages.edit');
+        Route::put('/update/{id}', 'ModerateController@pagesupdate')->name('moderate.pages.update');
+        //Route::put('/store', 'ModerateController@newsstore')->name('moderate.news.store');
+        //Route::delete('/delete/{id}', 'ModerateController@newsdelete')->name('moderate.news.delete');
     });
 
     Route::group(['prefix'  =>  'library', 'middleware'    =>  ['content']],   function() {

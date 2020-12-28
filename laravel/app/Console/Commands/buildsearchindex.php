@@ -226,6 +226,17 @@ class buildsearchindex extends Command
                 $term->save();
             }
 
+            //ip телефон
+            if(trim($user->ip_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->ip_phone, "UTF-8"));
+                $term->term = $user->ip_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'phone';
+                $term->save();
+            }
+
             //email
             if(trim($user->email)) {
                 $term = new Terms();

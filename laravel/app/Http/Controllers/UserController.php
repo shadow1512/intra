@@ -55,7 +55,7 @@ class UserController extends Controller
         $contacts       =   array();
         $contact_ids    =   array();
         if(Auth::check()) {
-            $contacts = User::select("users.id", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.birthday")
+            $contacts = User::select("users.id", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday")
                 ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
             foreach($contacts as $contact) {
@@ -67,38 +67,68 @@ class UserController extends Controller
         return view('users.unit', ['user'    =>  $user, 'contacts'  =>  $contacts, 'contact_ids'  =>  $contact_ids, 'crumbs'   =>  $crumbs]);
     }
 
-    public function search($id = null)
+    public function search($id = null, $sorttype="structure", Request $request)
     {
-        $rootdeps           = array();
-        $counts             = array();
-        $directory_name     = "Консорциум Кодекс";
-        $currentDep         = null;
-        $crumbs             = array();
-
+        $rootdeps           =   array();
+        $counts             =   array();
+        $directory_name     =   "Консорциум Кодекс";
+        $currentDep         =   null;
+        $crumbs             =   array();
+        $struct_deps        =   array();
+        $has_children       =   0;
+        $count_children     =   0;
+        $count_to_display   =   0;
         if(!is_null($id)) {
             $currentDep     = Dep::findOrFail($id);
-            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
-                ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-                ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
-                ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(200)->get();*/
+            $has_children   =   Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->where("id", "<>", $currentDep->id)->count();
+            if($sorttype    ==  "alphabet") {
+                $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
+                    ->orderBy('users.lname', 'asc')->orderBy('users.fname',  'asc')->orderBy('users.mname', 'asc')->get();
+                $count_children =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%' AND id<>"   .   $currentDep->id  .   ")")->count();
+                $count_to_display   =   count($users);
+            }
+            else {
+                //сначала выводим людей, кто принадлежит непосредственно подразделению, стартуя с босса, потом вложенные структуры, людей внутри них, стартуя с босса
+                $users[$currentDep->id]  =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                    ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereRaw("deps_peoples.dep_id = $currentDep->id")
+                    ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
+
+                $count_to_display   =   count($users[$currentDep->id]);
+                $struct_deps=  Dep::where("parent_id", 'LIKE',    $currentDep->parent_id   .   "%")->where("id", "<>", $currentDep->id)->orderBy("parent_id")->get();
+                foreach($struct_deps as $struct_dep) {
+                    $users[$struct_dep->id] =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+                        ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                        ->whereRaw("deps_peoples.dep_id = $struct_dep->id")
+                        ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
+                    $count_to_display   +=  count($users[$struct_dep->id]);
+                }
+            }
 
             //Пока вернемся к старой структуре, когда пользователей видим только тех, что привязаны непосредственно к подразделению
-            $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->whereRaw("deps_peoples.dep_id = $id")
                 ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(200)->get();
+                ->limit(200)->get();*/
         }
         else {
             $currentDep     = Dep::wherenull("parent_id")->first();
-            $users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            /*$users = User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef')
                 ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                 ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderByRaw('LENGTH(parent_id)',  'asc')->orderBy('users.lname', 'asc')
-                ->limit(120)->get();
+                ->limit(120)->get();*/
+            $users  =   array();
         }
 
         if(!is_null($id)) {
@@ -190,7 +220,13 @@ class UserController extends Controller
                                         "currentDep"            =>  $currentDep,
                                         "contacts"              =>  $contacts,
                                         "search_contacts"       =>  $search_contacts,
-                                        "contact_ids"           =>  $contact_ids]);
+                                        "contact_ids"           =>  $contact_ids,
+                                        "sorttype"              =>  $sorttype,
+                                        "struct_deps"           =>  $struct_deps,
+                                        "has_children"          =>  $has_children,
+                                        "count_children"        =>  $count_children,
+                                        "count_to_display"      =>  $count_to_display,
+                                        "request"               =>  $request]);
     }
     /**
      * Show the form for creating a new resource.

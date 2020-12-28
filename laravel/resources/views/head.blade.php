@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="/styles/css/jquery.datetimepicker.css">
     <link rel="stylesheet" type="text/css" href="/styles/css/jquery.fancybox.css">
     <link rel="stylesheet" href="/styles/css/styles.css">
+    @if(Route::currentRouteName()   ==  'stylecorporate')
+        <link rel="stylesheet" href="/styles/css/corporate.css">
+    @endif
     <link rel="shortcut icon" href="/images/favicon.ico" />
     <meta charset="UTF-8">
 </head>

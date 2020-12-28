@@ -9,7 +9,7 @@
             <!--<div class="profile_contacts_status"></div>--><a href="{{ route('people.unit', ['id' => $item->id])}}" class="profile_contacts_name">{{$item->lname}} {{$item->fname}} {{$item->mname}}</a>
                 <div class="profile_contacts_position">{{$item->work_title}}</div>
                 <div class="profile_contacts_position">E-mail: <a href="mailto:{{$item->email}}">{{$item->email}}</a></div>
-                <div class="profile_contacts_position">Местный тел.: {{$item->phone}}</div>
+                <div class="profile_contacts_position">Местный тел.: @if($item->ip_phone) {{$item->ip_phone}} @if($item->phone) или {{$item->phone}} @endif @else {{$item->phone}} @endif</div>
                 @if($item->mobile_phone)<div class="profile_contacts_position">Мобильный тел.: {{$item->mobile_phone}}</div>@endif
             </div>
         </li>

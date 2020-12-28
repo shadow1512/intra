@@ -226,7 +226,7 @@ class SearchController extends Controller
                                 }
                             }
                             //
-                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
+                            $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
                                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                                 ->whereIn('users.id', $max_user_ids)->get();
                             $assoc_records = array();
@@ -730,7 +730,8 @@ class SearchController extends Controller
         $users_by_phone  =   array();
         $user_ids   =   array();
         if($phone) {
-            $phone_records   =   User::where('phone', '=',    $phone)
+            //ищем по всем телефонам
+            $phone_records   =   User::where('phone', '=',    $phone)->orWhere('ip_phone',  '=',    $phone)
                     ->orWhere("city_phone",    'LIKE', '%' .   $phone. '%')
                     ->orWhere("mobile_phone",    'LIKE', '%' .   $phone. '%')->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
             /*foreach($phone_records   as $record) {
@@ -1269,7 +1270,7 @@ class SearchController extends Controller
         $users  =   array();
 
         //$user_ids = array_keys($all_found_records);
-        $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
+        $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereIn('users.id', $max_user_ids)->get();
         $assoc_records = array();

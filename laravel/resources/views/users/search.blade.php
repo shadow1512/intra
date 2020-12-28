@@ -10,7 +10,7 @@
         </a>
       @if (count($crumbs))
       <ul class="breadcrumbs">
-          <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
+          <li class="breadcrumbs_i"><a href="{{route('people.dept')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
           @foreach ($crumbs as $crumb)
           <li class="breadcrumbs_i"><a href="{{route('people.dept', ["id" =>  $crumb->id])}}" class="breadcrumbs_i_lk">{{$crumb->name}}</a></li>
           @endforeach
@@ -19,7 +19,7 @@
       @else
            @if ($directory_name != "Консорциум Кодекс")
                   <ul class="breadcrumbs">
-                      <li class="breadcrumbs_i"><a href="{{route('people.root')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
+                      <li class="breadcrumbs_i"><a href="{{route('people.dept')}}" class="breadcrumbs_i_lk">Телефонный справочник</a></li>
                       <li class="breadcrumbs_i __color_base __uppercase">{{$directory_name}}</li>
                   </ul>
            @endif
@@ -70,6 +70,19 @@
     @include("users.tree")
 @endsection
 
+@section("sortradios")
+    @if(!empty($currentDep->parent_id)  &&  $count_to_display)
+    <div class="content_i_radio">
+        <div class="content_i_radio_w">
+            <input id="alphabet" name="sortType" type="radio" value="alphabet" class="radio_input" data-attr="{{str_replace_last("/alphabet", "", $request->url()) .   "/alphabet"}}" @if($sorttype   ==  "alphabet")checked="checked" @endif>
+            <label for="alphabet" class="radio_label">по алфавиту</label>
+            <input id="structure" name="sortType" type="radio" class="radio_input" value="structure" data-attr="{{str_replace_last("/alphabet", "", $request->url())}}" @if($sorttype   !=  "alphabet")checked="checked" @endif>
+            <label for="structure" class="radio_label">по орг. структуре</label>
+        </div>
+    </div>
+    @endif
+@endsection
+
 @section("peoplelist")
     @if((mb_strlen($currentDep->parent_id,   "UTF-8")    ==  0) &&  (count($contacts)   ||  count($search_contacts)))
         @if (count($contacts))
@@ -86,7 +99,7 @@
                             <!--<div class="directory_lst_i_name_status"></div>-->
                             </div>
                             <div class="directory_lst_i_info">
-                                <div class="directory_lst_i_info_i">Местный тел.: {{$contact->phone}}</div>
+                                <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
                                 @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                                 <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -97,9 +110,9 @@
                 </ul>
         </div>
         @else
-            <!--<div class="content_i_header __with-ic">
-                <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
-            </div>-->
+            <div class="content_i_header __with-ic">
+                <div class="h __h_m"><h3>Вы пока не добавили избранные контакты</h3></div>
+            </div>
         @endif
         @if (count($search_contacts))
         <div class="content_i_header __with-ic"><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
@@ -115,7 +128,7 @@
                         <!--<div class="directory_lst_i_name_status"></div>-->
                         </div>
                         <div class="directory_lst_i_info">
-                            <div class="directory_lst_i_info_i">Местный тел.: {{$contact->phone}}</div>
+                            <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) {{$contact->ip_phone}} @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
                             @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                             <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                             <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -133,46 +146,115 @@
             </div>-->
         @endif
     @else
-        <div class="content_tx __no-pad">
-            @if(empty($currentDep->parent_id))
-              <div class="department">
-                <script src="/js/d3.v3.min.js"></script>
-                <script src="/js/draw.js" ></script>
-              </div>
-            @endif
-            @if (count($users))
-                <ul class="directory_lst">
-                    @foreach($users as $user)
-                        <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
-                            <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
-                            <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
-                                <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
-                            <!--<div class="directory_lst_i_name_status"></div>-->
-                            </div>
-                            <div class="directory_lst_i_info">
-                                <div class="directory_lst_i_info_i">Местный тел.: {{$user->phone}}</div>
-                                @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
-                                <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
-                                <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
-                            </div>
-                            <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
-                        </li>
-                    @endforeach
-                </ul>
-            @else
-            <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
-                <!--<div class="content_i_header __with-ic _intra-2">
-                    <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
-                </div>-->
-            <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
-            <!--Заглушка, когда сотрудники есть среди упр. состава департамента или внутри него, или то и другое-->
-                <div class="__num-intra-2">
-                    <div class="num-cnt">18</div>
-                    <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
-                    <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
+
+        @if(empty($currentDep->parent_id))
+            <div class="content_tx __no-pad">
+                <div class="department">
+                    <script src="/js/d3.v3.min.js"></script>
+                    <script src="/js/draw.js" ></script>
                 </div>
-            <!--/ Заглушка, когда сотрудники есть среди упр. состава департамента или внутри него, или то и другое-->
+            </div>
+        @else
+            @if($sorttype   ==  "alphabet")
+                <div class="content_tx __no-pad">
+                @if (count($users))
+                    <ul class="directory_lst">
+                        @foreach($users as $user)
+                            <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
+                                <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                                <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
+                                    <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
+                                <!--<div class="directory_lst_i_name_status"></div>-->
+                                </div>
+                                <div class="directory_lst_i_info">
+                                    <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                    @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
+                                    <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                    <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
+                                </div>
+                                <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
+                            </li>
+                        @endforeach
+                    </ul>
+                @else
+                    @if($has_children && $count_children)
+                            <div class="__num-intra-2">
+                                <div class="num-cnt">{{$count_children}}</div>
+                                <!-- окончание слова сотрудников сделать динамическим, чтоб менялось в зависимости от склонения-->
+                                <div class="txt-cnt">сотрудни<span>ков</span><br />в подразделении</div>
+                            </div>
+                    @else
+                        <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                            <div class="content_i_header __with-ic _intra-2">
+                                <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
+                            </div>
+                        <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                    @endif
+                @endif
+                </div>
+            @else
+                @if(count($users[$currentDep->id]))
+                    <div class="content_tx __no-pad">
+                        <ul class="directory_lst">
+                            @foreach($users[$currentDep->id] as $user)
+                                <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
+                                    <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                                    <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
+                                        <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
+                                        <!--<div class="directory_lst_i_name_status"></div>-->
+                                    </div>
+                                    <div class="directory_lst_i_info">
+                                        <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                        @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
+                                        <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                        <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
+                                    </div>
+                                    <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @else
+                    <!--количество struct_deps -->
+                    @if(!$has_children)
+                        <!--Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                        <div class="content_i_header __with-ic _intra-2">
+                            <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
+                        </div>
+                        <!--/ Заглушка, когда сотрудников нет совсем, в том числе в подразделениях внутри департамента-->
+                    @endif
+                @endif
+                @foreach($struct_deps as $struct_dep)
+                    <!-- Подзаголовки отделов -->
+                    <div class="content_i_w_h @if(mb_strlen($struct_dep->parent_id, "UTF-8") > 4) h{{mb_strlen($struct_dep->parent_id, "UTF-8")}} @endif">{{$struct_dep->name}}</div>
+                    @if(count($users[$struct_dep->id]))
+                        <div class="content_tx __no-pad">
+                            <ul class="directory_lst">
+                                @foreach($users[$struct_dep->id] as $user)
+                                    <li class="directory_lst_i @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif">
+                                        <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+                                        <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
+                                            <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
+                                            <!--<div class="directory_lst_i_name_status"></div>-->
+                                        </div>
+                                        <div class="directory_lst_i_info">
+                                            <div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) {{$user->ip_phone}} @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>
+                                            @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
+                                            <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                            <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
+                                        </div>
+                                        <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @else
+                        <div class="content_i_header __with-ic _intra-2">
+                            <div class="h __h_m"><h3>Сотрудников в подразделении нет</h3></div>
+                        </div>
+                    @endif
+                @endforeach
             @endif
-        </div>
+        @endif
     @endif
 @endsection

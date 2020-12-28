@@ -9,6 +9,9 @@ use App\Dep;
 use DB;
 use Auth;
 use App\Technical_Request;
+use Config;
+use View;
+use Mail;
 
 class ServicesController extends Controller
 {
@@ -72,6 +75,84 @@ class ServicesController extends Controller
 
 
         return view('services.conference', [ 'user' =>  $user]);
+    }
+
+    public function sendConferenceRequest(Request $request)
+    {
+        $event_name         =   trim($request->input('event_name'));
+        $provider           =   trim($request->input('provider'));
+        $moderate           =   trim($request->input('moderate'));
+        $typeevent          =   trim($request->input('typeevent'));
+        $presentation       =   trim($request->input('presentation'));
+        $responsible        =   trim($request->input('responsible'));
+        $desired_date       =   trim($request->input('desired_date'));
+        $desired_time       =   trim($request->input('desired_time'));
+        $desired_length     =   trim($request->input('desired_length'));
+        $audience           =   $request->input('audience');
+        $facility           =   trim($request->input('facility'));
+
+        $messages   =   array(  "event_name.required"           =>  "Поле обязательно для заполнения",
+                                "event_name.max"                =>  "Поле не должно превышать 255 символов",
+                                "responsible.required"          =>  "Поле обязательно для заполнения",
+                                "responsible.max"               =>  "Поле не должно превышать 255 символов",
+                                "desired_date.required"         =>  "Поле обязательно для заполнения",
+                                "desired_date.date"             =>  "Дата должна быть в формате dd.mm.YYYY",
+                                "desired_date.after"            =>  "Дата не должна быть раньше сегодняшней",
+                                "facility.required"             =>  "Поле обязательно для заполнения",
+                                "facility.max"                  =>  "Поле не должно превышать 4000 символов",
+                                "audience.required"             =>  "Должно быть выбрано хотя бы одно значение",
+                                "audience.between"              =>  "Должно быть выбрано хотя бы одно значение",
+                                "desired_time.regex"            =>  "Время начала должно быть указано в формате чч:мм",
+
+        );
+
+        //regex:pattern
+        $validator = Validator::make($request->all(), [
+            'event_name'            =>  'required|max:255',
+            'responsible'           =>  'required|max:255',
+            'desired_date'          =>  'required|date|after:today',
+            'facility'              =>  'required|max:4000',
+            'audience'              =>  'required|array|between:1,4',
+            'desired_time'          =>  array('regex:/^([01]?[0-9]|2[0-3]):[0-5][0-9]$/'),
+        ],  $messages);
+
+
+        if ($validator->fails()) {
+            return response()->json(["result"   =>  "error", "errors"   =>  $validator->errors()]);
+        }
+
+        $audience   =   implode(",",    $audience);
+        if($provider    ==  "Etutorium") {
+            $moderate   =   "yes";
+        }
+        Mail::send('services.conference-letter',
+                    [
+                        'event_name'    =>  $event_name,
+                        'provider'      =>  $provider,
+                        'moderate'      =>  str_replace(array("yes", "no"),
+                                                        array("Да", "Нет"),
+                                                        $moderate),
+                        'typeevent'     =>  str_replace(array("open", "registered", "restricted"),
+                                                        array("Открытый: вход по общей ссылке", "Открытый: вход по индивидуальной ссылке", "Закрытый"),
+                                                        $typeevent),
+                        'presentation'  =>  str_replace(array("powerpoint", "pdf", "screencast"),
+                                                        array("Презентация Power Point", "Файл PDF", "Демонстрация экрана"),
+                                                        $presentation),
+                        'responsible'   =>  $responsible,
+                        'desired_date'  =>  $desired_date,
+                        'desired_time'  =>  $desired_time,
+                        'desired_length'=>  $desired_length,
+                        'audience'      =>  str_replace(array("staff", "customers", "representative", "other"),
+                                                        array("Сотрудники Кодекс", "Пользователи", "Представители", "Другое"),
+                                                        $audience),
+                        'facility'      =>  $facility
+                    ], function ($m) {
+            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+            $m->to(Config::get('services.conference_owner'))->subject('Заявка на проведение мероприятий');
+        });
+
+        $html   =   View::make('services.conference-result', [ 'success_sent' =>  true]);
+        return response()->json(["result"   =>  "success", "content"    =>  $html->render()]);
     }
 
     public function storeRequest(Request $request) {

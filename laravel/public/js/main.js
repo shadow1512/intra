@@ -615,37 +615,10 @@ $(document).on("click", "#submit_feedback_form", function(ev) {
     return false;
 });
 
-$(document).on("submit", "#cartridge_change_form, #tech_service_form", function(ev) {
-    ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
-    var url = $(this).attr("action");
-    var form    =   $(this);
-    $(form).find("div").removeClass("__e");
-    $(form).find(".field_e").remove();
-    var token   =   $(this).find("input[name='_token']").val();
-
-    $.ajax({
-        type: "POST",
-        url: url,
-        cache: false,
-        async: true,
-        dataType: "json",
-        data: form.serialize() + "&_token=" + token,
-        success: function(msg) {
-            if(msg.result == "success") {
-                location.href   =   '/profile/';
-            }
-            if(msg[0] == "error") {
-                if(msg.message== "auth error") {
-                    alert("Для создания заявки необходимо авторизоваться на портале");
-                    return;
-                }
-                var errors  =   msg[1];
-                for(var key in errors) {
-                    $("#"+key).parent().append("<div class='field_e'>" + errors[key] + "</div>").addClass("__e");
-                }
-            }
-        }
-    });
+$("input[name='sortType']").on("change", function() {
+   if($(this).prop("checked")   ||  ($(this).attr("checked")    ==  "checked")) {
+       location.href    =   $(this).attr("data-attr");
+   }
 });
 
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});

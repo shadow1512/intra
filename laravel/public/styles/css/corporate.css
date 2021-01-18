@@ -253,25 +253,25 @@ h2{
 .wrapper-logo .logo-blk {
     margin-bottom: 80px;
 }
-.wrapper-logo div p {
+.wrapper-logo .logo-blk div p {
     font-size: 14px;
     padding: 5px 0 0px 0;
     margin-bottom: 8px;
     line-height: 17px;
 }
-.wrapper-logo div a {
+.wrapper-logo .logo-blk div a {
     font-size: 14px;
     text-decoration: none;
 }
-.wrapper-logo div a:hover {
+.wrapper-logo .logo-blk div a:hover {
     text-decoration: underline;
 }
-.wrapper-logo div div {
+.wrapper-logo .logo-blk div div {
     width: unset;
     display: block;
     padding-right: 0;
 }
-.wrapper-logo div div:last-child {
+.wrapper-logo .logo-blk div div:last-child {
     margin-top: 12px;
 }
 a.orange {

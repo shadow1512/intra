@@ -74,9 +74,8 @@
                     <div>
                         <img src="/images/corporate/30years.svg" alt="Техэксперт">
                         <p>Юбилейный логотип Консорциум &laquo;Кодекс&raquo;</p>
-                        <div><a href="https://ncloud.kodeks.ru/index.php/s/CgQfjEBXbaTJqmd" target="_blank" class="orange">eps</a></div>
-                        <div><a href="https://ncloud.kodeks.ru/index.php/s/sZSER9XL7n7THHp" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/QeJP9b5Lf8X76jq" target="_blank" class="blue">png</a><span
-                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/KqgKZt3qzGPerEk" target="_blank" class="blue">ai</a></div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/CgQfjEBXbaTJqmd" target="_blank" class="orange">eps</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/KqgKZt3qzGPerEk" target="_blank" class="orange">ai</a></div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/sZSER9XL7n7THHp" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/QeJP9b5Lf8X76jq" target="_blank" class="blue">png</a></div>
                     </div>
                 </div>
             </div>

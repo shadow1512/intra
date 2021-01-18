@@ -120,8 +120,9 @@ a:hover {
 }
 .corporate section.corporate_logo {
     background-color: #fff;
-    height: 497px;
+    height: 820px;
 }
+
 .corporate_bb {
     background-color: rgba(0, 0, 0, 0.3);
 }
@@ -200,7 +201,13 @@ h2{
 .k a.white{
     display: inline-block;
     font-size: 18px;
-    line-height: 40px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    background-position: 0 3px;
+
+}
+.k a.white.inl {
+    margin-right: 25px;
 }
 .te .white {
     margin-top: 10px;
@@ -237,11 +244,14 @@ h2{
 .wrapper-logo {
     width: 100%;
 }
-.wrapper-logo div {
+.wrapper-logo .logo-blk div {
     width: 24.5%;
     display: inline-block;
     padding-right: 60px;
     vertical-align: top;
+}
+.wrapper-logo .logo-blk {
+    margin-bottom: 80px;
 }
 .wrapper-logo div p {
     font-size: 14px;
@@ -317,7 +327,10 @@ a.white {
     margin-top: -4px;
     line-height: 23px;
 }
-.corporate_bb .cnt-wrapper div:last-child {
+.corporate_bb .cnt-wrapper div:first-child {
+    padding-top: 0;
+}
+.corporate_bb .cnt-wrapper div{
     padding-top: 23px;
 }
 .corporate_bb .cnt-wrapper div:last-child a.blue {

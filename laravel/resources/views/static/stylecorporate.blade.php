@@ -33,41 +33,51 @@
     <section id="1" class="corporate_logo">
         <div class="cnt-wrapper">
             <h2>Логотипы</h2>
-            <a href="https://ncloud.kodeks.ru/index.php/s/6qe5yoAp7FarCF9" target="_blank" class="logo_regulations">Правила использования логотипов</a>
             <div class="wrapper-logo">
-                <div>
-                    <img src="/images/corporate/kodeks.svg" alt="Кодекс">
-                    <p>Бренд справочных систем и&nbsp;информационных продуктов для бухгалтеров и&nbsp;юристов</p>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/jskYwEjQpnGDdnw" target="_blank" class="orange">cdr</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/LasDbsoiizGDsyS"
-                                                                                                                                                               target="_blank" class="orange">eps</a>
+                <div class="logo-blk">
+                    <div>
+                        <img src="/images/corporate/kodeks.svg" alt="Кодекс">
+                        <p>Бренд справочных систем и&nbsp;информационных продуктов для бухгалтеров и&nbsp;юристов</p>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/jskYwEjQpnGDdnw" target="_blank" class="orange">cdr</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/LasDbsoiizGDsyS"
+                                                                                                                                                                   target="_blank" class="orange">eps</a>
+                        </div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/HZEiraiwew6b9ic" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t45kLwN8K77HmFG" target="_blank" class="blue">png</a><span
+                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/cJSRtwbibAYTAqi" target="_blank" class="blue">tif</a></div>
                     </div>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/HZEiraiwew6b9ic" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t45kLwN8K77HmFG" target="_blank" class="blue">png</a><span
-                                class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/cJSRtwbibAYTAqi" target="_blank" class="blue">tif</a></div>
-                </div>
-                <div>
-                    <img src="/images/corporate/teh.svg" alt="Техэксперт">
-                    <p>Бренд справочных систем и&nbsp;информационных продуктов для технических специалистов</p>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/T8nKmxyC3cNtq99" target="_blank" class="orange">eps</a></div>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/CmqHkrCeBcGYFC6" target="_blank" class="blue">png</a><span
-                                class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">tif</a></div>
-                </div>
-                <div>
-                    <img src="/images/corporate/kodeks_kons.svg" alt="Кодекс">
-                    <p>Представление компании в&nbsp;целом как работодателя, партнера и&nbsp;разработчика
-                        информационных и&nbsp;программных продуктов &laquo;Кодекс&raquo;
-                        и&nbsp;&laquo;Техэксперт&raquo;</p>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/yWPmjTMQW7TxHaC" target="_blank" class="orange">cdr</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/3n7q5emjxkeCQZZ"
-                                                                                                                                                               target="_blank" class="orange">eps</a>
+                    <div>
+                        <img src="/images/corporate/teh.svg" alt="Техэксперт">
+                        <p>Бренд справочных систем и&nbsp;информационных продуктов для технических специалистов</p>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/T8nKmxyC3cNtq99" target="_blank" class="orange">eps</a></div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/CmqHkrCeBcGYFC6" target="_blank" class="blue">png</a><span
+                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/c8rATPEL92TwCRt" target="_blank" class="blue">tif</a></div>
                     </div>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/aABZ5LzQ7f3KR6p" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/DJPSAp6Ga6oz9sW" target="_blank" class="blue">png</a><span
-                                class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/EKqW86E9CsG27xH" target="_blank" class="blue">tif</a></div>
+                    <div>
+                        <img src="/images/corporate/kodeks_kons.svg" alt="Кодекс">
+                        <p>Представление компании в&nbsp;целом как работодателя, партнера и&nbsp;разработчика
+                            информационных и&nbsp;программных продуктов &laquo;Кодекс&raquo;
+                            и&nbsp;&laquo;Техэксперт&raquo;</p>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/yWPmjTMQW7TxHaC" target="_blank" class="orange">cdr</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/3n7q5emjxkeCQZZ"
+                                                                                                                                                                   target="_blank" class="orange">eps</a>
+                        </div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/aABZ5LzQ7f3KR6p" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/DJPSAp6Ga6oz9sW" target="_blank" class="blue">png</a><span
+                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/EKqW86E9CsG27xH" target="_blank" class="blue">tif</a></div>
+                    </div>
+                    <div>
+                        <img src="/images/corporate/kodeks_teh.svg" alt="Кодекс Техэксперт">
+                        <p>Используется для&nbsp;представления одновременно всех линеек продуктов, выпускаемых компанией</p>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="orange">eps</a></div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">png</a><span
+                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">tif</a></div>
+                    </div>
                 </div>
-                <div>
-                    <img src="/images/corporate/kodeks_teh.svg" alt="Кодекс Техэксперт">
-                    <p>Используется для&nbsp;представления одновременно всех линеек продуктов, выпускаемых компанией</p>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="orange">eps</a></div>
-                    <div><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">png</a><span
-                                class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">tif</a></div>
+                <div class="logo-blk">
+                    <div>
+                        <img src="/images/corporate/30years.svg" alt="Техэксперт">
+                        <p>Юбилейный логотип Консорциум &laquo;Кодекс&raquo;</p>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/CgQfjEBXbaTJqmd" target="_blank" class="orange">eps</a></div>
+                        <div><a href="https://ncloud.kodeks.ru/index.php/s/sZSER9XL7n7THHp" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/QeJP9b5Lf8X76jq" target="_blank" class="blue">png</a><span
+                                    class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/KqgKZt3qzGPerEk" target="_blank" class="blue">ai</a></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -82,6 +92,9 @@
             </div>
             <div>
                 <a href="https://ncloud.kodeks.ru/index.php/s/7EETYEiayzLFmx6" target="_blank" class="blue">Техэксперт</a>
+            </div>
+            <div>
+                <a href="https://ncloud.kodeks.ru/index.php/s/SKwDEboJQdM9TLe" target="_blank" class="blue">30&nbsp;лет Консорциуму &laquo;Кодекс&raquo;</a>
             </div>
         </div>
 
@@ -158,6 +171,7 @@
                     для соблюдения фирменного стиля</p>
                 <a href="https://ncloud.kodeks.ru/index.php/s/7rYYg6QzEJjJfSH" target="_blank" class="blue">Фирменные бланки &laquo;Теэксперт&raquo;</a>
                 <a href="https://ncloud.kodeks.ru/index.php/s/DtQLSXatrGn7aoz" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo;</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/H9QgPnDqcCbwcw4" target="_blank" class="blue">Фирменные бланки на&nbsp;2021 год</a>
             </div>
         </div>
     </section>
@@ -166,9 +180,11 @@
             <h2>Презентации</h2>
             <div class="k">
                 <div class="ppt"><img src="/images/corporate/ppt.svg" alt="ppt"></div>
-                <a href="https://ncloud.kodeks.ru/index.php/s/mkX7ysy6iG5D5Wm" target="_blank" class="white">Консорциум &laquo;Кодекс&raquo;</a><br>
-                <a href="https://ncloud.kodeks.ru/index.php/s/keefjG9PE5NkfAy" target="_blank" class="white">Кодекс</a><br>
-                <a href="https://ncloud.kodeks.ru/index.php/s/5rFZ2dyHf4kFRrC" target="_blank" class="white">Теэксперт</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/Bg2zDJnykonDHx3" target="_blank" class="white">Наша роль в&nbsp;цифровизации российских предприятий</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/LDsSTgmX7xsQrEz" target="_blank" class="white inl">СУ НТД</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/ZEBWoDGT6yEqXTF" target="_blank" class="white">СУТр</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/nRRWqgbGtgCFiF8" target="_blank" class="white inl">СЭД</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/4xxF3P8mZL6GXdj" target="_blank" class="white">ИСУПБ</a><br>
                 <a href="https://ncloud.kodeks.ru/index.php/s/8cpdXC9qHedWCrr" target="_blank" class="white">Подложки для презентаций</a>
             </div>
             <div class="te">

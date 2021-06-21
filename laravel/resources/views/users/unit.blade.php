@@ -12,8 +12,16 @@
         <div class="profile_info">
             <div class="profile_info_i  __padding-top_m">
                 <div class="profile_info_name">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</div>
-                <!--<div class="profile_info_place __in">В офисе</div>-->
                 <div class="profile_info_position">{{ $user->work_title }}</div>
+                <div class="profile_info_place __in">
+                    
+                    <span>В офисе</span>
+                </div>
+                <div class="profile_info_place __homework">Удаленно из дома</div>
+                <div class="profile_info_place __social-day">Социальный день</div>
+                <div class="profile_info_place __hospital">Больничный</div>
+                <div class="profile_info_place __business-trip">Коммандировка</div>
+                <div class="profile_info_place __vacation">Отпуск</div>
             </div>
             <div class="profile_info_i">
                 @if(!empty($user->birthday))<div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span title="{{ date('d.m.Y', strtotime($user->birthday)) }}">

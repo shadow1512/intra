@@ -24,7 +24,7 @@ Route::post('/feedback', 'HomeController@storefeedback')->name('feedback.store')
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 
-Route::get('/rooms/timetable', 'RoomsController@book')->name('rooms.timetable');
+
 Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
 Route::get('/rooms/book/{id}/{direction}/{num}', 'RoomsController@book')->name('rooms.book.otherweeks');
 Route::post('/rooms/book/{id}', 'RoomsController@createbooking')->name('rooms.book.create');

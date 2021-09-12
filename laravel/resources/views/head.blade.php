@@ -9,7 +9,7 @@
     @if(Route::currentRouteName()   ==  'stylecorporate')
         <link rel="stylesheet" href="/styles/css/corporate.css">
     @endif
-    @if(Route::currentRouteName()   ==  'timetable.viwq')
+    @if(Route::currentRouteName()   ==  'timetable.view')
         <link rel="stylesheet" href="/styles/css/timetable.css">
     @endif
     <link rel="shortcut icon" href="/images/favicon.ico" />

@@ -53,6 +53,7 @@ Route::get('/people/new', 'UserController@index')->name('people.new');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
+Route::get('/profile/timetable', 'ProfileController@viewtimetable')->name('timetable.view');
 Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
 Route::get('/profile/add/{id}', 'ProfileController@addcontact')->name('profile.addcontact');
 Route::get('/profile/delete/{id}', 'ProfileController@deletecontact')->name('profile.deletecontact');

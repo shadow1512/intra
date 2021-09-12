@@ -1,0 +1,704 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    max-width: 1200px;
+    margin: 15px auto;
+    
+}
+.timetable-wrapper{
+    border: 1px solid #d8e0e5;
+    padding-bottom: 60px;
+}
+.timetable-header{
+    border-bottom: 1px solid #e8ecef;
+    margin-bottom: 25px;
+    padding: 20px 30px;
+}
+.timetable-cnt *{
+    box-sizing: content-box;
+}
+.timetable-h{
+    color: #898989;
+}
+.timetable-h-name{
+    font-size: 22px;
+    color: #444444;
+}
+.timetable-person{
+    width: 30%;
+    display: inline-block;
+}
+.timetable-type{
+    width: 39%;
+    display: inline-block;
+    margin: 0 auto;
+    text-align: center;
+}
+.timetable-option{
+    width: 30%;
+    display: inline-block;
+}
+.timetable-btn{
+    display: inline-block;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    min-width: 125px;
+    max-height: 45px;
+    cursor: pointer;
+}
+.timetable-btn.__month{
+    border-left: 2px solid #dee5e8;
+    border-bottom: 2px solid #dee5e8;
+    border-top: 2px solid #dee5e8;
+    position: relative;
+    margin-right: -4px;
+}
+.timetable-btn.__year{
+    border-right: 2px solid #dee5e8;
+    border-bottom: 2px solid #dee5e8;
+    border-top: 2px solid #dee5e8;
+}
+.timetable-btn.__month.__active{
+    border-left: 2px solid #4192cf;
+    border-bottom: 2px solid #4192cf;
+    border-top: 2px solid #4192cf;
+}
+.timetable-btn.__year.__active{
+    border-right: 2px solid #4192cf;
+    border-bottom: 2px solid #4192cf;
+    border-top: 2px solid #4192cf;
+}
+
+.timetable-btn.__month::before{
+    content: '';
+    border-right: 2px solid #4192cf;
+    height: 44.5px;
+    position: absolute;
+    top: -2px;
+    bottom: 0;
+    right: 0;
+}
+.timetable-btn-left{
+    background: url(/images/timetable/arrow.png) no-repeat 0 center;
+    width: 20px;
+    height: 30px;
+    display: inline-block;
+    transform: rotate(180deg);
+    vertical-align: middle;
+    margin-right: 30px;
+}
+.timetable-btn-right{
+    background: url(/images/timetable/arrow.png) no-repeat 0 center;
+    width: 20px;
+    height: 30px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 30px;
+}
+.timetable-option-noselect.__active{
+    display: block;
+}
+.timetable-option-selected.__active{
+    display: block;
+}
+.timetable-option-noselect,
+.timetable-option-selected{
+    display: none;
+}
+.timetable-option-noselect a{
+    color: #4192cf;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 0 0 0 25px;
+    display: inline-block;
+}
+.timetable-option-noselect{
+    text-align: right;
+}
+.timetable-type-month{
+    padding: 20px 30px;
+}
+.timetable-type-month th {
+    color: #97a7b7;
+    font-weight: normal;
+}
+.timetable-type-month-area{
+    margin: -15px;
+    padding: 15px;
+    min-height: 85px;
+}
+.timetable-type-month tbody{
+    vertical-align: top;
+}
+.timetable-type-month-checkbox{
+    position: absolute;
+    right: 0;
+}
+.timetable-type-month-area-wrap{
+    position: absolute;
+    top: 15px;
+    width: calc(100% - 30px);
+}
+.timetable-type-month-checkbox .timetable-checkbox-custom {
+    vertical-align: top;
+	width: 17px;
+	height: 17px;
+	margin: 0 3px 0 0;
+}
+.timetable-type-month-num{
+    font-size: 20px;
+    font-weight: bold;
+}
+.timetable-type-month-time{
+    font-size: 18px;
+    padding: 5px 0 10px 0;
+    color: #9eacbb;
+}
+.timetable-checkbox-custom {
+    opacity: 0;
+    position: absolute; 
+}
+.timetable-checkbox-label{
+    position: relative;
+}
+.timetable-checkbox-custom,
+.timetable-checkbox-label{
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+    border-radius: 2px;
+    display: none;
+}
+.__edit .timetable-checkbox-custom,
+.__edit .timetable-checkbox-label{
+    display: inline-block;
+}
+.timetable-checkbox-custom + .timetable-checkbox-label::before{
+    content: '';
+    background: #fff;
+    border: 1px solid #d2d2d2;
+    display: inline-block;
+    vertical-align: middle;
+    width: 12px;
+    height: 12px;
+    padding: 2px;
+    text-align: center;
+}
+.timetable-checkbox-custom:checked + .timetable-checkbox-label::before {
+    content: url('data:image/svg+xml; base64,PHN2ZyAgIHZpZXdCb3g9IjAgMCAxMCA3LjQ1NzEyNDQiICAgdmVyc2lvbj0iMS4xIiAgIGlkPSJzdmc0IiAgIHNvZGlwb2RpOmRvY25hbWU9ImNoZWNrLnN2ZyIgICBpbmtzY2FwZTp2ZXJzaW9uPSIxLjEgKGM2OGUyMmMzODcsIDIwMjEtMDUtMjMpIiAgIHdpZHRoPSIxMCIgICBoZWlnaHQ9IjcuNDU3MTI0MiIgICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIgICB4bWxuczpzb2RpcG9kaT0iaHR0cDovL3NvZGlwb2RpLnNvdXJjZWZvcmdlLm5ldC9EVEQvc29kaXBvZGktMC5kdGQiICAgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPiAgPGRlZnMgICAgIGlkPSJkZWZzOCIgLz4gIDxzb2RpcG9kaTpuYW1lZHZpZXcgICAgIGlkPSJuYW1lZHZpZXc2IiAgICAgcGFnZWNvbG9yPSIjZmZmZmZmIiAgICAgYm9yZGVyY29sb3I9IiM2NjY2NjYiICAgICBib3JkZXJvcGFjaXR5PSIxLjAiICAgICBpbmtzY2FwZTpwYWdlc2hhZG93PSIyIiAgICAgaW5rc2NhcGU6cGFnZW9wYWNpdHk9IjAuMCIgICAgIGlua3NjYXBlOnBhZ2VjaGVja2VyYm9hcmQ9IjAiICAgICBzaG93Z3JpZD0iZmFsc2UiICAgICBpbmtzY2FwZTp6b29tPSIxLjY0NDUzMTIiICAgICBpbmtzY2FwZTpjeD0iMzQuNjYwMzM0IiAgICAgaW5rc2NhcGU6Y3k9IjE5MS4yMzk5MSIgICAgIGlua3NjYXBlOndpbmRvdy13aWR0aD0iMTkyMCIgICAgIGlua3NjYXBlOndpbmRvdy1oZWlnaHQ9IjEwMjciICAgICBpbmtzY2FwZTp3aW5kb3cteD0iLTgiICAgICBpbmtzY2FwZTp3aW5kb3cteT0iLTgiICAgICBpbmtzY2FwZTp3aW5kb3ctbWF4aW1pemVkPSIxIiAgICAgaW5rc2NhcGU6Y3VycmVudC1sYXllcj0ic3ZnNCIgICAgIGZpdC1tYXJnaW4tdG9wPSIwIiAgICAgZml0LW1hcmdpbi1sZWZ0PSIwIiAgICAgZml0LW1hcmdpbi1yaWdodD0iMCIgICAgIGZpdC1tYXJnaW4tYm90dG9tPSIwIiAvPiAgICA8cGF0aCAgICAgZD0iTSAzLjM5NjQ0MzcsNy4zMTA2NjY1IDAuMTQ2NDQwNTgsNC4wNjA2NjI4IGMgLTAuMTk1MjU0MSwtMC4xOTUyNTM0IC0wLjE5NTI1NDEsLTAuNTExODM2MyAwLC0wLjcwNzExIEwgMC44NTM1MzExLDIuNjQ2NDQyOSBjIDAuMTk1MjU0MiwtMC4xOTUyNzM2IDAuNTExODU2LC0wLjE5NTI3MzYgMC43MDcxMSwwIEwgMy43NDk5OTg3LDQuODM1NzgxNSA4LjQzOTM1ODUsMC4xNDY0NDA3MSBjIDAuMTk1MjU0MSwtMC4xOTUyNTQyOCAwLjUxMTg1NjcsLTAuMTk1MjU0MjggMC43MDcxMDk3LDAgbCAwLjcwNzA5MDksMC43MDcxMDk5NiBjIDAuMTk1MjU0OSwwLjE5NTI1NDMzIDAuMTk1MjU0OSwwLjUxMTgzNjUzIDAsMC43MDcxMTAwMyBMIDQuMTAzNTUzNyw3LjMxMDY4NTcgQyAzLjkwODI4MDMsNy41MDU5NCAzLjU5MTY5NzgsNy41MDU5NCAzLjM5NjQ0MzcsNy4zMTA2NjY1IFoiICAgICBpZD0icGF0aDIiICAgICBzdHlsZT0iZmlsbDojZmZmZmZmO3N0cm9rZS13aWR0aDowLjAxOTUzMTQiIC8+PC9zdmc+');
+    font-family: 'FontAwesome';
+    background: #4192cf;
+    color: #fff;
+    border: 1px solid #4192cf;
+    font-size: 11px;
+    border-radius: 2px;
+}
+.timetable-checkbox-custom:focus + .timetable-checkbox-label::before{
+    outline: 0px;
+}
+.timetable-type-month-icon{
+    width: 26px;
+    height: 26px;
+    display: inline-block;
+    position: relative;
+    margin-left: -9px;
+}
+.timetable-type-month-icons {
+    position: absolute;
+    padding-left: 9px;
+    bottom: 8px;
+}
+.timetable-type-month-icons .ic-business{
+    background: url('/images/timetable/pic_businesstrip.png') no-repeat center;
+}
+.timetable-type-month-icons .ic-house{
+    background: url('/images/timetable/pic_house.png') no-repeat center;
+}
+.timetable-type-month-icons .ic-office{
+    background: url('/images/timetable/pic_office.png') no-repeat center;
+}
+.timetable-type-month-icons .ic-sick{
+    background: url('/images/timetable/pic_sick.png') no-repeat center;
+    
+}
+.timetable-type-month-icons .ic-social{
+    background: url('/images/timetable/pic_social.png') no-repeat center;
+}
+.timetable-type-month-icons .ic-vacation{
+    background: url('/images/timetable/pic_vacation.png') no-repeat center;
+}
+.timetable-type-month-icons .ic-none{
+    background: url('/images/timetable/pic_non.png') no-repeat center;
+}
+.timetable-type-month-icons .one{
+    z-index: 1;
+}
+.timetable-type-month-icons .two{
+    z-index: 2;
+}
+.timetable-type-month-icons .three{
+    z-index: 3;
+}
+.timetable-type-month-icons .four{
+    z-index: 4;
+}
+.timetable-type-month-icons .five{
+    z-index: 5;
+}
+.timetable-type-month-icons .six{
+    z-index: 7;
+}
+.timetable-type-month-icons .seven{
+    z-index: 7;
+}
+.__weekend .timetable-type-month-area{
+    position: unset;
+
+}
+.__weekend .timetable-type-month-area .timetable-type-month-checkbox{
+    right: 0;
+    left: 0;
+    top: 15px;
+    text-align: center;
+}
+.__weekend .timetable-type-month-area .timetable-type-month-icons{
+    right: 0;
+    left: 0;
+    text-align: center;
+}
+.timetable-type-month td{
+    position: relative;
+    vertical-align: bottom;
+}
+.timetable-type-month-area.last-month{
+    opacity: 0.5;
+}
+.timetable-type-month-area.last-month .timetable-checkbox-custom,
+.timetable-type-month-area.last-month .timetable-checkbox-label{
+    cursor: unset;
+}
+.timetable-type-month-area.last-month .timetable-type-month-num{
+    color: #a7adb3;
+}
+.__weekend-opacity{
+    opacity: 0.5;
+}
+.timetable-type-month-area.__active{
+    border: 3px solid #a0c9e7;
+
+}
+.blue-btn{
+    background-color: #4192cf;
+    color: #fff;
+    text-decoration: none;
+    padding: 8px 25px;
+    font-size: 18px;
+    border-radius: 4px;
+    border: 1px solid #4192cf;
+}
+.ghost-btn{
+    background-color: transparent;
+    color: #4192cf;
+    text-decoration: none;
+    border: 1px solid #4192cf;
+    padding: 8px 25px;
+    font-size: 18px;
+    border-radius: 4px;
+    margin-left: 10px;
+    margin-right: -3px;
+}
+.blue-btn,
+.ghost-btn{
+    opacity: 1;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.ghost-btn:hover{
+    background-color: #4192cf;
+    color: #fff;
+}
+.blue-btn:hover,
+.ghost-btn:hover{
+    opacity: 0.9;
+}
+.timetable-option-selected{
+    text-align: right;
+}
+.timetable-month{
+    display: inline-block;
+    width: calc(33% - 50px);
+    padding: 25px;
+    text-align: center;
+}
+.timetable-name{
+    font-weight: bold;
+    text-align: center;
+    font-size: 17px;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    margin-bottom: 15px;
+}
+.timetable-name:hover{
+    color: #4192cf;
+}
+
+.timetable-month th{
+    font-weight: normal;
+    text-align: center;
+    color: #c1c1c1;
+    font-size: 14px;
+    padding-bottom: 15px;
+}
+.timetable-type-year{
+    padding: 45px 45px 0px 45px;
+}
+.timetable-month .day{
+    border-radius: 4px;
+    height: 36px;
+    width: 36px;
+    font-size: 18px;
+    padding: 7px 0;
+    box-sizing: border-box;
+    color: #6c6c6c;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+
+}
+.timetable-month .day.last{
+    color: #c1c1c1;
+}
+.timetable-month .day.social{
+    background-color: #fce6d6;
+    color: #6c6c6c;
+}
+.timetable-month .day.office{
+    background-color: #d9e9f5;
+    color: #6c6c6c;
+}
+.timetable-type-year td{
+    padding: 3px;
+    width: 36px;
+}
+.timetable-month .day.home{
+    background-color: #d5eddd;
+    color: #6c6c6c;
+}
+.timetable-month .day.business{
+    background-color: #ebd7f2;
+    color: #6c6c6c;
+}
+.timetable-month .day.weekend{
+    background-color: #dedede;
+    color: #6c6c6c;
+}
+.timetable-month .day.today{
+    background-color: #4192cf;
+    color: #fff;
+}
+.timetable-month .day.sick{
+    background-color: #f7d6d6;
+    color: #6c6c6c;
+}
+.timetable-month .day.vacation{
+    background-color: #f9f0d8;
+    color: #6c6c6c;
+}
+.timetable-month .day:hover{
+    background-color: #b3d3ec;
+    color: #6c6c6c;
+}
+.timetable-month .day.__active{
+border: 2px solid #4192cf;
+}
+.timetable-modal{
+    z-index: 8030;
+    width: 573px;
+    height: auto;
+    position: absolute;
+    top: 98px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    opacity: 1;
+    overflow: visible;
+    background-color: #fff;
+    border-radius: 5px;
+    padding-bottom: 100px;
+}
+.timetable-modal.__download{
+    width: fit-content;
+}
+.timetable-modal-header{
+    text-align: center;
+    position: relative;
+    padding: 20px 30px;
+}
+.timetable-modal-h{
+    font-size: 22px;
+}
+.timetable-modal-cnt{
+    padding: 25px 30px;
+    border-top: 1px solid #e8ecef;
+}
+.modal-close-ic{
+    background: url('/images/timetable/close.png') center no-repeat;
+    width: 19px;
+    height: 19px;
+    opacity: 1;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    position: absolute;
+    top: 24px;
+    right: 30px;
+    overflow: hidden;
+}
+.modal-close-ic:hover{
+    cursor: pointer;
+    opacity: 0.7;
+}
+.timetable-modal-footer{
+    position: absolute;
+    border-top: 1px solid #e8ecef;
+    bottom: 0;
+    padding: 30px;
+    width: 100%;
+    height: 100px;
+    box-sizing: border-box;
+    text-align: center;
+}
+.timetable-modal-footer .blue-btn, .ghost-btn{
+    display: inline-block;
+    box-sizing: border-box;
+    width: 135px;
+}
+.timetable-modal-footer .ghost-btn{
+    margin-left: 15px;
+    margin-right: 0;
+}
+.timetable-modal-cnt-time{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.timetable-modal-cnt-time input{
+    height: 37px;
+    font-size: 16px;
+    text-align: center;
+    border: 1px solid #dee5e8;
+    margin: 0 10px;
+}
+.timetable-modal-cnt-time input:focus-visible {
+    outline: 1px solid #4192cf80;
+}
+.timetable-modal-cnt-form div{
+    display: inline-block;
+    width: 49%;
+    padding: 10px 5px;
+}
+.timetable-modal-cnt-form div label div{
+    display: inline-block;
+    width: unset;
+    padding: 5px 0 0 50px;
+    min-height: 28px;
+    vertical-align: middle;
+    margin: 4px 0 0 15px;
+}
+.timetable-modal-cnt-form div label{
+    display: block;
+    padding: 10px 0;
+}
+.timetable-modal-cnt-form div label input{
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+}
+input[type='radio'] {
+    position: relative;
+    height: 15px;
+    width: 15px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+  }
+  
+  input[type='radio']::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid dodgerblue;
+  }
+  
+  input[type='radio']:checked::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: dodgerblue;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+  }
+
+.timetable-modal-cnt-form .ic-business{
+    background: url('/images/timetable/pic_businesstrip.png') no-repeat 0 center;
+}
+.timetable-modal-cnt-form .ic-house{
+    background: url('/images/timetable/pic_house.png') no-repeat 0 center;
+}
+.timetable-modal-cnt-form .ic-office{
+    background: url('/images/timetable/pic_office.png') no-repeat 0 center;
+}
+.timetable-modal-cnt-form .ic-sick{
+    background: url('/images/timetable/pic_sick.png') no-repeat 0 center;
+    
+}
+.timetable-modal-cnt-form .ic-social{
+    background: url('/images/timetable/pic_social.png') no-repeat 0 center;
+}
+.timetable-modal-cnt-form .ic-vacation{
+    background: url('/images/timetable/pic_vacation.png') no-repeat 0 center;
+}
+.timetable-modal-add{
+    background: url('/images/timetable/add.png') no-repeat 0 center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #4192cf;
+    padding-left: 20px;
+}
+.timetable-modal-add-wrapper{
+    text-align: center;
+    padding-bottom: 20px;
+}
+.__download .timetable-modal-cnt .timetable-type{
+    width: 100%;
+}
+.__download .timetable-modal-cnt .timetable-btn.__week{
+    border-left: 2px solid #dee5e8;
+    border-bottom: 2px solid #dee5e8;
+    border-top: 2px solid #dee5e8;
+    position: relative;
+    margin-right: -6px;
+}
+.__download .timetable-modal-cnt .timetable-btn.__week.__active{
+    border-left: 2px solid #4192cf;
+    border-bottom: 2px solid #4192cf;
+    border-top: 2px solid #4192cf;
+    z-index: 99;
+}
+.__download .timetable-modal-cnt .timetable-btn.__month{
+    margin-right: -5px;  
+}
+.__download .timetable-modal-cnt .timetable-btn.__month::before{
+    border-right: 2px solid #dee5e8;
+}
+.__download .timetable-modal-cnt .timetable-btn.__week::before{
+    border-right: 2px solid #dee5e8;
+    content: '';
+    height: 44.5px;
+    position: absolute;
+    top: -2px;
+    bottom: 0;
+    right: 0;
+}
+.__download .timetable-modal-cnt .timetable-btn.__week.__active::before{
+    border-right: 2px solid #4192cf;
+}
+.__download .timetable-modal-cnt .timetable-btn.__month.__active::before{
+    border-right: 2px solid #4192cf;
+}
+.__download .timetable-modal-cnt .timetable-btn.__year.__active::before{
+    border-left: 2px solid #4192cf;
+    content: '';
+    height: 44.5px;
+    position: absolute;
+    top: -2px;
+    bottom: 0;
+    left: 0;
+}
+.__download .timetable-modal-cnt .timetable-btn{
+    position: relative;
+    width: 170px;
+}
+.__padding-top_xl{
+    padding-top: 40px;
+}
+.__download .timetable-modal-footer .__big{
+    width: auto;
+}
+.__download .timetable-modal-cnt .timetable-btn.__basic{
+    border: 2px solid #dee5e8;
+}
+.__download .timetable-modal-cnt .timetable-btn.__basic{
+    min-width: 275px;
+    width: auto;
+}
+.__download .timetable-modal-cnt.__period {
+    border-top: 1px solid #e8ecef;
+    padding: 0;
+}
+
+.__download .timetable-modal-header{
+    border-bottom: 1px solid #e8ecef;
+}
+.__download .timetable-modal-cnt{
+    border: 0;
+}
+
+.__download .timetable-modal-cnt.__period .timetable-type{
+    width: 49%;
+    min-width: 380px;
+    max-width: 380px;
+    padding: 30px 50px;
+}
+.__download .timetable-modal-cnt.__period .timetable-type:first-child{
+    border-right: 1px solid #e8ecef;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month{
+    padding-top: 20px;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month th{
+    color: #c0c0c0;
+    font-weight: normal;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month td{
+    font-size: 18px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    padding: 6px 8px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    text-align: center;
+    color: #6c6c6c;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month td:hover{
+    border: 2px solid #4192cf;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month td.__cheked{
+    border: 2px solid #4192cf;
+}
+.__download .timetable-modal-cnt.__period .timetable-modal-month td .last-month{
+    color: #c0c0c0;
+}
+.__hidden {
+    display: none;
+}

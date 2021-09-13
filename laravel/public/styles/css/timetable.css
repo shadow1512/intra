@@ -41,7 +41,7 @@ body{
 }
 .timetable-btn{
     display: inline-block;
-    font-size: 18px;
+    font-size: 16px;
     text-align: center;
     padding: 10px;
     min-width: 125px;
@@ -123,9 +123,10 @@ body{
 .timetable-type-month th {
     color: #97a7b7;
     font-weight: normal;
+    border: 1px solid #e8ecef;
+    padding: 14px 0;
 }
 .timetable-type-month-area{
-    margin: -15px;
     padding: 15px;
     min-height: 85px;
 }
@@ -192,8 +193,13 @@ body{
     background: #4192cf;
     color: #fff;
     border: 1px solid #4192cf;
-    font-size: 11px;
-    border-radius: 2px;
+    font-size: 3px;
+    -webkit-box-sizing: unset;
+    -moz-box-sizing: unset;
+    box-sizing: unset;
+}
+table {
+    border-collapse: unset;
 }
 .timetable-checkbox-custom:focus + .timetable-checkbox-label::before{
     outline: 0px;
@@ -271,6 +277,7 @@ body{
 .timetable-type-month td{
     position: relative;
     vertical-align: bottom;
+    border: 1px solid #e8ecef;
 }
 .timetable-type-month-area.last-month{
     opacity: 0.5;
@@ -506,10 +513,10 @@ border: 2px solid #4192cf;
 .timetable-modal-cnt-form div label div{
     display: inline-block;
     width: unset;
-    padding: 5px 0 0 50px;
+    padding: 2px 0 0 40px;
     min-height: 28px;
     vertical-align: middle;
-    margin: 4px 0 0 15px;
+    margin: 0px 0 0 15px;
 }
 .timetable-modal-cnt-form div label{
     display: block;
@@ -692,9 +699,11 @@ input[type='radio'] {
 }
 .__download .timetable-modal-cnt.__period .timetable-modal-month td:hover{
     border: 2px solid #4192cf;
+    background-color: #ecf4fa;
 }
 .__download .timetable-modal-cnt.__period .timetable-modal-month td.__cheked{
     border: 2px solid #4192cf;
+    background-color: #ecf4fa;
 }
 .__download .timetable-modal-cnt.__period .timetable-modal-month td .last-month{
     color: #c0c0c0;

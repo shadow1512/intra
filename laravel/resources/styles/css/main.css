@@ -225,11 +225,11 @@
 
 .menu_li_inner {
   background-color: #0060a3;
-  padding: 10px 0;
+  padding: 17px 0;
   position: absolute;
-  top: -10px;
+  top: -15px;
   left: 310px;
-  width: 250px;
+  width: auto;
   visibility: hidden;
   opacity: 0;
   -webkit-transition: all 0.2s ease-in;
@@ -243,12 +243,12 @@
   -webkit-transition: all 0.15s ease-in;
   -moz-transition: all 0.15s ease-in;
   transition: all 0.15s ease-in;
-  padding: 10px 15px; }
+  white-space: nowrap;
+  padding: 6px 24px; }
   .menu_li_inner_lk:hover {
     color: #ffb56c;
     text-decoration: none; }
-  .menu_li_inner_lk:last-child {
-    padding-bottom: 0; }
+
 
 .__menu_simple {
   background: #0089cf;

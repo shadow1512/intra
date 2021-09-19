@@ -467,6 +467,7 @@ return array(
     'CreateMenuConfig' => $baseDir . '/database/migrations/2020_04_22_151403_create_menu_config.php',
     'CreateMenuTable' => $baseDir . '/database/migrations/2016_05_19_173453_create_menu_table.php',
     'CreatePagesTable' => $baseDir . '/database/migrations/2016_01_01_000000_create_pages_table.php',
+    'CreateParsecLog' => $baseDir . '/database/migrations/2021_09_19_175508_create_parsec_log.php',
     'CreatePeoplesDepartments' => $baseDir . '/database/migrations/2017_12_11_085344_create_peoples_departments.php',
     'CreatePermissionGroupsTable' => $baseDir . '/database/migrations/2017_01_15_000000_create_permission_groups_table.php',
     'CreatePermissionRoleTable' => $baseDir . '/database/migrations/2016_11_30_141208_create_permission_role_table.php',

@@ -19,6 +19,8 @@
         "laravel/tinker": "~1.0",
         "league/csv": "^9.2",
         "league/flysystem": "^1.0",
+        "maatwebsite/excel": "^3.1",
+        "phpoffice/phpspreadsheet": "^1.12",
         "sleimanx2/plastic": "^0.5.3",
         "tcg/voyager": "^1.0",
         "tuner88/laravel-redmine-api": "^1.0",

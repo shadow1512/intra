@@ -994,6 +994,7 @@ class ComposerStaticInit10ecb23dee2ed062c7618f11018c2feb
         'CreateMenuConfig' => __DIR__ . '/../..' . '/database/migrations/2020_04_22_151403_create_menu_config.php',
         'CreateMenuTable' => __DIR__ . '/../..' . '/database/migrations/2016_05_19_173453_create_menu_table.php',
         'CreatePagesTable' => __DIR__ . '/../..' . '/database/migrations/2016_01_01_000000_create_pages_table.php',
+        'CreateParsecLog' => __DIR__ . '/../..' . '/database/migrations/2021_09_19_175508_create_parsec_log.php',
         'CreatePeoplesDepartments' => __DIR__ . '/../..' . '/database/migrations/2017_12_11_085344_create_peoples_departments.php',
         'CreatePermissionGroupsTable' => __DIR__ . '/../..' . '/database/migrations/2017_01_15_000000_create_permission_groups_table.php',
         'CreatePermissionRoleTable' => __DIR__ . '/../..' . '/database/migrations/2016_11_30_141208_create_permission_role_table.php',

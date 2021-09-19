@@ -67,7 +67,7 @@ class uploadparseclog extends Command
 
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
         foreach($sourceArray as $row) {
-            if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', 'foobarbaz', $matches)) {
+            if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
                 var_dump($matches[0]);
             }
         }

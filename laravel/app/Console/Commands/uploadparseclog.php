@@ -54,7 +54,7 @@ class uploadparseclog extends Command
                     $option->nodeValue = "";
                 }
             }
-            Storage::disk('public')->put('/parsec/'    .   Config::get('parsec.filename'), $doc->saveXML(), 'public');
+            Storage::disk('public')->put('/parsec/'    .   Config::get('parsec.filename'), $doc->save(), 'public');
         }
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));

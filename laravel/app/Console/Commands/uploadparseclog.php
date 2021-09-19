@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use DOMDocument;
 use Config;
 
 class uploadparseclog extends Command

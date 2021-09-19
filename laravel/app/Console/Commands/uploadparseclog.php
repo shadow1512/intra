@@ -42,9 +42,10 @@ class uploadparseclog extends Command
     {
         //
         exec('mntParsec.sh run');
-        $doc    = new DOMDocument('1.0', 'utf-8');
+        $doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
+            $doc->encoding  =   'utf-8';
             $elements = $doc->getElementsByTagName("DocumentProperties");
             $props = $elements->item(0);
             $options = $props->childNodes;

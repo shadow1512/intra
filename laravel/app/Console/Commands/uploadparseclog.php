@@ -62,7 +62,11 @@ class uploadparseclog extends Command
         if(!$spreadsheet->getSheetCount()) {
             echo 'problem with file';
         }
-        var_dump($spreadsheet->getSheetCount());
+        $worksheets =   $spreadsheet->getAllSheets();
+        $sheet= $worksheets[0];
+
+        $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
+        var_dump($sourceArray);
         exec('mntParsec.sh stop');
     }
 }

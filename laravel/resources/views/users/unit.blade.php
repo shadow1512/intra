@@ -14,13 +14,14 @@
                 <div class="profile_info_name">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</div>
 
                 <div class="profile_info_position">{{ $user->work_title }}</div>
-<div class="profile_info_place __in"><span>В офисе</span></div>
-            <!--<div class="profile_info_place __out"><span>Не в офисе</span></div>
-            <div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
-            <div class="profile_info_place __social-day"><span>Социальный день</span></div>
-            <div class="profile_info_place __hospital"><span>Больничный</span></div>
-            <div class="profile_info_place __business-trip"><span>Коммандировка</span></div>
-            <div class="profile_info_place __vacation"><span>Отпуск</span></div>-->
+                @if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                @else<div class="profile_info_place __out"><span>Не в офисе</span></div>@endif
+
+            <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
+                <div class="profile_info_place __social-day"><span>Социальный день</span></div>
+                <div class="profile_info_place __hospital"><span>Больничный</span></div>
+                <div class="profile_info_place __business-trip"><span>Коммандировка</span></div>
+                <div class="profile_info_place __vacation"><span>Отпуск</span></div>-->
             </div>
             <div class="profile_info_i">
                 @if(!empty($user->birthday))<div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span title="{{ date('d.m.Y', strtotime($user->birthday)) }}">

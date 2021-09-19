@@ -66,7 +66,11 @@ class uploadparseclog extends Command
         $sheet= $worksheets[0];
 
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
-        var_dump($sourceArray);
+        foreach($sourceArray as $row) {
+            if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', 'foobarbaz', $matches)) {
+                var_dump($matches[0]);
+            }
+        }
         //exec('mntParsec.sh stop');
     }
 }

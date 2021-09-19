@@ -40,6 +40,14 @@
   text-decoration: none
   &:hover
     text-decoration: underline
+.profile_aside_graph
+  display: block
+  text-align: center
+  font-size: 12px
+  margin: -20px 0 20px 0
+  text-decoration: none
+  &:hover
+    text-decoration: underline
 .profile_aside_invoice
   display: block
   color: $base
@@ -81,7 +89,50 @@
 .profile_info_place
   display: inline-block
   margin: 0
-  vertical-align: top
+  padding: 3px 15px 4px 15px
+  -webkit-border-radius: 15px
+  -moz-border-radius: 15px
+  border-radius: 15px
+  margin-top: 10px
+  span
+    background-repeat: no-repeat
+    background-position: 0 50%
+    padding-left: 23px
+  &.__in
+    background-color: #eaf4fb
+    span
+      color: #4192cf
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALCAMAAAB4W0xQAAAAQlBMVEUAAABOicRHj8xHj9ZHmdZFk85BkdJAkNA/ks1Cks1Cks5CktFBkc9CkM5Bkc9Bk9BAks9AktBClNBAkc9Bk89Bks8KRxYrAAAAFnRSTlMADRkZGRozTE1NWVlmc5mZprKys7PMgfG9tAAAAEZJREFUeNpVioUBAFEIQrnuPvYf9XfoswUMPwtvj/lsC/fkTnRNyA5XOL+Q15PObfK5rOkMTmUmlZlM5uMeHaTv9w4qMCssyyEF5S0LlVQAAAAASUVORK5CYII=)
+  &.__out
+    background-color: #ebebeb
+    span
+      color: #444444
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAALCAMAAAB4W0xQAAAAWlBMVEUAAABJSUlGRkZDQ0M9PT1FRUVCQkJERERERERERERERERDQ0NFRUVFRUVERERDQ0NERERERERERERERERDQ0NERERERERDQ0NERERERERFRUVERERERERERESko7CFAAAAHnRSTlMAFRYXGRobKURSVldZXV5jbZeaoqOlpq6wsbrGx8z42p2mAAAAUklEQVR42lWKgwEFMRBE53yxnfRf5jdfsDvAWsaHvIKE/UMgoAbrhGXGvMDQu6wWKcKXl1QEgoPJm3yVt+2v3Npf+SafZe2OG73ff6cx/sD5xxVsZwe9sI1n7wAAAABJRU5ErkJggg==)
+  &.__homework
+    background-color: #ebf7ef
+    span
+      color: #2ea757
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAOCAMAAADHVLbdAAAAUVBMVEUAAAAnnU4po1wxp04xp1gvqFctpVUtqlosqFcuqVYuplYxqVktpVUtp1cvp1cspFYsplYvplYvqFcvp1cvqFgup1guqFcvp1cvp1cvqFgup1cD6MprAAAAG3RSTlMADRkaGiYzM0xNWVlmZmZzc3OMmZmmsrO/v8xWry0MAAAAXElEQVR42o2LgxXAQBQEN7Y9/fcZ4+4x843VjSuLjNIcGxaad3J6KuWMt8afSPeS3otoWcJzH0zzsR8Ibp3H6EgJ+1tRFHtLoXuGPf+a/Za6KODMXaAIk1h+YRJsiYAH4DIsdx4AAAAASUVORK5CYII=)
+  &.__social-day
+    background-color: #fcdfc8
+    span
+      color: #ef8432
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAOCAMAAADDoWbgAAAAS1BMVEUAAADriSfriTv1hTPrfzHyfzbwgjLwhzLvgzDvgzTuhDLthDLwhDLvhTHvhTPvhDLvgzLuhTLuhjHuhjPvhTLuhDLvhDLvhDPvhDLP2RJfAAAAGXRSTlMADQ0ZGiYzM0BATWZmc3N/gJmmprKzs7/MsPToygAAAGBJREFUeNpNywcOwyAQRNG/waR5Q5oJc/+ThpUw8lP90gxgiZCM8BLdIgfcv/Ku6O2OjtDDd6VXgqvBJa5R1j7mOo8it6aVvSjabJbr2cejTnUl1zwKI0TV9ps2ltt9sj/V0weu2LJPAAAAAABJRU5ErkJggg==)
+  &.__hospital
+    background-color: #f7d6d6
+    span
+      color: #d63333
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAMAAACecocUAAAAHlBMVEUAAADQLy/XLy/XNjbdLy/SMjLXMjLUNDTXNDTWMzOJMENrAAAACnRSTlMAJiYmJjMzWVnMXhOKvQAAADRJREFUeNp1zAEGADAMQ9FuW7Lm/hdeSxmjHzxELKKkkSjj9yQ9fEiaXq0B5N6B1X5Gu3wBq4wCmY16n0IAAAAASUVORK5CYII=)
+  &.__business-trip
+    background-color: #ebd7f2
+    span
+      color: #9a38bc
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAANCAMAAABFNRROAAAAbFBMVEUAAACJJ7CJO7CdO7CdO8STMbCdO7qUNryhNryhPLyWN7mXOLuaNryYObqbObqYN7ubObuXN7qZN7qZN7ybOrqbOL2XOLmZOLybOLyZObuZObyYN7qYN7uaN7uaObuZOLyYOLuaObubOLuaOLuM8Mo/AAAAJHRSTlMADQ0NDRoaJiYmM0BMWVlmZnNzc3N/gIyMmZmmpqamsrOzv8wWMgQvAAAAY0lEQVR42k3KhRHEABBC0X8Wd3ej/x5v4nljuwA3O89hrlPXDSCTSj6FVnUjyQR+lXYxKyue1mfk0GxjAMP9Rtr467fNukFyzl38CiWPVdLrzW9QzOazeGCpZee81snIw+fFH+4RCbybf2NIAAAAAElFTkSuQmCC)
+  &.__vacation
+    background-color: #f8f1df
+    span
+      color: #e2b339
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEUAAADYsCfYsDvgrTPguDPisDHisDvktTbktTzhrzfhtDfhtDzfszjhsjnhtTnhszjhszzisjnitDnhsTfhsTnjtDnisTritDrhszjjszjhsTjjszrisjjisjrksjjhsjnjsjnjsjrisjnisznisjnisjrjszniszn2tES+AAAAKHRSTlMADQ0ZGRoaJiYzMzNATExNTVlZZmZmc3N/f4CAjIyMmZmZprKzs7/MxiS4sAAAAJRJREFUeNpsjAMWQ1EMRPNt28hrZv8rrN3ewyH9Ra/Int6NALugqZq7HDbB0i7AejdqLE5axn6Prb7sc8W2AsDOjO5sOALnos+Ojfq6kAA3oh07kav4aWxsEmVK7Lvh7TudCeHPjw/kZyMBuz2AxVHsaRejVBxbnhEo7HSjBHAQcNnejazwhEeJTkP2niALAysLmAUAQi0SOJjLHrEAAAAASUVORK5CYII=)
 .profile_info_position, .profile_info_room, .profile_info_mail, .profile_info_birth, .profile_info_address, .profile_info_phone, .profile_info_responsibility
   margin: 5px 0 0
 .profile_info_position

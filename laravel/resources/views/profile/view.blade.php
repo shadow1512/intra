@@ -4,6 +4,7 @@
 <div class="profile_i">
     <div class="profile_aside">
         <div class="profile_aside_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{$user->lname}} {{$user->fname}}" title="{{$user->lname}} {{$user->fname}}"></div><a href="{{route('profile.edit')}}" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a>
+        <a href="" class="profile_aside_graph">График работы</a>
         @if($summ   >   0)
         <a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
@@ -15,8 +16,14 @@
         <div class="profile_info_i">
             <div class="profile_info_name">{{$user->lname}} {{$user->fname}} {{$user->mname}}</div>
             <!-- <div class="profile_info_name unchecked_name"><span class="tx_change">{{$user->lname}}</span> {{$user->lname}} {{$user->fname}} {{$user->mname}} <i class="ic-wait"></i></div> -->
-        <!--<div class="profile_info_place __in">В офисе</div>-->
             <div class="profile_info_position">{{$user->work_title}}</div>
+            @if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+            @else<div class="profile_info_place __out"><span>Не в офисе</span></div>@endif
+            <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
+            <div class="profile_info_place __social-day"><span>Социальный день</span></div>
+            <div class="profile_info_place __hospital"><span>Больничный</span></div>
+            <div class="profile_info_place __business-trip"><span>Коммандировка</span></div>
+            <div class="profile_info_place __vacation"><span>Отпуск</span></div>-->
         </div>
         <div class="profile_info_i">
             <div class="profile_info_birth"><strong>Дата рождения:&nbsp;</strong><span>{{ date("d.m.Y", strtotime($user->birthday)) }}</span></div>

@@ -9,9 +9,13 @@
     <div class="content layout_main">
         <div class="content_i onecolumn-page profile">
             <div class="content_i_w">
-                @include('profile.contacts')
+                @if(Route::currentRouteName()   !==  'timetable.view')
+                    @include('profile.contacts')
+                @endif
                 @yield('view')
-                @yield('result_changes')
+                @if(Route::currentRouteName()   !==  'timetable.view')
+                    @yield('result_changes')
+                @endif
             </div>
         </div>
     </div>

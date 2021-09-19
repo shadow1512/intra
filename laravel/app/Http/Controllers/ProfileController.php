@@ -321,4 +321,9 @@ class ProfileController extends Controller
         }
 
     }
+
+    public function viewtimetable() {
+
+        return view('profile.timetableview', [   'labels'    =>  Config::get("dict.labels")]);
+    }
 }

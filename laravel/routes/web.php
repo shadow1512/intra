@@ -24,7 +24,7 @@ Route::post('/feedback', 'HomeController@storefeedback')->name('feedback.store')
 Route::get('/news', 'NewsController@index')->name('news.list');
 Route::get('/news/{id}', 'NewsController@item')->name('news.item');
 
-Route::get('/rooms/book/{id}', 'RoomsController@book')->name('rooms.book');
+Route::get('/rooms/book/{id}', 'RoomsController@viewbooking')->name('rooms.book');
 Route::get('/rooms/book/{id}/{direction}/{num}', 'RoomsController@book')->name('rooms.book.otherweeks');
 Route::post('/rooms/book/{id}', 'RoomsController@createbooking')->name('rooms.book.create');
 Route::get('/rooms/book/view/{id}', 'RoomsController@viewbooking')->name('rooms.book.view');
@@ -53,6 +53,7 @@ Route::get('/people/new', 'UserController@index')->name('people.new');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');
+Route::get('/profile/timetable', 'ProfileController@viewtimetable')->name('timetable.view');
 Route::post('/profile/update', 'ProfileController@update')->name('profile.update');
 Route::get('/profile/add/{id}', 'ProfileController@addcontact')->name('profile.addcontact');
 Route::get('/profile/delete/{id}', 'ProfileController@deletecontact')->name('profile.deletecontact');

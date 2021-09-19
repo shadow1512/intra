@@ -40,7 +40,7 @@ class uploadparseclog extends Command
     {
         //
         exec('mntParsec.sh run');
-        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xls");
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xlsx");
         $spreadsheet = $reader->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
             echo 'problem with file';

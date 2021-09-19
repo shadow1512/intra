@@ -42,7 +42,7 @@ class uploadparseclog extends Command
     {
         //
         exec('mntParsec.sh run');
-        $doc    = new DOMDocument();
+        $doc    = new DOMDocument('1.0', 'utf-8');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
             $elements = $doc->getElementsByTagName("DocumentProperties");
@@ -57,7 +57,7 @@ class uploadparseclog extends Command
             Storage::disk('public')->put('/parsec/'    .   Config::get('parsec.filename'), $doc->saveXML(), 'public');
         }
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
-        $spreadsheet = $reader->load(Config::get('parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
+        $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
             echo 'problem with file';
         }

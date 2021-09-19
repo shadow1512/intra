@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Storage;
 use Config;
 
 class uploadparseclog extends Command
@@ -40,8 +41,22 @@ class uploadparseclog extends Command
     {
         //
         exec('mntParsec.sh run');
+        $doc    = new DOMDocument();
+        $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
+        if($dl) {
+            $elements = $doc->getElementsByTagName("DocumentProperties");
+            $props = $elements->item(0);
+            $options = $props->childNodes;
+            for ($j = 0; $j < $options->length; $j++) {
+                $option = $options->item($j);
+                if ($option->nodeName == "Created") {
+                    $option->nodeValue = "";
+                }
+            }
+            Storage::disk('public')->put('/parsec/'    .   Config::get('parsec.filename'), $doc->saveXML(), 'public');
+        }
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
-        $spreadsheet = $reader->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
+        $spreadsheet = $reader->load(Config::get('parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
             echo 'problem with file';
         }

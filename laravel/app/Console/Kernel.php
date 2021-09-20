@@ -49,6 +49,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('issuestatus:get')->everyFiveMinutes();
         $schedule->command('syncbookings:start')->everyFiveMinutes();
         $schedule->command('profileupdate:inform')->everyFiveMinutes();
+        $schedule->command('parsec:update')->everyFifteenMinutes();
     }
 
     /**

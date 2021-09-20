@@ -43,12 +43,13 @@ class uploadparseclog extends Command
     {
         //
         $fp =   fopen("/home/slava/parsec.txt", "a+");
-        fwrite($fp, "start");
+        fwrite($fp, "start\r\n");
         exec('mntParsec.sh run');
-        fwrite($fp, "exec");
+        fwrite($fp, "exec\r\n");
         $doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
+            fwrite($fp, "file ready\r\n");
             $doc->encoding  =   'utf-8';
             $elements = $doc->getElementsByTagName("DocumentProperties");
             $props = $elements->item(0);
@@ -60,14 +61,16 @@ class uploadparseclog extends Command
                 }
             }
             $doc->save(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
-            fwrite($fp, "save");
+            fwrite($fp, "save\r\n");
         }
-        fwrite($fp, "before reader");
+        else {
+            fwrite($fp, "file not ready\r\n");
+        }
+        fwrite($fp, "before reader\r\n");
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
-            echo 'problem with file';
-            fwrite($fp, "not count");
+            fwrite($fp, "not count\r\n");
         }
         $worksheets =   $spreadsheet->getAllSheets();
         $sheet= $worksheets[0];

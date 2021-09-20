@@ -44,7 +44,7 @@ class uploadparseclog extends Command
         //
         $fp =   fopen("/home/slava/parsec.txt", "a+");
         fwrite($fp, "start\r\n");
-        $result=    system('mntParsec.sh run', $result_var);
+        $result=    system(Config::get('parsec.mount_script_run'), $result_var);
         if($result  === false) {
             fwrite($fp, "false\r\n");
         }
@@ -118,7 +118,7 @@ class uploadparseclog extends Command
         }
 
         fwrite($fp, "processed");
-        system('mntParsec.sh stop', $result_var);
+        system(Config::get('parsec.mount_script_stop'), $result_var);
         fwrite($fp, "exec stopped");
     }
 }

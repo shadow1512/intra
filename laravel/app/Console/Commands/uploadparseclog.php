@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Storage;
+use App\Parsec_log;
 use DOMDocument;
 use Config;
 
@@ -68,7 +69,30 @@ class uploadparseclog extends Command
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
         foreach($sourceArray as $row) {
             if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
-                var_dump($matches[0]);
+                $time   =   $matches[0];
+                $action =   null;
+                if (str_contains($row[1], 'выход')) {
+                    $action =   false;
+                }
+                if (str_contains($row[1], 'вход')) {
+                    $action =   true;
+                }
+                $area   =   $row[3];
+                $user   =   $row[5];
+                $date_data  =   explode(";", $row[6]);
+                $date_parts =   explode(":", $date_data[0]);
+                $date_string= trim($date_parts[1]);
+                $date_array =   explode(".",    $date_string);
+                $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
+
+                $pl =   new Parsec_log();
+
+                $pl->datetime_record    = $date.    " " .   $time;
+                $pl->user               =   $user;
+                $pl->action             =   $action;
+                $pl->area               =   $area;
+
+                $pl->save();
             }
         }
         //exec('mntParsec.sh stop');

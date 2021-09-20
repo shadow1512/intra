@@ -42,7 +42,9 @@ class uploadparseclog extends Command
     public function handle()
     {
         //
+        $fp =   fopen("/home/slava/parsec.txt");
         exec('mntParsec.sh run');
+        fwrite($fp, "exec");
         $doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
@@ -57,11 +59,14 @@ class uploadparseclog extends Command
                 }
             }
             $doc->save(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
+            fwrite($fp, "save");
         }
+        fwrite($fp, "before reader");
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
             echo 'problem with file';
+            fwrite($fp, "not count");
         }
         $worksheets =   $spreadsheet->getAllSheets();
         $sheet= $worksheets[0];
@@ -103,6 +108,9 @@ class uploadparseclog extends Command
 
             }
         }
+
+        fwrite($fp, "processed");
         exec('mntParsec.sh stop');
+        fwrite($fp, "exec stopped");
     }
 }

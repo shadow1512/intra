@@ -920,6 +920,7 @@ return array(
     'EditNewsNullableTags' => $baseDir . '/database/migrations/2017_12_11_083948_edit_news_nullable_tags.php',
     'EditParsecLogAddNullables' => $baseDir . '/database/migrations/2021_09_20_031404_edit_parsec_log_add_nullables.php',
     'EditParsecLogChangeAction' => $baseDir . '/database/migrations/2021_09_20_031726_edit_parsec_log_change_action.php',
+    'EditParsecLogChangeDatetimeRecord' => $baseDir . '/database/migrations/2021_09_20_032149_edit_parsec_log_change_datetime_record.php',
     'EditProfilesSavedAddNotify' => $baseDir . '/database/migrations/2019_08_18_224555_edit_profiles_saved_add_notify.php',
     'EditProfilesSavedAddUserInformed' => $baseDir . '/database/migrations/2019_08_21_002840_edit_profiles_saved_add_user_informed.php',
     'EditProfilesSavedDropColumns' => $baseDir . '/database/migrations/2019_08_18_203955_edit_profiles_saved_drop_columns.php',

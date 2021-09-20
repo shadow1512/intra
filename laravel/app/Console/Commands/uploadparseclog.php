@@ -44,8 +44,12 @@ class uploadparseclog extends Command
         //
         $fp =   fopen("/home/slava/parsec.txt", "a+");
         fwrite($fp, "start\r\n");
-        exec('mntParsec.sh run');
+        $result=    exec('mntParsec.sh run', $result);
+        if($result  === false) {
+            fwrite($fp, "false\r\n");
+        }
         fwrite($fp, "exec\r\n");
+        fwrite($fp, implode(",", $result)   .   "\r\n");
         $doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {

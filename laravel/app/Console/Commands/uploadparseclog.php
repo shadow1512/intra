@@ -42,7 +42,8 @@ class uploadparseclog extends Command
     public function handle()
     {
         //
-        $fp =   fopen("/home/slava/parsec.txt");
+        $fp =   fopen("/home/slava/parsec.txt", "a+");
+        fwrite($fp, "start");
         exec('mntParsec.sh run');
         fwrite($fp, "exec");
         $doc    = new DOMDocument('1.0');

@@ -15,7 +15,7 @@
 
                 <div class="profile_info_position">{{ $user->work_title }}</div>
                 @if($user->in_office)<!--<div class="profile_info_place __in"><span>В офисе</span></div>-->
-                @else<<!--div class="profile_info_place __out"><span>Не в офисе</span></div>-->@endif
+                @else<!--div class="profile_info_place __out"><span>Не в офисе</span></div>-->@endif
 
             <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                 <div class="profile_info_place __social-day"><span>Социальный день</span></div>

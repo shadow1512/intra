@@ -69,7 +69,7 @@ class uploadparseclog extends Command
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
 
         $last_record    =   Parsec_log::orderBy('datetime_record', 'desc')->first();
-
+        
         foreach($sourceArray as $row) {
             if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
                 $time   =   $matches[0];
@@ -90,7 +90,7 @@ class uploadparseclog extends Command
 
                 //не надо добавлять файл весь, а только те записи, которые старше последней
 
-                if($last_record &&  ($last_record    <   ($date.    " " .   $time))) {
+                if($last_record &&  ($last_record->datetime_record    <   ($date.    " " .   $time))) {
                     $pl =   new Parsec_log();
 
                     $pl->datetime_record    = $date.    " " .   $time;

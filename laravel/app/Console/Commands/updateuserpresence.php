@@ -44,11 +44,10 @@ class updateuserpresence extends Command
         foreach($records_to_process as $record) {
             $user_names =   explode(" ",    $record->user);
 
-            foreach($user_names as $index   =>  $part_name) {
-                if(!trim($part_name)) {
-                    unset($user_names[$index]);
-                }
-            }
+            $user_names = array_filter($user_names, function($element) {
+                return !empty(trim($element));
+            });
+
             $processed  =   0;
             if(count($user_names)   ==  3) {
                 $user   =   User::where("fname",    "=",    trim($user_names[1]))->where("lname", "=", trim($user_names[0]))->where("mname", "=", trim($user_names[2]))->first();

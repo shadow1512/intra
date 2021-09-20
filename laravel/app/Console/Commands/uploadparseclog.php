@@ -67,6 +67,9 @@ class uploadparseclog extends Command
         $sheet= $worksheets[0];
 
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
+
+        $last_record    =   Parsec_log::orderBy('datetime_record', 'desc')->first();
+
         foreach($sourceArray as $row) {
             if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
                 $time   =   $matches[0];
@@ -85,14 +88,19 @@ class uploadparseclog extends Command
                 $date_array =   explode(".",    $date_string);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
-                $pl =   new Parsec_log();
+                //не надо добавлять файл весь, а только те записи, которые старше последней
 
-                $pl->datetime_record    = $date.    " " .   $time;
-                $pl->user               =   $user;
-                $pl->action             =   $action;
-                $pl->area               =   $area;
+                if($last_record &&  ($last_record    <   ($date.    " " .   $time))) {
+                    $pl =   new Parsec_log();
 
-                $pl->save();
+                    $pl->datetime_record    = $date.    " " .   $time;
+                    $pl->user               =   $user;
+                    $pl->action             =   $action;
+                    $pl->area               =   $area;
+
+                    $pl->save();
+                }
+
             }
         }
         //exec('mntParsec.sh stop');

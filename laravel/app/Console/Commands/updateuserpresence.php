@@ -78,7 +78,7 @@ class updateuserpresence extends Command
 
                 }
             }
-            if(count($user_names_without_empty)   ==  2) {
+            else if(count($user_names_without_empty)   ==  2) {
                 $num_users   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->count();
                 if($num_users   ==  1) {
                     $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->first();
@@ -95,7 +95,9 @@ class updateuserpresence extends Command
                     $processed  =   2;
                 }
             }
-
+            else {
+                $processed  =   2;
+            }
             $record->processed  =   $processed;
             $record->processed_at   =   date("Y-m-d H:i:s");
 

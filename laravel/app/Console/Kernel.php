@@ -31,6 +31,7 @@ class Kernel extends ConsoleKernel
         Commands\makeCsvWithPeopleList::class,
         Commands\uploadparseclog::class,
         Commands\updateuserpresence::class,
+        Commands\updateuserpresencemidnight::class,
     ];
 
     /**
@@ -52,6 +53,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('profileupdate:inform')->everyFiveMinutes();
         $schedule->command('parsec:update')->everyTenMinutes();
         $schedule->command('presence:update')->everyFiveMinutes();
+        $schedule->command('presencemidnight:update')->daily();
     }
 
     /**

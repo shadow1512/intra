@@ -42,7 +42,7 @@ class uploadparseclog extends Command
     public function handle()
     {
         //
-        /*exec('mntParsec.sh run');
+        exec('mntParsec.sh run');
         $doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
@@ -57,7 +57,7 @@ class uploadparseclog extends Command
                 }
             }
             $doc->save(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
-        }*/
+        }
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
@@ -103,6 +103,6 @@ class uploadparseclog extends Command
 
             }
         }
-        //exec('mntParsec.sh stop');
+        exec('mntParsec.sh stop');
     }
 }

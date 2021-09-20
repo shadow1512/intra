@@ -56,6 +56,7 @@ class updateuserpresence extends Command
                 $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->where("mname", "=", trim($user_names_without_empty[2]))->first();
                 if($user) {
                     $user->in_office    =   $record->action;
+                    $user->save();
                     $processed  =   1;
                 }
                 else {
@@ -64,6 +65,7 @@ class updateuserpresence extends Command
                         $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->first();
                         if($user) {
                             $user->in_office    =   $record->action;
+                            $user->save();
                             $processed  =   1;
                         }
                         else {
@@ -82,6 +84,7 @@ class updateuserpresence extends Command
                     $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->first();
                     if($user) {
                         $user->in_office    =   $record->action;
+                        $user->save();
                         $processed  =   1;
                     }
                     else {

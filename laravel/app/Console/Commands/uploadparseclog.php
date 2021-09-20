@@ -69,7 +69,7 @@ class uploadparseclog extends Command
         $sourceArray    =   $sheet->rangeToArray($sheet->calculateWorksheetDataDimension());
 
         $last_record    =   Parsec_log::orderBy('datetime_record', 'desc')->first();
-        
+
         foreach($sourceArray as $row) {
             if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
                 $time   =   $matches[0];

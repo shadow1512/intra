@@ -44,13 +44,16 @@ class updateuserpresence extends Command
         foreach($records_to_process as $record) {
             $user_names =   explode(" ",    $record->user);
 
-            $user_names = array_filter($user_names, function($element) {
-                return !empty(trim($element));
-            });
+            $user_names_without_empty    =   array();
+            foreach($user_names as $element) {
+                if(!empty(trim($element))){
+                    $user_names_without_empty[] = $element;
+                }
+            }
 
             $processed  =   0;
-            if(count($user_names)   ==  3) {
-                $user   =   User::where("fname",    "=",    trim($user_names[1]))->where("lname", "=", trim($user_names[0]))->where("mname", "=", trim($user_names[2]))->first();
+            if(count($user_names_without_empty)   ==  3) {
+                $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->where("mname", "=", trim($user_names_without_empty[2]))->first();
                 if($user) {
                     $user->in_office    =   $record->action;
                     $processed  =   1;
@@ -59,10 +62,10 @@ class updateuserpresence extends Command
                     $processed  =   2;
                 }
             }
-            if(count($user_names)   ==  2) {
-                $num_users   =   User::where("fname",    "=",    trim($user_names[1]))->where("lname", "=", trim($user_names[0]))->count();
+            if(count($user_names_without_empty)   ==  2) {
+                $num_users   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->count();
                 if($num_users   ==  1) {
-                    $user   =   User::where("fname",    "=",    trim($user_names[1]))->where("lname", "=", trim($user_names[0]))->first();
+                    $user   =   User::where("fname",    "=",    trim($user_names_without_empty[1]))->where("lname", "=", trim($user_names_without_empty[0]))->first();
                     if($user) {
                         $user->in_office    =   $record->action;
                         $processed  =   1;

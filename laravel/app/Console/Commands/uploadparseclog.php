@@ -74,7 +74,7 @@ class uploadparseclog extends Command
         $last_record    =   Parsec_log::orderBy('datetime_record', 'desc')->first();
 
         foreach($sourceArray as $row) {
-            if(preg_match('/[0-9]{2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
+            if(preg_match('/[0-9]{1,2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
                 $time   =   $matches[0];
                 $action =   null;
                 if (str_contains($row[1], 'выход')) {
@@ -91,7 +91,15 @@ class uploadparseclog extends Command
                 $date_array =   explode(".",    $date_string);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
+                //время в файле начинается не с ведущего нуля, когда меньше 10, а просто с числа
+                $time_parts =   explode(":", $time);
+                if(mb_strlen($time[0], "UTF-8") <   2) {
+                    $time[0]    =   "0" .   $time[0];
+                    $time=  implode(":", $time);
+                }
                 //не надо добавлять файл весь, а только те записи, которые старше последней
+
+
 
                 if($last_record &&  ($last_record->datetime_record    <   ($date.    " " .   $time))) {
                     $pl =   new Parsec_log();

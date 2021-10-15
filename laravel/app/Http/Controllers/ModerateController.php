@@ -1052,10 +1052,10 @@ class ModerateController extends Controller
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
         if(is_null($moderate)   &&    (Auth::user()->role_id  !=  1)) {
-            return redirect(route('moderate.users.start'));
+            abort(403, 'moderate not set. Not admin');
         }
         if(!is_null($moderate)  &&  ($moderate->id != Auth::user()->id)    &&    (Auth::user()->role_id  !=  1)) {
-            return redirect(route('moderate.users.start'));
+            abort(403, 'not enough rights for detected moderate');
         }
 
         $crumbs =   array();

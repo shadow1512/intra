@@ -93,9 +93,9 @@ class uploadparseclog extends Command
 
                 //время в файле начинается не с ведущего нуля, когда меньше 10, а просто с числа
                 $time_parts =   explode(":", $time);
-                if(mb_strlen($time[0], "UTF-8") <   2) {
-                    $time[0]    =   "0" .   $time[0];
-                    $time=  implode(":", $time);
+                if(mb_strlen($time_parts[0], "UTF-8") <   2) {
+                    $time_parts[0]    =   "0" .   $time_parts[0];
+                    $time=  implode(":", $time_parts);
                 }
                 //не надо добавлять файл весь, а только те записи, которые старше последней
 

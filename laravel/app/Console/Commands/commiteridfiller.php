@@ -72,7 +72,9 @@ class commiteridfiller extends Command
             }
         }
 
-        $psd =   Profiles_Saved_Data::whereNull("commiter_id")->where("status", "!=", "1")->get();
+        $psd =   Profiles_Saved_Data::select("profiles_saved.user_id")
+                    ->leftJoin('profiles_saved', 'profiles_saved.id', '=', 'profiles_saved_data.ps_id')
+                    ->whereNot("status", "!=", "1")->get();
 
         foreach($psd as $item) {
             $user   =   User::select("users.*", "deps_peoples.dep_id")

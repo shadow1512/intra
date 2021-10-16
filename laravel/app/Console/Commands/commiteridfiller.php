@@ -51,8 +51,11 @@ class commiteridfiller extends Command
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->where('users.id', '=', $item->user_id)->first();
 
-            if(!is_null($user->dep_id)) {
+            if((!is_null($user))  &&  (!is_null($user->dep_id))) {
                 $moderate   =   Dep::getModerate($user->dep_id);
+            }
+            else {
+                Log::error($item->user_id   .   "- no user record");
             }
 
             if(is_null($moderate)) {
@@ -75,8 +78,11 @@ class commiteridfiller extends Command
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->where('users.id', '=', $item->user_id)->first();
 
-            if(!is_null($user->dep_id)) {
+            if((!is_null($user))  &&  (!is_null($user->dep_id))) {
                 $moderate   =   Dep::getModerate($user->dep_id);
+            }
+            else {
+                Log::error($item->user_id   .   "- no user record");
             }
 
             if(is_null($moderate)) {

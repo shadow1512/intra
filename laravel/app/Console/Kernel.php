@@ -32,6 +32,7 @@ class Kernel extends ConsoleKernel
         Commands\uploadparseclog::class,
         Commands\updateuserpresence::class,
         Commands\updateuserpresencemidnight::class,
+        Commands\commiteridfiller::class,
     ];
 
     /**

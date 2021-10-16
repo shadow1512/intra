@@ -72,7 +72,7 @@ class commiteridfiller extends Command
             }
         }
 
-        $psd    =   Profiles_Saved_Data::withTrashed()->select("profiles_saved.user_id")
+        $psd    =   Profiles_Saved_Data::withTrashed()->select("profiles_saved_data.id, profiles_saved.user_id")
                     ->leftJoin('profiles_saved', 'profiles_saved.id', '=', 'profiles_saved_data.ps_id')
                     ->where("profiles_saved_data.status", "!=", "1")->get();
 
@@ -96,8 +96,7 @@ class commiteridfiller extends Command
 
             if(count($moderate)) {
                 foreach ($moderate as $moderator) {
-                    $item->commiter_id  =   $moderator->id;
-                    $item->save();
+                    Profiles_Saved_Data::update(["commiter_id"  =>  $moderator->id])->where("id",   "=",    $item->id);
                     break;
                 }
             }

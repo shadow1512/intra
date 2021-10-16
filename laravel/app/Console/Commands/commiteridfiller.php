@@ -72,9 +72,9 @@ class commiteridfiller extends Command
             }
         }
 
-        $psd =   Profiles_Saved_Data::select("profiles_saved.user_id")
+        dd(Profiles_Saved_Data::select("profiles_saved.user_id")
                     ->leftJoin('profiles_saved', 'profiles_saved.id', '=', 'profiles_saved_data.ps_id')
-                    ->where("profiles_saved_data.status", "!=", "1")->dd();
+                    ->where("profiles_saved_data.status", "!=", "1")->toSql());
 
         echo count($psd);
         foreach($psd as $item) {

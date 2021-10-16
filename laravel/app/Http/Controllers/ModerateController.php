@@ -1051,11 +1051,20 @@ class ModerateController extends Controller
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
-        if(is_null($moderate)   &&    (Auth::user()->role_id  !=  1)) {
-            abort(403, 'moderate not set. Not admin');
-        }
-        if(!is_null($moderate)  &&  ($moderate->id != Auth::user()->id)    &&    (Auth::user()->role_id  !=  1)) {
-            abort(403, 'not enough rights for detected moderate');
+
+        if(Auth::user()->role_id  !=  1) {
+            if(is_null($moderate)) {
+                abort(403, 'moderate not set. Not admin');
+            }
+            else {
+                $authorized_ids =   array();
+                foreach($moderate as $moderator) {
+                    $authorized_ids[]   =   $moderator->id;
+                }
+                if(!in_array(Auth::user()->id,   $authorized_ids)) {
+                    abort(403, 'not enough rights for detected moderate');
+                }
+            }
         }
 
         $crumbs =   array();
@@ -1099,6 +1108,8 @@ class ModerateController extends Controller
         if($psd->status ==  2) {
             $psd->new_value    =   trim(rawurldecode($request->input('input_newval')));
         }
+
+        $psd->commiter_id   =   Auth::user()->id;
         $psd->save();
 
         return response()->json(['success']);
@@ -1126,6 +1137,7 @@ class ModerateController extends Controller
             }
             else {
                 $item->status   =   3;
+                $item->commiter_id  =   Auth::user()->id;
                 $item->save();
             }
             $item->delete();
@@ -1133,6 +1145,8 @@ class ModerateController extends Controller
 
         $user->numupdates   =   $user->numupdates   +   1;
         $user->save();
+        $ps->commiter_id   =   Auth::user()->id;
+        $ps->save();
         $ps->delete();
 
         return response()->json(['success']);
@@ -1209,6 +1223,7 @@ class ModerateController extends Controller
 
         $ps->user_id        =   $id;
         $ps->creator_id     =   Auth::user()->id;
+        $ps->commiter_id    =   Auth::user()->id;
         $ps->notified       =   1;
         $ps->save();
 
@@ -1250,7 +1265,7 @@ class ModerateController extends Controller
 
                 $psd->ps_id         =   $ps->id;
                 $psd->creator_id    =   Auth::user()->id;
-
+                $psd->commiter_id   =   Auth::user()->id;
 
                 $psd->field_name    =   $key;
                 $psd->old_value     =   $user->$key;

@@ -31,5 +31,5 @@ return array(
         "position_desc"     =>  "Сфера деятельности"
     ),
 
-    'main_moderate' =>  349,
+    'main_moderate' =>  96,
 );

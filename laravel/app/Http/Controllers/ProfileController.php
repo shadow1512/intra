@@ -55,7 +55,6 @@ class ProfileController extends Controller
         }
 
         if(!is_null($user->dep_id)) {
-            $moderate   =   Dep::getModerate($user->dep_id);
             $dep        =   Dep::findOrFail($user->dep_id);
         }
 
@@ -74,15 +73,17 @@ class ProfileController extends Controller
 
 
         $change_records =   array();
+        $moderators     =   array();
         $changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
         foreach($changes as $item) {
             $change_records[$item->id]  =   Profiles_Saved_Data::withTrashed()->where('ps_id',  '=',    $item->id)->get();
+            $moderators[$item->id]      =   User::findOrFail($item->commiter_id);
             $item->user_informed    =   1;
             $item->save();
         }
         return view('profile.view', [   'contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,
                                         'ps'    =>  $ps, 'psd'    =>  $psd,    'summ'  =>  $summ,
-                                        'requests'  =>  $tr,    'moderate'  =>  $moderate,
+                                        'requests'  =>  $tr,    'moderators'  =>  $moderators,
                                         'changes'   =>  $changes,   'change_records'    =>  $change_records,    'labels'    =>  Config::get("dict.labels")]);
     }
 
@@ -192,7 +193,7 @@ class ProfileController extends Controller
             $ps->save();
 
 
-            $dep_new    =   $dep_old    =   $moderator  =   null;
+            $dep_new    =   $dep_old    =   $moderate  =   null;
             $updated_counter    =   0; //Чтобы не создавать запись об изменениях, когда нет реальных изменений
 
             foreach($updates_fields as $key =>  $value) {
@@ -244,14 +245,14 @@ class ProfileController extends Controller
                 ->where('users.id', '=', Auth::user()->id)->first();
 
 
-            if(is_null($moderator)  &&  $user->dep_id) {
-                $moderator  =   Dep::getModerate($user->dep_id);
+            if(is_null($moderate)  &&  $user->dep_id) {
+                $moderate  =   Dep::getModerate($user->dep_id);
             }
 
             $psd    =   Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->get();
 
             $html   =   View::make('profile.viewchanges', [ 'labels' =>  Config::get("dict.labels"),    'psd' =>  $psd,
-                                                            'moderator'  =>  $moderator]);
+                                                            'moderate'  =>  $moderate]);
 
             return response()->json(['success', $html->render(), $updated_counter]);
         }

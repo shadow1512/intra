@@ -58,21 +58,25 @@ class profileupdatesnotification extends Command
             }
 
             if(is_null($moderate)) {
-                $moderate   =   User::findOrFail(Config::get("dict.main_moderate"));
+                //так тут делаем для унификации
+                $moderate   =   User::where("id",   "=", Config::get("dict.main_moderate"))->get();
             }
 
-            if(!is_null($moderate)) {
-                if($moderate->email) {
-                    Mail::send('emails.profileupdate', ['user' => $user], function ($m) use ($moderate, $user) {
-                        $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                        $m->to($moderate->email, $moderate->fname)->subject('Сотрудник ' .   $user->fname    .   " " .   $user->lname    .   " обновил свой профиль");
-                    });
+            if(count($moderate)) {
+                foreach($moderate as $moderator) {
+                    if($moderator->email) {
+                        Mail::send('emails.profileupdate', ['user' => $user], function ($m) use ($moderator, $user) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            $m->to($moderator->email, $moderator->fname)->subject('Сотрудник ' .   $user->fname    .   " " .   $user->lname    .   " обновил свой профиль");
+                            Log::info('email sent to ' .   $moderator->email . ' for '  .   $user->fname    .   " " .   $user->lname);
+                        });
 
-                    $item->notified =   1;
-                    $item->save();
-                }
-                else {
-                    Log::error('NO EMAIL MODERATE ERROR: no email  for moderator ' .   $moderate->id);
+                        $item->notified =   1;
+                        $item->save();
+                    }
+                    else {
+                        Log::error('NO EMAIL MODERATE ERROR: no email  for moderator ' .   $moderator->id);
+                    }
                 }
             }
             else {

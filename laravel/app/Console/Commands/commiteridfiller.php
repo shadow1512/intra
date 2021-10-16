@@ -66,6 +66,7 @@ class commiteridfiller extends Command
             if(count($moderate)) {
                 foreach ($moderate as $moderator) {
                     $item->commiter_id  =   $moderator->id;
+                    $item->save();
                     break;
                 }
             }
@@ -93,6 +94,7 @@ class commiteridfiller extends Command
             if(count($moderate)) {
                 foreach ($moderate as $moderator) {
                     $item->commiter_id  =   $moderator->id;
+                    $item->save();
                     break;
                 }
             }

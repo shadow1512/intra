@@ -72,7 +72,7 @@ class commiteridfiller extends Command
             }
         }
 
-        Profiles_Saved_Data::withTrashed()->select("profiles_saved.user_id")
+        $psd    =   Profiles_Saved_Data::withTrashed()->select("profiles_saved.user_id")
                     ->leftJoin('profiles_saved', 'profiles_saved.id', '=', 'profiles_saved_data.ps_id')
                     ->where("profiles_saved_data.status", "!=", "1")->get();
 

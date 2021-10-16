@@ -96,7 +96,7 @@ class commiteridfiller extends Command
 
             if(count($moderate)) {
                 foreach ($moderate as $moderator) {
-                    Profiles_Saved_Data::update(["commiter_id"  =>  $moderator->id])->where("id",   "=",    $item->id);
+                    Profiles_Saved_Data::where("id",   "=",    $item->id)->update(["commiter_id"  =>  $moderator->id]);
                     break;
                 }
             }

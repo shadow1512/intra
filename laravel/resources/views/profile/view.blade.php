@@ -113,6 +113,7 @@
                 <div class="profile_form_h">
                     <div class="h light_h __h_m">Запрос на внесение изменений в ваш корпоративный профиль обработан модератором ( <a href="{{route('people.unit',   ["id"   =>  $moderate->id])}}">{{$moderate->lname}} {{mb_substr($moderate->fname, 0, 1, "UTF-8")}}. @if(!empty($moderate->mname)) {{mb_substr($moderate->mname, 0, 1, "UTF-8")}}.@endif</a>)</div>
                 </div>
+                @endif
                 <div class="profile_form">
                     <ul class="lst-changes">
                         @if(isset($change_records[$item->id]))

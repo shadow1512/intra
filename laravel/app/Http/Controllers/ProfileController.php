@@ -214,6 +214,8 @@ class ProfileController extends Controller
                     $createFlag = true;
                 }
                 if($createFlag) {
+                    var_dump(Auth::user()->$key);
+                    var_dump($value);
                     $psd =   new Profiles_Saved_Data();
 
                     $psd->ps_id         =   $ps->id;

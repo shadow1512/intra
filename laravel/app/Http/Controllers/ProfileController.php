@@ -15,6 +15,7 @@ use App\Dep;
 use App\Profiles_Saved;
 use App\Profiles_Saved_Data;
 use App\Technical_Request;
+use App\Users_Timetable;
 use DB;
 use PDO;
 use Config;
@@ -23,6 +24,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use DateTime;
+use DateInterval;
 use View;
 
 class ProfileController extends Controller
@@ -324,6 +326,24 @@ class ProfileController extends Controller
     }
 
     public function viewtimetable() {
+        $currentdate = new DateTime();
+        $currentdate->modify("first day of this month");
+        if($currentdate->format("N")    !=  1) {
+            $currentdate->modify("previous Monday");
+        }
+
+        $startDate  =   $currentdate;
+
+        $currentdate = new DateTime();
+        $currentdate->modify("last day of this month");
+        if($currentdate->format("N")    !=  7) {
+            $currentdate->modify("next Sunday");
+        }
+
+        $endDate    =   $currentdate;
+
+        var_dump($startDate);
+        var_dump($endDate);
 
         return view('profile.timetableview', [   'labels'    =>  Config::get("dict.labels")]);
     }

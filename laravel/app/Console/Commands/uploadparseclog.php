@@ -60,11 +60,12 @@ class uploadparseclog extends Command
             $doc->save(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         }
         else {
-
+            Log::error('Parsec: impossible to read XML Parsec file from mnt');
         }
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
+            Log::error('Parsec: no worksheets to parse');
             return;
         }
         $worksheets =   $spreadsheet->getAllSheets();
@@ -102,7 +103,7 @@ class uploadparseclog extends Command
 
 
 
-                if($last_record &&  ($last_record->datetime_record    <   ($date.    " " .   $time))) {
+                if((!$last_record)  ||  ($last_record &&  ($last_record->datetime_record    <   ($date.    " " .   $time)))) {
                     $pl =   new Parsec_log();
 
                     $pl->datetime_record    = $date.    " " .   $time;

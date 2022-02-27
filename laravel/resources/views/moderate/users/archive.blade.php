@@ -54,7 +54,7 @@
                                                 <div class="directory_lst_i_name_spec">{{$item->work_title}}</div>
                                             </div>
                                             <div class="directory_lst_i_info">
-                                                @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
+                                                @if($item->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$item->mobile_phone}}</div>@endif
                                             </div>
                                         </li>
                                     @endforeach

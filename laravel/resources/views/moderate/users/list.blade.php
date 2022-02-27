@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="row">
-                <div class="col-md-9"><h3>Сотрудники</h3></div>
+                <div class="col-md-9"><h3>Сотрудники (<a href="{{ route('moderate.users.archive'}}">Архив</a>)</h3></div>
                 <div class="col-md-3"></div>
             </div>
             @if ($mode  ==  'letters')

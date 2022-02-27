@@ -1035,6 +1035,23 @@ class ModerateController extends Controller
         return view('moderate.users.list', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
 
+    public function usersarchive($letter = "А")
+    {
+        //DB::enableQueryLog(); // Enable query log
+
+// Your Eloquent query executed by using get()
+
+        $users  =   User::onlyTrashed(Auth::user()->id)->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+        $mode   =   'list';
+        if(count($users)    >   50) {
+            $mode   =   'letters';
+            $users = User::onlyTrashed(Auth::user()->id)->where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
+        }
+
+        //dd(DB::getQueryLog()); // Show results of log
+        return view('moderate.users.archive', ['users'    =>  $users,  'mode'  =>  $mode]);
+    }
+
     public function usersedit($id)
     {
         $user       =   User::findOrFail($id);

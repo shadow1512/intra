@@ -146,6 +146,8 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
 
     Route::group(['prefix'  =>  'users', 'middleware'    =>  ['support']],   function() {
         Route::get('/', 'ModerateController@users')->name('moderate.users.start');
+        Route::get('/archive', 'ModerateController@usersarchive')->name('moderate.users.archive');
+        Route::get('/archive/{letter}', 'ModerateController@usersarchive')->name('moderate.users.archive');
         Route::get('/{letter}', 'ModerateController@users')->name('moderate.users.index');
         Route::get('/edit/{id}', 'ModerateController@usersedit')->name('moderate.users.edit');
         Route::put('/update/{id}', 'ModerateController@usersupdate')->name('moderate.users.update');

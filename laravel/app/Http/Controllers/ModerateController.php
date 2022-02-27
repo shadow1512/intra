@@ -1041,12 +1041,14 @@ class ModerateController extends Controller
 
 // Your Eloquent query executed by using get()
 
-        $users  =   User::onlyTrashed(Auth::user()->id)->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
-        $mode   =   'list';
-        if(count($users)    >   50) {
-            $mode   =   'letters';
-            $users = User::onlyTrashed(Auth::user()->id)->where("lname", "LIKE", "$letter%")->orderBy('lname', 'asc')->orderBy('fname', 'asc')->get();
-        }
+        $mode   =   'letters';
+        $users = User::onlyTrashed()->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
+            ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+            ->where("lname", "LIKE", "$letter%")
+            ->orderBy('lname', 'asc')
+            ->orderBy('fname', 'asc')
+            ->get();
 
         //dd(DB::getQueryLog()); // Show results of log
         return view('moderate.users.archive', ['users'    =>  $users,  'mode'  =>  $mode]);

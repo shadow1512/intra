@@ -45,13 +45,21 @@
                             </div>
                             @endif
                             @if (count($users))
-                                @foreach($users as $item)
-                                    <div class="row">
-                                        <div class="col-md-7"> {{ $item->lname }} {{ $item->fname }} {{ $item->mname }}<br>{{$item->position}}</div>
-                                        <div class="col-md-3"></div>
-                                        <div class="col-md-2"></div>
-                                    </div>
-                                @endforeach
+                            <div class="content_tx __no-pad">
+                                <ul class="directory_lst">
+                                    @foreach($users as $item)
+                                        <li class="directory_lst_i @if (mb_substr($item->birthday,  5) ==  date("m-d")) __birthday @endif">
+                                            <div class="directory_lst_i_pic"><img src="@if($item->avatar_round){{$item->avatar_round}} @else {{$item->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($item->birthday)) }}"></div>
+                                            <div class="directory_lst_i_name">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}
+                                                <div class="directory_lst_i_name_spec">{{$item->work_title}}</div>
+                                            </div>
+                                            <div class="directory_lst_i_info">
+                                                @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div>
                             @endif
                         </div>
                     </div>

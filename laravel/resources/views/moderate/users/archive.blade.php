@@ -51,10 +51,11 @@
                                         <li class="directory_lst_i @if (mb_substr($item->birthday,  5) ==  date("m-d")) __birthday @endif">
                                             <div class="directory_lst_i_pic"><img src="@if($item->avatar_round){{$item->avatar_round}} @else {{$item->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($item->birthday)) }}"></div>
                                             <div class="directory_lst_i_name">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}
-                                                <div class="directory_lst_i_name_spec">{{$item->work_title}}</div>
+                                                <div class="directory_lst_i_name_spec">{{$item->worktitle}}</div>
                                             </div>
                                             <div class="directory_lst_i_info">
                                                 @if($item->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$item->mobile_phone}}</div>@endif
+                                                    <div class="directory_lst_i_info_i">Дата увольнения: {{ date("d.m.Y", strtotime($item->deleted_at)) }}</div>
                                             </div>
                                         </li>
                                     @endforeach

@@ -109,12 +109,11 @@ class createarchiverecords extends Command
         $file = fopen(Config::get('archiveexcel.2016'), "r");
         $importData = array(); // Read through the file and store the contents as an array
         $i = 0;
+        $currentRootDep =   $currentDep =   null;
         while (($filedata = fgetcsv($file, 1000, ";")) !== FALSE) {
-            $currentRootDep =   $currentDep =   null;
             $key    =   trim($filedata[0]);
             //запись об уволенном сотруднике
             if(preg_match('/^[0-9]{2}.[0-9]{2}.[0-9]{4}/', $key, $matches)) {
-                var_dump($key);
                 $date_string= trim($key);
                 $date_array =   explode(".",    $date_string);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
@@ -134,10 +133,8 @@ class createarchiverecords extends Command
                 }
 
                 $date_string= trim($filedata[3]);
-                echo $date_string   .   "\r\n";
                 $date_array =   explode(".",    $date_string);
                 $date_string1   =   implode(",",    $date_array);
-                echo $date_string1  .   "\r\n";
                 $date_birth       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
                 $importData[$currentRootDep]["deps"][$currentDep]["users"][]    =   array("datedel" =>  $date, "lname"  =>  $lname, "fname" =>  $fname, "mname" =>  $mname, "position"  =>  trim($filedata[2]), "date_birth"    =>  $date_birth);

@@ -114,6 +114,7 @@ class createarchiverecords extends Command
             $key    =   trim($filedata[0]);
             //запись об уволенном сотруднике
             if(preg_match('/[0-9]{2}.[0-9]{2}.[0-9]{4}/', $key, $matches)) {
+                var_dump($key);
                 $date_string= trim($key);
                 $date_array =   explode(".",    $date_string);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];

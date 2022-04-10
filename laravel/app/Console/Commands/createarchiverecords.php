@@ -153,7 +153,7 @@ class createarchiverecords extends Command
                         $currentRootDep =   $key;
                     }
                     else {
-                        $importData[$currentRootDep]["deps"]    =   array($key  =>  array("users"   =>  array()));
+                        $importData[$currentRootDep]["deps"][]    =   array($key  =>  array("users"   =>  array()));
                         $currentDep =   $key;
                     }
                 }

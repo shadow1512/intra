@@ -33,6 +33,7 @@ class Kernel extends ConsoleKernel
         Commands\updateuserpresence::class,
         Commands\updateuserpresencemidnight::class,
         Commands\commiteridfiller::class,
+        Commands\createarchiverecords::class,
     ];
 
     /**

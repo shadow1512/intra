@@ -135,6 +135,8 @@ class createarchiverecords extends Command
                 $date_string= trim($filedata[3]);
                 echo $date_string   .   "\r\n";
                 $date_array =   explode(".",    $date_string);
+                $date_string1   =   implode(",",    $date_array);
+                echo $date_string1  .   "\r\n";
                 $date_birth       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
                 $importData[$currentRootDep]["deps"][$currentDep]["users"][]    =   array("datedel" =>  $date, "lname"  =>  $lname, "fname" =>  $fname, "mname" =>  $mname, "position"  =>  trim($filedata[2]), "date_birth"    =>  $date_birth);

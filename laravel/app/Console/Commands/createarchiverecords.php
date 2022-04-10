@@ -133,6 +133,7 @@ class createarchiverecords extends Command
                 }
 
                 $date_string= trim($filedata[3]);
+                echo $date_string   .   "\r\n";
                 $date_array =   explode(".",    $date_string);
                 $date_birth       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 

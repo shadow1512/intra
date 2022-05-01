@@ -228,6 +228,7 @@ class SearchController extends Controller
                             //
                             $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.birthday", "users.in_office", "deps_peoples.work_title")
                                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                                ->whereNull('deps_peoples.deleted_at')
                                 ->whereIn('users.id', $max_user_ids)->get();
                             $assoc_records = array();
                             foreach ($found_records as $record) {
@@ -1047,6 +1048,7 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.in_office", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->whereNull('deps_peoples.deleted_at')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->orWhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday) DESC")->orderByRaw("DAY(birthday) ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
@@ -1057,6 +1059,7 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.in_office", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->whereNull('deps_peoples.deleted_at')
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    >=  '$dt'")
                     ->whereRaw("DATE_FORMAT(birthday,  '%m-%d')    <=  '$dt1'")->orderByRaw("MONTH(birthday) ASC")->orderByRaw("DAY(birthday) ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
@@ -1094,6 +1097,7 @@ class SearchController extends Controller
 
                 $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.in_office", "deps_peoples.work_title")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->whereNull('deps_peoples.deleted_at')
                     ->whereRaw("DATE_FORMAT(birthday, '%m-%d') >=  '$dt'")
                     ->WhereRaw("DATE_FORMAT(birthday, '%m-%d') <=  '$dt1'")->orderByRaw("MONTH(birthday) ASC")->orderByRaw("DAY(birthday) ASC")
                     ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
@@ -1104,6 +1108,7 @@ class SearchController extends Controller
                     $dt = date("Y-m-d", strtotime($searchDate));
                     $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.in_office", "deps_peoples.work_title")
                         ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->whereNull('deps_peoples.deleted_at')
                         ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))
                         ->where(DB::raw("YEAR(birthday)"), '=', DB::raw("YEAR('$dt')"))->orderByRaw("MONTH(birthday) ASC")->orderByRaw("DAY(birthday) ASC")
                         ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
@@ -1113,6 +1118,7 @@ class SearchController extends Controller
                     $dt = date("Y-m-d", strtotime($searchDate));
                     $birthday_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.mobile_phone", "users.in_office", "deps_peoples.work_title")
                         ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                        ->whereNull('deps_peoples.deleted_at')
                         ->where(DB::raw("MONTH(birthday)"), '=', DB::raw("MONTH('$dt')"))->where(DB::raw("DAY(birthday)"), '=', DB::raw("DAY('$dt')"))->orderByRaw("MONTH(birthday) ASC")->orderByRaw("DAY(birthday) ASC")
                         ->orderBy("users.lname")->orderBy("users.fname")->orderBy("users.mname")->get();
                 }
@@ -1272,6 +1278,7 @@ class SearchController extends Controller
         //$user_ids = array_keys($all_found_records);
         $found_records = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "users.mobile_phone", "users.in_office", "users.birthday", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->whereIn('users.id', $max_user_ids)->get();
         $assoc_records = array();
         foreach ($found_records as $record) {

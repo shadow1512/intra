@@ -189,11 +189,6 @@ class updatedirectoryfromad extends Command
                 if($present) {
                     //print "present\r\n";
                     if($user->isActive()    &&  $user->isEnabled()) {
-                        if($user->getConvertedSid() ==  "S-1-5-21-3953116633-1604536341-3751884121-5660") {
-                            var_dump($user);
-                            echo "\r\n\r\n";
-                            var_dump($present);
-                        }
                         if(!is_null($present->deleted_at)) {
                             $present->restore();
                         }

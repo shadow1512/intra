@@ -42,10 +42,12 @@ class ProfileController extends Controller
     {
         $contacts = User::select("users.*", "deps_peoples.work_title")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
 
         $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->where('users.id', '=', Auth::user()->id)->first();
 
         $dep    =   $ps     =   $moderate   =   $psd    =   null;
@@ -93,6 +95,7 @@ class ProfileController extends Controller
     {
         $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->where('users.id', '=', Auth::user()->id)->first();
 
         $dep    =   $ps     =   $moderate   =   $psd    =   null;
@@ -244,6 +247,7 @@ class ProfileController extends Controller
 
             $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->whereNull('deps_peoples.deleted_at')
                 ->where('users.id', '=', Auth::user()->id)->first();
 
 

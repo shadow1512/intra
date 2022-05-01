@@ -54,6 +54,7 @@ class HomeController extends Controller
 
         $users = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "deps_peoples.work_title", "users.birthday")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                ->whereNull('deps_peoples.deleted_at')
                 ->where(function($query) use ($d,  $m) {
                     $query->where(DB::raw("MONTH(birthday)"), '=',   $m)->where(DB::raw("DAY(birthday)"),    '=',    $d);
                 })
@@ -68,6 +69,7 @@ class HomeController extends Controller
         //новые сотрудники
         $newusers = User::select("users.id", "users.name", "users.avatar", "users.avatar_round", "users.fname", "users.lname", "users.mname", "users.position", "users.email", "users.phone", "users.ip_phone", "deps_peoples.work_title", "users.workstart")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->whereRaw("ADDDATE(workstart, INTERVAL 1 MONTH) >= '" . date("Y-m-d") . "'")
             ->orderBy('workstart', 'desc')->get();
 

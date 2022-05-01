@@ -42,7 +42,7 @@ class UserController extends Controller
     {
         $user = User::select("users.*", "deps_peoples.work_title", "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-            ->where('users.id', $id)->first();
+            ->where('users.id', $id)->whereNull('deps_peoples.deleted_at')->first();
 
         if(!$user) {
             abort(404);
@@ -86,10 +86,12 @@ class UserController extends Controller
                     ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                     ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%')")
+                    ->whereNull('deps_peoples.deleted_at')
                     ->orderBy('users.lname', 'asc')->orderBy('users.fname',  'asc')->orderBy('users.mname', 'asc')->get();
                 $count_children =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                     ->select('users.id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                    ->whereNull('deps_peoples.deleted_at')
                     ->whereRaw("deps_peoples.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $currentDep->parent_id . "%' AND id<>"   .   $currentDep->id  .   ")")->count();
                 $count_to_display   =   count($users);
             }
@@ -99,6 +101,7 @@ class UserController extends Controller
                     ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                     ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
                     ->whereRaw("deps_peoples.dep_id = $currentDep->id")
+                    ->whereNull('deps_peoples.deleted_at')
                     ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
 
                 $count_to_display   =   count($users[$currentDep->id]);
@@ -107,6 +110,7 @@ class UserController extends Controller
                     $users[$struct_dep->id] =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                         ->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title', 'deps_peoples.chef', 'deps.parent_id')
                         ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+                        ->whereNull('deps_peoples.deleted_at')
                         ->whereRaw("deps_peoples.dep_id = $struct_dep->id")
                         ->orderByRaw('IFNULL(deps_peoples.chef,1000)', 'asc')->orderBy('users.lname', 'asc')->get();
                     $count_to_display   +=  count($users[$struct_dep->id]);
@@ -148,7 +152,7 @@ class UserController extends Controller
                         ->get();
 
                     foreach($deps[$rdep->id] as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at is NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -161,7 +165,7 @@ class UserController extends Controller
 
                 if(count($deps)) {
                     foreach ($deps as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -175,7 +179,7 @@ class UserController extends Controller
                         ->get();
 
                     foreach ($deps as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -188,7 +192,7 @@ class UserController extends Controller
                 ->get();
 
             foreach($deps as $dep) {
-                $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
                 $counts[$dep->id] = $nums->sum;
             }
         }
@@ -200,7 +204,7 @@ class UserController extends Controller
         if(Auth::check()) {
             $contacts = User::select("users.*", "deps_peoples.work_title")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
+                ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->whereNull('deps_peoples.deleted_at')->get();
 
             foreach($contacts as $contact) {
                 $contact_ids[]  =   $contact->id;

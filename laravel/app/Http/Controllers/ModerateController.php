@@ -1044,6 +1044,7 @@ class ModerateController extends Controller
         $mode   =   'letters';
         $users = User::onlyTrashed()->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title as worktitle', 'deps_peoples.chef', 'deps.parent_id')
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
             ->where("lname", "LIKE", "$letter%")
             ->orderBy('lname', 'asc')

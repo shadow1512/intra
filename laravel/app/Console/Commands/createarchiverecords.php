@@ -189,7 +189,7 @@ class createarchiverecords extends Command
                 }
             }
         }
-        sort($unique_users, SORT_STRING);
+        ksort($unique_users, SORT_STRING);
         foreach($unique_users as $key   =>  $data) {
             echo "$key - "  .   $data['date_fired'] .   "\r\n";
         }

@@ -283,7 +283,7 @@ class createarchiverecords extends Command
                 $du->dep_id =   $data["org_id"];
             }
             $du->work_title =   $data["position"];
-            $du-deleted_at  =   $data["date_fired"] .   " 00:00:00";
+            $du->deleted_at =   $data["date_fired"] .   " 00:00:00";
 
             $du->save();
         }

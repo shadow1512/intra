@@ -227,5 +227,7 @@ class createarchiverecords extends Command
 
             $du->save();
         }
+
+        User::whereNull('avatar')->update(['avatar'    =>  '/images/faces/default.svg']);
     }
 }

@@ -1072,7 +1072,7 @@ class ModerateController extends Controller
             ->orderBy('fname', 'asc')
             ->get();
 
-        return view('moderate.users.searcharchive', ['users'    =>  $users,  'mode'  =>  $mode]);
+        return view('moderate.users.searcharchive', ['users'    =>  $users,  'mode'  =>  $mode, 'searchvalue'   =>  $input]);
     }
 
     public function usersedit($id)

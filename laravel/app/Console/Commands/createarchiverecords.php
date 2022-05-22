@@ -175,7 +175,9 @@ class createarchiverecords extends Command
                     if(in_array($data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"], $unique_users["data_key"])) {
                         echo $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . $data["date_birth"] .   "\r\n";
                     }
-                    $unique_users["data_key"][]    =   $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"];
+                    else {
+                        $unique_users["data_key"][]    =   $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"];
+                    }
                 }
             }
         }

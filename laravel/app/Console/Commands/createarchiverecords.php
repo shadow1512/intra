@@ -227,6 +227,7 @@ class createarchiverecords extends Command
                     }
                     else {
                         $newdep         =   new Dep();
+                        $newdep->guid   =   "";
                         $dep_parent_id  =   $parent_id;
                         if($subindex   ==  0) {
                             for ($i = 0; $i < CODE_LENGTH; $i++) {

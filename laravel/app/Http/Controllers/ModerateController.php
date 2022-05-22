@@ -1055,9 +1055,24 @@ class ModerateController extends Controller
         return view('moderate.users.archive', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
 
-    public function searchusersarchive()
+    public function searchusersarchive(Request $request)
     {
+        $mode   =   'letters';
 
+        $input  =   $request->input("searcharchive");
+
+        User::onlyTrashed()->select('users.*', 'deps.name as depname', 'deps.id as depid', 'deps_peoples.work_title as worktitle', 'deps_peoples.chef', 'deps.parent_id')
+            ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
+            ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+            ->where(function ($query) {
+                    $query->where("lname", "LIKE", "%$input%")->orWhere("mname", "=", "%$input%")->orWhere("fname", "=", "%$input%");
+                })
+            ->orderBy('lname', 'asc')
+            ->orderBy('fname', 'asc')
+            ->get();
+
+        return view('moderate.users.searcharchive', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
 
     public function usersedit($id)

@@ -105,120 +105,45 @@ class createarchiverecords extends Command
 
     }
 
-    public function loader_2016() {
-        $file = fopen(Config::get('archiveexcel.2016'), "r");
-        $importData = array(); // Read through the file and store the contents as an array
-        $i = 0;
-        $currentRootDep =   $currentDep =   null;
-        while (($filedata = fgetcsv($file, 1000, ";")) !== FALSE) {
-            $key    =   trim($filedata[0]);
-            //запись об уволенном сотруднике
-            if(preg_match('/^[0-9]{2}.[0-9]{2}.[0-9]{4}/', $key, $matches)) {
-                $date_string= trim($key);
-                $date_array =   explode(".",    $date_string);
-                $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
-                $names  =   explode(" ", $filedata[1]);
+    public function loader($files_to_import) {
+
+        $importData =   array();
+        foreach($files_to_import as $file) {
+            while (($filedata = fgetcsv($file, 1000, ";")) !== FALSE) {
+                if($filedata[0]    ==  "ФИО") {
+                    continue;
+                }
+                $org    =   trim($filedata[1]);
+                $dep    =   trim($filedata[2]);
+                $work   =   trim($filedata[3]);
+
+                $date_string    =   trim($filedata[4]);
+                $date_array     =   explode(".",    $date_string);
+                $date_fired     =   $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
+
+                $date_string    =   trim($filedata[5]);
+                $date_array     =   explode(".",    $date_string);
+                $date_birth     =   $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
+
+                $names  =   explode(" ", $filedata[0]);
                 $lname  =   null;
                 if(isset($names[0])) {
-                    $lname  =   $names[0];
+                    $lname  =   trim($names[0]);
                 }
                 $fname  =   null;
                 if(isset($names[1])) {
-                    $fname  =   $names[1];
+                    $fname  =   trim($names[1]);
                 }
                 $mname  =   null;
                 if(isset($names[2])) {
-                    $mname  =   $names[2];
+                    $mname  =   trim($names[2]);
                 }
 
-                $date_string= trim($filedata[3]);
-                $date_array =   explode(".",    $date_string);
-                $date_birth       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
-
-                $importData[$currentRootDep]["deps"][$currentDep]["users"][]    =   array("datedel" =>  $date, "lname"  =>  $lname, "fname" =>  $fname, "mname" =>  $mname, "position"  =>  trim($filedata[2]), "date_birth"    =>  $date_birth);
-            }
-            else {
-                //бестолковая запись
-                if(mb_strtolower($key, "UTF-8") ==  "увольнение") {
-                    continue;
-                }
-                //отдел
-                else {
-                    $marker =   mb_substr($key, 0,   3);
-                    //верхний уровень
-                    if($marker  ==  "АО "   ||  $marker  ==  "ООО"   ||  $marker  ==  "ЗАО"  ||  $marker  ==  "ОАО") {
-                        $importData[$key]["deps"]   =   array();
-                        $currentRootDep =   $key;
-                    }
-                    else {
-                        $currentDep =   $key;
-                    }
-                }
+                $importData[$org][$dep][]    =   array("date_fired" =>  $date_fired, "lname"  =>  $lname, "fname" =>  $fname, "mname" =>  $mname, "position"  =>  $work, "date_birth"    =>  $date_birth);
             }
         }
 
-        return $importData;
-    }
-
-    public function loader_2017($importData) {
-        $file = fopen(Config::get('archiveexcel.2017'), "r");
-        $i = 0;
-        $currentRootDep =   null;
-        while (($filedata = fgetcsv($file, 1000, ";")) !== FALSE) {
-            $key    =   trim($filedata[0]);
-            if(mb_strtolower($key, "UTF-8") ==  "организация") {
-                $currentRootDep =   trim($filedata[3]);
-            }
-            else if(mb_strtolower($key, "UTF-8") ==  "") {
-                continue;
-            }
-            else if(mb_strtolower($key, "UTF-8") ==  "сотрудник") {
-                continue;
-            }
-            //запись об уволенном сотруднике
-            else {
-                if(isset($filedata[43]) &&  ($filedata[43]  !=  "")) {
-                    $key    =   trim($filedata[43]);
-                    if(preg_match('/^[0-9]{2}.[0-9]{2}.[0-9]{4}/', $key, $matches)) {
-                        $date_string= trim($key);
-                        $date_array =   explode(".",    $date_string);
-                        $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
-
-                        $names  =   explode(" ", $filedata[0]);
-                        $lname  =   null;
-                        if(isset($names[0])) {
-                            $lname  =   trim($names[0]);
-                        }
-                        $fname  =   null;
-                        if(isset($names[1])) {
-                            $fname  =   trim($names[1]);
-                        }
-                        $mname  =   null;
-                        if(isset($names[2])) {
-                            $mname  =   trim($names[2]);
-                        }
-
-                        $date_birth =   null;
-                        if(isset($filedata[48]) &&  ($filedata[48]  !=  "")) {
-                            $date_string= trim($filedata[48]);
-                            $date_array =   explode(".",    $date_string);
-                            $date_birth       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
-                        }
-
-                        $position =   null;
-                        if(isset($filedata[37]) &&  ($filedata[37]  !=  "")) {
-                            $position= trim($filedata[37]);
-                        }
-
-                        $importData[$currentRootDep]["deps"][$filedata[3]]["users"][]    =   array("datedel" =>  $date, "lname"  =>  $lname, "fname" =>  $fname, "mname" =>  $mname, "position"  =>  $position, "date_birth"    =>  $date_birth);
-                    }
-                }
-                else {
-                    continue;
-                }
-            }
-        }
 
         return $importData;
     }
@@ -226,23 +151,7 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
-        $importData =   $this->loader_2016();
-        $importData =   $this->loader_2017($importData);
+        $importData =   $this->loader(array(Config::get('archive.2016', 'archive.2017')));
         var_dump($importData);
-
-        /*$present    =   Dep::where('parent_id',  '=',    'AN')->first();
-
-        if($present) {
-
-        }
-        else {
-            $dep = new Dep();
-            $dep->parent_id =   'AN';
-            $dep->name      =   'Архив';
-            $dep->save();
-            $dep->delete();
-        }
-
-        $this->serveDepLevel("Архив", 'AN');*/
     }
 }

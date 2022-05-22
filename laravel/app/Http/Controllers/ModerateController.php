@@ -1065,8 +1065,8 @@ class ModerateController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-            ->where(function ($query, $input) {
-                    $query->where("lname", "LIKE", "%$input%")->orWhere("mname", "=", "%$input%")->orWhere("fname", "=", "%$input%");
+            ->where(function ($query) use ($input) {
+                    $query->where("lname", "LIKE", "%$input%")->orWhere("mname", "LIKE", "%$input%")->orWhere("fname", "LIKE", "%$input%");
                 })
             ->orderBy('lname', 'asc')
             ->orderBy('fname', 'asc')

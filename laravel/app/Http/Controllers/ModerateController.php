@@ -1055,6 +1055,11 @@ class ModerateController extends Controller
         return view('moderate.users.archive', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
 
+    public function searchusersarchive()
+    {
+        
+    }
+
     public function usersedit($id)
     {
         $user       =   User::findOrFail($id);

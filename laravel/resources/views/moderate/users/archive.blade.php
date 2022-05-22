@@ -42,7 +42,7 @@
                         </div>
                         <form name="searcharive" class="form-horizontal" method="POST" action="{{ route('moderate.users.archive.search') }}">
                             {{ csrf_field() }}
-                            <div class="col-md-2"><input type="text" name="searcharchive" value="{{$searchvalue}}" id="searcharchive"/></div>
+                            <div class="col-md-2"><input type="text" name="searcharchive" value="" id="searcharchive"/></div>
                             <div class="col-md-1"><input type="submit" name="searcharchive_button" value="Искать" id="searcharchive_button"/></div>
                         </form>
                     </div>

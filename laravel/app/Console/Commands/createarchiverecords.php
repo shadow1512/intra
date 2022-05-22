@@ -178,7 +178,7 @@ class createarchiverecords extends Command
                 }
             }
         }
-        array_sort($unique_users["data_key"]);
+        array_sort($unique_users["data_key"], SORT_STRING);
         foreach($unique_users["data_key"] as $user_string) {
             echo "$user_string\r\n";
         }

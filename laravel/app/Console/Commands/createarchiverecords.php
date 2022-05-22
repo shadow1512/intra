@@ -153,6 +153,11 @@ class createarchiverecords extends Command
     {
         //
         $importData =   $this->loader(array(Config::get('archiveexcel.2016'), Config::get('archiveexcel.2017')));
-        var_dump($importData);
+        foreach($importData as $org =>  $deps_data) {
+            echo "$org\r\n";
+            foreach ($deps_data as $dep =>  $user_data) {
+                echo "----$dep\r\n";
+            }
+        }
     }
 }

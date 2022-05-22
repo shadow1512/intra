@@ -141,6 +141,11 @@ class createarchiverecords extends Command
                 $date_string    =   trim($filedata[5]);
                 $date_array     =   explode(".",    $date_string);
                 $date_birth     =   $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
+                if(mb_strlen($date_array[2])    ==  2) {
+                    $date_array[2]  =   "19"    .   $date_array[2];
+                }
+
+
 
                 $names  =   explode(" ", $filedata[0]);
                 $lname  =   null;

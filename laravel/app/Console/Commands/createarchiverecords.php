@@ -152,7 +152,7 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
-        $importData =   $this->loader(array(Config::get('archive.2016'), Config::get('archive.2017')));
+        $importData =   $this->loader(array(Config::get('archiveexcel.2016'), Config::get('archiveexcel.2017')));
         var_dump($importData);
     }
 }

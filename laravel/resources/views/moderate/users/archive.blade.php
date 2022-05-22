@@ -5,15 +5,11 @@
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="row">
-                    <div class="col-md-9"><h3>Архив (Перейти в <a href="{{ route('moderate.users.start')}}">список действующих сотрудников</a>)</h3></div>
-                    <form name="searcharive" class="form-horizontal" method="POST" action="{{ route('moderate.users.archive.search') }}">
-                        <div class="col-md-2"><input type="text" name="searcharchive" value="" id="searcharchive"/></div>
-                        <div class="col-md-1"><input type="submit" name="searcharchive_button" value="Искать" id="searcharchive_button"/></div>
-                    </form>
+                    <div class="col-md-12"><h3>Архив (Перейти в <a href="{{ route('moderate.users.start')}}">список действующих сотрудников</a>)</h3></div>
                 </div>
                 @if ($mode  ==  'letters')
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <a href="{{ route('moderate.users.archive', ['letter' =>  'А'])}}">А</a>
                             <a href="{{ route('moderate.users.archive', ['letter' =>  'Б'])}}">Б</a>
                             <a href="{{ route('moderate.users.archive', ['letter' =>  'В'])}}">В</a>
@@ -44,6 +40,11 @@
                             <a href="{{ route('moderate.users.archive', ['letter' =>  'Ю'])}}">Ю</a>
                             <a href="{{ route('moderate.users.archive', ['letter' =>  'Я'])}}">Я</a>
                         </div>
+                        <form name="searcharive" class="form-horizontal" method="POST" action="{{ route('moderate.users.archive.search') }}">
+                            {{ csrf_field() }}
+                            <div class="col-md-2"><input type="text" name="searcharchive" value="" id="searcharchive"/></div>
+                            <div class="col-md-1"><input type="submit" name="searcharchive_button" value="Искать" id="searcharchive_button"/></div>
+                        </form>
                     </div>
                 @endif
                 @if (count($users))

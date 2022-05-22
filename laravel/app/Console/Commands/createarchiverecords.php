@@ -116,7 +116,22 @@ class createarchiverecords extends Command
                     continue;
                 }
                 $org    =   trim($filedata[1]);
+                if($org ==  'АО "Кодекс"(ЗАО до 16.06.2015 г)') {
+                    $org    =   'АО "Кодекс"';
+                }
                 $dep    =   trim($filedata[2]);
+                if($dep ==  'Сектор " Пресс- служба"'   ||  $dep    ==  '"Пресс - служба"') {
+                    $dep    =   'Сектор "Пресс-служба"';
+                }
+                if($dep ==  'Служба поддержки пользователей СЭД') {
+                    $dep    =   'Служба поддержки пользователей и тестирования СЭД';
+                }
+                if($dep ==  'Отдел " Учебный центр "') {
+                    $dep    =   'Отдел "Учебный центр"';
+                }
+                if($dep ==  'Отдел информационно - стратегического развития') {
+                    $dep    =   'Отдел информационно-стратегического развития';
+                }
                 $work   =   trim($filedata[3]);
 
                 $date_string    =   trim($filedata[4]);
@@ -152,13 +167,18 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
+        $unique_users   =   array();
         $importData =   $this->loader(array(Config::get('archiveexcel.2016'), Config::get('archiveexcel.2017')));
-        ksort($importData);
         foreach($importData as $org =>  $deps_data) {
-            echo "$org\r\n";
-            ksort($deps_data);
             foreach ($deps_data as $dep =>  $user_data) {
-                echo "----$dep\r\n";
+                foreach($user_data as $key  =>  $data) {
+                    if(in_array($data["lname"], $unique_users["lname"]) &&  in_array($data["fname"], $unique_users["fname"])    &&  in_array($data["mname"], $unique_users["mname"])) {
+                        echo $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . "\r\n";
+                    }
+                    $unique_users["lname"][]    =   $data["lname"];
+                    $unique_users["fname"][]    =   $data["fname"];
+                    $unique_users["mname"][]    =   $data["mname"];
+                }
             }
         }
     }

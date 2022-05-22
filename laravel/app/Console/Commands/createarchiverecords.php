@@ -187,9 +187,15 @@ class createarchiverecords extends Command
                 }
             }
         }
-        ksort($unique_users, SORT_STRING);
+        /*ksort($unique_users, SORT_STRING);
         foreach($unique_users as $key   =>  $data) {
             echo "$key - "  .   $data['date_fired'] .   "\r\n";
+        }*/
+
+        foreach($unique_users as $key   =>  $data) {
+            if(User::withTrashed()->where("lname",  '=',  $data["lname"])->where("fname",  '=',  $data["fname"])->where("birthday", '=', $data["date_birth"])->exists()) {
+                echo $data["lname"] .   " " .   $data["fname"]  .   " " .   $data["mname"]  .   "\r\n";
+            }
         }
     }
 }

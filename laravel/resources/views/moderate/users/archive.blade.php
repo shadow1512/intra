@@ -7,7 +7,8 @@
 
                 <div class="row">
                     <div class="col-md-9"><h3>Архив (Перейти в <a href="{{ route('moderate.users.start')}}">список действующих сотрудников</a>)</h3></div>
-                    <div class="col-md-3"></div>
+                    <form name="searcharive" class="form-horizontal" method="POST" action="{{ route('moderate.users.searcharchive' }}"><div class="col-md-2"><input type="text" name="searcharchive" value="" id="searcharchive"/></div>
+                    <div class="col-md-1"><input type="submit" name="searcharchive_button" value="Искать" id="searcharchive_button"/></div>
                 </div>
                 @if ($mode  ==  'letters')
                     <div class="row">

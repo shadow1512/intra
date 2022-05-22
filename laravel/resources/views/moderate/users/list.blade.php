@@ -6,7 +6,7 @@
         <div class="col-md-8 col-md-offset-2">
 
             <div class="row">
-                <div class="col-md-9"><h3>Сотрудники @if (Auth::user()->role_id  ==  1)(<a href="{{ route('moderate.users.archive.start')}}">Архив</a>)@endif</h3></div>
+                <div class="col-md-9"><h3>Сотрудники @if (Auth::user()->role_id  ==  1)(Перейти в <a href="{{ route('moderate.users.archive.start')}}">архив</a>)@endif</h3></div>
                 <div class="col-md-3"></div>
             </div>
             @if ($mode  ==  'letters')

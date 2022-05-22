@@ -178,7 +178,7 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
-    $unique_users   =   array("data_key" =>  array());
+        $unique_users   =   array();
         $importData =   $this->loader(array(Config::get('archiveexcel.2016'), Config::get('archiveexcel.2017')));
         foreach($importData as $org =>  $deps_data) {
             foreach ($deps_data as $dep =>  $user_data) {

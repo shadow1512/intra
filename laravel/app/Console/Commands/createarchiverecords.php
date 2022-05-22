@@ -44,68 +44,6 @@ class createarchiverecords extends Command
      * @return mixed
      */
 
-    public function serveDepLevel($name,    $parent_code) {
-        //print $ou.  "\r\n\r\n";
-        $hiercode   =   new \HierCode(CODE_LENGTH);
-        $archive_deps   =   array();
-        if(isset($archive_deps[$name]["deps"])  &&  count($archive_deps[$name]["deps"])) {
-            $index  =   0;
-            foreach($archive_deps[$name]["deps"] as $dep_inner) {
-                $present    =   Dep::where('name',  '=',    $dep_inner)->where('parent_id', 'LIKE', "$parent_code%")->whereRaw("LENGTH(parent_id)=" .   (mb_strlen($parent_code, "UTF-8") +   CODE_LENGTH))->first();
-                if($present) {
-                    $parent_id  =   $parent_code;
-
-                    if($index   ==  0) {
-                        for ($i = 0; $i < CODE_LENGTH; $i++) {
-                            $parent_id .= $hiercode->digit_to_char[0];
-                        }
-                    }
-                    else {
-                        $parent_id  =   $hiercode->getNextCode();
-                    }
-                    $hiercode->setValue($parent_id);
-
-                    $present->parent_id =   $parent_id;
-                    $present->save();
-                }
-                else {
-                    $newdep=   new Dep();
-                    $parent_id  =   $parent_code;
-
-                    if($index   ==  0) {
-                        for ($i = 0; $i < CODE_LENGTH; $i++) {
-                            $parent_id .= $hiercode->digit_to_char[0];
-                        }
-                    }
-                    else {
-                        $parent_id  =   $hiercode->getNextCode();
-                    }
-                    $hiercode->setValue($parent_id);
-                    $newdep->parent_id =   $parent_id;
-                    $newdep->name      =   $dep_inner;
-                    $newdep->save();
-                    $newdep->delete();
-                    $dep_user    =   $newdep;
-                }
-
-                $new_ou = addslashes($dep_inner);
-                $this->serveDepUsers($dep_inner,   $dep_user);
-                $this->serveDepLevel($dep_inner,    $parent_id);
-
-                $index  ++;
-            }
-        }
-    }
-
-    /**
-     * @return string
-     */
-    public function serveDepUsers()
-    {
-
-    }
-
-
     public function loader($files_to_import) {
 
         $importData =   array();

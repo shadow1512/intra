@@ -178,7 +178,7 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
-        $hiercode       =   new \HierCode(CODE_LENGTH);
+        $hiercode           =   new \HierCode(CODE_LENGTH);
         $parent_code    =   'AN';
         $index          =   0;
 
@@ -217,6 +217,7 @@ class createarchiverecords extends Command
             }
 
             $subindex   =  0;
+            $subhiercode       =   new \HierCode(CODE_LENGTH);
             foreach ($deps_data as $dep =>  $user_data) {
                 $dep_id =   null;
                 if($dep) {
@@ -231,13 +232,13 @@ class createarchiverecords extends Command
                         $dep_parent_id  =   $parent_id;
                         if($subindex   ==  0) {
                             for ($i = 0; $i < CODE_LENGTH; $i++) {
-                                $dep_parent_id .= $hiercode->digit_to_char[0];
+                                $dep_parent_id .= $subhiercode->digit_to_char[0];
                             }
                         }
                         else {
-                            $dep_parent_id  =   $hiercode->getNextCode();
+                            $dep_parent_id  =   $subhiercode->getNextCode();
                         }
-                        $hiercode->setValue($dep_parent_id);
+                        $subhiercode->setValue($dep_parent_id);
                         $newdep->parent_id =   $dep_parent_id;
                         $newdep->name      =   $dep;
                         $newdep->save();

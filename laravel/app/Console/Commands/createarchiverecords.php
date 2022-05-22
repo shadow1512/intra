@@ -172,12 +172,10 @@ class createarchiverecords extends Command
         foreach($importData as $org =>  $deps_data) {
             foreach ($deps_data as $dep =>  $user_data) {
                 foreach($user_data as $key  =>  $data) {
-                    if(in_array($data["lname"], $unique_users["lname"]) &&  in_array($data["fname"], $unique_users["fname"])    &&  in_array($data["mname"], $unique_users["mname"])) {
-                        echo $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . "\r\n";
+                    if(in_array($data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"], $unique_users["data_key"])) {
+                        echo $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . $data["date_birth"] .   "\r\n";
                     }
-                    $unique_users["lname"][]    =   $data["lname"];
-                    $unique_users["fname"][]    =   $data["fname"];
-                    $unique_users["mname"][]    =   $data["mname"];
+                    $unique_users["data_key"][]    =   $data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"];
                 }
             }
         }

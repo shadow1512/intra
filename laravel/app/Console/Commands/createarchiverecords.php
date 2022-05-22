@@ -110,6 +110,7 @@ class createarchiverecords extends Command
 
         $importData =   array();
         foreach($files_to_import as $file) {
+            $file=  fopen($file, "r");
             while (($filedata = fgetcsv($file, 1000, ";")) !== FALSE) {
                 if($filedata[0]    ==  "ФИО") {
                     continue;

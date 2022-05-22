@@ -137,7 +137,7 @@ class createarchiverecords extends Command
                 $date_string    =   trim($filedata[4]);
                 $date_array     =   explode(".",    $date_string);
                 if(mb_strlen($date_array[2], "UTF-8")    ==  2) {
-                    $date_array[2]  =   "19"    .   $date_array[2];
+                    $date_array[2]  =   "20"    .   $date_array[2];
                 }
                 $date_fired     =   $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
 
@@ -183,9 +183,7 @@ class createarchiverecords extends Command
         foreach($importData as $org =>  $deps_data) {
             foreach ($deps_data as $dep =>  $user_data) {
                 foreach($user_data as $key  =>  $data) {
-                    if(!array_key_exists($data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"], $unique_users)) {
-                        $unique_users[$data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"]]    =   $data;
-                    }
+                    $unique_users[$data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"]]    =   $data;
                 }
             }
         }

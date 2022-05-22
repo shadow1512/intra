@@ -178,11 +178,77 @@ class createarchiverecords extends Command
     public function handle()
     {
         //
+        $hiercode       =   new \HierCode(CODE_LENGTH);
+        $parent_code    =   'AN';
+        $index          =   0;
+
         $unique_users   =   array();
         $importData =   $this->loader(array(Config::get('archiveexcel.2016'), Config::get('archiveexcel.2017')));
         foreach($importData as $org =>  $deps_data) {
+            $org_id =   null;
+            if($org) {
+                $present    =   Dep::where('name',  '=',    $org)->where('parent_id', 'LIKE', "$parent_code%")->whereRaw("LENGTH(parent_id)=" .   (mb_strlen($parent_code, "UTF-8") +   CODE_LENGTH))->first();
+                if($present) {
+                    $org_id     =   $present->id;
+                    $parent_id  =   $present->parent_id;
+                }
+                else {
+                    $newdep=   new Dep();
+                    $parent_id  =   $parent_code;
+
+                    if($index   ==  0) {
+                        for ($i = 0; $i < CODE_LENGTH; $i++) {
+                            $parent_id .= $hiercode->digit_to_char[0];
+                        }
+                    }
+                    else {
+                        $parent_id  =   $hiercode->getNextCode();
+                    }
+                    $hiercode->setValue($parent_id);
+                    $newdep->parent_id =   $parent_id;
+                    $newdep->name      =   $org;
+                    $newdep->save();
+                    $newdep->delete();
+
+                    $org_id =   $newdep->id;
+                }
+                $index  ++;
+            }
+
+            $subindex   =  0;
             foreach ($deps_data as $dep =>  $user_data) {
+                $dep_id =   null;
+                if($dep) {
+                    $present_dep    =   Dep::where('name',  '=',    $dep)->where('parent_id', 'LIKE', "$parent_id%")->whereRaw("LENGTH(parent_id)=" .   (mb_strlen($parent_id, "UTF-8") +   CODE_LENGTH))->first();
+                    if($present_dep) {
+                        $dep_id         =   $present_dep->id;
+                        $dep_parent_id  =   $present_dep->parent_id;
+                    }
+                    else {
+                        $newdep         =   new Dep();
+                        $dep_parent_id  =   $parent_id;
+                        if($subindex   ==  0) {
+                            for ($i = 0; $i < CODE_LENGTH; $i++) {
+                                $dep_parent_id .= $hiercode->digit_to_char[0];
+                            }
+                        }
+                        else {
+                            $dep_parent_id  =   $hiercode->getNextCode();
+                        }
+                        $hiercode->setValue($dep_parent_id);
+                        $newdep->parent_id =   $dep_parent_id;
+                        $newdep->name      =   $dep;
+                        $newdep->save();
+                        $newdep->delete();
+
+                        $dep_id =   $newdep->id;
+                    }
+                    $subindex  ++;
+                }
+
                 foreach($user_data as $key  =>  $data) {
+                    $data["org_id"] =   $org_id;
+                    $data["dep_id"] =   $dep_id;
                     $unique_users[$data["lname"] . " " . $data["fname"] . " " . $data["mname"] . " " . $data["date_birth"]]    =   $data;
                 }
             }
@@ -194,8 +260,32 @@ class createarchiverecords extends Command
 
         foreach($unique_users as $key   =>  $data) {
             if(User::withTrashed()->where("lname",  '=',  $data["lname"])->where("fname",  '=',  $data["fname"])->where("birthday", '=', $data["date_birth"])->exists()) {
-                echo $data["lname"] .   " " .   $data["fname"]  .   " " .   $data["mname"]  .   "\r\n";
+                continue;
             }
+
+            $user               =   new User();
+            $user->sid          =   "";
+            $user->lname        =   $data["lname"];
+            $user->fname        =   $data["fname"];
+            $user->mname        =   $data["mname"];
+            $user->birthday     =   $data["date_birth"];
+            $user->deleted_at   =   $data["date_fired"] .   " 00:00:00";
+            $user->workend      =   $data["date_fired"];
+
+            $user->save();
+
+            $du =   new Deps_Peoples();
+            $du->people_id  =   $user->id;
+            if(!is_null($data["dep_id"])) {
+                $du->dep_id =   $data["dep_id"];
+            }
+            else {
+                $du->dep_id =   $data["org_id"];
+            }
+            $du->work_title =   $data["position"];
+            $du-deleted_at  =   $data["date_fired"] .   " 00:00:00";
+
+            $du->save();
         }
     }
 }

@@ -71,7 +71,9 @@ class updatedirectoryfromad extends Command
         }
         $this->i_links      =   array();
 
-        $deps_peoples   =   Deps_Peoples::get();
+        //добавляем костыль для архива - для всех пользователей, кто в архиве, не надо удалять связь
+        $exclude_deps   =   Dep::where("parent_id", "LIKE", "AN%")->pluck("id");
+        $deps_peoples   =   Deps_Peoples::whereNotIn("dep_id",  $exclude_deps)->get();
         foreach($deps_peoples as $dep_people) {
             $this->i_links[$dep_people->people_id][]  =   $dep_people->dep_id;
         }

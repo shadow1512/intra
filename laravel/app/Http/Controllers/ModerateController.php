@@ -1098,7 +1098,7 @@ class ModerateController extends Controller
         return view('moderate.users.searcharchive', ['users'    =>  $result_users,  'mode'  =>  $mode, 'searchvalue'   =>  $input]);
     }
 
-    public function userarchiveedit($id) {
+    public function usersarchiveedit($id) {
 
         $user       =   User::onlyTrashed()->findOrFail($id);
         $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();

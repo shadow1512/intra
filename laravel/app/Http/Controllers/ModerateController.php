@@ -1083,7 +1083,19 @@ class ModerateController extends Controller
             ->orderBy('fname', 'asc')
             ->get();
 
-        return view('moderate.users.searcharchive', ['users'    =>  $users,  'mode'  =>  $mode, 'searchvalue'   =>  $input]);
+        $result_users   =   array();
+        foreach($users as $user) {
+            $crumbs =   array();
+            if(!is_null($user->depid)) {
+                $crumbs    =    Dep::getCrumbsArchieve($user->depid);
+                $crumbs[]  =    Dep::withTrashed()->find($user->depid);
+            }
+            $user->crumbs   =   $crumbs;
+
+            $result_users[] =   $user;
+        }
+
+        return view('moderate.users.searcharchive', ['users'    =>  $result_users,  'mode'  =>  $mode, 'searchvalue'   =>  $input]);
     }
 
     public function usersedit($id)

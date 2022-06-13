@@ -141,3 +141,8 @@
 .directory_lst_i_name_spec {
     color:#999
 }
+.directory_lst_i_dep {
+    width:70%;
+    vertical-align:top;
+    margin-left:10%;
+}

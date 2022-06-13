@@ -1112,7 +1112,7 @@ class ModerateController extends Controller
 
         $crumbs =   array();
         if(!is_null($dep->dep_id)) {
-            $crumbs    =    Dep::getCrumbsArchieve()($dep->dep_id);
+            $crumbs    =    Dep::getCrumbsArchieve($dep->dep_id);
             $crumbs[]  =    Dep::withTrashed()->find($dep->dep_id);
         }
 

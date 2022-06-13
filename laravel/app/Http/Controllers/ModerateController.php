@@ -1054,7 +1054,7 @@ class ModerateController extends Controller
         $result_users   =   array();
         foreach($users as $user) {
             $crumbs =   array();
-            if(!is_null($user->dep_id)) {
+            if(!is_null($user->depid)) {
                 $crumbs    =    Dep::getCrumbsArchieve($user->depid);
                 $crumbs[]  =    Dep::withTrashed()->find($user->depid);
             }

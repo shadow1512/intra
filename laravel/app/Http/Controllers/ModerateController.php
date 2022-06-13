@@ -1400,7 +1400,7 @@ class ModerateController extends Controller
 
     public function usersarchiveupdate($id, Request $request)
     {
-        $user   =   User::onlyTrashed()->leftJoin('deps_peoples',  'users.id', '=',    'deps_peoples.people_id')->whereRaw('users.id=' .   $id)->first();
+        $user   =   User::onlyTrashed()->findOrFail($id);
 
         $updates_fields =   array(
             'fname'                     =>  trim($request->input('fname')),
@@ -1447,7 +1447,7 @@ class ModerateController extends Controller
             'email_secondary'   =>  'nullable|string|email',
         ],  $messages);
         if ($validator->fails()) {
-            return redirect()->route('moderate.users.arhiveedit', ["id"   =>  $id])
+            return redirect()->route('moderate.users.archive.edit', ["id"   =>  $id])
                 ->withErrors($validator)
                 ->withInput();
         }

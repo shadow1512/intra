@@ -1469,11 +1469,11 @@ class ModerateController extends Controller
             }
             else {
 
-                $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+                $wt_record =   Deps_Peoples::where("people_id", "=", $id)->first();
 
                 if(!$wt_record) {
                     $wt_record = new Deps_Peoples();
-                    $wt_record->people_id  =   $user->id;
+                    $wt_record->people_id  =   $id;
                 }
 
                 $wt_record->work_title  =   $value;

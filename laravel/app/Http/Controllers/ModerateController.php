@@ -1098,6 +1098,28 @@ class ModerateController extends Controller
         return view('moderate.users.searcharchive', ['users'    =>  $result_users,  'mode'  =>  $mode, 'searchvalue'   =>  $input]);
     }
 
+    public function userarchiveedit($id) {
+
+        $user       =   User::onlyTrashed()->findOrFail($id);
+        $work       =   Deps_Peoples::where("people_id",    "=",    $id)->first();
+
+        $dep =  Dep::withTrashed()->leftJoin("deps_peoples",   "deps.id",   "=",    "deps_peoples.dep_id")->where("deps_peoples.people_id", "=", $id)->first();
+
+
+        if(Auth::user()->role_id  !=  1) {
+            abort(403, 'moderate not set. Not admin');
+        }
+
+        $crumbs =   array();
+        if(!is_null($dep->dep_id)) {
+            $crumbs    =    Dep::getCrumbsArchieve()($dep->dep_id);
+            $crumbs[]  =    Dep::withTrashed()->find($dep->dep_id);
+        }
+
+        return view('moderate.users.archiveedit', ['user'    =>  $user,    'work'  =>  $work, 'dep'  =>  $dep,
+            'labels'    =>  Config::get("dict.labels"), 'crumbs'    =>  $crumbs]);
+    }
+
     public function usersedit($id)
     {
         $user       =   User::findOrFail($id);
@@ -1375,6 +1397,97 @@ class ModerateController extends Controller
 
         return redirect(route('moderate.users.start'));
     }
+
+    public function usersarchiveupdate($id, Request $request)
+    {
+        $user   =   User::onlyTrashed()->leftJoin('deps_peoples',  'users.id', '=',    'deps_peoples.people_id')->whereRaw('users.id=' .   $id)->first();
+
+        $updates_fields =   array(
+            'fname'                     =>  trim($request->input('fname')),
+            'lname'                     =>  trim($request->input('lname')),
+            'mname'                     =>  trim($request->input('mname')),
+            'room'                      =>  trim($request->input('room')),
+            'phone'                     =>  trim($request->input('phone')),
+            'ip_phone'                  =>  trim($request->input('ip_phone')),
+            'birthday'                  =>  trim($request->input('birthday')),
+            'mobile_phone'              =>  trim($request->input('mobile_phone')),
+            'city_phone'                =>  trim($request->input('city_phone')),
+            'email'                     =>  trim($request->input('email')),
+            'email_secondary'           =>  trim($request->input('email_secondary')),
+            'work_title'                =>  trim($request->input('work_title')),
+            'position_desc'             =>  trim($request->input('position_desc')),
+        );
+
+        $messages   =   array(
+            "lname.required"             =>  "Поле обязательно для заполнения",
+            "lname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "fname.required"             =>  "Поле обязательно для заполнения",
+            "fname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "mname.max"                  =>  "Поле не должно быть длиннее, чем 255 символов",
+            "phone.max"                  =>  "Поле не должно быть длиннее, чем 3 цифры - это местный номер",
+            "ip_phone.max"               =>  "Поле не должно быть длиннее, чем 4 цифры - это местный ip-номер",
+            "room.max"                   =>  "Поле не должно быть длиннее, чем 4 символа",
+            "city_phone.max"             =>  "Поле не должно быть длиннее, чем 18 символов",
+            "mobile_phone.max"           =>  "Поле не должно быть длиннее, чем 18 символов",
+            "email.email"                =>  "Поле должно быть формата email",
+            "email_secondary.email"      =>  "Поле должно быть формата email",
+            "position_desc.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
+        );
+        $validator = Validator::make($request->all(), [
+            'position_desc'     =>  'nullable|string|max:255',
+            'lname'             =>  'string|max:255|required',
+            'fname'             =>  'string|max:255|required',
+            'mname'             =>  'nullable|string|max:255',
+            'phone'             =>  'nullable|string|max:3',
+            'ip_phone'          =>  'nullable|string|max:4',
+            'room'              =>  'nullable|string|max:4',
+            'city_phone'        =>  'nullable|string|max:18',
+            'mobile_phone'      =>  'nullable|string|max:18',
+            'email'             =>  'nullable|string|email',
+            'email_secondary'   =>  'nullable|string|email',
+        ],  $messages);
+        if ($validator->fails()) {
+            return redirect()->route('moderate.users.arhiveedit', ["id"   =>  $id])
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+
+        foreach($updates_fields as $key =>  $value) {
+            if($key ==  "birthday") {
+                $birthday_parts =   explode(".",    $value);
+                if(count($birthday_parts)   ==  3) {
+                    $value   =   date("Y-m-d", strtotime($value));
+                }
+                else {
+                    $value  =   null;
+                }
+            }
+
+            if ($key != "work_title") {
+                $user->{$key} = $value;
+            }
+            else {
+
+                $wt_record =   Deps_Peoples::where("people_id", "=", $user->id)->first();
+
+                if(!$wt_record) {
+                    $wt_record = new Deps_Peoples();
+                    $wt_record->people_id  =   $user->id;
+                }
+
+                $wt_record->work_title  =   $value;
+                $wt_record->save();
+            }
+
+        }
+
+        $user->numupdates   =   $user->numupdates   +   1;
+        $user->save();
+
+        return redirect(route('moderate.users.archive.start'));
+    }
+
 
     public function usersupdateavatar($id, Request $request)
     {

@@ -69,6 +69,7 @@
                                         </ul>
                                     </div>
                                 @endif
+                                <div class="col-md-2 col-md-offset-10"><a href="{{ route('moderate.users.archive.edit', ["id" => $item->id]) }}">редактировать</a></div>
                             </li>
                         @endforeach
                     </ul>

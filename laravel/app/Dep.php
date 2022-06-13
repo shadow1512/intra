@@ -64,4 +64,20 @@ class Dep extends Model
         }
         return array_reverse($crumbs);
     }
+
+    public static function getCrumbsArchieve($id) {
+        $crumbs = array();
+        $currentDep     = parent::withTrashed()->find($id);
+        if($currentDep) {
+            $parent = $currentDep->parent_id;
+            $length = mb_strlen($parent, "UTF-8");
+            while ($length > 2) {
+                $parent = mb_substr($parent, 0, $length - 2);
+                $dep = parent::withTrashed()->where('parent_id', '=', $parent)->firstOrFail();
+                $crumbs[] = $dep;
+                $length = $length - 2;
+            }
+        }
+        return array_reverse($crumbs);
+    }
 }

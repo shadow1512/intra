@@ -55,6 +55,15 @@
                                 <div class="directory_lst_i_pic"><img src="@if($item->avatar_round){{$item->avatar_round}} @else {{$item->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($item->birthday)) }}"></div>
                                 <div class="directory_lst_i_name">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}
                                     <div class="directory_lst_i_name_spec">{{$item->worktitle}}</div>
+                                    @if(count($item->crumbs))
+                                        <div class="directory_lst_i_name_spec">
+                                            <ul class="breadcrumbs_unit">
+                                                @foreach ($item->crumbs as $crumb)
+                                                    <li class="breadcrumbs_i">{{$crumb->name}}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    @endif
                                 </div>
                                 <div class="directory_lst_i_info">
                                     @if($item->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$item->mobile_phone}}</div>@endif

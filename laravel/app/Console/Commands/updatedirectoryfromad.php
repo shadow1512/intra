@@ -254,8 +254,13 @@ class updatedirectoryfromad extends Command
                     }
                     else {
                         //print "trashed\r\n";
-                        $present->delete();
-                        Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
+
+                        //не надо удалять без конца запись, которая и так ранее была удалена - получается брак "даты увольнения"
+                        if(is_null($present->deleted_at)) {
+                            $present->delete();
+                        }
+                        //не надо удаляемым сотрудникам отрезать связь
+                        //Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
                     }
                 }
                 else {
@@ -392,14 +397,16 @@ class updatedirectoryfromad extends Command
         //Вердикт - убить
         foreach($this->i_uids as $uid) {
             User::where("id",    "=",    $uid)->delete();
-            Deps_Peoples::where("people_id",    '=',    $uid)->delete();
+            //последнюю связь не удаляем
+            //Deps_Peoples::where("people_id",    '=',    $uid)->delete();
         }
 
         //Те департаменты, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_dids as $did) {
             Dep::where("id",    "=",    $did)->delete();
-            Deps_Peoples::where("dep_id",    '=',    $did)->delete();
+            //прибивать связи не обязательно
+            //Deps_Peoples::where("dep_id",    '=',    $did)->delete();
         }
 
         //Самое сложное - повисшие связи. Люди, которые, видимо, были перемещены между департаментами. Старую связь надо удалить

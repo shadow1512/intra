@@ -254,10 +254,11 @@ class updatedirectoryfromad extends Command
                     }
                     else {
                         //print "trashed\r\n";
-
+                        Log::error('Trashed person is found ' .   $present->id);
                         //не надо удалять без конца запись, которая и так ранее была удалена - получается брак "даты увольнения"
                         if(is_null($present->deleted_at)) {
                             $present->delete();
+                            Log::error('Trashed person deleted from DB ' .   $present->id);
                         }
                         //не надо удаляемым сотрудникам отрезать связь
                         //Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
@@ -396,6 +397,7 @@ class updatedirectoryfromad extends Command
         //Те люди, которые остались в списках по предыдущему состоянию Intra, но их нет в текущем состоянии после синхронизации.
         //Вердикт - убить
         foreach($this->i_uids as $uid) {
+            Log::error('Intra extra record for deletion is found ' .   $uid);
             User::where("id",    "=",    $uid)->delete();
             //последнюю связь не удаляем
             //Deps_Peoples::where("people_id",    '=',    $uid)->delete();
@@ -412,6 +414,7 @@ class updatedirectoryfromad extends Command
         //Самое сложное - повисшие связи. Люди, которые, видимо, были перемещены между департаментами. Старую связь надо удалить
         foreach($this->i_links as $uid  =>  $deps) {
             foreach($deps as $dep) {
+                Log::error('Trashed link between person and dep is found ' .   $uid .   '-' .   $dep);
                 Deps_Peoples::where("dep_id",    '=',    $dep)->where("people_id",  "=",    $uid)->delete();
             }
         }

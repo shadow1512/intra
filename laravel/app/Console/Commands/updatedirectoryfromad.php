@@ -73,7 +73,9 @@ class updatedirectoryfromad extends Command
 
         //добавляем костыль для архива - для всех пользователей, кто в архиве, не надо удалять связь
         $exclude_deps   =   Dep::withTrashed()->where("parent_id", "LIKE", "AN%")->pluck("id");
-        $deps_peoples   =   Deps_Peoples::whereNotIn("dep_id",  $exclude_deps)->get();
+        //добавляем условие - для всех пользователей, кто уже удален, не надо удалять связь
+        $exclude_users   =   Dep::onlyTrashed()->pluck("id");
+        $deps_peoples   =   Deps_Peoples::whereNotIn("dep_id",  $exclude_deps)->whereNotIn("people_id", $exclude_users)->get();
         foreach($deps_peoples as $dep_people) {
             $this->i_links[$dep_people->people_id][]  =   $dep_people->dep_id;
         }
@@ -259,13 +261,13 @@ class updatedirectoryfromad extends Command
                         if(is_null($present->deleted_at)) {
                             $present->delete();
                             Log::error('Trashed person deleted from DB ' .   $present->id);
-                        }
-                        //не надо удаляемым сотрудникам отрезать связь
-                        //сначала нужно убрать из связей, которые надо удалить, т.к. сотрудник в департаменте есть, просто удален
-                        if(isset($this->i_links[$present->id])) {
-                            $key = array_search($dep->id, $this->i_links[$present->id]);
-                            if ($key !== false) {
-                                unset($this->i_links[$present->id][$key]);
+                            //не надо удаляемым сотрудникам отрезать связь
+                            //сначала нужно убрать из связей, которые надо удалить, т.к. сотрудник в департаменте есть, просто удален
+                            if(isset($this->i_links[$present->id])) {
+                                $key = array_search($dep->id, $this->i_links[$present->id]);
+                                if ($key !== false) {
+                                    unset($this->i_links[$present->id][$key]);
+                                }
                             }
                         }
                         //прямого удаления тут тоже быть не должно

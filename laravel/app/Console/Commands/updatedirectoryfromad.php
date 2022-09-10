@@ -261,6 +261,14 @@ class updatedirectoryfromad extends Command
                             Log::error('Trashed person deleted from DB ' .   $present->id);
                         }
                         //не надо удаляемым сотрудникам отрезать связь
+                        //сначала нужно убрать из связей, которые надо удалить, т.к. сотрудник в департаменте есть, просто удален
+                        if(isset($this->i_links[$present->id])) {
+                            $key = array_search($dep->id, $this->i_links[$present->id]);
+                            if ($key !== false) {
+                                unset($this->i_links[$present->id][$key]);
+                            }
+                        }
+                        //прямого удаления тут тоже быть не должно
                         //Deps_Peoples::where("people_id",    "=",    $present->id)->delete();
                     }
                 }

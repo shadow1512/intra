@@ -74,7 +74,7 @@ class updatedirectoryfromad extends Command
         //добавляем костыль для архива - для всех пользователей, кто в архиве, не надо удалять связь
         $exclude_deps   =   Dep::withTrashed()->where("parent_id", "LIKE", "AN%")->pluck("id");
         //добавляем условие - для всех пользователей, кто уже удален, не надо удалять связь (кажется, что для архива тоже работать будет, но пускай пока так)
-        $exclude_users   =   Dep::onlyTrashed()->pluck("id");
+        $exclude_users   =   User::onlyTrashed()->pluck("id");
         $deps_peoples   =   Deps_Peoples::whereNotIn("dep_id",  $exclude_deps)->whereNotIn("people_id", $exclude_users)->get();
         foreach($deps_peoples as $dep_people) {
             $this->i_links[$dep_people->people_id][]  =   $dep_people->dep_id;

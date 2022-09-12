@@ -56,13 +56,14 @@ class HomeController extends Controller
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
                 ->whereNull('deps_peoples.deleted_at')
                 ->where(function($query) use ($d,  $m) {
-                    $query->where(DB::raw("MONTH(birthday)"), '=',   $m)->where(DB::raw("DAY(birthday)"),    '=',    $d);
-                })
-                ->orWhere(function($query) use ($d,  $m) {
-                    $query->where(DB::raw("MONTH(SUBDATE(birthday, 1))"),   '=',    $m)->where(DB::raw("DAY(SUBDATE(birthday, 1))"), '=',    $d);
-                })
-                ->orWhere(function($query) use ($d,  $m) {
-                    $query->where(DB::raw("MONTH(SUBDATE(birthday, 2))"),   '=',    $m)->where(DB::raw("DAY(SUBDATE(birthday, 2))"), '=',    $d);
+                    $query
+                        ->where(DB::raw("MONTH(birthday)"), '=', $m)->where(DB::raw("DAY(birthday)"), '=', $d)
+                        ->orWhere(function ($query) use ($d, $m) {
+                            $query->where(DB::raw("MONTH(SUBDATE(birthday, 1))"), '=', $m)->where(DB::raw("DAY(SUBDATE(birthday, 1))"), '=', $d);
+                        })
+                        ->orWhere(function ($query) use ($d, $m) {
+                            $query->where(DB::raw("MONTH(SUBDATE(birthday, 2))"), '=', $m)->where(DB::raw("DAY(SUBDATE(birthday, 2))"), '=', $d);
+                        });
                 })
                 ->orderByRaw('MONTH(birthday)', 'asc')->orderByRaw('DAY(birthday)', 'asc')->get();
 

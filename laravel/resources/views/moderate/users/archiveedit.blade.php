@@ -157,6 +157,7 @@
                                         @endif
                                     </div>
                                 </div>
+                            @if(!is_null($work))
                                 <div class="form-group{{ $errors->has('work_title') ? ' has-error' : '' }}">
                                     <label for="work_title" class="col-md-2 control-label">Должность</label>
 
@@ -170,6 +171,7 @@
                                         @endif
                                     </div>
                                 </div>
+                            @endif
                                 <h2>Дополнительные данные</h2>
                                 <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                     <label for="birthday" class="col-md-2 control-label">День рождения</label>

@@ -157,13 +157,11 @@
                                         @endif
                                     </div>
                                 </div>
-                            @if(!is_null($work))
                                 <div class="form-group{{ $errors->has('work_title') ? ' has-error' : '' }}">
                                     <label for="work_title" class="col-md-2 control-label">Должность</label>
 
                                     <div class="col-md-6">
-                                        <input id="work_title" type="text" class="form-control" name="work_title" value="@if ($work->work_title) {{$work->work_title}} @endif">
-
+                                        <input id="work_title" type="text" class="form-control" name="work_title" value="@if(!is_null($work)) @if ($work->work_title) {{$work->work_title}} @endif @endif">
                                         @if ($errors->has('work_title'))
                                             <span class="help-block">
                                         <strong>{{ $errors->first('work_title') }}</strong>
@@ -171,7 +169,6 @@
                                         @endif
                                     </div>
                                 </div>
-                            @endif
                                 <h2>Дополнительные данные</h2>
                                 <div class="form-group{{ $errors->has('birthday') ? ' has-error' : '' }}">
                                     <label for="birthday" class="col-md-2 control-label">День рождения</label>

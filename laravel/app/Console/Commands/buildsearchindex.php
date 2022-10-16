@@ -59,7 +59,7 @@ class buildsearchindex extends Command
         //Секция "пользователи"
         $users = User::orderBy('name', 'asc')
             ->leftJoin('deps_peoples', function($join) {
-                $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL')
+                $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL');
             })
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
 

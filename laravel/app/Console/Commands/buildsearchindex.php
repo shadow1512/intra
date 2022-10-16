@@ -63,6 +63,8 @@ class buildsearchindex extends Command
             })
             ->select('users.*', 'deps_peoples.work_title as work_title')->get();
 
+        echo $users->toSql();
+
         $bar = $this->output->createProgressBar(count($users));
 
         foreach($users as $user) {

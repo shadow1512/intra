@@ -61,7 +61,7 @@ class makeCsvDirectoryInfographics extends Command
                 }
 
                 //$num    =   Deps_Peoples::whereIn('dep_id', $ids_to_find)->count('people_id');
-                $num    =   User::('deps_peoples', function($join) {
+                $num    =   User::leftJoin('deps_peoples', function($join) {
                     $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL');
                 })->whereIn('deps_peoples.dep_id',  $ids_to_find)->distinct('users.id')->count('users.id');
 

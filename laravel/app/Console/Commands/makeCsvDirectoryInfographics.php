@@ -61,7 +61,7 @@ class makeCsvDirectoryInfographics extends Command
                 }
 
                 //$num    =   Deps_Peoples::whereIn('dep_id', $ids_to_find)->count('people_id');
-                $num    =   Users::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')->whereIn('deps_peoples.dep_id',  $ids_to_find)->distinct('id')->count('id');
+                $num    =   User::leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')->whereIn('deps_peoples.dep_id',  $ids_to_find)->distinct('id')->count('id');
 
 
                 $writer->insertOne([$dep->short_name,$dep->name,$num,$dep->color,route('people.dept',    ["id"   =>  $dep->id])]);

@@ -15,7 +15,10 @@ use App\LibRazdel;
 use cijic\phpMorphy\Facade\Morphy;
 use DB;
 use Config;
+use Matrix\Exception;
 use Text_LangCorrect;
+use Auth;
+use App\Search_logs;
 
 class SearchController extends Controller
 {
@@ -339,6 +342,33 @@ class SearchController extends Controller
         else {
             //
         }
+
+
+        try {
+            $user_id    =   0;
+            if (Auth::check()) {
+                $user_id    =   Auth::user()->id;
+            }
+
+            $sl = new Search_logs();
+            $sl->user_id            =   $user_id;
+            $sl->term               =   $phrase;
+            $sl->total_res          =   count($news)    +   count($users)   +   count($docs)    +   count($books)   +   count($razdels) +   count($deps);
+            $sl->section_results    =   json_encode(
+                array(
+                    'news'      =>  count($news),
+                    'users'     =>  count($users),
+                    'docs'      =>  count($docs),
+                    'books'     =>  count($books),
+                    'razdels'   =>  count($razdels),
+                    'deps'      =>  count($deps)
+                ));
+            $sl->save();
+        }
+        catch(Exception $e) {
+
+        }
+
 
 
         return view('search.all', [ "news"   =>  $news, "users"  =>  $users, "docs"  => $docs,
@@ -1331,6 +1361,31 @@ class SearchController extends Controller
                 $phrase    .=  ", ";
             }
             $phrase .=   "день рождения: " .   trim($bdates[0]);
+        }
+
+        try {
+            $user_id    =   0;
+            if (Auth::check()) {
+                $user_id    =   Auth::user()->id;
+            }
+
+            $sl = new Search_logs();
+            $sl->user_id            =   $user_id;
+            $sl->term               =   $phrase;
+            $sl->total_res          =   count($users);
+            $sl->section_results    =   json_encode(
+                array(
+                    'news'      =>  0,
+                    'users'     =>  count($users),
+                    'docs'      =>  0,
+                    'books'     =>  0,
+                    'razdels'   =>  0,
+                    'deps'      =>  0
+                ));
+            $sl->save();
+        }
+        catch(Exception $e) {
+
         }
 
         return view('search.all', [ "users"  =>  $users,

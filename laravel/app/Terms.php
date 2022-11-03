@@ -8,7 +8,7 @@ class Terms extends Model
 {
     //
     protected $fillable = [
-        'term', 'baseterm', 'section', 'record'
+        'term', 'user_id', 'total', 'record'
     ];
     protected $table = 'terms';
 }

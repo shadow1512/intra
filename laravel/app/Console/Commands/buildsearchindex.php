@@ -5,8 +5,6 @@ use Illuminate\Console\Command;
 
 use App\User;
 use App\Dep;
-use DB;
-use PDO;
 use App\News;
 use App\LibBook;
 use App\LibRazdel;
@@ -20,7 +18,7 @@ class buildsearchindex extends Command
      *
      * @var string
      */
-    protected $signature = 'searchindex:create';
+    protected $signature = 'searchindex:createdaily';
 
     /**
      * The console command description.
@@ -57,7 +55,7 @@ class buildsearchindex extends Command
         $fp =   fopen("/var/www/intra/laravel/storage/app/public/dict/ru.custom.txt",   "w+");
 
         //Секция "пользователи"
-        $users = User::orderBy('name', 'asc')
+        $users = User::orderBy('lname', 'asc')->orderBy('fname',    'asc')->orderBy('mname',    'asc')
             ->leftJoin('deps_peoples', function($join) {
                 $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL');
             })

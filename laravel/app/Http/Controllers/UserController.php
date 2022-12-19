@@ -232,6 +232,10 @@ class UserController extends Controller
                                         "count_to_display"      =>  $count_to_display,
                                         "request"               =>  $request]);
     }
+    
+    public function call($id) {
+        return abort(404);
+    }
     /**
      * Show the form for creating a new resource.
      *

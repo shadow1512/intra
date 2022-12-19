@@ -107,7 +107,7 @@
                             <!--<div class="directory_lst_i_name_status"></div>-->
                             </div>
                             <div class="directory_lst_i_info">
-                                <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}">{{$contact->ip_phone}} @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
+                                <div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>
                                 @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                                 <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>

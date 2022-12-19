@@ -50,6 +50,7 @@ Route::get('/people/dept/{id?}/{sorttype?}', 'UserController@search')->name('peo
 Route::get('/people/unit/{id}', 'UserController@unit')->name('people.unit');
 Route::get('/people/birthday', 'UserController@index')->name('people.birthday');
 Route::get('/people/new', 'UserController@index')->name('people.new');
+Route::get('/people/call/{id}', 'UserController@call')->name('people.call');
 
 Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::get('/profile/edit', 'ProfileController@edit')->name('profile.edit');

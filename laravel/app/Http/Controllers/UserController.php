@@ -252,7 +252,7 @@ class UserController extends Controller
         }
         
         $params = array(
-            'endpoint'      =>  'SIP/'  .   $abonent->ip_phone,
+            'endpoint'      =>  'SIP/'  .   Auth::user()->ip_phone,
             'extension'     =>  $abonent->ip_phone,
             'context'       =>  'kodeksspb',
             'priority'      =>  1,

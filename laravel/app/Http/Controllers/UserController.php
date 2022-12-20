@@ -234,7 +234,46 @@ class UserController extends Controller
     }
     
     public function call($id) {
-        return abort(404);
+        if(!Auth::check()) {
+            return abort(403);
+        }
+        
+        if(is_null(Auth::user()->ip_phone)) {
+            return abort(403);
+        }
+        
+        $abonent    =   User::find($id);
+        if(!$abonent) {
+            return abort(403);
+        }
+        
+        if(is_null($abonent->ip_phone)) {
+            return abort(403);
+        }
+        
+        $params = array(
+            'endpoint'      =>  'SIP/'  .   $abonent->ip_phone,
+            'extension'     =>  $abonent->ip_phone,
+            'context'       =>  'kodeksspb',
+            'priority'      =>  1,
+            'callerId'      =>  Auth::user()->ip_phone
+        );
+        
+        $ch = curl_init('http://ast.dmz:8088/ari/channels');
+        
+        curl_setopt($ch, CURLOPT_USERPWD, 'caller:ZxAsQw12');
+        curl_setopt($ch, CURLOPT_VERBOSE, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLINFO_HEADER_OUT, true);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($params, '', '&'));
+        
+        $res = curl_exec($ch);
+        $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        
+        var_dump($res);
+        var_dump($status_code);
     }
     /**
      * Show the form for creating a new resource.

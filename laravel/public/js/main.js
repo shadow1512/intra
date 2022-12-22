@@ -621,9 +621,9 @@ $("input[name='sortType']").on("change", function() {
    }
 });
 
-$("a.dynamic_call").on("click", function() {
-    
-        var url=    $(but).attr("href");
+$("a.dynamic_call").on("click", function(event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        var url=    $(this).attr("href");
         $.ajax({
             type: "GET",
             url: url,
@@ -637,7 +637,6 @@ $("a.dynamic_call").on("click", function() {
                 
             }
         });
-    return false;
 });
 
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});

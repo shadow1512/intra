@@ -413,7 +413,7 @@ function open(link, cnt, parent) {
         $(this).parents(parent).children(cnt).toggle(250);
         $(parent).removeClass('__active');
         $(this).parents(parent).addClass('__active');
-    })
+    });
 }
 
 open('.order_calendar_btn', '.order_calendar_cnt', '.order_calendar_i');
@@ -493,7 +493,7 @@ function toggleMenu(el, siblings) {
             document.cookie = "hide_menu_" + index + "=1; path=/; expires=" + date.toUTCString();
         }
         $(this).siblings(siblings).toggle(250);
-    })
+    });
 }
 
 toggleMenu('.menu_li_h', '.menu_li_lst');
@@ -504,7 +504,7 @@ function hideDinner(el, block, openBlock) {
         $(openBlock).show();
         var date = new Date(new Date().getTime() + 60 * 10000000);
         document.cookie = "hide_dinner=1; path=/; expires=" + date.toUTCString();
-    })
+    });
 }
 
 function showDinner(el, block) {
@@ -513,7 +513,7 @@ function showDinner(el, block) {
         $(block).fadeIn(200);
         var date = new Date(new Date().getTime() + 60 * 10000000);
         document.cookie = "hide_dinner=0; path=/; expires=" + date.toUTCString();
-    })
+    });
 }
 
 hideDinner('.main_top_dinner_hide', '.main_top_dinner', '#open-dinner');
@@ -621,26 +621,22 @@ $("input[name='sortType']").on("change", function() {
    }
 });
 
-function hideIpDropdown (e) {
-    var ipDropdown = $('.profile_dropdown');
-    if (ipDropdown && !ipDropdown.is(e.target) && ipDropdown.has(e.target).length === 0){
-      ipDropdown.fadeOut(200);
-      $('body').off('click', hideIpDropdown);
-    }
-  }
-
-$('.__js-open-ip-dropdown').click(function(event) {
-    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-    ipDropdown = $(this).next('.profile_dropdown');
-
-    $('body').on('click', hideIpDropdown);
-
-    if (ipDropdown.is(':visible')) {
-        ipDropdown.fadeOut(200);
-        $('body').off('click', hideIpDropdown);
-    } else {
-        ipDropdown.fadeIn(200);
-    }
+$("a.dynamic_call").on("click", function() {
+    
+        var url=    $(but).attr("href");
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function(msg) {
+                
+            },
+            error:function (xhr, ajaxOptions, thrownError){
+                
+            }
+        });
     return false;
 });
 

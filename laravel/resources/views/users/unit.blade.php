@@ -34,16 +34,7 @@
                         
                 @if(!empty($user->address))<div class="profile_info_address"><strong>Адрес:&nbsp;</strong><span>{{ $user->address }}</span></div>@endif
                 @if(!empty($user->room))<div class="profile_info_room"><strong>Комната:&nbsp;</strong><span>{{ $user->room }}</span></div>@endif
-                @if(!empty($user->phone) || !empty($user->ip_phone))<div class="profile_info_phone"><strong>Местный телефон:&nbsp;</strong><span>@if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) 
-                        <span class="profile_info_phone_ip">
-                            <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="profile_info_phone_lk __js-open-ip-dropdown">{{$user->ip_phone}}</a>
-                            <div class="profile_dropdown">
-                                <i class="profile_dropdown_arrow"></i>
-                                <div class="profile_dropdown_img"></div>
-                                <div class="profile_dropdown_h">IP-телефония</div>
-                                <div class="profile_dropdown_tx">Сейчас на&nbsp;экране своего телефона вы&nbsp;увидите входящий звонок с&nbsp;собственного номера. Примите этот звонок, чтобы начать дозваниваться на&nbsp;ip-телефон адресата.</div>
-                            </div>
-                        </span> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</span></div>@endif
+                @if(!empty($user->phone) || !empty($user->ip_phone))<div class="profile_info_phone"><strong>Местный телефон:&nbsp;</strong><span>@if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone))<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="dynamic_call">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</span></div>@endif
                 @if(!empty($user->mobile_phone))<div class="profile_info_phone"><strong>Мобильный телефон:&nbsp;</strong><span>{{ $user->mobile_phone }}</span></div>@endif
                 @if(!empty($user->city_phone))<div class="profile_info_phone"><strong>Городской телефон:&nbsp;</strong><span>{{ $user->city_phone }}</span></div>@endif
                 @if(!empty($user->email))<div class="profile_info_mail"><strong>E-mail: <a href='mailto:{{ $user->email }}'>{{ $user->email }}</a></strong></div>@endif

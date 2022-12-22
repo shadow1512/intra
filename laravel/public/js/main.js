@@ -621,10 +621,29 @@ $("input[name='sortType']").on("change", function() {
    }
 });
 
-$("a.dynamic_call").on("click", function() {
-    
-   return false; 
+function hideIpDropdown (e) {
+    var ipDropdown = $('.profile_dropdown');
+    if (ipDropdown && !ipDropdown.is(e.target) && ipDropdown.has(e.target).length === 0){
+      ipDropdown.fadeOut(200);
+      $('body').off('click', hideIpDropdown);
+    }
+  }
+
+$('.__js-open-ip-dropdown').click(function(event) {
+    event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+    ipDropdown = $(this).next('.profile_dropdown');
+
+    $('body').on('click', hideIpDropdown);
+
+    if (ipDropdown.is(':visible')) {
+        ipDropdown.fadeOut(200);
+        $('body').off('click', hideIpDropdown);
+    } else {
+        ipDropdown.fadeIn(200);
+    }
+    return false;
 });
+
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
 var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});

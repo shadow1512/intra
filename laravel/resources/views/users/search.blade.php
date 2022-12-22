@@ -109,7 +109,7 @@
                             <div class="directory_lst_i_info">
                                 @if($contact->ip_phone || $contact->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="dynamic_call">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>@endif
                                 @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
-                                <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
+                                @if($contact->room)<div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>@endif
                                 <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
                             </div>
                             <div class="directory_lst_i_action"><a href="{{route("profile.deletecontact",   ["id"   =>  $contact->id,  "url"   =>  route("people.dept",    ["id"   =>  $currentDep->id])])}}" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>
@@ -146,7 +146,7 @@
                         <div class="directory_lst_i_info">
                             @if($contact->ip_phone || $contact->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="dynamic_call">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>@endif
                             @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
-                            <div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>
+                            @if($contact->room)<div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>@endif
                             <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
                         </div>
                         @if(!in_array($user->id,    $contact_ids))
@@ -193,7 +193,7 @@
                                 <div class="directory_lst_i_info">
                                     @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="dynamic_call">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
                                     @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
-                                    <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                    @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                     <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                                 </div>
                                 <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
@@ -238,7 +238,7 @@
                                     <div class="directory_lst_i_info">
                                         @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="dynamic_call">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
                                         @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
-                                        <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                        @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                         <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                                     </div>
                                     <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->
@@ -280,7 +280,7 @@
                                         <div class="directory_lst_i_info">
                                             @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="dynamic_call">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
                                             @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
-                                            <div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>
+                                            @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                             <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                                         </div>
                                         <!--<div class="directory_lst_i_action"><a href="" title="Удалить из Моих контактов" class="directory_lst_i_action_lk"><svg class="directory_lst_i_action_del" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 27.37559 27.45416"><g><path d="M0 26.11L26.033.1l1.343 1.344-26.033 26.01z"/><path d="M0 1.343L1.343 0l26.022 26.02-1.344 1.345z"/></g></svg></a></div>-->

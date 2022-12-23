@@ -7,7 +7,7 @@
     @endif
     <div class="profile_i">
         <div class="profile_aside">
-            <div class="profile_aside_pic @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{ $user->name }}" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
+            <div class='profile_aside_pic @if (mb_substr($user->birthday,  5) ==  date("m-d")) __birthday @endif'><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{ $user->name }}" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
         </div>
         <div class="profile_info">
             <div class="profile_info_i  __padding-top_m">

@@ -639,6 +639,60 @@ $("a.dynamic_call").on("click", function(event) {
         });
 });
 
+function getIpCheckboxInfo () {
+  if ($('#ip_show-no-more').is(":checked")) {
+    localStorage.setItem('ip-modal_not-show', true);
+  }
+}
+
+function openIpModal(button, window) {
+  $(document).on('click', button, function(event) {
+    if (!localStorage.getItem('ip-modal_not-show')) {
+      event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+      $(window).removeClass('__vis');
+      $(window).addClass('__vis');
+      $('body').css('overflow', 'hidden');
+      var url=    $(button).attr("href");
+        $.ajax({
+            type: "GET",
+            url: url,
+            cache: false,
+            async: true,
+            dataType: "json",
+            success: function(msg) {
+                
+            },
+            error:function (xhr, ajaxOptions, thrownError){
+                
+            }
+        });
+    }
+  });
+  
+  $(document).on('click', '.modal-close', function(event) {
+      event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+      $(this).parents(window).removeClass('__vis');
+      $('body').css('overflow', 'auto');
+      getIpCheckboxInfo();
+  });
+  $(document).on('click', '.__js-modal-close', function(event) {
+      event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+      $(this).parents(window).removeClass('__vis');
+      $('body').css('overflow', 'auto');
+      getIpCheckboxInfo();
+  });
+  $(document).on('click', window, function(event) {
+      $(this).removeClass('__vis');
+      $('body').css('overflow', 'auto');
+      getIpCheckboxInfo();
+  });
+  $(document).on('click', '.modal-cnt', function(event) {
+      event.stopPropagation();
+  });
+}
+
+openIpModal('.__js-open-ip-modal', '.__js-ip-modal');
+
 var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
 var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});

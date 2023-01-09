@@ -234,7 +234,7 @@ class UserController extends Controller
     }
     
     public function call($id) {
-        var_dump($id);
+        //var_dump($id);
         if(!Auth::check()) {
             return abort(403);
         }
@@ -245,12 +245,12 @@ class UserController extends Controller
         
         $abonent    =   User::find($id);
         
-        var_dump($abonent->lname);
-        var_dump($abonent->fname);
-        var_dump($abonent->ip_phone);
-        var_dump(Auth::user()->ip_phone);
+        //var_dump($abonent->lname);
+        //var_dump($abonent->fname);
+        //var_dump($abonent->ip_phone);
+        //var_dump(Auth::user()->ip_phone);
         
-        exit();
+        //exit();
         if(!$abonent) {
             return abort(403);
         }
@@ -282,6 +282,10 @@ class UserController extends Controller
         
         var_dump($res);
         var_dump($status_code);
+        var_dump($abonent->fname);
+        var_dump($abonent->lname);
+        var_dump($abonent->ip_phone);
+        var_dump(Auth::user()->ip_phone);
     }
     /**
      * Show the form for creating a new resource.

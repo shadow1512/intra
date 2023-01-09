@@ -543,8 +543,7 @@ $('#date_one').datepicker({
     dayNamesShort: ['Вск', 'Пон', 'Вто', 'Сре', 'Чет', 'Пят', 'Суб'],
     dayNamesMin: ['Вс', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
     showOtherMonths: true,
-    selectOtherMonths: true,
-    defaultDate: null
+    selectOtherMonths: true
 });
 
 $("#tabs").tabs();
@@ -646,13 +645,13 @@ function getIpCheckboxInfo () {
 }
 
 function openIpModal(button, window) {
-  $(document).on('click', button, function(event) {
+  $(button).on('click', function(event) {
     if (!localStorage.getItem('ip-modal_not-show')) {
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
       $(window).removeClass('__vis');
       $(window).addClass('__vis');
       $('body').css('overflow', 'hidden');
-      var url=    $(button).attr("href");
+      var url=    $(this).attr("href");
         $.ajax({
             type: "GET",
             url: url,

@@ -3,13 +3,11 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use App\Dep;
 use App\Deps_Peoples;
 use Illuminate\Support\Facades\Log;
 use Config;
-use DB;
 
 class createarchiverecords extends Command
 {

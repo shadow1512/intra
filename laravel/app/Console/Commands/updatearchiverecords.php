@@ -56,7 +56,8 @@ class updatearchiverecords extends Command
             $work_start =   trim($filedata[7]);
             $work_end   =   trim($filedata[8]);
             
-            $obj    =   User::where("fname",    "=",    $fname)->where("lname", "=",    $lname)->where("mname", "=",    $mname)->get();
+            //ищем среди всех сотрудников тех, что есть в списке как удаленные
+            $obj    =   User::withTrashed()->where("fname",    "=",    $fname)->where("lname", "=",    $lname)->where("mname", "=",    $mname)->get();
             echo $lname . " " . $fname . " " . $mname . " || " . $obj->count() . "\r\n";
         }
     }

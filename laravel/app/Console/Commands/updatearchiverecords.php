@@ -60,12 +60,13 @@ class updatearchiverecords extends Command
             $obj    =   User::onlyTrashed()->where("fname",    "=",    $fname)->where("lname", "=",    $lname)->where("mname", "=",    $mname)->get();
             if($obj->count()    ==  1) {
                 if(is_numeric($dep)) {
-                    $work_place= Deps_Peoples::withTrashed()->where("people_id", "=",    $obj->first()->id)->get();
+                    $work_place= Deps_Peoples::withTrashed()->where("people_id", "=",    $obj->first()->id)->order("created_at", "desc")->get();
                     if($work_place->count()   >   0) {
                         echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $obj->first()->id . " - есть место работы\r\n";
+                        echo $work_place->first()->work_title . " ||| " . $work . "\r\n\r\n";
                     }
                     else {
-                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $work . "\r\n";
+                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $dep . "\r\n";
                     }
                 }
                 else {

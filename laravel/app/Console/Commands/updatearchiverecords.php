@@ -58,7 +58,23 @@ class updatearchiverecords extends Command
             
             //ищем среди всех сотрудников тех, что есть в списке как удаленные
             $obj    =   User::onlyTrashed()->where("fname",    "=",    $fname)->where("lname", "=",    $lname)->where("mname", "=",    $mname)->get();
-            echo $lname . " " . $fname . " " . $mname . " || " . $obj->count() . "\r\n";
+            if($obj->count()    ==  1) {
+                if(is_numeric($dep)) {
+                    $work_place= Deps_Peoples::withTrashed()->where("people_id", "=",    $obj->first()->id)->get();
+                    if($work_place->count()   >   0) {
+                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $obj->first()->id . " - есть место работы\r\n";
+                    }
+                    else {
+                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $work . "\r\n";
+                    }
+                }
+                else {
+                    
+                }
+            }
+            else {
+                echo $lname .   " " .   $fname  .   " " .   $mname  .   " || не обработано:"   .   $obj->count() . "\r\n";
+            }
         }
     }
 }

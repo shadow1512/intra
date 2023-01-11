@@ -64,13 +64,14 @@ class updatearchiverecords extends Command
                     if($work_place->count()   >   0) {
                         echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $obj->first()->id . " - есть место работы\r\n";
                         echo $work_place->first()->work_title . " ||| " . $work . "\r\n\r\n";
+                        echo $work_place->first()->dep_id . " ||| " . $dep . "\r\n\r\n";
                     }
                     else {
-                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || "   .   $dep . "\r\n";
+                        echo $lname .   " " .   $fname  .   " " .   $mname  .   " || GOOD \r\n";
                     }
                 }
                 else {
-                    
+                    echo $lname .   " " .   $fname  .   " " .   $mname  .   " || $dep \r\n";
                 }
             }
             else {

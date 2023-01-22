@@ -63,7 +63,8 @@ class updatearchiverecords extends Command
             $obj    =   User::onlyTrashed()->where("fname",    "=",    $fname)->where("lname", "=",    $lname)->where("mname", "=",    $mname)->get();
             if($obj->count()    ==  1) {
                 if(is_numeric($dep)) {
-                    $work_place= Deps_Peoples::where("people_id", "=",    $obj->first()->id)->orderBy("created_at", "desc")->get();
+                    $current_user   =   $obj->first();
+                    $work_place= Deps_Peoples::where("people_id", "=",    $current_user->id)->orderBy("created_at", "desc")->get();
                     if($work_place->count()   >   0) {
                         $current_work   =   $work_place->last();
                         if(($current_work->work_title    !== $work) &&  ($current_work->dep_id   !=  $dep)) {
@@ -81,15 +82,15 @@ class updatearchiverecords extends Command
                     
                     if($flag_create) {
                         $archive_work   =   new Deps_Peoples();
-                        $archive_work->people_id    =   $obj->first()->id;
+                        $archive_work->people_id    =   $current_user->id;
                         $archive_work->dep_id       =   $dep;
                         $archive_work->work_title   =   $work;
                         $archive_work->save();
-
-                        $obj->first()->work_start   =   $work_start;
-                        $obj->first()->work_end     =   $work_end;
-                        $obj->fitst()->deleted_at   =   $work_end   .   " 00:00:00";
-                        $obj->first()->save();
+                        
+                        $current_user->work_start   =   $work_start;
+                        $current_user->work_end     =   $work_end;
+                        $current_user->deleted_at   =   $work_end   .   " 00:00:00";
+                        $current_user->save();
 
                         $updated ++;
                     }

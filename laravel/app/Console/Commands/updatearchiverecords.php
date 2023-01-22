@@ -87,9 +87,14 @@ class updatearchiverecords extends Command
                         $archive_work->work_title   =   $work;
                         $archive_work->save();
                         
-                        $current_user->work_start   =   $work_start;
-                        $current_user->work_end     =   $work_end;
-                        $current_user->deleted_at   =   $work_end   .   " 00:00:00";
+                        if($work_start) {
+                            $current_user->workstart   =   $work_start;
+                        }
+                        if($work_end) {
+                            $current_user->workend     =   $work_end;
+                            $current_user->deleted_at   =   $work_end   .   " 00:00:00";
+                        }
+                        
                         $current_user->save();
 
                         $updated ++;

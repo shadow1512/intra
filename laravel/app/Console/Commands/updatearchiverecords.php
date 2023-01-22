@@ -54,11 +54,11 @@ class updatearchiverecords extends Command
             $dep    =   trim($filedata[5]);
             $work   =   trim($filedata[6]);
             $work_start =   trim($filedata[7]);
-            if($work_start  ==  'NULL') {
+            if($work_start  ==  'NULL'  ||  !$work_start) {
                 $work_start =   null;
             }
             $work_end   =   trim($filedata[8]);
-            if($work_end    ==  'NULL') {
+            if($work_end    ==  'NULL'  ||  !$work_end) {
                 $work_end   =   null;
             }
             $updated    =   0;

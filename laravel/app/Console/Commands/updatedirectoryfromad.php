@@ -95,7 +95,7 @@ class updatedirectoryfromad extends Command
 
         $index  =   0;
         foreach($deps as $dep_inner) {
-
+            echo $dep_inner->getName() . "\r\n";
             $dep_user   =   null;
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 continue;

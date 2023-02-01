@@ -46,7 +46,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        //$schedule->command('adstaff:import')->hourly();
+        $schedule->command('adstaff:import')->hourly();
         $schedule->command('searchindex:createdaily')->dailyAt('02:00');
         $schedule->command('searchindexdelta:createhourly')->hourlyAt(10);
         $schedule->command('adxml:create')->daily();

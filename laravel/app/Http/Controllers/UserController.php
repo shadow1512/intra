@@ -152,7 +152,7 @@ class UserController extends Controller
                         ->get();
 
                     foreach($deps[$rdep->id] as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at is NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples dp LEFT JOIN users ON (users.id=dp.people_id) WHERE dp.deleted_at is NULL AND users.deleted_at IS NULL AND dp.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%' AND deleted_at IS NULL) GROUP BY dp.dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -165,7 +165,7 @@ class UserController extends Controller
 
                 if(count($deps)) {
                     foreach ($deps as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples dp LEFT JOIN users ON (users.id=dp.people_id) WHERE dp.deleted_at is NULL AND users.deleted_at IS NULL AND dp.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%' AND deleted_at IS NULL) GROUP BY dp.dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -179,7 +179,7 @@ class UserController extends Controller
                         ->get();
 
                     foreach ($deps as $dep) {
-                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                        $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples dp LEFT JOIN users ON (users.id=dp.people_id) WHERE dp.deleted_at is NULL AND users.deleted_at IS NULL AND dp.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%' AND deleted_at IS NULL) GROUP BY dp.dep_id) t");
                         $counts[$dep->id] = $nums->sum;
                     }
                 }
@@ -192,7 +192,7 @@ class UserController extends Controller
                 ->get();
 
             foreach($deps as $dep) {
-                $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples WHERE deleted_at IS NULL AND dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%') GROUP BY dep_id) t");
+                $nums = DB::selectOne("SELECT SUM(t.numpeople) as sum FROM (SELECT COUNT(DISTINCT people_id) as numpeople FROM deps_peoples dp LEFT JOIN users ON (users.id=dp.people_id) WHERE dp.deleted_at is NULL AND users.deleted_at IS NULL AND dp.dep_id IN (SELECT id FROM deps WHERE parent_id LIKE '" . $dep->parent_id . "%' AND deleted_at IS NULL) GROUP BY dp.dep_id) t");
                 $counts[$dep->id] = $nums->sum;
             }
         }

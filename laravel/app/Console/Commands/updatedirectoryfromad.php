@@ -40,7 +40,9 @@ class updatedirectoryfromad extends Command
                                     'testforprogrammers',
                                     'workstations',
                                     'отключенные',
-                                    'печать');
+                                    'печать',
+                                    'groups-storage02',
+                                    'groupsq');
 
     //Массивы для поддержания удаления подразделений или пользователей, которые могли быть удалены или перенесены
     // в служебные группы, что означает де-факто удаление, нужно хранить текущее состояние Intra-базы и сравнивать с тем,
@@ -95,7 +97,6 @@ class updatedirectoryfromad extends Command
 
         $index  =   0;
         foreach($deps as $dep_inner) {
-            echo $dep_inner->getName() . "\r\n";
             $dep_user   =   null;
             if(in_array(mb_strtolower($dep_inner->getName(),  "UTF-8"),   $this->fakeous)) {
                 continue;

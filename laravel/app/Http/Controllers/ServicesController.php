@@ -199,6 +199,7 @@ class ServicesController extends Controller
 
                 $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
                     ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+                    ->whereNull('deps_peoples.deleted_at')
                     ->where('users.id', '=', Auth::user()->id)->first();
 
                 $dpname =   null;

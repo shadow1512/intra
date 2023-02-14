@@ -42,7 +42,7 @@ class Technical_Request extends Model
                 $issue = $client->issue->create([
                     'project_id'        =>  110,
                     'tracker_id'        =>  6,
-                    'assigned_to_id'    =>  577,
+                    'assigned_to_id'    =>  778,
                     'subject' => $subject,
                     'description' => $description,
                     'due_date' => date("Y-m-d"),
@@ -50,6 +50,10 @@ class Technical_Request extends Model
                         [
                             'id' => 18,
                             'value' => $tr->room,
+                        ],
+                        [
+                            'id' => 14,
+                            'value' => $tr->printer,
                         ],
                     ],
                     'watcher_user_ids' => []

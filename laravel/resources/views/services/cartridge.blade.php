@@ -49,6 +49,7 @@
                     <option value="Sharp AR-5415QE:AR-168T">Sharp AR-5415QE</option>
                     <option value="Toshiba e-studio 166:T-1640E">Toshiba e-studio 166</option>
                     <option value="Canon 7161:C-EXV6">Canon 7161</option>
+                    <option value="Kyocera M2735dn:TK-1200">Kyocera M2735dn</option>
                     <option value="Kyocera TASKalfa 1800:TK-4105">Kyocera TASKalfa 1800</option>
                     <option value="Kyocera 6525:TK-475">Kyocera 6525</option>
                     <option value="Kyocera P3055dn:TK-3190">Kyocera P3055dn</option>

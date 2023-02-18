@@ -123,6 +123,7 @@ class SearchController extends Controller
                                         $res= $this->getSearchResultsByWord($word);
                                         $words_records[]    =   $res;
                                         $total_found_by_word    =   count($res);
+                                        var_dump($total_found_by_word);
                                         unset($res);
                                     }
                                 }

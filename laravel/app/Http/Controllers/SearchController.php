@@ -623,7 +623,7 @@ class SearchController extends Controller
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         $total_found_by_word = 0;
-                        var_dump(pspell_check($ict, $word));
+                        var_dump(pspell_check($dict, $word));
                         if (pspell_check($dict, $word)) {
                             echo 'a';
                             $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));

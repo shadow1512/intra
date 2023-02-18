@@ -55,7 +55,7 @@ class buildsearchindex extends Command
         $fp =   fopen("/var/www/intra/laravel/storage/app/public/dict/ru.custom.txt",   "w+");
 
         //Секция "пользователи"
-        $users = User::orderBy('lname', 'asc')->orderBy('fname',    'asc')->orderBy('mname',    'asc')
+        $users = User::withTrashed()->orderBy('lname', 'asc')->orderBy('fname',    'asc')->orderBy('mname',    'asc')
             ->leftJoin('deps_peoples', function($join) {
                 $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL');
             })

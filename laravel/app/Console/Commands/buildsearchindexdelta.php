@@ -55,8 +55,10 @@ class buildsearchindexdelta extends Command
             ->leftJoin('deps_peoples', function($join) {
                 $join->on('users.id', '=', 'deps_peoples.people_id')->whereRaw('deps_peoples.deleted_at IS NULL');
             })
-            ->select('users.*', 'deps_peoples.work_title as work_title')->get();
-
+            ->select('users.*', 'deps_peoples.work_title as work_title')->toSql();
+        
+            var_dump($users);exit();
+        
         $bar = $this->output->createProgressBar(count($users));
 
         foreach($users as $user) {

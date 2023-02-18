@@ -596,7 +596,7 @@ class SearchController extends Controller
         $allname = mb_substr($allname, 0, 100);
 
         //Орфография, опечатки
-        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_FAST);
+        $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_BAD_SPELLERS);
         //Раскладка
         $corrector = new Text_LangCorrect();
 

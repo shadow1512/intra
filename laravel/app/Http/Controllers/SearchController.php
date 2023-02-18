@@ -84,6 +84,7 @@ class SearchController extends Controller
                     ]);
                     //Если цифры или слова
                     if ($validator->fails()) {
+                        $word = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $word);//раз не email, то прочую чушь можно выбросить
                         //в начале пытаемся поработать с раскладкой, потому что она круто отрабатывает всякую чушь, которую вводят на английской раскладке, вводя русские (там могут быть знаки преминания)
                         $oldword    =   $word;
                         $word=  $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
@@ -106,7 +107,6 @@ class SearchController extends Controller
                             //Слово не нашлось в словаре
                             else {
                                 //сначала ищем как есть, вдруг, это правильно?
-                                $oldword = preg_replace("/[^0-9A-zА-яЁё]/iu", "", $oldword);
                                 $res= $this->getSearchResultsByWord($oldword);
                                 $words_records[]    =   $res;
                                 $total_found_by_word    =   count($res);
@@ -115,7 +115,7 @@ class SearchController extends Controller
                                 if(!$total_found_by_word) {
                                     //пробуем в начале советы (опечатки, если было на русском)
                                     $suggest    =   pspell_suggest($dict,   $word);
-                                    //var_dump($suggest);
+                                    var_dump($suggest);
                                     //берем только первый вариант, остальные уже не то
                                     if(count($suggest)) {
                                         $word=  $suggest[0];

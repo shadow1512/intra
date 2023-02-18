@@ -602,6 +602,7 @@ class SearchController extends Controller
 
         if(mb_strlen($allname) >= 3) {
             $allname = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $allname);
+            echo $allname.  "-allname\r\n";
             $words = explode(" ", $allname);
             //итоговый массив со взвешенным списком
             $words_records = array();
@@ -614,6 +615,7 @@ class SearchController extends Controller
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                     //вот теперь можно убрать лишнее
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
+                    echo $word.  "-word\r\n";
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
@@ -621,7 +623,7 @@ class SearchController extends Controller
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         $total_found_by_word = 0;
-
+                        var_dump(pspell_check($ict, $word));
                         if (pspell_check($dict, $word)) {
                             echo 'a';
                             $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));
@@ -630,8 +632,10 @@ class SearchController extends Controller
                             unset($res);
                         } //Слово не нашлось в словаре
                         else {
+                            echo 'b'    .   "\r\n";
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"),  array("fname",  "lname",    "mname"));
+                            var_dump(count($res));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);

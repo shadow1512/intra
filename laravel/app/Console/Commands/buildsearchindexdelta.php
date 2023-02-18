@@ -341,7 +341,7 @@ class buildsearchindexdelta extends Command
                                     }
                                     $term->term = $part;
                                     $term->section = 'deps';
-                                    $term->record = $user->id;
+                                    $term->record = $dep->id;
                                     $term->partial  =   'dep';
                                     $term->save();
                                 }

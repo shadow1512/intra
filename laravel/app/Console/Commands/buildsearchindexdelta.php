@@ -63,237 +63,237 @@ class buildsearchindexdelta extends Command
             //удаляем всю информацию об этой записи, если она ранее существовала
             Terms::where('section', 'users')->where('record',    $user->id)->delete();
             //если запись пользователя не была удалена, то добавляем в Индекс
-            if(is_null($user->deleted_at)) {
-                //Имя
-                $fname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->fname);
-                $fname_res  =   array();
-                if(mb_strripos($fname,  "-",    0,  "UTF-8")    !== false) {
-                    $fnames =   explode("-",    $fname);
-                    foreach($fnames as  $part) {
-                        if(trim($part)) {
-                            $fname_res[]    =   trim($part);
-                        }
+            
+            //Имя
+            $fname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->fname);
+            $fname_res  =   array();
+            if(mb_strripos($fname,  "-",    0,  "UTF-8")    !== false) {
+                $fnames =   explode("-",    $fname);
+                foreach($fnames as  $part) {
+                    if(trim($part)) {
+                        $fname_res[]    =   trim($part);
                     }
                 }
-                else {
-                    $fname_res[]  =   trim($fname);
-                }
+            }
+            else {
+                $fname_res[]  =   trim($fname);
+            }
 
-                foreach($fname_res as $part) {
-                    if($part) {
-                        $term = new Terms();
-                        $part  =   mb_strtoupper($part, "UTF-8");
-                        $baseform = Morphy::getBaseForm($part);
-                        if($baseform && count($baseform)) {
-                            $term->baseterm = $baseform[0];
-                        }
-                        $term->term = $part;
-                        $term->section = 'users';
-                        $term->record = $user->id;
-                        $term->partial  =   'fname';
-                        $term->save();
+            foreach($fname_res as $part) {
+                if($part) {
+                    $term = new Terms();
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
+                    }
+                    $term->term = $part;
+                    $term->section = 'users';
+                    $term->record = $user->id;
+                    $term->partial  =   'fname';
+                    $term->save();
+                }
+            }
+
+
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
+
+            //Фамилия
+
+            $lname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->lname);
+            $lname_res  =   array();
+            if(mb_strripos($lname,  "-",    0,  "UTF-8")    !== false) {
+                $lnames =   explode("-",    $lname);
+                foreach($lnames as  $part) {
+                    if(trim($part)) {
+                        $lname_res[]    =   trim($part);
                     }
                 }
+            }
+            else {
+                $lname_res[]  =   trim($lname);
+            }
 
-
-                //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8"));
-                $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->fname), "UTF-8");
-                if($str) {
-                    fwrite($fp, $str    .   PHP_EOL);
+            foreach($lname_res as $part) {
+                if($part) {
+                    $term = new Terms();
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
+                    }
+                    $term->term = $part;
+                    $term->section = 'users';
+                    $term->record = $user->id;
+                    $term->partial  =   'lname';
+                    $term->save();
                 }
+            }
 
-                //Фамилия
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
 
-                $lname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->lname);
-                $lname_res  =   array();
-                if(mb_strripos($lname,  "-",    0,  "UTF-8")    !== false) {
-                    $lnames =   explode("-",    $lname);
-                    foreach($lnames as  $part) {
-                        if(trim($part)) {
-                            $lname_res[]    =   trim($part);
-                        }
+            //Отчество
+
+            $mname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->mname);
+            $mname_res  =   array();
+            if(mb_strripos($mname,  "-",    0,  "UTF-8")    !== false) {
+                $mnames =   explode("-",    $mname);
+                foreach($mnames as  $part) {
+                    if(trim($part)) {
+                        $mname_res[]    =   trim($part);
                     }
                 }
-                else {
-                    $lname_res[]  =   trim($lname);
-                }
+            }
+            else {
+                $mname_res[]  =   trim($mname);
+            }
 
-                foreach($lname_res as $part) {
-                    if($part) {
-                        $term = new Terms();
-                        $part  =   mb_strtoupper($part, "UTF-8");
-                        $baseform = Morphy::getBaseForm($part);
-                        if($baseform && count($baseform)) {
-                            $term->baseterm = $baseform[0];
-                        }
-                        $term->term = $part;
-                        $term->section = 'users';
-                        $term->record = $user->id;
-                        $term->partial  =   'lname';
-                        $term->save();
+            foreach($mname_res as $part) {
+                if($part) {
+                    $term = new Terms();
+                    $part  =   mb_strtoupper($part, "UTF-8");
+                    $baseform = Morphy::getBaseForm($part);
+                    if($baseform && count($baseform)) {
+                        $term->baseterm = $baseform[0];
                     }
-                }
-
-                //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
-                $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->lname), "UTF-8");
-                if($str) {
-                    fwrite($fp, $str    .   PHP_EOL);
-                }
-
-                //Отчество
-
-                $mname= preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $user->mname);
-                $mname_res  =   array();
-                if(mb_strripos($mname,  "-",    0,  "UTF-8")    !== false) {
-                    $mnames =   explode("-",    $mname);
-                    foreach($mnames as  $part) {
-                        if(trim($part)) {
-                            $mname_res[]    =   trim($part);
-                        }
-                    }
-                }
-                else {
-                    $mname_res[]  =   trim($mname);
-                }
-
-                foreach($mname_res as $part) {
-                    if($part) {
-                        $term = new Terms();
-                        $part  =   mb_strtoupper($part, "UTF-8");
-                        $baseform = Morphy::getBaseForm($part);
-                        if($baseform && count($baseform)) {
-                            $term->baseterm = $baseform[0];
-                        }
-                        $term->term = $part;
-                        $term->section = 'users';
-                        $term->record = $user->id;
-                        $term->partial  =   'mname';
-                        $term->save();
-                    }
-                }
-
-                //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
-                $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8");
-                if($str) {
-                    fwrite($fp, $str    .   PHP_EOL);
-                }
-
-                //Номер комнаты
-
-                if(trim($user->room)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->room, "UTF-8"));
-                    $term->term = $user->room;
+                    $term->term = $part;
                     $term->section = 'users';
                     $term->record = $user->id;
-                    $term->partial  =   'room';
+                    $term->partial  =   'mname';
                     $term->save();
                 }
+            }
 
-                //телефон
-                if(trim($user->phone)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->phone, "UTF-8"));
-                    $term->term = $user->phone;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'phone';
-                    $term->save();
-                }
+            //pspell_add_to_personal($pspell_link, mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8"));
+            $str    =   mb_strtoupper( preg_replace("/[^0-9A-zА-яЁё]/iu", "", $user->mname), "UTF-8");
+            if($str) {
+                fwrite($fp, $str    .   PHP_EOL);
+            }
 
-                //городской телефон
-                if(trim($user->city_phone)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->city_phone, "UTF-8"));
-                    $term->term = $user->city_phone;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'phone';
-                    $term->save();
-                }
+            //Номер комнаты
 
-                //мобильный телефон
-                if(trim($user->mobile_phone)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->mobile_phone, "UTF-8"));
-                    $term->term = $user->mobile_phone;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'phone';
-                    $term->save();
-                }
+            if(trim($user->room)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->room, "UTF-8"));
+                $term->term = $user->room;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'room';
+                $term->save();
+            }
 
-                //ip телефон
-                if(trim($user->ip_phone)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->ip_phone, "UTF-8"));
-                    $term->term = $user->ip_phone;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'phone';
-                    $term->save();
-                }
+            //телефон
+            if(trim($user->phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->phone, "UTF-8"));
+                $term->term = $user->phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'phone';
+                $term->save();
+            }
 
-                //email
-                if(trim($user->email)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->email, "UTF-8"));
-                    $term->term = $user->email;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'email';
-                    $term->save();
-                }
+            //городской телефон
+            if(trim($user->city_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->city_phone, "UTF-8"));
+                $term->term = $user->city_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'phone';
+                $term->save();
+            }
 
-                //email secondary
-                if(trim($user->email_secondary)) {
-                    $term = new Terms();
-                    $term->baseterm = trim(mb_strtoupper($user->email_secondary, "UTF-8"));
-                    $term->term = $user->email_secondary;
-                    $term->section = 'users';
-                    $term->record = $user->id;
-                    $term->partial  =   'email';
-                    $term->save();
-                }
+            //мобильный телефон
+            if(trim($user->mobile_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->mobile_phone, "UTF-8"));
+                $term->term = $user->mobile_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'phone';
+                $term->save();
+            }
 
-                //должность. Тут веселее, т.к. состоит из нескольких слов
-                if(trim($user->work_title)) {
-                    $words = explode(" ", $user->work_title);
-                    if(count($words)) {
-                        foreach($words as $word) {
-                            $word   =   preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $word);
-                            if(mb_strlen(trim($word), "UTF-8") >= 3) {
-                                $word_res  =   array();
-                                if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
-                                    $words =   explode("-",    $word);
-                                    foreach($words as  $part) {
-                                        if(trim($part)) {
-                                            $word_res[]    =   trim($part);
-                                        }
+            //ip телефон
+            if(trim($user->ip_phone)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->ip_phone, "UTF-8"));
+                $term->term = $user->ip_phone;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'phone';
+                $term->save();
+            }
+
+            //email
+            if(trim($user->email)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->email, "UTF-8"));
+                $term->term = $user->email;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'email';
+                $term->save();
+            }
+
+            //email secondary
+            if(trim($user->email_secondary)) {
+                $term = new Terms();
+                $term->baseterm = trim(mb_strtoupper($user->email_secondary, "UTF-8"));
+                $term->term = $user->email_secondary;
+                $term->section = 'users';
+                $term->record = $user->id;
+                $term->partial  =   'email';
+                $term->save();
+            }
+
+            //должность. Тут веселее, т.к. состоит из нескольких слов
+            if(trim($user->work_title)) {
+                $words = explode(" ", $user->work_title);
+                if(count($words)) {
+                    foreach($words as $word) {
+                        $word   =   preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $word);
+                        if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word_res  =   array();
+                            if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
+                                $words =   explode("-",    $word);
+                                foreach($words as  $part) {
+                                    if(trim($part)) {
+                                        $word_res[]    =   trim($part);
                                     }
                                 }
-                                else {
-                                    $word_res[]  =   trim($word);
-                                }
+                            }
+                            else {
+                                $word_res[]  =   trim($word);
+                            }
 
-                                foreach($word_res as $part) {
-                                    $term = new Terms();
-                                    $part  =   mb_strtoupper($part, "UTF-8");
-                                    $baseform = Morphy::getBaseForm($part);
-                                    if($baseform && count($baseform)) {
-                                        $term->baseterm = $baseform[0];
-                                    }
-                                    $term->term = $part;
-                                    $term->section = 'users';
-                                    $term->record = $user->id;
-                                    $term->partial  =   'work';
-                                    $term->save();
+                            foreach($word_res as $part) {
+                                $term = new Terms();
+                                $part  =   mb_strtoupper($part, "UTF-8");
+                                $baseform = Morphy::getBaseForm($part);
+                                if($baseform && count($baseform)) {
+                                    $term->baseterm = $baseform[0];
                                 }
+                                $term->term = $part;
+                                $term->section = 'users';
+                                $term->record = $user->id;
+                                $term->partial  =   'work';
+                                $term->save();
                             }
                         }
                     }
                 }
             }
+            
             
 
             $bar->advance();

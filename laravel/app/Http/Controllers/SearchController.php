@@ -402,7 +402,8 @@ class SearchController extends Controller
             $word_search_records = Terms::where('baseterm', 'LIKE', $word)
                 ->whereIn('section',  $sections_to_find)
                 ->whereIn('partial',  $partials_to_find)
-                ->get();
+                ->toSql();
+            var_dump($word_search_records);
 
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {

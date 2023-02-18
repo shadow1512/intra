@@ -71,7 +71,7 @@ class SearchController extends Controller
         $corrector = new Text_LangCorrect();
 
         if(mb_strlen($phrase) >= 3) {
-            $phrase = preg_replace("/[^0-9A-zА-яЁё]/iu", " ", $phrase);
+            $phrase = preg_replace("/[^0-9A-zА-яЁё\.\_\-\@]/iu", " ", $phrase);
             $words = explode(" ", $phrase);
             //итоговый массив со взвешенным списком
             $words_records = array();

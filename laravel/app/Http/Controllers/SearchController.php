@@ -381,7 +381,6 @@ class SearchController extends Controller
         
         //базовая форма. Не у всех слов есть, поэтому, если форма не нашлась, то стоит искать по исходному термину
         $word=  trim(mb_strtoupper($word, "UTF-8"));
-        echo $word. "\r\n";
         $baseform   =   null;
         $forms = Morphy::getBaseForm($word);
         if($forms   !== false) {
@@ -398,8 +397,10 @@ class SearchController extends Controller
         if(count($sections_to_find) &&  count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)
-            ->whereIn('partial',  $partials_to_find)
-            ->get();
+            ->whereIn('partial',  $partials_to_find);
+            //->get();
+            var_dump($word_search_records->toSql());
+            var_dump($word_search_records->getBindings());
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)

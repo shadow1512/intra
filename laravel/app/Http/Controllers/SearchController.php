@@ -383,7 +383,7 @@ class SearchController extends Controller
         $syns_records   =   $this->getSearchResultsBySyns(mb_strtoupper($word,  "UTF-8"));
         //синонимы закончены
         
-        //базовая форма. Не у всех фамилий есть, поэтому, если форма не нашлась, то стоит искать по исходному термину
+        //базовая форма. Не у всех слов есть, поэтому, если форма не нашлась, то стоит искать по исходному термину
         $word=  trim(mb_strtoupper($word, "UTF-8"));
         $baseform   =   null;
         $forms = Morphy::getBaseForm($word);
@@ -392,29 +392,29 @@ class SearchController extends Controller
                 $baseform = $forms[0];
             } 
         }
-        var_dump($baseform);
         //Продолжаем со словом
+        $where  =   'baseterm';
+        if(is_null($baseform)) {
+            $where= 'term';
+        }
         if(count($sections_to_find) &&  count($partials_to_find)) {
-            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
-                ->whereIn('section',  $sections_to_find)
-                ->whereIn('partial',  $partials_to_find);
-                //->get();
-            var_dump($word_search_records->toSql());
-            var_dump($word_search_records->getBindings());
-
+            $word_search_records = Terms::where($where, 'LIKE', $word)
+            ->whereIn('section',  $sections_to_find)
+            ->whereIn('partial',  $partials_to_find)
+            ->get();
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {
-            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
+            $word_search_records = Terms::where($where, 'LIKE', $word)
                 ->whereIn('section',  $sections_to_find)
                 ->get();
         }
         if(!count($sections_to_find) &&  count($partials_to_find)) {
-            $word_search_records = Terms::where('baseterm', 'LIKE', $word)
+            $word_search_records = Terms::where($where, 'LIKE', $word)
                 ->whereIn('partial',  $partials_to_find)
                 ->get();
         }
         if(!count($sections_to_find) &&  !count($partials_to_find)) {
-            $word_search_records = Terms::where('baseterm', 'LIKE', $word)->get();
+            $word_search_records = Terms::where($where, 'LIKE', $word)->get();
         }
         //var_dump(count($word_search_records));
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
@@ -600,7 +600,6 @@ class SearchController extends Controller
 
         if(mb_strlen($allname) >= 3) {
             $allname = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $allname);
-            echo $allname.  "-allname\r\n";
             $words = explode(" ", $allname);
             //итоговый массив со взвешенным списком
             $words_records = array();
@@ -613,7 +612,6 @@ class SearchController extends Controller
                     $word = $corrector->parse($word, $corrector::KEYBOARD_LAYOUT);
                     //вот теперь можно убрать лишнее
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
-                    echo $word.  "-word\r\n";
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
@@ -621,19 +619,15 @@ class SearchController extends Controller
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         $total_found_by_word = 0;
-                        var_dump(pspell_check($dict, $word));
                         if (pspell_check($dict, $word)) {
-                            echo 'a';
                             $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
                         } //Слово не нашлось в словаре
                         else {
-                            echo 'b'    .   "\r\n";
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
                             $res = $this->getSearchResultsByWord($oldword, array("users"),  array("fname",  "lname",    "mname"));
-                            var_dump(count($res));
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
@@ -645,7 +639,6 @@ class SearchController extends Controller
                                 //берем только первый вариант, остальные уже не то
                                 if (count($suggest)) {
                                     $word = $suggest[0];
-                                    //var_dump($word);
                                     $res = $this->getSearchResultsByWord($word, array("users"),  array("fname",  "lname",    "mname"));
                                     $words_records[] = $res;
                                     $total_found_by_word = count($res);

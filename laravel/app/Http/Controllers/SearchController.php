@@ -98,7 +98,6 @@ class SearchController extends Controller
 
                             //var_dump($word);
                             if(pspell_check($dict,  $word)) {
-                                //echo 'a';
                                 $res= $this->getSearchResultsByWord($word);
                                 $words_records[]    =   $res;
                                 $total_found_by_word    =   count($res);
@@ -115,7 +114,6 @@ class SearchController extends Controller
                                 if(!$total_found_by_word) {
                                     //пробуем в начале советы (опечатки, если было на русском)
                                     $suggest    =   pspell_suggest($dict,   $word);
-                                    var_dump($suggest);
                                     //берем только первый вариант, остальные уже не то
                                     if(count($suggest)) {
                                         $word=  $suggest[0];
@@ -123,7 +121,6 @@ class SearchController extends Controller
                                         $res= $this->getSearchResultsByWord($word);
                                         $words_records[]    =   $res;
                                         $total_found_by_word    =   count($res);
-                                        var_dump($total_found_by_word);
                                         unset($res);
                                     }
                                 }
@@ -385,19 +382,17 @@ class SearchController extends Controller
         //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
         $syns_records   =   $this->getSearchResultsBySyns(mb_strtoupper($word,  "UTF-8"));
         //синонимы закончены
-
-        $forms = Morphy::getBaseForm(trim(mb_strtoupper($word, "UTF-8")));
+        
+        //базовая форма. Не у всех фамилий есть, поэтому, если форма не нашлась, то стоит искать по исходному термину
+        $word=  trim(mb_strtoupper($word, "UTF-8"));
+        $baseform   =   null;
+        $forms = Morphy::getBaseForm($word);
         if($forms   !== false) {
             if (count($forms)) {
-                $word = $forms[0];
-            } else {
-                $word = trim(mb_strtoupper($word, "UTF-8"));
-            }
+                $baseform = $forms[0];
+            } 
         }
-        else {
-            $word=  trim(mb_strtoupper($word, "UTF-8"));
-        }
-
+        var_dump($baseform);
         //Продолжаем со словом
         if(count($sections_to_find) &&  count($partials_to_find)) {
             $word_search_records = Terms::where('baseterm', 'LIKE', $word)

@@ -60,21 +60,21 @@ class SearchController extends Controller
         - если в разделе нет совпадений, то внутри раздела запускаем поиск по частям каждого слова (т.е. полученный термин обрамляется %)
         - смотрим идентификаторы записей, которые набрали наибольшее количество совпадений - их выносим наверх по взвешиванию */
         
-        $news = $users = $deps = $books = $razdels  =  $docs    =    $found_sections =   array();
-
-        $phrase = trim($request->input('phrase'));
-        $phrase = mb_substr($phrase, 0, 100);
-
         //Орфография, опечатки
         $dict   = pspell_new ( 'ru', '', '', "utf-8", PSPELL_BAD_SPELLERS);
         //Раскладка
         $corrector = new Text_LangCorrect();
-
+        
+        //найденные пользователи, департаменты, книги, документы, секции
+        $news = $users = $deps = $books = $razdels  =  $docs    =    $found_sections =   array();
+        //найденные слова без определения, кто где, но взвешенный
+        $words_records = array();
+        $phrase = trim($request->input('phrase'));
+        $phrase = mb_substr($phrase, 0, 100);
         if(mb_strlen($phrase) >= 3) {
             $phrase = preg_replace("/[^0-9A-zА-яЁё\.\_\-\@]/iu", " ", $phrase);
             $words = explode(" ", $phrase);
-            //итоговый массив со взвешенным списком
-            $words_records = array();
+            
             foreach($words as $word) {
                 $word=  trim($word);
                 if(mb_strlen($word, "UTF-8")) {
@@ -96,7 +96,6 @@ class SearchController extends Controller
                             //слово есть в словаре
                             $total_found_by_word    =   0;
 
-                            //var_dump($word);
                             if(pspell_check($dict,  $word)) {
                                 $res= $this->getSearchResultsByWord($word);
                                 $words_records[]    =   $res;
@@ -201,8 +200,6 @@ class SearchController extends Controller
                         }
                     }
                     arsort($search_result[$section]);
-
-                    //var_dump($search_result);
                     //начинаем теперь пляски с базой
                     switch ($section) {
                         case 'users':
@@ -423,14 +420,12 @@ class SearchController extends Controller
         }
         //если что-то нашли по слову
         if(count($word_search_records)) {
-            //var_dump("sorting");
             $by_razdels = array();
             //Нам интересно искать по разделам
             foreach($word_search_records as $record) {
                 $by_razdels[$record->section][] =   $record->record;
             }
 
-            //var_dump($by_razdels);
             /*Нам не наплевать, что слово может встретиться для одной записи несколько раз. Например, для сотрудника в имени и отчестве
                 (Иван Иванович) или в новости в заголовке и тексе (или в тексте несколько раз). Куда важнее по каким разным поисковым терминам
                 запись вошла в выборку. Но при прочих равных надо учитывать количество вхождений*/
@@ -438,8 +433,6 @@ class SearchController extends Controller
                 $by_razdels[$section]  =   array_count_values($records);
                 arsort($by_razdels[$section]);
             }
-
-            //var_dump($by_razdels);
 
             //если еще и синонимы были и что-то нашлось
             if(count($syns_records)) {
@@ -1279,7 +1272,9 @@ class SearchController extends Controller
                 $max_weight =   $all_found_records[$user_id];
             }
         }
-
+        
+        var_dump($max_weight);
+        var_dump($total_attrs_in_search);
         $max_user_ids   =   array();
         if($max_weight  ==   $total_attrs_in_search) {
             foreach($user_ids as $user_id) {

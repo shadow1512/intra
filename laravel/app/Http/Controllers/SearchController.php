@@ -413,7 +413,6 @@ class SearchController extends Controller
         if(!count($sections_to_find) &&  !count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)->get();
         }
-        //var_dump(count($word_search_records));
         //если у слова были синонимы, по ним что-то нашлось, а по самому слову нет - искать по подстроке не будем. Результат по слову = результат по синонимам
         if(count($syns_records) && !count($word_search_records)) {
             $word_records    =   $syns_records;
@@ -644,7 +643,6 @@ class SearchController extends Controller
                 $parsed_words ++;
             }
             
-            var_dump($parsed_words);
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
@@ -660,6 +658,7 @@ class SearchController extends Controller
                     for ($i = 0; $i < $parsed_words; $i++) {
                         if (isset($words_records[$i][$section])) {
                             foreach ($words_records[$i][$section] as $record => $total) {
+                                echo $i.    "--"    .   $record.   "--"    .   $total   .   "\r\n";
                                 if (array_key_exists($record, $search_result[$section])) {
                                     $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
                                 } else {

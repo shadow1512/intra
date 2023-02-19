@@ -628,7 +628,6 @@ class SearchController extends Controller
                             if(!$total_found_by_word) {
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest = pspell_suggest($dict, $word);
-                                //var_dump($suggest);
                                 //берем только первый вариант, остальные уже не то
                                 if (count($suggest)) {
                                     $word = $suggest[0];
@@ -644,7 +643,8 @@ class SearchController extends Controller
 
                 $parsed_words ++;
             }
-
+            
+            var_dump($parsed_words);
             $search_result = array();
             $parsed_words   =   count($words_records);
             //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов

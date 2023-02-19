@@ -637,7 +637,6 @@ class SearchController extends Controller
                                 }
                             }
                         }
-                        $parsed_words ++;
                     }
                 }
             }
@@ -649,8 +648,9 @@ class SearchController extends Controller
                 //по каждому отработанному слову проверяем найденные разделы
                 for ($i = 0; $i < $parsed_words; $i++) {
                     $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
+                    var_dump(array_keys($words_records[$i]));
                 }
-                var_dump($parsed_words);
+
                 //все уникальные найденные разделы
                 $found_sections = array_unique($found_sections);
                 var_dump($found_sections);

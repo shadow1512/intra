@@ -388,7 +388,6 @@ class SearchController extends Controller
                 $baseform = $forms[0];
             } 
         }
-        echo $baseform  .   "\r\n";
         //Продолжаем со словом
         $where  =   'baseterm';
         if(is_null($baseform)) {
@@ -398,12 +397,6 @@ class SearchController extends Controller
             $word=  $baseform;
         }
         if(count($sections_to_find) &&  count($partials_to_find)) {
-            $word_search_records = Terms::where($where, 'LIKE', $word)
-            ->whereIn('section',  $sections_to_find)
-            ->whereIn('partial',  $partials_to_find);
-            //->get();
-            var_dump($word_search_records->toSql());
-            var_dump($word_search_records->getBindings());
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)
             ->whereIn('partial',  $partials_to_find)
@@ -625,7 +618,6 @@ class SearchController extends Controller
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-                            echo $word  .   "--"    .   $total_found_by_word    .   "\r\n";
                         } //Слово не нашлось в словаре
                         else {
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
@@ -633,7 +625,6 @@ class SearchController extends Controller
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-                            echo $oldword  .   "--"    .   $total_found_by_word    .   "\r\n";
                             if(!$total_found_by_word) {
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest = pspell_suggest($dict, $word);
@@ -644,7 +635,6 @@ class SearchController extends Controller
                                     $words_records[] = $res;
                                     $total_found_by_word = count($res);
                                     unset($res);
-                                    echo $word  .   "--"    .   $total_found_by_word    .   "\r\n";
                                 }
                             }
                         }
@@ -668,7 +658,6 @@ class SearchController extends Controller
                     for ($i = 0; $i < $parsed_words; $i++) {
                         if (isset($words_records[$i][$section])) {
                             foreach ($words_records[$i][$section] as $record => $total) {
-                                echo $i.    "--"    .   $record.   "--"    .   $total   .   "\r\n";
                                 if (array_key_exists($record, $search_result[$section])) {
                                     $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
                                 } else {
@@ -682,7 +671,6 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
-                var_dump($user_ids);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;
                 foreach($user_ids as $user_id) {
@@ -1282,9 +1270,6 @@ class SearchController extends Controller
                 $max_weight =   $all_found_records[$user_id];
             }
         }
-        
-        var_dump($max_weight);
-        var_dump($total_attrs_in_search);
         $max_user_ids   =   array();
         if($max_weight  ==   $total_attrs_in_search) {
             foreach($user_ids as $user_id) {

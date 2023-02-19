@@ -373,7 +373,6 @@ class SearchController extends Controller
     }
 
     private function getSearchResultsByWord($word,  $sections_to_find   =   array(),    $partials_to_find   =   array()) {
-        //var_dump('byword_search_start');
         $word_records = array();
 
         //отдельно обработали синонимы к слову и получили все записи, отсортированные по количеству совпадений отдельным словам
@@ -382,6 +381,7 @@ class SearchController extends Controller
         
         //базовая форма. Не у всех слов есть, поэтому, если форма не нашлась, то стоит искать по исходному термину
         $word=  trim(mb_strtoupper($word, "UTF-8"));
+        echo $word. "\r\n";
         $baseform   =   null;
         $forms = Morphy::getBaseForm($word);
         if($forms   !== false) {
@@ -389,6 +389,7 @@ class SearchController extends Controller
                 $baseform = $forms[0];
             } 
         }
+        echo $baseform  .   "\r\n";
         //Продолжаем со словом
         $where  =   'baseterm';
         if(is_null($baseform)) {

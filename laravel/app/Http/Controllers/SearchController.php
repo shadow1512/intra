@@ -673,6 +673,7 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
+                var_dump($user_ids);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;
                 foreach($user_ids as $user_id) {
@@ -986,7 +987,6 @@ class SearchController extends Controller
                 }
 
                 $user_ids = array_keys($search_result['users']);
-                var_dump($user_ids);
                 //Убираем лишние результаты поиска по более, чем одному слову
                 $max_weight =   0;
                 foreach($user_ids as $user_id) {

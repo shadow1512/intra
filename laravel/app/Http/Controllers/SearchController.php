@@ -606,7 +606,6 @@ class SearchController extends Controller
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
-                        echo $word. "\r\n";
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
@@ -617,6 +616,7 @@ class SearchController extends Controller
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
+                            echo $word  .   "--"    .   $total_found_by_word    .   "\r\n";
                         } //Слово не нашлось в словаре
                         else {
                             $oldword = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $oldword);
@@ -624,7 +624,7 @@ class SearchController extends Controller
                             $words_records[] = $res;
                             $total_found_by_word = count($res);
                             unset($res);
-
+                            echo $oldword  .   "--"    .   $total_found_by_word    .   "\r\n";
                             if(!$total_found_by_word) {
                                 //пробуем в начале советы (опечатки, если было на русском)
                                 $suggest = pspell_suggest($dict, $word);
@@ -635,6 +635,7 @@ class SearchController extends Controller
                                     $words_records[] = $res;
                                     $total_found_by_word = count($res);
                                     unset($res);
+                                    echo $word  .   "--"    .   $total_found_by_word    .   "\r\n";
                                 }
                             }
                         }

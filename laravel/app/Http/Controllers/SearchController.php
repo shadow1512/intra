@@ -394,6 +394,9 @@ class SearchController extends Controller
         if(is_null($baseform)) {
             $where= 'term';
         }
+        else {
+            $word=  $baseform;
+        }
         if(count($sections_to_find) &&  count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)

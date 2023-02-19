@@ -637,10 +637,9 @@ class SearchController extends Controller
                                 }
                             }
                         }
+                        $parsed_words ++;
                     }
                 }
-
-                $parsed_words ++;
             }
             
             $search_result = array();

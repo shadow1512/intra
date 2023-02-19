@@ -606,6 +606,7 @@ class SearchController extends Controller
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
                     //с цифрами ничего делать не надо
                     if (mb_strlen($word) >= 3) {
+                        echo $word. "\r\n";
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
@@ -648,12 +649,10 @@ class SearchController extends Controller
                 //по каждому отработанному слову проверяем найденные разделы
                 for ($i = 0; $i < $parsed_words; $i++) {
                     $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
-                    var_dump(array_keys($words_records[$i]));
                 }
 
                 //все уникальные найденные разделы
                 $found_sections = array_unique($found_sections);
-                var_dump($found_sections);
                 foreach ($found_sections as $section) {
                     $search_result[$section] = array();
                     for ($i = 0; $i < $parsed_words; $i++) {

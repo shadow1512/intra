@@ -651,8 +651,10 @@ class SearchController extends Controller
                 for ($i = 0; $i < $parsed_words; $i++) {
                     $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
                 }
+                var_dump($parsed_words);
                 //все уникальные найденные разделы
                 $found_sections = array_unique($found_sections);
+                var_dump($found_sections);
                 foreach ($found_sections as $section) {
                     $search_result[$section] = array();
                     for ($i = 0; $i < $parsed_words; $i++) {

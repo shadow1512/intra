@@ -403,7 +403,7 @@ class SearchController extends Controller
             var_dump($word_search_records->getBindings());
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)
-            ->whereIn('partial',  $partials_to_find);
+            ->whereIn('partial',  $partials_to_find)
             ->get();
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {

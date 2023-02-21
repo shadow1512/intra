@@ -14,7 +14,7 @@
             <div class="field">
                 <label for="printer" class="lbl">Выберите модель принтера из списка:</label>
                 <select id="printer" name="printer" class="form-control">
-                    <option value="0" selected="selected">Выберите принтер</option>
+                    <option value="" selected="selected">Выберите принтер</option>
                     <option value="Другой">Другой</option>
                     <option value="Canon 7161:C-EXV6">Canon 7161</option>
                     <option value="Canon FC-128:E-16 / E-30">Canon FC-128</option>

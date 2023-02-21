@@ -179,6 +179,7 @@ class ServicesController extends Controller
             $validator = Validator::make($request->all(), [
                 'roomnum'               => 'required|max:10',
                 'user_comment'          =>  'required|max:4096',
+                'printer'               =>  'required',
             ],  $messages);
         }
         if($trequest  ==  "teh") {

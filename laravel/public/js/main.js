@@ -121,6 +121,7 @@ $(document).on("submit", "#login_form", function(ev) {
 function popUp(button, window, callback) {
     $(document).on('click', button, function(event) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        $(window).addClass('__transition');
         $(window).removeClass('__vis');
         $(window).addClass('__vis');
         $('body').css('overflow', 'hidden');
@@ -648,6 +649,7 @@ function openIpModal(button, window) {
   $(button).on('click', function(event) {
     if (!localStorage.getItem('ip-modal_not-show')) {
       event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+      $(window).addClass('__transition');
       $(window).removeClass('__vis');
       $(window).addClass('__vis');
       $('body').css('overflow', 'hidden');

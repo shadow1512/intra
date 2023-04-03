@@ -36,7 +36,7 @@ class Booking extends Model
             ->leftJoin('users', 'users.id', '=',    'room_bookings.user_id')
             ->whereNull('redmine_link')->where(function($query) {
             $query->where('notebook_own',   '=',    1)->orWhere('notebook_ukot',   '=',    1)->orWhere('info_internet',   '=',    1)->orWhere('info_kodeks',   '=',    1)
-                ->orWhere('software_skype',   '=',    1)->orWhere('software_skype_for_business',   '=',    1)->orWhere('type_meeting_webinar',   '=',    1)->orWhere('type_meeting_other',   '=',    1)
+                ->orWhere('software_skype',   '=',    1)    ->orWhere('software_ukotman',   '=',    1)->orWhere('software_skype_for_business',   '=',    1)->orWhere('type_meeting_webinar',   '=',    1)->orWhere('type_meeting_other',   '=',    1)
                 ->orWhereNotNull('notes');
         })->get();
 
@@ -69,6 +69,9 @@ class Booking extends Model
             if($tr->software_skype) {
                 $description    .=  "Skype\r\n";
             }
+            if($tr->software_ukotman) {
+				$description    .=  "Требуется присутствие специалисто УКОТ на мероприятии\r\n";
+			}
             if($tr->software_skype_for_business) {
                 $description    .=  "Skype for Business\r\n";
             }

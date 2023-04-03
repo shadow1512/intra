@@ -61,7 +61,7 @@
       @endif
     </div>
 
-    <div class="field __margin-top_l">
+    <!--<div class="field __margin-top_l">
       <div class="field_half">
         <div class="form-check form-check-inline">
           <label class="lbl">Компьютер:</label>
@@ -80,25 +80,27 @@
           <label class="lbl form-check-label" for="check4_info_change">Доступ к локальным БД Кодекс</label>
         </div>
       </div>
-    </div>
+    </div>-->
     <div class="field">
-      <label class="lbl">Используемое ПО:</label>
-      <div class="field_half">
+      <!--<label class="lbl">Используемое ПО:</label>-->
+      <div class="">
         <div class="form-check form-check-inline">
-          <input type="checkbox" class="form-check-input ich" id="check5_software_change" name="software_skype_change" value="1" @if($booking->software_skype) checked="checked" @endif>
+        	<input type="checkbox" class="form-check-input ich" id="check9_software_change" name="software_ukotman_change" value="1" @if($booking->software_ukotman) checked="checked" @endif>
+		  <label class="lbl form-check-label" for="check9_software_change">Требуется присутствие специалисто УКОТ на&nbsp;мероприятии</label>
+          <!--<input type="checkbox" class="form-check-input ich" id="check5_software_change" name="software_skype_change" value="1" @if($booking->software_skype) checked="checked" @endif>
           <label class="lbl form-check-label" for="check5_software_change">Skype</label>
           <input type="checkbox" class="form-check-input ich" id="check6_software_change" name="software_skype_for_business_change" value="1" @if($booking->software_skype_for_business) checked="checked" @endif>
-          <label class="lbl form-check-label" for="check6_software_change">Skype for Business</label>
+          <label class="lbl form-check-label" for="check6_software_change">Skype for Business</label>-->
         </div>
       </div>
-      <div class="field_half">
+     <!--<div class="field_half">
         <div class="form-check form-check-inline">
           <input type="checkbox" class="form-check-input ich" id="check7_type_meeting_change" name="type_meeting_webinar_change" value="1" @if($booking->type_meeting_webinar) checked="checked" @endif>
           <label class="lbl form-check-label" for="check7_type_meeting_change">Вебинар</label>
           <input type="checkbox" class="form-check-input ich" id="check8_type_meeting_change" name="type_meeting_other_change" value="1" @if($booking->type_meeting_other) checked="checked" @endif>
           <label class="lbl form-check-label" for="check8_type_meeting_change">Прочее</label>
         </div>
-      </div>
+      </div>-->
     </div>
 
     <div class="field">

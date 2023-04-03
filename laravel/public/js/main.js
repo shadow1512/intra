@@ -20,7 +20,15 @@ $('select').on('change', function(event) {
 
 // checkbox for ukot room
 
-$("#check9_software, #check9_software_change").click(function() {
+$("#check9_software").click(function() {
+    if($(this).is(":checked")) {
+        $(".notes_e").css("display", "block");
+    } else {
+        $(".notes_e").css("display", "none");
+    }
+});
+
+$("#check9_software_change").click(function() {
     if($(this).is(":checked")) {
         $(".notes_e").css("display", "block");
     } else {

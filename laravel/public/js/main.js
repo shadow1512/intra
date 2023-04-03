@@ -30,8 +30,10 @@ $("#check9_software").click(function() {
 
 $("#check9_software_change").click(function() {
     if($(this).is(":checked")) {
+        console.log('dfdf')
         $("#change_notes_e").css("display", "block");
     } else {
+        console.log('111')
         $("#change_notes_e").css("display", "none");
     }
 });

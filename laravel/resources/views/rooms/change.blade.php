@@ -86,7 +86,7 @@
       <div class="">
         <div class="form-check form-check-inline">
         	<input type="checkbox" class="form-check-input ich" id="check9_software_change" name="software_ukotman_change" value="1" @if($booking->software_ukotman) checked="checked" @endif>
-		  <label class="lbl form-check-label" for="check9_software_change">Требуется присутствие специалисто УКОТ на&nbsp;мероприятии</label>
+		  <label class="lbl form-check-label" for="check9_software_change">Требуется присутствие специалиста УКОТ на&nbsp;мероприятии</label>
           <!--<input type="checkbox" class="form-check-input ich" id="check5_software_change" name="software_skype_change" value="1" @if($booking->software_skype) checked="checked" @endif>
           <label class="lbl form-check-label" for="check5_software_change">Skype</label>
           <input type="checkbox" class="form-check-input ich" id="check6_software_change" name="software_skype_for_business_change" value="1" @if($booking->software_skype_for_business) checked="checked" @endif>

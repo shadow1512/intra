@@ -27,6 +27,12 @@ $(document).on("click", "#submit_room_change_form", function(ev) {
 
 $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     $("div.error").html("").hide();
+    if ($("#check9_software").attr('checked')) {
+        $(".notes_e").show();
+    }
+    else {
+        $(".notes_e").hide();
+    }
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     var url = $(this).attr("action");
     var form = $(this);

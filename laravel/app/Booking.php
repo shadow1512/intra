@@ -70,7 +70,7 @@ class Booking extends Model
                 $description    .=  "Skype\r\n";
             }
             if($tr->software_ukotman) {
-				$description    .=  "Требуется присутствие специалисто УКОТ на мероприятии\r\n";
+				$description    .=  "Требуется присутствие специалиста УКОТ на мероприятии\r\n";
 			}
             if($tr->software_skype_for_business) {
                 $description    .=  "Skype for Business\r\n";

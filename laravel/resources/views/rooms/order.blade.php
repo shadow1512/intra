@@ -186,7 +186,7 @@
                 <div>
         			<div class="form-check form-check-inline">
         			<input type="checkbox" class="form-check-input ich" id="check9_software" name="software_ukotman" value="1">
-					<label class="lbl form-check-label" for="check9_software">Требуется присутствие специалисто УКОТ на&nbsp;мероприятии</label>
+					<label class="lbl form-check-label" for="check9_software">Требуется присутствие специалиста УКОТ на&nbsp;мероприятии</label>
                     <!--<input type="checkbox" class="form-check-input ich" id="check5_software" name="software_skype" value="1">
                     <label class="lbl form-check-label" for="check5_software">Skype</label>
                     <input type="checkbox" class="form-check-input ich" id="check6_software" name="software_skype_for_business" value="1">

@@ -102,10 +102,14 @@ class RoomsController extends Controller
             $info_kodeks   =   0;
         }
 
-        $software_skype   =   $request->input('software_skype');
-        if(is_null($software_skype)) {
-            $software_skype   =   0;
+        $software_ukotman   =   $request->input('software_ukotman');
+        if(is_null($software_ukotman)) {
+            $software_ukotman   =   0;
         }
+        $software_skype   =   $request->input('software_skype');
+		if(is_null($software_skype)) {
+			$software_skype   =   0;
+		}
 
         $software_skype_for_business   =   $request->input('software_skype_for_business');
         if(is_null($software_skype_for_business)) {
@@ -129,6 +133,7 @@ class RoomsController extends Controller
                                 "input_date_booking.required"   =>  "Поле обязательно для заполнения",
                                 "input_time_start.required"     =>  "Поле обязательно для заполнения",
                                 "input_time_end.required"       =>  "Поле обязательно для заполнения",
+                                "notes.required"                =>  "Поле обязательно для заполнения",
                                 "input_time_start.date_format"  =>  "Время должно быть в формате ЧЧ:ММ",
                                 "input_time_end.date_format"    =>  "Время должно быть в формате ЧЧ:ММ",
                                 "notes.max"                     =>  "Поле не должно быть длиннее, чем 255 символов"
@@ -191,6 +196,7 @@ class RoomsController extends Controller
                     $booking->notebook_ukot     =   $notebook_ukot;
                     $booking->info_internet     =   $info_internet;
                     $booking->info_kodeks       =   $info_kodeks;
+                    $booking->software_ukotman    =   $software_ukotman;
                     $booking->software_skype    =   $software_skype;
                     $booking->software_skype_for_business    =   $software_skype_for_business;
                     $booking->type_meeting_webinar           =   $type_meeting_webinar;
@@ -261,6 +267,11 @@ class RoomsController extends Controller
         if(is_null($software_skype)) {
             $software_skype   =   0;
         }
+
+        $software_ukotman   =   $request->input('software_ukotman_change');
+		if(is_null($software_ukotman)) {
+			$software_ukotman   =   0;
+		}
 
         $software_skype_for_business   =   $request->input('software_skype_for_business_change');
         if(is_null($software_skype_for_business)) {
@@ -347,6 +358,7 @@ class RoomsController extends Controller
                     $booking->notebook_ukot =   $notebook_ukot;
                     $booking->info_internet =   $info_internet;
                     $booking->info_kodeks   =   $info_kodeks;
+                    $booking->software_ukotman                =   $software_ukotman;
                     $booking->software_skype                =   $software_skype;
                     $booking->software_skype_for_business   =   $software_skype_for_business;
                     $booking->type_meeting_webinar  =   $type_meeting_webinar;

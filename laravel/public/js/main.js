@@ -29,6 +29,7 @@ $("#check9_software").click(function() {
 });
 
 $("#check9_software_change").click(function() {
+    console.log('dfdf')
     if($(this).is(":checked")) {
         console.log('dfdf')
         $("#change_notes_e").css("display", "block");

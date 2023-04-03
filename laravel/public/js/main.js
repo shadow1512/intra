@@ -17,8 +17,14 @@ $('select').on('change', function(event) {
         $('select').trigger('chosen:updated');
     }
 });
-// eo chosen select
 
+// checkbox for ukot room
+
+if ($('#check9_software').is(':checked')){
+    $(".notes_e").css("display", "block");
+}
+
+// eo chosen select
 $("a.directory_search").on("click", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);
     $(this).addClass("__hidden");

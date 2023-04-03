@@ -34,6 +34,28 @@
 .ic_birthday {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC8AAAAxCAYAAABK+/BHAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAuIwAALiMBeKU/dgAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAASTSURBVGiB7ZldbFNlGMd/z9uND/FCBXExIaBhZxvbGX7EdkKEBIzRANEL4giiGDUxXBi/guiN0Tu5gKgYwchH3IToosaYeGHUEI3Ete7CtSvQHpRMkQACi0KCbOt5vCjM0p1z2m4tdcn+V3vf5+v3vj193rdnQomK9aaWq7ACaFKRGhEGcOXHjOt2Lbqt4Y+g2J54qjEj5kXQB4Ebc0xnBPZgareEm285USyLFOvYnTjcajB7FO7wcRkC7RjUaRvvaZ07kGtIJpNTzru1rwKbgJqAMmeMsuauVuubYpiKgu/uS60Rld3A9IIJleOEWBFutn4G6Ok5fk1myrlPEbm/mFrAMPBQxLa+LORoCjnE+pxVotJJEeAAKtysLvtjcWepqprM1PMflwAO2U+mszvx602FHAN3vieVmpUZlEPALA9zBjgLzMR7Ey4q8rmg7T7pTwPHgAa8N2ZHxLY2BPEF7rx7UTbgDf5eaIrWRWxr9nBo+FZgm4fPVB/wswhr+w/V10Vs63adJnXAdg+/dfuTyWuD+AJ3PppI9wB35k3vjtjWkx6+zwBvB+UDPaHGLG9rrj/oEf8FsOoKb7ivzba+9stW6JlvzBu7w655xcsxYlvbQF4LyHXSRZZ5gWdB5Z1RcCL1QXCF4PPamp5avHD+KT/niF3/uoo8D2ie6aQaWXa3bR3yBTE6Kq+rWhsEVwj+lyuHMvvAwYNzgwLaWurfFHRjztSfavx3fATUZakH3O9BMYXg83utCWVCLxWIIWw3bEF0vcBbIdUlhcB7e3tnCDybN61DrvkhKG7kCxtLHq1THVyJa2bmxDchrB8dpesjLQ0dhRZRjLq6NDR3gdOBsjbPNKTw3X81ZQjc3ozJ7Fi8YEH/CHw0nl6LsJMiDyIgo6Lr2loaPho3eFN6D8ijJYRdEFgXtq3P5KdkKuy6coDgO4eXxrWALPiR3aCPjSH8glFajJttfaWCA4REpTOWSPmdoL5SVTMOcIDpKvKUAV0yxgQANYp8GEs4DxcboKomlnDGA57NgzYa4PrxJAFqFN1bzAJU1USTzi7PJlCyRAwl3OkDVKPovmg8nd8xRqSqEutz3hXl8TLUA4q4EpegEEKH1wIugW8Hni5jvbLCg8cCKgUOWfgLZc4ZQvigO+msVlUT63N2UgFwcAcNkC5/YmrE1X3RPucr4IkK5EeEwwbYVYnkQK3AvRXKPTQsoU4Tuvj3DpRPKlSkElIReW5R8/wjApcOjqTTjvI+MKPKcP4S/pGMrgwvbPg2O8xRNJH+DZhzyXFzpMV6+eoTXqloPL0Z4fI1/FjEtuZctpW7VV5VTcJXSxMaPuge396dSOe/swmUgb/CtrXazx6Np15QkQdKyalovYz0Fbkh1+YPr8wTmFdaIU4HOohpErTEg0ty/xrMtUyox0bRc7njCQWfr0n4amkSvlqahK+WJuGrpUn4amlCw4/l1XaQpkfjziZ/sy4sZ7F8+H4u/wAfm2Yg+sY44gvpaO4g77HRrYz+N+T/RaoqW3MnRr3ejsWdpS48Ikavu3pcwRIYwGVvuNX6Pnf+X1RnnN+GvlMKAAAAAElFTkSuQmCC"); }
 
+.notes_e {
+  color: #0089cf;
+  font-size: .8em;
+  text-align: right;
+  z-index: 99;
+  line-height: 1.2em;
+  vertical-align: middle;
+  position: absolute;
+  right: 0;
+}
+.notes_e svg {
+  fill: #0089cf;
+  width: 16px;
+  display: inline-block;
+  vertical-align: bottom;
+}
+.__e .notes_e {
+  color: #d40808;
+}
+.__e .notes_e svg{
+  fill: #d40808;
+}
 html, body, div, span, h1, h2, h3, h4, h5, h6, p, em, img, strong, sub, sup, b, u, i, dl, dt, dd, ol, ul, li, fieldset, form, label, table, tbody, tfoot, thead, tr, th, td {
   margin: 0;
   padding: 0;

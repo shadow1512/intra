@@ -28,7 +28,7 @@ $("#check9_software").click(function() {
     }
 });
 
-$("#check9_software_change").click(function() {
+$(".software_ukotman_change").click(function() {
     if($(this).is(":checked")) {
         $("#change_notes_e").css("display", "block");
     } else {

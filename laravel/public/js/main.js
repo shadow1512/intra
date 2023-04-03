@@ -22,17 +22,17 @@ $('select').on('change', function(event) {
 
 $("#check9_software").click(function() {
     if($(this).is(":checked")) {
-        $("#room_order_form .notes_e").css("display", "block");
+        $("#order_notes_e").css("display", "block");
     } else {
-        $("#room_order_form .notes_e").css("display", "none");
+        $("#order_notes_e").css("display", "none");
     }
 });
 
 $("#check9_software_change").click(function() {
     if($(this).is(":checked")) {
-        $("#room_change_form .notes_e").css("display", "block");
+        $("#change_notes_e").css("display", "block");
     } else {
-        $("#room_change_form .notes_e").css("display", "none");
+        $("#change_notes_e").css("display", "none");
     }
 });
 

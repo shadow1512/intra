@@ -85,8 +85,8 @@
       <!--<label class="lbl">Используемое ПО:</label>-->
       <div class="">
         <div class="form-check form-check-inline">
-          <input type="checkbox" class="form-check-input ich software_ukotman_change" id="check9_software_change" name="software_ukotman_change" value="1" @if($booking->software_ukotman) checked="checked" @endif>
-		  <label class="lbl form-check-label" for="check9_software_change">Требуется присутствие специалиста УКОТ на&nbsp;мероприятии</label>
+          <input type="checkbox" class="form-check-input ich software_ukotman_change" id="check9_service_change" name="ukot_presence_change" value="1" @if($booking->service_ukot) checked="checked" @endif>
+		  <label class="lbl form-check-label" for="check9_service_change">Требуется присутствие специалиста УКОТ на&nbsp;мероприятии</label>
           <!--<input type="checkbox" class="form-check-input ich" id="check5_software_change" name="software_skype_change" value="1" @if($booking->software_skype) checked="checked" @endif>
           <label class="lbl form-check-label" for="check5_software_change">Skype</label>
           <input type="checkbox" class="form-check-input ich" id="check6_software_change" name="software_skype_for_business_change" value="1" @if($booking->software_skype_for_business) checked="checked" @endif>
@@ -104,10 +104,12 @@
     </div>
 
     <div class="field">
-    	<div class="notes_e" id="change_notes_e">
+    	@if($booking->service_ukot)
+            <div class="notes_e" id="change_notes_e">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M7.96859 1.33333C4.30992 1.33333 1.33325 4.324 1.33325 8c0 3.676 2.99067 6.6667 6.66667 6.6667 3.67598 0 6.66668-2.9907 6.66668-6.6667 0-3.676-3.0047-6.66667-6.69801-6.66667Zm.69799 9.99997H7.33325V10h1.33333v1.3333Zm0-2.66663H7.33325v-4h1.33333v4Z"/></svg>
 			Укажите требования к&nbsp;УКОТ в&nbsp;поле Примечания
-		</div>
+            </div>
+        @endif
       <label for="notes" class="lbl">Примечания:</label>
       <textarea id="notes" value="" name="notes_change" class="it">{{$booking->notes}}</textarea>
     </div>

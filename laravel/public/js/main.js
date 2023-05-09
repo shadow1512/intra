@@ -18,24 +18,6 @@ $('select').on('change', function(event) {
     }
 });
 
-// checkbox for ukot room
-
-$("#check9_software").click(function() {
-    if($(this).is(":checked")) {
-        $("#order_notes_e").css("display", "block");
-    } else {
-        $("#order_notes_e").css("display", "none");
-    }
-});
-
-$("#check9_software_change").click(function() {
-    if($(this).is(":checked")) {
-        $("#change_notes_e").css("display", "block");
-    } else {
-        $("#change_notes_e").css("display", "none");
-    }
-});
-
 // eo chosen select
 $("a.directory_search").on("click", function(ev) {
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

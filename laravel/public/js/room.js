@@ -1,3 +1,21 @@
+// checkbox for ukot room
+
+$("#check9_service").click(function() {
+    if($(this).is(":checked")) {
+        $("#order_notes_e").css("display", "block");
+    } else {
+        $("#order_notes_e").css("display", "none");
+    }
+});
+
+$("#check9_service_change").click(function() {
+    if($(this).is(":checked")) {
+        $("#change_notes_e").css("display", "block");
+    } else {
+        $("#change_notes_e").css("display", "none");
+    }
+});
+
 $(document).on("click", "#input_time_start,#input_time_end,#input_time_start_change,#input_time_end_change", function() {
    $(this).datetimepicker('toggle');
 });

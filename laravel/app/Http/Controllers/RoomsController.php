@@ -287,7 +287,12 @@ class RoomsController extends Controller
         if(is_null($type_meeting_other)) {
             $type_meeting_other   =   0;
         }
-
+        
+        $ukot_presence   =   $request->input('ukot_presence');
+        if(is_null($ukot_presence)) {
+            $ukot_presence   =   0;
+        }
+        
         $notes          = trim($request->input('notes_change'));
 
         $messages   =   array(  "input_name_change.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
@@ -313,7 +318,12 @@ class RoomsController extends Controller
             return response()->json(['error', $validator->errors()]);
         }
         else {
-
+            if($ukot_presence) {
+                if(!mb_strlen($notes,    "UTF-8")) {
+                    return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes']);
+                }
+            }
+            
             if($time_start  <   Config::get('rooms.time_start_default')) {
                 return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start_change']);
             }
@@ -362,6 +372,7 @@ class RoomsController extends Controller
                     $booking->software_skype_for_business   =   $software_skype_for_business;
                     $booking->type_meeting_webinar  =   $type_meeting_webinar;
                     $booking->type_meeting_other    =   $type_meeting_other;
+                    $booking->service_ukot          =   $ukot_presence;
                     $booking->notes =   $notes;
                     $booking->save();
 

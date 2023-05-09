@@ -54,6 +54,9 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
                 else if(msg.message  == "time end too late") {
                   $("#"+msg.field).parent().append("<div class='field_e'>Время окончания брони позже максимально позднего 19:00</div>").addClass("__e");
                 }
+                else if(msg.message  == "notes required for ukot") {
+                  $("#"+msg.field).parent().append("<div class='field_e'>Если вам нужен специалист УКОТ на мероприятии, то укажите в поле \"Примечания\" зачем именно</div>").addClass("__e");
+                }
                 else {
                   var errors  =   msg[1];
                   for(var key in errors) {

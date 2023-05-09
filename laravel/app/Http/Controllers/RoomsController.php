@@ -81,8 +81,9 @@ class RoomsController extends Controller
         $date_booking  = trim($request->input('input_date_booking'));
         $time_start    = trim($request->input('input_time_start'));
         $time_end      = trim($request->input('input_time_end'));
-
-        $notebook_own   =   $request->input('notebook_own');
+        
+        //По требованию УКОТ меняем форму, все старые отметки не нужны, нужна только одна галочка - если она есть, то нужно еще примечание
+        /*$notebook_own   =   $request->input('notebook_own');
         if(is_null($notebook_own)) {
             $notebook_own   =   0;
         }
@@ -120,8 +121,11 @@ class RoomsController extends Controller
         $type_meeting_other   =   $request->input('type_meeting_other');
         if(is_null($type_meeting_other)) {
             $type_meeting_other   =   0;
+        }*/
+        $ukot_presence   =   $request->input('ukot_presence');
+        if(is_null($ukot_presence)) {
+            $ukot_presence   =   0;
         }
-
         $notes          = trim($request->input('notes'));
 
         $messages   =   array(  "input_name.required"           =>  "Поле обязательно для заполнения",
@@ -146,6 +150,11 @@ class RoomsController extends Controller
             return response()->json(['error', $validator->errors()]);
         }
         else {
+            if($ukot_presence) {
+                if(!mb_strlen($notes,    "UTF-8")) {
+                    return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes']);
+                }
+            }
             if($time_start  <   Config::get('rooms.time_start_default')) {
                 return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start']);
             }
@@ -195,6 +204,7 @@ class RoomsController extends Controller
                     $booking->software_skype_for_business    =   $software_skype_for_business;
                     $booking->type_meeting_webinar           =   $type_meeting_webinar;
                     $booking->type_meeting_other             =   $type_meeting_other;
+                    $booking->ukot_presence                  =   $ukot_presence;
                     $booking->notes             =   $notes;
 
                     $booking->save();

@@ -205,7 +205,7 @@ class RoomsController extends Controller
                     $booking->software_skype_for_business    =   $software_skype_for_business;
                     $booking->type_meeting_webinar           =   $type_meeting_webinar;
                     $booking->type_meeting_other             =   $type_meeting_other;
-                    $booking->ukot_presence                  =   $ukot_presence;
+                    $booking->service_ukot                   =   $ukot_presence;
                     $booking->notes             =   $notes;
 
                     $booking->save();

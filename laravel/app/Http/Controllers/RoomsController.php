@@ -320,7 +320,7 @@ class RoomsController extends Controller
         else {
             if($ukot_presence) {
                 if(!mb_strlen($notes,    "UTF-8")) {
-                    return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes']);
+                    return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes_change']);
                 }
             }
             

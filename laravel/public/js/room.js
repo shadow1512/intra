@@ -1,6 +1,6 @@
 // checkbox for ukot room
 
-$("#check9_service").click(function() {
+$(document).on("click", "#check9_service", function() {
     if($(this).is(":checked")) {
         $("#order_notes_e").css("display", "block");
     } else {
@@ -8,7 +8,7 @@ $("#check9_service").click(function() {
     }
 });
 
-$("#check9_service_change").click(function() {
+$(document).on("click", "#check9_service_change", function() {
     alert('a');
     if($(this).is(":checked")) {
         alert('b');

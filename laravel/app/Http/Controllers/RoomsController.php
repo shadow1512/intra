@@ -82,8 +82,8 @@ class RoomsController extends Controller
         $time_start    = trim($request->input('input_time_start'));
         $time_end      = trim($request->input('input_time_end'));
         
-        //По требованию УКОТ меняем форму, все старые отметки не нужны, нужна только одна галочка - если она есть, то нужно еще примечание
-        /*$notebook_own   =   $request->input('notebook_own');
+        //По требованию УКОТ меняем форму, все старые отметки не нужны (убрали из формы), нужна только одна галочка - если она есть, то нужно еще примечание
+        $notebook_own   =   $request->input('notebook_own');
         if(is_null($notebook_own)) {
             $notebook_own   =   0;
         }
@@ -121,7 +121,8 @@ class RoomsController extends Controller
         $type_meeting_other   =   $request->input('type_meeting_other');
         if(is_null($type_meeting_other)) {
             $type_meeting_other   =   0;
-        }*/
+        }
+        
         $ukot_presence   =   $request->input('ukot_presence');
         if(is_null($ukot_presence)) {
             $ukot_presence   =   0;

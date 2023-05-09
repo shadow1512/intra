@@ -288,7 +288,7 @@ class RoomsController extends Controller
             $type_meeting_other   =   0;
         }
         
-        $ukot_presence   =   $request->input('ukot_presence');
+        $ukot_presence   =   $request->input('ukot_presence_change');
         if(is_null($ukot_presence)) {
             $ukot_presence   =   0;
         }

@@ -35,9 +35,7 @@ class Booking extends Model
             ->leftJoin('rooms', 'rooms.id', '=',    'room_bookings.room_id')
             ->leftJoin('users', 'users.id', '=',    'room_bookings.user_id')
             ->whereNull('redmine_link')->where(function($query) {
-            $query->where('notebook_own',   '=',    1)->orWhere('notebook_ukot',   '=',    1)->orWhere('info_internet',   '=',    1)->orWhere('info_kodeks',   '=',    1)
-                ->orWhere('software_skype',   '=',    1)    ->orWhere('software_ukotman',   '=',    1)->orWhere('software_skype_for_business',   '=',    1)->orWhere('type_meeting_webinar',   '=',    1)->orWhere('type_meeting_other',   '=',    1)
-                ->orWhereNotNull('notes');
+            $query->where('service_ukot',   '=',    1);
         })->get();
 
         foreach($trs as  $tr) {
@@ -54,32 +52,8 @@ class Booking extends Model
             $description    .=  "Время: " .   $tr->time_start  .   " - "    .   $tr->time_end   .   "\r\n";
             $description    .=  "Отмеченные потребности:\r\n";
 
-            if($tr->notebook_own) {
-                $description    .=  "Собственный ноутбук\r\n";
-            }
-            if($tr->notebook_ukot) {
-                $description    .=  "Ноутбук УКОТ\r\n";
-            }
-            if($tr->info_internet) {
-                $description    .=  "Доступ в Интернет\r\n";
-            }
-            if($tr->info_kodeks) {
-                $description    .=  "Доступ к информационным продуктам \"Кодекс\"\r\n";
-            }
-            if($tr->software_skype) {
-                $description    .=  "Skype\r\n";
-            }
-            if($tr->software_ukotman) {
-				$description    .=  "Требуется присутствие специалиста УКОТ на мероприятии\r\n";
-			}
-            if($tr->software_skype_for_business) {
-                $description    .=  "Skype for Business\r\n";
-            }
-            if($tr->type_meeting_webinar) {
-                $description    .=  "Тип мероприятия - вебинар\r\n";
-            }
-            if($tr->type_meeting_other) {
-                $description    .=  "Тип мероприятия - иной\r\n";
+            if($tr->service_ukot) {
+		$description    .=  "Требуется присутствие специалиста УКОТ на мероприятии\r\n";
             }
             if($tr->notes) {
                 $description    .=  "Комментарии организатора: "    .   $tr->notes  .   "\r\n";

@@ -9,12 +9,9 @@ $(document).on("click", "#check9_service", function() {
 });
 
 $(document).on("click", "#check9_service_change", function() {
-    alert('a');
     if($(this).is(":checked")) {
-        alert('b');
         $("#change_notes_e").css("display", "block");
     } else {
-        alert('c');
         $("#change_notes_e").css("display", "none");
     }
 });

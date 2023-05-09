@@ -104,7 +104,7 @@
     </div>
 
     <div class="field">
-            <div class="notes_e" id="change_notes_e">
+            <div class="notes_e" id="change_notes_e" @if($booking->service_ukot) style="display:block" @endif>
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M7.96859 1.33333C4.30992 1.33333 1.33325 4.324 1.33325 8c0 3.676 2.99067 6.6667 6.66667 6.6667 3.67598 0 6.66668-2.9907 6.66668-6.6667 0-3.676-3.0047-6.66667-6.69801-6.66667Zm.69799 9.99997H7.33325V10h1.33333v1.3333Zm0-2.66663H7.33325v-4h1.33333v4Z"/></svg>
 			Укажите требования к&nbsp;УКОТ в&nbsp;поле Примечания
             </div>

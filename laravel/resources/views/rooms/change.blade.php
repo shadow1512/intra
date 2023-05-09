@@ -109,7 +109,7 @@
 			Укажите требования к&nbsp;УКОТ в&nbsp;поле Примечания
             </div>
       <label for="notes" class="lbl">Примечания:</label>
-      <textarea id="notes" value="" name="notes_change" class="it">{{$booking->notes}}</textarea>
+      <textarea id="notes_change" value="" name="notes_change" class="it">{{$booking->notes}}</textarea>
     </div>
   </div>
   <div class="profile_form_submit">

@@ -90,7 +90,7 @@ class HomeController extends Controller
                 $summ   =   $bill->summ;
             }
         }
-
+        
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'       =>Cookie::get('hide_dinner'),
                                 'ditems'            =>  $items,

@@ -86,6 +86,14 @@ class ComposerServiceProvider extends ServiceProvider
                             'curbill'       =>  $bill,
                             'bills'         =>  $bills]);
         });
+        
+        View::composer('footer',    function($view) {
+            
+            $version    =   exec('git log --pretty=format:"%h" --max-count=1');
+            var_dump($version);
+            
+            $view->with([   'version'  =>  $version]);
+        });
     }
 
     /**

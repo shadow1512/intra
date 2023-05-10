@@ -92,7 +92,7 @@ class ComposerServiceProvider extends ServiceProvider
             $version    =   null;
             exec('git log --pretty=format:"%h" --max-count=1', $version);
             var_dump($version);
-            
+            $version=   "";
             $view->with([   'version'  =>  $version]);
         });
     }

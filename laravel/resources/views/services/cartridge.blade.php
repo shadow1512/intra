@@ -114,7 +114,7 @@
                 <label for="user_comment" class="lbl">Комментарии</label>
                 <textarea id="user_comment" name="user_comment" class="it" maxlength="4096"></textarea>
             </div>
-            <div class="field"><a href="#" class="btn profile_form_btn" id="submit_cartridge_change_form">Отправить заявку</a></div>
+            <div class="field"><a href="#" class="btn profile_form_btn" id="submit_cartridge_change_form" style="width:180px">Отправить заявку</a></div>
         </form>
         <div class="news_li_date">После отправки заявка поступит в сервисный отдел УКОТ и специалисты рассмотрят ее.<br/><br/>Статус вашей заявки вы сможете контролировать через <a href="/profile">ваш профиль</a></div>
         @else

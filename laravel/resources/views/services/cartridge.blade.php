@@ -73,7 +73,7 @@
                     <option value="HP DJ 6122 Черный:HP 51645AE Черный">HP DJ 6122 Черный</option>
                     <option value="HP DJ 6122 Трёхцветный:HP C6578DE Трёхцветный">HP DJ 6122 Трёхцветный</option>
                     <option value="Konica Minolta bizhub 3602P:TNP58">Konica Minolta bizhub 3602P</option>
-                    <option value="Kyocera FS-6525MFP:TK-475">FS-6525MFP</option>
+                    <option value="Kyocera FS-6525MFP:TK-475">Kyocera FS-6525MFP</option>
                     <option value="Kyocera P6235cdn: TK-5280C гол.">Kyocera P6235cdn гол.</option>
                     <option value="Kyocera P6235cdn: TK-5280K черн.">Kyocera P6235cdn черн.</option>
                     <option value="Kyocera P6235cdn: TK-5280M пурп.">Kyocera P6235cdn пурп.</option>

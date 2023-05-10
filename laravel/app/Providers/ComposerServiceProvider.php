@@ -89,9 +89,9 @@ class ComposerServiceProvider extends ServiceProvider
         
         View::composer('footer',    function($view) {
             
-            $version    =   $code   =   null;
-            exec('git log --pretty=format:"%h" --max-count=1', $version, $code);
-            var_dump($code);
+            $version    =   null;
+            $version    =   shell_exec('git log --pretty=format:"%h" --max-count=1');
+            var_dump($version);
             $version=   "";
             $view->with([   'version'  =>  $version]);
         });

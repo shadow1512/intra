@@ -16,8 +16,8 @@
             <li class="footer_lst_i">
                 <div class="footer_lst_i_h">Консорциум</div>
             </li>
-            <li class="footer_lst_i"><a href="http://172.16.2.4:8000/teh/" class="footer_lst_i_lk">Продукты &laquo;Техэксперт&raquo;</a></li>
-            <li class="footer_lst_i"><a href="http://172.16.2.4:8000/kodeks/" class="footer_lst_i_lk">Продукты &laquo;Кодекс&raquo;</a></li>
+            <li class="footer_lst_i"><a href="http://usodemo.work.kodeks.ru:8000/teh/" class="footer_lst_i_lk">Продукты &laquo;Техэксперт&raquo;</a></li>
+            <li class="footer_lst_i"><a href="http://usodemo.work.kodeks.ru:8000/docs/" class="footer_lst_i_lk">Продукты &laquo;Кодекс&raquo;</a></li>
             <li class="footer_lst_i"><a href="http://www.kodeks.ru/about.html" class="footer_lst_i_lk">Информация о&nbsp;Консорциуме</a></li>
             <li class="footer_lst_i"><a href="http://www.kodeks.ru/contacts.html" class="footer_lst_i_lk">Контактная информация</a></li>
             <li class="footer_lst_i"><a href="http://oldintra.kodeks.ru/img/stuff" class="footer_lst_i_lk">Корпоративный стиль</a></li>
@@ -39,7 +39,7 @@
         <div class="footer_copyright">
             <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2023, version=2.1.0, rev=
                 @php
-                    echo exec('git log --pretty=format:"%h" --max-count=1');
+                    echo exec('git rev-parse HEAD');
                 @endphp
             </div>
             <div class="footer_copyright_tx __margin-top_s">Исключительные авторские и&nbsp;смежные права принадлежат АО&nbsp;&laquo;Кодекс&raquo;.</div>

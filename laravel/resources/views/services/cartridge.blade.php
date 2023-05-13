@@ -77,7 +77,7 @@
 <option value="Kyocera P6235cdn:TK-5280Y Желтый">Kyocera P6235cdn Желтый</option>
 <option value="Kyocera P6235cdn:TK-5280M Пурпурный">Kyocera P6235cdn Пурпурный</option>
 <option value="Kyocera P3045dn:TK-3160">Kyocera P3045dn</option>
-<option selected="selected" value="Kyocera P3055dn:TK-3190">Kyocera P3055dn</option>
+<option value="Kyocera P3055dn:TK-3190">Kyocera P3055dn</option>
 <option value="Kyocera P3060dn:TK-3190">Kyocera P3060dn</option>
 <option value="Kyocera P3155dn:TK-3160">Kyocera P3155dn</option>
 <option value="Kyocera P5021:TK-5230 K Черный">Kyocera P5021 Черный</option>

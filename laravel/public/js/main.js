@@ -141,7 +141,7 @@ function popUp(button, window, callback) {
     });
 
     window.onmousedown = function(event) {
-        if (event.target == window) {
+        if (event.target !== window) {
             $(this).removeClass('__vis');
             $('body').css('overflow', 'auto');
         }

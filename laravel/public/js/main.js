@@ -137,9 +137,8 @@ function popUp(button, window, callback) {
     });
 
 
-    $('.overlay.__transition').on('click', function(event) {
-        $('.overlay').removeClass('__vis');
-        $(window).removeClass('__vis');
+    $(document).on('click', window, function(event) {
+        $(this).removeClass('__vis');
         $('body').css('overflow', 'auto');
     });
 

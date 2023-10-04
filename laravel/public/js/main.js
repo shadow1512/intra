@@ -135,17 +135,16 @@ function popUp(button, window, callback) {
         $(this).parents(window).removeClass('__vis');
         $('body').css('overflow', 'auto');
     });
-    $(document).on('click', window, function(event) {
-        $(this).removeClass('__vis');
-        $('body').css('overflow', 'auto');
-    });
+    if (window == ".__js-modal-order") {
 
-    window.onmousedown = function(event) {
-        if (event.target !== window) {
+    }
+    else {
+        $(document).on('click', window, function(event) {
             $(this).removeClass('__vis');
             $('body').css('overflow', 'auto');
-        }
+        });
     }
+
     $(document).on('click', '.modal-cnt', function(event) {
         event.stopPropagation();
     });

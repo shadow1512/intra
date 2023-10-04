@@ -138,8 +138,8 @@ function popUp(button, window, callback) {
 
 
     $('.overlay').on('click', function(event) {
-        $(this).removeClass('__vis');
-        $(window).removeClass('__vis');
+        $(this).fadeOut();
+        $(window).fadeOut();
         $('body').css('overflow', 'auto');
     });
 

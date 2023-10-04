@@ -122,9 +122,8 @@ function popUp(button, window, callback) {
     $(document).on('click', button, function(event) {
         event.preventDefault ? event.preventDefault() : (event.returnValue = false);
         $(window).addClass('__transition');
-        $('.overlay').fadeOut();
-        $(window).fadeOut();
-        $(window).fadeIn();
+        $(window).removeClass('__vis');
+        $(window).addClass('__vis');
         $('body').css('overflow', 'hidden');
         if (callback) {
             callback($(this), window);
@@ -139,8 +138,8 @@ function popUp(button, window, callback) {
 
 
     $('.overlay').on('click', function(event) {
-        $(this).fadeOut();
-        $(window).fadeOut();
+        $('.overlay').removeClass('__vis');
+        $(window).removeClass('__vis');
         $('body').css('overflow', 'auto');
     });
 

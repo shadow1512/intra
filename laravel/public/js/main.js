@@ -137,7 +137,7 @@ function popUp(button, window, callback) {
     });
 
 
-    $('.__js-modal-order').on('click', window, function(event) {
+    $('.__js-modal-order').on('click', function(event) {
         $(this).removeClass('__vis');
         $('body').css('overflow', 'auto');
     });

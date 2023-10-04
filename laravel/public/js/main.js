@@ -136,8 +136,10 @@ function popUp(button, window, callback) {
         $('body').css('overflow', 'auto');
     });
     $(document).on('click', window, function(event) {
-        $(this).removeClass('__vis');
-        $('body').css('overflow', 'auto');
+        if ($(this).mousedown()) {
+            $(this).removeClass('__vis');
+            $('body').css('overflow', 'auto');
+        }
     });
     $(document).on('click', '.modal-cnt', function(event) {
         event.stopPropagation();

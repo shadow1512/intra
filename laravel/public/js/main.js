@@ -119,60 +119,33 @@ $(document).on("submit", "#login_form", function(ev) {
 
 //modal window
 function popUp(button, window, callback) {
+    $(document).on('click', button, function(event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        $(window).addClass('__transition');
+        $(window).removeClass('__vis');
+        $(window).addClass('__vis');
+        $('body').css('overflow', 'hidden');
+        if (callback) {
+            callback($(this), window);
+        }
 
-    if (window == ".__js-modal-order") {
-
-        $(function(){
-
-            let modalBg = $('.__js-modal-order');
-            let modalOpen = $('.reserve_table_column_btn');
-            let modalWindow = $('.__js-modal-order');
-
-
-            modalOpen.on('click', function(){
-                modalBg.fadeIn();
-                modalWindow.fadeIn();
-                $('body').css('overflow', 'hidden');
-            });
-
-            modalBg.on('click', function(){
-                modalBg.fadeOut();
-                modalWindow.fadeOut();
-                $('body').css('overflow', 'auto');
-            });
-
-        });
-
-    }
-    else {
-        $(document).on('click', button, function(event) {
-            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-            $(window).addClass('__transition');
-            $(window).removeClass('__vis');
-            $(window).addClass('__vis');
-            $('body').css('overflow', 'hidden');
-            if (callback) {
-                callback($(this), window);
-            }
-
-        });
-        $(document).on('click', '.modal-close', function(event) {
-            event.preventDefault ? event.preventDefault() : (event.returnValue = false);
-            $(this).parents(window).removeClass('__vis');
-            $('body').css('overflow', 'auto');
-        });
+    });
+    $(document).on('click', '.modal-close', function(event) {
+        event.preventDefault ? event.preventDefault() : (event.returnValue = false);
+        $(this).parents(window).removeClass('__vis');
+        $('body').css('overflow', 'auto');
+    });
 
 
-        $(document).on('click', window, function(event) {
-            $(this).removeClass('__vis');
-            $('body').css('overflow', 'auto');
-        });
+    $('.__js-modal-order').on('click', window, function(event) {
+        $(this).removeClass('__vis');
+        $('body').css('overflow', 'auto');
+    });
 
 
-        $(document).on('click', '.modal-cnt', function(event) {
-            event.stopPropagation();
-        });
-    }
+    $(document).on('click', '.modal-cnt', function(event) {
+        event.stopPropagation();
+    });
 }
 
 function setFocus(window) { setTimeout(function() { $(window).find('input')[0].focus(); }, 100) };

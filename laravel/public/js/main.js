@@ -137,13 +137,13 @@ function popUp(button, window, callback) {
     });
 
 
-    $(document).on('click', window, function(event) {
+    $(document).on('mousedown', window, function(event) {
         $(this).removeClass('__vis');
         $('body').css('overflow', 'auto');
     });
 
 
-    $(document).on('click', '.modal-cnt', function(event) {
+    $(document).on('mousedown', '.modal-cnt', function(event) {
         event.stopPropagation();
     });
 }

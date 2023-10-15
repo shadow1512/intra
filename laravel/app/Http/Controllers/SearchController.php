@@ -397,12 +397,11 @@ class SearchController extends Controller
             $word=  $baseform;
         }
         if(count($sections_to_find) &&  count($partials_to_find)) {
-            var_dump($word);
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)
-            ->whereIn('partial',  $partials_to_find);
-            //->get();
-            $sql = str_replace_array('?', $word_search_records->getBindings(), $word_search_records->toSql()); dd($sql);
+            ->whereIn('partial',  $partials_to_find)
+            ->get();
+            //$sql = str_replace_array('?', $word_search_records->getBindings(), $word_search_records->toSql()); dd($sql);
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)
@@ -726,16 +725,12 @@ class SearchController extends Controller
                 $word = trim($word);
                 if (mb_strlen($word, "UTF-8")) {
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
-                    var_dump($word);
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
-                        $total_found_by_word = 0;
-                        
                         $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
-                        var_dump($res);
                         $words_records[] = $res;
                         $total_found_by_word = count($res);
                         unset($res);

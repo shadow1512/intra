@@ -715,19 +715,91 @@ class SearchController extends Controller
         $users_by_room  =   array();
         $user_ids   =   array();
         if($room) {
-            $room_records   =   User::where('room', '=',    $room)->orderBy("lname")->orderBy("fname")->orderBy("mname")->get();
-            /*foreach($room_records   as $record) {
-                $user_ids[] =   $record->id;
-            }
-            $room_sim_records   =   User::where('room', 'LIKE',    '%'  .   $room   .   '%')->get();
-            foreach($room_sim_records   as $record) {
-                if(!in_array($record->id,   $user_ids)) {
-                    $user_ids[] =   $record->id;
-                    $room_records->push($record);
+            $room = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $room);
+            $words = explode(" ", $room);
+            //итоговый массив со взвешенным списком
+            $words_records = array();
+            foreach ($words as $word) {
+                $word = trim($word);
+                if (mb_strlen($word, "UTF-8")) {
+                    $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
+                    if (mb_strlen($word) >= 3) {
+                        /*Если человек вводит какое-то разумное слово, то если:
+                            - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
+                            - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
+                        //слово есть в словаре
+                        $total_found_by_word = 0;
+                        
+                        $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
+                        $words_records[] = $res;
+                        $total_found_by_word = count($res);
+                        unset($res);
+                    }
                 }
-            }*/
+            }
+            
+            $search_result = array();
+            $parsed_words   =   count($words_records);
+            //Ищем по каждому разделу запись, которая вошла в выборку по максимальному количеству слов
+            if($parsed_words > 0) {
+                //по каждому отработанному слову проверяем найденные разделы
+                for ($i = 0; $i < $parsed_words; $i++) {
+                    $found_sections = array_merge($found_sections, array_keys($words_records[$i]));
+                }
 
-            $users_by_room  =   $room_records;
+                //все уникальные найденные разделы
+                $found_sections = array_unique($found_sections);
+                foreach ($found_sections as $section) {
+                    $search_result[$section] = array();
+                    for ($i = 0; $i < $parsed_words; $i++) {
+                        if (isset($words_records[$i][$section])) {
+                            foreach ($words_records[$i][$section] as $record => $total) {
+                                if (array_key_exists($record, $search_result[$section])) {
+                                    $search_result[$section][$record] = $search_result[$section][$record] + 1000000;
+                                } else {
+                                    $search_result[$section][$record] = $total;
+                                }
+                            }
+
+                        }
+                    }
+                    arsort($search_result[$section]);
+                }
+
+                $user_ids = array_keys($search_result['users']);
+                //Убираем лишние результаты поиска по более, чем одному слову
+                $max_weight =   0;
+                foreach($user_ids as $user_id) {
+                    if($search_result['users'][$user_id]    >   $max_weight) {
+                        $max_weight =   $search_result['users'][$user_id];
+                    }
+                }
+                $max_user_ids   =   array();
+                //там мы разбиваем, когда одно слово встречается в разных секциях целого и когда два слово входят в одну секцию
+                if($max_weight  <  1000000)  {
+                    $max_user_ids   =   $user_ids;
+                }
+                else {
+                    foreach($user_ids as $user_id) {
+                        if($search_result['users'][$user_id]   ==   $max_weight) {
+                            $max_user_ids[] =   $user_id;
+                        }
+                    }
+                }
+
+                $found_records = User::find($max_user_ids);
+                $assoc_records = array();
+                foreach ($found_records as $record) {
+                    $assoc_records[$record->id] = $record;
+                }
+                foreach ($user_ids as $user_id) {
+                    if(isset($assoc_records[$user_id])) {
+                        $users_by_room[] = array("record"   =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);
+                    }
+                }
+                unset($found_records);
+                unset($assoc_records);
+            }
             unset($room_records);
             unset($user_ids);
         }
@@ -1206,19 +1278,18 @@ class SearchController extends Controller
                 $all_found_records[$record->id] =   1;
             }
         }
-        $index  =   count($users_by_room);
         foreach($users_by_room as $user) {
-            if(array_key_exists($user->id,  $all_found_records)) {
-                //$all_found_records[$user->id]   =   $all_found_records[$user->id]   +   $index;
-                $all_found_records[$user->id] =   $all_found_records[$user->id]   + 1;
+            $record=    $user["record"];
+            $weight=    $user["weight"];
+            if(array_key_exists($record->id,  $all_found_records)) {
+                //$all_found_records[$record->id]   =   $all_found_records[$record->id]   +   $weight;
+                $all_found_records[$record->id] =   $all_found_records[$record->id]   + 1;
             }
             else {
-                //$all_found_records[$user->id]   =   $index;
-                $all_found_records[$user->id] =   1;
+                //$all_found_records[$record->id]   =   $weight;
+                $all_found_records[$record->id] =   1;
             }
-            $index  --;
         }
-
         $index  =   count($users_by_birthday);
         foreach($users_by_birthday as $user) {
             if(array_key_exists($user->id,  $all_found_records)) {

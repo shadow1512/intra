@@ -92,13 +92,13 @@
                 @if(isset($waiting_fields["room"]))
                     <div class="field unchecked_field">
                         <label for="input_room" class="lbl">Комната:</label>
-                        <input id="input_room" name="input_room" type="text" value="{{$waiting_fields["room"]}}" class="it" maxlength="4">
+                        <input id="input_room" name="input_room" type="text" value="{{$waiting_fields["room"]}}" class="it" maxlength="50">
                         <i class="ic-wait"></i>
                     </div>
                 @else
                     <div class="field">
                         <label for="input_room" class="lbl">Комната:</label>
-                        <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="4">
+                        <input id="input_room" name="input_room" type="text" value="{{$user->room}}" class="it" maxlength="50">
                     </div>
                 @endif
             </div>

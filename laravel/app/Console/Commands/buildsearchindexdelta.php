@@ -179,15 +179,42 @@ class buildsearchindexdelta extends Command
             }
 
             //Номер комнаты
-
+            //Изменение после переезда 15.10.2023 - теперь комната может быть из нескольких слов
             if(trim($user->room)) {
-                $term = new Terms();
-                $term->baseterm = trim(mb_strtoupper($user->room, "UTF-8"));
-                $term->term = $user->room;
-                $term->section = 'users';
-                $term->record = $user->id;
-                $term->partial  =   'room';
-                $term->save();
+                $words = explode(" ", $user->room);
+                if(count($words)) {
+                    foreach($words as $word) {
+                        $word   =   preg_replace("/[^0-9A-zА-яЁё\-]/iu", "", $word);
+                        if(mb_strlen(trim($word), "UTF-8") >= 3) {
+                            $word_res  =   array();
+                            if(mb_strripos($word,  "-",    0,  "UTF-8")    !== false) {
+                                $words =   explode("-",    $word);
+                                foreach($words as  $part) {
+                                    if(trim($part)) {
+                                        $word_res[]    =   trim($part);
+                                    }
+                                }
+                            }
+                            else {
+                                $word_res[]  =   trim($word);
+                            }
+
+                            foreach($word_res as $part) {
+                                $term = new Terms();
+                                $part  =   mb_strtoupper($part, "UTF-8");
+                                $baseform = Morphy::getBaseForm($part);
+                                if($baseform && count($baseform)) {
+                                    $term->baseterm = $baseform[0];
+                                }
+                                $term->term = $part;
+                                $term->section = 'users';
+                                $term->record = $user->id;
+                                $term->partial  =   'room';
+                                $term->save();
+                            }
+                        }
+                    }
+                }
             }
 
             //телефон

@@ -422,7 +422,6 @@ class SearchController extends Controller
         }
         //если что-то нашли по слову
         if(count($word_search_records)) {
-            var_dump(count($word_search_records));
             $by_razdels = array();
             //Нам интересно искать по разделам
             foreach($word_search_records as $record) {
@@ -731,10 +730,8 @@ class SearchController extends Controller
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
-                        var_dump($res);
                         $words_records[] = $res;
                         $total_found_by_word = count($res);
-                        var_dump($total_found_by_word);
                         unset($res);
                     }
                 }
@@ -751,7 +748,6 @@ class SearchController extends Controller
 
                 //все уникальные найденные разделы
                 $found_sections = array_unique($found_sections);
-                var_dump($found_sections);
                 foreach ($found_sections as $section) {
                     $search_result[$section] = array();
                     for ($i = 0; $i < $parsed_words; $i++) {
@@ -789,13 +785,11 @@ class SearchController extends Controller
                         }
                     }
                 }
-                var_dump($max_user_ids);
                 $found_records = User::find($max_user_ids);
                 $assoc_records = array();
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
-                var_dump($assoc_records);
                 foreach ($user_ids as $user_id) {
                     if(isset($assoc_records[$user_id])) {
                         $users_by_room[] = array("record"   =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);

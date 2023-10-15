@@ -422,6 +422,7 @@ class SearchController extends Controller
         }
         //если что-то нашли по слову
         if(count($word_search_records)) {
+            var_dump(count($word_search_records));
             $by_razdels = array();
             //Нам интересно искать по разделам
             foreach($word_search_records as $record) {
@@ -730,6 +731,7 @@ class SearchController extends Controller
                             - если он ошибся в чем-то одном, то последовательное применение обоих методов сначала в одном порядке, потом в другом, дадут результат*/
                         //слово есть в словаре
                         $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
+                        var_dump($res);
                         $words_records[] = $res;
                         $total_found_by_word = count($res);
                         var_dump($total_found_by_word);

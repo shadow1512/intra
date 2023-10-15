@@ -420,7 +420,6 @@ class SearchController extends Controller
         if(count($syns_records) && !count($word_search_records)) {
             $word_records    =   $syns_records;
         }
-        var_dump($word_search_records);
         //если что-то нашли по слову
         if(count($word_search_records)) {
             $by_razdels = array();
@@ -733,6 +732,7 @@ class SearchController extends Controller
                         $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
                         $words_records[] = $res;
                         $total_found_by_word = count($res);
+                        var_dump($total_found_by_word);
                         unset($res);
                     }
                 }

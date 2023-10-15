@@ -795,6 +795,7 @@ class SearchController extends Controller
                 foreach ($found_records as $record) {
                     $assoc_records[$record->id] = $record;
                 }
+                var_dump($assoc_records);
                 foreach ($user_ids as $user_id) {
                     if(isset($assoc_records[$user_id])) {
                         $users_by_room[] = array("record"   =>  $assoc_records[$user_id],   "weight"    =>  $search_result['users'][$user_id]);

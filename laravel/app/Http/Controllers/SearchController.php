@@ -751,6 +751,7 @@ class SearchController extends Controller
 
                 //все уникальные найденные разделы
                 $found_sections = array_unique($found_sections);
+                var_dump($found_sections);
                 foreach ($found_sections as $section) {
                     $search_result[$section] = array();
                     for ($i = 0; $i < $parsed_words; $i++) {
@@ -788,7 +789,7 @@ class SearchController extends Controller
                         }
                     }
                 }
-
+                var_dump($max_user_ids);
                 $found_records = User::find($max_user_ids);
                 $assoc_records = array();
                 foreach ($found_records as $record) {
@@ -802,7 +803,6 @@ class SearchController extends Controller
                 unset($found_records);
                 unset($assoc_records);
             }
-            unset($room_records);
             unset($user_ids);
         }
         //кусок поиска по email

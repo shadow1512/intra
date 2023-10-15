@@ -717,12 +717,14 @@ class SearchController extends Controller
         if($room) {
             $room = preg_replace("/[^0-9A-zА-яЁё]/ius", " ", $room);
             $words = explode(" ", $room);
+            var_dump($words);
             //итоговый массив со взвешенным списком
             $words_records = array();
             foreach ($words as $word) {
                 $word = trim($word);
                 if (mb_strlen($word, "UTF-8")) {
                     $word = preg_replace("/[^0-9A-zА-яЁё]/ius", "", $word);
+                    var_dump($word);
                     if (mb_strlen($word) >= 3) {
                         /*Если человек вводит какое-то разумное слово, то если:
                             - он ошибся в транслитерации и еще допустил опечатку, то маловероятно, что выйдет
@@ -731,6 +733,7 @@ class SearchController extends Controller
                         $total_found_by_word = 0;
                         
                         $res = $this->getSearchResultsByWord($word, array("users"),  array("room"));
+                        var_dump($res);
                         $words_records[] = $res;
                         $total_found_by_word = count($res);
                         unset($res);

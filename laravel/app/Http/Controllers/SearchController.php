@@ -397,10 +397,12 @@ class SearchController extends Controller
             $word=  $baseform;
         }
         if(count($sections_to_find) &&  count($partials_to_find)) {
+            var_dump($word);
             $word_search_records = Terms::where($where, 'LIKE', $word)
             ->whereIn('section',  $sections_to_find)
-            ->whereIn('partial',  $partials_to_find)
-            ->get();
+            ->whereIn('partial',  $partials_to_find);
+            //->get();
+            $sql = str_replace_array('?', $word_search_records->getBindings(), $word_search_records->toSql()); dd($sql);
         }
         if(count($sections_to_find) &&  !count($partials_to_find)) {
             $word_search_records = Terms::where($where, 'LIKE', $word)

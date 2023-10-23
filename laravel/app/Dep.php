@@ -36,7 +36,7 @@ class Dep extends Model
             $code   =   $dep->parent_id;
             while(mb_strlen($code,   "UTF-8")   >=  2) {
                 //включаем поддержку нескольких "управляющих сотрудников"
-                $guids[]    =   Dep::where('parent_id', 'LIKE', "$code")->pluck('guid');
+                $guids[]    =   Dep::where('parent_id', 'LIKE', "$code")->pluck('guid')->all();
                 $code   =   mb_substr($code,  0,  mb_strlen($code,   "UTF-8")   -   2);
             }
         }

@@ -31,11 +31,19 @@ class Dep extends Model
     public static function getModerate($id) {
 
         $dep    =   parent::findOrFail($id);
+        $guids= array();
         if(mb_strlen($dep->parent_id,   "UTF-8")    >=   2) {
             $code   =   $dep->parent_id;
             while(mb_strlen($code,   "UTF-8")   >=  2) {
                 //включаем поддержку нескольких "управляющих сотрудников"
-                $moderators   =   Users_Moderators_Rules::select("users.*")
+                $guids[]    =   Dep::where('parent_id', 'LIKE', "$code")->pluck('guid');
+                $code   =   mb_substr($code,  0,  mb_strlen($code,   "UTF-8")   -   2);
+            }
+        }
+        
+        var_dump($guids);
+        /*
+        $moderators   =   Users_Moderators_Rules::select("users.*")
                                 ->leftJoin("users", 'users_moderators_rules.user_id', '=', 'users.id')
                                 ->where('section',    '=',    'deps')
                                 ->where('record',    'LIKE',    "$code")
@@ -43,9 +51,7 @@ class Dep extends Model
                 if(count($moderators)) {
                     return $moderators;
                 }
-                $code   =   mb_substr($code,  0,  mb_strlen($code,   "UTF-8")   -   2);
-            }
-        }
+        */      
         return null;
     }
 

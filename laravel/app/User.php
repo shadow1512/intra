@@ -46,27 +46,45 @@ class User extends \TCG\Voyager\Models\User
                 $deps   =   Dep::where(function($query) use($record_ids) {
                     foreach($record_ids as $key   =>  $code) {
                         if($key ==  0) {
-                            $query->where('parent_id',  'LIKE', $code.  '%');
+                            $query->where('guid',  '=', $code);
                         }
                         else {
-                            $query->orWhere('parent_id',  'LIKE', $code.  '%');
+                            $query->orWhere('guid',  '=', $code);
                         }
                     }
                 })->get();
-
+                
                 if(count($deps)) {
-                    $dep_ids    =   array();
+                    $dep_codes    =   array();
                     foreach($deps as $dep) {
-                        $dep_ids[]  =   $dep->id;
+                        $dep_codes[]  =   $dep->parent_id;
                     }
-
-                    $users  =   Deps_Peoples::whereIn('dep_id', $dep_ids)->get();
-                    if(count($users)) {
-                        $user_ids   =   array();
-                        foreach($users as $user) {
-                            $user_ids[] =   $user->people_id;
+                    
+                    if(count($dep_codes)) {
+                        $deps   =   Dep::where(function($query) use($dep_codes) {
+                            foreach($dep_codes as $key   =>  $code) {
+                                if($key ==  0) {
+                                    $query->where('parent_id',  'LIKE', $code   .   '%');
+                                }
+                                else {
+                                    $query->orWhere('parent_id',  'LIKE', $code .   '%');
+                                }
+                            }
+                        })->get();
+                        
+                        $dep_ids    =   array();
+                        foreach($deps as $dep) {
+                            $dep_ids[]  =   $dep->id;
                         }
-                        return $query->whereIn('id', $user_ids);
+
+                        $users  =   Deps_Peoples::whereIn('dep_id', $dep_ids)->get();
+                        if(count($users)) {
+                            $user_ids   =   array();
+                            foreach($users as $user) {
+                                $user_ids[] =   $user->people_id;
+                            }
+                            return $query->whereIn('id', $user_ids);
+                        }
                     }
                 }
             }

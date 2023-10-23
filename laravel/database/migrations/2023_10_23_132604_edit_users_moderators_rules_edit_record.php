@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditUser+moderationRulesEditRecord extends Migration
+class EditUsersModeratorsRulesEditRecord extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class EditUser+moderationRulesEditRecord extends Migration
      */
     public function up()
     {
-        //
         Schema::table('users_moderators_rules', function (Blueprint $table) {
             $table->string('record', 64)->default(null)->change();
+        });
     }
 
     /**

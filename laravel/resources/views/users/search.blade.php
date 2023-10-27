@@ -96,9 +96,9 @@
                             <div class="directory_lst_i_pic"><img src="@if($contact->avatar_round){{$contact->avatar_round}} @else {{$contact->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($contact->birthday)) }}"></div>
                             <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $contact->id])}}" class="directory_lst_i_name_fio">{{ $contact->lname }} {{ $contact->fname }} {{ $contact->mname }}</a>
                                 <div class="directory_lst_i_name_spec">{{$contact->work_title}}</div>
-                                @if($contact->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                                {{--@if($contact->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
                                 @else<div class="profile_info_place __out"><span>Не в офисе</span></div>
-                                @endif
+                                @endif--}}
                                 <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                                 <div class="profile_info_place __social-day"><span>Социальный день</span></div>
                                 <div class="profile_info_place __hospital"><span>Больничный</span></div>
@@ -133,9 +133,9 @@
                         <div class="directory_lst_i_pic"><img src="@if($contact->avatar_round){{$contact->avatar_round}} @else {{$contact->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($contact->birthday)) }}"></div>
                         <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $contact->id])}}" class="directory_lst_i_name_fio">{{ $contact->lname }} {{ $contact->fname }} {{ $contact->mname }}</a>
                             <div class="directory_lst_i_name_spec">{{$contact->work_title}}</div>
-                            @if($contact->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                            {{--@if($contact->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
                             @else<div class="profile_info_place __out"><span>Не в офисе</span></div>
-                            @endif
+                            @endif--}}
                             <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                             <div class="profile_info_place __social-day"><span>Социальный день</span></div>
                             <div class="profile_info_place __hospital"><span>Больничный</span></div>
@@ -180,9 +180,9 @@
                                 <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
                                 <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
                                     <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
-                                    @if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                                    {{--@if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
                                     @else<div class="profile_info_place __out"><span>Не в офисе</span></div>
-                                    @endif
+                                    @endif--}}
                                     <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                                     <div class="profile_info_place __social-day"><span>Социальный день</span></div>
                                     <div class="profile_info_place __hospital"><span>Больничный</span></div>
@@ -225,9 +225,9 @@
                                     <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
                                     <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
                                         <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
-                                        @if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                                        {{--@if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
                                         @else<div class="profile_info_place __out"><span>Не в офисе</span></div>
-                                        @endif
+                                        @endif--}}
                                         <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                                         <div class="profile_info_place __social-day"><span>Социальный день</span></div>
                                         <div class="profile_info_place __hospital"><span>Больничный</span></div>
@@ -267,9 +267,9 @@
                                         <div class="directory_lst_i_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($user->birthday)) }}"></div>
                                         <div class="directory_lst_i_name"><a href="{{route("people.unit", ["id" =>  $user->id])}}" class="directory_lst_i_name_fio">{{ $user->lname }} {{ $user->fname }} {{ $user->mname }}</a>
                                             <div class="directory_lst_i_name_spec">{{$user->work_title}}</div>
-                                            @if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
+                                            {{--@if($user->in_office)<div class="profile_info_place __in"><span>В офисе</span></div>
                                             @else<div class="profile_info_place __out"><span>Не в офисе</span></div>
-                                            @endif
+                                            @endif--}}
                                             <!--<div class="profile_info_place __homework"><span>Удаленно из дома</span></div>
                                             <div class="profile_info_place __social-day"><span>Социальный день</span></div>
                                             <div class="profile_info_place __hospital"><span>Больничный</span></div>

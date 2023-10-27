@@ -29,7 +29,7 @@
 <!--footer-->
 @include('footer')
 <!--eo footer-->
-@include('dinner')
+<!--@include('dinner')-->
 <script src="/js/libs/jquery-3.1.0.js"></script>
 <script src="/js/libs/chosen.jquery.min.js"></script>
 <script src="/js/libs/owl.carousel.js"></script>

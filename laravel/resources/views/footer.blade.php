@@ -37,9 +37,7 @@
     </div>
     <div class="footer_bottom">
         <div class="footer_copyright">
-            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2023, version=2.1.0, rev={{$version}}
-                {{-- @php echo exec('git rev-parse HEAD'); @endphp --}}
-            </div>
+            <div class="footer_copyright_tx">&copy;&nbsp;АО&nbsp;&laquo;Кодекс&raquo;, 2019-2023, version=2.1.0, rev={{$version}} @php echo exec('git rev-parse HEAD'); @endphp</div>
             <div class="footer_copyright_tx __margin-top_s">Исключительные авторские и&nbsp;смежные права принадлежат АО&nbsp;&laquo;Кодекс&raquo;.</div>
         </div>
     </div>

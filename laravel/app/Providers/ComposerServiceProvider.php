@@ -88,7 +88,8 @@ class ComposerServiceProvider extends ServiceProvider
         });
         
         View::composer('footer',    function($view) {
-            $version    =   passthru('git log --pretty=format:"%h" --max-count=1');
+            //$version    =   passthru('git log --pretty=format:"%h" --max-count=1');
+            $version="";
             $view->with([   'version'  =>  $version]);
         });
     }

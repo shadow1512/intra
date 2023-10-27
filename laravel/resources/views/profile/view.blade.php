@@ -5,12 +5,12 @@
     <div class="profile_aside">
         <div class="profile_aside_pic"><img src="@if($user->avatar_round){{$user->avatar_round}} @else {{$user->avatar}} @endif" alt="{{$user->lname}} {{$user->fname}}" title="{{$user->lname}} {{$user->fname}}"></div><a href="{{route('profile.edit')}}" class="profile_aside_set __js-modal-profile-lk">Настройки профиля</a>
         <a href="" class="profile_aside_graph">График работы</a>
-        @if($summ   >   0)
+        {{-- @if($summ   >   0)
         <a href="" class="profile_aside_invoice __js-modal-bill-lk">
             <p class="profile_aside_invoice_t">Мой счет в столовой:</p>
             <p class="profile_aside_invoice_i">{{$summ}} ₽</p>
         </a>
-        @endif
+        @endif --}}
     </div>
     <div class="profile_info">
         <div class="profile_info_i">

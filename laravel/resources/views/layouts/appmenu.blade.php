@@ -20,7 +20,7 @@
 <!--footer-->
 @include('footer')
 <!--eo footer-->
-@include('dinner')
+{{-- @include('dinner') --}}
 <script src="{{ asset('/js/libs/jquery-3.1.0.js') }}"></script>
 <script src="{{ asset('/js/libs/chosen.jquery.min.js') }}"></script>
 <script src="{{ asset('/js/libs/owl.carousel.js') }}"></script>

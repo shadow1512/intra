@@ -45,7 +45,7 @@
                         <div class="col-md-3"><strong>Департамент</strong></div>
                     </div>
                     @foreach($users as $item)
-                        <div class="row">
+                        <div class="row" style="margin-top:10px;">
                             <div class="col-md-3">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>
                             <div class="col-md-1">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
                             <div class="col-md-1">{{ $item->age }}</div>

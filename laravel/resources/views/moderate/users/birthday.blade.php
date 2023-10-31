@@ -29,6 +29,11 @@
                     </div>
                 @endif
             </div>
+            <div class="col-md-12"><p></p></div>
+            @php
+                $months =   array("январе","феврале","марте","апреле","мае","июне","июле","августе","сентябре","октябре","ноябре","декабре");
+            @endphp
+            <div class="col-md-12"><h3>Дни рождения в {{ $months[$month-1] }}</h3></div>
             <div class="col-md-12">
                 @if (count($users))
                     @foreach($users as $item)

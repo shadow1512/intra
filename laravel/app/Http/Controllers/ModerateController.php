@@ -1055,7 +1055,7 @@ class ModerateController extends Controller
             ->get();
         
         //dd(DB::getQueryLog()); // Show results of log
-        return view('moderate.users.birthday', ['users'    =>  $users,  'mode'  =>  $mode]);
+        return view('moderate.users.birthday', ['users'    =>  $users, 'month'  =>  $month, 'mode'  =>  $mode]);
     }
     
     public function usersarchive($letter = "А")

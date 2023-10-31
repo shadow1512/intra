@@ -12,7 +12,7 @@
                 </div>
                 @if ($mode  ==  'months')
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '1'])}}">Январь</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '2'])}}">Февраль</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '3'])}}">Март</a>
@@ -26,7 +26,6 @@
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '11'])}}">Ноябрь</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '12'])}}">Декабрь</a>
                         </div>
-                        <div class="col-md-3"></div>
                     </div>
                 @endif
             </div>

@@ -7,7 +7,7 @@
                 <div class="row">
                     <div class="row">
                         <div class="col-md-9"><h3><a href="{{ route('moderate.users.start')}}">Сотрудники </a> @if (Auth::user()->role_id  ==  1)(Перейти в <a href="{{ route('moderate.users.archive.start')}}">архив</a>)@endif</h3></div>
-                        <div class="col-md-3">@if (Auth::user()->role_id  ==  1) Дни рождения@endif</div>
+                        <div class="col-md-3"><h3>@if (Auth::user()->role_id  ==  1) Дни рождения@endif</h3></div>
                     </div>
                 </div>
                 @if ($mode  ==  'letters')

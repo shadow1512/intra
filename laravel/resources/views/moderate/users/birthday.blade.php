@@ -10,7 +10,7 @@
                         <div class="col-md-3"><h3>@if (Auth::user()->role_id  ==  1) Дни рождения@endif</h3></div>
                     </div>
                 </div>
-                @if ($mode  ==  'letters')
+                @if ($mode  ==  'months')
                     <div class="row">
                         <div class="col-md-9">
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '1'])}}">Январь</a>

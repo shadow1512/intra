@@ -1048,6 +1048,7 @@ class ModerateController extends Controller
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
             ->leftjoin('deps as deps_root', 'deps_root.parent_id', '=', DB::raw('SUBSTRING(deps.parent_id, 1, 2)'))
             ->whereRaw("MONTH(birthday)=$month")
+            ->whereNull("deps_root.deleted_at")
             ->orderByRaw('DAY(birthday)', 'asc')
             ->orderBy('lname', 'asc')
             ->orderBy('fname', 'asc')

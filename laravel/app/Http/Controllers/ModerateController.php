@@ -1034,7 +1034,29 @@ class ModerateController extends Controller
         }
         return view('moderate.users.list', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
+    
+    public function usersbirthday($month = null)
+    {
+        $mode   =   'months';
+        if(is_null($month)) {
+            $month= date("n");
+        }
+        $users = User::select('users.*', 'YEAR(NOW)-YEAR(users.birthday) as age', 'deps_root.name as depname', 'deps_peoples.work_title as worktitle')
+            ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
+            ->whereNull('deps_peoples.deleted_at')
+            ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
+            ->leftjoin('deps as deps_root', function ($join) {
+                $join->on('deps_root.parent_id', '=', 'SUBSTRING(deps.parent_id, 0, 2');
+            })
+            ->whereRaw("MONTH(birthday)=$month")
+            ->orderByRaw('DAY(birthday)', 'asc')
+            ->orderBy('lname', 'asc')
+            ->orderBy('fname', 'asc')
+            ->get();
 
+        return view('moderate.users.birthday', ['users'    =>  $users,  'mode'  =>  $mode]);
+    }
+    
     public function usersarchive($letter = "А")
     {
         //DB::enableQueryLog(); // Enable query log

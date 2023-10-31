@@ -1037,6 +1037,7 @@ class ModerateController extends Controller
     
     public function usersbirthday($month = null)
     {
+        DB::enableQueryLog(); // Enable query log
         $mode   =   'months';
         if(is_null($month)) {
             $month= date("n");
@@ -1045,15 +1046,14 @@ class ModerateController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')
-            ->leftjoin('deps as deps_root', function ($join) {
-                $join->on('deps_root.parent_id', '=', DB::raw('SUBSTRING(deps.parent_id, 0, 2)'));
-            })
+            ->leftjoin('deps as deps_root', 'deps_root.parent_id', '=', DB::raw('SUBSTRING(deps.parent_id, 0, 2)'))
             ->whereRaw("MONTH(birthday)=$month")
             ->orderByRaw('DAY(birthday)', 'asc')
             ->orderBy('lname', 'asc')
             ->orderBy('fname', 'asc')
             ->get();
-
+        
+        dd(DB::getQueryLog()); // Show results of log
         return view('moderate.users.birthday', ['users'    =>  $users,  'mode'  =>  $mode]);
     }
     

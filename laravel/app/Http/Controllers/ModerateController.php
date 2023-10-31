@@ -1042,7 +1042,12 @@ class ModerateController extends Controller
         if(is_null($month)) {
             $month= date("n");
         }
-        $users = User::selectRaw('users.*, YEAR(NOW())-YEAR(users.birthday) as age, deps_root.name as depname, deps_peoples.work_title as worktitle')
+        $next_year_age  =   0;
+        if($month==13) {
+            $next_year_age= 1;
+            $month  =   1;
+        }
+        $users = User::selectRaw("users.*, YEAR(NOW())-YEAR(users.birthday) + $next_year_age as age, deps_root.name as depname, deps_peoples.work_title as worktitle")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('deps', 'deps_peoples.dep_id', '=', 'deps.id')

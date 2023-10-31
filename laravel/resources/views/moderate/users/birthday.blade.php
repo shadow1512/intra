@@ -25,6 +25,7 @@
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '10'])}}">Октябрь</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '11'])}}">Ноябрь</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '12'])}}">Декабрь</a>
+                            --><a href="{{ route('moderate.users.birthday', ['month' =>  '13'])}}">Январь след. года</a>
                         </div>
                     </div>
                 @endif

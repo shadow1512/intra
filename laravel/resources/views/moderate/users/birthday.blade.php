@@ -35,8 +35,8 @@
                     @foreach($users as $item)
                         <div class="row">
                             <div class="col-md-4">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>
-                            <div class="col-md-2">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
-                            <div class="col-md-2">{{ $item->age }}</div>
+                            <div class="col-md-1">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
+                            <div class="col-md-1">{{ $item->age }}</div>
                             <div class="col-md-3">{{ $item->worktitle }}</div>
                             <div class="col-md-3">{{ $item->depname }}</div>
                         </div>

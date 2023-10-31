@@ -36,6 +36,13 @@
             <div class="col-md-12"><h3>Дни рождения в {{ $months[$month-1] }}</h3></div>
             <div class="col-md-12">
                 @if (count($users))
+                    <div class="row">
+                        <div class="col-md-3"><strong>ФИО</strong></div>
+                        <div class="col-md-1"><strong>Дата рождения</strong></div>
+                        <div class="col-md-1"><strong>Исполняется</strong></div>
+                        <div class="col-md-4"><strong>Должность</strong></div>
+                        <div class="col-md-3"><strong>Департамент</strong></div>
+                    </div>
                     @foreach($users as $item)
                         <div class="row">
                             <div class="col-md-3">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>

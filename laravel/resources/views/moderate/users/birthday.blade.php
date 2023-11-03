@@ -45,7 +45,7 @@
                         <div class="col-md-3"><strong>Департамент</strong></div>
                     </div>
                     @foreach($users as $item)
-                        <div class="row" style="margin-top:15px;@if (!($item->age % 5)) background-color:green; @endif">
+                        <div class="row" style="margin-top:15px;@if (!($item->age % 5)) background-color:#d3ffce; @endif">
                             <div class="col-md-3">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>
                             <div class="col-md-1">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
                             <div class="col-md-1">{{ $item->age }}</div>

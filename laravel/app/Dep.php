@@ -31,7 +31,7 @@ class Dep extends Model
     public static function getModerate($id) {
 
         $dep    =   parent::find($id);
-        if(!dep) {
+        if(!$dep) {
             return null;
         }
         $guids= array();

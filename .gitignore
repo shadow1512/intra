@@ -16,3 +16,6 @@ hunspell_Russian.zip
 ru.rws
 logs/intra-access.log
 *.log
+logs/access.log.14
+logs/access.log.14.gz
+logs/zz.dat

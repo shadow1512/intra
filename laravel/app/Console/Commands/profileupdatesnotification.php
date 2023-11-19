@@ -51,7 +51,8 @@ class profileupdatesnotification extends Command
             echo $item->user_id .   "\r\n";
             $user   =   User::select("users.*", "deps_peoples.dep_id")
                 ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
-                ->where('users.id', '=', $item->user_id)->first();
+                ->where('users.id', '=', $item->user_id)
+                ->whereNull('deps_peoples.deleted_at')->first();
             echo $user->dep_id  .   "\r\n";
             if(!is_null($user->dep_id)) {
                 $moderate   =   Dep::getModerate($user->dep_id);

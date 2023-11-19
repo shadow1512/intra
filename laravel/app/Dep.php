@@ -30,7 +30,10 @@ class Dep extends Model
 
     public static function getModerate($id) {
 
-        $dep    =   parent::findOrFail($id);
+        $dep    =   parent::find($id);
+        if(!dep) {
+            return null;
+        }
         $guids= array();
         if(mb_strlen($dep->parent_id,   "UTF-8")    >=   2) {
             $code   =   $dep->parent_id;

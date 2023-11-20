@@ -26,12 +26,14 @@
             <div class="profile_form_submit">
                 <div class="h light_h __h_s __margin-bottom_l">Ожидайте подтверждения модератором
                     @php $index = 0; @endphp
+                    @if(!is_null($moderate))
                     @if(count($moderate))
                         @foreach($moderate as $moderator)
                             @if($index > 0) <span>,</span> @endif
                             (<a href="{{route('people.unit',   ["id"   =>  $moderator->id])}}">{{$moderator->lname}} {{mb_substr($moderator->fname, 0, 1, "UTF-8")}}. @if(!empty($moderator->mname)) {{mb_substr($moderator->mname, 0, 1, "UTF-8")}}.@endif</a>)
                             @php $index ++; @endphp
                         @endforeach
+                    @endif
                     @endif
                     <br /> После подтверждения новые данные профиля станут видны остальным сотрудникам.</div>
                 <a href="#" class="btn profile_form_btn close_changes_form_btn">Готово</a>

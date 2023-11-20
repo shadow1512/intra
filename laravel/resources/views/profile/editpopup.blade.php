@@ -18,12 +18,14 @@
                 <div class="field_warning">
                     Часть данных ожидает подтверждения модератором
                     @php $index = 0; @endphp
+                    @if(!is_null($moderate))
                     @if(count($moderate))
                         @foreach($moderate as $moderator)
                             @if($index > 0) <span>,</span> @endif
                             (<a href="{{route('people.unit',   ["id"   =>  $moderator->id])}}">{{$moderator->lname}} {{mb_substr($moderator->fname, 0, 1, "UTF-8")}}. @if(!empty($moderator->mname)) {{mb_substr($moderator->mname, 0, 1, "UTF-8")}}.@endif</a>)
                             @php $index ++; @endphp
                         @endforeach
+                    @endif
                     @endif
                     перед внесением в&nbsp;корпоративный профиль. После подтверждения эти данные станут видны остальным сотрудникам.
                 </div>

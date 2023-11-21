@@ -4,14 +4,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                <div class="row">
+                <div class="row hidden-print">
                     <div class="row">
                         <div class="col-md-9"><h3><a href="{{ route('moderate.users.start')}}">Сотрудники </a> @if (Auth::user()->role_id  ==  1)(Перейти в <a href="{{ route('moderate.users.archive.start')}}">архив</a>)@endif</h3></div>
                         <div class="col-md-3"><h3>@if (Auth::user()->role_id  ==  1) Дни рождения@endif</h3></div>
                     </div>
                 </div>
                 @if ($mode  ==  'months')
-                    <div class="row">
+                    <div class="row hidden-print">
                         <div class="col-md-12">
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '1'])}}">Январь</a>
                             <a href="{{ route('moderate.users.birthday', ['month' =>  '2'])}}">Февраль</a>
@@ -45,7 +45,7 @@
                         <div class="col-md-3"><strong>Департамент</strong></div>
                     </div>
                     @foreach($users as $item)
-                        <div class="row" style="margin-top:15px;@if (!($item->age % 5)) background-color:#d3ffce; @endif">
+                        <div class="row" style="margin-top:15px; @if(!($item->age % 5)) background-color:#d3ffce; @endif">
                             <div class="col-md-3">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>
                             <div class="col-md-1">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
                             <div class="col-md-1">{{ $item->age }}</div>

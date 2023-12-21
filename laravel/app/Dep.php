@@ -79,7 +79,7 @@ class Dep extends Model
             $length = mb_strlen($parent, "UTF-8");
             while ($length > 2) {
                 $parent = mb_substr($parent, 0, $length - 2);
-                $dep = parent::withTrashed()->where('parent_id', '=', $parent)->firstOrFail();
+                $dep = parent::withTrashed()->where('parent_id', '=', $parent)->first();
                 $crumbs[] = $dep;
                 $length = $length - 2;
             }

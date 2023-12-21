@@ -40,7 +40,7 @@
                     <div class="row">
                         <div class="col-xs-3"><strong>ФИО</strong></div>
                         <div class="col-xs-1"><strong>Дата рождения</strong></div>
-                        <div class="col-xs-1"><strong>Исполняется</strong></div>
+                        <div class="col-xs-1"><strong>Возраст</strong></div>
                         <div class="col-xs-4"><strong>Должность</strong></div>
                         <div class="col-xs-3"><strong>Департамент</strong></div>
                     </div>

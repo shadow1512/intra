@@ -80,7 +80,9 @@ class Dep extends Model
             while ($length > 2) {
                 $parent = mb_substr($parent, 0, $length - 2);
                 $dep = parent::withTrashed()->where('parent_id', '=', $parent)->first();
-                $crumbs[] = $dep;
+                if($dep) {
+                    $crumbs[] = $dep;
+                }
                 $length = $length - 2;
             }
         }

@@ -35,21 +35,22 @@
                 $months =   array("январе","феврале","марте","апреле","мае","июне","июле","августе","сентябре","октябре","ноябре","декабре");
             @endphp
             <div class="col-xs-12"><h3>Дни рождения в {{ $months[$month-1] }}</h3></div>
+            <div class="col-xs-12"><p></p></div>
             <div class="col-xs-12">
                 @if (count($users))
                     <div class="row">
                         <div class="col-xs-3"><strong>ФИО</strong></div>
-                        <div class="col-xs-1"><strong>Дата рождения</strong></div>
+                        <div class="col-xs-2"><strong>Дата рождения</strong></div>
                         <div class="col-xs-1"><strong>Возраст</strong></div>
-                        <div class="col-xs-4"><strong>Должность</strong></div>
+                        <div class="col-xs-3"><strong>Должность</strong></div>
                         <div class="col-xs-3"><strong>Департамент</strong></div>
                     </div>
                     @foreach($users as $item)
                         <div class="row" style="margin-top:15px; @if(!($item->age % 5)) background-color:#d3ffce; @endif">
                             <div class="col-xs-3">{{ $item->lname }} {{ $item->fname }} {{ $item->mname }}</div>
-                            <div class="col-xs-1">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
+                            <div class="col-xs-2">{{ date("d.m.Y", strtotime($item->birthday)) }}</div>
                             <div class="col-xs-1">{{ $item->age }}</div>
-                            <div class="col-xs-4">{{ $item->worktitle }}</div>
+                            <div class="col-xs-3">{{ $item->worktitle }}</div>
                             <div class="col-xs-3">{{ $item->depname }}</div>
                         </div>
                     @endforeach

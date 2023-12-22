@@ -36,11 +36,9 @@ class AdLoginController extends Controller
             $login= mb_substr($login,    5);
         }
 
-        /*$user = Adldap::getProvider('default')->search()->where('samaccountname',   '=',    'slava_u_s')->first();
-        $user->setPassword('fH24031958!');
-        $user->save();
+        $user = Adldap::getProvider('default')->search()->where('samaccountname',   '=',    'slava_u_s')->first();
         var_dump($user);
-        exit();*/
+        exit();
         if (Adldap::getProvider('default')->auth()->attempt($authlogin, $request->input('pass'))) {
             $user = Adldap::getProvider('default')->search()->where('samaccountname',   '=',    $login)->first();
             if($user) {

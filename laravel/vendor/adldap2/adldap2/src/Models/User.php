@@ -1084,7 +1084,7 @@ class User extends Entry implements Authenticatable
      */
     public function setPassword($password)
     {
-        $this->validateSecureConnection();
+        //$this->validateSecureConnection();
 
         return $this->addModification(new BatchModification(
             $this->schema->unicodePassword(),

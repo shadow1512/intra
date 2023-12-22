@@ -31,6 +31,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use DateTime;
 use Mail;
 
@@ -313,6 +314,18 @@ class ModerateController extends Controller
         $item->save();
 
         return redirect(route('moderate.dinner.list'));
+    }
+    
+    public function dinnerupdatemenu() {
+        
+    }
+    
+    public function dinnermenuform() {
+    
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
+        $reader->setReadDataOnly(TRUE);
+        $spreadsheet = $reader->load(Config::get('dinner.menu_converted_path')  .   Config::get('dinner.filename')); //Load excel sheet
+        var_dump($spreadsheet);
     }
 
     public function rooms()
@@ -1589,5 +1602,5 @@ class ModerateController extends Controller
 
     public function adminsdelete($id) {
 
-    }
+    } 
 }

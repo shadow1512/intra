@@ -24,6 +24,7 @@ use App\LibRazdel;
 use App\Gallery;
 use App\GalleryPhoto;
 use App\Dinner_slots;
+use App\Dinner_menu;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -336,12 +337,23 @@ class ModerateController extends Controller
                     TRUE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)
                     TRUE         // Should the array be indexed by cell row and cell column
                 );
-                
-                if($i==0) {
-                    var_dump($dataArray);
-                }
                 if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "меню") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]))) {
-                    
+                    $type_meal  =   "";
+                    $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
+                    for($j  =   2;  $j  <=   50; $j++) {
+                        
+                        if($dataArray[$j]["B"]) {
+                            $type_meal  =   $dataArray[$j]["B"];
+                        }
+                        if($date_menu   &&  $type_meal   &&  $dataArray[$j]["C"] &&  $dataArray[$j]["D"]) {
+                            $dm =   new Dinner_menu();
+                            $dm->date_menu      =   $date_menu;
+                            $dm->type_meals     =   $type_meal;
+                            $dm->meals          =   $dataArray[$j]["C"];
+                            $dm->price_meals    =   $dataArray[$j]["D"];
+                            $dm->save();
+                        }
+                    }
                 }
                 
             }

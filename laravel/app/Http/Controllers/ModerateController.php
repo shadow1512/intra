@@ -340,6 +340,12 @@ class ModerateController extends Controller
                 if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "меню") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]))) {
                     $type_meal  =   "";
                     $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
+                    
+                    $exist  =   Dinner_menu::where("date_menu", '=',    $date_menu)->count();
+                    if($exist) {
+                        echo $exist;
+                        Dinner_menu::where("date_menu", '=',    $date_menu)->delete();
+                    }
                     for($j  =   2;  $j  <=   50; $j++) {
                         
                         if($dataArray[$j]["B"]) {

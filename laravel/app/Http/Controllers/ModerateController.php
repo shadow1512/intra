@@ -329,7 +329,15 @@ class ModerateController extends Controller
         if($numdays >   0) {
             for ($i =   0;  $i  <   $numdays;   $i++) {
                 $sheet  =   $spreadsheet->getSheet($i);
-                echo $sheet->getTitle();
+                $numrows    =   0;
+                foreach ($sheet->getRowIterator() as $row) {
+                    $numrows    ++;
+                    $cellIterator = $row->getCellIterator();
+                    foreach ($cellIterator as $cell) {
+                        echo $numrows   .   "row<br/>";
+                        echo $cell->getValue() .    "<br/>";
+                    }
+                }
             }
         }
     }

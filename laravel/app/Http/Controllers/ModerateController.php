@@ -335,7 +335,7 @@ class ModerateController extends Controller
                     $cellIterator = $row->getCellIterator();
                     foreach ($cellIterator as $cell) {
                         echo $numrows   .   "row<br/>";
-                        echo $cell->getValue() .    "<br/>";
+                        echo $cell->getFormattedValue(); .    "<br/>";
                     }
                 }
             }

@@ -337,7 +337,10 @@ class ModerateController extends Controller
                     TRUE         // Should the array be indexed by cell row and cell column
                 );
                 
-                var_dump($dataArray);
+                if($i==0) {
+                    $date = \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]);
+                    var_dump($date);
+                }
             }
         }
     }

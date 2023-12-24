@@ -330,7 +330,7 @@ class ModerateController extends Controller
             for ($i =   0;  $i  <   $numdays;   $i++) {
                 $sheet  =   $spreadsheet->getSheet($i);
                 $dataArray = $sheet->rangeToArray(
-                    'A3:D50',     // The worksheet range that we want to retrieve
+                    'A1:D50',     // The worksheet range that we want to retrieve
                     NULL,        // Value that should be returned for empty cells
                     TRUE,        // Should formulas be calculated (the equivalent of getCalculatedValue() for each cell)
                     TRUE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)

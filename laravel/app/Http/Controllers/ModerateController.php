@@ -325,7 +325,13 @@ class ModerateController extends Controller
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(TRUE);
         $spreadsheet = $reader->load(Config::get('dinner.menu_converted_path')  .   Config::get('dinner.filename')); //Load excel sheet
-        var_dump($spreadsheet);
+        $numdays    =   $spreadsheet->getSheetCount();
+        if($numdays >   0) {
+            for ($i =   0;  $i  <   $numdays;   $i++) {
+                $sheet  =   $spreadsheet->getSheet($i);
+                echo $sheet->getTitle();
+            }
+        }
     }
 
     public function rooms()

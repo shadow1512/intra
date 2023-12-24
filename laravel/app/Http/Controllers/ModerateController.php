@@ -338,10 +338,12 @@ class ModerateController extends Controller
                 );
                 
                 if($i==0) {
-                    var_dump(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]));
-                    $date = date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]));
-                    var_dump($date);
+                    var_dump($dataArray);
                 }
+                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "меню") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]))) {
+                    
+                }
+                
             }
         }
     }

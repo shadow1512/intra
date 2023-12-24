@@ -23,6 +23,6 @@ return array (
     'time_period'           =>  '15',
     'total_accepted'        =>  15,
     'last_time'             =>  '15:00',
-    'filename'              =>  'menu.xls',
+    'filename'              =>  'menu.xlsx',
     'menu_converted_path'   =>  storage_path('app/public/dinner/'),
 );

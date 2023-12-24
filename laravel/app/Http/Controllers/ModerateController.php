@@ -339,7 +339,7 @@ class ModerateController extends Controller
                 
                 if($i==0) {
                     var_dump(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]));
-                    $date = strtotime("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]));
+                    $date = date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[4]["A"]));
                     var_dump($date);
                 }
             }

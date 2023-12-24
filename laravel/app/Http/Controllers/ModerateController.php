@@ -329,15 +329,15 @@ class ModerateController extends Controller
         if($numdays >   0) {
             for ($i =   0;  $i  <   $numdays;   $i++) {
                 $sheet  =   $spreadsheet->getSheet($i);
-                $numrows    =   0;
-                foreach ($sheet->getRowIterator() as $row) {
-                    $numrows    ++;
-                    $cellIterator = $row->getCellIterator();
-                    foreach ($cellIterator as $cell) {
-                        echo $numrows   .   "row<br/>";
-                        echo $cell->getFormattedValue() .    "<br/>";
-                    }
-                }
+                $dataArray = $sheet->rangeToArray(
+                    'A3:D50',     // The worksheet range that we want to retrieve
+                    NULL,        // Value that should be returned for empty cells
+                    TRUE,        // Should formulas be calculated (the equivalent of getCalculatedValue() for each cell)
+                    TRUE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)
+                    TRUE         // Should the array be indexed by cell row and cell column
+                );
+                
+                var_dump($dataArray);
             }
         }
     }

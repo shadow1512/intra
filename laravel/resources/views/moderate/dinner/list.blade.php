@@ -29,7 +29,7 @@
         </div>
     </div>
     <div class="row">
-        <form action="{{ route('moderate.dinner.uploadmenu') }}" method="POST" id="menu_fileupload">
+        <form action="{{ route('moderate.dinner.uploadmenu') }}" method="POST" id="menu_fileupload" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="custom-file"{{ $errors->has('menu_file') ? ' has-error' : '' }}>
                 <input type="file" class="custom-file-input" id="menu_file" name="menu_file" aria-describedby="fileHelpInline">

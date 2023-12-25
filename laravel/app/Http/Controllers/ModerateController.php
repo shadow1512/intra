@@ -320,7 +320,7 @@ class ModerateController extends Controller
     public function dinneruploadmenu(Request $request) {
         if(!is_null($request->file('menu_file'))) {
             $path = Storage::disk('public')->putFileAs(Config::get('dinner.menu_converted_path'), $request->file('menu_file'), Config::get('dinner.filename'), 'public');
-            $this->dinnermenuupdate(storage_path('app/public') . '/' . $path);
+            return $this->dinnermenuupdate(storage_path('app/public') . '/' . $path);
         }
     }
     public function dinnermenuupdate($filename) {

@@ -317,15 +317,19 @@ class ModerateController extends Controller
         return redirect(route('moderate.dinner.list'));
     }
     
-    public function dinnerupdatemenu() {
-        
+    public function dinneruploadmenu(Request $request) {
+        if(!is_null($request->file('menu_file'))) {
+            $path = Storage::disk('public')->putFileAs(Config::get('dinner.menu_converted_path'), $request->file('menu_file'), Config::get('dinner.filename'), 'public');
+            $this->dinnermenuupdate($path);
+        }
     }
-    
-    public function dinnermenuform() {
-    
+    public function dinnermenuupdate($filename) {
+        
+        $updated_positions  =   array();
+        $added_positions    =   array();
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader('Xlsx');
         $reader->setReadDataOnly(TRUE);
-        $spreadsheet = $reader->load(Config::get('dinner.menu_converted_path')  .   Config::get('dinner.filename')); //Load excel sheet
+        $spreadsheet = $reader->load($filename); //Load excel sheet
         $numdays    =   $spreadsheet->getSheetCount();
         if($numdays >   0) {
             for ($i =   0;  $i  <   $numdays;   $i++) {
@@ -343,9 +347,10 @@ class ModerateController extends Controller
                     
                     $exist  =   Dinner_menu::where("date_menu", '=',    $date_menu)->count();
                     if($exist) {
-                        echo $exist;
                         Dinner_menu::where("date_menu", '=',    $date_menu)->delete();
+                        $updated_positions[$date_menu]  =   $exist;
                     }
+                    $added_positions[$date_menu]    =   0;
                     for($j  =   2;  $j  <=   50; $j++) {
                         
                         if($dataArray[$j]["B"]) {
@@ -358,12 +363,19 @@ class ModerateController extends Controller
                             $dm->meals          =   $dataArray[$j]["C"];
                             $dm->price_meals    =   $dataArray[$j]["D"];
                             $dm->save();
+                            
+                            $added_positions[$date_menu]    =   $added_positions[$date_menu]    +   1;
                         }
                     }
                 }
                 
             }
         }
+        
+        return view('moderate.dinner.list', [   'filename'      =>  basename($filename),    
+                                                'updated'       =>  $updated_positions, 
+                                                'added'         =>  $added_positions,    
+                                                'url_example'   =>  Storage::url(pathinfo($filename, PATHINFO_DIRNAME)  .   '/' .   Config::get('dinner.filename_example'))]);
     }
 
     public function rooms()

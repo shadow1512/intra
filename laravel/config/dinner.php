@@ -24,5 +24,6 @@ return array (
     'total_accepted'        =>  15,
     'last_time'             =>  '15:00',
     'filename'              =>  'menu.xlsx',
-    'menu_converted_path'   =>  storage_path('app/public/dinner/'),
+    'filename_example'      =>  'menu_example.xlsx',
+    'menu_converted_path'   =>  '/dinner'
 );

@@ -171,6 +171,7 @@ Route::group(['prefix' => 'moderate',   'middleware'    =>  ['moderate']], funct
         Route::put('/store', 'ModerateController@dinnerstore')->name('moderate.dinner.store');
         Route::delete('/delete/{id}', 'ModerateController@dinnerdelete')->name('moderate.dinner.delete');
         Route::get('/menuform', 'ModerateController@dinnermenuform')->name('moderate.dinner.menuform');
+        Route::put('/uploadmenu', 'ModerateController@dinneruploadmenu')->name('moderate.dinner.uploadmenu');
     });
 
     Route::group(['prefix'  =>  'admins', 'middleware'    =>  ['admin']],   function() {

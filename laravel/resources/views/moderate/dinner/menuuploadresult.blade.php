@@ -20,7 +20,7 @@
                     @endif
                     @if(!$numdays_updated   &&  !$numdays_added)
                         <p class="error">Не найдено информации по дням в файле. Проверьте корректность его структуры и разметки</p>
-                        <p><a href="{$url_example}">Скачать пример</a></p>
+                        <p><a href="{{$url_example}}">Скачать пример</a></p>
                     @endif
                 </div>
             </div>

@@ -318,6 +318,7 @@ class ModerateController extends Controller
     }
     
     public function dinneruploadmenu(Request $request) {
+        var_dump($request->file('menu_file'));
         if(!is_null($request->file('menu_file'))) {
             $path = Storage::disk('public')->putFileAs(Config::get('dinner.menu_converted_path'), $request->file('menu_file'), Config::get('dinner.filename'), 'public');
             $this->dinnermenuupdate($path);
@@ -372,7 +373,7 @@ class ModerateController extends Controller
             }
         }
         
-        return view('moderate.dinner.menuuoloadresult', [   'filename'      =>  basename($filename),    
+        return view('moderate.dinner.menuuploadresult', [   'filename'      =>  basename($filename),    
                                                             'updated'       =>  $updated_positions, 
                                                             'added'         =>  $added_positions,    
                                                             'url_example'   =>  Storage::url(pathinfo($filename, PATHINFO_DIRNAME)  .   '/' .   Config::get('dinner.filename_example'))]);

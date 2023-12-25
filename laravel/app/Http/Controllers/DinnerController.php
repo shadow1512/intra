@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\Dinner_booking;
+use App\Dinner_menu;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -125,5 +126,16 @@ class DinnerController extends Controller
 
         return view('kitchen.list', [   'periods'           =>  Config::get('dinner.dinner_slots'),
                                         'bookings_by_time'  =>  $bookings_by_times]);
+    }
+    
+    public function menu($date) {
+        $items  = Dinner_menu::where('date_menu',   '=',    $date)->get();
+        $positions_by_mealtype  =   array();
+        foreach($items as $item) {
+            $positions_by_mealtype[$item->type_meals][] =   $item;
+        }
+        
+        return view('kitchen.menu', [   'date_menu' =>  date("d.m.Y", strtotime($date)),
+                                        'positions' =>  $positions_by_mealtype]);
     }
 }

@@ -106,7 +106,7 @@
         <div class="main_top_dinner_info">@if (count($ditems)) @foreach($ditems as $item)<span class="main_top_dinner_info_i">{{$item->name}}: с&nbsp;{{\Carbon\Carbon::parse($item->time_start)->format("H.i")}} до&nbsp;{{\Carbon\Carbon::parse($item->time_end)->format("H.i")}}</span>@endforeach @endif</div>
         <div class="main_top_dinner_hide">Свернуть –</div>
         <ul class="main_top_dinner_lst">
-            <li class="main_top_dinner_lst_i @if (!Auth::check() || (!$summ&&   is_null($curbill))) __logout @endif"><a href="{{ route('kitchen.menu') }}" class="main_top_dinner_lst_lk">
+            <li class="main_top_dinner_lst_i @if (!Auth::check() || (!$summ&&   is_null($curbill))) __logout @endif" style="width:100%;"><a href="{{ route('kitchen.menu') }}" class="main_top_dinner_lst_lk">
                     <div class="main_top_dinner_lst_ic"><svg class="main_top_dinner_lst_ic_dinner" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21.1 33"><path class="st0" d="M8.1.4c0 .5-.5 6.9-.6 7.4s-1 .6-1.1 0c0 .1-.5-6.7-.6-7.3-.1-.6-1.1-.6-1.2 0C4.6.9 4 7.3 4 7.8c-.1.6-1 .6-1 0S2.5 1 2.4.5 1.3-.1 1.2.5C1.2 1.1 0 7.4 0 9.8s1.5 3.9 3.1 4.7c0 .4-.9 14.2-.9 15.6S3.6 33 5.3 33c1.7 0 3.1-1.8 3.1-2.5 0-.8-.9-15.5-1-15.9 1.7-.8 3.3-2.7 3.2-4.5-.1-1.7-1.2-9-1.3-9.6S8.2-.1 8.1.4zM20.4 0c-1.2 0-6.1 3.6-6.1 8.9 0 5.7 2.4 8 2.4 8.3 0 .3-1.1 1.2-1.1 1.2s-1 10.3-1 11.7 1.4 2.9 3 2.9c2 0 3.4-1.4 3.4-3.3V.7c.1-.2 0-.7-.6-.7z"/></svg></div>
                     <div class="main_top_dinner_lst_tx">Меню на&nbsp;сегодня</div></a></li>
             <!--<li class="main_top_dinner_lst_i @if (!Auth::check() || (!$summ&&   is_null($curbill))) __logout @endif"><a href="" class="main_top_dinner_lst_lk __js-modal-camera-lk">

@@ -375,7 +375,7 @@ class ModerateController extends Controller
         return view('moderate.dinner.menuuploadresult', [   'filename'      =>  basename($filename),    
                                                             'updated'       =>  $updated_positions, 
                                                             'added'         =>  $added_positions,    
-                                                            'url_example'   =>  Storage::url(pathinfo($filename, PATHINFO_DIRNAME)  .   '/' .   Config::get('dinner.filename_example'))]);
+                                                            'url_example'   =>  Storage::disk('public')->url(pathinfo($filename, PATHINFO_DIRNAME))  .   '/' .   Config::get('dinner.filename_example')]);
     }
 
     public function rooms()

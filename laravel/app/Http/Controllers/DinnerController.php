@@ -128,7 +128,17 @@ class DinnerController extends Controller
                                         'bookings_by_time'  =>  $bookings_by_times]);
     }
     
-    public function menu($date  =   date("Y-m-d")) {
+    public function menu($date = null) {
+        if(!$date) {
+            $date=  date("Y-m-d");
+        }
+        else {
+            if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$date)) {
+                $date=  date("Y-m-d");
+            } 
+ 
+        }
+            
         $items  = Dinner_menu::where('date_menu',   '=',    $date)->get();
         $positions_by_mealtype  =   array();
         foreach($items as $item) {

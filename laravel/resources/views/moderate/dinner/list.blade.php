@@ -31,7 +31,6 @@
     <div class="row">
         <form action="{{ route('moderate.dinner.uploadmenu') }}" method="POST" id="menu_fileupload">
             {{ csrf_field() }}
-            {{ method_field('PUT') }}
             <div class="custom-file"{{ $errors->has('menu_file') ? ' has-error' : '' }}>
                 <input type="file" class="custom-file-input" id="menu_file" name="menu_file" aria-describedby="fileHelpInline">
                 <label class="custom-file-label" for="menu_file">Выберите файл</label>

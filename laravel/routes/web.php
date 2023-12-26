@@ -63,10 +63,10 @@ Route::post('/profile/updateavatar', 'ProfileController@updateavatar')->name('pr
 
 Route::get('/kitchen/camera', 'DinnerController@index')->name('kitchen.camera');
 Route::get('/kitchen/menu/{date?}', 'DinnerController@menu')->name('kitchen.menu');
-Route::get('/kitchen/bills', 'DinnerController@index')->name('kitchen.bills');
-Route::get('/kitchen/booking', 'DinnerController@book')->name('kitchen.book');
-Route::put('/kitchen/booking/book', 'DinnerController@createbooking')->name('kitchen.book.create');
-Route::get('/kitchen/booking/list', 'DinnerController@listbookings')->name('kitchen.book.list');
+Route::get('/kitchen/bills', 'DinnerController@index')->name('kitchen.bills')->middleware('auth');
+Route::get('/kitchen/booking', 'DinnerController@book')->name('kitchen.book')->middleware('auth');
+Route::put('/kitchen/booking/book', 'DinnerController@createbooking')->name('kitchen.book.create')->middleware('auth');
+Route::get('/kitchen/booking/list', 'DinnerController@listbookings')->name('kitchen.book.list')->middleware('auth');
 
 Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');

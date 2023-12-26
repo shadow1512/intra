@@ -64,25 +64,7 @@ class ComposerServiceProvider extends ServiceProvider
                     ->groupBy('mdc')->orderBy('mdc',    'desc')->limit(8)->get();
             }
 
-            //Меню
-            $ch = curl_init('http://oldintra.kodeks.ru/cooking/menu1.html');
-            curl_setopt($ch, CURLINFO_HEADER_OUT, true);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            $res = curl_exec($ch);
-            $status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $kitchen_menu   =   "";
-            $res=   iconv("windows-1251",    "utf-8",   $res);
-            if($status_code == 200) {
-                preg_match("/<body[^>]*>(.*?)<\/body>/ius", $res, $matches);
-                if(count($matches)) {
-                    $kitchen_menu   =   $matches[1];
-                }
-            }
-
-
-
-            $view->with([   'kitchen_menu'  =>  $kitchen_menu,
-                            'summ'          =>  $summ,
+            $view->with([   'summ'          =>  $summ,
                             'curbill'       =>  $bill,
                             'bills'         =>  $bills]);
         });

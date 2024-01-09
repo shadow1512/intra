@@ -27,7 +27,7 @@ class Kernel extends ConsoleKernel
         Commands\syncBookingsWithRedmine::class,
         Commands\profileupdatesnotification::class,
         Commands\createmoderator::class,
-        Commands\getdinnerbills::class,
+        //Commands\getdinnerbills::class,
         Commands\fixchefs::class,
         Commands\makeCsvWithPeopleList::class,
         Commands\uploadparseclog::class,

@@ -46,28 +46,6 @@ class ComposerServiceProvider extends ServiceProvider
 
             $view->with(["rooms" =>  $rooms, "contacts"  =>  $contacts, "menu_items" => $menu_items,    "hide_menues"   =>  $hide_menues]);
         });
-
-        View::composer('dinner',    function($view)
-        {
-            //счет в столовой
-            $summ   =   0;
-            $bills  =   array();
-            $bill=  null;
-            if (Auth::check()) {
-                $bill = DB::table('users_dinner_bills')->where('user_id', Auth::user()->id)->orderBy('date_created', 'desc')->first();
-                if($bill) {
-                    $summ   =   $bill->summ;
-                }
-                $bills =   DB::table('users_dinner_bills')->selectRaw('MONTH(date_created) as mdc, MAX(summ) as ms')
-                    ->where("user_id", "=",   Auth::user()->id)
-                    ->whereRaw("DAY(date_created)=16")
-                    ->groupBy('mdc')->orderBy('mdc',    'desc')->limit(8)->get();
-            }
-
-            $view->with([   'summ'          =>  $summ,
-                            'curbill'       =>  $bill,
-                            'bills'         =>  $bills]);
-        });
         
         View::composer('footer',    function($view) {
             //$version    =   passthru('git log --pretty=format:"%h" --max-count=1');

@@ -594,11 +594,6 @@ if(location.href.indexOf("foto")    !== -1) {
 
 }
 
-$(".lk.reserve_table_filled_cnt_bl").click(function(e){
-         e.stopPropagation();
-         window.location = $(this).attr("href");
-});
-
 });
 
 $(document).on("click", "#submit_cartridge_change_form", function(ev) {

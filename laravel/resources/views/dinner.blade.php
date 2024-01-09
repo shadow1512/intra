@@ -1,17 +1,3 @@
-<!--modal-->
-<div class="overlay __js-modal-dinner">
-    <div class="modal-w">
-        <div class="modal-cnt">
-            <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
-            <div class="modal_cnt">
-                <div class="dinner">
-                    {!! $kitchen_menu   !!}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 <div class="overlay __js-modal-camera">
     <div class="modal-w">
         <div class="modal-cnt">

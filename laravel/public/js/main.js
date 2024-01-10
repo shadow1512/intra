@@ -152,6 +152,129 @@ function setFocus(window) { setTimeout(function() { $(window).find('input')[0].f
 
 popUp('.__js-modal-bill-lk', '.__js-modal-bill');
 popUp('.__js-modal-camera-lk', '.__js-modal-camera');
+popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
+    if ($(but).parent().children("span.source_date").length > 0) {
+        var dd = $(but).parent().children("span.source_date").text();
+        $(win).find("input[name='input_date_booking']").val(dd);
+        $(win).find("div.error").html("").hide();
+        $(win).find("input[name='input_time_start']").val("");
+        $(win).find("input[name='input_time_end']").val("");
+        $(win).find("input[name='input_name']").val("");
+        $(win).find("input").on("focus", function() {
+          $(this).parent().removeClass("__e");
+          $(this).parent().find(".field_e").remove();
+        });
+
+        $(win).find("#input_time_start").datetimepicker({
+            lang:'ru',
+            datepicker:false,
+            timepicker:true,
+            format:'H:i',
+            step:30,
+            minTime:'09:00',
+            maxTime:'18:45',
+            validateOnBlur:false,
+            allowTimes:[
+                '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'
+            ],
+            mask:true,
+            onShow:function( ct ){
+                this.setOptions({
+                    maxTime:$(win).find('#input_time_end').val()=='__:__' || $(win).find('#input_time_end').val()==''?'18:45':$(win).find('#input_time_end').val()
+                });
+            }
+        });
+
+        $(win).find("#input_time_end").datetimepicker({
+            lang:'ru',
+            datepicker:false,
+            timepicker:true,
+            format:'H:i',
+            step:30,
+            validateOnBlur:false,
+            minTime:'09:30',
+            maxTime:'19:15',
+            allowTimes:[
+                '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+            ],
+            mask:true,
+            onShow:function( ct ){
+                this.setOptions({
+                    minTime:$(win).find('#input_time_start').val()=='__:__' || $(win).find('#input_time_start').val()==''?'09:30':$(win).find('#input_time_start').val()
+                });
+            }
+        });
+    }
+});
+
+popUp('.reserve_table_filled', '.__js-modal-change-order',  function(but, win) {
+    var url=    $(but).attr("data-url");
+    $.ajax({
+        type: "GET",
+        url: url,
+        cache: false,
+        async: true,
+        dataType: "json",
+        success: function(msg) {
+            if (msg["result"] == "success") {
+                $("div.__js-modal-change-order").find("div.__form").html(msg["html"]);
+
+                $("div.__js-modal-change-order").find("#input_time_start_change").datetimepicker({
+                    lang:'ru',
+                    datepicker:false,
+                    timepicker:true,
+                    format:'H:i',
+                    validateOnBlur:false,
+                    step: 30,
+                    minTime: '09:00',
+                    maxTime: '18:45',
+                    allowTimes:[
+                        '09:00', '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30'
+                    ],
+                    mask:true,
+                    onShow:function( ct ){
+                        this.setOptions({
+                            maxTime:$("div.__js-modal-change-order").find('#input_time_end_change').val()=='__:__' || $("div.__js-modal-change-order").find('#input_time_end_change').val()==''?'18:45':$("div.__js-modal-change-order").find('#input_time_end_change').val()
+                        });
+                    }
+                });
+
+                $("div.__js-modal-change-order").find("#input_time_end_change").datetimepicker({
+                    lang:'ru',
+                    datepicker:false,
+                    timepicker:true,
+                    format:'H:i',
+                    validateOnBlur:false,
+                    step: 30,
+                    minTime: '09:30',
+                    maxTime: '19:15',
+                    allowTimes:[
+                        '09:30', '10:00', '10:30', '11:00', '11:30', '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
+                        '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30', '19:00'
+                    ],
+                    mask:true,
+                    onShow:function( ct ){
+                        this.setOptions({
+                            minTime:$("div.__js-modal-change-order").find('#input_time_start_change').val()=='__:__' || $("div.__js-modal-change-order").find('#input_time_start_change').val()==''?'09:30':$("div.__js-modal-change-order").find('#input_time_start_change').val()
+                        });
+                    }
+                });
+            }
+            if (msg["result"] == "error") {
+                $("div.__js-modal-change-order").find("div.__form").html("<div class=\"modal_h\"><a href=\"#\" title=\"Закрыть\" class=\"modal-close\"></a></div><div class=\"profile_form_h\"><div class=\"h light_h __h_m\">Вы не можете забронировать переговорную</div><div class=\"h light_h __h_m\">" +   msg["text"] +   "</div>");
+            }
+        },
+        error:function (xhr, ajaxOptions, thrownError){
+            if(xhr.status==404) {
+                $("div.__js-modal-change-order").find("div.__form").html("<h3>Бронирование не было найдено.</h3><p>Возможно, оно было отклонено и удалено ответственным за бронирование переговорной.</p><p>Обновите страницу, чтобы убедиться в этом. На вашу почту должно поступить сообщение с причиной удаления.</p>");
+            }
+        }
+    });
+});
+
 popUp('.__js-modal-profile-lk', '.__js-modal-profile', function(but, win) {
     var url=    $(but).attr("href");
     $.ajax({

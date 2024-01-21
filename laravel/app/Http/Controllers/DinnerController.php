@@ -147,7 +147,7 @@ class DinnerController extends Controller
         }
         
         $complex_item   = Dinner_menu_complex::where('date_menu_complex',   '=',    $date)->get();
-        $items_complex  =   Dinner_menu::where('date_menu',   '=',    $date)->whereNotNull('type_dinner')->get();
+        $items_complex  =   Dinner_menu::where('date_menu',   '=',    $date)->whereNotNull('type_dinner')->first();
         
         
         return view('kitchen.menu', [   'date_menu'     =>  date("d.m.Y", strtotime($date)),

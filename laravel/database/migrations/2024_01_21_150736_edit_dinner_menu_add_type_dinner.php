@@ -14,7 +14,7 @@ class EditDinnerMenuAddTypeDinner extends Migration
     public function up()
     {
         //
-        Schema::create('dinner_menu', function (Blueprint $table) {
+        Schema::table('dinner_menu', function (Blueprint $table) {
             $table->boolean('type_dinner')->index()->nullable()->default(null);
         });
     }

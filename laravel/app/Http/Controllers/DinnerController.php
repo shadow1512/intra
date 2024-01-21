@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 use App\Dinner_booking;
 use App\Dinner_menu;
+use App\Dinner_menu_complex;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -139,13 +140,19 @@ class DinnerController extends Controller
  
         }
             
-        $items  = Dinner_menu::where('date_menu',   '=',    $date)->get();
+        $items  = Dinner_menu::where('date_menu',   '=',    $date)->whereNull('type_dinner')->get();
         $positions_by_mealtype  =   array();
         foreach($items as $item) {
             $positions_by_mealtype[$item->type_meals][] =   $item;
         }
         
-        return view('kitchen.menu', [   'date_menu' =>  date("d.m.Y", strtotime($date)),
-                                        'positions' =>  $positions_by_mealtype]);
+        $complex_item   = Dinner_menu_complex::where('date_menu_complex',   '=',    $date)->get();
+        $items_complex  =   Dinner_menu::where('date_menu',   '=',    $date)->whereNotNull('type_dinner')->get();
+        
+        
+        return view('kitchen.menu', [   'date_menu'     =>  date("d.m.Y", strtotime($date)),
+                                        'positions'     =>  $positions_by_mealtype,
+                                        'complex_item'  =>  $complex_item,
+                                        'items_complex' =>  $items_complex]);
     }
 }

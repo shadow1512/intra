@@ -394,7 +394,7 @@ class ModerateController extends Controller
                     
                     $exist_children  = Dinner_menu::where("date_menu", '=',    $date_menu)->whereNotNull("type_dinner")->count();
                     if($exist_children) {
-                        Dinner_menu::where("date_menu_complex", '=',    $date_menu)->whereNotNull("type_dinner")->delete();
+                        Dinner_menu::where("date_menu", '=',    $date_menu)->whereNotNull("type_dinner")->delete();
                     }
                     
                     $dm =   new Dinner_menu_complex();

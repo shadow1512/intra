@@ -25,6 +25,7 @@ use App\Gallery;
 use App\GalleryPhoto;
 use App\Dinner_slots;
 use App\Dinner_menu;
+use App\Dinner_menu_complex;
 use PDO;
 use Config;
 use Illuminate\Http\Request;
@@ -365,6 +366,33 @@ class ModerateController extends Controller
                             $dm->save();
                             
                             $added_positions[$date_menu]    =   $added_positions[$date_menu]    +   1;
+                        }
+                    }
+                }
+                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[1]["D"]))) {
+                    $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
+                    
+                    $exist  = Dinner_menu_complex::where("date_menu", '=',    $date_menu)->count();
+                    if($exist) {
+                        Dinner_menu_complex::where("date_menu", '=',    $date_menu)->delete();
+                        $updated_positions[$date_menu]  =   $updated_positions[$date_menu]  +   $exist;
+                    }
+                    
+                    $dm =   new Dinner_menu_complex();
+                    $dm->date_menu_complex      =   $date_menu;
+                    $dm->meals_complex          =   $dataArray[1]["C"];
+                    $dm->price_meals_complex    =   $dataArray[1]["D"];
+                    $dm->save();
+                    $added_positions[$date_menu]    =   $added_positions[$date_menu]    +1;
+                    
+                    for($j  =   3;  $j  <=   50; $j++) {
+                        
+                        if($dataArray[$j]["B"]) {
+                            $dm =   new Dinner_menu();
+                            $dm->date_menu      =   $date_menu;
+                            $dm->meals          =   $dataArray[$j]["B"];
+                            $dm->type_dinner    =   1;
+                            $dm->save();
                         }
                     }
                 }

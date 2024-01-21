@@ -349,9 +349,18 @@ class ModerateController extends Controller
                     $exist  =   Dinner_menu::where("date_menu", '=',    $date_menu)->count();
                     if($exist) {
                         Dinner_menu::where("date_menu", '=',    $date_menu)->delete();
-                        $updated_positions[$date_menu]  =   $exist;
+                        if(!isset($updated_positions[$date_menu])) {
+                            $updated_positions[$date_menu]    =   $exist;
+                        }
+                        else {
+                            $updated_positions[$date_menu]  =   $updated_positions[$date_menu]  +   $exist;
+                        }
+                        
                     }
-                    $added_positions[$date_menu]    =   0;
+                    if(!isset($added_positions[$date_menu])) {
+                        $added_positions[$date_menu]    =   0;
+                    }
+                    
                     for($j  =   2;  $j  <=   50; $j++) {
                         
                         if($dataArray[$j]["B"]) {
@@ -375,7 +384,12 @@ class ModerateController extends Controller
                     $exist  = Dinner_menu_complex::where("date_menu_complex", '=',    $date_menu)->count();
                     if($exist) {
                         Dinner_menu_complex::where("date_menu_complex", '=',    $date_menu)->delete();
-                        $updated_positions[$date_menu]  =   $updated_positions[$date_menu]  +   $exist;
+                        if(isset($updated_positions[$date_menu])) {
+                            $updated_positions[$date_menu]    =   $updated_positions[$date_menu]    +$exist;
+                        }
+                        else {
+                            $updated_positions[$date_menu]    =   1;
+                        }
                     }
                     
                     $dm =   new Dinner_menu_complex();
@@ -383,7 +397,13 @@ class ModerateController extends Controller
                     $dm->meals_complex          =   $dataArray[1]["C"];
                     $dm->price_meals_complex    =   $dataArray[1]["D"];
                     $dm->save();
-                    $added_positions[$date_menu]    =   $added_positions[$date_menu]    +1;
+                    if(isset($added_positions[$date_menu])) {
+                        $added_positions[$date_menu]    =   $added_positions[$date_menu]    +1;
+                    }
+                    else {
+                        $added_positions[$date_menu]    =   1;
+                    }
+                    
                     
                     for($j  =   3;  $j  <=   50; $j++) {
                         

@@ -346,9 +346,9 @@ class ModerateController extends Controller
                     $type_meal  =   "";
                     $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
                     
-                    $exist  =   Dinner_menu::where("date_menu", '=',    $date_menu)->count();
+                    $exist  =   Dinner_menu::where("date_menu", '=',    $date_menu)->whereNull("type_dinner")->count();
                     if($exist) {
-                        Dinner_menu::where("date_menu", '=',    $date_menu)->delete();
+                        Dinner_menu::where("date_menu", '=',    $date_menu)->whereNull("type_dinner")->delete();
                         if(!isset($updated_positions[$date_menu])) {
                             $updated_positions[$date_menu]    =   $exist;
                         }
@@ -390,6 +390,11 @@ class ModerateController extends Controller
                         else {
                             $updated_positions[$date_menu]    =   1;
                         }
+                    }
+                    
+                    $exist_children  = Dinner_menu::where("date_menu", '=',    $date_menu)->whereNotNull("type_dinner")->count();
+                    if($exist_children) {
+                        Dinner_menu::where("date_menu_complex", '=',    $date_menu)->whereNotNull("type_dinner")->delete();
                     }
                     
                     $dm =   new Dinner_menu_complex();

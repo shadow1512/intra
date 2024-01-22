@@ -378,7 +378,11 @@ class ModerateController extends Controller
                         }
                     }
                 }
-                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && ((int)($dataArray[1]["D"]) > 0)) {
+                var_dump($dataArray[1]["C"]);
+                var_dump(mb_strtolower($dataArray[1]["C"], "UTF-8"));
+                var_dump(is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])));
+                var_dump((int)$dataArray[1]["D"]);
+                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && ((int)$dataArray[1]["D"] > 0)) {
                     $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
                     
                     $exist  = Dinner_menu_complex::where("date_menu_complex", '=',    $date_menu)->count();

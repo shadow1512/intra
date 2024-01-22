@@ -342,7 +342,7 @@ class ModerateController extends Controller
                     TRUE,        // Should values be formatted (the equivalent of getFormattedValue() for each cell)
                     TRUE         // Should the array be indexed by cell row and cell column
                 );
-                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "меню") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]))) {
+                if(isset($dataArray[1]["C"]) &&   (mb_strtolower(trim($dataArray[1]["C"]), "UTF-8")   ==  "меню") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]))) {
                     $type_meal  =   "";
                     $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
                     
@@ -378,11 +378,7 @@ class ModerateController extends Controller
                         }
                     }
                 }
-                var_dump($dataArray[1]["C"]);
-                var_dump(mb_strtolower($dataArray[1]["C"], "UTF-8"));
-                var_dump(is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])));
-                var_dump((int)$dataArray[1]["D"]);
-                if(isset($dataArray[1]["C"]) &&   (mb_strtolower($dataArray[1]["C"], "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && ((int)$dataArray[1]["D"] > 0)) {
+                if(isset($dataArray[1]["C"]) &&   (mb_strtolower(trim($dataArray[1]["C"]), "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && ((int)$dataArray[1]["D"] > 0)) {
                     $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
                     
                     $exist  = Dinner_menu_complex::where("date_menu_complex", '=',    $date_menu)->count();

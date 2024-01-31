@@ -49,7 +49,8 @@
             <div class="row">
                 <div class="col-md-7"> {{ $item->lname }} {{ $item->fname }} {{ $item->mname }}<br>{{$item->position}}</div>
                 <div class="col-md-3">@if ($item->count_updated) Не подтвержденных изменений профиля: {{$item->count_updated}} @endif</div>
-                <div class="col-md-2"><a href="{{ route('moderate.users.edit', ["id" => $item->id]) }}"><span class="glyphicon glyphicon-edit"></span></a></div>
+                <div class="col-md-1"><a href="{{ route('moderate.users.edit', ["id" => $item->id]) }}"><span class="glyphicon glyphicon-edit"></span></a></div>
+                <div class="col-md-1">@if (Auth::user()->role_id  ==  1)<a href="{{ route('auth.loginasuser', ["id" => $item->id]) }}">Войти</a>@endif</div>
             </div>
                 @endforeach
             @endif

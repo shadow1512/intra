@@ -71,8 +71,9 @@ Route::get('/staff', 'HomeController@staff')->name('staff');
 Route::post('/search', 'SearchController@index')->name('search');
 Route::post('/search/directory', 'SearchController@directory')->name('search.directory');
 
-Route::post('/auth/login', 'AdLoginController@login')->name('auth.login');
+Route::post('/auth/login', 'AdLoginController@login')->name('auth.login')->middleware('guest');
 Route::post('/auth/logout', 'AdLoginController@logout')->name('auth.logout');
+Route::post('/auth/loginasuser/{id}', 'AdLoginController@loginasuser')->name('auth.loginasuser')->middleware('admin');
 
 Route::get('/indexer/dir', 'IndexerController@dirloader')->name('indexer.dir');
 Route::get('/indexer/struct', 'IndexerController@structloader')->name('indexer.struct');

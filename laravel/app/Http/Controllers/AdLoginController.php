@@ -17,7 +17,7 @@ class AdLoginController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        //$this->middleware('guest')->except('logout');
     }
 
     /**
@@ -58,7 +58,15 @@ class AdLoginController extends Controller
         }
 
     }
-
+    
+    public function loginasuser($id) {
+        if(Auth::check()) {
+            Auth::logout();
+        }
+        Auth::loginUsingId($id, true);
+        return redirect('/');
+    }
+    
     public function logout() {
         Auth::logout();
         return redirect('/');

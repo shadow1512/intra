@@ -1276,12 +1276,13 @@ class ModerateController extends Controller
         if($ps_record) {
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
         }
-
+        
+        echo $dep->dep_id;
         $moderate   =   null;
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
-
+        var_dump($moderate);
         if(Auth::user()->role_id  !=  1) {
             if(is_null($moderate)) {
                 abort(403, 'moderate not set. Not admin');

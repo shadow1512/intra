@@ -1282,7 +1282,6 @@ class ModerateController extends Controller
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
         }
-        var_dump($moderate);
         if(Auth::user()->role_id  !=  1) {
             if(is_null($moderate)) {
                 abort(403, 'moderate not set. Not admin');
@@ -1292,6 +1291,7 @@ class ModerateController extends Controller
                 foreach($moderate as $moderator) {
                     $authorized_ids[]   =   $moderator->id;
                 }
+                var_dump($authorized_ids);
                 if(!in_array(Auth::user()->id,   $authorized_ids)) {
                     abort(403, 'not enough rights for detected moderate');
                 }

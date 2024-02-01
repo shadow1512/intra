@@ -42,7 +42,6 @@ class ModerateController extends Controller
     public function __construct()
     {
         //$this->middleware('moderate');
-        phpinfo();
     }
     /**
      * Display a listing of the resource.

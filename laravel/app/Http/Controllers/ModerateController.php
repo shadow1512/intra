@@ -1277,7 +1277,6 @@ class ModerateController extends Controller
             $psd    =   Profiles_Saved_Data::where('ps_id', '=',    $ps_record->id)->get();
         }
         
-        echo $dep->dep_id;
         $moderate   =   null;
         if($dep->dep_id) {
             $moderate   =   Dep::getModerate($dep->dep_id);
@@ -1291,7 +1290,6 @@ class ModerateController extends Controller
                 foreach($moderate as $moderator) {
                     $authorized_ids[]   =   $moderator->id;
                 }
-                var_dump($authorized_ids);
                 if(!in_array(Auth::user()->id,   $authorized_ids)) {
                     abort(403, 'not enough rights for detected moderate');
                 }

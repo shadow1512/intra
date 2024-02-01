@@ -44,7 +44,6 @@ class Dep extends Model
             }
         }
         
-        var_dump($guids);
         $moderators   =   Users_Moderators_Rules::select("users.*")
                                 ->leftJoin("users", 'users_moderators_rules.user_id', '=', 'users.id')
                                 ->where('section',    '=',    'deps')

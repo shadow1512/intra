@@ -1068,7 +1068,7 @@ class ModerateController extends Controller
     private function galleryimagehandle($filename, $id, $path_full, $path)
     {
         $size   =   Storage::disk('public')->getSize($path_full);
-        if($size <= 5000000) {
+        if($size <= 10000000) {
 
             $manager = new ImageManager(array('driver' => 'imagick'));
             $image  = $manager->make(storage_path('app/public') . '/' . $path)->fit(Config::get('image.gallery_photo_thumb_width'), Config::get('image.gallery_photo_thumb_height'));

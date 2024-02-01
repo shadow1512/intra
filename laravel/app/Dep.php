@@ -49,7 +49,8 @@ class Dep extends Model
                                 ->leftJoin("users", 'users_moderators_rules.user_id', '=', 'users.id')
                                 ->where('section',    '=',    'deps')
                                 ->whereIn('record',    $guids)
-                                ->get();
+                                ->toSql();
+        var_dump($moderators);
                 if(count($moderators)) {
                     return $moderators;
                 }      

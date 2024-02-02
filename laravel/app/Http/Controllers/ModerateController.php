@@ -1383,7 +1383,7 @@ class ModerateController extends Controller
 
     public function usersupdate($id, Request $request)
     {
-        $user   =   User::leftJoin('deps_peoples',  'users.id', '=',    'deps_peoples.people_id')->whereRaw('users.id=' .   $id)->first();
+        $user   =   User::leftJoin('deps_peoples',  'users.id', '=',    'deps_peoples.people_id')->whereRaw('users.id=' .   $id)->whereNull('deps_peoples.deleted_at')->first();
 
         $updates_fields =   array(
             'fname'                     =>  trim($request->input('fname')),

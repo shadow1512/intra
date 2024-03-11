@@ -1446,6 +1446,7 @@ class ModerateController extends Controller
         $ps =   Profiles_Saved::where("user_id",    "=",    $id)->first();
         if($ps) {
             Profiles_Saved_Data::where("ps_id", '=',    $ps->id)->delete();
+            $ps->commiter_id    =   Auth::user()->id;
             $ps->delete();
         }
         $ps =   new Profiles_Saved();

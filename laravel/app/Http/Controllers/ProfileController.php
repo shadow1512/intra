@@ -78,13 +78,13 @@ echo 'c';
 
         $change_records =   array();
         $moderators     =   array();
-        //$changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
+        $changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
         $query = Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0);
         $sql = $query->toSql();
         $bindings = $query->getBindings();
         var_dump($sql);
         var_dump($bindings);
-        echo count($changes);
+        echo $changes->count();
         exit();
         foreach($changes as $item) {
             echo $item->id . "<br>";

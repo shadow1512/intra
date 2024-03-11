@@ -44,12 +44,12 @@ class ProfileController extends Controller
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereNull('deps_peoples.deleted_at')
             ->leftJoin('user_contacts', 'user_contacts.contact_id', '=', 'users.id')->where('user_contacts.user_id', '=', Auth::user()->id)->get();
-
+echo a;
         $user   =   User::select("users.*", "deps_peoples.work_title",  "deps_peoples.dep_id")
             ->leftJoin('deps_peoples', 'users.id', '=', 'deps_peoples.people_id')
             ->whereNull('deps_peoples.deleted_at')
             ->where('users.id', '=', Auth::user()->id)->first();
-
+echo b;
         $dep    =   $ps     =   $moderate   =   $psd    =   null;
 
         $ps_record=    Profiles_Saved::where("user_id",    "=",    Auth::user()->id)->orderBy("id",    "desc")->first();
@@ -61,7 +61,7 @@ class ProfileController extends Controller
         if(!is_null($user->dep_id)) {
             $dep        =   Dep::findOrFail($user->dep_id);
         }
-
+echo c;
 
         //счет в столовой
         $summ   =   0;
@@ -85,6 +85,7 @@ class ProfileController extends Controller
             $item->user_informed    =   1;
             $item->save();
         }
+        echo d;
         return view('profile.view', [   'contacts'    =>  $contacts,   'user'  =>  $user,  'dep'   =>  $dep,
                                         'ps'    =>  $ps, 'psd'    =>  $psd,    'summ'  =>  $summ,
                                         'requests'  =>  $tr,    'moderators'  =>  $moderators,

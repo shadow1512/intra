@@ -79,7 +79,7 @@ echo 'c';
         $change_records =   array();
         $moderators     =   array();
         $changes    =   Profiles_Saved::onlyTrashed()->where('user_id', '=',    Auth::user()->id)->where('user_informed',   '=',    0)->get();
-        echo count($CHANGES);
+        echo count($changes);
         foreach($changes as $item) {
             echo $item->id . "<br>";
             $change_records[$item->id]  =   Profiles_Saved_Data::withTrashed()->where('ps_id',  '=',    $item->id)->get();

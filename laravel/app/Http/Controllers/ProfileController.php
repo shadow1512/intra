@@ -85,7 +85,6 @@ echo 'c';
         var_dump($sql);
         var_dump($bindings);
         echo $changes->count();
-        exit();
         foreach($changes as $item) {
             echo $item->id . "<br>";
             $change_records[$item->id]  =   Profiles_Saved_Data::withTrashed()->where('ps_id',  '=',    $item->id)->get();

@@ -10,7 +10,7 @@
 
 .dinner_i {
   text-align: left;
-  padding: 40px;
+  padding: 0 40px;
   margin-top: 50px; }
   .dinner_i:first-child {
     margin-top: 0; }

@@ -14,6 +14,8 @@
   margin-top: 50px; }
   .dinner_i:first-child {
     margin-top: 0; }
+  .dinner_i:last-child {
+    margin-bottom: 50px; }
 
 .dinner_lst,
 .bill_lst {

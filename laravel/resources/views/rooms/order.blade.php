@@ -81,7 +81,7 @@
               </div>
             </div>
             <div class="reserve_table">
-@for ($i = 0;  $i<=4;  $i++)
+@for ($i = 0;  $i<=5;  $i++)
               <div class="reserve_table_column">
                 <span style="display:none" class="source_date">{{$caldate->format("Y-m-d")}}</span>
                 <div class="reserve_table_column_h">

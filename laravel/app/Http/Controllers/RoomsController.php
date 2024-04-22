@@ -56,7 +56,7 @@ class RoomsController extends Controller
         }
 
         $startdate    =   $caldate->format("Y-m-d");
-        $caldate->add(new DateInterval("P4D"));
+        $caldate->add(new DateInterval("P5D"));
 
         $bookings = Booking::select('room_bookings.*',
                                             'users.name as person_name', 'users.phone as person_phone', 'users.email as person_email', 'users.fname as fname',  'users.lname as lname', 'users.avatar as avatar')

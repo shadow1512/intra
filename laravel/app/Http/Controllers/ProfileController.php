@@ -140,7 +140,6 @@ class ProfileController extends Controller
                                 "input_fname.max"       =>  "Имя не может быть длиннее, чем 255 символов",
                                 "input_fname.required"  =>  "Имя - обязательное поле",
                                 "input_position_desc.string"    =>  "Описание деятельности должно быть строкой символов",
-                                "input_position_desc.max"       =>  "Описание деятельности должно быть не более 255 символов",
                                 "input_mname.string"    =>  "Отчество должно быть строкой символов",
                                 "input_mname.max"       =>  "Отчество не может быть длиннее, чем 255 символов",
                                 "input_phone.string"    =>  "Местный телефон должен быть строкой символов",
@@ -161,7 +160,7 @@ class ProfileController extends Controller
                                 "input_work_title.max"       =>  "Должность должна быть не более 255 символов"
                                 );
         $validator = Validator::make($request->all(), [
-            'input_position_desc'     =>  'nullable|string|max:255',
+            'input_position_desc'     =>  'nullable|string',
             'input_lname'             =>  'string|max:255|required',
             'input_fname'             =>  'string|max:255|required',
             'input_mname'             =>  'nullable|string|max:255',

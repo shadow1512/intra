@@ -46,8 +46,13 @@
             @endif
         </div>
         <div class="profile_info_i">
-            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->work_title}}</span>@if(!is_null($dep)),<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a>@endif</p>
+            <p class="profile_info_responsibility"><strong>Должность, место работы:&nbsp;</strong><span>{{$user->work_title}}</span>@if(!is_null($dep)),<br/><a href="{{route('people.dept', ['id' => $dep->id])}}">{{ $dep->name }}</a>@endif</p>
         </div>
+        @if($user->position_desc)
+        <div class="profile_info_i">
+            <p class="profile_info_responsibility"><strong>Сфера компетенции:&nbsp;</strong><span>{{$user->position_desc}}</span></p>
+        </div>
+        @endif
         @if (count($requests))
             <div class="profile_info_i">
                 <div class="profile_info_i_requests">

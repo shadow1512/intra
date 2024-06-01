@@ -128,6 +128,11 @@ class RoomsController extends Controller
             $ukot_presence   =   0;
         }
         $notes          = trim($request->input('notes'));
+        
+        $aho_presence   =   $request->input('aho_presence');
+        if(is_null($aho_presence)) {
+            $aho_presence   =   0;
+        }
 
         $messages   =   array(  "input_name.required"           =>  "Поле обязательно для заполнения",
                                 "input_name.max"                =>  "Поле не должно быть длиннее, чем 90 символов",
@@ -154,6 +159,13 @@ class RoomsController extends Controller
             if($ukot_presence) {
                 if(!mb_strlen($notes,    "UTF-8")) {
                     return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes']);
+                }
+            }
+            if($aho_presence) {
+                $caldate    =   new Date();
+                $service_date   =   $caldate->add(new DateInterval("P1D"));
+                if($date_booking < $service_date) {
+                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'input_date_booking']);
                 }
             }
             if($time_start  <   Config::get('rooms.time_start_default')) {
@@ -206,15 +218,28 @@ class RoomsController extends Controller
                     $booking->type_meeting_webinar           =   $type_meeting_webinar;
                     $booking->type_meeting_other             =   $type_meeting_other;
                     $booking->service_ukot                   =   $ukot_presence;
+                    $booking->service_aho                    =   $aho_presence;
                     $booking->notes             =   $notes;
 
                     $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                            $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                        });
+                        $emails =   explode(",", $room->notify_email);
+                        foreach($emails as $email) {
+                            Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            });
+                        }
+                    }
+                    if($booking->service_aho    &&  $room->notify_email) {
+                        $emails =   explode(",", $room->notify_email);
+                        foreach($emails as $email) {
+                            Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            });
+                        }
                     }
                     return response()->json(['result' => 'success']);
                 }
@@ -294,7 +319,12 @@ class RoomsController extends Controller
         }
         
         $notes          = trim($request->input('notes_change'));
-
+        
+        $aho_presence   =   $request->input('aho_presence');
+        if(is_null($aho_presence)) {
+            $aho_presence   =   0;
+        }
+        
         $messages   =   array(  "input_name_change.required"           =>  "Поле \"название мероприятия\" обязательно для заполнения",
             "input_name_change.max"                 =>  "Поле \"название мероприятия\" не должно быть длиннее, чем 90 символов",
             "input_date_booking_change.required"    =>  "Поле \"дата бронирования\" обязательно для заполнения",
@@ -323,7 +353,13 @@ class RoomsController extends Controller
                     return response()->json(['error',  'message' =>  'notes required for ukot',    'field' =>  'notes_change']);
                 }
             }
-            
+            if($aho_presence) {
+                $caldate    =   new Date();
+                $service_date   =   $caldate->add(new DateInterval("P1D"));
+                if($date_booking < $service_date) {
+                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'input_date_booking']);
+                }
+            }
             if($time_start  <   Config::get('rooms.time_start_default')) {
                 return response()->json(['error',  'message' =>  'time start too early',    'field' =>  'input_time_start_change']);
             }
@@ -373,16 +409,28 @@ class RoomsController extends Controller
                     $booking->type_meeting_webinar  =   $type_meeting_webinar;
                     $booking->type_meeting_other    =   $type_meeting_other;
                     $booking->service_ukot          =   $ukot_presence;
+                    $booking->service_aho           =   $aho_presence;
                     $booking->notes =   $notes;
                     $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        Mail::send('emails.editbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                            $m->to($room->notify_email)->subject('Изменено бронирование в переговорной '    .   $room->name);
-                        });
+                        $emails =   explode(",", $room->notify_email);
+                        foreach($emails as $email) {
+                            Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            });
+                        }
                     }
-
+                    if($booking->service_aho    &&  $room->notify_email) {
+                        $emails =   explode(",", $room->notify_email);
+                        foreach($emails as $email) {
+                            Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            });
+                        }
+                    }
                     return response()->json(['result' => 'success']);
                 }
             }

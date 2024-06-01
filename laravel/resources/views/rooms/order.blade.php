@@ -211,8 +211,18 @@
                 <label for="notes" class="lbl">Примечания:</label>
                 <textarea id="notes" value="" name="notes" class="it"></textarea>
               </div>
+            @if ($room->service_aho_available)
+            <div class="field">
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input type="checkbox" class="form-check-input ich" id="check10_service" name="aho_presence" value="1">
+                        <label class="lbl form-check-label" for="check10_service">Требуется расстановка мебели</label>
+                    </div>
+                </div>
+            </div>
+            @endif
 
-                <div class="error"></div>
+            <div class="error"></div>
             </div>
             <div class="profile_form_submit"><a href="#" class="btn profile_form_btn" id="submit_room_order_form">OK</a></div>
           </form>

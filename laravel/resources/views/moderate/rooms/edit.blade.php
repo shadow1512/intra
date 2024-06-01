@@ -44,6 +44,19 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('service_aho_available') ? ' has-error' : '' }}">
+                                <label for="service_aho_available" class="col-md-4 control-label">Доступен сервис по расстановке мебели</label>
+
+                                <div class="col-md-6">
+                                    <input id="service_aho_available" type="checkbox" class="form-control" name="service_aho_available" value="1" @if ($room->service_aho_available) checked="checked" @endif/>
+
+                                    @if ($errors->has('service_aho_available'))
+                                        <span class="help-block error">
+                                        <strong>{{ $errors->first('service_aho_available') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

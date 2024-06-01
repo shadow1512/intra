@@ -489,10 +489,19 @@ class ModerateController extends Controller
         else {
             $available = 1;
         }
+        
+        $service_aho_available = 0;
+        if($request->input('service_aho_available')) {
+            $service_aho_available = 1;
+        }
+        else {
+            $service_aho_available = 0;
+        }
 
         Rooms::create([
-            'name'      => $request->input('name'),
-            'available' =>  $available,
+            'name'                  =>  $request->input('name'),
+            'available'             =>  $available,
+            'service_aho_available' =>  $service_aho_available,
         ]);
 
         return redirect(route('moderate.rooms.index'));
@@ -527,6 +536,14 @@ class ModerateController extends Controller
         else {
             $room->available = 1;
         }
+        
+        if($request->input('service_aho_available')) {
+            $room->service_aho_available = 1;
+        }
+        else {
+            $room->service_aho_available = 0;
+        }
+        
         $room->save();
 
         return redirect(route('moderate.rooms.index'));

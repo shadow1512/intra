@@ -59,7 +59,7 @@
                             </div>
                             <div class="form-group">
                                 <div class="form-check col-md-6 col-md-offset-4">
-                                    <input type="checkbox" class="form-check-input" id="service_aho_available" name="service_aho_available" @if ($room->service_aho_available == 0) checked="checked"@endif/>
+                                    <input type="checkbox" class="form-check-input" id="service_aho_available" name="service_aho_available" @if ($room->service_aho_available == 1) checked="checked"@endif/>
                                     <label class="form-check-label" for="service_aho_available">Доступен сервис по расстановке мебели</label>
                                 </div>
                             </div><!-- comment -->

@@ -233,13 +233,13 @@ class RoomsController extends Controller
                         Mail::send('emails.newbookingahoservice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             if($room->notify_email && $room->notify_email_cc) {
-                                $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email)->cc($room->notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                             if($room->notify_email && !$room->notify_email_cc) {
-                                $m->to($notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                             if(!$room->notify_email && $room->notify_email_cc) {
-                                $m->to($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                         });
                     }
@@ -425,13 +425,13 @@ class RoomsController extends Controller
                         Mail::send('emails.newbookingahoservice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             if($room->notify_email && $room->notify_email_cc) {
-                                $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email)->cc($room->notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                             if($room->notify_email && !$room->notify_email_cc) {
-                                $m->to($notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                             if(!$room->notify_email && $room->notify_email_cc) {
-                                $m->to($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                                $m->to($room->notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
                             }
                         });
                     }

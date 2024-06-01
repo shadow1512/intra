@@ -1417,7 +1417,6 @@ class ModerateController extends Controller
             "mobile_phone.max"           =>  "Поле не должно быть длиннее, чем 18 символов",
             "email.email"                =>  "Поле должно быть формата email",
             "email_secondary.email"      =>  "Поле должно быть формата email",
-            "position_desc.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
             "numpark.integer"            =>  "Поле должно быть номером места, числом",
             "role_id.required"           =>  "Поля обязательно для заполнения",
             "role_id.integer"            =>  "Поле должно быть числом",
@@ -1425,7 +1424,7 @@ class ModerateController extends Controller
         $validator = Validator::make($request->all(), [
             'numpark'           =>  'nullable|integer',
             'role_id'           =>  'required|integer',
-            'position_desc'     =>  'nullable|string|max:255',
+            'position_desc'     =>  'nullable|string',
             'lname'             =>  'string|max:255|required',
             'fname'             =>  'string|max:255|required',
             'mname'             =>  'nullable|string|max:255',

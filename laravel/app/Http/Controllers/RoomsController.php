@@ -165,7 +165,7 @@ class RoomsController extends Controller
                 $caldate    =   new Datetime();
                 $service_date   =   $caldate->add(new DateInterval("P1D"));
                 if($date_booking < $service_date->format("Y-m-d")) {
-                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'input_date_booking']);
+                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'check10_service']);
                 }
             }
             if($time_start  <   Config::get('rooms.time_start_default')) {
@@ -359,7 +359,7 @@ class RoomsController extends Controller
                 $caldate    =   new Datetime();
                 $service_date   =   $caldate->add(new DateInterval("P1D"));
                 if($date_booking < $service_date->format("Y-m-d")) {
-                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'input_date_booking']);
+                    return response()->json(['error',  'message' =>  'correct interval for aho',    'field' =>  'check10_service']);
                 }
             }
             if($time_start  <   Config::get('rooms.time_start_default')) {

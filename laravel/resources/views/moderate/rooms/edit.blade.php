@@ -44,19 +44,25 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('service_aho_available') ? ' has-error' : '' }}">
-                                <label for="service_aho_available" class="col-md-4 control-label">Доступен сервис по расстановке мебели</label>
+                            <div class="form-group{{ $errors->has('notify_email_cc') ? ' has-error' : '' }}">
+                                <label for="notify_email_cc" class="col-md-4 control-label">Второй Email для уведомлений</label>
 
                                 <div class="col-md-6">
-                                    <input id="service_aho_available" type="checkbox" class="form-control" name="service_aho_available" value="1" @if ($room->service_aho_available) checked="checked" @endif/>
+                                    <input id="notify_email_cc" type="text" class="form-control" name="notify_email_cc" value="{{ $room->notify_email_cc }}">
 
-                                    @if ($errors->has('service_aho_available'))
+                                    @if ($errors->has('notify_email_cc'))
                                         <span class="help-block error">
-                                        <strong>{{ $errors->first('service_aho_available') }}</strong>
+                                        <strong>{{ $errors->first('notify_email_cc') }}</strong>
                                     </span>
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group">
+                                <div class="form-check col-md-6 col-md-offset-4">
+                                    <input type="checkbox" class="form-check-input" id="service_aho_available" name="service_aho_available" @if ($room->service_aho_available == 0) checked="checked"@endif/>
+                                    <label class="form-check-label" for="service_aho_available">Доступен сервис по расстановке мебели</label>
+                                </div>
+                            </div><!-- comment -->
                             <div class="form-group">
                                 <div class="col-md-6 col-md-offset-4">
                                     <button type="submit" class="btn btn-primary">

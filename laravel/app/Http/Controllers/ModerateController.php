@@ -471,10 +471,14 @@ class ModerateController extends Controller
             "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
             "notify_email.email"        =>  "Поле должно быть формата email",
             "notify_email.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
+            "notify_email_cc.email"     =>  "Поле должно быть формата email",
+            "notify_email_cc.max"       =>  "Поле не должно быть длиннее, чем 255 символов",
+            
         );
         $validator = Validator::make($request->all(), [
-            'name'  => 'required|string|max:50',
-            'notify_email'  =>  'nullable|string|max:255|email',
+            'name'              => 'required|string|max:50',
+            'notify_email'      =>  'nullable|string|max:255|email',
+            'notify_email_cc'   =>  'nullable|string|max:255|email',
         ],  $messages);
         if ($validator->fails()) {
             return redirect()->route('moderate.rooms.create')
@@ -500,6 +504,8 @@ class ModerateController extends Controller
 
         Rooms::create([
             'name'                  =>  $request->input('name'),
+            'notify_email'          =>  $request->input('notify_email'),
+            'notify_email_cc'       =>  $request->input('notify_email_cc'),
             'available'             =>  $available,
             'service_aho_available' =>  $service_aho_available,
         ]);
@@ -514,6 +520,8 @@ class ModerateController extends Controller
             "name.required"             =>  "Поле обязательно для заполнения",
             "notify_email.email"        =>  "Поле должно быть формата email",
             "notify_email.max"          =>  "Поле не должно быть длиннее, чем 255 символов",
+            "notify_email_cc.email"     =>  "Поле должно быть формата email",
+            "notify_email_cc.max"       =>  "Поле не должно быть длиннее, чем 255 символов",
             "name.max"                  =>  "Поле не должно быть длиннее, чем 50 символов",
         );
 
@@ -530,6 +538,7 @@ class ModerateController extends Controller
         $room = Rooms::findOrFail($id);
         $room->name             = $request->input('name');
         $room->notify_email     = $request->input('notify_email');
+        $room->notify_email_cc  = $request->input('notify_email_cc');
         if($request->input('available')) {
             $room->available = 0;
         }

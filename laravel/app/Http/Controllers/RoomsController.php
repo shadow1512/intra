@@ -224,22 +224,24 @@ class RoomsController extends Controller
                     $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        $emails =   explode(",", $room->notify_email);
-                        foreach($emails as $email) {
-                            Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                            });
-                        }
+                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                        });
                     }
-                    if($booking->service_aho    &&  $room->notify_email) {
-                        $emails =   explode(",", $room->notify_email);
-                        foreach($emails as $email) {
-                            Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                            });
-                        }
+                    if($booking->service_aho    &&  ($room->notify_email || $room->notify_email_cc)) {
+                        Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            if($room->notify_email && $room->notify_email_cc) {
+                                $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                            if($room->notify_email && !$room->notify_email_cc) {
+                                $m->to($notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                            if(!$room->notify_email && $room->notify_email_cc) {
+                                $m->to($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                        });
                     }
                     return response()->json(['result' => 'success']);
                 }
@@ -414,22 +416,24 @@ class RoomsController extends Controller
                     $booking->save();
 
                     if(!$booking->approved  &&  $room->notify_email) {
-                        $emails =   explode(",", $room->notify_email);
-                        foreach($emails as $email) {
-                            Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                            });
-                        }
+                        Mail::send('emails.newbooking', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                        });
                     }
-                    if($booking->service_aho    &&  $room->notify_email) {
-                        $emails =   explode(",", $room->notify_email);
-                        foreach($emails as $email) {
-                            Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
-                                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
-                                $m->to($email)->subject('Новое бронирование в переговорной '    .   $room->name);
-                            });
-                        }
+                    if($booking->service_aho    &&  ($room->notify_email || $room->notify_email_cc)) {
+                        Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                            $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                            if($room->notify_email && $room->notify_email_cc) {
+                                $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                            if($room->notify_email && !$room->notify_email_cc) {
+                                $m->to($notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                            if(!$room->notify_email && $room->notify_email_cc) {
+                                $m->to($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
+                            }
+                        });
                     }
                     return response()->json(['result' => 'success']);
                 }

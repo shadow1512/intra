@@ -230,7 +230,7 @@ class RoomsController extends Controller
                         });
                     }
                     if($booking->service_aho    &&  ($room->notify_email || $room->notify_email_cc)) {
-                        Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                        Mail::send('emails.newbookingahoservice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             if($room->notify_email && $room->notify_email_cc) {
                                 $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);
@@ -422,7 +422,7 @@ class RoomsController extends Controller
                         });
                     }
                     if($booking->service_aho    &&  ($room->notify_email || $room->notify_email_cc)) {
-                        Mail::send('emails.newbookingahoervice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
+                        Mail::send('emails.newbookingahoservice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             if($room->notify_email && $room->notify_email_cc) {
                                 $m->to($notify_email)->cc($notify_email_cc)->subject('Новое бронирование в переговорной '    .   $room->name);

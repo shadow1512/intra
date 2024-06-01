@@ -212,13 +212,13 @@
             @if(isset($waiting_fields["position_desc"]))
                 <div class="field unchecked_field">
                     <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                    <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$waiting_fields["position_desc"]}}</textarea>
+                    <textarea id="input_position_desc" name="input_position_desc" class="it">{{$waiting_fields["position_desc"]}}</textarea>
                     <i class="ic-wait"></i>
                 </div>
             @else
                 <div class="field">
                     <label for="input_position_desc" class="lbl">Сфера компетенции:</label>
-                    <textarea id="input_position_desc" name="input_position_desc" class="it" maxlength="255">{{$user->position_desc}}</textarea>
+                    <textarea id="input_position_desc" name="input_position_desc" class="it">{{$user->position_desc}}</textarea>
                 </div>
             @endif
         </div>

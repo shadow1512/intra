@@ -46,6 +46,7 @@ $(document).on("click", "#submit_room_change_form", function(ev) {
 $(document).on("change", "select[name='input_room']", function(ev) {
     alert('a');
     var options = $(this).children("option[selected='selected']");
+    alert($(options).length);
     var option = options[0];
     alert($(option).attr("data-attr"));
     if($(option).attr("data-attr")  ===  1) {

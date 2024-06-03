@@ -55,7 +55,7 @@
       @if (count($rooms))
       <select id="input_room" name="input_room">
         @foreach($rooms as $room)
-        <option value="{{$room->id}}" @if ($booking->room_id ==  $room->id) selected="selected" @endif>{{$room->name}}</option>
+            <option value="{{$room->id}}" @if ($booking->room_id ==  $room->id) selected="selected" @endif data-atr="{{$room->service_aho_available}}">{{$room->name}}</option>
         @endforeach
       </select>
       @endif
@@ -111,8 +111,8 @@
       <label for="notes" class="lbl">Примечания:</label>
       <textarea id="notes_change" value="" name="notes_change" class="it">{{$booking->notes}}</textarea>
     </div>
-    @if ($room->service_aho_available)
-    <div class="field">
+    
+    <div class="field" id="aho_presence_field" style="display:none">
         <div>
             <div class="form-check form-check-inline">
                 <input type="checkbox" class="form-check-input ich" id="check10_service" name="aho_presence" value="1" @if ($booking->service_aho) checked="checked" @endif>
@@ -120,7 +120,7 @@
             </div>
         </div>
     </div>
-    @endif
+    
   </div>
   <div class="profile_form_submit">
     <a href="{{route('rooms.book.delete', ["id"  =>  $booking->id])}}" class="btn profile_form_btn __cancel __margin-right_l" id="cancel_room_order_form">

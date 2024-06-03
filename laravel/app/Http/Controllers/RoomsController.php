@@ -421,7 +421,7 @@ class RoomsController extends Controller
                             $m->to($room->notify_email)->subject('Новое бронирование в переговорной '    .   $room->name);
                         });
                     }
-                    if($booking->service_aho    &&  ($room->notify_email || $room->notify_email_cc)) {
+                    if($booking->service_aho    &&  $room->service_aho_available    &&  ($room->notify_email || $room->notify_email_cc)) {
                         Mail::send('emails.newbookingahoservice', ['booking' => $booking, 'user'  =>  Auth::user(),  'room'  =>  $room], function ($m) use ($room) {
                             $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                             if($room->notify_email && $room->notify_email_cc) {

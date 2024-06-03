@@ -88,6 +88,7 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
                 }
                 else if(msg.message  == "correct interval for aho") {
                     alert('a');
+                    alert(msg.field);
                   $("#"+msg.field).parent().append("<div class='field_e'>Для помощи АХО в расстановке мебели, заявку на бронирование нужно оформлять за день до мероприятия</div>").addClass("__e");
                 }
                 else {

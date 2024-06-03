@@ -87,8 +87,7 @@ $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
                   $("#"+msg.field).parent().append("<div class='field_e'>Если вам нужен специалист УКОТ на мероприятии, то укажите в поле \"Примечания\" зачем именно</div>").addClass("__e");
                 }
                 else if(msg.message  == "correct interval for aho") {
-                    alert('a');
-                    alert(msg.field);
+                    alert($("#"+msg.field).parent().attr("class"));
                   $("#"+msg.field).parent().append("<div class='field_e'>Для помощи АХО в расстановке мебели, заявку на бронирование нужно оформлять за день до мероприятия</div>").addClass("__e");
                 }
                 else {

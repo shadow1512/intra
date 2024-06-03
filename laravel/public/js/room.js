@@ -53,6 +53,14 @@ $(document).on("change", "select[name='input_room']", function(ev) {
     }
 });
 
+var initSelected = $("#input_room option:selected");
+if($(initSelected).attr("data-attr")  ==  1) {
+        $("#aho_presence_field").show();
+}
+else {
+    $("#aho_presence_field").hide();
+}
+    
 $(document).on("submit", "#room_order_form,#room_change_form", function(ev) {
     $("div.error").html("").hide();
     ev.preventDefault ? ev.preventDefault() : (ev.returnValue = false);

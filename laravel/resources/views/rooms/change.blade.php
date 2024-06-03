@@ -55,7 +55,7 @@
       @if (count($rooms))
       <select id="input_room" name="input_room">
         @foreach($rooms as $room)
-            <option value="{{$room->id}}" @if ($booking->room_id ==  $room->id) selected="selected" @endif data-atr="{{$room->service_aho_available}}">{{$room->name}}</option>
+            <option value="{{$room->id}}" @if ($booking->room_id ==  $room->id) selected="selected" @endif data-attr="{{$room->service_aho_available}}">{{$room->name}}</option>
         @endforeach
       </select>
       @endif

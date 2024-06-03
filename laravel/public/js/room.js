@@ -44,9 +44,8 @@ $(document).on("click", "#submit_room_change_form", function(ev) {
 });
 
 $(document).on("change", "select[name='input_room']", function(ev) {
-    var options = $(this).children("option[selected='selected']");
-    var option = options[0];
-    if($(option).attr("data-attr")  ==  1) {
+    var optionSelected = $("option:selected", this);
+    if($(optionSelected).attr("data-attr")  ==  1) {
         $("#aho_presence_field").show();
     }
     else {

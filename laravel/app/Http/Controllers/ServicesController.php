@@ -164,9 +164,9 @@ class ServicesController extends Controller
         $trequest       =   trim($request->input('type_request'));
 
         $messages   =   array(  "roomnum.required"          =>  "Поле обязательно для заполнения",
-                                "roomnum.max"               =>  "Поле не должно превышать 10 символов",
+                                "roomnum.max"               =>  "Поле не должно превышать 191 символ",
                                 "phone.required"            =>  "Поле обязательно для заполнения",
-                                "phone.max"                 =>  "Поле не должно превышать 10 символов",
+                                "phone.max"                 =>  "Поле не должно превышать 18 символов",
                                 "email.required"            =>  "Поле обязательно для заполнения",
                                 "email.email"               =>  "Неверный формат поля",
                                 "email.max"                 =>  "Поле не должно превышать 255 символов",
@@ -177,14 +177,14 @@ class ServicesController extends Controller
 
         if($trequest  ==  "cartridge") {
             $validator = Validator::make($request->all(), [
-                'roomnum'               => 'required|max:10',
+                'roomnum'               => 'required|max:191',
                 'user_comment'          =>  'required|max:4096',
                 'printer'               =>  'required',
             ],  $messages);
         }
         if($trequest  ==  "teh") {
             $validator = Validator::make($request->all(), [
-                'roomnum'               =>  'required|max:10',
+                'roomnum'               =>  'required|max:191',
                 'phone'                 =>  'required|max:18',
                 'email'                 =>  'required|email|max:255',
                 'user_comment'          =>  'required|max:4096',

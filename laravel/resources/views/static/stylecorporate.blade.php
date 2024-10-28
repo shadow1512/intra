@@ -70,14 +70,14 @@
                                     class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/t3r3seriZyRjErf" target="_blank" class="blue">tif</a></div>
                     </div>
                 </div>
-                <div class="logo-blk">
+                <!--<div class="logo-blk">
                     <div>
                         <img src="/images/corporate/30years.svg" alt="Техэксперт">
                         <p>Юбилейный логотип Консорциум &laquo;Кодекс&raquo;</p>
                         <div><a href="https://ncloud.kodeks.ru/index.php/s/CgQfjEBXbaTJqmd" target="_blank" class="orange">eps</a><span class="orange">, </span><a href="https://ncloud.kodeks.ru/index.php/s/KqgKZt3qzGPerEk" target="_blank" class="orange">ai</a></div>
                         <div><a href="https://ncloud.kodeks.ru/index.php/s/sZSER9XL7n7THHp" target="_blank" class="blue">jpg</a><span class="blue">, </span><a href="https://ncloud.kodeks.ru/index.php/s/QeJP9b5Lf8X76jq" target="_blank" class="blue">png</a></div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
     </section>
@@ -165,12 +165,12 @@
         <div class="cnt-wrapper">
             <div>
                 <h2>Бланки</h2>
-                <p>Используйте специально подготовленные <br>бланки &laquo;Кодекс&raquo; и&nbsp;&laquo;Теэксперт&raquo;
+                <p>Используйте специально подготовленные <br>бланки &laquo;Кодекс&raquo; и&nbsp;&laquo;Техэксперт&raquo;
                     <br>
                     для соблюдения фирменного стиля</p>
-                <a href="https://ncloud.kodeks.ru/index.php/s/7rYYg6QzEJjJfSH" target="_blank" class="blue">Фирменные бланки &laquo;Теэксперт&raquo;</a>
-                <a href="https://ncloud.kodeks.ru/index.php/s/DtQLSXatrGn7aoz" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo;</a>
-                <a href="https://ncloud.kodeks.ru/index.php/s/H9QgPnDqcCbwcw4" target="_blank" class="blue">Фирменные бланки на&nbsp;2021 год</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/7rYYg6QzEJjJfSH" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo; | &laquo;Теэксперт&raquo;</a>
+                <!--<a href="https://ncloud.kodeks.ru/index.php/s/DtQLSXatrGn7aoz" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo;</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/H9QgPnDqcCbwcw4" target="_blank" class="blue">Фирменные бланки на&nbsp;2021 год</a>-->
             </div>
         </div>
     </section>
@@ -179,11 +179,11 @@
             <h2>Презентации</h2>
             <div class="k">
                 <div class="ppt"><img src="/images/corporate/ppt.svg" alt="ppt"></div>
-                <a href="https://ncloud.kodeks.ru/index.php/s/Bg2zDJnykonDHx3" target="_blank" class="white">Наша роль в&nbsp;цифровизации российских предприятий</a><br>
-                <a href="https://ncloud.kodeks.ru/index.php/s/LDsSTgmX7xsQrEz" target="_blank" class="white inl">СУ НТД</a>
-                <a href="https://ncloud.kodeks.ru/index.php/s/ZEBWoDGT6yEqXTF" target="_blank" class="white">СУТр</a><br>
-                <a href="https://ncloud.kodeks.ru/index.php/s/nRRWqgbGtgCFiF8" target="_blank" class="white inl">СЭД</a>
-                <a href="https://ncloud.kodeks.ru/index.php/s/4xxF3P8mZL6GXdj" target="_blank" class="white">ИСУПБ</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/CSzHMJtSoK3ABQd" target="_blank" class="white">Наша роль в&nbsp;цифровизации российских предприятий</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/wZ33amFQX2LCzyt" target="_blank" class="white inl">СУ НТД</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/Z7RtYodNa7DZCnn" target="_blank" class="white">СУТр</a><br>
+                <a href="https://ncloud.kodeks.ru/index.php/s/eBo3nj9BoWMENAm" target="_blank" class="white inl">СЭД</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/c3xTiRAZiRrgBos" target="_blank" class="white">ИСУПБ</a><br>
                 <a href="https://ncloud.kodeks.ru/index.php/s/8cpdXC9qHedWCrr" target="_blank" class="white">Подложки для презентаций</a>
             </div>
             <div class="te">

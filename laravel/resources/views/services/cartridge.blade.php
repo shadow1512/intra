@@ -16,7 +16,8 @@
                 <select id="printer" name="printer" class="form-control">
                     <option value="" selected="selected">Выберите принтер</option>
                     <option value="Другой">Другой</option>
-                    <option value="Epson AcuLaser C3800 Желтый:Epson S051124 Желтый">Epson AcuLaser C3800 Желтый:Epson S051124 Желтый</option>
+<option value="Epson AcuLaser C3800 Голубой:Epson S051126 Голубой">Epson AcuLaser C3800 Голубой:Epson S051126 Голубой</option>
+<option value="Epson AcuLaser C3800 Желтый:Epson S051124 Желтый">Epson AcuLaser C3800 Желтый:Epson S051124 Желтый</option>
 <option value="Epson AcuLaser C3800 Пурпурный:Epson S051125 Пурпурный">Epson AcuLaser C3800 Пурпурный</option>
 <option value="Epson AcuLaser C3800 Черный:Epson S051127 Черный">Epson AcuLaser C3800 Черный</option>
 <option value="Epson L1800 A3 Черный:Epson C13T67314A T6731 Черный">Epson L1800 A3 Черный</option>
@@ -71,7 +72,12 @@
 <option value="HP P1102:CF285A">HP P1102</option>
 <option value="HP LaserJet M1120:CB436A">HP LaserJet M1120</option>
 <option value="Konica Minolta bizhub 3602P:TNP58">Konica Minolta bizhub 3602P</option>
+<option value="Kyocera FS-1125MFP:TK-1120">Kyocera FS-1125MFP</option>
 <option value="Kyocera FS-6525MFP:TK-475">Kyocera FS-6525MFP</option>
+<option value="Kyocera P5021:TK-5230 K Черный">Kyocera P5021 Черный</option>
+<option value="Kyocera P5021:TK-5230 C Голубой">Kyocera P5021 Голубой</option>
+<option value="Kyocera P5021:TK-5230 Y Желтый">Kyocera P5021 Желтый</option>
+<option value="Kyocera P5021:TK-5230 M Пурпурный">Kyocera P5021 Пурпурный</option>
 <option value="Kyocera P6235cdn:TK-5280K Черный">Kyocera P6235cdn Черный</option>
 <option value="Kyocera P6235cdn:TK-5280C Голубой">Kyocera P6235cdn Голубой</option>
 <option value="Kyocera P6235cdn:TK-5280Y Желтый">Kyocera P6235cdn Желтый</option>
@@ -79,21 +85,18 @@
 <option value="Kyocera P3045dn:TK-3160">Kyocera P3045dn</option>
 <option value="Kyocera P3055dn:TK-3190">Kyocera P3055dn</option>
 <option value="Kyocera P3060dn:TK-3190">Kyocera P3060dn</option>
-<option value="Kyocera P3155dn:TK-3160">Kyocera P3155dn</option>
-<option value="Kyocera P5021:TK-5230 K Черный">Kyocera P5021 Черный</option>
-<option value="Kyocera P5021:TK-5230 C Голубой">Kyocera P5021 Голубой</option>
-<option value="Kyocera P5021:TK-5230 Y Желтый">Kyocera P5021 Желтый</option>
-<option value="Kyocera P5021:TK-5230 M Пурпурный">Kyocera P5021 Пурпурный</option>
+<option value="Kyocera P3150dn:TK-3160">Kyocera P3150dn</option>
+<option value="Kyocera P3155dn:TK-3190">Kyocera P3155dn</option>
+<option value="Kyocera P3260dn:TK-3190">Kyocera P3260dn</option>
 <option value="Kyocera M2235dn:TK-1200">Kyocera M2235dn</option>
+<option value="Kyocera M2335dn:TK-1200">Kyocera M2335dn</option>
+<option value="Kyocera M2635DN:TK-1150">Kyocera M2635DN</option>
 <option value="Kyocera M2735dn:TK-1200">Kyocera M2735dn</option>
 <option value="Kyocera M4125 A3: TK-6115">Kyocera M4125 A3</option>
-<option value="Kyocera M2335dn:TK-1200">Kyocera M2335dn</option>
-<option value="Kyocera P3150dn:TK-3160">Kyocera P3150dn</option>
-<option value="Kyocera P3155dn:TK-3160">Kyocera P3155dn</option>
-<option value="Kyocera P6235cdn:TK-5280K Черный">Kyocera P6235cdn Черный</option>
-<option value="Kyocera P6235cdn:TK-5280C Голубой">Kyocera P6235cdn Голубой</option>
-<option value="Kyocera P6235cdn:TK-5280Y Желтый">Kyocera P6235cdn Желтый</option>
-<option value="Kyocera P6235cdn:TK-5280M Пурпурный">Kyocera P6235cdn Пурпурный</option>
+<option value="Kyocera M5526cdn:TK-5240C">Kyocera M5526cdn Голубой</option>
+<option value="Kyocera M5526cdn:TK-5240Bk">Kyocera M5526cdn Черный</option>
+<option value="Kyocera M5526cdn:TK-5240Y">Kyocera M5526cdn Желтый</option>
+<option value="Kyocera M5526cdn:TK-5240M">Kyocera M5526cdn Пурпурный</option>
 <option value="Kyocera P7240:TK-5290 black Черный">Kyocera P7240 Черный</option>
 <option value="Kyocera P7240:TK-5290 cyan Голубой">Kyocera P7240 Голубой</option>
 <option value="Kyocera P7240:TK-5290 yellow Желтый">Kyocera P7240 Желтый</option>

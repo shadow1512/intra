@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use kbsali\Redmine\Client;
 use Config;
 use App\User;
+use Mail;
 
 class Technical_Request extends Model
 {
@@ -39,41 +40,57 @@ class Technical_Request extends Model
 
             $issue= null;
             if($tr->type_request    ==  "cartridge") {
-                $issue = $client->issue->create([
-                    'project_id'        =>  110,
-                    'tracker_id'        =>  6,
-                    //'assigned_to_id'    =>  778,
-                    'subject' => $subject,
-                    'description' => $description,
-                    'due_date' => date("Y-m-d"),
-                    'custom_fields' => [
-                        [
-                            'id' => 18,
-                            'value' => $tr->room,
+                try {
+                    $issue = $client->issue->create([
+                        'project_id'        =>  110,
+                        'tracker_id'        =>  6,
+                        //'assigned_to_id'    =>  778,
+                        'subject' => $subject,
+                        'description' => $description,
+                        'due_date' => date("Y-m-d"),
+                        'custom_fields' => [
+                            [
+                                'id' => 18,
+                                'value' => $tr->room,
+                            ],
+                            [
+                                'id' => 14,
+                                'value' => $tr->printer,
+                            ],
                         ],
-                        [
-                            'id' => 14,
-                            'value' => $tr->printer,
-                        ],
-                    ],
-                    'watcher_user_ids' => []
-                ]);
+                        'watcher_user_ids' => []
+                    ]);
+                }
+                catch(Exception $e) {
+                    Mail::send($e->getMessage(), function ($m) {
+                        $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                        $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
+                    });
+                }
             }
             else {
-                $issue = $client->issue->create([
-                    'project_id' => 103,
-                    'tracker_id' => 7,
-                    'subject' => $subject,
-                    'description' => $description,
-                    'due_date' => date("Y-m-d"),
-                    'custom_fields' => [
-                        [
-                            'id' => 18,
-                            'value' => $tr->room,
+                try {
+                    $issue = $client->issue->create([
+                        'project_id' => 103,
+                        'tracker_id' => 7,
+                        'subject' => $subject,
+                        'description' => $description,
+                        'due_date' => date("Y-m-d"),
+                        'custom_fields' => [
+                            [
+                                'id' => 18,
+                                'value' => $tr->room,
+                            ],
                         ],
-                    ],
-                    'watcher_user_ids' => []
-                ]);
+                        'watcher_user_ids' => []
+                    ]);
+                }
+                catch(Exception $e) {
+                    Mail::send($e->getMessage(), function ($m) {
+                        $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                        $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
+                    });
+                }
             }
 
             if(is_null($issue)) {

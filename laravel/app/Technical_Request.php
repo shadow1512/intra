@@ -95,7 +95,10 @@ class Technical_Request extends Model
 
             if(is_null($issue)) {
                 Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);
-                return;
+                Mail::send("Ошибка для заявки "  .   $tr->id, function ($m) {
+                        $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                        $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
+                });
             }
             $els    =   $issue->children();
 
@@ -103,7 +106,10 @@ class Technical_Request extends Model
             foreach($els as $name   =>  $value) {
                 if($name    === "error") {
                     Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
-                    return;
+                    Mail::send("Ошибка для заявки "  .   $tr->id, function ($m) {
+                        $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                        $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
+                    });
                 }
                 if($name    === "id") {
                     $issue_id   =   $value;

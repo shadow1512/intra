@@ -62,7 +62,7 @@ class Technical_Request extends Model
                     ]);
                 }
                 catch(Exception $e) {
-                    Mail::send($e->getMessage(), function ($m) {
+                    Mail::raw($e->getMessage(), function ($m) {
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
                     });
@@ -86,7 +86,7 @@ class Technical_Request extends Model
                     ]);
                 }
                 catch(Exception $e) {
-                    Mail::send($e->getMessage(), function ($m) {
+                    Mail::raw($e->getMessage(), function ($m) {
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
                     });
@@ -95,7 +95,7 @@ class Technical_Request extends Model
 
             if(is_null($issue)) {
                 Log::error('REDMINE ISSUE CREATION ERROR: no issue  for record ' .   $tr->id);
-                Mail::send("Ошибка для заявки "  .   $tr->id, function ($m) {
+                Mail::raw("Ошибка для заявки "  .   $tr->id, function ($m) {
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
                 });
@@ -106,7 +106,7 @@ class Technical_Request extends Model
             foreach($els as $name   =>  $value) {
                 if($name    === "error") {
                     Log::error('REDMINE ISSUE CREATION ERROR: ' .   $value  .   " for record " .   $tr->id);
-                    Mail::send("Ошибка для заявки "  .   $tr->id, function ($m) {
+                    Mail::raw("Ошибка для заявки "  .   $tr->id, function ($m) {
                         $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                         $m->to(Config::get('services.tech_admin'))->subject('Ошибка в создании заявки redmine, связаться с Борисовым');
                     });

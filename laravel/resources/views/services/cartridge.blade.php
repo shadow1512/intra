@@ -9,7 +9,7 @@
             {{ csrf_field() }}
             <div class="field">
                 <label for="roomnum" class="lbl">Уточните комнату, в которой стоит принтер:</label>
-                <input type="text" id="roomnum" name="roomnum" class="it" value="{{$user->room}}" maxlength="10"/>
+                <input type="text" id="roomnum" name="roomnum" class="it" value="{{$user->room}}" />
             </div>
             <div class="field">
                 <label for="printer" class="lbl">Выберите модель принтера из списка:</label>

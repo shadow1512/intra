@@ -404,6 +404,26 @@ a.white {
     left: 405px;
     top: 154px;
 }
+.square.__seven{
+    left: 0px;
+    top: 308px;
+}
+.square.__eight{
+    left: 203px;
+    top: 308px;
+}
+.square.__nine{
+    left: 405px;
+    top: 308px;
+}
+.square.__ten{
+    left: 607px;
+    top: 308px;
+}
+.square.__eleven{
+    right: 41px;
+    top: 308px;
+}
 .long-vertical {
     width: 192px;
     height: 297px;

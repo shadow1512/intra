@@ -168,7 +168,7 @@
                 <p>Используйте специально подготовленные <br>бланки &laquo;Кодекс&raquo; и&nbsp;&laquo;Техэксперт&raquo;
                     <br>
                     для соблюдения фирменного стиля</p>
-                <a href="https://ncloud.kodeks.ru/index.php/s/w8xgS8tLwo9a2RA" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo; | &laquo;Теэксперт&raquo;</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/w8xgS8tLwo9a2RA" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo; | &laquo;Техэксперт&raquo;</a>
                 <!--<a href="https://ncloud.kodeks.ru/index.php/s/DtQLSXatrGn7aoz" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo;</a>
                 <a href="https://ncloud.kodeks.ru/index.php/s/H9QgPnDqcCbwcw4" target="_blank" class="blue">Фирменные бланки на&nbsp;2021 год</a>-->
             </div>

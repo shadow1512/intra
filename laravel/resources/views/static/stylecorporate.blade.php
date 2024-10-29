@@ -168,7 +168,7 @@
                 <p>Используйте специально подготовленные <br>бланки &laquo;Кодекс&raquo; и&nbsp;&laquo;Техэксперт&raquo;
                     <br>
                     для соблюдения фирменного стиля</p>
-                <a href="https://ncloud.kodeks.ru/index.php/s/7rYYg6QzEJjJfSH" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo; | &laquo;Теэксперт&raquo;</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/w8xgS8tLwo9a2RA" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo; | &laquo;Теэксперт&raquo;</a>
                 <!--<a href="https://ncloud.kodeks.ru/index.php/s/DtQLSXatrGn7aoz" target="_blank" class="blue">Фирменные бланки &laquo;Кодекс&raquo;</a>
                 <a href="https://ncloud.kodeks.ru/index.php/s/H9QgPnDqcCbwcw4" target="_blank" class="blue">Фирменные бланки на&nbsp;2021 год</a>-->
             </div>
@@ -184,7 +184,7 @@
                 <a href="https://ncloud.kodeks.ru/index.php/s/Z7RtYodNa7DZCnn" target="_blank" class="white">СУТр</a><br>
                 <a href="https://ncloud.kodeks.ru/index.php/s/eBo3nj9BoWMENAm" target="_blank" class="white inl">СЭД</a>
                 <a href="https://ncloud.kodeks.ru/index.php/s/c3xTiRAZiRrgBos" target="_blank" class="white">ИСУПБ</a><br>
-                <a href="https://ncloud.kodeks.ru/index.php/s/8cpdXC9qHedWCrr" target="_blank" class="white">Подложки для презентаций</a>
+                <a href="https://ncloud.kodeks.ru/index.php/s/BRYaNsxgdK3KDWM" target="_blank" class="white">Подложки для презентаций</a>
             </div>
             <div class="te">
                 <p class="white">Видео-презентация <br> о&nbsp;том, как мы&nbsp;создаем системы</p>

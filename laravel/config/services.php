@@ -36,6 +36,6 @@ return [
     ],
 
     'conference_owner'  =>  'konf@kodeks.ru',
-    'tech_admin'        =>  'slava_b@kodeks.ru'
+    'tech_admin'        =>  'den@kodeks.ru'
 
 ];

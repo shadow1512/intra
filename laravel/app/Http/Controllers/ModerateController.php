@@ -370,7 +370,11 @@ class ModerateController extends Controller
                             $dm =   new Dinner_menu();
                             $dm->date_menu      =   $date_menu;
                             $dm->type_meals     =   $type_meal;
-                            $dm->meals          =   $dataArray[$j]["C"];
+                            $meals  =   trim($dataArray[$j]["C"]);
+                            if(mb_strlen($meals) > 255) {
+                                $meals= mb_substr($meals, 0, 251, "UTF-8")   .   "..";
+                            }
+                            $dm->meals          =   $meals;
                             $dm->price_meals    =   $dataArray[$j]["D"];
                             $dm->save();
                             
@@ -378,8 +382,8 @@ class ModerateController extends Controller
                         }
                     }
                 }
-                if(isset($dataArray[1]["C"]) &&   (mb_strtolower(trim($dataArray[1]["C"]), "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"])) && ((int)$dataArray[1]["D"] > 0)) {
-                    $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[2]["A"]));
+                if(isset($dataArray[1]["B"]) &&   (mb_strtolower(trim($dataArray[1]["B"]), "UTF-8")   ==  "обед") && is_integer(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[1]["A"])) && ((int)$dataArray[1]["C"] > 0)) {
+                    $date_menu  =   date("Y-m-d", \PhpOffice\PhpSpreadsheet\Shared\Date::excelToTimestamp($dataArray[1]["A"]));
                     
                     $exist  = Dinner_menu_complex::where("date_menu_complex", '=',    $date_menu)->count();
                     if($exist) {
@@ -415,7 +419,11 @@ class ModerateController extends Controller
                         if($dataArray[$j]["B"]) {
                             $dm =   new Dinner_menu();
                             $dm->date_menu      =   $date_menu;
-                            $dm->meals          =   $dataArray[$j]["B"];
+                            $meals  =   trim($dataArray[$j]["B"]);
+                            if(mb_strlen($meals) > 255) {
+                                $meals= mb_substr($meals, 0, 251, "UTF-8")   .   "..";
+                            }
+                            $dm->meals          =   $meals;
                             $dm->type_dinner    =   1;
                             $dm->save();
                         }

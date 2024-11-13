@@ -403,8 +403,8 @@ class ModerateController extends Controller
                     
                     $dm =   new Dinner_menu_complex();
                     $dm->date_menu_complex      =   $date_menu;
-                    $dm->meals_complex          =   $dataArray[1]["C"];
-                    $dm->price_meals_complex    =   $dataArray[1]["D"];
+                    $dm->meals_complex          =   $dataArray[1]["B"];
+                    $dm->price_meals_complex    =   $dataArray[1]["C"];
                     $dm->save();
                     if(isset($added_positions[$date_menu])) {
                         $added_positions[$date_menu]    =   $added_positions[$date_menu]    +1;

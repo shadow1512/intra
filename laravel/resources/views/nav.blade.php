@@ -41,6 +41,10 @@
                     <svg class="main_top_phones_logout_ic" xmlns="http://www.w3.org/2000/svg" width="17.313" height="17.125"><path d="M8.626.051l2.21 4.726.387.829.885.136 5.021.77-3.662 3.768-.615.633.143.883.855 5.265-4.425-2.455-.8-.444-.799.444L3.4 17.061l.856-5.266.143-.883-.615-.633-3.66-3.768 5.021-.77.884-.136.388-.829L8.626.051" fill="#fff"/></svg>
                     Мои контакты
                 </a>
+                <div href="" class="main_top_phones_search_lk __js-modal-security-lk">
+                    <svg class="main_top_phones_logout_ic" xmlns="http://www.w3.org/2000/svg" width="14" height="16" fill="none"><path fill="#fff" d="M13.178 1.903 7.13.02a.436.436 0 0 0-.26 0L.822 1.903a.452.452 0 0 0-.233.169.48.48 0 0 0-.089.28v6.903c0 .898.35 1.817 1.041 2.732.528.699 1.258 1.4 2.17 2.086a19.295 19.295 0 0 0 3.104 1.886.439.439 0 0 0 .37 0c.063-.03 1.572-.735 3.104-1.886.912-.685 1.642-1.387 2.17-2.086.69-.915 1.041-1.834 1.041-2.732V2.352a.48.48 0 0 0-.09-.28.452.452 0 0 0-.232-.17Z"/></svg>
+                    Охрана
+                </div>
             @else
                 Необходимо <span class="__js_auth">авторизоваться</span>
             @endif
@@ -84,3 +88,11 @@
         @endforeach
     </ul>
 </nav>
+<!-- security modal -->
+<div class="overlay __js-modal-security">
+    <div class="modal-w">
+        <div class="modal-cnt __form">
+        </div>
+    </div>
+</div>
+<!-- eo security modal -->

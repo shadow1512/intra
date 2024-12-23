@@ -151,6 +151,7 @@ function popUp(button, window, callback) {
 function setFocus(window) { setTimeout(function() { $(window).find('input')[0].focus(); }, 100) };
 
 popUp('.__js-modal-bill-lk', '.__js-modal-bill');
+popUp('.__js-modal-security-lk', '.__js-modal-security');
 popUp('.__js-modal-camera-lk', '.__js-modal-camera');
 popUp('.reserve_table_column_btn', '.__js-modal-order', function(but, win) {
     if ($(but).parent().children("span.source_date").length > 0) {

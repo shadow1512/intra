@@ -91,7 +91,21 @@
 <!-- security modal -->
 <div class="overlay __js-modal-security">
     <div class="modal-w">
-        <div class="modal-cnt __form">
+        <div class="modal-cnt">
+            <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
+            <div class="modal_cnt">
+                <div class="security-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 102 102"><circle cx="51" cy="51" r="51" fill="#0089CF"/><path fill="#fff" fill-rule="evenodd" d="M33.493 23.112C33.493 19.239 51 16.28 51 16.28s17.507 2.958 17.507 6.83c0 5.164-3.185 7.342-3.185 7.342H36.678s-3.185-2.178-3.185-7.341Zm20.008.672a2.501 2.501 0 1 1-5.003 0 2.501 2.501 0 0 1 5.003 0Zm10.527 12.971c2.318-1.809 1.957-3.801 1.957-3.801H36.014s-.362 1.994 1.957 3.801a13.339 13.339 0 1 0 26.059 0h-.002ZM51 39.623c4.536 0 7.708-.523 9.923-1.277a10.004 10.004 0 1 1-19.845 0c2.214.754 5.385 1.277 9.922 1.277Zm2.5 16.673a1.667 1.667 0 0 1 1.668 1.667v2.305a1.667 1.667 0 0 1-.922 1.49l-.745.374.962 4.81 7.07-10.604c.483 0 .933.003 1.34.006C71.884 58.4 81.01 62.592 81.01 68.898v4.267a3.138 3.138 0 0 1-3.138 3.139H24.127a3.138 3.138 0 0 1-3.139-3.139v-4.267c0-6.306 9.526-10.546 18.537-12.602-.031.007.307.012.926.017l7.142 10.712.906-4.893-.745-.374a1.667 1.667 0 0 1-.922-1.49v-2.305a1.667 1.667 0 0 1 1.667-1.667H53.5Zm15.84 8.892s-2.222-1.11-3.335-2.223c-1.112 1.112-3.334 2.223-3.334 2.223s1.164 4.447 3.334 4.447c2.171 0 3.335-4.447 3.335-4.447Z" clip-rule="evenodd"/></svg>
+                    <div class="security-wrapper-h">Служба охраны</div>
+                    <div class="security-wrapper-desc">Работа контрольно-пропускных пунктов, обеспечение безопасности и&nbsp;общественного порядка на&nbsp;предприятии</div>
+                    <div class="security-wrapper-bd">
+                        <div class="security-wrapper-num"><strong>Местный тел.: </strong><span>125</span></div>
+                        <div class="security-wrapper-num"><strong>Местный тел.: </strong><span>547</span></div>
+                        <div class="security-wrapper-num"><strong>Мобильный тел.: </strong><span>+7 (932) 564-88-88</span></div>
+                        <div class="security-wrapper-num"><strong>Мобильный тел.: </strong><span>+7 (812) 600-55-31</span></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

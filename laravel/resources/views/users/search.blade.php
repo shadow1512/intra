@@ -129,7 +129,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="div-tab" id="id2">
+                    <div class="div-tab" id="diagram">
                     <div class="content_tx __no-pad">
                         <div class="department">
                             <script src="/js/d3.v3.min.js"></script>
@@ -233,7 +233,7 @@
                             </div>
                             @endif
                         </div>
-                        <div class="div-tab" id="id2">
+                        <div class="div-tab" id="diagram">
                         <div class="content_tx __no-pad">
                             <div class="department">
                                 <script src="/js/d3.v3.min.js"></script>

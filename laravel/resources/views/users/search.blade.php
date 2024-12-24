@@ -88,14 +88,14 @@
         @if (Auth::check())
             <div class="main-tabs">
                 <ul>
-                    <li><a href="#id1" class="content_i_header __with-ic"><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
+                    <li class="content_i_header __with-ic"><a href="#id1" ><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.918006 35.1"><path d="M29.28 35.1c-.2 0-.4-.1-.5-.2l-10.3-7.5-10.3 7.5c-.3.2-.8.2-1.1 0s-.5-.7-.3-1l3.9-12.1-10.3-7.5c-.3-.2-.5-.7-.3-1 .1-.4.5-.6.9-.6h12.7L17.58.6c.1-.4.5-.6.9-.6s.8.3.9.6l3.9 12.1h12.7c.4 0 .8.3.9.6.1.4 0 .8-.3 1l-10.3 7.5 3.9 12.1c.1.4 0 .8-.3 1-.2.2-.4.2-.6.2zm-10.8-9.7c.2 0 .4.1.5.2l8.5 6.2-3.3-10c-.1-.4 0-.8.3-1l8.5-6.2h-10.5c-.4 0-.8-.3-.9-.6l-3.3-10-3.3 10c-.1.4-.5.6-.9.6H3.58l8.5 6.2c.3.2.5.7.3 1l-3.3 10 8.5-6.2c.5-.1.7-.2.9-.2z"/></svg>
                         <div class="h __h_m">Мои контакты</div></a></li>
-                    <li><a href="#id2" class="content_i_header __with-ic"><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg" width="17" height="16"><path fill="#0189CF" fill-rule="nonzero" d="M5.003 1.978a.571.571 0 0 1 .732.34.567.567 0 0 1-.135.599.558.558 0 0 1-.205.135 6.102 6.102 0 0 0-4.002 5.714 6.099 6.099 0 0 0 6.092 6.091 6.103 6.103 0 0 0 5.715-4.001.559.559 0 0 1 .135-.207.567.567 0 0 1 .598-.135c.296.108.449.437.34.733A7.25 7.25 0 0 1 7.485 16C3.495 16 .25 12.755.25 8.766a7.25 7.25 0 0 1 4.753-6.788ZM7.482 0c4.835 0 8.768 3.934 8.768 8.769a.571.571 0 0 1-.571.571H7.482a.571.571 0 0 1-.572-.571V.57c0-.315.256-.571.572-.571Zm.571 1.164v7.033h7.033a7.638 7.638 0 0 0-7.033-7.033Z"/></svg><div class="h __h_m">Диаграмма оргструктуры</div></a></li>
+                    <li class="content_i_header __with-ic"><a href="#id2" ><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg"><path fill="#0189CF" fill-rule="nonzero" d="M5.003 1.978a.571.571 0 0 1 .732.34.567.567 0 0 1-.135.599.558.558 0 0 1-.205.135 6.102 6.102 0 0 0-4.002 5.714 6.099 6.099 0 0 0 6.092 6.091 6.103 6.103 0 0 0 5.715-4.001.559.559 0 0 1 .135-.207.567.567 0 0 1 .598-.135c.296.108.449.437.34.733A7.25 7.25 0 0 1 7.485 16C3.495 16 .25 12.755.25 8.766a7.25 7.25 0 0 1 4.753-6.788ZM7.482 0c4.835 0 8.768 3.934 8.768 8.769a.571.571 0 0 1-.571.571H7.482a.571.571 0 0 1-.572-.571V.57c0-.315.256-.571.572-.571Zm.571 1.164v7.033h7.033a7.638 7.638 0 0 0-7.033-7.033Z"/></svg><div class="h __h_m">Диаграмма оргструктуры</div></a></li>
                 </ul>
                 <div class="div-tab" id="id1">
                     @if (count($contacts))
                         <div class="content_tx __no-pad">
-                        <ul class="directory_lst">
+                            <ul class="directory_lst">
                             @foreach($contacts as $contact)
                                 <li class="directory_lst_i @if (mb_substr($contact->birthday,  5) ==  date("m-d")) __birthday @endif">
                                     <div class="directory_lst_i_pic"><img src="@if($contact->avatar_round){{$contact->avatar_round}} @else {{$contact->avatar}} @endif" class="directory_lst_i_img" title="{{ date("d.m.Y", strtotime($contact->birthday)) }}"></div>
@@ -121,7 +121,7 @@
                                 </li>
                             @endforeach
                         </ul>
-                </div>
+                        </div>
                     @else
                         <div class="content_i_header __with-ic">
                             <div class="h __h_m"><h3>Вы пока не добавили избранные контакты</h3></div>

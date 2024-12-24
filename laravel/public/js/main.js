@@ -425,18 +425,6 @@ $(function () {
     if (hash) $('.main-tabs-ul a[href$="'+hash+'"]').trigger('click');
 });
 
-if( window.location.search.indexOf('diagram')) {
-    $("#favorite").hide();
-    $("#diagram").show();
-    $(".main-tabs-ul").children().eq(0).removeClass('active');
-    $(".main-tabs-ul").children().eq(1).addClass('active');
-}
-if( window.location.search.indexOf('favorite')) {
-    $("#diagram").hide();
-    $("#favorite").show();
-    $(".main-tabs-ul").children().eq(1).removeClass('active');
-    $(".main-tabs-ul").children().eq(0).addClass('active');
-}
 
 function open(link, cnt, parent) {
     $(link).on('click', function(event) {

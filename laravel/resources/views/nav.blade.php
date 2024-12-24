@@ -2,7 +2,7 @@
     <div class="main_top_phones">
         <div class="main_top_phones_people">
             <div class="main_top_phones_h">
-                <a href="{{route("people.search")}}">
+                <a href="{{route("people.search")}}#diagram">
                     Телефонный справочник
                 </a>
                 <a href="{{route("people.search")}}" title="Найти">

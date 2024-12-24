@@ -93,7 +93,7 @@
                     <li class="content_i_header __with-ic"><svg class="content_i_header_ic" xmlns="http://www.w3.org/2000/svg"><path fill="#0189CF" fill-rule="nonzero" d="M5.003 1.978a.571.571 0 0 1 .732.34.567.567 0 0 1-.135.599.558.558 0 0 1-.205.135 6.102 6.102 0 0 0-4.002 5.714 6.099 6.099 0 0 0 6.092 6.091 6.103 6.103 0 0 0 5.715-4.001.559.559 0 0 1 .135-.207.567.567 0 0 1 .598-.135c.296.108.449.437.34.733A7.25 7.25 0 0 1 7.485 16C3.495 16 .25 12.755.25 8.766a7.25 7.25 0 0 1 4.753-6.788ZM7.482 0c4.835 0 8.768 3.934 8.768 8.769a.571.571 0 0 1-.571.571H7.482a.571.571 0 0 1-.572-.571V.57c0-.315.256-.571.572-.571Zm.571 1.164v7.033h7.033a7.638 7.638 0 0 0-7.033-7.033Z"/></svg><div class="h __h_m">Диаграмма оргструктуры</div></li>
                 </ul>
                 <div class="div-tab-wrap">
-                    <div class="div-tab">
+                    <div class="div-tab" id="favorite">
                         @if (count($contacts))
                             <div class="content_tx __no-pad">
                                 <ul class="directory_lst">
@@ -129,7 +129,7 @@
                             </div>
                         @endif
                     </div>
-                    <div class="div-tab">
+                    <div class="div-tab" id="diagram">
                     <div class="content_tx __no-pad">
                         <div class="department">
                             <script src="/js/d3.v3.min.js"></script>
@@ -233,7 +233,7 @@
                             </div>
                             @endif
                         </div>
-                        <div class="div-tab">
+                        <div class="div-tab" id="diagram">
                         <div class="content_tx __no-pad">
                             <div class="department">
                                 <script src="/js/d3.v3.min.js"></script>

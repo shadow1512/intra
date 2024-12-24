@@ -412,6 +412,7 @@ function tabs(tab, cnt) {
 }
 
 tabs('.search-res_lst', '.search-res_cnt');
+tabs('.main-tabs-ul', '.div-tab-wrap');
 
 function open(link, cnt, parent) {
     $(link).on('click', function(event) {

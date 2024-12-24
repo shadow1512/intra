@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 @include('head')
 <body>
-<div class="main_w __tabs-page">
+<div class="main_w">
     <!--header-->
 @include('header')
 <!-- eo header-->

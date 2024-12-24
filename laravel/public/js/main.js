@@ -412,7 +412,18 @@ function tabs(tab, cnt) {
 }
 
 tabs('.search-res_lst', '.search-res_cnt');
-tabs('.main-tabs-ul', '.div-tab-wrap');
+
+$(function () {
+    $(".div-tab").hide().first().show();
+    $(".main-tabs-ul li:first").addClass("active");
+    $(".main-tabs-ul a").on('click', function (e) {
+        e.preventDefault();
+        $(this).closest('li').addClass("active").siblings().removeClass("active");
+        $($(this).attr('href')).show().siblings('.div-tab').hide();
+    });
+    var hash = $.trim( window.location.hash );
+    if (hash) $('.main-tabs-ul a[href$="'+hash+'"]').trigger('click');
+});
 
 if( window.location.search.indexOf('diagram')) {
     $("#favorite").hide();

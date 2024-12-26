@@ -32,7 +32,7 @@
             @else
             <div class="main_top_phones_logout">
                 <div class="main_top_phones_logout_tx">Тут будут доступны контакты, добавленные в&nbsp;группу &laquo;Мои контакты&raquo; для быстрого доступа
-                    <p>Чтобы воспользоваться, необходимо <span class="__js_auth">авторизоваться</span></p>
+                    <p>Чтобы воспользоваться, необходимо <span class="__js_auth" style="color:#fff">авторизоваться</span></p>
                 </div>
             </div>
             @endif

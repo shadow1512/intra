@@ -63,7 +63,7 @@ class uploadparseclog extends Command
         else {
             Log::error('Parsec: impossible to read XML Parsec file from mnt');
         }*/
-        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
+        $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("xlsx");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
             Log::error('Parsec: no worksheets to parse');

@@ -43,8 +43,9 @@ class uploadparseclog extends Command
     public function handle()
     {
         //
-        $result=    system(Config::get('parsec.mount_script_run'), $result_var);
-        $doc    = new DOMDocument('1.0');
+        //$result=    system(Config::get('parsec.mount_script_run'), $result_var);
+        copy(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'), Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
+        /*$doc    = new DOMDocument('1.0');
         $dl =   $doc->load(Config::get('parsec.path') . '/'   .   Config::get('parsec.filename'));
         if($dl) {
             $doc->encoding  =   'utf-8';
@@ -61,7 +62,7 @@ class uploadparseclog extends Command
         }
         else {
             Log::error('Parsec: impossible to read XML Parsec file from mnt');
-        }
+        }*/
         $reader = \PhpOffice\PhpSpreadsheet\IOFactory::createReader("Xml");
         $spreadsheet = $reader->load(Config::get('parsec.parsec_converted_path') . '/'   .   Config::get('parsec.filename'));
         if(!$spreadsheet->getSheetCount()) {
@@ -76,30 +77,26 @@ class uploadparseclog extends Command
         $last_record    =   Parsec_log::orderBy('datetime_record', 'desc')->first();
 
         foreach($sourceArray as $row) {
-            if(preg_match('/[0-9]{1,2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
-                $time   =   $matches[0];
-                $action =   null;
-                if (str_contains($row[1], 'выход')) {
-                    $action =   false;
-                }
-                if (str_contains($row[1], 'вход')) {
-                    $action =   true;
-                }
-                $area   =   $row[3];
-                $user   =   $row[5];
-                $date_data  =   explode(";", $row[6]);
-                $date_parts =   explode(":", $date_data[0]);
-                $date_string= trim($date_parts[1]);
-                $date_array =   explode(".",    $date_string);
+            if(preg_match('/[0-9]{1,2}.[0-9]{2}:[0-9]{4}\s[0-9]{1,2}:[0-9]{2}:[0-9]{2}/', $row[0], $matches)) {
+                $datetime   =   $matches[0];
+                $datetimeparts  =   explode(" ", $datetime);
+                $date_array =   explode(".",    $datetimeparts[0]);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
-
-                //время в файле начинается не с ведущего нуля, когда меньше 10, а просто с числа
-                $time_parts =   explode(":", $time);
+                $time_parts =   explode(":", $datetimeparts[1]);
                 if(mb_strlen($time_parts[0], "UTF-8") <   2) {
                     $time_parts[0]    =   "0" .   $time_parts[0];
                     $time=  implode(":", $time_parts);
                 }
-                //не надо добавлять файл весь, а только те записи, которые старше последней
+                $action =   null;
+                if (str_contains($row[5], 'выход')) {
+                    $action =   false;
+                }
+                if (str_contains($row[5], 'вход')) {
+                    $action =   true;
+                }
+                $area   =   $row[6];
+                $user   =   $row[2] . " " . $row[3] . " " . $row[4];
+                
 
 
 
@@ -116,6 +113,6 @@ class uploadparseclog extends Command
 
             }
         }
-        system(Config::get('parsec.mount_script_stop'), $result_var);
+        //system(Config::get('parsec.mount_script_stop'), $result_var);
     }
 }

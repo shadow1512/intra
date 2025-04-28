@@ -111,12 +111,13 @@ class uploadparseclog extends Command
 
                     $pl->save();
                 }
+                else {
+                    echo $date.    " " .   $time;
+                }
 
             }
             else {
                 echo "No records found\r\n";
-                var_dump($row[0]);
-                var_dump($row[1]);
             }
         }
         //system(Config::get('parsec.mount_script_stop'), $result_var);

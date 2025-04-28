@@ -89,14 +89,14 @@ class uploadparseclog extends Command
                     $time=  implode(":", $time_parts);
                 }
                 $action =   null;
-                if (str_contains($row[5], 'выход')) {
+                if (str_contains($row[6], 'выход')) {
                     $action =   false;
                 }
-                if (str_contains($row[5], 'вход')) {
+                if (str_contains($row[6], 'вход')) {
                     $action =   true;
                 }
-                $area   =   $row[6];
-                $user   =   $row[2] . " " . $row[3] . " " . $row[4];
+                $area   =   $row[7];
+                $user   =   $row[3] . " " . $row[4] . " " . $row[5];
                 
 
 

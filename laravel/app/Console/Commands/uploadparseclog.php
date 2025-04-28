@@ -86,8 +86,8 @@ class uploadparseclog extends Command
                 $time_parts =   explode(":", $datetimeparts[1]);
                 if(mb_strlen($time_parts[0], "UTF-8") <   2) {
                     $time_parts[0]    =   "0" .   $time_parts[0];
-                    $time=  implode(":", $time_parts);
                 }
+                $time=  implode(":", $time_parts);
                 $action =   null;
                 if (str_contains($row[6], 'выход')) {
                     $action =   false;
@@ -112,12 +112,12 @@ class uploadparseclog extends Command
                     $pl->save();
                 }
                 else {
-                    echo $date.    " " .   $time;
+                    //echo $date.    " " .   $time;
                 }
 
             }
             else {
-                echo "No records found\r\n";
+                //echo "No records found\r\n";
             }
         }
         //system(Config::get('parsec.mount_script_stop'), $result_var);

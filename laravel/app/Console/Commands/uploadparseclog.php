@@ -82,6 +82,7 @@ class uploadparseclog extends Command
                 $datetimeparts  =   explode(" ", $datetime);
                 $date_array =   explode(".",    $datetimeparts[0]);
                 $date       =    $date_array[2]  .   "-" .   $date_array[1]  .   "-" .   $date_array[0];
+                $time   =   "00:00:00";
                 $time_parts =   explode(":", $datetimeparts[1]);
                 if(mb_strlen($time_parts[0], "UTF-8") <   2) {
                     $time_parts[0]    =   "0" .   $time_parts[0];

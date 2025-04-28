@@ -112,6 +112,9 @@ class uploadparseclog extends Command
                 }
 
             }
+            else {
+                echo "No records found\r\n";
+            }
         }
         //system(Config::get('parsec.mount_script_stop'), $result_var);
     }

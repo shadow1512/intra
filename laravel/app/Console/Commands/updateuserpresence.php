@@ -40,7 +40,7 @@ class updateuserpresence extends Command
     public function handle()
     {
         //берем только те записи, которые не обработаны
-        $records_to_process    =   Parsec_log::where("processed", "=",  0)->get();
+        $records_to_process    =   Parsec_log::where("processed", "=",  0)->orderBy("datetime_record", "desc")->get();
         foreach($records_to_process as $record) {
             $user_names =   explode(" ",    $record->user);
 

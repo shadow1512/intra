@@ -195,7 +195,9 @@
   left: 30px;
   top: 50%;
   margin-top: -9px; }
-
+.__tabs-page .content_header,.__tabs-page .content_i {
+  overflow: hidden;
+}
 .content_tx {
   padding: 30px 50px; }
   .content_tx.__no-pad {

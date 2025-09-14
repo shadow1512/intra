@@ -181,4 +181,10 @@ class Technical_Request extends Model
             }
         }
     }
+    
+    public function syncPrintersFromRedmine() {
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password')); 
+        $data   =   $client->custom_fields->all();
+        var_dump($data);
+    }
 }

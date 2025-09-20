@@ -184,7 +184,20 @@ class Technical_Request extends Model
     
     public function syncPrintersFromRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password')); 
-        $data   =   $client->custom_fields->all();
-        var_dump($data);
+        $custom_fields   =   $client->custom_fields->all();
+        $found_printers_field   =   false;
+        foreach($custom_fields as $custom_field_data) {
+            if(isset($custom_field_data["name"])    &&  ($custom_field_data["name"] ==  "Принтеры")) {
+                var_dump($custom_field_data);
+                $found_printers_field   =   true;
+            }
+        }
+        if(!$found_printers_field) {
+            Log::error('REDMINE PRINTERS ARRAY NOT FOUND');
+            /*Mail::raw("Ошибка синхронизации массива принтеров с redmine", function ($m) {
+                $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
+                $m->to(Config::get('services.tech_admin'))->subject('Ошибка синхронизации массива принтеров с redmine, связаться с Борисовым');
+            });*/
+        }
     }
 }

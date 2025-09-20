@@ -185,6 +185,7 @@ class Technical_Request extends Model
     public function syncPrintersFromRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password')); 
         $custom_fields   =   $client->custom_fields->all();
+        var_dump($custom_fields);
         $found_printers_field   =   false;
         foreach($custom_fields as $custom_field_data) {
             if(isset($custom_field_data["name"])    &&  ($custom_field_data["name"] ==  "Принтеры")) {

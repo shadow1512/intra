@@ -189,10 +189,10 @@ class Technical_Request extends Model
         $found_printers_field   =   false;
         if(!isset($custom_fields["custom_fields"])) {
             Log::error('REDMINE CUSTOM FIELDS ARRAY NOT FOUND');
-            /*Mail::raw("Ошибка получения справочника кастомных полей с redmine", function ($m) {
+            Mail::raw("Ошибка получения справочника кастомных полей с redmine", function ($m) {
                 $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                 $m->to(Config::get('services.tech_admin'))->subject('Ошибка получения справочника кастомных полей с redmine, связаться с Борисовым');
-            });*/
+            });
             return;
         }
         foreach($custom_fields["custom_fields"] as $custom_field_data) {
@@ -209,10 +209,10 @@ class Technical_Request extends Model
         }
         if(!$found_printers_field) {
             Log::error('REDMINE PRINTERS ARRAY NOT FOUND');
-            /*Mail::raw("Ошибка синхронизации массива принтеров с redmine", function ($m) {
+            Mail::raw("Ошибка синхронизации массива принтеров с redmine", function ($m) {
                 $m->from('newintra@kodeks.ru', 'Новый корпоративный портал');
                 $m->to(Config::get('services.tech_admin'))->subject('Ошибка синхронизации массива принтеров с redmine, связаться с Борисовым');
-            });*/
+            });
             return;
         }
     }

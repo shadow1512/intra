@@ -9,6 +9,7 @@ use App\Dep;
 use DB;
 use Auth;
 use App\Technical_Request;
+use App\Technical_Request_Printers;
 use Config;
 use View;
 use Mail;
@@ -49,8 +50,9 @@ class ServicesController extends Controller
         if (Auth::check()) {
             $user = User::findOrFail(Auth::user()->id);
         }
-
-        return view('services.cartridge', [ 'user' =>  $user]);
+        
+        $printers   = Technical_Request_Printers::all();
+        return view('services.cartridge', [ 'user' =>  $user, 'printers'    =>  $printers]);
     }
 
     public function mail()

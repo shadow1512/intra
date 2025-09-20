@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use kbsali\Redmine\Client;
 use Config;
 use App\User;
+use App\Technical_Request_Printers;
 use Mail;
 
 class Technical_Request extends Model
@@ -195,8 +196,14 @@ class Technical_Request extends Model
             return;
         }
         foreach($custom_fields["custom_fields"] as $custom_field_data) {
-            if(isset($custom_field_data["name"])    &&  ($custom_field_data["name"] ==  "Принтеры")) {
-                var_dump($custom_field_data);
+            if(isset($custom_field_data["name"])    &&  ($custom_field_data["name"] ==  "Принтеры") &&  isset($custom_field_data["possible_values"])    &&  count($custom_field_data["possible_values"])) {
+                $printers   =   $custom_field_data["possible_values"];
+                Technical_Request_Printers::truncate();
+                foreach($printers as $printer) {
+                    $trp    =   new Technical_Request_Printers();
+                    $trp->name_printer  =   $printer["value"];
+                    $trp->save();
+                }
                 $found_printers_field   =   true;
             }
         }

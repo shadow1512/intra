@@ -4,7 +4,7 @@
         <div class="modal-cnt __changes">
             <div class="modal_h"><a href="#" title="Закрыть" class="modal-close"></a></div>
             <div class="profile_form_h">
-                <div class="h light_h __h_m">Отправлен запрос на&nbsp;внесение изменений<br />в&nbsp;ваш корпоративный профиль</div>
+                <div class="h light_h __h_m">Запрос отправлен</div>
             </div>
             <div class="profile_form">
                 <ul class="lst-changes">

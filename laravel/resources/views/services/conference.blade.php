@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="main_news">
-        <div class="h __h_m">Заявка на проведение обучений и  вебинаров на площадке ZOOM/ETUTORIUM</div>
+        <div class="h __h_m">Заявка на проведение обучений и  вебинаров на площадке МТС Линк</div>
         @if(isset($user)    &&  !is_null($user))
             <form class="profile_form" id="conference_service_form" action="{{route('services.send.conference')}}" method="POST">
                 <input type="hidden" name="type_request" id="type_request" value="conference"/>
@@ -15,7 +15,7 @@
                     <label for="provider" class="lbl">Площадка проведения:</label>
                     <select id="provider" name="provider" class="it" value="">
                         <option value="Zoom">Zoom</option>
-                        <option value="Etutorium">Etutorium</option>
+                        <option value="MTS Link">МТС Линк</option>
                     </select>
                 </div>
                 <div class="field">
@@ -26,9 +26,9 @@
                             <input type="radio" class="form-radio-input ir" id="check2_moderate" name="moderate" value="no">
                             <label class="lbl form-radio-label" for="check2_moderate">Нет</label>
                         </div>
-                    <span>для&nbsp;площадки Etutorium модерация по&nbsp;умолчанию осуществляется <a href="{{route("people.unit", ["id"   =>  854])}}">О.&nbsp;Григорьевой</a></span>
+                    <!--<span>для&nbsp;площадки Etutorium модерация по&nbsp;умолчанию осуществляется <a href="{{route("people.unit", ["id"   =>  854])}}">О.&nbsp;Григорьевой</a></span>-->
                 </div>
-                <div class="field" style="display:none;">
+                <!--<div class="field" style="display:none;">
                     <label class="lbl">Тип вебинара:</label>
                     <div class="form-radio form-radio-inline">
                         <input type="radio" class="form-radio-input ir" id="check1_typeevent" name="typeevent" value="open" checked="checked">
@@ -54,7 +54,7 @@
                         <input type="radio" class="form-radio-input ir" id="check3_presentation" name="presentation" value="screencast">
                         <label class="lbl form-radio-label" for="check3_presentation">Демонстрация экрана</label>
                     </div>
-                </div>
+                </div>-->
                 <div class="field" style="margin-top:40px;">
                     <label for="responsible" class="lbl">ФИО ответственного:</label>
                     <input type="text" id="responsible" name="responsible" class="it" value="{{$user->lname}} {{$user->fname}} {{$user->mname}}"/>

@@ -85,7 +85,7 @@ class ServicesController extends Controller
         $provider           =   trim($request->input('provider'));
         $moderate           =   trim($request->input('moderate'));
         $typeevent          =   trim($request->input('typeevent'));
-        $presentation       =   trim($request->input('presentation'));
+        //$presentation       =   trim($request->input('presentation'));
         $responsible        =   trim($request->input('responsible'));
         $desired_date       =   trim($request->input('desired_date'));
         $desired_time       =   trim($request->input('desired_time'));
@@ -124,9 +124,9 @@ class ServicesController extends Controller
         }
 
         $audience   =   implode(",",    $audience);
-        if($provider    ==  "Etutorium") {
+        /*if($provider    ==  "Etutorium") {
             $moderate   =   "yes";
-        }
+        }*/
         Mail::send('services.conference-letter',
                     [
                         'event_name'    =>  $event_name,
@@ -137,9 +137,9 @@ class ServicesController extends Controller
                         'typeevent'     =>  str_replace(array("open", "registered", "restricted"),
                                                         array("Открытый: вход по общей ссылке", "Открытый: вход по индивидуальной ссылке", "Закрытый"),
                                                         $typeevent),
-                        'presentation'  =>  str_replace(array("powerpoint", "pdf", "screencast"),
+                        /*'presentation'  =>  str_replace(array("powerpoint", "pdf", "screencast"),
                                                         array("Презентация Power Point", "Файл PDF", "Демонстрация экрана"),
-                                                        $presentation),
+                                                        $presentation),*/
                         'responsible'   =>  $responsible,
                         'desired_date'  =>  $desired_date,
                         'desired_time'  =>  $desired_time,

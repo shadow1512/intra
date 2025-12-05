@@ -8,4 +8,4 @@
 <p><strong>Площадка проведения вебинара</strong>:{{$provider}}</p>
 <p><strong>Тип вебинара</strong>:{{$typeevent}}</p>
 <p><strong>Помощь в модерации</strong>:{{$moderate}}</p>
-<p><strong>Способ презентации</strong>:{{$presentation}}</p>
+<!--<p><strong>Способ презентации</strong>:{{$presentation}}</p>-->

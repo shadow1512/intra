@@ -35,8 +35,8 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
-    //'conference_owner'  =>  'konf@kodeks.ru',
-    'conference_owner'  =>  'slava_b@kodeks.ru',
+    'conference_owner'  =>  'konf@kodeks.ru',
+    //'conference_owner'  =>  'slava_b@kodeks.ru',
     'tech_admin'        =>  'den@kodeks.ru'
 
 ];

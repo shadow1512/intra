@@ -36,7 +36,7 @@ return [
     ],
 
     //'conference_owner'  =>  'konf@kodeks.ru',
-    'conference_owner'  =>  'shadow1512@yandex.ru',
+    'conference_owner'  =>  'slava_b@kodeks.ru',
     'tech_admin'        =>  'den@kodeks.ru'
 
 ];

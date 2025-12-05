@@ -19,7 +19,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //array('января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря');
         Schema::defaultStringLength(191);//
-
+        URL::forceScheme('https');
         /*DB::listen(function($query) {
             Log::info(
                 $query->sql,

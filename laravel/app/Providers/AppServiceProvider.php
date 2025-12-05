@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Blade;
+use Illuminate\Support\Facades\URL;
 use DB;
 use Log;
 
@@ -19,6 +20,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //array('января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря');
         Schema::defaultStringLength(191);//
+        $this->app['request']->server->set('HTTPS','on');
         URL::forceScheme('https');
         /*DB::listen(function($query) {
             Log::info(

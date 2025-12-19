@@ -102,7 +102,7 @@
             </form>
             <div class="news_li_date">После отправки заявка будет доставлена на почту к <a href="{{route("people.unit", ["id"   =>  854])}}">Григорьевой Ольге</a>.<br/><br/>Ольга свяжется с вами для дальнейшей работы по организации мероприятия.</div>
         @else
-            @if(isset($user))<div class="news_li_date">Для отправки заявки на техническое обслуживание на портале, необходимо <a href="#" id="teh_auth" class="__js_auth">авторизоваться</a></div>@endif
+            <div class="news_li_date">Для отправки заявки на проведение обучений и  вебинаров, необходимо <a href="#" id="teh_auth" class="__js_auth">авторизоваться</a></div>
         @endif
     </div>
 @endsection

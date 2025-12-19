@@ -239,7 +239,7 @@ class UserController extends Controller
             return abort(403);
         }
         
-        if(is_null(Auth::user()->ip_phone)) {
+        if(is_null(Auth::user()->ip_phone) && is_null(Auth::user()->phone)) {
             return abort(403);
         }
         
@@ -254,17 +254,27 @@ class UserController extends Controller
         if(!$abonent) {
             return abort(403);
         }
-        
-        if(is_null($abonent->ip_phone)) {
+            
+        if(is_null($abonent->ip_phone) && is_null($abonent->phone)) {
             return abort(403);
         }
         
+        $from_phone =   Auth::user()->ip_phone;
+        if(is_null($from_phone)) {
+            $from_phone = Auth::user()->phone;  
+        }
+        
+        $to_phone =   $abonent->ip_phone;
+        if(is_null($to_phone)) {
+            $to_phone = $abonent->ip_phone;
+        }
+        
         $params = array(
-            'endpoint'      =>  'SIP/'  .   Auth::user()->ip_phone,
-            'extension'     =>  $abonent->ip_phone,
+            'endpoint'      =>  'SIP/'  .   $from_phone,
+            'extension'     =>  $to_phone,
             'context'       =>  'kodeksspb',
             'priority'      =>  1,
-            'callerId'      =>  Auth::user()->ip_phone
+            'callerId'      =>  $from_phone
         );
         
         $ch = curl_init('http://ast.dmz:8088/ari/channels');

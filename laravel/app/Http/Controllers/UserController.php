@@ -266,7 +266,7 @@ class UserController extends Controller
         
         $to_phone =   $abonent->ip_phone;
         if(is_null($to_phone)) {
-            $to_phone = $abonent->ip_phone;
+            $to_phone = $abonent->phone;
         }
         
         $params = array(

@@ -44,7 +44,7 @@
                                     @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
                                     @if(!empty($user->phone) || !empty($user->ip_phone))
                                     <div class="profile_contacts_position">Местный тел.: 
-                                        @if(Auth::check() && (!is_null(Auth::user()->ip_phone) || !is_null(Auth::user()->phone)))
+                                        @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
                                             @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
                                                 @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
                                             @else
@@ -91,7 +91,7 @@
                                         @if(!empty($user->email))<div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>@endif
                                         @if(!empty($user->phone) || !empty($user->ip_phone))
                                         <div class="profile_contacts_position">Местный тел.: 
-                                        @if(Auth::check() && (!is_null(Auth::user()->ip_phone) || !is_null(Auth::user()->phone)))
+                                        @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
                                             @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
                                                 @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
                                             @else
@@ -192,7 +192,7 @@
                             <div class="profile_contacts_position">E-mail: <a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
                             @if(!empty($user->phone) || !empty($user->ip_phone))
                             <div class="profile_contacts_position">Местный тел.: 
-                                @if(Auth::check() && (!is_null(Auth::user()->ip_phone) || !is_null(Auth::user()->phone)))
+                                @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
                                     @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
                                         @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
                                     @else

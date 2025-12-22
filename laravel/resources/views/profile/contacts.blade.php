@@ -11,7 +11,7 @@
                 <div class="profile_contacts_position">E-mail: <a href="mailto:{{$item->email}}">{{$item->email}}</a></div>
                 @if($item->ip_phone || $item->phone)
                 <div class="profile_contacts_position">Местный тел.:
-                    @if(Auth::check() && (!is_null(Auth::user()->ip_phone) || !is_null(Auth::user()->phone)))
+                    @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
                         @if($item->ip_phone)<a href="{{route("people.call", ["id"   =>  $item->id])}}" class="__js-open-ip-modal">{{$item->ip_phone}}</a>
                             @if($item->phone) или <a href="{{route("people.call", ["id"   =>  $item->id])}}" class="__js-open-ip-modal">{{$item->phone}}</a>@endif
                         @else

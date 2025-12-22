@@ -112,7 +112,23 @@
                                     <!--<div class="directory_lst_i_name_status"></div>-->
                                     </div>
                                     <div class="directory_lst_i_info">
-                                        @if($contact->ip_phone || $contact->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>@endif
+                                        @if($contact->ip_phone || $contact->phone)
+                                        <div class="directory_lst_i_info_i">Местный тел.: 
+                                            @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                @if($contact->ip_phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a>
+                                                    @if($contact->phone) или <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif
+                                                @else
+                                                    @if($contact->phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif 
+                                                @endif
+                                            @else
+                                                @if($contact->ip_phone){{$contact->ip_phone}}
+                                                    @if($contact->phone) или {{$contact->phone}}@endif
+                                                @else
+                                                    @if($contact->phone){{$contact->phone}}@endif 
+                                                @endif
+                                            @endif 
+                                        </div>
+                                        @endif
                                         @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                                         @if($contact->room)<div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>@endif
                                         <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -167,7 +183,23 @@
                         <!--<div class="directory_lst_i_name_status"></div>-->
                         </div>
                         <div class="directory_lst_i_info">
-                            @if($contact->ip_phone || $contact->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>@endif
+                            @if($contact->ip_phone || $contact->phone)
+                                        <div class="directory_lst_i_info_i">Местный тел.: 
+                                            @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                @if($contact->ip_phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a>
+                                                    @if($contact->phone) или <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif
+                                                @else
+                                                    @if($contact->phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif 
+                                                @endif
+                                            @else
+                                                @if($contact->ip_phone){{$contact->ip_phone}}
+                                                    @if($contact->phone) или {{$contact->phone}}@endif
+                                                @else
+                                                    @if($contact->phone){{$contact->phone}}@endif 
+                                                @endif
+                                            @endif 
+                                        </div>
+                            @endif
                             @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                             @if($contact->room)<div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>@endif
                             <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -215,7 +247,23 @@
                                         <!--<div class="directory_lst_i_name_status"></div>-->
                                     </div>
                                     <div class="directory_lst_i_info">
-                                        @if($contact->ip_phone || $contact->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($contact->ip_phone) @if(!is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a> @else {{$contact->ip_phone}} @endif @if($contact->phone) или {{$contact->phone}} @endif @else {{$contact->phone}} @endif</div>@endif
+                                        @if($contact->ip_phone || $contact->phone)
+                                        <div class="directory_lst_i_info_i">Местный тел.: 
+                                            @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                @if($contact->ip_phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->ip_phone}}</a>
+                                                    @if($contact->phone) или <a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif
+                                                @else
+                                                    @if($contact->phone)<a href="{{route("people.call", ["id"   =>  $contact->id])}}" class="__js-open-ip-modal">{{$contact->phone}}</a>@endif 
+                                                @endif
+                                            @else
+                                                @if($contact->ip_phone){{$contact->ip_phone}}
+                                                    @if($contact->phone) или {{$contact->phone}}@endif
+                                                @else
+                                                    @if($contact->phone){{$contact->phone}}@endif 
+                                                @endif
+                                            @endif 
+                                        </div>
+                                        @endif
                                         @if($contact->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$contact->mobile_phone}}</div>@endif
                                         @if($contact->room)<div class="directory_lst_i_info_i">Комната: {{$contact->room}}</div>@endif
                                         <div class="directory_lst_i_info_i"><a href="mailto:{{$contact->email}}">{{$contact->email}}</a></div>
@@ -270,7 +318,23 @@
                                 <!--<div class="directory_lst_i_name_status"></div>-->
                                 </div>
                                 <div class="directory_lst_i_info">
-                                    @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
+                                    @if($user->ip_phone || $user->phone)
+                                        <div class="directory_lst_i_info_i">Местный тел.: 
+                                            @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
+                                                    @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
+                                                @else
+                                                    @if($user->phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif 
+                                                @endif
+                                            @else
+                                                @if($user->ip_phone){{$user->ip_phone}}
+                                                    @if($user->phone) или {{$user->phone}}@endif
+                                                @else
+                                                    @if($user->phone){{$user->phone}}@endif 
+                                                @endif
+                                            @endif 
+                                        </div>
+                                    @endif
                                     @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                     @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                     <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
@@ -315,7 +379,23 @@
                                         <!--<div class="directory_lst_i_name_status"></div>-->
                                     </div>
                                     <div class="directory_lst_i_info">
-                                        @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
+                                        @if($user->ip_phone || $user->phone)
+                                        <div class="directory_lst_i_info_i">Местный тел.: 
+                                            @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
+                                                    @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
+                                                @else
+                                                    @if($user->phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif 
+                                                @endif
+                                            @else
+                                                @if($user->ip_phone){{$user->ip_phone}}
+                                                    @if($user->phone) или {{$user->phone}}@endif
+                                                @else
+                                                    @if($user->phone){{$user->phone}}@endif 
+                                                @endif
+                                            @endif 
+                                        </div>
+                                        @endif
                                         @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                         @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                         <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>
@@ -357,7 +437,23 @@
                                             <!--<div class="directory_lst_i_name_status"></div>-->
                                         </div>
                                         <div class="directory_lst_i_info">
-                                            @if($user->ip_phone || $user->phone)<div class="directory_lst_i_info_i">Местный тел.: @if($user->ip_phone) @if(Auth::check() && !is_null(Auth::user()->ip_phone)) <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a> @else {{$user->ip_phone}} @endif @if($user->phone) или {{$user->phone}} @endif @else {{$user->phone}} @endif</div>@endif
+                                            @if($user->ip_phone || $user->phone)
+                                                <div class="directory_lst_i_info_i">Местный тел.: 
+                                                    @if(Auth::check() && (Auth::user()->ip_phone || Auth::user()->phone))
+                                                        @if($user->ip_phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->ip_phone}}</a>
+                                                            @if($user->phone) или <a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif
+                                                        @else
+                                                            @if($user->phone)<a href="{{route("people.call", ["id"   =>  $user->id])}}" class="__js-open-ip-modal">{{$user->phone}}</a>@endif 
+                                                        @endif
+                                                    @else
+                                                        @if($user->ip_phone){{$user->ip_phone}}
+                                                            @if($user->phone) или {{$user->phone}}@endif
+                                                        @else
+                                                            @if($user->phone){{$user->phone}}@endif 
+                                                        @endif
+                                                    @endif 
+                                                </div>
+                                            @endif
                                             @if($user->mobile_phone)<div class="directory_lst_i_info_i">Мобильный тел.: {{$user->mobile_phone}}</div>@endif
                                             @if($user->room)<div class="directory_lst_i_info_i">Комната: {{$user->room}}</div>@endif
                                             <div class="directory_lst_i_info_i"><a href="mailto:{{$user->email}}">{{$user->email}}</a></div>

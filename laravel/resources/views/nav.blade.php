@@ -15,7 +15,7 @@
                     @foreach($contacts as $item)
                 <li class="main_top_phones_lst_i">
                     <span class="main_top_phones_lst_i_lk"><a href="{{route('people.unit', ["id" =>  $item->id])}}" title="{{$item->lname}} {{$item->fname}} {{$item->mname}}">{{$item->lname}} {{mb_substr($item->fname,   0,  1)  .   "."}} {{mb_substr($item->mname, 0,  1)  .   "."}}</a>
-                    ( @if(Auth::user()->ip_phone || Auth::user()->phone)
+                    @if($item->ip_phone || $item->phone) ( @if(Auth::user()->ip_phone || Auth::user()->phone)
                         @if($item->ip_phone)<a href="{{route("people.call", ["id"   =>  $item->id])}}" class="__js-open-ip-modal">{{$item->ip_phone}}</a>
                             @if($item->phone) или <a href="{{route("people.call", ["id"   =>  $item->id])}}" class="__js-open-ip-modal">{{$item->phone}}</a>@endif
                         @else
@@ -27,7 +27,7 @@
                         @else
                             @if($item->phone){{$item->phone}}@endif 
                         @endif
-                    @endif )
+                    @endif ) @endif
                     </span>
                 </li>
                     @endforeach

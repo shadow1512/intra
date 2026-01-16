@@ -135,7 +135,8 @@
   width: 311px;
   background-color: #272626; }
 .content_i.inside-page, .content_i.main-page, .content_i.onecolumn-page {
-  width: 100%;
+  width: calc(100% - 311px);
+  order: 1;
   background-color: #fff; }
 
 .content_i_w {

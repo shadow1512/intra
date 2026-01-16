@@ -1,4 +1,4 @@
-@extends('layouts.static', ['class'=>''])
+@extends('layouts.static', ['class'=>'dinnerMenu'])
 
 @section('news')
 <div class="dinner_top h __h_m">Меню на {{ $date_menu }}</div>

@@ -137,7 +137,10 @@
 .content_i.inside-page, .content_i.main-page, .content_i.onecolumn-page {
   width: calc(100% - 311px);
   order: 1;
-  background-color: #fff; }
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch; }
 
 .content_i_w {
   background: #fff; }
@@ -197,7 +200,8 @@
     padding: 0; }
 
 .content_i_container {
-  min-height: 1054px; }
+  min-height: 1054px;
+  flex-grow: 1; }
 
 .department_slice {
   display: block;

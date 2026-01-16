@@ -160,6 +160,9 @@
   &.onecolumn-page
     width: calc(100% - 311px)
     order: 1
+    display: flex
+    flex-direction: column
+    justify-content: stretch
   background-co
     background-color: $clear
 .content_i_w
@@ -231,6 +234,7 @@
 
 .content_i_container
   min-height: 1054px
+  flex-grow: 1
 .department_slice
   display: block
   cursor: pointer

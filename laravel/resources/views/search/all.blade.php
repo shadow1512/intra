@@ -1,4 +1,4 @@
-@extends('layouts.search', ['class'=>'searchFlex'])
+@extends('layouts.search')
 
 @section('search')
     @if (count($users)  ||  count($deps) || count($news) || count($books) || count($razdels))

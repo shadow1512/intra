@@ -6,7 +6,7 @@
     <!--header-->
 @include('header')
 <!-- eo header-->
-    <div class="content layout_main __no-border">
+    <div class="content layout_main __no-border searchFlex">
         @yield('search')
     </div>
     <div class="push"></div>

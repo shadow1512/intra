@@ -99,7 +99,9 @@
   display: flex;
   flex-wrap: wrap;
 }
-
+.content.layout_main.searchFlex {
+  flex-direction: column;
+}
 .layout_main {
   min-width: 990px;
   max-width: 1200px;

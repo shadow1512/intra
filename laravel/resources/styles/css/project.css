@@ -102,6 +102,8 @@
 .content.layout_main.searchFlex {
   flex-direction: column;
 }
+.content_i.onecolumn-page.profile {
+  width: 100%; }
 .layout_main {
   min-width: 990px;
   max-width: 1200px;

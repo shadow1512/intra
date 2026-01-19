@@ -188,7 +188,7 @@ class updatedirectoryfromad extends Command
         $users = Adldap::getProvider('default')->search()->users()->in($ou .   ",dc=work,dc=kodeks,dc=ru")->sortBy('samaccountname', 'asc')->listing()->get();
         if(count($users)) {
             foreach($users as $user) {
-
+                var_dump($user);exit();
                 //print $user->getLastName()  .   "\r\n";
                 $currentRecord  =   null;
                 $present    =   User::withTrashed()->where('sid',  '=',    $user->getConvertedSid())->first();

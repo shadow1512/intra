@@ -83,6 +83,9 @@
 .content
   margin-top: 15px
   margin-bottom: 15px
+  &.layout_main
+    display: flex
+    flex-wrap: wrap
   @include clearfix
   overflow: hidden
   border-left: 1px solid $border
@@ -131,7 +134,6 @@
   background: #0089cf url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAAEhyb7BAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAWBJREFUeNpi/P//PwMMMEHp/8gcRhABEECMMGVg0e/fv7+AiwAEECOyCegmQZQyMhqB2AABhKGSCZc2kLL/QG3cLCDeiRMngvn5+VOAzF8YZgAEEFbrcToHBP79+3cOZgfQ6CCgPYwYipiYmAxhbKjd/CA2C4rdjIwgTVxAzArEX4H4N0gcIIBIdxN1FP3588cR5rNv375dAbqPE64K5CYQBnr/4X8kAJTShMkhR9s+NFswTQJ5+9GjR2u/fv36sr+/vwjIl4DJIZIHJHBB4cMNDZ9vUGsZiAongAAjShExgGoGYY0UkD9B4f/379/ZQIseAoP5ETAO5j958sQDKMfKCAGommChhYyBhsz+jwOAQhsUyqAARdaD1SCgSx7hMggUZUBDQNlSAFkPVq89e/YsDeiVq+ji79+/vzNr1qxOUHqBJX28gQ0NAA5oZhJESlUgA94D8Ucg/vEfSfPgi34AA4MlmS4nU7QAAAAASUVORK5CYII=) 50% no-repeat
   transition: all .2s
 .content_i
-  float: left
   &_w_h
     font-weight: bold
     font-size: 20px
@@ -148,40 +150,39 @@
     right: 0
     padding: 20px 0 20px 20px
   &.menu
-    margin-left: -100%
     width: 311px
     background-color: $project-default
-    margin-bottom: -1000000px
-    padding-bottom: 1000000px
-    position: relative
   &.dining-menu
-    margin-left: -100%
     width: 311px
     background-color: $dark
-    margin-bottom: -1000000px
-    padding-bottom: 1000000px
   &.inside-page,
   &.main-page,
   &.onecolumn-page
-    width: 100%
+    width: calc(100% - 311px)
+    order: 1
+    display: flex
+    flex-direction: column
+    justify-content: stretch
+  background-co
     background-color: $clear
-    margin-bottom: -1000000px
-    padding-bottom: 1000000px
+.content.layout_main.searchFlex
+  flex-direction: column
+.content_i.onecolumn-page.profile
+  width: 100%
 .content_i_w
   background: $clear
-.inside-page
-  .content_i_w
-    margin-left: 311px
 .main-page
   .content_i_w
-    margin: 0 219px 0 311px
+    margin: 0 219px 0 0
     border-top: 1px solid $border
 .onecolumn-page
   border-top: 1px solid $border
   .content_i_w
     margin: 0
-
+.content_i.onecolumn-page.dinnerMenu
+  width: 100%
 .content_header
+  width: 100%
   padding: 15px 20px
   background-color: $clear
   position: relative
@@ -191,9 +192,6 @@
   background-color: $clear
   border-top: 1px solid $border
   position: relative
-.__tabs-page .content_header,
-.__tabs-page .content_i
-  overflow: hidden
 .content_i_header
   padding: 15px 30px
   border-bottom: 1px solid $border
@@ -240,6 +238,7 @@
 
 .content_i_container
   min-height: 1054px
+  flex-grow: 1
 .department_slice
   display: block
   cursor: pointer

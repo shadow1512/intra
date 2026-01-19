@@ -18,14 +18,13 @@
   position: absolute;
   right: 0;
   top: 0;
+  bottom: 0;
   background: #fff;
   border-left: 1px solid #d1dce2;
   border-top: 1px solid #d1dce2;
   margin-left: -220px;
   width: 220px;
-  text-align: center;
-  margin-bottom: -1000000px;
-  padding-bottom: 1000000px; }
+  text-align: center; }
 
 .staff_i {
   border-bottom: 1px solid #d1dce2;
@@ -520,7 +519,6 @@
   opacity: .7; }
 
 .main_top_dinner {
-  margin-left: 311px;
   background-color: #f5f5f5;
   padding: 30px;
   min-height: 259px;

@@ -213,6 +213,7 @@
 .search-res_cnt_nothing {
   background-color: #fff;
   padding: 30px;
+  width: 100%;
   text-align: center; }
 
 .search-res_cnt_nothing_h {

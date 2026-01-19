@@ -306,6 +306,7 @@
   color: #272626; }
 
 .profile_form_cnt {
+  display: flex;
   overflow: hidden; }
 
 .profile_form_photo {

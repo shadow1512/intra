@@ -586,3 +586,57 @@
 
 .main_top_dinner_info_i
   padding-right: 15px
+
+.main-tabs
+  > .div-tab
+    border: 1px solid #eaeaea
+    display: none
+
+  .main-tabs-ul
+    list-style-type: none
+    border-bottom: 1px solid #d1dce2
+    border-top: 1px solid #d1dce2
+    margin-left: 0
+
+    .content_i_header.__with-ic
+      display: inline-block
+      margin: 0
+      cursor: pointer
+      -webkit-transition: .15s ease-in
+      transition: .15s ease-in
+
+      &:target
+        border-bottom: 2px solid #0089cf
+
+  .div-tab
+    &:first-child
+      display: block
+
+    scroll-margin-top: 80px
+
+  .directory_lst_i:first-child
+    border-top: 0
+
+  .active
+    border-bottom: 2px solid #0089cf
+
+  .main-tabs-ul .content_i_header.__with-ic
+    a
+      text-decoration: none
+      color: #444
+      -webkit-transition: .15s ease-in
+      transition: .15s ease-in
+
+    &:hover a
+      color: #0089cf
+
+    &.active
+      a
+        color: #0089cf
+
+      border-bottom: 2px solid #0089cf
+      -webkit-transition: .15s ease-in
+      transition: .15s ease-in
+
+    &:hover a .content_i_header_ic, &.active a .content_i_header_ic
+      fill: #0089cf

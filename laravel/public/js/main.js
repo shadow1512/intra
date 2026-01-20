@@ -710,25 +710,3 @@ openIpModal('.__js-open-ip-modal', '.__js-ip-modal');
 //var player1 = new Playerjs({id:"rtmp_cam1", file:"//cam-intra.kodeks.ru:8081/hls1/stream.m3u8"});
 var player2 = new Playerjs({id:"rtmp_cam2", file:"//cam-intra.kodeks.ru:8081/hls2/stream.m3u8"});
 //var player3 = new Playerjs({id:"rtmp_cam3", file:"//cam-intra.kodeks.ru:8081/hls3/stream.m3u8"});
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        // Проверяем, является ли ссылка внутренней или внешней
-        if (this.getAttribute('href').startsWith('#')) {
-            e.preventDefault(); // Отменяем стандартное поведение
-
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-
-            if (targetElement) {
-                // Плавная прокрутка к элементу
-                targetElement.scrollIntoView({
-                    behavior: 'smooth' // Плавное поведение
-                });
-            }
-        } else {
-            // Для ссылок на другие страницы оставляем стандартное поведение
-            // или добавляем логику для плавного перехода, если нужно
-        }
-    });
-});

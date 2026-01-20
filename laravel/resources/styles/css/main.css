@@ -507,6 +507,10 @@
 .main-tabs .main-tabs-ul .content_i_header.__with-ic:hover a .content_i_header_ic, .main-tabs .main-tabs-ul .content_i_header.__with-ic.active a .content_i_header_ic {
   fill: #0089cf;
 }
+.main-tabs .div-tab#favorite {
+  scroll-margin-top: 80px; }
+.main-tabs .div-tab#diagram {
+  scroll-margin-top: 80px; }
 
 .main_top_phones_people {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);

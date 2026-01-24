@@ -7,6 +7,7 @@ use Adldap\Laravel\Facades\Adldap;
 use App\User;
 use DB;
 use Auth;
+use Log;
 
 class AdLoginController extends Controller
 {
@@ -43,17 +44,22 @@ class AdLoginController extends Controller
                 $user = User::where("sid",  "=",    $sid)->first();
                 if($user) {
                     Auth::loginUsingId($user->id, true);
+                    $user->lastlogon    =   date("Y-m-d H:i:s");
+                    $user->save();
                     return response()->json(['ok', $sid]);
                 }
                 else {
+                    Log::error('No linked user ' .   $sid);
                     return response()->json(['error', 'no linked user', $sid]);
                 }
             }
             else {
+                Log::error('No LDAP user ' .   $login);
                 return response()->json(['error', 'no ldap user']);
             }
         }
         else {
+            Log::error('Failed login ' .   $authlogin);
             return response()->json(['error', 'wrong credentials']);
         }
 

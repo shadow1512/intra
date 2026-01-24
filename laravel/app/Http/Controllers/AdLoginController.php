@@ -59,7 +59,13 @@ class AdLoginController extends Controller
             }
         }
         else {
-            Log::error('Failed login ' .   $authlogin);
+            try {
+                Log::error('Failed login ' .   $authlogin);
+            }
+            catch(Exception $e) {
+                echo storage_path() .   'logs/laravel-' .   date("Y-m-d")   .   '.log';
+                //exec('chown www-data ');
+            }
             return response()->json(['error', 'wrong credentials']);
         }
 

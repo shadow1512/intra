@@ -59,6 +59,7 @@ class AdLoginController extends Controller
             }
         }
         else {
+            echo 'a';
             try {
                 Log::error('Failed login ' .   $authlogin);
             }

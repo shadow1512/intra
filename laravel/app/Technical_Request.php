@@ -8,12 +8,14 @@ use kbsali\Redmine\Client;
 use Config;
 use App\User;
 use App\Technical_Request_Printers;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Mail;
 
 class Technical_Request extends Model
 {
     //
     protected $table = 'technical_requests';
+    use SoftDeletes;
 
     public function syncToRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));

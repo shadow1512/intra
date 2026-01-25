@@ -183,6 +183,30 @@ class Technical_Request extends Model
         }
     }
     
+    /*Когда issue в redmine удалена (тестовая или по ошибке удалили), а на интре со статусом null, 
+     * то она всегда попадает в проверку каждые 5 минут и сыпет в лог ошибками, 
+     * а на стороне пользователя статус "на рассмотрении". 
+     * Устанавливаем softdelete
+     */
+    public function setCorrectStatusByRedmine() {
+        $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password'));
+        $trs =   Technical_Request::whereNotNull('redmine_link')->where(function($query) {
+            $query->whereNull('status');
+        })->get();
+        
+        $counter = 0;
+        foreach($trs as  $tr) {
+            //echo $tr->redmine_link . "\r\n";
+            $rec    =   $client->issue->show($tr->redmine_link);
+            if(!$rec) {
+                $tr->delete();
+                $counter ++;
+            }
+        }
+        
+        echo $counter . " записей запросов на обслуживание 'мягко' удалены";
+    }
+    
     public function syncPrintersFromRedmine() {
         $client =   new \Redmine\Client(Config::get('redmine.url'), Config::get('redmine.username'), Config::get('redmine.password')); 
         $custom_fields   =   $client->custom_fields->all();

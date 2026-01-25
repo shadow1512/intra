@@ -52,7 +52,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('searchindexdelta:createhourly')->hourlyAt(10);
         $schedule->command('adxml:create')->daily();
         $schedule->command('maindepcsv:create')->daily();
-        $schedule->command('dinnerbills:get')->daily();
+        //$schedule->command('dinnerbills:get')->daily();
         $schedule->command('syncissues:start')->everyFiveMinutes();
         $schedule->command('syncprinters:start')->dailyAt('03:00');
         $schedule->command('issuestatus:get')->everyFiveMinutes();

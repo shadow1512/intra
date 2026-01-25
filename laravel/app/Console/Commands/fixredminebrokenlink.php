@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use App\Technical_Request;
 
 class fixredminebrokenlink extends Command
 {

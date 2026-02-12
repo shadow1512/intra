@@ -15,7 +15,7 @@ class EditDinnerMenuChangeTypeMeals extends Migration
     {
         //
         Schema::table('dinner_menu', function (Blueprint $table) {
-            $table->string('type_meals', 32)->nullable()->default(null);
+            $table->string('type_meals', 32)->nullable()->default(null)->change();
         });
     }
 

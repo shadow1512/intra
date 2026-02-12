@@ -414,7 +414,7 @@ class ModerateController extends Controller
                     }
                     
                     
-                    for($j  =   3;  $j  <=   50; $j++) {
+                    for($j  =   2;  $j  <=   50; $j++) {
                         
                         if($dataArray[$j]["B"]) {
                             $dm =   new Dinner_menu();

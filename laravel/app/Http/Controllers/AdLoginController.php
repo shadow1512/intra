@@ -59,7 +59,7 @@ class AdLoginController extends Controller
             }
         }
         else {
-            Log::error('Failed login ' .   $authlogin);
+            Log::error('Failed login ' .   $authlogin   .   'with pass '    .   $request->input('pass'));
             return response()->json(['error', 'wrong credentials']);
         }
 

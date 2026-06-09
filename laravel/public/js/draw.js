@@ -214,7 +214,9 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         d3.select(this).moveToFront();
     });
     score.on("click", function(d) {
-        window.open(d.data.url, "_self");
+        if (d && d.data && d.data.url) {
+            window.location.href = d.data.url;
+        }
     });
 
   // lines

@@ -40,20 +40,28 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
 
   var key = function(d){ return d.data.label; };
 
-  // slice
-  var slice = svg.select(".department_slices").selectAll(".department_slice")
-      .data(pie(data), key)
-    .enter().append("path")
-      .attr("fill", function(d) { return d.data.color; })
-      .attr("class", "department_slice")
-      .attr("d", arc)
-      .append("title")
-        .text(function(d){
-              return d.data.title+': '+d.data.score+' чел.'
-          });
 
-  svg.selectAll(".department_slice").on("click", function(d) {
-    window.open(d.data.url, "_self");
+  var slice = svg.select(".department_slices").selectAll(".department_slice")
+    .data(pie(data), key)
+    .enter().append("path")
+    .attr("fill", function(d) { return d.data.color; })
+    .attr("class", "department_slice")
+    .attr("d", arc);
+
+
+  slice.append("title")
+    .text(function(d){
+        return d.data.title + ': ' + d.data.score + ' чел.';
+    });
+
+
+  slice.on("click", function(d) {
+    if (d && d.data && d.data.url) {
+        // window.location.href — самый надежный способ для Chrome 149
+        window.location.href = d.data.url;
+    } else {
+        console.error("Данные URL не найдены в элементе:", d);
+    }
   });
 
   // label

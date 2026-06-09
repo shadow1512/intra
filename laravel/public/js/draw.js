@@ -40,28 +40,20 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
 
   var key = function(d){ return d.data.label; };
 
-
+  // slice
   var slice = svg.select(".department_slices").selectAll(".department_slice")
-    .data(pie(data), key)
+      .data(pie(data), key)
     .enter().append("path")
-    .attr("fill", function(d) { return d.data.color; })
-    .attr("class", "department_slice")
-    .attr("d", arc);
+      .attr("fill", function(d) { return d.data.color; })
+      .attr("class", "department_slice")
+      .attr("d", arc)
+      .append("title")
+        .text(function(d){
+              return d.data.title+': '+d.data.score+' чел.'
+          });
 
-
-  slice.append("title")
-    .text(function(d){
-        return d.data.title + ': ' + d.data.score + ' чел.';
-    });
-
-
-  slice.on("click", function(d) {
-    if (d && d.data && d.data.url) {
-        // window.location.href — самый надежный способ для Chrome 149
-        window.location.href = d.data.url;
-    } else {
-        console.error("Данные URL не найдены в элементе:", d);
-    }
+  svg.selectAll(".department_slice").on("click", function(d) {
+    window.open(d.data.url, "_self");
   });
 
   // label
@@ -195,29 +187,35 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
     })
     .attr("class", "department_score_tx");
 
-  score.transition().duration(1000)
-    .attrTween("transform", function(d) {
-      this._current = this._current || d;
-      var interpolate = d3.interpolate(this._current, d);
-      this._current = interpolate(0);
-      return function(t) {
-        var d2 = interpolate(t);
-        var outerScoreArc = d3.svg.arc()
-        	.innerRadius(radius * 0.7)
-        	.outerRadius(radius * 0.7);
-        var pos = outerScoreArc.centroid(d2);
-        return "translate("+ pos +")";
-      };
-    });
+    score
+        .style("cursor", "pointer") // Сразу делаем курсор в виде указателя
+        .on("mouseover", function(d) {
+            d3.select(this).moveToFront();
+        })
+        .on("click", function(d) {
+            // Проверяем наличие данных
+            if (d && d.data && d.data.url) {
+                console.log("Клик по кругу/иконке сработал! Переход на:", d.data.url);
+                window.location.href = d.data.url; // Самый надежный переход для Chrome 149
+            } else {
+                console.error("Ошибка: Данные URL не найдены для элемента score", d);
+            }
+        });
 
-    score.on("mouseover", function(d) {
-        d3.select(this).moveToFront();
-    });
-    score.on("click", function(d) {
-        if (d && d.data && d.data.url) {
-            window.location.href = d.data.url;
-        }
-    });
+    score.transition().duration(1000)
+        .attrTween("transform", function(d) {
+            this._current = this._current || d;
+            var interpolate = d3.interpolate(this._current, d);
+            this._current = interpolate(0);
+            return function(t) {
+                var d2 = interpolate(t);
+                var outerScoreArc = d3.svg.arc()
+                    .innerRadius(radius * 0.7)
+                    .outerRadius(radius * 0.7);
+                var pos = outerScoreArc.centroid(d2);
+                return "translate("+ pos +")";
+            };
+        });
 
   // lines
 	var polyline = svg.select(".department_lines").selectAll("polyline")

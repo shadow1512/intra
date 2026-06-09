@@ -202,12 +202,12 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
       };
     });
 
-  score.on("mouseover", function(d) {
-    d3.select(this).moveToFront();
-  })
-  .on("click", function(d) {
-    window.open(d.data.url, "_self");
-  });
+    score.on("mouseover", function(d) {
+        d3.select(this).moveToFront();
+    });
+    score.on("click", function(d) {
+        window.open(d.data.url, "_self");
+    });
 
   // lines
 	var polyline = svg.select(".department_lines").selectAll("polyline")

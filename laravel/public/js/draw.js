@@ -18,7 +18,7 @@ var svg = d3.select(".department").append("svg")
     .attr("width", width)
     .attr("height", height)
     .attr("class", "department_svg")
-    .style("pointer-events", "auto") // Принудительно разрешаем события мыши для SVG-контейнера
+    .style("pointer-events", "auto")
     .append("g");
 
 svg.append("g")
@@ -48,15 +48,14 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         .attr("fill", function(d) { return d.data.color; })
         .attr("class", "department_slice")
         .attr("d", arc)
-        .style("cursor", "pointer") // Делаем курсор-указатель для секторов
+        .style("cursor", "pointer")
         .on("click", function(d) {
             console.log("Клик по сектору! Переход на:", d.data.url);
             if (d && d.data && d.data.url) {
-                window.location.href = d.data.url; // Надежный переход в Chrome 149
+                window.location.href = d.data.url;
             }
         });
 
-    // Добавляем тег title отдельно, не разрушая ссылку на path в переменной slice
     slice.append("title")
         .text(function(d){
             return d.data.title+': '+d.data.score+' чел.'
@@ -101,33 +100,30 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         return d.startAngle + (d.endAngle - d.startAngle)/2;
     }
 
-    d3.selection.prototype.moveToFront = function() {
-        return this.each(function(){
-            this.parentNode.appendChild(this);
-        });
-    };
-    d3.selection.prototype.moveToBack = function() {
-        return this.each(function() {
-            var firstChild = this.parentNode.firstChild;
-            if (firstChild) {
-                this.parentNode.insertBefore(this, firstChild);
-            }
-        });
-    };
+    // УДАЛЕНЫ НЕБЕЗОПАСНЫЕ ДЛЯ CHROME 149 МЕТОДЫ moveToFront И moveToBack
 
     // === 3. КРУЖКИ И ТЕКСТ (SCORE) ===
     var score = svg.selectAll(".department_score")
         .data(pie(data))
         .enter().append("g")
-        .attr("class", "department_score");
+        .attr("class", "department_score")
+        .style("cursor", "pointer")
+        // Вместо moveToFront просто добавляем CSS-класс, меняющий z-index
+        .on("mouseover", function() { d3.select(this).classed("active-score", true); })
+        .on("mouseout", function() { d3.select(this).classed("active-score", false); })
+        // Вешаем один общий клик на всю группу, так как DOM теперь стабилен
+        .on("click", function(d) {
+            console.log("Клик по группе score! Переход на:", d.data.url);
+            if (d && d.data && d.data.url) {
+                window.location.href = d.data.url;
+            }
+        });
 
     // Текстовая подпись снаружи
     score.append("text")
         .attr("dy", ".35em")
         .attr("x", "1em")
-        .text(function(d) {
-            return d.data.label;
-        })
+        .text(function(d) { return d.data.label; })
         .call(wrap, 120)
         .attr("class", "department_label");
 
@@ -138,21 +134,11 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
             this._current = interpolate(0);
             return function(t) {
                 var d2 = interpolate(t);
-                var outerLabelArc = d3.svg.arc()
-                    .innerRadius(radius * 0.2)
-                    .outerRadius(radius * 0.2);
+                var outerLabelArc = d3.svg.arc().innerRadius(radius * 0.2).outerRadius(radius * 0.2);
                 var pos = outerLabelArc.centroid(d2);
-                var posX = pos[0], posY = pos[1];
-                if (posX > -4 & posX < 0) {
-                    posX = posX+100;
-                } else if (posX > -10 & posX < -4) {
-                    posX = posX-20;
-                }
-                if (posY > 20 & posY < 25) {
-                    posY = posY-30;
-                } else if (posY > 26 & posY < 30) {
-                    posY = posY-10;
-                }
+                var posX = pos, posY = pos;
+                if (posX > -4 & posX < 0) { posX = posX+100; } else if (posX > -10 & posX < -4) { posX = posX-20; }
+                if (posY > 20 & posY < 25) { posY = posY-30; } else if (posY > 26 & posY < 30) { posY = posY-10; }
                 return "translate(" + posX + "," + posY + ")";
             };
         })
@@ -166,20 +152,10 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
             };
         });
 
-    // КРУГ: События вешаются непосредственно на него
+    // КРУГ
     score.append("circle")
         .attr("class", "department_circle")
         .attr("r", "30")
-        .style("cursor", "pointer") // Принудительный pointer для круга
-        .on("mouseover", function(d) {
-            d3.select(this.parentNode).moveToFront(); // Поднимаем всю группу <g>
-        })
-        .on("click", function(d) {
-            console.log("Клик по кругу! Переход на:", d.data.url);
-            if (d && d.data && d.data.url) {
-                window.location.href = d.data.url;
-            }
-        })
         .append("title")
         .text(function(d){
             return d.data.title+': '+d.data.score+' чел.'
@@ -188,37 +164,23 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
     score.append('clipPath')
         .append('use')
 
-    // ИКОНКА ЧЕЛОВЕЧКА: Клик дублируется здесь
+    // ИКОНКА ЧЕЛОВЕЧКА
     score.append('image')
         .classed('node-icon', true)
-        .attr('xlink:href', function(d){
-            return d.data.icon
-        })
+        .attr('xlink:href', function(d){ return d.data.icon })
         .attr("x", "0.5em")
         .attr("y", "-0.6em")
-        .attr("class", "department_score_ic")
-        .style("cursor", "pointer") // Принудительный pointer для иконки
-        .on("mouseover", function(d) {
-            d3.select(this.parentNode).moveToFront();
-        })
-        .on("click", function(d) {
-            console.log("Клик по иконке! Переход на:", d.data.url);
-            if (d && d.data && d.data.url) {
-                window.location.href = d.data.url;
-            }
-        });
+        .attr("class", "department_score_ic");
 
-    // ЦИФРА СЧЕТЧИКА: Пропускает клики сквозь себя на круг под ней
+    // ЦИФРА СЧЕТЧИКА
     score.append("text")
         .attr("dy", ".35em")
         .attr("x", "-0.5em")
-        .text(function(d) {
-            return d.data.score;
-        })
+        .text(function(d) { return d.data.score; })
         .attr("class", "department_score_tx")
-        .style("pointer-events", "none"); // Делаем цифру прозрачной для мыши
+        .style("pointer-events", "none");
 
-    // Анимация перемещения всей группы score (Оригинальная логика)
+    // Анимация перемещения всей группы score
     score.transition().duration(1000)
         .attrTween("transform", function(d) {
             this._current = this._current || d;
@@ -226,9 +188,7 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
             this._current = interpolate(0);
             return function(t) {
                 var d2 = interpolate(t);
-                var outerScoreArc = d3.svg.arc()
-                    .innerRadius(radius * 0.7)
-                    .outerRadius(radius * 0.7);
+                var outerScoreArc = d3.svg.arc().innerRadius(radius * 0.7).outerRadius(radius * 0.7);
                 var pos = outerScoreArc.centroid(d2);
                 return "translate("+ pos +")";
             };
@@ -238,8 +198,7 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
     var polyline = svg.select(".department_lines").selectAll("polyline")
         .data(pie(data), key);
 
-    polyline.enter()
-        .append("polyline");
+    polyline.enter().append("polyline");
 
     polyline.transition().duration(1000)
         .attrTween("points", function(d){
@@ -247,26 +206,18 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
             var interpolate = d3.interpolate(this._current, d);
             this._current = interpolate(0);
             return function(t) {
-                var lineArc = d3.svg.arc()
-                    .outerRadius(radius * 0.6)
-                    .innerRadius(radius * 0.4);
-                var outerLineArc = d3.svg.arc()
-                    .innerRadius(radius * 0.7)
-                    .outerRadius(radius * 0.7);
+                var lineArc = d3.svg.arc().outerRadius(radius * 0.6).innerRadius(radius * 0.4);
+                var outerLineArc = d3.svg.arc().innerRadius(radius * 0.7).outerRadius(radius * 0.7);
                 var d2 = interpolate(t);
                 return [lineArc.centroid(d2), outerLineArc.centroid(d2)];
             };
         })
         .attr("class", "department_line");
 
-    polyline.exit()
-        .remove();
+    polyline.exit().remove();
 
     // === 5. ЦЕНТРАЛЬНЫЙ СУММИРУЮЩИЙ ТЕКСТ ===
-    var personal =
-        data.reduce(function(a, b) {
-            return a + b.score;
-        }, 0);
+    var personal = data.reduce(function(a, b) { return a + b.score; }, 0);
 
     svg.append("svg:text")
         .attr("class", "department_after-score")

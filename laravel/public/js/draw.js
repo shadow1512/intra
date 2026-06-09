@@ -100,18 +100,14 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
         return d.startAngle + (d.endAngle - d.startAngle)/2;
     }
 
-    // УДАЛЕНЫ НЕБЕЗОПАСНЫЕ ДЛЯ CHROME 149 МЕТОДЫ moveToFront И moveToBack
-
     // === 3. КРУЖКИ И ТЕКСТ (SCORE) ===
     var score = svg.selectAll(".department_score")
         .data(pie(data))
         .enter().append("g")
         .attr("class", "department_score")
         .style("cursor", "pointer")
-        // Вместо moveToFront просто добавляем CSS-класс, меняющий z-index
         .on("mouseover", function() { d3.select(this).classed("active-score", true); })
         .on("mouseout", function() { d3.select(this).classed("active-score", false); })
-        // Вешаем один общий клик на всю группу, так как DOM теперь стабилен
         .on("click", function(d) {
             console.log("Клик по группе score! Переход на:", d.data.url);
             if (d && d.data && d.data.url) {
@@ -136,7 +132,10 @@ d3.csv('/storage/directory/public_data.csv', function(error, data) {
                 var d2 = interpolate(t);
                 var outerLabelArc = d3.svg.arc().innerRadius(radius * 0.2).outerRadius(radius * 0.2);
                 var pos = outerLabelArc.centroid(d2);
-                var posX = pos, posY = pos;
+
+                // ИСПРАВЛЕНО: Извлекаем атомарные координаты x и y из массива pos
+                var posX = pos[0], posY = pos[1];
+
                 if (posX > -4 & posX < 0) { posX = posX+100; } else if (posX > -10 & posX < -4) { posX = posX-20; }
                 if (posY > 20 & posY < 25) { posY = posY-30; } else if (posY > 26 & posY < 30) { posY = posY-10; }
                 return "translate(" + posX + "," + posY + ")";

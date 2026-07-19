@@ -24,7 +24,7 @@ $day_names    = array("понедельник",  "вторник",  "среда"
             <div class="row">
                 <div class="col-md-4">{{ $item->name }}</div>
                 @if (!is_null($item->day_of_week))
-                <div class="col-md-2">{{ $day_names[$item->day_of_week] }}</div>
+                <div class="col-md-2">{{ $day_names[$item->day_of_week-1] }}</div>
                 @else
                 <div class="col-md-2">для всех дней</div>
                 @endif

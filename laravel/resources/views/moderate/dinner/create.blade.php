@@ -23,6 +23,30 @@
                                     @endif
                                 </div>
                             </div>
+                            
+                            <div class="form-group{{ $errors->has('day_of_week') ? ' has-error' : '' }}">
+                                <label for="day_of_week" class="col-md-4 control-label">Слот для дня недели</label>
+
+                                <div class="col-md-6">
+                                    <select name="day_of_week">
+                                        <option value="">для всех</option>
+                                        <option value="1">понедельник</option>
+                                        <option value="2">вторник</option>
+                                        <option value="3">среда</option>
+                                        <option value="4">четверг</option>
+                                        <option value="5">пятница</option>
+                                        <option value="6">суббота</option>
+                                        <option value="7">воскресенье</option>
+                                    </select>
+
+                                    @if ($errors->has('day_of_week'))
+                                        <span class="help-block error">
+                                        <strong>{{ $errors->first('day_of_week') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            
                             <div class="form-group{{ $errors->has('time_start') ? ' has-error' : '' }}">
                                 <label for="time_start" class="col-md-4 control-label">Время начала</label>
 

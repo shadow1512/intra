@@ -25,6 +25,30 @@
                                     @endif
                                 </div>
                             </div>
+                            
+                            <div class="form-group{{ $errors->has('day_of_week') ? ' has-error' : '' }}">
+                                <label for="day_of_week" class="col-md-4 control-label">Слот для дня недели</label>
+
+                                <div class="col-md-6">
+                                    <select name="day_of_week">
+                                        <option value="" @if (is_null($item->day_of_week))selected="selected"@endif>для всех</option>
+                                        <option value="1" @if ($item->day_of_week==1)selected="selected"@endif>понедельник</option>
+                                        <option value="2" @if ($item->day_of_week==2)selected="selected"@endif>вторник</option>
+                                        <option value="3" @if ($item->day_of_week==3)selected="selected"@endif>среда</option>
+                                        <option value="4" @if ($item->day_of_week==4)selected="selected"@endif>четверг</option>
+                                        <option value="5" @if ($item->day_of_week==5)selected="selected"@endif>пятница</option>
+                                        <option value="6" @if ($item->day_of_week==6)selected="selected"@endif>суббота</option>
+                                        <option value="7" @if ($item->day_of_week==7)selected="selected"@endif>воскресенье</option>
+                                    </select>
+
+                                    @if ($errors->has('day_of_week'))
+                                        <span class="help-block error">
+                                        <strong>{{ $errors->first('day_of_week') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            
                             <div class="form-group{{ $errors->has('time_start') ? ' has-error' : '' }}">
                                 <label for="time_start" class="col-md-4 control-label">Время начала</label>
 

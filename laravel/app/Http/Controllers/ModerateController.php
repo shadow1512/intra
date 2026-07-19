@@ -279,6 +279,7 @@ class ModerateController extends Controller
 
         Dinner_slots::create([
             'name'              =>  $request->input('name'),
+            'day_of_week'       =>  $request->input('day_of_week'),
             'time_start'        =>  $request->input('time_start'),
             'time_end'          =>  $request->input('time_end'),
         ]);
@@ -310,6 +311,7 @@ class ModerateController extends Controller
 
         $item = Dinner_slots::findOrFail($id);
         $item->name            = $request->input('name');
+        $item->day_of_week     = $request->input('day_of_week');
         $item->time_start      = $request->input('time_start');
         $item->time_end        = $request->input('time_end');
 

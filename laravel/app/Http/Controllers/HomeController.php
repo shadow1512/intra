@@ -75,7 +75,13 @@ class HomeController extends Controller
             ->orderBy('workstart', 'desc')->get();
 
         //режим работы столовой
-        $items  =   Dinner_slots::orderBy('time_start')->get();
+        //19.07.2026 - добавлена возможность указывать разные режимы для разных дней недели. Для этого добавил поле "день недели", которое может быть от 1 до 7 (выбирается в админке)
+        //Можно не выбирать никакой день, тогда это поле будет null, т.е. подходить для всех дней недели
+        //Это костыль, можно было бы сделать поле обязательным и тогда для каждого дня нужно было бы заполнять его, но не хотелось морочиться с миграцией
+        $items  =   Dinner_slots::where("day_of_week",  "=",    date("N"))->orderBy('time_start')->get();
+        if(!count($items)) {
+            $items  =   Dinner_slots::whereNull("day_of_week")->get();
+        }
 
         return view('home', [   'news'    =>  $news, 'users'   =>  $users, 'newusers'=>$newusers,
                                 'hide_dinner'       =>Cookie::get('hide_dinner'),

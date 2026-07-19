@@ -24,13 +24,13 @@ $day_names    = array("понедельник",  "вторник",  "среда"
             <div class="row">
                 <div class="col-md-4">{{ $item->name }}</div>
                 @if (!is_null($item->day_of_week))
-                <div class="col-md-1">{{ $day_names[$item->day_of_week] }}</div>
+                <div class="col-md-2">{{ $day_names[$item->day_of_week] }}</div>
                 @else
-                <div class="col-md-1">для всех дней</div>
+                <div class="col-md-2">для всех дней</div>
                 @endif
                 <div class="col-md-1">{{ $item->time_start }}</div>
                 <div class="col-md-1">{{ $item->time_end }}</div>
-                <div class="col-md-3"><a href="{{ route('moderate.dinner.edit', ["id" => $item->id]) }}"><span class="glyphicon glyphicon-edit"></span></a></div>
+                <div class="col-md-2"><a href="{{ route('moderate.dinner.edit', ["id" => $item->id]) }}"><span class="glyphicon glyphicon-edit"></span></a></div>
                 <div class="col-md-2"><form method="POST" action="{{ route('moderate.dinner.delete', ["id" => $item->id]) }}">{{ method_field('DELETE') }}{{ csrf_field() }}<a href="" class="deleteRecord"><span class="glyphicon glyphicon-remove-sign"></span></a></form></div>
             </div>
                 @endforeach
